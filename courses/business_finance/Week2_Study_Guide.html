@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第二周 导学指南：金融市场生态与企业融资渠道</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #d4af37;
+            --bg-light: #f8fafc;
+            --box-bg: #ffffff;
+            --text-dark: #334155;
+            --text-light: #475569;
+            --border-color: #e2e8f0;
+            --radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        /* 自适应标题字体大小 */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-blue);
+            padding-bottom: 15px;
+            margin-top: 0;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            margin-top: 40px;
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+        }
+
+        h3 {
+            color: var(--primary-navy);
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+       .intro-box {
+            background-color: #f0f4f8;
+            border-radius: var(--radius);
+            padding: 25px;
+            margin-bottom: 35px;
+            border-left: 5px solid var(--secondary-blue);
+        }
+
+       .intro-box p {
+            margin: 0 0 15px 0;
+        }
+
+       .intro-box p:last-child {
+            margin: 0;
+        }
+
+       .tips-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+       .tips-list li {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
+            padding-left: 50px;
+        }
+
+       .tips-list li::before {
+            content: '💡';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 1.2rem;
+        }
+
+       .module-card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--secondary-blue);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--radius);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
+        }
+
+       .module-tag {
+            display: inline-block;
+            background-color: var(--secondary-blue);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* 底部导航区域 - 严格匹配要求 */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 1.5px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+        
+       .back-to-top:active {
+            transform: scale(0.97);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>第二周 导学指南：金融市场生态与企业融资渠道</h1>
+
+    <div class="intro-box">
+        <h3>🎯 教授寄语：进入 CFO 的“实战”状态</h3>
+        <p>欢迎来到第二周！在第一周，我们确立了企业生存的终极指南针——“股东财富最大化”。本周，我们要从云端的理论降落到现实的商业土壤中，解决一个最直接、最致命的问题：<strong>“企业扩张的钱，究竟从哪里来？”</strong></p>
+        <p>不要把这周的内容当成枯燥的金融工具说明书。从现在开始，请你带入一家跨国公司首席财务官（CFO）的视角。面对琳琅满目的金融市场和融资工具，你必须学会权衡（Trade-off）：想要绝对的控制权，还是想要低廉的融资成本？想要短期的灵活，还是长期的稳定？<strong>培养这种“权衡与取舍”的商业直觉，是你在这门课中跨越及格线、直击 A+ (Distinction) 的秘密武器。</strong></p>
+    </div>
+
+    <h2>🧠 高阶学习技巧：如何吃透本周内容？</h2>
+    <ul class="tips-list">
+        <li>
+            <strong>构建“对比矩阵” (Matrix Comparison)：</strong>
+            本周会出现大量易混淆的概念。请准备一张大白纸，画出对比表格。比如：将“货币市场 (Money Market)”与“资本市场 (Capital Market)”对比；将“股权融资 (Equity)”与“债务融资 (Debt)”在风险、成本、投票权、税收影响四个维度上进行硬核对比。在考试的论述题中，这种结构化的对比思维是阅卷老师最喜欢看到的。
+        </li>
+        <li>
+            <strong>追踪真实市场 (Real-world Tracking)：</strong>
+            金融是一门活的科学。这周在学习股票和债券时，不妨打开手机里的财经软件，看看苹果公司（Apple）或者 3B家居（Bed Bath & Beyond）的资产负债表，看看他们借了多少钱（Debt），发了多少股票（Equity）。把理论套进现实，能极大增强你的记忆深度。
+        </li>
+        <li>
+            <strong>聚焦“债权人的保护伞” (Focus on Covenants)：</strong>
+            在学习债务融资时，很多学生只关注利息。但对于冲刺 A+ 的你，必须深刻理解“债务契约 (Loan Covenants)”的存在逻辑——这是债权人为了防止管理层乱来（联系第一周的代理问题）而设置的“紧箍咒”。理解概念之间的关联，是拔高的关键。
+        </li>
+    </ul>
+
+    <h2>📚 第二周 模块划分与知识地图</h2>
+    <p style="color: var(--text-light); margin-bottom: 25px;">本周的知识体系将被科学地拆解为以下三个模块，我们将在接下来的几天里逐一攻克：</p>
+
+    <div class="module-card">
+        <span class="module-tag">模块一</span>
+        <h3>金融市场的全景透视 (Financial Markets)</h3>
+        <p><strong>模块简述：</strong> 企业并非在真空中运作，其资金血液的流动高度依赖于复杂的金融市场。在这个模块中，我们将为你建立上帝视角，俯瞰整个金融生态系统。我们将精确分类并理解：交易短期工具的货币市场与交易长期资金的资本市场有何区别？企业首次发行股票（IPO）的一级市场与股民日常炒股的二级市场又是如何互相支撑的？</p>
+    </div>
+
+    <div class="module-card">
+        <span class="module-tag">模块二</span>
+        <h3>外部融资的双刃剑：股权 vs. 债务 (Equity vs. Debt Finance)</h3>
+        <p><strong>模块简述：</strong> 这是本周的核心重头戏。企业向外找钱，无非两条路：找人合伙（发股票）或找人借钱（发债券）。我们将深入解剖普通股、优先股、公司债券（Debentures）、欧洲债券（Eurobonds）的底层运作逻辑。你将学会批判性地分析：为什么债务的成本通常低于股权？过度借债会带来怎样的破产风险？企业又该如何利用可转换债券（Convertibles）和认股权证（Warrants）来吸引挑剔的投资者？</p>
+    </div>
+
+    <div class="module-card">
+        <span class="module-tag">模块三</span>
+        <h3>内部造血与中小企业创投生态 (Internal Finance & Venture Capital)</h3>
+        <p><strong>模块简述：</strong> 最便宜的钱，永远是自己赚来的钱。本模块首先探讨企业最重要的资金来源——留存收益（Retained Profits），并分析其优缺点。随后，我们将目光转向资源匮乏的中小企业（SMEs），深度解析它们面临的“资金缺口”难题，并揭开风险投资（Venture Capital）与天使投资人（Business Angels）神秘的面纱，了解他们如何评估项目并实施退出机制。</p>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+
+</div>
+
+</body>
+</html>

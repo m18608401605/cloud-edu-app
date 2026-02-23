@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 - Module 1: The Financial Markets Ecosystem</title>
+    <style>
+        :root {
+            --primary-color: #0b2447;
+            --secondary-color: #19376d;
+            --accent-color: #c84b31;
+            --bg-color: #f8fafc;
+            --box-bg: #ffffff;
+            --text-color: #334155;
+            --border-radius: 8px;
+            --divider-color: #cbd5e1;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        /* Adaptive Title Typography */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 45px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+        }
+
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fcf3f2; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-color);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-color); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* Top Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+        /* Language content toggling */
+       .lang-content { display: none; }
+       .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation Area - Strictly matching the requested image */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed var(--divider-color);
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .nav-buttons-row {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+       .back-to-top {
+            background-color: #f1f5f9;
+            color: #0f172a;
+            border: 1px solid var(--divider-color);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">Switch to Chinese (点击切换至全中文)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 2 - Module 1: The Financial Markets Ecosystem</h1>
+        
+        <p>Welcome to Week 2. Having established the ultimate goal of the firm (Wealth Maximization), we now turn our attention to the environment in which the firm operates to secure funding. A corporation does not operate in a vacuum; its lifeblood is heavily dependent on the complex financial markets. This module dissects the taxonomy of financial markets and the mechanism of financial intermediation.</p>
+
+        <h2>1. The Money Market vs. The Capital Market</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Market Classification by Maturity</h3>
+            <p><strong>The Money Market:</strong> A segment of the financial market in which financial instruments with high liquidity and very short maturities (typically one year or less) are traded. Examples include Treasury Bills, Commercial Paper, and Banker's Acceptances.</p>
+            <p><strong>The Capital Market:</strong> A segment of the financial market concerned with long-term finance. It is the market for buying and selling equity (ordinary shares) and long-term debt securities (bonds/debentures) with maturities exceeding one year, or instruments with no maturity date at all.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>To operate effectively, a financial manager must know exactly which "store" to visit based on the company's specific needs. Consider the maturity matching principle: you should match the lifespan of the asset with the lifespan of the financing.</p>
+            <p><span class="case-title">Real-World Application: General Electric (GE)</span><br>
+            If GE needs to cover a temporary cash shortfall to pay employee wages this month, they will issue Commercial Paper in the <strong>Money Market</strong>. It is a quick, 30-to-90-day short-term loan. However, if GE decides to build a multi-billion dollar aviation manufacturing plant that will take 20 years to generate returns, funding it with a 30-day loan would be suicidal. Instead, they will issue 20-year corporate bonds or new shares in the <strong>Capital Market</strong>.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> Examiners love to test your ability to categorize financial instruments. <em>Rule of Thumb:</em> Always look at the time horizon. If the instrument expires or matures within 12 months, it belongs to the Money Market. If it is long-term debt or equity (which never "matures"), it is a Capital Market instrument.</p>
+            
+            <p><strong>Classic Exam MCQ:</strong><br>
+            <em>Which of the following securities is most likely to be traded in the money market?</em><br>
+            A) A 10-year government bond.<br>
+            B) Ordinary shares of a newly listed technology firm.<br>
+            C) 90-day commercial paper issued by a multinational bank.<br>
+            D) A 5-year convertible debenture.</p>
+            
+            <p><strong>Answer & Rationale:</strong> <strong>C</strong>. The money market deals exclusively with short-term instruments (less than one year). Options A, B, and D are long-term instruments traded in the capital market.</p>
+        </div>
+
+        <h2>2. Primary vs. Secondary Markets</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Market Classification by Issuance</h3>
+            <p><strong>The Primary Market:</strong> The market for the original sale of new securities by governments and corporations. In a primary market transaction, the corporation is the seller, and the transaction raises new capital directly for the firm. An Initial Public Offering (IPO) is a classic example.</p>
+            <p><strong>The Secondary Market:</strong> The market in which previously issued securities are bought and sold among investors. In a secondary market transaction, one owner or creditor sells to another. The original issuing corporation receives absolutely no new cash from these transactions.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Understanding the distinction between primary and secondary markets is absolutely critical. While the primary market provides the actual funding for the company, the secondary market is what makes the primary market possible by providing <strong>liquidity</strong>.</p>
+            
+            <p><span class="case-title">Real-World Case Study: The Facebook (Apple/Meta) IPO vs. Daily Trading</span><br>
+            When a tech company like Meta (formerly Facebook) went public via its IPO in 2012, it sold shares to the public for the very first time. This was a <strong>Primary Market</strong> transaction, and Meta received roughly $16 billion in fresh cash to fund its expansion. <br><br>
+            Today, millions of Meta shares are traded daily on the NASDAQ (a <strong>Secondary Market</strong>). If you buy 100 shares of Meta today from another investor, Mark Zuckerberg and Meta do not receive a single penny from your purchase. However, the secondary market is vital. If investors knew they couldn't easily sell their shares later (lack of liquidity), they would never have given Meta the $16 billion during the IPO.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> The most common conceptual error made by students is assuming that high trading volume on the stock exchange directly injects cash into the underlying companies. <strong>It does not.</strong> A stock exchange (like the London Stock Exchange) is primarily a Secondary Market.</p>
+            
+            <p><strong>Classic Exam Question:</strong><br>
+            <em>"Discuss the role of the secondary market and explain why its efficiency is crucial to the financial manager, even though secondary market transactions do not raise new capital for the firm."</em></p>
+            
+            <p><strong>A+ Answer Strategy:</strong> A Distinction-level answer must articulate the concept of <strong>Liquidity</strong> and <strong>Price Discovery</strong>. You must explain that a highly liquid secondary market reduces the risk for investors, thereby lowering the return they demand. This subsequently lowers the firm's Cost of Capital when they attempt to issue new shares in the primary market. Furthermore, the secondary market provides the financial manager with an accurate, real-time valuation of the firm's worth (wealth maximization metric).</p>
+        </div>
+
+        <h2>3. Direct Financing vs. Financial Intermediation</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: The Flow of Funds</h3>
+            <p><strong>Direct Financing:</strong> The transfer of funds where the user of funds interacts directly with the supplier without the involvement of a third party (e.g., a firm selling bonds directly to a wealthy investor).</p>
+            <p><strong>Financial Intermediation (Indirect Financing):</strong> The process where a third party (a financial intermediary such as a commercial bank, pension fund, or insurance company) acts as a facilitator. The intermediary takes funds from suppliers (depositors) and repackages them to lend to users (borrowers).</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Why do banks exist? Because direct financing is extremely inefficient due to transaction costs and risk.</p>
+            <p>If a local bakery needs £50,000 to buy new ovens, trying to find 50 individuals on the street willing to lend £1,000 each (Direct Financing) involves massive search costs, legal fees, and risk for the individuals. Through <strong>Financial Intermediation</strong>, a commercial bank pools the deposits of thousands of individuals. The bank evaluates the bakery's creditworthiness, absorbs the default risk, and grants the £50,000 loan. The intermediary bridges the gap between the small, risk-averse saver and the large, risk-taking corporation.</p>
+        </div>
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第2周 - 模块一：金融市场生态系统全景透视</h1>
+        
+        <p>欢迎来到第二周的学习。在第一周确立了企业的终极目标（股东财富最大化）之后，我们现在将注意力转向企业获取资金的环境。企业不是在真空中运作的，其资金血液的流动高度依赖于复杂的金融市场。本模块将解剖金融市场的分类体系以及金融中介的运作机制。</p>
+
+        <h2>1. 货币市场 (Money Market) 与 资本市场 (Capital Market)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：按期限划分市场</h3>
+            <p><strong>货币市场 (Money Market):</strong> 金融市场的一个分支，专门交易具有高流动性且期限极短（通常为一年或更短）的金融工具。典型的例子包括短期国库券 (Treasury Bills)、商业票据 (Commercial Paper) 和银行承兑汇票 (Banker's Acceptances)。</p>
+            <p><strong>资本市场 (Capital Market):</strong> 涉及长期融资的金融市场分支。它是买卖股权（普通股）和期限超过一年的长期债务证券（债券/公司债），或根本没有到期日的金融工具的市场。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>为了有效运营，财务经理必须知道根据公司的具体需求去逛哪家“商店”。请记住期限匹配原则 (Maturity Matching Principle)：你应该将资产的寿命与融资的期限相匹配。</p>
+            <p><span class="case-title">实战案例：通用电气 (GE)</span><br>
+            如果通用电气这个月需要弥补临时性的现金短缺来发工资，他们会在<strong>货币市场</strong>发行商业票据。这是一种快速的、30到90天的短期借款。然而，如果通用电气决定建造一个需要20年才能回本的数十亿美元的航空制造厂，用30天的贷款来提供资金无异于自杀。相反，他们会在<strong>资本市场</strong>发行20年期的公司债券或发行新股。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 考官非常喜欢测试你对金融工具的分类能力。<em>黄金法则：</em> 永远看时间跨度。如果该工具在12个月内到期，它就属于货币市场。如果它是长期债务或股权（股权永远不会“到期”），它就是资本市场工具。</p>
+            
+            <p><strong>经典选择题 (MCQ)：</strong><br>
+            <em>以下哪种证券最有可能在货币市场交易？</em><br>
+            A) 10年期政府债券。<br>
+            B) 一家新上市科技公司的普通股。<br>
+            C) 跨国银行发行的90天期商业票据。<br>
+            D) 5年期可转换债券。</p>
+            
+            <p><strong>答案与解析：</strong> <strong>C</strong>。货币市场专门处理短期工具（少于一年）。选项 A、B 和 D 都是在资本市场交易的长期金融工具。</p>
+        </div>
+
+        <h2>2. 一级市场 (Primary Market) 与 二级市场 (Secondary Market)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：按发行顺序划分市场</h3>
+            <p><strong>一级市场 (Primary Market):</strong> 政府和企业首次出售新证券的市场。在一级市场交易中，企业是卖方，该交易直接为公司筹集新的资本。首次公开募股 (IPO) 就是一个经典的例子。</p>
+            <p><strong>二级市场 (Secondary Market):</strong> 投资者之间买卖以前已经发行过的证券的市场。在二级市场交易中，是一个所有者（或债权人）卖给另一个所有者。最初发行证券的实体公司从这些交易中绝对拿不到任何新的现金。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>理解一级市场和二级市场之间的区别至关重要。虽然一级市场为公司提供了实际的资金，但正是二级市场通过提供<strong>流动性 (Liquidity)</strong> 使得一级市场成为可能。</p>
+            
+            <p><span class="case-title">实战案例：Facebook (Meta) 的 IPO 与日常股票交易</span><br>
+            当 Meta（前身为 Facebook）这样的科技公司在 2012 年通过 IPO 上市时，它是第一次向公众出售股票。这是一次<strong>一级市场</strong>交易，Meta 获得了约 160 亿美元的新鲜现金来资助其扩张。<br><br>
+            今天，每天有数以百万计的 Meta 股票在纳斯达克（一个<strong>二级市场</strong>）上交易。如果你今天从另一个投资者那里购买了 100 股 Meta 股票，马克·扎克伯格和 Meta 公司不会从你的购买中得到一分钱。然而，二级市场是至关重要的。如果投资者知道他们以后无法轻易卖出股票（缺乏流动性），他们当初就绝对不会在 IPO 时给 Meta 投资那 160 亿美元。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 学生常犯的最大的概念性错误，就是认为证券交易所的高交易量会直接为底层公司注入现金。<strong>绝对不会！</strong> 证券交易所（如伦敦证券交易所）本质上是一个二级市场。</p>
+            
+            <p><strong>经典论述题 (Essay)：</strong><br>
+            <em>“请讨论二级市场的作用，并解释为什么即使二级市场交易没有为企业筹集新资本，它的有效性对财务经理而言仍然至关重要。”</em></p>
+            
+            <p><strong>A+ 答题策略：</strong> Distinction 级别的答案必须清晰阐述<strong>流动性 (Liquidity)</strong> 和 <strong>价格发现 (Price Discovery)</strong> 的概念。你必须解释：一个高度流动性的二级市场降低了投资者的风险，从而降低了他们要求的投资回报率。这随后降低了企业在尝试于一级市场发行新股时的资本成本 (Cost of Capital)。此外，二级市场为财务经理提供了准确的、实时的公司价值评估（财富最大化的指标）。</p>
+        </div>
+
+        <h2>3. 直接融资 (Direct Financing) 与 金融中介 (Financial Intermediation)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：资金流动的路径</h3>
+            <p><strong>直接融资 (Direct Financing):</strong> 资金使用者直接与资金供应者互动，没有第三方介入的资金转移过程（例如，企业直接向富有的投资者出售债券）。</p>
+            <p><strong>金融中介 / 间接融资 (Financial Intermediation):</strong> 第三方（金融中介机构，如商业银行、养老基金或保险公司）作为促进者的过程。中介机构从供应商（存款人）那里获取资金，然后将其重新打包借给使用者（借款人）。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>为什么我们需要银行？因为由于交易成本和风险的存在，直接融资的效率极低。</p>
+            <p>如果当地的一家面包店需要 5 万英镑购买新烤箱，试图在街上找到 50 个愿意每人借出 1000 英镑的个人（直接融资），会涉及巨大的搜索成本、法律费用和个人风险。通过<strong>金融中介</strong>，商业银行汇集了成千上万个人的存款。银行评估面包店的信用度，吸收违约风险，并发放 5 万英镑的贷款。金融中介成功地在规避风险的小额储户和承担风险的大型企业之间架起了一座桥梁。</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <div class="nav-buttons-row">
+            <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            enContent.classList.remove('active');
+            zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active');
+            enContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to Chinese (点击切换至全中文)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>

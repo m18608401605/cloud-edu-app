@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 3: Agency Theory & Corporate Governance</title>
+    <style>
+        :root {
+            --primary-color: #0b2447;
+            --secondary-color: #19376d;
+            --accent-color: #c84b31;
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem); /* Adaptive font size */
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 45px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+        }
+
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-color);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-color); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* Top Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+        /* Language content toggling */
+       .lang-content { display: none; }
+       .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation Area matching the provided image */
+       .bottom-nav-container {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed #d1d5db;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f3f4f6;
+            color: #1e3a8a; /* Dark blue text matching image */
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+       .back-to-top:hover {
+            background-color: #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">Switch to Chinese (点击切换至全中文)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 1 - Module 3: Agency Theory & Corporate Governance</h1>
+        
+        <p>Welcome to Module 3, the final module of our first week. In Module 2, we established that a firm's ultimate goal is the maximization of shareholder wealth. However, modern corporations possess a structural vulnerability: the people who own the firm (shareholders) are rarely the people who run it (managers). This separation gives birth to profound conflicts of interest. Today, we will dissect the Agency Problem and examine how Corporate Governance attempts to bridge this critical gap.</p>
+
+        <h2>1. The Agency Relationship and Problem</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: The Agency Problem & Information Asymmetry</h3>
+            <p><strong>Definition:</strong> An <em>Agency Relationship</em> occurs when a principal (shareholder) hires an agent (management) to perform a service and delegates decision-making authority to them. The <strong>Agency Problem</strong> is the inherent conflict of interest that arises when the agent's personal goals misalign with the principal's goal of wealth maximization.</p>
+            <p>This problem is severely aggravated by <strong>Information Asymmetry</strong>: Managers possess granular, day-to-day data about the firm's operations and true financial health, whereas shareholders generally only receive delayed, highly summarized annual reports.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Imagine you pool your savings to open a restaurant, but you live in another city, so you hire a general manager to run it. You (the principal) want the restaurant to maximize its long-term value. The manager (the agent), however, might want to hire their unqualified friends, buy the most expensive espresso machine simply for the prestige of using it, or close the restaurant early on Fridays to play golf.</p>
+            <p>In the corporate world, this manifests as CEOs engaging in "empire building"—acquiring other companies at highly inflated prices just to increase their own power and prestige, rather than to create actual value for the shareholders. Because of <em>Information Asymmetry</em>, you cannot stand over the CEO's shoulder every day to verify if a multi-billion dollar acquisition was necessary or simply a vanity project.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> Students frequently define the agency problem merely as "managers stealing from the company." This is too simplistic for university level. In your exam, frame the agency problem around <em>risk aversion</em> and <em>time horizons</em>. Managers are often more risk-averse than shareholders because their entire livelihood is tied to the firm (job security), whereas shareholders hold diversified portfolios.</p>
+            <p><strong>Classic Exam Question:</strong> <em>"Explain the concept of Information Asymmetry and how it contributes to the Agency Problem within a modern publicly traded corporation."</em></p>
+        </div>
+
+        <h2>2. Agency Costs</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Agency Costs</h3>
+            <p><strong>Definition:</strong> Agency Costs are the tangible and intangible expenses borne by shareholders to mitigate the agency problem, as well as the losses incurred when managers make suboptimal decisions. They are categorized into:</p>
+            <ul>
+                <li><strong>Monitoring Costs:</strong> Costs incurred by principals to observe and restrict the agent's behavior (e.g., paying for external audits, hiring independent boards of directors).</li>
+                <li><strong>Bonding Costs:</strong> Costs incurred by the agent to assure the principal that they will not engage in detrimental acts (e.g., managers purchasing indemnity insurance or structuring their own compliance reporting).</li>
+                <li><strong>Residual Loss:</strong> The absolute loss of wealth that still occurs despite monitoring and bonding, because it is impossible to perfectly align the interests of both parties.</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Trust is not free in finance. If shareholders do not trust the CEO, they must hire an elite accounting firm like PwC or Deloitte to conduct a rigorous audit of the company's books. The millions of dollars paid in audit fees are classic <em>Monitoring Costs</em>. If a manager decides to avoid a highly profitable but slightly risky project simply because they are afraid of getting fired if it fails, the foregone profit is a <em>Residual Loss</em> to the shareholders.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> A Distinction-level (A+) answer must recognize the paradox of agency costs: Shareholders should only be willing to incur monitoring costs up to the point where the marginal cost of monitoring equals the marginal reduction in residual loss. Spending $10 million to prevent $1 million of managerial waste destroys shareholder wealth.</p>
+        </div>
+
+        <h2>3. Corporate Governance & Incentive Alignment</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Resolving the Agency Problem</h3>
+            <p><strong>Definition:</strong> <em>Corporate Governance</em> is the system of rules, practices, and processes by which a firm is directed and controlled. To solve the agency problem, corporate governance relies primarily on <strong>Incentive Alignment</strong>—structuring managerial compensation so that managers only achieve personal wealth when they successfully maximize shareholder wealth.</p>
+            <p>Common mechanisms include Performance-Related Pay (PRP) and Executive Share Options (ESOs).</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>The most effective way to stop an agent from acting against the principal is to turn the agent into a principal. If we give the manager shares instead of a high cash salary, they will feel the pain when the stock price drops, and reap the rewards when it rises.</p>
+            
+            <p><span class="case-title">Real-World Case Study: The Walt Disney Company & Bob Iger</span><br>
+            Disney provides a textbook example of utilizing compensation to align incentives. Recognizing the vast separation of ownership (millions of retail shareholders) and control (the executive suite), Disney’s board structured former CEO Bob Iger’s contract heavily toward equity. While his base cash salary was maintained at around $1 million, his target bonuses and stock option awards were valued at over $25 million per year. <br><br>
+            If Iger made poor capital budgeting decisions, his options would be worthless. Conversely, by successfully acquiring Pixar, Marvel, and Lucasfilm, he drove Disney's stock price to record highs. He earned a fortune, but mathematically, he could only do so by making his shareholders significantly wealthier. This is incentive alignment in its purest form.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Distinction (A+) Tip:</strong> The ability to critique financial models separates the average student from the elite. When writing an essay about Executive Share Options (like Disney's), you must point out their flaws.</p>
+            <p><strong>The Flaw to highlight:</strong> Stock options can reward <em>luck</em> rather than <em>skill</em>. During a massive macroeconomic boom, almost all stock prices rise. A poorly performing CEO might see their stock options become worth millions simply because the overall market went up, representing a massive and unjustified agency cost to the firm. Mentioning this caveat guarantees top marks from the examiner.</p>
+        </div>
+
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第1周 - 模块三：代理理论与公司治理</h1>
+        
+        <p>欢迎来到第三模块，也是我们第一周的最后一个模块。在第二模块中，我们确立了企业的终极目标是“股东财富最大化”。然而，现代企业存在一个结构性的漏洞：拥有企业的人（股东）几乎从不亲自管理企业（经理人）。这种分离催生了深刻的利益冲突。今天，我们将解剖“代理问题”，并研究“公司治理”如何试图弥合这一致命的裂痕。</p>
+
+        <h2>1. 代理关系与代理问题</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：代理问题与信息不对称</h3>
+            <p><strong>定义：</strong> 当委托人（股东）雇佣代理人（管理层）提供服务并向其下放决策权时，就形成了<em>代理关系 (Agency Relationship)</em>。<strong>代理问题 (Agency Problem)</strong> 是指当代理人的个人目标与委托人“财富最大化”的目标不一致时，所产生的内在利益冲突。</p>
+            <p>这个问题被<strong>信息不对称 (Information Asymmetry)</strong> 严重恶化了：管理者掌握着关于企业运营和真实财务健康状况的、颗粒度极高的日常数据，而股东通常只能收到滞后且高度概括的年度报告。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>想象一下，你凑齐了积蓄开了一家餐厅，但你住在另一个城市，所以你雇了一个总经理来打理。你（委托人）希望餐厅的长期价值最大化。然而，总经理（代理人）可能想雇佣他不符合条件的亲戚，仅仅为了面子去买最昂贵的浓缩咖啡机，或者在周五提早关门去打高尔夫球。</p>
+            <p>在商业世界中，这表现为 CEO 们建立“商业帝国”——以极度虚高的价格收购其他公司，仅仅是为了增加自己的权力和威望，而不是为了给股东创造实际价值。因为存在<em>信息不对称</em>，你不可能每天站在 CEO 背后，去核实一项价值数十亿美元的收购到底是必要的战略，还是仅仅出于他的虚荣心。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 学生们经常把代理问题简单地定义为“管理者偷公司的钱”。在大学考试标准中，这太肤浅了。在考试中，你应该围绕<em>风险厌恶 (Risk Aversion)</em> 和<em>时间跨度 (Time Horizons)</em> 来构建代理问题。管理者通常比股东更厌恶风险，因为他们的全部生计（工作保障）都与这家公司绑定，而股东则拥有分散化的投资组合。</p>
+            <p><strong>经典真题：</strong> <em>“解释信息不对称的概念，以及它如何导致了现代上市公司的代理问题。”</em></p>
+        </div>
+
+        <h2>2. 代理成本 (Agency Costs)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：代理成本</h3>
+            <p><strong>定义：</strong> 代理成本是股东为了缓解代理问题而承担的有形和无形费用，以及当管理者做出次优决策时所引发的损失。它们被分为三类：</p>
+            <ul>
+                <li><strong>监督成本 (Monitoring Costs)：</strong> 委托人为了观察和限制代理人行为而产生的成本（例如：支付外部审计费用、聘请独立董事）。</li>
+                <li><strong>约束成本 (Bonding Costs)：</strong> 代理人为了向委托人保证自己不会从事有害行为而产生的成本（例如：管理者购买赔偿保险或构建他们自己的合规报告体系）。</li>
+                <li><strong>剩余损失 (Residual Loss)：</strong> 尽管有监督和约束，由于不可能完美地使双方利益一致，最终仍然发生的那部分绝对财富损失。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>在金融界，信任是需要花钱买的。如果股东不信任 CEO，他们就必须聘请像普华永道 (PwC) 或德勤 (Deloitte) 这样的精英会计师事务所对公司的账目进行严格审计。支付的数百万美元审计费就是典型的<em>监督成本</em>。如果一位管理者为了保住饭碗，仅仅因为害怕失败被解雇而拒绝了一个高利润但带有一定风险的项目，那么失去的潜在利润对股东来说就是一种<em>剩余损失</em>。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>Distinction (A+) 答题策略：</strong> 要想拿到 A+，你必须认识到代理成本的悖论：股东只应该在“监督的边际成本等于剩余损失的边际减少额”这一限度内去支付监督成本。如果花 1000 万美元去防止管理者浪费 100 万美元，这本身就是在摧毁股东财富。</p>
+        </div>
+
+        <h2>3. 公司治理与激励对齐 (Corporate Governance & Incentive Alignment)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：解决代理问题</h3>
+            <p><strong>定义：</strong> <em>公司治理</em> 是指导和控制企业的一套规则、实践和流程体系。为了解决代理问题，公司治理主要依赖于<strong>激励对齐 (Incentive Alignment)</strong>——通过设计管理者的薪酬结构，使得管理者只有在成功最大化股东财富时，才能实现个人财富的最大化。</p>
+            <p>常见的机制包括绩效薪酬 (PRP) 和高管股票期权 (ESOs)。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>阻止代理人违背委托人利益的最有效方法，就是把代理人变成委托人。如果我们给管理者发放股票而不是高额的现金底薪，当股价下跌时他们会感到切肤之痛，而当股价上涨时他们则会获得丰厚的回报。</p>
+            
+            <p><span class="case-title">实战案例：华特迪士尼公司 (Disney) 与 罗伯特·艾格 (Bob Iger)</span><br>
+            在利用薪酬来对齐激励方面，迪士尼提供了一个教科书般的案例。认识到所有权（数以百万计的散户股东）与控制权（高管团队）的巨大分离，迪士尼董事会将前任 CEO 罗伯特·艾格的合同重度绑定了股权。虽然他的基础现金薪水维持在 100 万美元左右，但他每年的目标奖金和股票期权奖励价值超过 2500 万美元。 <br><br>
+            如果艾格做出了糟糕的资本预算决策，他的期权就会变成废纸。相反，通过成功收购皮克斯、漫威和卢卡斯影业，他将迪士尼的股价推向了历史新高。他赚得盆满钵满，但在数学逻辑上，他只有让股东变得非常富有，他自己才能拿到这笔钱。这就是最纯粹的激励对齐。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>Distinction (A+) 答题策略：</strong> 批判性地分析金融模型是区分普通学生和顶尖学生的分水岭。当你在论述高管股票期权（比如迪士尼的案例）时，你必须指出它的致命缺陷。</p>
+            <p><strong>必须指出的缺陷：</strong> 股票期权奖励的可能是<em>运气</em>，而不是<em>实力</em>。在宏观经济繁荣（大牛市）期间，几乎所有的股票都在上涨。一个业绩平平的 CEO 可能会发现他的股票期权变得价值千万，这仅仅是因为大盘整体上涨了。这对于公司来说代表着一笔巨大且毫无道理的代理成本。在答案中提到这个警告，能确保你从考官那里获得最高分。</p>
+        </div>
+
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            enContent.classList.remove('active');
+            zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active');
+            enContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to Chinese (点击切换至全中文)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>

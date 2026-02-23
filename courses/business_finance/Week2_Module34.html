@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 - Module 3: Internal Finance and Venture Capital</title>
+    <style>
+        :root {
+            --primary-color: #0b2447;
+            --secondary-color: #19376d;
+            --accent-color: #c84b31;
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem); /* Adaptive font size */
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 45px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+        }
+
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-color);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-color); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* Top Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+        /* Language content toggling */
+       .lang-content { display: none; }
+       .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation Area - Strictly matching requirements */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        /* Specific styles matching the user's provided image for "Back to Top" */
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: #0b2447;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">Switch to Chinese (点击切换至全中文)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 2 - Module 3: Internal Finance and Venture Capital</h1>
+        
+        <p>Welcome to Module 3. Having explored the external capital markets (equity and debt) in previous modules, we now turn our attention inward. The cheapest and most accessible source of funds for a successful firm is the cash it generates itself. Furthermore, we will address the unique financing challenges faced by Small and Medium-sized Enterprises (SMEs) and how the Venture Capital industry bridges the "funding gap."</p>
+
+        <h2>1. Internal Sources of Finance</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Internal Finance & Retained Profits</h3>
+            <p><strong>Definition:</strong> Internal sources of finance are funds generated within the business itself, requiring no external agreement from new investors or lenders. The primary long-term internal source is <strong>Retained Profits (Earnings)</strong>—profits kept within the business rather than distributed as dividends to shareholders.</p>
+            <p>Other short-term internal sources involve working capital adjustments, such as:</p>
+            <ul>
+                <li><strong>Tighter Credit Control:</strong> Reducing the time given to trade debtors to pay, thus releasing cash.</li>
+                <li><strong>Reducing Stock Levels:</strong> Freeing up capital tied in inventory.</li>
+                <li><strong>Delayed Payment to Creditors:</strong> Utilizing suppliers as a free short-term funding source (though risking supplier goodwill).</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Why do giant corporations often refrain from issuing new shares or borrowing from banks? Because issuing external finance incurs substantial transaction costs (underwriting fees, legal fees) and dilutes existing control. Retained profit avoids all of this.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Apple Inc.'s Cash Mountain</span><br>
+            For many years under Steve Jobs and Tim Cook, Apple accumulated massive amounts of retained profits, eventually holding hundreds of billions of dollars in cash reserves. Instead of distributing all profits as dividends, Apple used these retained earnings as its primary long-term financing source to fund the monumental R&D required for the iPhone, iPad, and Apple Watch. By utilizing internal finance, Apple avoided the scrutiny, covenants, and interest payments associated with external debt, maintaining absolute strategic secrecy and operational flexibility.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> The most dangerous pitfall in exams is stating that "retained profit is a free source of finance." <strong>It is NOT free.</strong> It has an <em>Opportunity Cost</em>. If the company retained the profit instead of paying it out as dividends, the shareholders lost the opportunity to invest that cash elsewhere. Therefore, the cost of retained earnings is the return that shareholders expect the firm to generate on their behalf.</p>
+            
+            <p><strong>Classic Exam Question (Short Answer):</strong><br>
+            <em>Question:</em> Explain two advantages and one major disadvantage of using retained profits to finance a new long-term project. (6 Marks)</p>
+            
+            <p><strong>Model Answer:</strong><br>
+            <strong>Advantages (4 Marks):</strong> First, there are no issue costs (such as underwriting or prospectus fees) associated with retained earnings, making it cheaper to administer than issuing new equity. Second, it prevents the dilution of control, as no new voting shares are issued to outside investors.<br>
+            <strong>Disadvantage (2 Marks):</strong> The primary disadvantage is that the amount of finance available is strictly limited by the firm's historical profitability. Furthermore, it may dissatisfy shareholders who rely on regular cash dividend payouts, potentially leading to a drop in the share price.</p>
+        </div>
+
+        <h2>2. Financing Small Businesses and The Funding Gap</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: The SME Funding Gap</h3>
+            <p><strong>Definition:</strong> Small and Medium-sized Enterprises (SMEs) frequently experience a "funding gap"—a situation where they have viable, profitable business plans but cannot secure long-term finance from traditional capital markets (like stock exchanges) or commercial banks.</p>
+            <p>This gap exists due to several obstacles:</p>
+            <ul>
+                <li><strong>Information Asymmetry:</strong> SMEs lack the rigorous financial track records and audited reports of large PLCs.</li>
+                <li><strong>Lack of Security (Collateral):</strong> Banks require tangible assets to secure loans, which service-based or tech startups often lack.</li>
+                <li><strong>High Assessment Costs:</strong> The administrative cost for a bank to screen a small loan is disproportionately high compared to the loan's value.</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Imagine you are a brilliant software engineering student who just invented a revolutionary AI app. You need £1 million to scale it. You can't issue bonds (no one knows you), you can't IPO on the stock exchange (you don't meet listing requirements), and the bank rejects you because you have no factory or land to offer as collateral. This is the classic "Funding Gap." Because traditional debt and equity markets fail here, a specialized ecosystem of risk-takers has evolved to fill the void: Business Angels and Venture Capitalists.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> Do not confuse "Business Angels" with "Venture Capitalists" in an exam. Business Angels are wealthy <em>individuals</em> investing their <em>own</em> personal money in very early-stage startups. Venture Capitalists (VCs) are <em>firms</em> (institutions) that pool money from pension funds and institutions to invest larger amounts in high-growth companies.</p>
+        </div>
+
+        <h2>3. Venture Capital (VC) Ecosystem</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: The Venture Capital Process</h3>
+            <p><strong>Definition:</strong> Venture Capital is long-term risk capital provided to unquoted, high-growth-potential companies. VCs expect high returns to compensate for the extreme risks. The VC investment process universally follows five steps:</p>
+            <ol>
+                <li><strong>Obtaining Funds:</strong> The VC firm raises a pool of money from institutional investors.</li>
+                <li><strong>Evaluating Opportunities:</strong> Screening business plans (often assessing the management team, market size, and using Internal Rate of Return - IRR).</li>
+                <li><strong>Structuring the Investment:</strong> Staging the capital injection over time to mitigate risk.</li>
+                <li><strong>Monitoring Progress:</strong> VCs demand a seat on the Board of Directors and provide strategic consultancy.</li>
+                <li><strong>Exit Mechanism:</strong> Realizing the return through a Trade Sale (acquisition) or an Initial Public Offering (IPO).</li>
+            </ol>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>VCs are not charities; they are ruthless risk managers. They know that 7 out of 10 startups will go bankrupt. Therefore, the remaining 3 must generate astronomical returns to cover the losses. How do they manage this risk? Through <strong>Staged Financing (Structuring)</strong> and the <strong>Exit Strategy</strong>.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Sequoia Capital & WhatsApp's Exit</span><br>
+            Sequoia Capital, a premier VC firm, invested $60 million in WhatsApp. To manage risk, they didn't give the founders $60m on day one; they <em>staged</em> the financing, releasing funds only when WhatsApp hit specific user-growth milestones (Step 3). Sequoia partners sat on the board to monitor operations (Step 4). The ultimate goal of a VC is the "Exit" (Step 5). In 2014, Facebook acquired WhatsApp for $19 billion (a Trade Sale). This Exit Mechanism allowed Sequoia to turn its $60 million investment into $3 billion, perfectly illustrating the high-risk, ultra-high-reward nature of Venture Capital.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Classic Exam Question (Essay):</strong><br>
+            <em>"Venture capitalists are required to invest in highly uncertain SME environments. Critically evaluate the control mechanisms venture capitalists establish within the financing agreement to protect their investments." (15 Marks)</em></p>
+            
+            <p><strong>Model Answer Structure (Distinction Level):</strong><br>
+            To achieve a Distinction (70%+), structure your essay dynamically:<br>
+            <strong>1. Context:</strong> Briefly define the SME funding gap and why VCs face extreme information asymmetry and risk.<br>
+            <strong>2. Control Mechanism 1 (Staged Financing):</strong> Explain that VCs do not provide all funds upfront. They use "staged injections" tied to milestones. If the business fails a milestone, funding is cut, capping the VC's loss.<br>
+            <strong>3. Control Mechanism 2 (Board Representation):</strong> Discuss active monitoring. VCs mitigate the Agency Problem by taking seats on the Board of Directors, ensuring founders do not pursue sub-optimal strategies.<br>
+            <strong>4. Control Mechanism 3 (Financial Instruments):</strong> VCs rarely use straight equity. They often use Convertible Preference Shares. If the firm goes bankrupt, they rank ahead of founders to reclaim assets. If the firm succeeds, they convert to ordinary shares to capture the upside.<br>
+            <strong>5. Conclusion:</strong> Link these mechanisms to the ultimate goal: reaching a successful 'Exit' (IPO or Trade Sale) to realize maximum shareholder wealth.</p>
+        </div>
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第二周 - 模块三：内部造血与中小企业创投生态</h1>
+        
+        <p>欢迎来到模块三。在之前的模块中探索了外部资本市场（股权和债务）之后，我们现在将目光转向企业内部。对于一家成功的企业来说，最廉价、最容易获取的资金来源就是它自己产生的现金。此外，我们还将探讨中小企业（SMEs）面临的独特融资困境，以及风险投资（Venture Capital）行业是如何填补这一“资金缺口”的。</p>
+
+        <h2>1. 内部融资渠道 (Internal Sources of Finance)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：内部融资与留存收益</h3>
+            <p><strong>定义：</strong> 内部融资是指企业内部产生的资金，不需要与新的投资者或贷款人达成外部协议。最主要的长期内部资金来源是<strong>留存收益 (Retained Profits/Earnings)</strong>——即保留在企业内部而非作为股息分配给股东的利润。</p>
+            <p>其他短期的内部资金来源涉及营运资本的调整，例如：</p>
+            <ul>
+                <li><strong>收紧信用控制 (Tighter Credit Control)：</strong> 缩短给予贸易债务人（客户）的付款期限，从而释放现金。</li>
+                <li><strong>降低库存水平 (Reducing Stock Levels)：</strong> 释放积压在存货上的资金。</li>
+                <li><strong>延迟支付债权人 (Delayed Payment to Creditors)：</strong> 将供应商作为免费的短期资金来源（尽管这有损害供应商商誉的风险）。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>为什么那些商业巨头往往避免发行新股或向银行借款？因为发行外部融资会产生高昂的交易成本（承销费、律师费），并且会稀释现有的控制权。留存收益完美地避开了这一切。</p>
+            
+            <p><span class="case-title">实战案例：苹果公司 (Apple Inc.) 的现金帝国</span><br>
+            在史蒂夫·乔布斯和蒂姆·库克的领导下，苹果公司多年来积累了巨额的留存收益，最终手握数千亿美元的现金储备。苹果没有将所有利润作为股息全部分发，而是将这些留存收益作为其主要的长期融资来源，为 iPhone、iPad 和 Apple Watch 背后庞大的研发支出提供资金。通过利用内部融资，苹果避开了外部债务带来的严格审查、债务契约和利息支付，保持了绝对的战略机密性和运营灵活性。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍与真题解析</h3>
+            <p><strong>防坑策略：</strong> 考试中最危险的陷阱是声称“留存收益是一种免费的资金来源”。<strong>它绝对不是免费的。</strong> 它具有<em>机会成本 (Opportunity Cost)</em>。如果公司保留了利润而不是将其作为股息支付，股东就失去了将这些现金投资于别处获取回报的机会。因此，留存收益的成本，就是股东期望公司代他们投资所能产生的回报率。</p>
+            
+            <p><strong>经典真题 (简答题)：</strong><br>
+            <em>问题：</em> 解释使用留存收益来为新的长期项目融资的两个优点和一个主要缺点。(6分)</p>
+            
+            <p><strong>高分标准答案：</strong><br>
+            <strong>优点 (4分)：</strong> 首先，留存收益没有任何发行成本（如承销费或招股说明书费用），这使得它的管理成本低于发行新股。其次，它防止了控制权的稀释，因为没有向外部投资者发行新的有投票权的股票。<br>
+            <strong>缺点 (2分)：</strong> 主要的缺点是，可用资金的数额严格受限于企业历史的盈利能力。此外，如果股东依赖于定期的现金股息支出，保留利润可能会引起他们的不满，进而可能导致公司股价下跌。</p>
+        </div>
+
+        <h2>2. 中小企业融资与资金缺口 (The Funding Gap)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：中小企业资金缺口</h3>
+            <p><strong>定义：</strong> 中小企业（SMEs）经常遭遇“资金缺口 (Funding Gap)”——即它们拥有可行且有利可图的商业计划，但却无法从传统的资本市场（如证券交易所）或商业银行获得长期融资的困境。</p>
+            <p>这种缺口的存在源于以下几个障碍：</p>
+            <ul>
+                <li><strong>信息不对称 (Information Asymmetry)：</strong> 中小企业缺乏大型上市公司那样严谨的财务往绩和经过审计的报告。</li>
+                <li><strong>缺乏抵押品 (Lack of Security/Collateral)：</strong> 银行要求提供有形资产作为贷款担保，而服务型或科技型初创企业通常缺乏此类资产。</li>
+                <li><strong>高昂的评估成本 (High Assessment Costs)：</strong> 银行审查一笔小额贷款的行政成本，相较于贷款价值而言，比例高得不成正比。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>想象你是一名才华横溢的软件工程学生，刚刚发明了一款革命性的 AI 应用。你需要 100 万英镑来扩大规模。你无法发行债券（没人认识你），你不能在股票交易所 IPO（达不到上市标准），银行也拒绝了你，因为你没有工厂或土地可以作为抵押。这就是经典的“资金缺口”。正因为传统的债务和股权市场在这里失效了，一个专门填补这一空白的风险承担者生态系统应运而生：天使投资人和风险投资家。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍与真题解析</h3>
+            <p><strong>防坑策略：</strong> 考试中千万不要混淆“天使投资人 (Business Angels)”和“风险投资家 (Venture Capitalists)”。天使投资人是富有的<em>个人</em>，用他们<em>自己</em>的私人资金投资于非常早期的初创企业。而风险投资家（VCs）是<em>机构/公司</em>，他们汇集来自养老基金和机构的资金，对高增长公司进行较大规模的投资。</p>
+        </div>
+
+        <h2>3. 风险投资生态系统 (Venture Capital)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：风险投资的五步流程</h3>
+            <p><strong>定义：</strong> 风险投资是提供给未上市、具有高增长潜力的公司的长期风险资本。由于面临极端风险，VC 期望获得极高的回报。风险投资过程普遍遵循以下五个步骤：</p>
+            <ol>
+                <li><strong>获取资金 (Obtaining Funds)：</strong> VC 公司从机构投资者那里筹集资金池。</li>
+                <li><strong>评估机会 (Evaluating Opportunities)：</strong> 筛选商业计划（通常评估管理团队、市场规模，并使用内部收益率 IRR 进行财务测算）。</li>
+                <li><strong>构建投资结构 (Structuring the Investment)：</strong> 随着时间的推移分阶段注入资金以降低风险。</li>
+                <li><strong>实施与监控 (Monitoring Progress)：</strong> VC 会要求在董事会中占有一席之地，并提供战略咨询。</li>
+                <li><strong>退出机制 (Exit Mechanism)：</strong> 通过贸易出售（被收购）或首次公开募股（IPO）来实现投资回报。</li>
+            </ol>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>风险投资家不是慈善机构；他们是冷酷无情的风险管理者。他们知道 10 家初创企业中有 7 家会破产。因此，剩下的 3 家必须产生天文数字的回报来弥补损失。他们如何管理这种风险？通过<strong>分阶段融资 (Staged Financing)</strong>和<strong>退出战略 (Exit Strategy)</strong>。</p>
+            
+            <p><span class="case-title">实战案例：红杉资本 (Sequoia Capital) 与 WhatsApp 的退出</span><br>
+            顶级 VC 公司红杉资本向 WhatsApp 投资了 6000 万美元。为了控制风险，他们并没有在第一天就把 6000 万全给创始人；他们采取了<em>分阶段</em>融资，只有当 WhatsApp 达到特定的用户增长里程碑时才释放资金（步骤3）。红杉的合伙人进入董事会以监控运营（步骤4）。VC 的终极目标是“退出”（步骤5）。2014 年，Facebook 以 190 亿美元收购了 WhatsApp（属于贸易出售 Trade Sale）。这种退出机制让红杉资本的 6000 万美元投资变成了 30 亿美元，完美诠释了风险投资高风险、超高回报的本质。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍与真题解析</h3>
+            <p><strong>经典真题 (论述题 Essay)：</strong><br>
+            <em>"风险投资家往往需要在高度不确定的中小企业环境中进行投资。请批判性地评估风险投资家在融资协议中建立的、用于保护其投资的控制机制。" (15分)</em></p>
+            
+            <p><strong>A+ 级别答题结构 (Distinction Level)：</strong><br>
+            为了获得卓越的成绩（70%以上），请使用具有逻辑层次的结构来论述：<br>
+            <strong>1. 背景切入：</strong> 简要定义中小企业的资金缺口，以及为什么 VC 面临极端的信息不对称和风险。<br>
+            <strong>2. 控制机制一（分阶段融资 Staged Financing）：</strong> 解释 VC 不会预先提供所有资金。他们使用与业务里程碑挂钩的“分阶段注资”。如果企业未能实现里程碑，资金将被切断，从而锁定了 VC 的最大损失。<br>
+            <strong>3. 控制机制二（董事会席位 Board Representation）：</strong> 论述主动监控。VC 通过在董事会中占据席位来缓解代理问题，确保创始人不会追求次优的战略。<br>
+            <strong>4. 控制机制三（金融工具 Financial Instruments）：</strong> VC 极少使用纯粹的普通股。他们经常使用“可转换优先股”。如果公司破产，他们在清算时排在创始人之前拿回资产。如果公司成功，他们就转换为普通股，获取巨大的资本上涨收益。<br>
+            <strong>5. 结论提升：</strong> 将这些机制与终极目标联系起来：所有这些控制都是为了最终实现成功的“退出（IPO 或出售）”，从而实现股东财富最大化。</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            enContent.classList.remove('active');
+            zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active');
+            enContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to Chinese (点击切换至全中文)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>
