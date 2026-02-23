@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CB2200 | 智慧学习架构系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366f1; --secondary: #10b981; --accent: #f59e0b;
+            --bg: #f8fafc; --sidebar: #1e293b; --text: #1e293b;
+        }
+
+        body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); margin: 0; display: flex; height: 100vh; overflow: hidden; }
+
+        /* --- 侧边栏与导航 --- */
+        nav { width: 280px; background: var(--sidebar); color: white; display: flex; flex-direction: column; z-index: 10; }
+        .nav-header { padding: 25px; font-size: 20px; font-weight: 800; border-bottom: 1px solid #334155; }
+        .course-list { flex-grow: 1; overflow-y: auto; padding: 15px; }
+        .course-item { 
+            padding: 12px; margin-bottom: 8px; border-radius: 10px; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between; transition: 0.3s;
+        }
+        .course-item:hover, .course-item.active { background: var(--primary); color: white; }
+        
+        /* --- 主画布 (思维导图区) --- */
+        main { flex-grow: 1; padding: 40px; overflow: auto; position: relative; }
+        .mindmap-container { display: flex; flex-direction: column; align-items: flex-start; gap: 40px; padding-left: 20px; }
+        
+        .root-node { background: #1e293b; color: white; padding: 15px 30px; border-radius: 50px; font-weight: bold; font-size: 1.2rem; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        
+        .week-branch { display: flex; align-items: flex-start; gap: 50px; position: relative; padding-left: 40px; }
+        .week-branch::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: #cbd5e1; }
+
+        .week-label { 
+            background: white; border: 2px solid var(--primary); padding: 10px 20px; border-radius: 12px; 
+            font-weight: 600; min-width: 120px; text-align: center; position: relative;
+        }
+        .week-label::after { content: ""; position: absolute; right: -50px; top: 50%; width: 50px; height: 2px; background: #cbd5e1; }
+
+        .module-group { display: flex; flex-direction: column; gap: 15px; }
+        .module-node { 
+            background: white; padding: 10px 18px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;
+            min-width: 250px; transition: 0.2s; text-decoration: none; color: var(--text);
+        }
+        .module-node:hover { transform: translateX(5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .module-node.locked { border-left-color: #94a3b8; opacity: 0.6; cursor: not-allowed; }
+
+        /* --- 管理员面板 --- */
+        .admin-panel { 
+            position: fixed; top: 0; right: 0; width: 450px; height: 100vh; background: white; 
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1); padding: 30px; transform: translateX(100%); transition: 0.4s; z-index: 100;
+            overflow-y: auto; color: var(--text);
+        }
+        .admin-panel.open { transform: translateX(0); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        .btn { padding: 10px 15px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: white; width: 100%; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-ghost { background: #f1f5f9; color: var(--text); }
+        .btn-success { background: #10b981; color: white; width: 100%; }
+
+        .sort-tool { display: flex; gap: 5px; align-items: center; }
+        .sort-btn { background: #f1f5f9; border: none; cursor: pointer; padding: 2px 6px; border-radius: 4px; font-size: 12px; }
+        .admin-only { display: none !important; }
+        body.is-admin .admin-only { display: flex !important; }
+        
+        /* 登录弹窗 */
+        #loginModal {
+            position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5);
+            display:none; justify-content:center; align-items:center; z-index:200;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-header">CityU Hub 2.0</div>
+        <div class="course-list" id="courseList"></div>
+        <div style="padding: 20px; border-top: 1px solid #334155;">
+            <div id="userStatus" style="font-size: 12px; margin-bottom: 10px;">状态: <span id="statusLabel">学生 (未订阅)</span></div>
+            <button class="btn btn-primary" id="adminGateBtn" onclick="handleAdminAuth()"><i class="fas fa-lock"></i> 管理员登录</button>
+            <button class="btn btn-ghost admin-only" onclick="logoutAdmin()" style="margin-top:10px; width:100%; font-size:12px;">登出管理模式</button>
+        </div>
+    </nav>
+
+    <main id="mainCanvas"></main>
+
+    <div class="admin-panel" id="adminPanel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2>系统管理中心</h2>
+            <button onclick="toggleAdminPanel()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        </div>
+
+        <div class="form-group">
+            <h3>1. 课程设置</h3>
+            <input type="text" id="courseNameInput" placeholder="课程名称">
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:10px;">
+                <button class="btn btn-primary" onclick="addCourse()">保存/更新课程</button>
+                <button class="btn btn-danger" onclick="deleteCurrentCourse()">删除当前课程</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <h3>2. 节点管理</h3>
+            <label>所属课程</label>
+            <select id="parentCourseSelect"></select>
+            <label>周次</label>
+            <input type="text" id="weekInput" placeholder="例如: Week 01">
+            <label>模块名称</label>
+            <input type="text" id="moduleNameInput" placeholder="课件显示标题">
+            <label>HTML文件名</label>
+            <input type="text" id="fileNameInput" placeholder="例如: lec1.html">
+            <label>权限</label>
+            <select id="accessSelect">
+                <option value="free">免费试用</option>
+                <option value="pro">订阅可见</option>
+            </select>
+            <button class="btn btn-primary" onclick="saveModule()" style="margin-top:10px;">发布/更新节点内容</button>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <h3>3. 数据备份与安全</h3>
+            <button class="btn" onclick="toggleSubscription()" style="background:var(--accent); color:white; width:100%; margin-bottom:10px;">模拟切换会员状态</button>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+                <button class="btn btn-success" onclick="exportData()"><i class="fas fa-download"></i> 导出备份</button>
+                <button class="btn btn-ghost" onclick="document.getElementById('importFile').click()"><i class="fas fa-upload"></i> 导入备份</button>
+                <input type="file" id="importFile" style="display:none" onchange="importData(event)">
+            </div>
+            <button class="btn btn-ghost" onclick="changeAdminPassword()" style="width:100%;">修改管理员登录密码</button>
+        </div>
+    </div>
+
+    <div id="loginModal">
+        <div style="background:white; padding:30px; border-radius:15px; width:300px;">
+            <h3 style="margin-top:0">管理员验证</h3>
+            <p style="font-size:12px; color:#666;">默认密码: admin</p>
+            <input type="password" id="adminPwdInput" placeholder="输入管理员密码">
+            <button class="btn btn-primary" onclick="verifyAdmin()" style="margin-top:15px;">验证登录</button>
+            <button class="btn btn-ghost" onclick="closeLoginModal()" style="margin-top:5px; width:100%;">取消</button>
+        </div>
+    </div>
+
+    <script>
+        // 初始状态定义
+        const DEFAULT_STATE = {
+            courses: [{id: 'stats', name: 'Statistics'}],
+            data: {
+                'stats': {
+                    'Week 01': [{ name: '概率基础', file: 'p1.html', type: 'free' }]
+                }
+            },
+            isSubscribed: false,
+            currentCourseId: 'stats',
+            adminPwd: 'admin',
+            isAdmin: false
+        };
+
+        let state = JSON.parse(localStorage.getItem('edu_sys_v2')) || DEFAULT_STATE;
+        if(!state.adminPwd) state.adminPwd = 'admin';
+
+        let editingContext = null;
+
+        function saveState() {
+            localStorage.setItem('edu_sys_v2', JSON.stringify(state));
+        }
+
+        // --- 核心鉴权 ---
+        function handleAdminAuth() {
+            if(state.isAdmin) toggleAdminPanel();
+            else document.getElementById('loginModal').style.display = 'flex';
+        }
+
+        function verifyAdmin() {
+            const input = document.getElementById('adminPwdInput').value;
+            if(input === state.adminPwd) {
+                state.isAdmin = true;
+                document.body.classList.add('is-admin');
+                document.getElementById('adminGateBtn').innerHTML = '<i class="fas fa-cog"></i> 管理后台';
+                closeLoginModal();
+                renderAll();
+            } else {
+                alert("密码错误！默认密码为 admin");
+            }
+        }
+
+        function logoutAdmin() {
+            state.isAdmin = false;
+            document.body.classList.remove('is-admin');
+            document.getElementById('adminGateBtn').innerHTML = '<i class="fas fa-lock"></i> 管理员登录';
+            if(document.getElementById('adminPanel').classList.contains('open')) toggleAdminPanel();
+            renderAll();
+        }
+
+        function closeLoginModal() { document.getElementById('loginModal').style.display = 'none'; }
+
+        function changeAdminPassword() {
+            const old = prompt("请输入当前密码:");
+            if(old !== state.adminPwd) return alert("旧密码验证错误");
+            const newP = prompt("请输入新密码:");
+            if(newP) {
+                state.adminPwd = newP;
+                saveState();
+                alert("密码修改成功，请妥善保管。");
+            }
+        }
+
+        // --- 备份功能 ---
+        function exportData() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", "course_system_backup.json");
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function importData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedState = JSON.parse(e.target.result);
+                    if(confirm("确定要导入备份吗？这会覆盖当前所有课程数据！")) {
+                        state = importedState;
+                        state.isAdmin = true; 
+                        saveState();
+                        location.reload(); 
+                    }
+                } catch (err) {
+                    alert("文件损坏或格式不正确");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // --- 渲染逻辑 ---
+        function renderAll() {
+            renderNav();
+            renderMindMap();
+            updateAdminSelects();
+            saveState();
+        }
+
+        function renderNav() {
+            const list = document.getElementById('courseList');
+            list.innerHTML = state.courses.map((c, index) => `
+                <div class="course-item ${state.currentCourseId === c.id ? 'active' : ''}" onclick="switchCourse('${c.id}')">
+                    <span><i class="fas fa-folder"></i> ${c.name}</span>
+                    <div class="sort-tool admin-only">
+                        <button class="sort-btn" title="上移课程" onclick="moveCourse(${index}, -1); event.stopPropagation();">▲</button>
+                        <button class="sort-btn" title="下移课程" onclick="moveCourse(${index}, 1); event.stopPropagation();">▼</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMindMap() {
+            const canvas = document.getElementById('mainCanvas');
+            const course = state.courses.find(c => c.id === state.currentCourseId);
+            if (!course) { canvas.innerHTML = "<h2>请添加课程</h2>"; return; }
+
+            let html = `<div class="mindmap-container"><div class="root-node">${course.name}</div>`;
+            const courseData = state.data[course.id] || {};
+            
+            Object.keys(courseData).forEach((week, wIdx) => {
+                html += `
+                    <div class="week-branch">
+                        <div class="week-label">
+                            ${week}
+                            <div class="admin-only" style="font-size:10px; margin-top:5px; justify-content:center; gap:5px;">
+                                <span onclick="moveWeek('${course.id}', ${wIdx}, -1)" title="上移周次" style="cursor:pointer">◀</span>
+                                <span onclick="deleteWeek('${course.id}', '${week}')" title="删除周次" style="color:red;cursor:pointer">×</span>
+                                <span onclick="moveWeek('${course.id}', ${wIdx}, 1)" title="下移周次" style="cursor:pointer">▶</span>
+                            </div>
+                        </div>
+                        <div class="module-group">
+                `;
+                courseData[week].forEach((mod, mIdx) => {
+                    const isLocked = mod.type === 'pro' && !state.isSubscribed;
+                    html += `
+                        <div class="module-node ${isLocked ? 'locked' : ''}">
+                            <div onclick="${isLocked ? "alert('请先订阅')" : `window.location.href='./courses/${course.id}/${mod.file}'`}" style="cursor:pointer">
+                                <i class="fas ${isLocked ? 'fa-lock' : 'fa-file-alt'}"></i> ${mod.name}
+                            </div>
+                            <div class="sort-tool admin-only">
+                                <button class="sort-btn" title="上移课件" onclick="moveMod('${course.id}', '${week}', ${mIdx}, -1)">▲</button>
+                                <button class="sort-btn" title="下移课件" onclick="moveMod('${course.id}', '${week}', ${mIdx}, 1)">▼</button>
+                                <button class="sort-btn" title="编辑" onclick="editMod('${course.id}', '${week}', ${mIdx})"><i class="fas fa-edit"></i></button>
+                                <button class="sort-btn" title="删除" onclick="deleteMod('${course.id}', '${week}', ${mIdx})" style="color:red">×</button>
+                            </div>
+                        </div>`;
+                });
+                html += `</div></div>`;
+            });
+            canvas.innerHTML = html + `</div>`;
+        }
+
+        // --- 管理逻辑 ---
+        function toggleAdminPanel() { document.getElementById('adminPanel').classList.toggle('open'); }
+
+        function addCourse() {
+            const name = document.getElementById('courseNameInput').value;
+            if (!name) return;
+            const id = name.toLowerCase().replace(/\s+/g, '_');
+            if (!state.courses.find(c => c.id === id)) {
+                state.courses.push({id, name});
+                state.data[id] = {};
+            } else {
+                state.courses.find(c => c.id === id).name = name;
+            }
+            renderAll();
+        }
+
+        function deleteCurrentCourse() {
+            if(!confirm("确定删除吗？")) return;
+            state.courses = state.courses.filter(c => c.id !== state.currentCourseId);
+            delete state.data[state.currentCourseId];
+            state.currentCourseId = state.courses[0]?.id || null;
+            renderAll();
+        }
+
+        function editMod(cid, week, idx) {
+            const mod = state.data[cid][week][idx];
+            editingContext = { cid, week, idx };
+            document.getElementById('parentCourseSelect').value = cid;
+            document.getElementById('weekInput').value = week;
+            document.getElementById('moduleNameInput').value = mod.name;
+            document.getElementById('fileNameInput').value = mod.file;
+            document.getElementById('accessSelect').value = mod.type;
+            if(!document.getElementById('adminPanel').classList.contains('open')) toggleAdminPanel();
+        }
+
+        function saveModule() {
+            const cid = document.getElementById('parentCourseSelect').value;
+            const week = document.getElementById('weekInput').value || 'Week 01';
+            const mod = {
+                name: document.getElementById('moduleNameInput').value,
+                file: document.getElementById('fileNameInput').value,
+                type: document.getElementById('accessSelect').value
+            };
+            if(!mod.name || !mod.file) return alert("请填写完整");
+
+            if(editingContext) {
+                state.data[editingContext.cid][editingContext.week].splice(editingContext.idx, 1);
+            }
+            if(!state.data[cid][week]) state.data[cid][week] = [];
+            state.data[cid][week].push(mod);
+            editingContext = null;
+            renderAll();
+        }
+
+        function switchCourse(id) { state.currentCourseId = id; renderAll(); }
+        function updateAdminSelects() {
+            document.getElementById('parentCourseSelect').innerHTML = state.courses.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+        }
+        function toggleSubscription() {
+            state.isSubscribed = !state.isSubscribed;
+            document.getElementById('statusLabel').innerText = state.isSubscribed ? "已订阅会员" : "学生 (未订阅)";
+            renderAll();
+        }
+
+        // --- 排序与删除功能 ---
+        function moveCourse(idx, dir) {
+            const arr = state.courses;
+            if(arr[idx+dir]) { [arr[idx], arr[idx+dir]] = [arr[idx+dir], arr[idx]]; renderAll(); }
+        }
+
+        function moveWeek(cid, idx, dir) {
+            const keys = Object.keys(state.data[cid]);
+            if(keys[idx+dir]) {
+                const newObj = {};
+                [keys[idx], keys[idx+dir]] = [keys[idx+dir], keys[idx]];
+                keys.forEach(k => newObj[k] = state.data[cid][k]);
+                state.data[cid] = newObj;
+                renderAll();
+            }
+        }
+
+        // 重新添加回来的课件模块排序功能
+        function moveMod(cid, week, idx, dir) {
+            const arr = state.data[cid][week];
+            if (arr[idx + dir]) {
+                [arr[idx], arr[idx + dir]] = [arr[idx + dir], arr[idx]];
+                renderAll();
+            }
+        }
+
+        function deleteWeek(cid, week) { if(confirm("删除全周？")) { delete state.data[cid][week]; renderAll(); } }
+        function deleteMod(cid, week, idx) { state.data[cid][week].splice(idx, 1); renderAll(); }
+
+        // 页面加载检查
+        if(state.isAdmin) document.body.classList.add('is-admin');
+        renderAll();
+    </script>
+</body>
+</html>
