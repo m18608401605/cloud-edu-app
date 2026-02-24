@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1: Introduction to Business Finance</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* Navy Blue */
+            --secondary-color: #005b96;
+            --accent-bg: #f4f4f4;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #444;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .page-marker {
+            font-size: 0.8em;
+            color: #999;
+            text-align: right;
+            border-top: 1px dashed #ccc;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .case-study {
+            background-color: var(--accent-bg);
+            border-left: 5px solid var(--secondary-color);
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .math-block {
+            font-family: "Courier New", Courier, monospace;
+            background: #eee;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        
+        /* 针对修复数据的特殊样式 */
+        .data-table-fix td {
+            text-align: center;
+            border: 1px solid #999;
+        }
+        .data-table-fix td:first-child, 
+        .data-table-fix td:nth-child(2) {
+            background-color: #e0e0e0;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="page-marker">Page 1 of 12</div>
+    <h1>Lecture 1: Introduction to Business Finance</h1>
+    <p><strong>Readings: McLaney Chapter 1&2</strong></p>
+
+    <h2>1) What is Business Finance</h2>
+    
+    <h3>General Financial Concepts</h3>
+    <p><strong>What is Finance?</strong></p>
+    <ul>
+        <li><strong>Economics:</strong> the science of how scarce resources – natural resources, land, labor, capital - are allocated.</li>
+        <li><strong>Finance:</strong> the sub-field focused on the allocation of capital.</li>
+        <li>Funnel capital (money) from those with a surplus of money and a deficit of ideas to those with a deficit of money and a surplus of ideas.</li>
+    </ul>
+
+    <h3>Business and Business Finance</h3>
+    <p>Business is about making money.</p>
+    <p>Business finance answers two questions:</p>
+    <ul>
+        <li><strong>How to invest money (Investment Decision)</strong>
+            <ul>
+                <li>Whether to choose or not (New tech, Production line, New product)</li>
+                <li>Which one to choose</li>
+            </ul>
+        </li>
+        <li><strong>How to raise money (Financing Decision)</strong>
+            <ul>
+                <li>Debt or equity (and how to issue)?</li>
+                <li>How much debt and how much equity?</li>
+                <li>How to distribute profits?</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p><strong>What is Business Finance?</strong><br>
+    It is a mix of economics, accounting, law, quantitative methods, and behavioural sciences, but it is now taught as a distinct subject.</p>
+
+    <h2>2) Organization of Firms</h2>
+    <h3>What is a Business?</h3>
+    <p>A business can be a sole proprietorship, partnership, or a limited company/corporation.<br>
+    The course focuses on limited companies, although the methods and theories we will be studying could be used for all businesses.</p>
+
+    <h3>Typical legal structures of firms:</h3>
+    <ul>
+        <li><strong>Sole Proprietorship</strong> (default legal structure)
+            <ul>
+                <li>1 owner/manager, Limited to the life of the owner</li>
+                <li>Unlimited liability</li>
+                <li>Taxation at the individual level</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="page-marker">Page 2 of 12</div>
+    <ul>
+        <li><strong>Partnership</strong> (General and Limited)
+            <ul>
+                <li>Multiple owners/managers, Partnership dissolves when one partner dies or wishes to sell, Difficult to transfer ownership</li>
+                <li>Unlimited liability</li>
+                <li>Taxation at the individual level</li>
+                <li><strong>General partnerships:</strong> each partner is fully responsible for the liabilities incurred by the partnership.</li>
+                <li><strong>Limited partnerships:</strong> The limited owners have limited liability – their liability is limited to their investment. The death or withdrawal of a limited partner does not dissolve the partnership. A limited partner’s interest is transferable. However, they have no management authority.</li>
+            </ul>
+        </li>
+        <li><strong>Limited Company/Corporation</strong> (U.S: Inc, UK: ltd or plc, France: S.A., Italy: S.p.A., Sweden: AB, etc.)
+            <ul>
+                <li>Benefit: Ability to raise capital is much better.</li>
+                <li>Limited liability for owners (shareholders) and unlimited life for the corporation</li>
+                <li>No special skills are needed to be a shareholder</li>
+                <li>Shareholders delegate managerial responsibilities. Ownership is divisible, so investors can diversify; Ownership can be readily transferred to new owners</li>
+                <li><strong>Costs:</strong>
+                    <ul>
+                        <li>Separation of ownership and control: Principal-agent conflict</li>
+                        <li>Board of Directors “supervises” managers. Asymmetric information</li>
+                        <li>Disclosure laws + financial institutions alleviate the problem</li>
+                        <li>Double taxation (corporate tax and dividend tax)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>3) Agency Problem</h2>
+    <h3>Who owns and who runs a limited company</h3>
+    <ul>
+        <li>In theory, shareholders control the business</li>
+        <li>In practice, shareholders are the owners of a limited company, but delegate the business management to directors. Managers handle day-to-day management.</li>
+        <li>Shareholders elect directors, usually 1/3 of the directors retire each year and offer themselves for re-election.</li>
+        <li>Mixed role among three groups of people. Directors may become shareholders. If they own a substantial proportion of the shares, they may control the company. The shareholder, director, and /or officer can be the same individual. E.g., family firms.</li>
+    </ul>
+
+    <div class="page-marker">Page 3 of 12</div>
+    <p>The way that companies are directed and controlled: separation of ownership and control</p>
+    
+    <h3>Agency Problem</h3>
+    <ul>
+        <li>The best interests of shareholders: long-term profitability</li>
+        <li>The best interests of managers: short-term – <strong>Short Termism</strong>
+            <ul>
+                <li>Reputations while they are in the business</li>
+                <li>Management remuneration</li>
+                <li>Perceive investors are interested only in the short term- research has debated over this argument</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p>The managers may be more concerned with pursuing their own interests, such as:</p>
+    <ul>
+        <li>Increasing pay & perks.</li>
+        <li>Building their empires with mergers and expansions.</li>
+        <li>Reducing risk through diversification.</li>
+    </ul>
+
+    <p>Shareholder ownership is too diffuse and fragmented for effective management</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Company (GVKEY)</th>
+                <th>Number of Common/Ordinary Shareholders (CSHR) in 2021</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Microsoft Corp (012141)</td>
+                <td>89,291</td>
+            </tr>
+            <tr>
+                <td>General Electric Co (005047)</td>
+                <td>294,000</td>
+            </tr>
+            <tr>
+                <td>IBM Corp (006066)</td>
+                <td>362,482</td>
+            </tr>
+            <tr>
+                <td>Intel Corp (006008)</td>
+                <td>102,962</td>
+            </tr>
+        </tbody>
+    </table>
+    <p style="font-size: 0.8em;">Source: Extracted from COMPUSTAT (<a href="https://wrds-web.wharton.upenn.edu/wrds/query_forms/navigation.cfm?navId=60">Link</a>). CSHR: the actual number of shareholders of common/ordinary capital as reported by the company</p>
+
+    <h3>Agency Cost</h3>
+    <p>Agency problem results in additional costs to the business called Agency Costs.<br>
+    Types of Agency Cost:</p>
+    <ul>
+        <li>The costs to the shareholders of managers making decisions that are not in the shareholders’ best interests.</li>
+        <li>The costs occurred as shareholders need to monitor the managers.</li>
+    </ul>
+
+    <div class="page-marker">Page 4 of 12</div>
+    
+    <h2>Corporate Governance</h2>
+    
+    <h3>Role of Directors</h3>
+    <p>There are rules to monitor and control the behaviour of directors.<br>
+    <strong>Duty of Care & Duty of Loyalty</strong><br>
+    They are based on 3 guiding principles:</p>
+    <ul>
+        <li><strong>Disclosure</strong> – Adequate and timely information about corporate performance <a href="http://www.sec.gov/edgar/searchedgar/companysearch.html">SEC Link</a>; <a href="http://www.sse.com.cn/disclosure/">SSE Link</a></li>
+        <li><strong>Accountability</strong> – annual financial statements independently audited</li>
+        <li><strong>Fairness</strong> – directors do not gain from insider knowledge (restrictions on buying and selling shares immediately)</li>
+    </ul>
+
+    <h3>Role of Shareholders</h3>
+    <p>It is suggested that corporate failures are because shareholders, especially large institutional shareholders, are not very active in corporate governance matters.<br>
+    Shareholders can play an active role in monitoring/controlling the management team (managers) to compel a company to act in a desired manner.</p>
+
+    <div class="page-marker">Page 5 of 12</div>
+    
+    <h3>Recent studies</h3>
+    <p>For two generations, the image of the modern company in the US is stuck with a widely held corporation run by professional managers whose interests diverge from those of small shareholders (Berle and Means, 1932).</p>
+    <p>Recent research shows that widely dispersed ownership is especially true for corporations in the U.S., the U.K., and Ireland. However, for East Asian corporations and most of the Continental European corporations, firms are closely held.</p>
+    
+    <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid #005b96; margin-top: 15px;">
+        <h4 style="margin-top: 0; color: #333;">Conflicts between the interests of controlling shareholders and minority shareholders</h4>
+        <table class="data-table-fix" style="width: auto; margin: 10px 0;">
+            <tr>
+                <td>/District</td>
+                <td>Total 2980</td>
+                <td>7.4</td>
+                <td>54.2</td>
+                <td>8.4</td>
+                <td>12.9</td>
+                <td>17.1</td>
+            </tr>
+        </table>
+        <p style="font-size: 0.85em; color: #666; font-style: italic; margin-bottom: 0;">
+            Source: Claessens, et al. 2000, The separation of ownership and control in East Asian Corporations, JFE, Table 6
+        </p>
+    </div>
+
+    <h2>7) Maximisation of profit?? XXX</h2>
+    <h2>4) Business Objective • Maximisation of ????</h2>
+    <ul>
+        <li>Profit</li>
+        <li>Long term stability</li>
+        <li>Return of capital</li>
+        <li>Satisficing</li>
+        <li>Survival</li>
+        <li>Growth</li>
+    </ul>
+
+    <div class="page-marker">Page 6 of 12</div>
+    
+    <h3>8) Profit increases ≠ shareholders’ return increases</h3>
+    <div class="case-study">
+        <p>– If Company A has 10,000 shares of £1 and a profit of £1,000, what is the return to the shareholders?</p>
+        <p class="math-block">– £1,000/10,000= £0.1, £ 0.1/ £1=10%</p>
+        <p>– If the company increases the shares to 20,000 to expand the business’s scale of operations and increases its profit to £1,600, what is the return to the shareholders?</p>
+        <p class="math-block">– £1,600/20,000=£0.08, £ 0.08/ £1=8% – Reduced!</p>
+    </div>
+    
+    <p>9) Profits in the short term may reduce profitability in the long term</p>
+    <p>10) Profits can also increase by taking additional risks.</p>
+
+    <h3>Shareholder Theory - Maximisation of shareholders’ wealth (Firm Value)</h3>
+    <p>More credible goal since it considers both return and risk. This is what rational investors will recognise when they decide to buy. This encourages managers to balance risk and returns to maximise the dividends and share price for shareholders.<br>
+    A reasonable working basis for financial decision-making.</p>
+    <p><strong>Milton Friedman, 1970, New York Times</strong><br>
+    “A Friedman doctrine-- The Social Responsibility Of Business Is to Increase Its Profits” (risk-adjusted profits)</p>
+
+    <h3>Stakeholder Theory</h3>
+    <p>Stakeholder theory broadens a company’s organizational objective beyond the interests of its shareholders to the benefits of different stakeholders, who have an interest in the company.</p>
+    <p>The primary stakeholder groups of a corporation consist of shareholders, creditors, managers (or executives), other employees, board of directors, customers, suppliers, governments/regulators, and civil societies (and, by extension, affected individuals and community groups). (Freeman, 1984)</p>
+    <p><strong>Companies Should Maximize Shareholder Welfare Not Market Value (Hart and Zingales, 2017):</strong> Shareholders are concerned with money but not just money. They also have ethical and social concerns.</p>
+    <p><strong>Growing the pie - Alex Edmans</strong><br>
+    CSR activities also have a positive effect on shareholder wealth because focusing on the interests of other stakeholders increases their willingness to support a firm's operation and reduces firm risks.</p>
+
+    <h2>5) Risk and Return</h2>
+    <p>All decision-making involves the future. There is no complete certainty about the future. Risk is an important factor in all financial decision-making. Business Finance theory considers both risks and returns (profits) when deciding which investments to make and which form of finance to use.<br>
+    Higher risk, higher required rate of return.</p>
+
+    <div class="page-marker">Page 7 of 12</div>
+    <p><strong>Relationship between risk and return:</strong><br>
+    Where there is no risk, the expected return is the risk-free rate. As risk increases, an increasingly larger risk premium over the risk-free rate is expected.</p>
+
+    <h2>Long-term Source of Financing</h2>
+    <p>Long-term financing of companies</p>
+    <ul>
+        <li><strong>Ordinary shares: (equities or common stock)</strong>
+            <ul>
+                <li>No maturity date</li>
+                <li>Equity holders hope to receive periodic dividends (not compulsory for firms)</li>
+                <li>Lowest priority to Assets and Earnings: If a firm is closed down, shareholders receive an appropriate share of funds left after other commitments have been satisfied. Shareholders expect to receive a high return, associated with high risk.</li>
+                <li>Has Voting rights: e.g., delegates day-to-day decisions to managers, elects the Board of Directors to supervise managers</li>
+            </ul>
+        </li>
+        <li><strong>Preference shares (preferred stock)</strong>
+            <ul>
+                <li>Periodic, contractually specified dividends: Dividend is usually fixed as % of the nominal value of the share</li>
+                <li>Priority to Assets and Earnings: Junior to debt but senior to common equity</li>
+                <li>Not usually confer voting rights.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="page-marker">Page 8 of 12</div>
+    <ul>
+        <li><strong>Debt</strong>
+            <ul>
+                <li>Bank loans or corporate bonds</li>
+                <li>Highest priority to Assets and Earnings (Payments are contractual obligations; failure to make payment will lead to bankruptcy)</li>
+                <li>Different maturity</li>
+                <li>Secured/Unsecured</li>
+                <li>No voting right</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="case-study">
+        <h3>Example: Sky Plc</h3>
+        <p>Sky Plc promises to pay £100 to Cloud Insurance Company at the end of one year. This is a debt of Sky, and the holders of the debt will receive £100 if the value of Sky is equal to or more than £100 at the end of the year.</p>
+        <ul>
+            <li>Suppose that at year-end the Sky’s value is equal to £100. The firm has promised to pay Cloud £100. How much will the debt-holders get?</li>
+            <li>Suppose that at year-end the Sky’s value is equal to £200. How much will the debt-holders get?</li>
+            <li>Suppose that at year-end the Sky’s value is equal to £75. How much will the debt-holders get?</li>
+            <li>How much will the shareholders get for the above 3 cases?</li>
+        </ul>
+    </div>
+
+    <p><strong>For investors</strong></p>
+    <ul>
+        <li>Ordinary Shares -> Risk & Return</li>
+        <li>Preference Shares -> Source of long-term financing</li>
+        <li>Debt -> For investors -> Payment order when company is liquidated</li>
+    </ul>
+
+    <div class="page-marker">Page 9 of 12</div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Risk</th>
+                <th>Return</th>
+                <th>Voting Rights</th>
+                <th>Transferability</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Ordinary Shares</strong></td>
+                <td>High Risk</td>
+                <td>High Return, all company profits</td>
+                <td>Yes Voting Rights</td>
+                <td>Tradable</td>
+            </tr>
+            <tr>
+                <td><strong>Preference Shares</strong></td>
+                <td>Low Risk, first claim on dividends, but not risk-free</td>
+                <td>Relatively Low Return, there is an upper limit</td>
+                <td>No Voting Rights</td>
+                <td>Tradable but are no longer a major form of source of finance</td>
+            </tr>
+            <tr>
+                <td><strong>Debt</strong></td>
+                <td>Low Risk, normally secured on some specific assets</td>
+                <td>Low Return, agreed interests, date of payments</td>
+                <td>No Voting Rights</td>
+                <td>Tradable (bonds)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>The order of paying claimants: debtholders, preference shareholders, Ordinary shareholders</p>
+
+    <h2>The Separation Theorem</h2>
+    <p><strong>Separation Theorem- Invest or Spend (P28 example 2.2)</strong></p>
+    <div class="case-study">
+        <p><strong>The problem:</strong><br>
+        Industries Ltd should decide if to pay £10,000 to each shareholder now or to invest in project X. If investing in project X, the proceeds will be received in 1 year's time and each shareholder will receive £12,000.<br>
+        £10,000 now or £12,000 one year later?<br>
+        Should the firm invest (Assume interest rate is 10% p.a.)? Invest or Spend (P28 example 2.2)</p>
+
+        <p><strong>The Disagreement:</strong></p>
+        <ul>
+            <li><strong>Eager:</strong> Get £10,000 now in case there is a need. £2,000 is not worth the delay</li>
+            <li><strong>Patient:</strong> £12,000 is more than £10,000, why not wait?</li>
+            <li><strong>Steady:</strong> Investment is a good idea; however, she needs money for her house bill in 6 months' time.</li>
+        </ul>
+    </div>
+
+    <h3>The Solution – Borrowing & Lending</h3>
+    
+    <p><strong>For Eager: (10% interest rate)</strong></p>
+    <ul>
+        <li>If invest (receive dividend 1 year later): Today: Borrow from the bank for and spend now</li>
+        <li>1 year later: Return to the bank £12,000 (£10,909 *(1+10%)), using the dividend received</li>
+        <li>If do NOT invest: Today receive</li>
+    </ul>
+
+    <p><strong>For Patient: (10% interest rate)</strong></p>
+    <ul>
+        <li>If invest (receive dividend 1 year later): 1 year later: Receive the dividend:</li>
+        <li>If do NOT invest: Today receive £10,000 dividend, save in the bank</li>
+        <li>1 year later: Receive from the bank:</li>
+    </ul>
+
+    <div class="page-marker">Page 10 of 12</div>
+    
+    <p><strong>For Steady:</strong></p>
+    <ul>
+        <li>If invest: 6 months later: Borrow from the bank for and spend on her house</li>
+        <li>1 year later from now: Return to the bank £12,000, using the dividend received</li>
+        <li>If do NOT invest: Today receive £10,000 dividend, save in the bank</li>
+        <li>6months later: Receive and spend on her house</li>
+    </ul>
+
+    <p><strong>Conclusions:</strong></p>
+    <ul>
+        <li>All three investors will have more to spend if Project X is undertaken than if it is not, irrespective of when they wish to spend.</li>
+        <li>The company should invest</li>
+        <li>The shareholders’ preferences do not matter</li>
+    </ul>
+
+    <h3>Borrowing by the Business</h3>
+    <p>If the company were to pay £5,000 to each shareholder now, and borrow from the bank to finance project X, 1 year later, pay another £6,500 to each shareholder.</p>
+    
+    <ul>
+        <li><strong>For Eager:</strong> Today: Receive £5,000, Borrow from the bank for and spend now (together )<br>
+        year later: Return to the bank , using the dividend received<br>
+        No difference to previous case!!</li>
+
+        <li><strong>For Patient:</strong> Today: Receive £5,000, save into the bank and receive<br>
+        1 year later: receive dividend , together he has<br>
+        No difference to previous case!!</li>
+
+        <li><strong>For Steady:</strong> Today: Receive £5,000, save into the bank and for half year, receive after 6 months. Also borrow from the bank after 6 months, total 6months later: receive dividend £6,500, return bank £6,500<br>
+        Almost no difference to the previous case!!</li>
+    </ul>
+
+    <h2>The Separation Theorem (Implications)</h2>
+    <p>Theoretical implications of the Industries Ltd example</p>
+    <ul>
+        <li>Businesses should invest in projects that make them wealthier – increase shareholders' wealth.</li>
+        <li>Personal consumption/investment preferences of individual shareholders are irrelevant in making business payout decisions</li>
+        <li>The financing method does not affect shareholder wealth.</li>
+    </ul>
+
+    <div class="page-marker">Page 11 of 12</div>
+    
+    <h3>Assumptions</h3>
+    <ul>
+        <li>Investment only lasted one year (in the example)</li>
+        <li>The returns were certain – risk-free?</li>
+        <li>All the individuals wanted more wealth, not less</li>
+        <li>Borrowing rates were the same for individuals and businesses.</li>
+        <li>Borrowing and lending rates are the same</li>
+    </ul>
+
+    <p>However, the theorem certainly provides a foundation for several major financial theories that we will discuss later on in the book</p>
+
+    <div style="background-color: #e6f7ff; padding: 15px; border-radius: 5px; margin-top: 20px;">
+        <h3>NEXT WEEK</h3>
+        <p>Lecture: Time value of money, Interest Rate Basics, and Investment Appraisal</p>
+        <p>Readings: McLaney Chpt 4;</p>
+        <p>Student Resources online: <a href="http://wps.pearsoned.co.uk/ema_uk_he_mclaney_busfin_11/">http://wps.pearsoned.co.uk/ema_uk_he_mclaney_busfin_11/</a></p>
+    </div>
+
+    <div class="page-marker">Page 12 of 12</div>
+    
+    <h2>Contact Details</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Teaching Staff</th>
+                <th>Room:</th>
+                <th>Email:</th>
+                <th>Office hours:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Xiaolan Zheng (Lecturer)</td>
+                <td>IEB 522</td>
+                <td>xiaolan.zheng@nottingham.edu.cn</td>
+                <td>Tuesday 15:00-17:00</td>
+            </tr>
+            <tr>
+                <td>Qing Xia</td>
+                <td>IEB 406</td>
+                <td>qing.xia@nottingham.edu.cn</td>
+                <td>Tuesday 11:00- 13:00</td>
+            </tr>
+            <tr>
+                <td>Cass Lai</td>
+                <td>IEB 405</td>
+                <td>cass.lai@nottingham.edu.cn</td>
+                <td>Thursday 15:00-16:00;</td>
+            </tr>
+            <tr>
+                <td>Tingting Ying (Seminar Tutor)</td>
+                <td>IEB 407</td>
+                <td>Tingting.Ying@nottingham.edu.cn</td>
+                <td>Friday 11:00–13:00 (Weeks 24–28) Tuesday 13:00–15:00</td>
+            </tr>
+            <tr>
+                <td>Congjia He</td>
+                <td>Trent 453-33</td>
+                <td>Congjia.HE@nottingham.edu.cn</td>
+                <td>Thursday</td>
+            </tr>
+            <tr>
+                <td>Liqing Yin (Seminar Tutor)</td>
+                <td>Trent 453-36</td>
+                <td>liqing.yin@nottingham.edu.cn</td>
+                <td>Wednesday 15:00-17:00</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
