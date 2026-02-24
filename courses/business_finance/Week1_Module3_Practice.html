@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 3: Agency Theory & Corporate Governance (Mock Exam)</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #dca743;
+            --accent-gold-hover: #c69539;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #5a6b82;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-navy);
+        }
+
+        /* Intro Box */
+       .quiz-intro {
+            background-color: #f1f5f9;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+            border-left: 6px solid var(--primary-navy);
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+       .quiz-intro strong {
+            color: var(--primary-navy);
+        }
+
+        /* Quiz Styles */
+       .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius);
+            transition: box-shadow 0.2s ease;
+        }
+
+       .question-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+       .question-text {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+       .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+       .options-list li {
+            margin-bottom: 12px;
+        }
+
+       .options-list label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            background-color: #f8fafc;
+        }
+
+       .options-list label:hover {
+            background-color: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+       .options-list input[type="radio"] {
+            margin-top: 6px;
+            margin-right: 12px;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        /* Submit Button */
+       .submit-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-navy);
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            display: block;
+            width: 100%;
+            margin: 40px 0;
+            transition: background-color 0.3s ease;
+        }
+
+       .submit-btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Results & Mistake Book */
+        #results-container {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+       .score-display {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #fdfaf2;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--accent-gold);
+        }
+
+       .mistake-book {
+            background-color: #fff5f5;
+            border: 1px solid #f5cccc;
+            border-left: 6px solid var(--accent-red);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+
+       .mistake-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+       .correct-ans-highlight { color: var(--accent-green); font-weight: bold; background-color: #e8f8f5; padding: 2px 6px; border-radius: 4px;}
+       .wrong-ans-highlight { color: var(--accent-red); font-weight: bold; text-decoration: line-through; background-color: #fdedec; padding: 2px 6px; border-radius: 4px;}
+        
+       .explanation-box {
+            background-color: #eff6ff;
+            padding: 18px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary-blue);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+       .attribution-box {
+            background-color: #fef2f2;
+            padding: 18px;
+            margin-top: 12px;
+            border-left: 4px solid var(--accent-red);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Bottom Navigation Area */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 1.5px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: var(--primary-navy);
+            border: 1px solid #cbd5e1;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Language Display Logic */
+        body.lang-zh .en { display: none !important; }
+        body.lang-en .zh { display: none !important; }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (切换至中文)</button>
+
+    <h1 class="en">Week 1 - Module 3: Agency Theory & Corporate Governance</h1>
+    <h1 class="zh">第一周 - 模块 3: 代理理论与公司治理</h1>
+    
+    <div class="subtitle en">Mock Exam & Error Attribution Framework</div>
+    <div class="subtitle zh">模拟考试及错误归因框架</div>
+
+    <div class="quiz-intro en">
+        <p><strong>Professor's Instructions:</strong> Welcome to the rigorous assessment for Module 3. In the BUSI1020 final exam, questions concerning the Agency Problem require deep critical thinking, not just definitions. You must demonstrate the ability to identify conflicts of interest, evaluate corporate governance mechanisms, and critically analyze executive compensation schemes. Complete the 10 questions below to trigger the <em>Error Attribution Analysis</em>.</p>
+    </div>
+    <div class="quiz-intro zh">
+        <p><strong>教授指示:</strong> 欢迎来到模块三的严格考核。在 BUSI1020 的期末考试中，关于“代理问题”的题目需要极深的批判性思维，而不仅仅是背诵定义。您必须展现出识别利益冲突、评估公司治理机制以及批判性分析高管薪酬方案的能力。请完成以下10道题，系统将为您生成深度的<em>错误归因分析</em>。</p>
+    </div>
+
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+        
+        <button type="button" id="submitBtn" class="submit-btn en" onclick="submitQuiz()">Submit Answers & Generate Analysis</button>
+        <button type="button" id="submitBtnZh" class="submit-btn zh" onclick="submitQuiz()">提交答案并生成分析</button>
+    </form>
+
+    <div id="results-container">
+        <div class="score-display">
+            <span class="en">Your Score: <span id="score-val-en"></span> / 10</span>
+            <span class="zh">您的得分：<span id="score-val-zh"></span> / 10</span>
+        </div>
+        
+        <div id="mistake-book-section" class="mistake-book">
+            <h2 class="en" style="color: var(--accent-red); margin-top:0;">📖 Personal Mistake Book</h2>
+            <h2 class="zh" style="color: var(--accent-red); margin-top:0;">📖 个人错误簿与归因分析</h2>
+            <p class="en">Review the questions you answered incorrectly below. The attribution framework explains the root cause of your error to prevent it in the final exam.</p>
+            <p class="zh">请仔细回顾下方您做错的题目。归因分析框架将帮您彻底挖出错误的底层逻辑根源，确保在期末考场上绝不重犯。</p>
+            <div id="mistakes-container"></div>
+        </div>
+
+        <div id="perfect-score-section" style="display:none; text-align:center; padding: 20px;">
+            <h2 class="en" style="color: var(--accent-green);">🌟 Exceptional! Class I Quality!</h2>
+            <p class="en">You achieved a perfect score. You have demonstrated a Distinction-level understanding of Agency Theory and Corporate Governance.</p>
+            <h2 class="zh" style="color: var(--accent-green);">🌟 满分卓越表现！(Distinction)</h2>
+            <p class="zh">您获得了满分。您已经展现出了对“代理理论与公司治理”达到 A+ (Distinction) 级别的深刻理解！</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            id: 1,
+            qEn: "What is the fundamental cause of the 'Agency Problem' in corporate finance?",
+            qZh: "公司金融中“代理问题”的根本原因是什么？",
+            optionsEn: [
+                "The company cannot raise external debt financing.",
+                "The separation of ownership from control and the presence of information asymmetry.",
+                "High corporate taxes and government regulations.",
+                "Conflict between long-term bondholders and short-term creditors."
+            ],
+            optionsZh: [
+                "公司无法筹集外部债务融资。",
+                "所有权与控制权的分离，以及信息不对称的存在。",
+                "高水平的企业税收和政府监管。",
+                "长期债券持有人与短期债权人之间的冲突。"
+            ],
+            correct: 1,
+            expEn: "The Agency Problem arises because the principals (shareholders) hire agents (managers) to run the firm. Because managers have day-to-day data that shareholders lack (information asymmetry), they have the opportunity to pursue their own self-interests.",
+            expZh: "代理问题之所以产生，是因为委托人（股东出钱）雇佣了代理人（管理者出力）。由于管理者掌握股东没有的日常运营数据（信息不对称），他们有条件追求自身的利益而非股东利益。",
+            attrEn: "Definitional Error. You failed to grasp the core of Agency Theory. It is purely an internal governance issue stemming from 'who owns the money vs. who spends the money'.",
+            attrZh: "理论定义类错误。您未能掌握代理理论的核心。它纯粹是一个内部公司治理问题，源于\"谁出的钱\"与\"谁在花钱\"之间的身份错位及信息差。"
+        },
+        {
+            id: 2,
+            qEn: "Which of the following is considered a direct 'Agency Cost' incurred by shareholders?",
+            qZh: "以下哪一项被视为由股东承担的直接\"代理成本 (Agency Cost)\"？",
+            optionsEn: [
+                "The cost of purchasing new raw materials for production.",
+                "Payment to independent external auditors to monitor management (audit fees).",
+                "Interest paid to bondholders.",
+                "Dividends paid to common shareholders."
+            ],
+            optionsZh: [
+                "为生产购买新原材料的成本。",
+                "支付给独立外部审计师以监督管理层的审计费用。",
+                "支付给债券持有人的利息。",
+                "支付给普通股股东的股息。"
+            ],
+            correct: 1,
+            expEn: "Agency costs are the costs incurred to monitor and align the agent's behavior with the principal's goals. Paying an independent auditor to check the financial statements (monitoring cost) is a classic agency cost.",
+            expZh: "代理成本是为了监督代理人行为并使其与委托人目标保持一致而产生的成本。聘请独立审计师检查财务报表（监督成本）是最经典的代理成本。",
+            attrEn: "Categorization Error. You confused operational/financing costs with governance costs. Agency costs relate exclusively to monitoring, incentivizing, or controlling managers.",
+            attrZh: "成本分类错误。您将日常运营/融资成本与治理成本混淆了。代理成本专门指用于监督、激励或控制管理层行为的费用。"
+        },
+        {
+            id: 3,
+            qEn: "Which of the following corporate actions is most likely a manifestation of the agency problem rather than wealth maximization?",
+            qZh: "以下哪项企业行为最可能是代理问题作祟的体现，而不是为了实现财富最大化？",
+            optionsEn: [
+                "The CEO actively acquires unrelated companies to build an 'empire' despite these acquisitions having negative NPV.",
+                "The CFO decides to use retained earnings instead of issuing new shares to avoid issuance costs.",
+                "The board declares a high dividend payout to reward existing shareholders.",
+                "The company invests heavily in R&D projects with high risk but positive expected NPV."
+            ],
+            optionsZh: [
+                "CEO积极收购不相关的公司以建立\"商业帝国\"，尽管这些收购的净现值 (NPV) 为负。",
+                "CFO决定使用留存收益而不是发行新股，以避免发行成本。",
+                "董事会宣布高额股息支付以回报现有股东。",
+                "公司在具有高风险但预期 NPV 为正的研发项目上投入巨资。"
+            ],
+            correct: 0,
+            expEn: "Empire building (expanding firm size for prestige, power, or higher salary) even when it destroys shareholder value (negative NPV) is a textbook example of managers prioritizing their own utility over shareholder wealth.",
+            expZh: "\"建立商业帝国\"（为了声望、权力和高薪而盲目扩大公司规模），即使这会破坏股东价值（负 NPV），也是管理者将自身利益置于股东财富之上的教科书级案例。",
+            attrEn: "Application Error. You failed to identify self-serving managerial behavior. An A+ student recognizes that 'empire building' at the expense of NPV is the ultimate agency red flag.",
+            attrZh: "实战应用类错误。您未能识别出管理层自私自利的行为。A+ 学生应该敏锐地察觉到：以牺牲 NPV 为代价的\"建立商业帝国\"是代理问题的终极危险信号。"
+        },
+        {
+            id: 4,
+            qEn: "Disney provided former CEO Bob Iger with $25 million in stock options. What is the primary academic rationale for this compensation structure?",
+            qZh: "迪士尼为前任CEO罗伯特·艾格提供了价值 2500 万美元的股票期权。这种薪酬结构的主要学术理论依据是什么？",
+            optionsEn: [
+                "To save cash for the company in the short term.",
+                "To align the interests of managers with shareholders (Incentive Alignment).",
+                "To reduce the company's tax burden.",
+                "To increase the voting power of the board of directors."
+            ],
+            optionsZh: [
+                "为了公司在短期内节省现金。",
+                "将管理层的利益与股东利益对齐（激励对齐）。",
+                "为了减轻公司的税收负担。",
+                "为了增加董事会的投票权。"
+            ],
+            correct: 1,
+            expEn: "The core solution to the agency problem is Incentive Alignment. By giving the CEO stock options, their personal wealth relies on the share price increasing, which perfectly aligns their goals with those of the shareholders.",
+            expZh: "解决代理问题的核心在于\"激励对齐 (Incentive Alignment)\"。通过给予 CEO 股票期权，其个人财富就依赖于股价的上涨，从而将他们的目标与股东的目标完美统一。",
+            attrEn: "Conceptual Error. While stock options do save cash, their fundamental purpose in corporate finance theory is overcoming the principal-agent conflict via incentive alignment.",
+            attrZh: "概念类错误。虽然发放股票期权确实能省下当前现金，但它在公司金融理论中的根本目的是：通过利益绑定来克服\"委托-代理冲突\"。"
+        },
+        {
+            id: 5,
+            qEn: "From a critical perspective (Distinction level), what is the most significant flaw of using executive share options to resolve the agency problem?",
+            qZh: "从批判性思维（A+级别）的角度来看，使用高管股票期权来解决代理问题最显著的缺陷是什么？",
+            optionsEn: [
+                "They are taxed at extremely high rates compared to standard salaries.",
+                "They completely eliminate the need for external auditors.",
+                "They may allow executives to reap huge profits simply due to a bull market (overall market momentum), rather than due to their actual management skills.",
+                "They transfer voting rights from shareholders to managers."
+            ],
+            optionsZh: [
+                "与标准工资相比，它们被征收极高的税。",
+                "它们完全消除了对外部审计师的需求。",
+                "它们可能仅仅因为宏观经济的大牛市（整体市场势能）而让高管获得暴利，而并非因为其实际的管理技能。",
+                "它们将投票权从股东转移给了管理者。"
+            ],
+            correct: 2,
+            expEn: "An A+ student must critique solutions. Stock options reward CEOs when share prices rise. However, if the entire stock market is rising due to economic factors, the CEO gets rich purely through luck, not necessarily good management.",
+            expZh: "A+ 学生必须学会批判解决问题的方法。股票期权在股价上涨时奖励CEO。但是，如果整个股票市场因为宏观经济因素都在上涨（大牛市），CEO完全是靠运气暴富，这凸显了该机制的不公。",
+            attrEn: "Critical Thinking Deficit. You must learn to evaluate the limitations of financial mechanisms. Stock options fail to isolate managerial alpha (skill) from general market beta (momentum).",
+            attrZh: "批判性思维缺失。您必须学会在论述中评估金融工具的局限性。股票期权虽好，但它的致命缺陷是无法将管理者的真实能力与市场的整体运气剥离开来。"
+        },
+        {
+            id: 6,
+            qEn: "A company links its executive bonuses strictly to the annual accounting profit (e.g., EPS). According to financial theory, what is the major governance risk of this policy?",
+            qZh: "一家公司将其高管奖金严格与年度会计利润（如每股收益 EPS）挂钩。根据金融理论，这项政策存在的主要治理风险是什么？",
+            optionsEn: [
+                "It encourages managers to take on too much long-term debt.",
+                "It may induce managers to manipulate accounting policies or cut long-term R&D spending to artificially inflate short-term profits.",
+                "It automatically triggers a hostile takeover of the company.",
+                "It drives the dividend payout ratio to zero."
+            ],
+            optionsZh: [
+                "它鼓励管理者承担过多的长期债务。",
+                "它会诱使管理者操纵会计政策或削减长期研发费用，以人为地虚增短期盈利。",
+                "它会自动引发针对该公司的恶意收购。",
+                "它会将股息支付率降至零。"
+            ],
+            correct: 1,
+            expEn: "Performance-Related Pay (PRP) tied to accounting profit is dangerous. As seen in the Tesco scandal, managers might legally or illegally manipulate accounting figures, or cut vital long-term investments, just to hit their short-term bonus targets.",
+            expZh: "与会计利润挂钩的绩效薪酬 (PRP) 非常危险。正如乐购 (Tesco) 丑闻所见，管理者可能会合法或非法地操纵会计数据，或者削减至关重要的长期投资，仅仅为了达成他们的短期奖金目标。",
+            attrEn: "Analytical Error. You failed to connect 'Profit Maximization' flaws (manipulation & short-termism) with behavioral incentives. Never trust accounting profit as a standalone metric for executive bonuses.",
+            attrZh: "逻辑分析错误。您未能将\"利润最大化\"的理论缺陷（易被操纵和短视主义）与高管行为动机联系起来。绝不能将会计利润作为决定高管奖金的唯一指标。"
+        },
+        {
+            id: 7,
+            qEn: "According to the UK Corporate Governance Code, why should the roles of Chairman and Chief Executive Officer (CEO) NOT be held by the same individual?",
+            qZh: "根据英国《公司治理准则 (UK Corporate Governance Code)》，为什么董事长 (Chairman) 和首席执行官 (CEO) 的职务【不应】由同一个人担任？",
+            optionsEn: [
+                "Because it violates tax law.",
+                "Because one person cannot physically handle the huge workload of both positions.",
+                "To prevent unrestricted power concentration and ensure checks and balances at the board level.",
+                "Because shareholders would rather pay two salaries instead of one."
+            ],
+            optionsZh: [
+                "因为这违反了税法。",
+                "因为一个人在体力上无法处理这两个职位的巨大工作量。",
+                "为了防止不受限制的权力过度集中，并确保在董事会层面建立制衡机制 (checks and balances)。",
+                "因为股东宁愿支付两份薪水而不是一份。"
+            ],
+            correct: 2,
+            expEn: "A fundamental principle of the Cadbury and subsequent UK Governance Codes is the separation of the Chairman (who runs the board) and the CEO (who runs the business). This prevents one individual from having unfettered control over corporate decisions.",
+            expZh: "Cadbury 报告及后续英国治理准则的一个基本原则是：董事长（管理董事会）和 CEO（管理日常业务）必须分离。这可以防止一个人对公司决策拥有不受约束的绝对控制权。",
+            attrEn: "Governance Framework Error. The separation of Chairman and CEO is the most widely cited structural reform in UK corporate governance designed to mitigate agency risk at the highest level.",
+            attrZh: "治理框架常识错误。董事长与 CEO 职务分离是英国公司治理中最常被引用的结构性改革，旨在从最高管理层缓解代理风险。"
+        },
+        {
+            id: 8,
+            qEn: "What is the primary role of Independent Non-Executive Directors (NEDs) on a corporate board?",
+            qZh: "独立非执行董事 (NEDs) 在公司董事会中的主要职责是什么？",
+            optionsEn: [
+                "To manage the company's daily business operations.",
+                "To objectively supervise the executive management, review performance, and protect shareholder interests.",
+                "To act as legal counsel for the company during litigation.",
+                "To guarantee the company's stock price will never fall."
+            ],
+            optionsZh: [
+                "管理公司的日常业务运营。",
+                "客观地监督执行管理层，审查业绩，并保护股东利益。",
+                "在诉讼期间担任公司的法律顾问。",
+                "保证公司的股票价格永远不会下跌。"
+            ],
+            correct: 1,
+            expEn: "NEDs do not engage in daily management. They are independent outsiders brought onto the board specifically to challenge the executive directors, determine executive pay (via committees), and safeguard shareholders.",
+            expZh: "非执行董事不参与日常管理。他们是独立的外部人士，被引入董事会的目的就是为了质疑和监督执行董事、决定高管薪酬（通过薪酬委员会），并捍卫股东权益。",
+            attrEn: "Role Confusion. You confused Executive Directors (who run the business) with Non-Executive Directors (who monitor the executives).",
+            attrZh: "角色定位混淆。您混淆了执行董事（负责经营业务）和非执行董事（负责监督高管）的核心区别。"
+        },
+        {
+            id: 9,
+            qEn: "If internal governance mechanisms fail and managers consistently destroy shareholder wealth, what is the ultimate external market mechanism that disciplines management?",
+            qZh: "如果内部治理机制失效，且管理者持续破坏股东财富，那么能够约束管理层的终极【外部市场机制】是什么？",
+            optionsEn: [
+                "Audit by government tax authorities.",
+                "The threat of hostile takeover, which often leads to the complete dismissal and replacement of the existing management team.",
+                "A downgrade in the company's credit rating.",
+                "A strike organized by labor unions."
+            ],
+            optionsZh: [
+                "政府税务机关的审计。",
+                "敌意收购 (hostile takeover) 的威胁，这通常会导致现有管理团队被全盘解雇替换。",
+                "公司信用评级的下降。",
+                "由工会组织的罢工。"
+            ],
+            correct: 1,
+            expEn: "When managers perform poorly, the share price drops. This makes the company cheap to buy. A rival firm can execute a hostile takeover, buy the cheap shares, and fire the incompetent managers. This 'market threat' forces managers to perform well.",
+            expZh: "当管理者表现糟糕时，股价就会下跌。这使得公司变得便宜。竞争对手可以发起敌意收购，买下便宜的股票，并解雇无能的管理者。这种\"市场威胁\"迫使管理者不敢轻易懈怠。",
+            attrEn: "Market Dynamics Error. You failed to recognize the 'Market for Corporate Control'. Takeovers act as the ultimate safety net for shareholders when internal monitoring fails.",
+            attrZh: "市场动态认知错误。您未能认识到\"公司控制权市场\"的存在。当内部监督完全失效时，被收购并面临失业是悬在管理层头上的达摩克利斯之剑。"
+        },
+        {
+            id: 10,
+            qEn: "According to Herbert Simon's concept of 'Bounded Rationality', why might managers fail to truly 'maximize' shareholder wealth in practice?",
+            qZh: "根据赫伯特·西蒙 (Herbert Simon) 的\"有限理性 (Bounded Rationality)\"概念，为什么管理者在实践中可能无法真正实现股东财富的\"最大化\"？",
+            optionsEn: [
+                "Because they intentionally want the company to go bankrupt.",
+                "Because of human cognitive limitations and incomplete information, forcing them to 'satisfice' (accept a satisfactory result) rather than achieve perfect absolute maximization.",
+                "Because the stock market is completely unpredictable and random.",
+                "Because government regulations strictly prohibit wealth maximization."
+            ],
+            optionsZh: [
+                "因为他们故意想让公司破产。",
+                "因为人类认知能力的局限和信息的不完全，迫使他们采取\"满意原则 (satisfice)\"（接受一个令人满意的结果），而不是实现完美的绝对最大化。",
+                "因为股票市场是完全不可预测和随机的。",
+                "因为政府法规严格禁止财富最大化。"
+            ],
+            correct: 1,
+            expEn: "Bounded Rationality acknowledges that managers are human. They cannot process infinite data to find the 'absolute mathematical maximum'. Instead, they find an option that is 'good enough' to satisfy stakeholders (Satisficing).",
+            expZh: "有限理性承认管理者只是人类。他们无法处理无限的数据来寻找\"绝对的数学最大值\"。相反，他们往往会寻找一个\"足够好\"的选项来满足各方利益相关者的基本要求（即满意原则）。",
+            attrEn: "Theoretical Error. You missed the nuance between the pure financial goal (Maximization) and behavioral economic reality (Satisficing due to Bounded Rationality).",
+            attrZh: "理论认知错误。您没有理解纯粹金融目标（绝对最大化）与行为经济学现实（因有限理性而采取的满意原则）之间的微妙区别。"
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('questions-container');
+        quizData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            
+            // Question Text (Rendered both, CSS handles visibility)
+            const qEn = `<div class="question-text en">${index + 1}. ${q.qEn}</div>`;
+            const qZh = `<div class="question-text zh">${index + 1}. ${q.qZh}</div>`;
+            
+            // Options
+            let optionsHTML = '<ul class="options-list">';
+            for(let i=0; i<4; i++) {
+                optionsHTML += `
+                    <li>
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            <span class="en">${q.optionsEn[i]}</span>
+                            <span class="zh">${q.optionsZh[i]}</span>
+                        </label>
+                    </li>
+                `;
+            }
+            optionsHTML += '</ul>';
+
+            card.innerHTML = qEn + qZh + optionsHTML;
+            container.appendChild(card);
+        });
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        let mistakeHTML = '';
+        let allAnswered = true;
+
+        // Validation
+        for(let i = 0; i < quizData.length; i++) {
+            if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                allAnswered = false;
+                break;
+            }
+        }
+
+        if (!allAnswered) {
+            const isEng = document.body.classList.contains('lang-en');
+            alert(isEng? "Please answer all questions before submitting." : "请回答所有问题后再提交。");
+            return;
+        }
+        
+        // Scoring & Mistake Generation
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            
+            if (selected && parseInt(selected.value) === q.correct) {
+                score++;
+            } else {
+                let userChoiceTextEn = selected? q.optionsEn[selected.value] : "None";
+                let userChoiceTextZh = selected? q.optionsZh[selected.value] : "未选择";
+                let correctTextEn = q.optionsEn[q.correct];
+                let correctTextZh = q.optionsZh[q.correct];
+
+                mistakeHTML += `
+                    <div class="mistake-card">
+                        <div class="question-text en">Q${index + 1}: ${q.qEn}</div>
+                        <div class="question-text zh">Q${index + 1}: ${q.qZh}</div>
+                        
+                        <div style="margin-bottom: 12px; margin-top: 15px;">
+                            <span class="en">❌ <strong>Your Answer:</strong> <span class="wrong-ans-highlight">${userChoiceTextEn}</span></span>
+                            <span class="zh">❌ <strong>您的答案：</strong> <span class="wrong-ans-highlight">${userChoiceTextZh}</span></span>
+                        </div>
+                        <div>
+                            <span class="en">✅ <strong>Correct Answer:</strong> <span class="correct-ans-highlight">${correctTextEn}</span></span>
+                            <span class="zh">✅ <strong>正确答案：</strong> <span class="correct-ans-highlight">${correctTextZh}</span></span>
+                        </div>
+
+                        <div class="explanation-box">
+                            <strong class="en">👨‍🏫 Professor's Explanation:</strong> <span class="en">${q.expEn}</span>
+                            <strong class="zh">👨‍🏫 教授精讲：</strong> <span class="zh">${q.expZh}</span>
+                        </div>
+
+                        <div class="attribution-box">
+                            <strong class="en">🔍 Error Attribution Analysis:</strong> <span class="en">${q.attrEn}</span>
+                            <strong class="zh">🔍 深度归因分析：</strong> <span class="zh">${q.attrZh}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        // Hide form buttons
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('submitBtnZh').style.display = 'none';
+
+        // Display Score
+        document.getElementById('score-val-en').innerText = score;
+        document.getElementById('score-val-zh').innerText = score;
+        document.getElementById('results-container').style.display = 'block';
+
+        if (score === 10) {
+            document.getElementById('mistake-book-section').style.display = 'none';
+            document.getElementById('perfect-score-section').style.display = 'block';
+        } else {
+            document.getElementById('mistake-book-section').style.display = 'block';
+            document.getElementById('perfect-score-section').style.display = 'none';
+            document.getElementById('mistakes-container').innerHTML = mistakeHTML;
+        }
+
+        // Smooth scroll to results
+        setTimeout(() => {
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function toggleLanguage() {
+        const body = document.body;
+        const btn = document.getElementById('langToggleBtn');
+        
+        if (body.classList.contains('lang-en')) {
+            body.classList.remove('lang-en');
+            body.classList.add('lang-zh');
+            btn.innerText = 'Switch to English (切换至英文)';
+        } else {
+            body.classList.remove('lang-zh');
+            body.classList.add('lang-en');
+            btn.innerText = '点击切换至全中文 (切换至中文)';
+        }
+    }
+
+    // Initialize Quiz on load
+    window.onload = renderQuiz;
+</script>
+
+</body>
+</html>
