@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 5: The Fisher Separation Theorem</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #dca743;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.65;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 35px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #5a6b82;
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-navy);
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            margin-top: 45px;
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+        }
+
+        /* Content Boxes */
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e2e8f0;
+            padding: 25px 30px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-navy);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+            margin-bottom: 15px;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-red); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* CSS based Language Display Logic */
+        body.lang-en .zh { display: none !important; }
+        body.lang-zh .en { display: none !important; }
+
+        /* Bottom Navigation Area - Strictly matching your specifications */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: #0b2447;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (Switch to Chinese)</button>
+
+    <h1 class="en">Week 1 - Module 5: The Fisher Separation Theorem</h1>
+    <h1 class="zh">第一周 - 模块 5：费雪分离定理</h1>
+    
+    <div class="subtitle en">Answering the Core Business Dilemma: Can managers make optimal investment choices without knowing the specific consumption preferences of thousands of shareholders?</div>
+    <div class="subtitle zh">商业核心问题：管理者是否可以在不知道成千上万名股东具体消费偏好的情况下，做出最优的投资选择？</div>
+
+    <h2>1. The Theoretical Foundation</h2>
+    
+    <div class="section-box concept">
+        <h3 class="en">📚 Concept: The Fisher Separation Theorem</h3>
+        <h3 class="zh">📚 概念：费雪分离定理</h3>
+        
+        <p class="en"><strong>Definition:</strong> Formulated by economist Irving Fisher (1930), the Fisher Separation Theorem asserts that in a perfect capital market, a firm's investment decisions (production opportunities) are completely independent of the consumption preferences of its owners (shareholders).</p>
+        <p class="zh"><strong>定义：</strong> 费雪分离定理（Fisher Separation Theorem）由经济学家欧文·费雪于1930年提出。该定理断言：在完美的资本市场中，企业的最优投资决策（生产机会）完全独立于其所有者（股东）的个人消费偏好。</p>
+        
+        <p class="en">Therefore, the primary objective of a corporation should solely be the <strong>maximization of its present value (Net Present Value - NPV)</strong>, regardless of whether its shareholders prefer to consume their wealth today or save it for tomorrow.</p>
+        <p class="zh">因此，企业的首要目标应该仅仅是<strong>最大化其现值（即净现值 NPV 最大化）</strong>，而完全不需要考虑股东是想在今天消费他们的财富，还是想把财富留到明天。</p>
+
+        <p class="en"><strong>Strict Assumptions Required:</strong> For this theorem to hold, the capital market must be "perfect." This means:<br>
+        1. There are no transaction costs or taxes.<br>
+        2. Information is symmetric and freely available.<br>
+        3. The <strong>borrowing rate equals the lending rate</strong>, and individuals can borrow/lend unlimited amounts at this market interest rate.</p>
+        <p class="zh"><strong>严格的前提假设：</strong> 要使该定理成立，资本市场必须是“完美的”。这意味着：<br>
+        1. 不存在交易成本或税收。<br>
+        2. 信息是对称且可自由获取的。<br>
+        3. <strong>借款利率等于贷款利率</strong>，且个人可以按照该市场利率无限制地借入或贷出资金。</p>
+    </div>
+
+    <h2>2. Resolving the Core Business Dilemma</h2>
+
+    <div class="section-box explanation">
+        <h3 class="en">👨‍🏫 Professor's Explanation & Application</h3>
+        <h3 class="zh">👨‍🏫 教授精讲与商业场景应用</h3>
+
+        <p class="en">Let's address the core dilemma: You are the CEO of a multinational corporation with 100,000 shareholders. Shareholder A is a 70-year-old retiree who wants immediate cash (dividends) today to pay for living expenses. Shareholder B is a 25-year-old professional who wants the company to reinvest all cash for long-term growth (capital gains) 20 years from now. <strong>If their preferences are completely opposite, how can you possibly make an investment decision that satisfies both?</strong></p>
+        <p class="zh">让我们直面这个核心商业难题：假设你是一家拥有 10万名股东的跨国公司的CEO。股东A是一位70岁的退休老人，他今天就需要立刻拿到现金（股息）来支付生活费。股东B是一位25岁的职场新人，他希望公司把所有的现金都用于再投资，以获取20年后的长期增长（资本利得）。<strong>如果他们的偏好完全相反，你怎么可能做出一个让两人都满意的投资决策呢？</strong></p>
+
+        <p class="en"><span class="highlight">The Genius of Fisher's Theorem:</span> You don't need to ask them. As the manager, your only job is to push the firm along its Production Possibility Frontier to find the highest Net Present Value (NPV). You blindly accept any project that yields a return higher than the market interest rate.</p>
+        <p class="zh"><span class="highlight">费雪定理的伟大之处：</span> 你根本不需要去问他们。作为管理者，你唯一的工作就是推动企业沿着“生产可能性边界 (Production Possibility Frontier)”前进，去寻找最高的净现值 (NPV)。你只需要闭着眼睛接受任何回报率高于市场利率的投资项目。</p>
+
+        <p class="en"><span class="case-title">How the Capital Market Solves the Rest:</span><br>
+        Suppose you invest all the company's cash into a highly profitable AI project (NPV > 0). The firm's overall value (share price) instantly increases. <br>
+        - <strong>For Shareholder A (wants cash now):</strong> Even though the company didn't pay a dividend today, the share price went up. Shareholder A can simply sell some of his shares in the capital market, or borrow money from a bank using his highly-valued shares as collateral, achieving his desired current consumption.<br>
+        - <strong>For Shareholder B (wants cash later):</strong> The company is investing for the future, perfectly aligning with B's desire to delay consumption.</p>
+        <p class="zh"><span class="case-title">资本市场如何解决剩下的问题：</span><br>
+        假设你把公司所有的现金都投资到了一个极具盈利潜力的AI项目中（NPV > 0）。公司的整体价值（股价）瞬间飙升。<br>
+        - <strong>对于股东A（现在就要钱）：</strong> 尽管公司今天没有发股息，但股价上涨了。股东A完全可以在资本市场上卖掉他的一部分股票，或者用他高价值的股票作为抵押向银行借钱，从而实现他当前想要的消费。<br>
+        - <strong>对于股东B（以后才要钱）：</strong> 公司正在为未来投资，这完美契合了B延迟消费的愿望。</p>
+
+        <p class="en">Because the capital market exists (allowing borrowing and lending at the market rate), the manager can <em>separate</em> the investment decision from the shareholders' consumption decisions. The capital market acts as a shock absorber, reconciling opposing desires.</p>
+        <p class="zh">正因为资本市场的存在（允许以市场利率借贷），管理者才能将“投资决策”与股东的“消费决策”彻底<strong>分离 (Separate)</strong>。资本市场充当了减震器，调和了对立的欲望。这就是为什么这门课只教你如何计算和最大化 NPV，而不教你如何去迎合股东偏好的底层逻辑。</p>
+    </div>
+
+    <h2>3. Assessment Readiness</h2>
+
+    <div class="section-box exam">
+        <h3 class="en">📝 Exam Anti-Pitfall Guide & Distinction-Level Past Papers</h3>
+        <h3 class="zh">📝 考试防坑秘籍 & A+级别真题解析</h3>
+
+        <p class="en"><strong>Anti-Pitfall Strategy:</strong> Examiners love to test the <em>limitations</em> of Fisher's Theorem. If a question asks what happens when the assumptions are broken, you must state that if capital markets are imperfect (e.g., the rate to borrow money from a bank is much higher than the rate earned on savings), the separation theorem collapses. In that scenario, managers <em>would</em> need to know the specific time preferences and utility curves (Indifference Curves) of their shareholders to make optimal choices.</p>
+        <p class="zh"><strong>防坑策略：</strong> 考官非常喜欢测试费雪定理的<em>局限性</em>。如果题目问当假设被打破时会发生什么，你必须指出：如果资本市场是不完美的（例如，向银行借钱的利率远远高于存款的利率），分离定理就会崩溃。在这种情况下，管理者就<em>必须</em>了解其股东具体的时间偏好和效用曲线（无差异曲线 Indifference Curves），才能做出最优选择。</p>
+
+        <p class="en"><strong>Classic Exam Question (Essay - 10 Marks):</strong><br>
+        <em>"Recall the Fisher separation theorem and the conditions under which it holds. Discuss the implications of the Fisher separation theorem for project evaluation and the organisation of the firm."</em></p>
+        <p class="zh"><strong>经典考题 (论述题 - 10分)：</strong><br>
+        <em>“请回顾费雪分离定理及其成立的条件。并讨论费雪分离定理对项目评估以及企业组织形式的深远影响。”</em></p>
+
+        <p class="en"><strong>Complete Distinction (A+) Answer Framework:</strong><br>
+        1. <strong>Definition & Conditions (3 marks):</strong> Define the theorem. Explicitly list the conditions of perfect capital markets (no taxes, no transaction costs, all agents can borrow/lend at the same risk-free rate, rational behavior).<br>
+        2. <strong>Implication for Project Evaluation (4 marks):</strong> Explain that because of the theorem, project evaluation becomes objective rather than subjective. The firm does not need to consult shareholders' utility curves. The firm simply uses the Net Present Value (NPV) rule, discounting expected cash flows at the market interest rate. Any project with NPV > 0 increases wealth and should be accepted.<br>
+        3. <strong>Implication for Firm Organisation (3 marks):</strong> This is the crucial differentiator. Explain that Fisher's Theorem provides the theoretical justification for the modern corporate structure (the separation of ownership and management). Because the investment rule is objective (Max NPV), shareholders can safely delegate day-to-day decision-making to professional managers, knowing that maximizing market value is universally optimal.</p>
+        
+        <p class="zh"><strong>A+ 级别满分答题框架：</strong><br>
+        1. <strong>定义与条件 (3分)：</strong> 准确写出定理定义。明确列出完美资本市场的条件（无税收、无交易成本、所有主体都能以相同的无风险利率借贷、理性人假设）。<br>
+        2. <strong>对项目评估的影响 (4分)：</strong> 论述由于该定理的存在，项目评估变得“客观”而非“主观”。企业不需要去调查股东的效用曲线。企业只需采用净现值（NPV）法则，用市场利率对预期现金流进行折现。任何 NPV > 0 的项目都会增加财富，都应被接受。<br>
+        3. <strong>对企业组织形式的影响 (3分)：</strong> 这是拉开分数差距的关键。解释费雪定理为现代企业制度（所有权与经营权分离）提供了理论合法性。正因为投资法则是一个客观的标准（最大化 NPV），股东才可以放心地将日常决策权委托给职业经理人，因为他们知道，最大化公司的市场价值是对所有人都有利的最优解。</p>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const body = document.body;
+        const btn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            // Switch to Chinese
+            body.classList.remove('lang-en');
+            body.classList.add('lang-zh');
+            btn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            // Switch to English
+            body.classList.remove('lang-zh');
+            body.classList.add('lang-en');
+            btn.innerHTML = '点击切换至全中文 (Switch to Chinese)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>
