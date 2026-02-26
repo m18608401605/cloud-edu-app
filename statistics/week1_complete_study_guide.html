@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计学 - 第一周完整学习攻略</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #005b96;
+            --accent-bg: #f4f4f4;
+            --border-color: #ddd;
+            --text-color: #333;
+            --prof-bg: #e8f4fd;
+            --business-bg: #fff9e6;
+            --application-bg: #e8f5e8;
+            --exam-bg: #fef5e7;
+            --bonus-bg: #f4e8fd;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, "Microsoft YaHei", sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #444;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+        h4 {
+            color: var(--primary-color);
+            margin-top: 20px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .toc {
+            background-color: #f8f9fa;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .toc table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .toc th {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .toc td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .toc a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .module-section {
+            margin: 40px 0;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            margin: -30px -30px 30px -30px;
+            text-align: center;
+        }
+
+        .module-header h2 {
+            color: #fff;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .section-box {
+            margin: 25px 0;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .professor-section {
+            background-color: var(--prof-bg);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .business-section {
+            background-color: var(--business-bg);
+            border-left: 5px solid #f39c12;
+        }
+
+        .application-section {
+            background-color: var(--application-bg);
+            border-left: 5px solid #27ae60;
+        }
+
+        .exam-section {
+            background-color: var(--exam-bg);
+            border-left: 5px solid #e67e22;
+        }
+
+        .bonus-section {
+            background-color: var(--bonus-bg);
+            border-left: 5px solid #8e44ad;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .emoji {
+            font-size: 1.3em;
+        }
+
+        .formula-box {
+            background-color: #f0f8ff;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1.1em;
+        }
+
+        .formula {
+            font-family: "Courier New", Courier, monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .example-box {
+            background-color: #fff;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .note-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background-color: #ffebee;
+            border: 2px solid #f39c12;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px 20px;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .boxed-text {
+            border: 2px solid var(--primary-color);
+            padding: 8px 15px;
+            display: inline-block;
+            margin: 5px 0;
+            background: #fff;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background-color: #d5f4e6;
+            border: 2px solid #27ae60;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .answer-title {
+            font-weight: bold;
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--primary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .difficulty-stars {
+            color: #f39c12;
+            margin-left: 10px;
+        }
+
+        .ascii-box {
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .comparison-table {
+            margin: 20px auto;
+            width: auto;
+            border: 2px solid var(--primary-color);
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .tree-diagram {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 0.9em;
+            border-radius: 5px;
+        }
+
+        .pitfall-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .pitfall-table th, .pitfall-table td {
+            border: 1px solid #e74c3c;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .pitfall-table th {
+            background-color: #e74c3c;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .pitfall-table tr:nth-child(even) {
+            background-color: #f8f8fa;
+        }
+
+        .pitfall-bad {
+            color: #dc3545;
+        }
+
+        .pitfall-good {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 50px;
+            text-decoration: none;
+            font-size: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .back-to-top:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📊 统计学 - 第一周完整学习攻略</h1>
+    <p style="text-align: center; color: #666; margin-bottom: 30px;">
+        本周主题：概率基础、条件概率、排列组合、二项分布、贝叶斯定理
+    </p>
+
+    <!-- TOC -->
+    <div class="toc" id="toc">
+        <h3>📋 目录</h3>
+        <table>
+            <tr>
+                <th>模块</th>
+                <th>主题</th>
+                <th>难度</th>
+                <th>链接</th>
+            </tr>
+            <tr>
+                <td><strong>模块一</strong></td>
+                <td>概率基础与规则</td>
+                <td><span class="difficulty-stars">⭐</span></td>
+                <td><a href="#module1">查看详情 →</a></td>
+            </tr>
+            <tr>
+                <td><strong>模块二</strong></td>
+                <td>条件概率与树形图</td>
+                <td><span class="difficulty-stars">⭐⭐</span></td>
+                <td><a href="#module2">查看详情 →</a></td>
+            </tr>
+            <tr>
+                <td><strong>模块三</strong></td>
+                <td>排列与组合公式</td>
+                <td><span class="difficulty-stars">⭐⭐</span></td>
+                <td><a href="#module3">查看详情 →</a></td>
+            </tr>
+            <tr>
+                <td><strong>模块四</strong></td>
+                <td>二项分布</td>
+                <td><span class="difficulty-stars">⭐⭐⭐</span></td>
+                <td><a href="#module4">查看详情 →</a></td>
+            </tr>
+            <tr>
+                <td><strong>模块五</strong></td>
+                <td>贝叶斯定理</td>
+                <td><span class="difficulty-stars">⭐⭐⭐⭐</span></td>
+                <td><a href="#module5">查看详情 →</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Study Tips -->
+    <div class="section-box bonus-section">
+        <div class="section-title">
+            <span class="emoji">💡</span> 新手学习建议（必看！）
+        </div>
+        <div class="ascii-box">
+┌─────────────────────────────────────────────────────┐
+│  本周学习策略                                    │
+│                                                    │
+│ 1️⃣  先搞定"三大基础"：                          │
+│    • 概率定义（频数派 vs 主观派）                 │
+│    • 加法法则 Pr(A or B)                          │
+│    • 乘法法则 Pr(A and B)                         │
+│                                                    │
+│ 2️⃣  再攻"三大难点"：                            │
+│    • 条件概率（最绕！）                           │
+│    • 独立 vs 互斥（最常搞混！）                   │
+│    • 贝叶斯定理（考试必考！）                     │
+│                                                    │
+│ 3️⃣  最后刷题：做练手题 PDF！                    │
+│                                                    │
+│  💡 心法：不要死记公式，理解逻辑！                 │
+└─────────────────────────────────────────────────────┘
+        </div>
+
+        <h4>💡 本周学习目标</h4>
+        <ul style="display: flex; flex-wrap: wrap; gap: 15px; list-style: none; padding-left: 0;">
+            <li style="display: flex; align-items: center; margin: 0;">✅ 掌握频数派和主观派概率的定义</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 理解样本空间、事件、互补事件的概念</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 熟练运用加法法则和乘法法则</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 区分独立事件与互斥事件</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 理解条件概率的含义和计算方法</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 掌握排列公式 nPr 和组合公式 nCr</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 理解二项分布的基本形式</li>
+            <li style="display: flex; align-items: center; margin: 0;">✅ 掌握贝叶斯定理的应用场景</li>
+        </ul>
+    </div>
+
+    <!-- NAV LINKS -->
+    <div class="nav-links">
+        <a href="#module1" class="nav-btn">📚 模块一：概率基础</a>
+        <a href="#module2" class="nav-btn">📚 模块二：条件概率</a>
+        <a href="#module3" class="nav-btn">📚 模块三：排列组合</a>
+        <a href="#module4" class="nav-btn">📚 模块四：二项分布</a>
+        <a href="#module5" class="nav-btn">📚 模块五：贝叶斯定理</a>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- MODULE 1 -->
+    <!-- ============================================================================ -->
+
+    <div id="module1" class="module-section">
+        <div class="module-header">
+            <h2>📚 模块一：概率基础与规则 <span class="difficulty-stars">⭐</span></h2>
+        </div>
+
+        <!-- Professor Section -->
+        <div class="section-box professor-section">
+            <div class="section-title">
+                <span class="emoji">👨‍🏫</span> 1. 教授大白话解析（深入浅出）
+            </div>
+
+            <p>各位同学，把"概率"这个词先忘掉！</p>
+
+            <p><strong>想象一个场景：</strong></p>
+
+            <div class="example-box">
+                <p>你是一家奶茶店的老板，每天早上决定要不要进货。</p>
+                <p>昨天卖得好好的，今天可能还会卖得好；昨天卖得差，今天可能继续差。</p>
+            </div>
+
+            <p><strong>概率就是"可能性的量化语言"</strong>，用0到1之间的数字告诉你：</p>
+
+            <div class="formula-box">
+                P = 0  ───  绝对不可能（明天太阳从西边升起）<br>
+                P = 1  ───  肯定会发生（明天太阳会升起）<br>
+                P = 0.5  ───  50/50，抛硬币正反面
+            </div>
+
+            <h3>三大基础概念（考试必考！）</h3>
+
+            <h4>① 样本空间</h4>
+            <div class="example-box">
+                <p><strong>问：</strong>一枚硬币，可能出现什么结果？</p>
+                <div class="boxed-text">答：{正面, 反面}</div>
+                <p class="note-box">这就是"样本空间"——就像餐厅的菜单，列出所有可能出现的菜品。</p>
+            </div>
+
+            <h4>② 事件</h4>
+            <div class="example-box">
+                <p><strong>问：</strong>扔骰子，"点数是偶数"？</p>
+                <div class="boxed-text">答：{2, 4, 6}</div>
+                <p class="note-box">这就是"事件"——是样本空间的子集，就像点了某几道菜的组合。</p>
+            </div>
+
+            <h4>③ 频数派 vs 主观派</h4>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>派别</th>
+                    <th>态度</th>
+                    <th>例子</th>
+                    <th>适用场景</th>
+                </tr>
+                <tr>
+                    <td>频数派</td>
+                    <td>"看历史数据说话"</td>
+                    <td>抛硬币100万次，正面出现50万次 → 概率 = 0.5</td>
+                    <td>有大量历史数据的重复性实验</td>
+                </tr>
+                <tr>
+                    <td>主观派</td>
+                    <td>"我感觉会怎样"</td>
+                    <td>我觉得明天有80%概率下雨（但这是直觉！）</td>
+                    <td>一次性事件、专家预测</td>
+                </tr>
+            </table>
+
+            <div class="warning-box">
+                <h4>教授金句：</h4>
+                <p>"考试里出现频数派案例，就直接用'次数/总次数'算；出现主观派案例（比如'明天天气'），题目会告诉你概率是多少，别自己瞎编！"</p>
+            </div>
+
+            <h3>三大概率规则（必须背下来！）</h3>
+
+            <div class="formula-box">
+                <strong>规则1：概率范围</strong><br>
+                0 ≤ P(A) ≤ 1<br><br>
+                <strong>规则2：互补事件</strong><br>
+                P(not-A) = 1 - P(A)<br><br>
+                <strong>规则3：所有概率之和 = 1</strong><br>
+                Σ P(所有结果) = 1
+            </div>
+        </div>
+
+        <!-- Business Cases -->
+        <div class="section-box business-section">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 2. 经典商业案例
+            </div>
+
+            <h3>案例一：航空公司超额售票——概率论的精妙应用</h3>
+            <p><strong>背景：</strong>美航空公司每年都有人"误机"（买了票但没来），空座位损失巨大。</p>
+            <p><strong>他们怎么做？</strong>历史数据显示：平均"误机率" = 10%</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>一架飞机有200个座位，卖了多少张票最划算？</p>
+                <div class="success-box">
+                    <h4>教授算账：</h4>
+                    <ul>
+                        <li>卖200张票：收入 = 200 × 500 = 100,000元</li>
+                        <li>期望来的人：200 × 90% = 180人</li>
+                        <li>期望"爽约"损失 = 20人 × 500 = 10,000元</li>
+                    </ul>
+                    <table style="margin-top: 20px;">
+                        <tr>
+                            <th>售票数量</th>
+                            <th>期望收入</th>
+                        </tr>
+                        <tr>
+                            <td>200张</td>
+                            <td>100,000 - 10,000 = <strong>90,000元</strong></td>
+                        </tr>
+                        <tr style="background-color: #d5f4e6;">
+                            <td><strong>210张（最优）</strong></td>
+                            <td><strong>210 × 500 - 21 × 500 = 94,500元</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>商业洞察：</h4>
+                <p>这就是为什么你永远订不到票——航空公司用概率论算出"最优超额率"，在最大化收益的同时，控制"爽约"成本。</p>
+            </div>
+
+            <h3>案例二：亚马逊的"闪电交易"——高频低概率事件</h3>
+            <p><strong>背景：</strong>2013年，亚马逊网站崩了30分钟。</p>
+
+            <div class="example-box">
+                <p><strong>概率分析：</strong></p>
+                <ul>
+                    <li>亚马逊系统的可用性 = 99.99%（很高！）</li>
+                    <li>系统故障概率 = 0.01%（极低！）</li>
+                </ul>
+                <p><strong>问题：</strong>系统出故障导致交易中断的概率？</p>
+                <div class="formula-box">
+                    <strong>期望损失计算：</strong><br>
+                    假设每天有1亿次访问<br>
+                    故障导致中断 = 1亿次 × 0.0001 = 10,000次中断<br>
+                    每次中断损失 ≈ 10,000元<br><br>
+                    <strong>期望损失 = 10,000 × 10,000 = 100,000,000元！</strong>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>商业启示：</h4>
+                <p>哪怕概率只有0.01%，一旦发生，损失是天文数字。这就是为什么大公司要花巨资做"灾备"——应对低概率但高影响的黑天鹅事件。</p>
+            </div>
+
+            <h3>案例三：保险公司的定价策略</h3>
+            <p><strong>背景：</strong>保险公司如何设计产品定价？</p>
+
+            <div class="example-box">
+                <p><strong>概率计算：</strong></p>
+                <ul>
+                    <li>假设车险：客户平均每年事故率 = 5%</li>
+                    <li>平均事故损失 = 20,000元</li>
+                </ul>
+                <p><strong>纯保费定价：</strong></p>
+                <div class="formula-box">
+                    期望赔付 = 5% × 20,000 = 1,000元<br>
+                    公司需要加运营成本和利润率，比如30%：<br>
+                    <strong>保费 = 1,000 ÷ (1 - 30%) = 1,429元/年</strong>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>商业洞察：</h4>
+                <p>整个保险行业的利润，本质上来自于"大数定律"——个体不确定，但群体可预测。保险公司不是在赌每个客户，而是在管理成千上万个客户的风险组合。</p>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-box application-section">
+            <div class="section-title">
+                <span class="emoji">💼</span> 3. 商业场景应用
+            </div>
+
+            <h3>场景A：你是产品经理，要做A/B测试</h3>
+            <p><strong>问题：</strong>测试新功能，应该测多少用户才有统计意义？</p>
+
+            <div class="example-box">
+                <p>你有个新按钮，预估点击率提升20%</p>
+                <p>老按钮点击率 = 5%</p>
+                <p>新按钮期望点击率 = 5% × 1.2 = 6%</p>
+                <p><strong>问：</strong>需要多少用户样本，才能证明6%不是运气？</p>
+                <div class="success-box">
+                    <h4>用概率规则（置信区间简化版）：</h4>
+                    <p>样本量n的误差 ≈ √(p(1-p)/n)</p>
+                    <p>假设要证明提升是真实的（从5%提到6%，差异1%）：</p>
+                    <p>误差范围 = 1% ≈ 0.01</p>
+                    <p>计算：0.01 ≈ √(0.05×0.95/n)</p>
+                    <p>得：<strong>n ≈ 475用户</strong></p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>行动建议：</h4>
+                <ul>
+                    <li>⚠️ 测少于100用户，结果完全不可信</li>
+                    <li>⚠️ 测1000用户，成本可接受，但结论才可靠</li>
+                    <li>💡 别只看"点击率提升了"，要看"统计显著性"！</li>
+                </ul>
+            </div>
+
+            <h3>场景B：你是CEO，要决定是否买保险</h3>
+            <p><strong>问题：</strong>一年有1%概率发生火灾，损失1000万。保单保费15万，买不买？</p>
+
+            <div class="example-box">
+                <p><strong>用期望值决策：</strong></p>
+                <table style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>不买保险</th>
+                            <th>买保险</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>发生火灾</strong><br>概率 1%</td>
+                            <td>损失 1000万</td>
+                            <td>损失 15万保费</td>
+                        </tr>
+                        <tr>
+                            <td><strong>不发生火灾</strong><br>概率 99%</td>
+                            <td>损失 0</td>
+                            <td>损失 15万保费</td>
+                        </tr>
+                        <tr>
+                            <td><strong>期望成本</strong></td>
+                            <td>1% × 1000万 = <strong>10万</strong></td>
+                            <td>1% × 15万 + 99% × 15万 = <strong>15万</strong></td>
+                        </tr>
+                        <tr style="background-color: #d5f4e6;">
+                            <td><strong>结论</strong></td>
+                            <td colspan="2"><strong>结论：虽然期望成本更高，但买保险可以避免1%的灾难性损失！</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="note-box">
+                <h4>行动建议：</h4>
+                <ul>
+                    <li>✅ 这就是"期望值决策"的经典应用</li>
+                    <li>💡 虽然保费15万 > 期望损失10万，但买的是"确定性"——避免那1%的灾难性损失</li>
+                    <li>🎯 大公司的风险管理本质上都是"用小钱换大安全"</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Exam Questions -->
+        <div class="section-box exam-section">
+            <div class="section-title">
+                <span class="emoji">📝</span> 4. 考试真题模拟
+            </div>
+
+            <h3>真题一：选择题（基础题必会！）</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>一个班级有100名学生，其中：</p>
+                    <ul>
+                        <li>男生60人</li>
+                        <li>女生40人</li>
+                        <li>近视学生35人（男生15人，女生20人）</li>
+                    </ul>
+                    <p>从班上随机选一人，求以下概率：</p>
+                    <ol>
+                        <li>选到男生的概率？</li>
+                        <li>选到女生或近视学生的概率？</li>
+                        <li>已知选到男生，求选到近视学生的概率？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① P(男生) = 60/100 = 0.6</strong></p>
+
+                    <p><strong>② P(女生或近视)</strong></p>
+                    <p style="padding-left: 30px;">= P(女生) + P(近视) - P(女生且近视)</p>
+                    <p style="padding-left: 30px;">= 40/100 + 35/100 - 20/100</p>
+                    <p style="padding-left: 30px;">= 40% + 35% - 20% = <strong>55%</strong></p>
+
+                    <p><strong>③ P(近视 | 男生)</strong></p>
+                    <p style="padding-left: 30px;">= P(男生且近视) / P(男生)</p>
+                    <p style="padding-left: 30px;">= (15/100) / (60/100)</p>
+                    <p style="padding-left: 30px;">= 15/60 = <strong>0.25 或 25%</strong></p>
+                </div>
+
+                <div class="success-box">
+                    <div class="answer-title">答案</div>
+                    <p>① <strong>0.6</strong>&nbsp;&nbsp;&nbsp;&nbsp;② <strong>0.55</strong>&nbsp;&nbsp;&nbsp;&nbsp;③ <strong>0.25 (25%)</strong></p>
+                </div>
+            </div>
+
+            <h3>真题二：概率规则综合题</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>一副扑克牌（52张），随机抽取一张：</p>
+                    <ol>
+                        <li>抽到King的概率？</li>
+                        <li>抽到King或Heart的概率？</li>
+                        <li>抽到不是King的概率？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① P(King) = 4/52 = 1/13 ≈ 0.0769</strong></p>
+
+                    <p><strong>② P(King或Heart)</strong></p>
+                    <p style="padding-left: 30px;">= P(King) + P(Heart) - P(King且Heart)</p>
+                    <p style="padding-left: 30px;">= 4/52 + 13/52 - 1/52</p>
+                    <p style="padding-left: 30px;">= (4 + 13 - 1)/52 = 16/52 = <strong>4/13 ≈ 0.3077</strong></p>
+                    <p style="padding-left: 30px; color: #e67e22;">⚠️ 注意：King of Hearts被计算了两次，要减去一次！</p>
+
+                    <p><strong>③ P(非King) = 1 - P(King) = 1 - 1/13 = <strong>12/13 ≈ 0.9231</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Tips -->
+        <div class="section-box bonus-section">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 5. 教授的高分宝典
+            </div>
+
+            <div class="formula-box">
+                <h4>一句话总结</h4>
+                <p style="font-size: 1.1em;"><strong>"概率三大法则记牢口诀：加法管'或'，乘法管'且'；独立直接乘，条件要看分母！"</strong></p>
+            </div>
+
+            <h3>常见避坑指南</h3>
+
+            <table class="pitfall-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">⚠️ 致命错误</th>
+                        <th style="width: 35%;">✅ 正确做法</th>
+                        <th>💀 考点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pitfall-bad">加法法则无脑用</span><br>P(A或B) = P(A)+P(B)</td>
+                        <td>只在互斥时才能这样！<br>否则要减P(A且B)</td>
+                        <td>高频！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">互补事件忘了</span><br>不记得P(非A)=1-P(A)</td>
+                        <td>P(非A)=1-P(A)<br>超好用！记住这个！</td>
+                        <td>必考！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">主观概率当客观用</span><br>把"我觉得有80%"当真</td>
+                        <td>题目如果没给，<br>就是已知条件，别自己编！</td>
+                        <td>易错点！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nav-links">
+                <a href="#toc" class="nav-btn">📋 返回目录</a>
+                <a href="#module2" class="nav-btn">📚 继续模块二</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- MODULE 2 -->
+    <!-- ============================================================================ -->
+
+    <div id="module2" class="module-section">
+        <div class="module-header">
+            <h2>📚 模块二：条件概率与树形图 <span class="difficulty-stars">⭐⭐</span></h2>
+        </div>
+
+        <!-- Professor Section -->
+        <div class="section-box professor-section">
+            <div class="section-title">
+                <span class="emoji">👨‍🏫</span> 1. 教授大白话解析（深入浅出）
+            </div>
+
+            <p><strong>"条件概率"是什么鬼？</strong></p>
+
+            <div class="example-box">
+                <p>想象你去看病，医生说：</p>
+                <p>• <strong>第一种说法：</strong>"你这个病，10个人里有8个能治好"</p>
+                <p>• <strong>第二种说法：</strong>"如果用了这个药，10个人里有9个能治好"</p>
+                <p class="note-box">这两种说法概率不一样！第二种就是<strong>条件概率</strong>——"在用药的条件下"，治愈率从80%变成90%。</p>
+            </div>
+
+            <h3>条件概率公式（必记！）</h3>
+
+            <div class="formula-box">
+                <strong>P(A | B) = P(A且B) / P(B)</strong><br><br>
+                读作：<br>
+                "在B发生的条件下，A发生的概率"<br><br>
+                💡 记忆技巧：分母是条件B，分子是A和B一起发生
+            </div>
+
+            <h3>树形图——条件概率的神器</h3>
+
+            <div style="background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 25px; margin: 20px 0; border-radius: 8px;">
+                <h4 style="text-align: center; color: var(--primary-color);">📊 抛硬币两次的概率树形图</h4>
+
+                <table style="width: 100%; margin: 20px auto; border-collapse: collapse;">
+                    <tr>
+                        <th colspan="2" style="background-color: var(--primary-color);">第一次抛硬币</th>
+                    </tr>
+                    <tr>
+                        <td style="width: 50%; background-color: #e8f4fd; font-weight: bold;">正面 (H) <br><span style="color: #666;">概率 = 1/2</span></td>
+                        <td style="width: 50%; background-color: #fff9e6; font-weight: bold;">反面 (T) <br><span style="color: #666;">概率 = 1/2</span></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="height: 30px; text-align: center;">↓ 第二次抛硬币 ↓</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <table style="width: 100%; border-collapse: collapse; margin: 0;">
+                                <tr>
+                                    <td style="background-color: #e8f4fd; padding: 10px; text-align: center; width: 50%;">正面 (H)<br>1/2</td>
+                                    <td style="background-color: #fff9e6; padding: 10px; text-align: center; width: 50%;">反面 (T)<br>1/2</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table style="width: 100%; border-collapse: collapse; margin: 0;">
+                                <tr>
+                                    <td style="background-color: #e8f4fd; padding: 10px; text-align: center; width: 50%;">正面 (H)<br>1/2</td>
+                                    <td style="background-color: #fff9e6; padding: 10px; text-align: center; width: 50%;">反面 (T)<br>1/2</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="background-color: #fff; border: 2px solid var(--secondary-color); padding: 15px; margin-top: 20px; border-radius: 8px;">
+                    <h5 style="margin-top: 0;">✨ 最终结果与概率：</h5>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr style="background-color: var(--secondary-color); color: #fff;">
+                            <th>路径</th>
+                            <th>结果</th>
+                            <th>概率计算</th>
+                            <th>最终概率</th>
+                        </tr>
+                        <tr>
+                            <td>第一次H → 第二次H</td>
+                            <td style="font-weight: bold;">{H, H}</td>
+                            <td>1/2 × 1/2</td>
+                            <td style="font-weight: bold; color: var(--primary-color);">1/4 = 25%</td>
+                        </tr>
+                        <tr>
+                            <td>第一次H → 第二次T</td>
+                            <td style="font-weight: bold;">{H, T}</td>
+                            <td>1/2 × 1/2</td>
+                            <td style="font-weight: bold; color: var(--primary-color);">1/4 = 25%</td>
+                        </tr>
+                        <tr>
+                            <td>第一次T → 第二次H</td>
+                            <td style="font-weight: bold;">{T, H}</td>
+                            <td>1/2 × 1/2</td>
+                            <td style="font-weight: bold; color: var(--primary-color);">1/4 = 25%</td>
+                        </tr>
+                        <tr>
+                            <td>第一次T → 第二次T</td>
+                            <td style="font-weight: bold;">{T, T}</td>
+                            <td>1/2 × 1/2</td>
+                            <td style="font-weight: bold; color: var(--primary-color);">1/4 = 25%</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 15px; color: #666; text-align: center;">💡 验证：1/4 + 1/4 + 1/4 + 1/4 = 1 ✓</p>
+                </div>
+            </div>
+
+            <h3>独立事件 vs 互斥事件（最容易搞混！）</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>概念</th>
+                    <th>定义</th>
+                    <th>公式</th>
+                    <th>例子</th>
+                </tr>
+                <tr>
+                    <td><strong>独立事件</strong></td>
+                    <td>A发生与否不影响B</td>
+                    <td>P(A|B) = P(A)</td>
+                    <td>第一次抛硬币<br>不影响第二次</td>
+                </tr>
+                <tr>
+                    <td><strong>互斥事件</strong></td>
+                    <td>A和B不能同时发生</td>
+                    <td>P(A且B) = 0</td>
+                    <td>一次抛硬币<br>不能同时H和T</td>
+                </tr>
+            </table>
+
+            <div class="warning-box">
+                <h4>教授警告：</h4>
+                <p><strong>独立 ≠ 互斥！这是最容易丢分的地方！</strong></p>
+                <ul>
+                    <li>独立：知道A发生了，B的概率不变</li>
+                    <li>互斥：知道A发生了，B不可能发生</li>
+                </ul>
+                <p><strong>记住了：</strong>互斥事件一定不独立（除非概率为0）！</p>
+            </div>
+        </div>
+
+        <!-- Business Cases -->
+        <div class="section-box business-section">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 2. 经典商业案例
+            </div>
+
+            <h3>案例一：乳腺癌筛查——检察官谬误的经典案例</h3>
+            <p><strong>背景：</strong>乳腺癌筛查准确率90%，但有1%的女性真正患癌。</p>
+
+            <div class="example-box">
+                <p><strong>树形图分析（1000人样本）：</strong></p>
+
+                <div style="background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 25px; margin: 20px 0; border-radius: 8px;">
+                    <h4 style="text-align: center; color: var(--primary-color);">📊 乳腺癌筛查树形图（1000人）</h4>
+
+                    <table style="width: 100%; margin: 20px auto; border-collapse: collapse;">
+                        <tr>
+                            <th colspan="2" style="background-color: var(--primary-color);">样本分组</th>
+                            <th style="background-color: var(--primary-color);">人数</th>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #c0392b; color: white; font-weight: bold;" colspan="2">🔴 有癌症</td>
+                            <td style="text-align: center; font-weight: bold;">10人 (1%)</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #fff9e6; font-weight: bold;" colspan="2">🟡 无癌症</td>
+                            <td style="text-align: center; font-weight: bold;">990人 (99%)</td>
+                        </tr>
+                    </table>
+
+                    <table style="width: 100%; margin: 20px auto; border-collapse: collapse;">
+                        <tr>
+                            <th colspan="3" style="background-color: var(--secondary-color);">检测结果分布</th>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #c0392b; color: white; font-weight: bold;">有癌症者</td>
+                            <td style="text-align: center;">检测阳性 (90%准确)</td>
+                            <td style="text-align: center; font-weight: bold;">9人</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #c0392b; color: white; font-weight: bold;">有癌症者</td>
+                            <td style="text-align: center;">检测阴性 (10%漏检)</td>
+                            <td style="text-align: center;">1人</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #fff9e6; font-weight: bold;">无癌症者</td>
+                            <td style="text-align: center;">检测阳性 (10%误诊)</td>
+                            <td style="text-align: center; font-weight: bold;">99人</td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: #fff9e6; font-weight: bold;">无癌症者</td>
+                            <td style="text-align: center;">检测阴性 (90%正确)</td>
+                            <td style="text-align: center;">891人</td>
+                        </tr>
+                    </table>
+
+                    <div style="background-color: #fff; border: 2px solid var(--secondary-color); padding: 15px; margin-top: 20px; border-radius: 8px;">
+                        <h5 style="margin-top: 0;">✨ 关键计算：</h5>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr style="background-color: #f0f8ff;">
+                                <th>项目</th>
+                                <th>计算</th>
+                                <th>结果</th>
+                            </tr>
+                            <tr>
+                                <td>总阳性人数</td>
+                                <td>真阳性 + 假阳性</td>
+                                <td style="font-weight: bold;">9 + 99 = <strong>108人</strong></td>
+                            </tr>
+                            <tr>
+                                <td>真正患癌的阳性</td>
+                                <td>-</td>
+                                <td style="font-weight: bold;">9人</td>
+                            </tr>
+                            <tr style="background-color: #ffebee;">
+                                <td style="font-weight: bold; color: #c0392b;">P(患癌 | 检测+)</td>
+                                <td>真阳性 / 总阳性</td>
+                                <td style="font-weight: bold; color: #c0392b;">9 / 108 ≈ <strong>8.3%</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="success-box">
+                    <h4>关键计算：</h4>
+                    <p>总检测阳性人数 = 9 + 99 = 108人</p>
+                    <p>真正患癌的阳性人数 = 9人</p>
+                    <p><strong>P(患癌 | 检测+) = 9/108 ≈ 8.3%</strong></p>
+                    <p style="color: #c0392b; font-weight: bold;">🔴 震惊：检测准确率90%，但阳性中真正患癌只有8.3%！</p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>商业/医疗洞察：</h4>
+                <p>这就是著名的"检察官谬误"（Prosecutor's Fallacy）：</p>
+                <p>• <strong>错误理解：</strong>"检测准确率90%，所以阳性=90%患癌"</p>
+                <p>• <strong>正确理解：</strong>"检测准确率90%，但阳性中只有8.3%真正患癌"</p>
+                <p>这就是为什么医院会要求复检！</p>
+            </div>
+
+            <h3>案例二：信用卡欺诈检测</h3>
+            <p><strong>背景：</strong>银行用AI检测信用卡欺诈。</p>
+
+            <div class="example-box">
+                <p><strong>数据：</strong></p>
+                <ul>
+                    <li>正常交易占99.9%</li>
+                    <li>欺诈交易占0.1%</li>
+                    <li>AI检测正常交易的准确率 = 99%</li>
+                    <li>AI检测欺诈交易的准确率 = 80%</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>计算条件概率：</h4>
+                    <p>假设10000笔交易：</p>
+                    <p>• 正常交易：9990笔 → 误判为欺诈 ≈ 100笔</p>
+                    <p>• 欺诈交易：10笔 → 正确识别 ≈ 8笔</p>
+                    <p><strong>系统标记"欺诈"的总数 = 100 + 8 = 108笔</strong></p>
+                    <p><strong>P(真的欺诈 | 标记为欺诈) = 8/108 ≈ 7.4%</strong></p>
+                    <p style="color: #e67e22;">⚠️ 即使AI准确率很高，假阳性仍然占绝大多数！</p>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <h4>商业启示：</h4>
+                <p>这就是为什么银行不会直接冻结所有"可疑"账户——误判会导致客户投诉。通常需要人工审核，或采用更复杂的多级检测系统。</p>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-box application-section">
+            <div class="section-title">
+                <span class="emoji">💼</span> 3. 商业场景应用
+            </div>
+
+            <h3>场景A：营销精准投放</h3>
+            <p><strong>问题：</strong>你有100万用户历史数据：</p>
+
+            <div class="example-box">
+                <ul>
+                    <li>购买过产品A的用户：20万（20%）</li>
+                    <li>购买过产品A又购买产品B的用户：5万</li>
+                </ul>
+                <p><strong>问：</strong>如果用户已经购买了产品A，他购买产品B的概率是多少？</p>
+
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p><strong>P(购买B | 购买A) = P(购买A且B) / P(购买A)</strong></p>
+                    <p>= 5万 / 20万</p>
+                    <p>= <strong>25%</strong></p>
+                    <p>💡 应用：对已购买A的用户推送B的转化率约25%，比普通用户高得多！</p>
+                </div>
+            </div>
+
+            <h3>场景B：招聘流程优化</h3>
+            <p><strong>问题：</strong>公司招聘流程有3个环节，每个环节通过率独立：</p>
+
+            <div class="example-box">
+                <ul>
+                    <li>简历筛选通过率：10%</li>
+                    <li>笔试通过率：50%</li>
+                    <li>面试通过率：40%</li>
+                </ul>
+                <p><strong>问：</strong>1000人投递，最终录用多少人？</p>
+
+                <div class="success-box">
+                    <h4>解法（独立事件连乘）：</h4>
+                    <p>因为各环节独立，用乘法法则：</p>
+                    <p><strong>P(录用) = 10% × 50% × 40% = 2%</strong></p>
+                    <p>期望录用人数 = 1000 × 2% = <strong>20人</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Questions -->
+        <div class="section-box exam-section">
+            <div class="section-title">
+                <span class="emoji">📝</span> 4. 考试真题模拟
+            </div>
+
+            <h3>真题一：条件概率基础题</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>从一副52张扑克牌中连续抽两张牌（不放回）：</p>
+                    <ol>
+                        <li>第一张是King的概率？</li>
+                        <li>第一张是King的情况下，第二张也是King的概率？</li>
+                        <li>两张都是King的概率？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① P(第一张是King) = 4/52 = 1/13</strong></p>
+
+                    <p><strong>② P(第二张是King | 第一张是King)</strong></p>
+                    <p style="padding-left: 30px;">第一张抽走一张King后，剩下51张牌中有3张King</p>
+                    <p style="padding-left: 30px;"><strong>= 3/51 = 1/17</strong></p>
+
+                    <p><strong>③ P(两张都是King)</strong></p>
+                    <p style="padding-left: 30px;">= P(第一张是King) × P(第二张是King | 第一张是King)</p>
+                    <p style="padding-left: 30px;">= (4/52) × (3/51)</p>
+                    <p style="padding-left: 30px;">= <strong>1/221 ≈ 0.0045</strong></p>
+                </div>
+
+                <div class="success-box">
+                    <div class="answer-title">答案</div>
+                    <p>① <strong>1/13</strong>&nbsp;&nbsp;&nbsp;&nbsp;② <strong>1/17</strong>&nbsp;&nbsp;&nbsp;&nbsp;③ <strong>1/221</strong></p>
+                </div>
+            </div>
+
+            <h3>真题二：树形图应用</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>某疾病有以下特征：</p>
+                    <ul>
+                        <li>患病率：0.1%</li>
+                        <li>患病者检测结果阳性率：95%</li>
+                        <li>健康者检测结果阳性率：5%</li>
+                    </ul>
+                    <p>某人检测结果为阳性，求他真正患病的概率。</p>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <p style="color: #e67e22;">⚠️ 这是一个条件概率问题！不能直接用95%！</p>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>假设10,000人：</strong></p>
+                    <p>• 患病者：10,000 × 0.1% = 10人</p>
+                    <p>• 健康者：9,990人</p>
+                    <p><br></p>
+                    <p>• 患病且阳性：10 × 95% = 9.5人</p>
+                    <p>• 健康且阳性：9,990 × 5% = 499.5人</p>
+                    <p>• 总阳性人数：9.5 + 499.5 = 509人</p>
+                    <p><br></p>
+                    <p><strong>P(患病 | 阳性) = 9.5 / 509 ≈ 0.0187 = 1.87%</strong></p>
+                </div>
+
+                <div class="success-box">
+                    <div class="answer-title">答案</div>
+                    <p><strong>约1.87%</strong></p>
+                    <p style="color: #c0392b; font-size: 0.9em;">🔴 即使检测准确率95%，阳性结果中真正患病的概率不到2%！这就是检察官谬误！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Tips -->
+        <div class="section-box bonus-section">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 5. 教授的高分宝典
+            </div>
+
+            <div class="formula-box">
+                <h4>一句话总结</h4>
+                <p style="font-size: 1.1em;"><strong>"条件概率分母是条件，分子是交集；独立事件直接乘，依赖要画树！"</strong></p>
+            </div>
+
+            <h3>常见避坑指南</h3>
+
+            <table class="pitfall-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">⚠️ 致命错误</th>
+                        <th style="width: 35%;">✅ 正确做法</th>
+                        <th>💀 考点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pitfall-bad">条件概率分母搞错</span><br>P(A|B) = P(A且B)/P(A)</td>
+                        <td>分母是条件B的全概率！<br>不是P(A)！</td>
+                        <td>必考！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">混淆独立与互斥</span><br>认为独立就是互斥</td>
+                        <td>独立=P(A|B)=P(A)<br>互斥=P(A且B)=0</td>
+                        <td>高频！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">检察官谬误</span><br>P(A|B)混同P(B|A)</td>
+                        <td>检测准确率≠真阳性率<br>一定要画树形图！</td>
+                        <td>必考！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nav-links">
+                <a href="#toc" class="nav-btn">📋 返回目录</a>
+                <a href="#module1" class="nav-btn">📚 返回模块一</a>
+                <a href="#module3" class="nav-btn">📚 继续模块三</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- MODULE 3 -->
+    <!-- ============================================================================ -->
+
+    <div id="module3" class="module-section">
+        <div class="module-header">
+            <h2>📚 模块三：排列与组合公式 <span class="difficulty-stars">⭐⭐</span></h2>
+        </div>
+
+        <!-- Professor Section -->
+        <div class="section-box professor-section">
+            <div class="section-title">
+                <span class="emoji">👨‍🏫</span> 1. 教授大白话解析（深入浅出）
+            </div>
+
+            <p><strong>"排列"和"组合"是什么区别？</strong></p>
+
+            <div class="example-box">
+                <p><strong>场景：</strong>从3个人（A、B、C）中选2个人：</p>
+                <ul>
+                    <li><strong>排列（考虑顺序）：</strong>AB ≠ BA，是两种情况</li>
+                    <li><strong>组合（不考虑顺序）：</strong>AB = BA，是同一种情况</li>
+                </ul>
+                <p class="note-box">💡 记忆口诀：<strong>"排列排座次，组合选团队"</strong></p>
+            </div>
+
+            <h3>阶乘</h3>
+
+            <div class="formula-box">
+                <strong>n! = n × (n-1) × (n-2) × ... × 2 × 1</strong><br><br>
+                例如：<br>
+                5! = 5 × 4 × 3 × 2 × 1 = 120<br>
+                3! = 3 × 2 × 1 = 6
+            </div>
+
+            <h3>排列公式 nPr（排列）</h3>
+
+            <div class="formula-box">
+                <strong>nPr = n × (n-1) × (n-2) × ... × (n-r+1)</strong><br><br>
+                或：<br>
+                <strong>nPr = n! / (n-r)!</strong><br><br>
+                💡 含义：从n个元素中取r个，<strong>考虑顺序</strong>
+            </div>
+
+            <div class="example-box">
+                <h4>例题：排列</h4>
+                <p><strong>问：</strong>从5个人中选2个人排座次，有多少种排法？</p>
+                <p><strong>解：</strong>5P2 = 5 × 4 = 20种</p>
+                <p>验证：AB, AC, AD, AE, BA, BC, BD, BE, CA, CB, CD, CE, DA, DB, DC, DE, EA, EB, EC, ED（共20种）</p>
+            </div>
+
+            <h3>组合公式 nCr（组合）</h3>
+
+            <div class="formula-box">
+                <strong>nCr = n! / [r! × (n-r)!]</strong><br><br>
+                或：<br>
+                <strong>nCr = nPr / r!</strong><br><br>
+                💡 含义：从n个元素中取r个，<strong>不考虑顺序</strong>
+            </div>
+
+            <div class="example-box">
+                <h4>例题：组合</h4>
+                <p><strong>问：</strong>从5个人中选2个人组队，有多少种选法？</p>
+                <p><strong>解：</strong>5C2 = 5! / (2! × 3!) = (5×4×3×2×1) / (2×1 × 6) = 120/12 = 10种</p>
+                <p>验证：AB, AC, AD, AE, BC, BD, BE, CD, CE, DE（共10种，AB和BA只算一种）</p>
+            </div>
+
+            <h3>排列与组合的区别</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>项目</th>
+                    <th>排列 nPr</th>
+                    <th>组合 nCr</th>
+                </tr>
+                <tr>
+                    <td>是否考虑顺序</td>
+                    <td>是</td>
+                    <td>否</td>
+                </tr>
+                <tr>
+                    <td>公式</td>
+                    <td>n! / (n-r)!</td>
+                    <td>n! / [r! × (n-r)!]</td>
+                </tr>
+                <tr>
+                    <td>关系</td>
+                    <td colspan="2" style="text-align: center;">nPr = nCr × r!</td>
+                </tr>
+                <tr>
+                    <td>例子</td>
+                    <td>排座次、排队</td>
+                    <td>选团队、抽牌</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Business Cases -->
+        <div class="section-box business-section">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 2. 经典商业案例
+            </div>
+
+            <h3>案例一：航空公司座位安排</h3>
+            <p><strong>背景：</strong>一架飞机有10个商务舱座位，有5位重要客户需要安排。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>5位客户坐在10个座位上，有多少种坐法？</p>
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p>这是<strong>排列问题</strong>（考虑顺序）</p>
+                    <p><strong>10P5 = 10 × 9 × 8 × 7 × 6 = 30,240种</strong></p>
+                    <p>或：10P5 = 10! / (10-5)! = 10! / 5! = 3,628,800 / 120 = 30,240</p>
+                </div>
+            </div>
+
+            <h3>案例二：项目团队组建</h3>
+            <p><strong>背景：</strong>公司有20名工程师，要选5人组成新项目团队。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>有多少种选法？</p>
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p>这是<strong>组合问题</strong>（不考虑顺序）</p>
+                    <p><strong>20C5 = 20! / (5! × 15!) = 15,504种</strong></p>
+                    <p>💡 这意味着你有超过1.5万种方式组建团队！</p>
+                </div>
+            </div>
+
+            <h3>案例三：密码破解安全</h3>
+            <p><strong>背景：</strong>银行设置4位数字PIN码。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>黑客尝试破解，需要试多少次？</p>
+                <div class="success-box">
+                    <h4>分析：</h4>
+                    <ul>
+                        <li>每个位可以是0-9，共10种可能</li>
+                        <li>4位PIN码：10 × 10 × 10 × 10 = 10,000种</li>
+                    </ul>
+                    <p>💡 这就是为什么银行要求6位PIN码（10^6 = 100万种）！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-box application-section">
+            <div class="section-title">
+                <span class="emoji">💼</span> 3. 商业场景应用
+            </div>
+
+            <h3>场景A：A/B测试分组</h3>
+            <div class="example-box">
+                <p><strong>问题：</strong>你有1000个用户，要随机选100个做A组，其余900做B组。有多少种分组方式？</p>
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p>这是<strong>组合问题</strong></p>
+                    <p><strong>1000C100 = 1000! / (100! × 900!)</strong></p>
+                    <p>这是一个天文数字！</p>
+                    <p>💡 实际上，我们会用随机函数来分配，而不是穷举所有可能性。</p>
+                </div>
+            </div>
+
+            <h3>场景B：产品组合策略</h3>
+            <div class="example-box">
+                <p><strong>问题：</strong>某品牌有10种商品，要推出"3件套餐"。有多少种套餐组合？</p>
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p><strong>10C3 = 10! / (3! × 7!) = (10×9×8)/(3×2×1) = 120种</strong></p>
+                    <p>💡 可以推出120种不同的3件套餐！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Questions -->
+        <div class="section-box exam-section">
+            <div class="section-title">
+                <span class="emoji">📝</span> 4. 考试真题模拟
+            </div>
+
+            <h3>真题一：排列组合基础</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <ol>
+                        <li>计算 7P3</li>
+                        <li>计算 7C3</li>
+                        <li>7P3 和 7C3 有什么关系？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① 7P3 = 7 × 6 × 5 = 210</strong></p>
+
+                    <p><strong>② 7C3 = 7! / (3! × 4!) = (7×6×5)/(3×2×1) = 35</strong></p>
+
+                    <p><strong>③ 7P3 = 7C3 × 3!</strong></p>
+                    <p style="padding-left: 30px;">210 = 35 × 6 ✓</p>
+                    <p style="padding-left: 30px;">💡 排列 = 组合 × 阶乘（排列考虑顺序）</p>
+                </div>
+
+                <div class="success-box">
+                    <div class="answer-title">答案</div>
+                    <p>① <strong>210</strong>&nbsp;&nbsp;&nbsp;&nbsp;② <strong>35</strong>&nbsp;&nbsp;&nbsp;&nbsp;③ <strong>7P3 = 7C3 × 3!</strong></p>
+                </div>
+            </div>
+
+            <h3>真题二：综合应用</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>单词 "COMPUTER" 有8个字母（5个辅音，3个元音）。</p>
+                    <p><strong>问：</strong>如果元音只能出现在偶数位置（2、4、6、8位），有多少种排列方式？</p>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>步骤1：确定元音位置</strong></p>
+                    <p>有4个偶数位置，选3个放元音：<br>
+                    <strong>4P3 = 4 × 3 × 2 = 24种</strong></p>
+
+                    <p><strong>步骤2：确定辅音位置</strong></p>
+                    <p>剩下5个位置，放5个辅音：<br>
+                    <strong>5P5 = 5 × 4 × 3 × 2 × 1 = 120种</strong></p>
+
+                    <p><strong>步骤3：计算总数</strong></p>
+                    <p><strong>总数 = 24 × 120 = 2,880种</strong></p>
+                </div>
+
+                <div class="success-box">
+                    <div class="answer-title">答案</div>
+                    <p><strong>2,880种</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Tips -->
+        <div class="section-box bonus-section">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 5. 教授的高分宝典
+            </div>
+
+            <div class="formula-box">
+                <h4>一句话总结</h4>
+                <p style="font-size: 1.1em;"><strong>"排列排座次，组合选团队；有顺序用P，无顺序用C；P转C除r！"}</strong></p>
+            </div>
+
+            <h3>常见避坑指南</h3>
+
+            <table class="pitfall-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">⚠️ 致命错误</th>
+                        <th style="width: 35%;">✅ 正确做法</th>
+                        <th>💀 考点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pitfall-bad">混淆排列组合</span><br>不知道该用P还是C</td>
+                        <td>看是否考虑顺序！<br>排座次用P，选团队用C</td>
+                        <td>必考！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">公式记错</span><br>分母忘了除r!</td>
+                        <td>nPr = n!/(n-r)!<br>nCr = n!/[r!×(n-r)!]</td>
+                        <td>易错点！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nav-links">
+                <a href="#toc" class="nav-btn">📋 返回目录</a>
+                <a href="#module2" class="nav-btn">📚 返回模块二</a>
+                <a href="#module4" class="nav-btn">📚 继续模块四</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- MODULE 4 -->
+    <!-- ============================================================================ -->
+
+    <div id="module4" class="module-section">
+        <div class="module-header">
+            <h2>📚 模块四：二项分布 <span class="difficulty-stars">⭐⭐⭐</span></h2>
+        </div>
+
+        <!-- Professor Section -->
+        <div class="section-box professor-section">
+            <div class="section-title">
+                <span class="emoji">👨‍🏫</span> 1. 教授大白话解析（深入浅出）
+            </div>
+
+            <p><strong>"二项分布"是什么？</strong></p>
+
+            <div class="example-box">
+                <p><strong>场景：</strong>抛硬币10次，求恰好得到6次正面的概率。</p>
+                <p>这就是<strong>二项分布</strong>解决的问题：</p>
+                <ul>
+                    <li><strong>二项</strong>：只有两种结果（正面/反面）</li>
+                    <li><strong>分布</strong>：每种结果出现次数的概率分布</li>
+                </ul>
+            </div>
+
+            <h3>二项分布的四个条件</h3>
+
+            <div class="success-box">
+                <h4>满足以下四个条件，才能用二项分布：</h4>
+                <ol>
+                    <li><strong>固定试验次数 n</strong>：比如抛10次硬币</li>
+                    <li><strong>每次试验独立</strong>：第一次结果不影响第二次</li>
+                    <li><strong>每次只有两种结果</strong>：成功/失败、正面/反面</li>
+                    <li><strong>成功概率 P 恒定</strong>：每次正面的概率相同</li>
+                </ol>
+            </div>
+
+            <h3>二项分布公式（必记！）</h3>
+
+            <div class="formula-box">
+                <strong>P(X = r) = nCr × P^r × (1-P)^(n-r)</strong><br><br>
+                其中：<br>
+                • n = 试验总次数<br>
+                • r = 成功次数<br>
+                • P = 每次成功的概率<br>
+                • nCr = 组合数（从n次中选r次成功）
+            </div>
+
+            <h3>二项分布示例</h3>
+
+            <div class="example-box">
+                <h4>例题：抛硬币5次，恰好3次正面</h4>
+                <p>已知：n=5, r=3, P=0.5</p>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>P(X=3) = 5C3 × (0.5)^3 × (0.5)^(5-3)</strong></p>
+                    <p>= 10 × 0.125 × 0.25</p>
+                    <p>= <strong>0.3125 或 31.25%</strong></p>
+                </div>
+                <p>💡 解释：抛5次硬币，恰好3次正面的概率是31.25%</p>
+            </div>
+
+            <h3>期望值和方差</h3>
+
+            <div class="formula-box">
+                <strong>期望值 E(X) = n × P</strong><br><br>
+                <strong>方差 Var(X) = n × P × (1-P)</strong><br><br>
+                💡 期望值告诉你"平均会成功多少次"
+            </div>
+        </div>
+
+        <!-- Business Cases -->
+        <div class="section-box business-section">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 2. 经典商业案例
+            </div>
+
+            <h3>案例一：呼叫中心接听率</h3>
+            <p><strong>背景：</strong>呼叫中心每个客服每分钟接听电话的概率是60%。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>观察一位客服10分钟，求：</p>
+                <ol>
+                    <li>恰好接听6次电话的概率？</li>
+                    <li>平均接听多少次？</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p><strong>n=10, P=0.6, r=6</strong></p>
+                    <p><strong>① P(X=6) = 10C6 × (0.6)^6 × (0.4)^4</strong></p>
+                    <p>= 210 × 0.0467 × 0.0256</p>
+                    <p>≈ <strong>0.25 或 25%</strong></p>
+                    <p><br></p>
+                    <p><strong>② 期望值 = n × P = 10 × 0.6 = 6次</strong></p>
+                </div>
+            </div>
+
+            <h3>案例二：产品质量控制</h3>
+            <p><strong>背景：</strong>某产品的不良率是5%。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>随机抽取20个产品，求：</p>
+                <ol>
+                    <li>全部合格的概率？</li>
+                    <li>至少有1个不良品的概率？</li>
+                </ol>
+
+                <div class="success-box">
+                    <h4>解法：</h4>
+                    <p><strong>n=20, P(不良)=0.05, P(合格)=0.95</strong></p>
+                    <p><strong>① P(全部合格) = P(X=0) = 20C0 × (0.05)^0 × (0.95)^20</strong></p>
+                    <p>= 1 × 1 × 0.95^20</p>
+                    <p>≈ <strong>0.3585 或 35.85%</strong></p>
+                    <p><br></p>
+                    <p><strong>② P(至少1个不良) = 1 - P(全部合格)</strong></p>
+                    <p>= 1 - 0.3585</p>
+                    <p>= <strong>0.6415 或 64.15%</strong></p>
+                    <p>💡 用互补概率更简单！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-box application-section">
+            <div class="section-title">
+                <span class="emoji">💼</span> 3. 商业场景应用
+            </div>
+
+            <h3>场景A：A/B测试成功判断</h3>
+            <div class="example-box">
+                <p><strong>问题：</strong>A版本的转化率是5%，B版本估计是6%。测1000个用户：</p>
+                <p>B版本有多少用户转化才算"正常波动范围"（95%置信）？</p>
+
+                <div class="success-box">
+                    <h4>分析：</h4>
+                    <p>期望转化 = 1000 × 6% = 60人</p>
+                    <p>方差 = 1000 × 0.06 × 0.94 = 56.4</p>
+                    <p>标准差 ≈ √56.4 ≈ 7.5</p>
+                    <p><strong>95%置信区间 = 60 ± 2×7.5 = [45, 75]</strong></p>
+                    <p>💡 如果B版本转化在45-75之间，可能只是波动；超过75才显著更好。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Questions -->
+        <div class="section-box exam-section">
+            <div class="section-title">
+                <span class="emoji">📝</span> 4. 考试真题模拟
+            </div>
+
+            <h3>真题一：二项分布基础</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>抛硬币10次，求：</p>
+                    <ol>
+                        <li>恰好5次正面的概率？</li>
+                        <li>至少8次正面的概率？</li>
+                        <li>平均有多少次正面？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① P(X=5) = 10C5 × (0.5)^5 × (0.5)^5</strong></p>
+                    <p>= 252 × 0.03125 × 0.03125</p>
+                    <p>= <strong>0.2461 或 24.61%</strong></p>
+                    <p><br></p>
+                    <p><strong>② P(至少8次) = P(8次) + P(9次) + P(10次)</strong></p>
+                    <p>= 10C8×(0.5)^10 + 10C9×(0.5)^10 + 10C10×(0.5)^10</p>
+                    <p>= (45 + 10 + 1) × 0.0009765625</p>
+                    <p>= <strong>0.0547 或 5.47%</strong></p>
+                    <p><br></p>
+                    <p><strong>③ 期望值 = n × P = 10 × 0.5 = <strong>5次</strong></p>
+                </div>
+            </div>
+
+            <h3>真题二：产品质量控制</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>某产品不良率为10%，随机抽取5个产品，求：</p>
+                    <ol>
+                        <li>全部合格的概率？</li>
+                        <li>恰好有1个不良的概率？</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>① P(全部合格) = P(X=0) = 5C0 × (0.1)^0 × (0.9)^5</strong></p>
+                    <p>= 1 × 1 × 0.59049</p>
+                    <p>= <strong>0.5905 或 59.05%</strong></p>
+                    <p><br></p>
+                    <p><strong>② P(恰好1个不良) = P(X=1) = 5C1 × (0.1)^1 × (0.9)^4</strong></p>
+                    <p>= 5 × 0.1 × 0.6561</p>
+                    <p>= <strong>0.3281 或 32.81%</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Tips -->
+        <div class="section-box bonus-section">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 5. 教授的高分宝典
+            </div>
+
+            <div class="formula-box">
+                <h4>一句话总结</h4>
+                <p style="font-size: 1.1em;"><strong>"二项分布四条件：定次数、独立、二结果、恒概率；公式记牢C×P^r×(1-P)^(n-r)"}</strong></p>
+            </div>
+
+            <h3>常见避坑指南</h3>
+
+            <table class="pitfall-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">⚠️ 致命错误</th>
+                        <th style="width: 35%;">✅ 正确做法</th>
+                        <th>💀 考点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pitfall-bad">公式记错</span><br>忘了组合数nCr</td>
+                        <td>一定要有nCr！<br>考虑顺序</td>
+                        <td>必考！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">"至少"算错</span><br>逐个相加太麻烦</td>
+                        <td>用互补概率！<br>至少k个 = 1 - 最多(k-1)个</td>
+                        <td>易错点！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="nav-links">
+                <a href="#toc" class="nav-btn">📋 返回目录</a>
+                <a href="#module3" class="nav-btn">📚 返回模块三</a>
+                <a href="#module5" class="nav-btn">📚 继续模块五</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================================ -->
+    <!-- MODULE 5 -->
+    <!-- ============================================================================ -->
+
+    <div id="module5" class="module-section">
+        <div class="module-header">
+            <h2>📚 模块五：贝叶斯定理 <span class="difficulty-stars">⭐⭐⭐⭐</span></h2>
+        </div>
+
+        <!-- Professor Section -->
+        <div class="section-box professor-section">
+            <div class="section-title">
+                <span class="emoji">👨‍🏫</span> 1. 教授大白话解析（深入浅出）
+            </div>
+
+            <p><strong>"贝叶斯定理"是什么？</strong></p>
+
+            <div class="example-box">
+                <p><strong>核心思想：</strong>当我们获得新证据时，如何更新我们对某件事的相信程度。</p>
+                <p><strong>简单例子：</strong></p>
+                <ul>
+                    <li><strong>先验概率：</strong>你认为明天会下雨的概率 = 30%</li>
+                    <li><strong>新证据：</strong>天气预报说下雨概率80%</li>
+                    <li><strong>后验概率：</strong>有了天气预报后，你认为下雨概率 = ？（贝叶斯定理计算）</li>
+                </ul>
+                <p class="note-box">💡 贝叶斯定理 = "根据新证据，更新你的看法"</p>
+            </div>
+
+            <h3>贝叶斯定理公式（必记！）</h3>
+
+            <div class="formula-box">
+                <strong>P(A|B) = [P(B|A) × P(A)] / P(B)</strong><br><br>
+                或用全概率公式展开：<br>
+                <strong>P(A|B) = [P(B|A) × P(A)] / [P(B|A)×P(A) + P(B|非A)×P(非A)]</strong><br><br>
+                💡 读作：<br>
+                "在B发生的条件下A发生的概率 = (B在A条件下的概率 × A的先验概率) / B的全概率"
+            </div>
+
+            <h3>贝叶斯定理的三个关键概念</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>概念</th>
+                    <th>符号</th>
+                    <th>含义</th>
+                    <th>例子</th>
+                </tr>
+                <tr>
+                    <td><strong>先验概率</strong></td>
+                    <td>P(A)</td>
+                    <td>获得新证据前的概率</td>
+                    <td>明天下雨30%</td>
+                </tr>
+                <tr>
+                    <td><strong>似然度</strong></td>
+                    <td>P(B|A)</td>
+                    <td>在A为真时B发生的概率</td>
+                    <td>下雨时预报准确80%</td>
+                </tr>
+                <tr>
+                    <td><strong>后验概率</strong></td>
+                    <td>P(A|B)</td>
+                    <td>获得证据B后A的概率</td>
+                    <td>预报下雨时真正下雨？</td>
+                </tr>
+            </table>
+
+            <h3>贝叶斯定理计算示例</h3>
+
+            <div class="example-box">
+                <h4>例题：红球来自哪个盒子？</h4>
+                <p>有两个盒子：</p>
+                <ul>
+                    <li>盒子A：3个红球，2个黑球（红球概率60%）</li>
+                    <li>盒子B：1个红球，2个黑球（红球概率33%）</li>
+                </ul>
+                <p>随机选一个盒子，摸出一个红球。这个红球来自盒子A的概率是多少？</p>
+
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>已知：</strong></p>
+                    <p>• P(A) = P(B) = 0.5（每个盒子被选中的概率相同）</p>
+                    <p>• P(红|A) = 3/5 = 0.6</p>
+                    <p>• P(红|B) = 1/3 ≈ 0.333</p>
+                    <p><br></p>
+                    <p><strong>计算 P(A|红)：</strong></p>
+                    <p>= [P(红|A) × P(A)] / [P(红|A)×P(A) + P(红|B)×P(B)]</p>
+                    <p>= [0.6 × 0.5] / [0.6×0.5 + 0.333×0.5]</p>
+                    <p>= 0.3 / [0.3 + 0.1667]</p>
+                    <p>= 0.3 / 0.4667</p>
+                    <p>= <strong>0.643 或 64.3%</strong></p>
+                </div>
+                <p>💡 解释：摸到红球后，我们应该更倾向于认为它来自盒子A（64.3%），而不是盒子B（35.7%）</p>
+            </div>
+        </div>
+
+        <!-- Business Cases -->
+        <div class="section-box business-section">
+            <div class="section-title">
+                <span class="emoji">🏢</span> 2. 经典商业案例
+            </div>
+
+            <h3>案例一：医疗诊断（经典贝叶斯）</h3>
+            <p><strong>背景：</strong>某疾病患病率1%，检测准确率90%。</p>
+
+            <div class="example-box">
+                <p><strong>问题：</strong>检测结果为阳性，真正患病的概率是多少？</p>
+
+                <div class="success-box">
+                    <h4>贝叶斯计算表：</h4>
+                    <table style="width: 100%; margin: 15px 0;">
+                        <tr style="background: var(--primary-color); color: white;">
+                            <th>情况</th>
+                            <th>先验概率</th>
+                            <th>似然度</th>
+                            <th>联合概率</th>
+                        </tr>
+                        <tr>
+                            <td>患病</td>
+                            <td>1%</td>
+                            <td>90%</td>
+                            <td>0.01 × 0.9 = 0.009</td>
+                        </tr>
+                        <tr style="background: #f9f9f9;">
+                            <td>健康</td>
+                            <td>99%</td>
+                            <td>10%</td>
+                            <td>0.99 × 0.1 = 0.099</td>
+                        </tr>
+                        <tr style="background: #d5f4e6;">
+                            <td><strong>总和（证据）</strong></td>
+                            <td>100%</td>
+                            <td>-</td>
+                            <td><strong>0.108</strong></td>
+                        </tr>
+                    </table>
+                    <p><strong>P(患病 | 阳性) = 0.009 / 0.108 ≈ 8.3%</strong></p>
+                    <p style="color: #c0392b;">🔴 即使检测准确率90%，阳性结果中真正患病的只有8.3%！</p>
+                </div>
+            </div>
+
+            <h3>案例二：垃圾邮件过滤</h3>
+            <p><strong>背景：</strong>邮件系统用贝叶斯过滤垃圾邮件。</p>
+
+            <div class="example-box">
+                <p><strong>数据：</strong></p>
+                <ul>
+                    <li>50%的邮件是垃圾邮件</li>
+                    <li>"中奖"这个词：20%出现在垃圾邮件，2%出现在正常邮件</li>
+                </ul>
+
+                <div class="success-box">
+                    <h4>贝叶斯计算：</h4>
+                    <p>一封邮件包含"中奖"，它是垃圾邮件的概率？</p>
+                    <p><strong>P(垃圾 | 中奖) = [P(中奖|垃圾) × P(垃圾)] / P(中奖)</strong></p>
+                    <p>= [0.2 × 0.5] / [0.2×0.5 + 0.02×0.5]</p>
+                    <p>= 0.1 / 0.11</p>
+                    <p>= <strong>0.909 或 90.9%</strong></p>
+                    <p>💡 这就是为什么垃圾邮件过滤器如此有效！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications -->
+        <div class="section-box application-section">
+            <div class="section-title">
+                <span class="emoji">💼</span> 3. 商业场景应用
+            </div>
+
+            <h3>场景A：客户流失预测</h3>
+            <div class="example-box">
+                <p><strong>问题：</strong>某公司客户流失率10%。使用某种预测方法：</p>
+                <ul>
+                    <li>流失客户中，80%被正确预测</li>
+                    <li>非流失客户中，5%被误判为流失</li>
+                </ul>
+                <p>如果系统预测某客户会流失，真正流失的概率是多少？</p>
+
+                <div class="success-box">
+                    <h4>贝叶斯计算：</h4>
+                    <p><strong>P(流失 | 预测流失) = [0.8 × 0.1] / [0.8×0.1 + 0.05×0.9]</strong></p>
+                    <p>= 0.08 / 0.125</p>
+                    <p>= <strong>0.64 或 64%</strong></p>
+                    <p>💡 预测准确性约64%，可以用来优先处理高流失风险客户。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Questions -->
+        <div class="section-box exam-section">
+            <div class="section-title">
+                <span class="emoji">📝</span> 4. 考试真题模拟
+            </div>
+
+            <h3>真题一：贝叶斯基础</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>有两个工厂生产零件：</p>
+                    <ul>
+                        <li>工厂A生产40%的零件，不良率2%</li>
+                        <li>工厂B生产60%的零件，不良率3%</li>
+                    </ul>
+                    <p>随机抽取一个零件，发现是不良品。求这个零件来自工厂A的概率。</p>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>已知：</strong></p>
+                    <p>• P(A) = 0.4, P(B) = 0.6</p>
+                    <p>• P(不良|A) = 0.02, P(不良|B) = 0.03</p>
+                    <p><br></p>
+                    <p><strong>P(A|不良) = [P(不良|A) × P(A)] / [P(不良|A)×P(A) + P(不良|B)×P(B)]</strong></p>
+                    <p>= [0.02 × 0.4] / [0.02×0.4 + 0.03×0.6]</p>
+                    <p>= 0.008 / 0.026</p>
+                    <p>= <strong>0.3077 或 30.77%</strong></p>
+                </div>
+            </div>
+
+            <h3>真题二：医疗诊断</h3>
+            <div class="example-box">
+                <p><strong>题目：</strong></p>
+                <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+                    <p>某疾病患病率0.5%，检测准确率98%（患病检测阳性的概率98%，健康检测阴性的概率98%）。</p>
+                    <p>如果检测结果为阳性，真正患病的概率是多少？</p>
+                </div>
+            </div>
+
+            <div class="answer-box">
+                <div class="answer-title">【解题思路】</div>
+                <div class="formula-box" style="text-align: left;">
+                    <p><strong>已知：</strong></p>
+                    <p>• P(患病) = 0.005, P(健康) = 0.995</p>
+                    <p>• P(阳性|患病) = 0.98</p>
+                    <p>• P(阳性|健康) = 1 - 0.98 = 0.02（假阳性率）</p>
+                    <p><br></p>
+                    <p><strong>P(患病|阳性) = [0.98 × 0.005] / [0.98×0.005 + 0.02×0.995]</strong></p>
+                    <p>= 0.0049 / 0.0248</p>
+                    <p>= <strong>0.1976 或 19.76%</strong></p>
+                    <p style="color: #e67e22;">⚠️ 即使检测准确率98%，阳性结果中真正患病的不到20%！</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- High Score Tips -->
+        <div class="section-box bonus-section">
+            <div class="section-title">
+                <span class="emoji">🏆</span> 5. 教授的高分宝典
+            </div>
+
+            <div class="formula-box">
+                <h4>一句话总结</h4>
+                <p style="font-size: 1.1em;"><strong>"贝叶斯定理记三数：先验、似然、全概率；证据更新看后验，逆向思维破谜题！"}</strong></p>
+            </div>
+
+            <h3>常见避坑指南</h3>
+
+            <table class="pitfall-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">⚠️ 致命错误</th>
+                        <th style="width: 35%;">✅ 正确做法</th>
+                        <th>💀 考点</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="pitfall-bad">混淆P(A|B)和P(B|A)</span><br>以为P(A|B)=P(B|A)</td>
+                        <td>这是最常见的错误！<br>一定要用贝叶斯公式转换</td>
+                        <td>必考！</td>
+                    </tr>
+                    <tr>
+                        <td><span class="pitfall-bad">全概率算错</span><br>只算了一种情况</td>
+                        <td>P(B)=P(B|A)×P(A)+P(B|非A)×P(非A)<br>要考虑所有情况！</td>
+                        <td>易错点！</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="note-box" style="margin-top: 20px; background-color: #e6f7ff;">
+                <h4>💡 教授的临别赠言</h4>
+                <p>各位同学，贝叶斯定理看似复杂，其实核心思想很简单：</p>
+                <p><strong>"根据新证据，更新你的看法"</strong></p>
+                <ul>
+                    <li>✅ 先验概率 = 最初的看法</li>
+                    <li>✅ 新证据 = 获得的信息</li>
+                    <li>✅ 后验概率 = 更新后的看法</li>
+                </ul>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary-color);">祝大家本周学习愉快，概率满分！🎓</p>
+            </div>
+
+            <div class="nav-links">
+                <a href="#toc" class="nav-btn">📋 返回目录</a>
+                <a href="#module4" class="nav-btn">📚 返回模块四</a>
+                <a href="#module1" class="nav-btn">📚 返回模块一</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final Nav -->
+    <div class="nav-links" style="margin-top: 50px; padding-top: 30px; border-top: 2px solid #e0e0e0;">
+        <a href="#toc" class="nav-btn">📋 返回目录</a>
+        <a href="#module1" class="nav-btn">📚 模块一</a>
+        <a href="#module2" class="nav-btn">📚 模块二</a>
+        <a href="#module3" class="nav-btn">📚 模块三</a>
+        <a href="#module4" class="nav-btn">📚 模块四</a>
+        <a href="#module5" class="nav-btn">📚 模块五</a>
+    </div>
+
+</div>
+
+<a href="#toc" class="back-to-top" title="返回目录">↑</a>
+
+</body>
+</html>
