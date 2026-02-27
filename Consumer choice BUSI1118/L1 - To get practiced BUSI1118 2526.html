@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L1 - To get practiced BUSI1118 2526</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .page:last-child {
+            border-bottom: none;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 12px 0 12px 30px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .math-block {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+            overflow-x: auto;
+        }
+
+        .definition {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .definition strong {
+            color: #856404;
+        }
+
+        .theorem {
+            background: #e1f5fe;
+            border-left: 4px solid #03a9f4;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .theorem strong {
+            color: #0277bd;
+        }
+
+        .example {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .example strong {
+            color: #2e7d32;
+        }
+
+        .exercise {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .exercise strong {
+            color: #c62828;
+        }
+
+        .solution {
+            background: #e8f4fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .solution strong {
+            color: #1565c0;
+        }
+
+        .key-point {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .key-point strong {
+            color: #e65100;
+        }
+
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .graph-caption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .graph svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        sub {
+            font-size: 0.7em;
+            vertical-align: sub;
+        }
+
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .fraction > span {
+            display: block;
+            padding: 0.1em;
+        }
+
+        .fraction span.numerator {
+            border-bottom: 1px solid #000;
+        }
+
+        .fraction span.denominator {
+            display: block;
+            border-bottom: none;
+        }
+
+        .warning {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            padding: 12px 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .warning strong {
+            color: #c62828;
+        }
+
+        .note {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .note strong {
+            color: #6a1b9a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>L1 - To get practiced BUSI1118 2526</h1>
+
+        <!-- Page 1 -->
+        <div class="page">
+            <h2>Practice Exercises - Consumer Choice Theory</h2>
+
+            <p>This document contains practice problems to help you master the concepts of consumer choice theory. Work through each problem carefully to reinforce your understanding.</p>
+
+            <h3>Problem Set 1: Basic Utility Concepts</h3>
+
+            <div class="exercise">
+                <strong>Exercise 1.1:</strong> Consider the utility function U(X, Y) = XY. Calculate the utility derived from the following consumption bundles:
+                <ol>
+                    <li>(X=2, Y=3)</li>
+                    <li>(X=4, Y=2)</li>
+                    <li>(X=5, Y=1)</li>
+                    <li>(X=0, Y=10)</li>
+                </ol>
+                <p>Which bundle gives the highest utility? Explain your answer.</p>
+            </div>
+
+            <div class="solution">
+                <strong>Solution:</strong>
+                <table>
+                    <tr>
+                        <th>Bundle</th>
+                        <th>Calculation</th>
+                        <th>Utility</th>
+                    </tr>
+                    <tr>
+                        <td>(2, 3)</td>
+                        <td>U = 2 × 3</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>(4, 2)</td>
+                        <td>U = 4 × 2</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>(5, 1)</td>
+                        <td>U = 5 × 1</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>(0, 10)</td>
+                        <td>U = 0 × 10</td>
+                        <td>0</td>
+                    </tr>
+                </table>
+                <p>Bundle (4, 2) gives the highest utility of 8. This demonstrates that for this utility function, maximizing utility involves balancing the two goods.</p>
+            </div>
+
+            <div class="page-number">Page 1</div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page">
+            <div class="exercise">
+                <strong>Exercise 1.2:</strong> Based on the utility function U(X, Y) = XY from the previous exercise:
+                <ol>
+                    <li>Calculate the marginal utility of good X (MU<sub>X</sub>) at point (4, 2)</li>
+                    <li>Calculate the marginal utility of good Y (MU<sub>Y</sub>) at point (4, 2)</li>
+                    <li>Calculate the marginal rate of substitution (MRS<sub>XY</sub>) at point (4, 2)</li>
+                    <li>Interpret the meaning of the MRS value you calculated.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution:</strong>
+                <p>For U(X, Y) = XY:</p>
+                <p>MU<sub>X</sub> = ∂U/∂X = Y</p>
+                <p>MU<sub>Y</sub> = ∂U/∂Y = X</p>
+                <p>MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub> = Y/X</p>
+                <br>
+                <p>At point (4, 2):</p>
+                <ol>
+                    <li>MU<sub>X</sub> = Y = 2</li>
+                    <li>MU<sub>Y</sub> = X = 4</li>
+                    <li>MRS<sub>XY</sub> = Y/X = 2/4 = 0.5</li>
+                    <li><strong>Interpretation:</strong> At point (4, 2), the consumer is willing to give up 0.5 units of Y in exchange for 1 additional unit of X, while maintaining the same level of utility.</li>
+                </ol>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 1.3:</strong> For the utility function U(X, Y) = X<sup>2</sup> + Y<sup>2</sup>:
+                <ol>
+                    <li>Find MU<sub>X</sub></li>
+                    <li>Find MU<sub>Y</sub></li>
+                    <li>Find MRS<sub>XY</sub></li>
+                    <li>Is the marginal rate of substitution constant or does it vary with the consumption bundle?</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 2</div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 1.3:</strong>
+                <p>For U(X, Y) = X<sup>2</sup> + Y<sup>2</sup>:</p>
+                <p>MU<sub>X</sub> = ∂U/∂X = 2X</p>
+                <p>MU<sub>Y</sub> = ∂U/∂Y = 2Y</p>
+                <p>MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub> = 2X/2Y = X/Y</p>
+                <br>
+                <p><strong>Answer to d):</strong> The marginal rate of substitution varies with the consumption bundle because MRS = X/Y depends on both X and Y. As X increases relative to Y, MRS increases.</p>
+                <div class="key-point">
+                    <strong>Note:</strong> This is an example of a utility function where MRS is not constant. The indifference curves are not straight lines but have a different shape.
+                </div>
+            </div>
+
+            <h3>Problem Set 2: Budget Constraint</h3>
+
+            <div class="exercise">
+                <strong>Exercise 2.1:</strong> A consumer has income I = $100 to spend on two goods: pizza (P<sub>pizza</sub> = $10) and soda (P<sub>soda</sub> = $2).
+                <ol>
+                    <li>Write the budget constraint equation.</li>
+                    <li>Find the maximum quantity of pizza the consumer can buy (if only pizza is purchased).</li>
+                    <li>Find the maximum quantity of soda the consumer can buy (if only soda is purchased).</li>
+                    <li>What is the slope of the budget line?</li>
+                    <li>Draw the budget line.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 3</div>
+        </div>
+
+        <!-- Page 4 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 2.1:</strong>
+                <p>a) Budget constraint: 100 = 10Q<sub>pizza</sub> + 2Q<sub>soda</sub></p>
+                <p>b) Maximum pizza (Q<sub>soda</sub> = 0): 100 = 10Q<sub>pizza</sub> + 2(0) → Q<sub>pizza</sub> = 10</p>
+                <p>c) Maximum soda (Q<sub>pizza</sub> = 0): 100 = 10(0) + 2Q<sub>soda</sub> → Q<sub>soda</sub> = 50</p>
+                <p>d) Slope = -P<sub>pizza</sub>/P<sub>soda</sub> = -10/2 = -5</p>
+                <p>e) <strong>Budget Line Graph:</strong></p>
+                <div class="graph-container">
+                    <svg width="450" height="320" viewBox="0 0 450 320">
+                        <defs>
+                            <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                            </marker>
+                        </defs>
+                        <!-- Axes -->
+                        <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow1)"/>
+                        <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow1)"/>
+                        <!-- Labels -->
+                        <text x="400" y="300" font-size="12" font-family="Arial">Pizza</text>
+                        <text x="15" y="20" font-size="12" font-family="Arial">Soda</text>
+                        <!-- Budget Line -->
+                        <line x1="70" y1="280" x2="270" y2="80" stroke="#3498db" stroke-width="2.5"/>
+                        <!-- Intercepts -->
+                        <circle cx="70" cy="280" r="5" fill="#e74c3c"/>
+                        <text x="55" y="305" font-size="10" font-family="Arial">(0,50)</text>
+                        <circle cx="270" cy="80" r="5" fill="#e74c3c"/>
+                        <text x="255" y="65" font-size="10" font-family="Arial">(10,0)</text>
+                        <!-- Midpoint -->
+                        <circle cx="170" cy="180" r="4" fill="#2ecc71"/>
+                        <text x="155" y="175" font-size="10" font-family="Arial">(5,25)</text>
+                    </svg>
+                    <div class="graph-caption">Budget Line for Pizza and Soda</div>
+                </div>
+            </div>
+
+            <div class="page-number">Page 4</div>
+        </div>
+
+        <!-- Page 5 -->
+        <div class="page">
+            <div class="exercise">
+                <strong>Exercise 2.2:</strong> Using the same budget constraint from Exercise 2.1 (I = 100, P<sub>pizza</sub> = 10, P<sub>soda</sub> = 2):
+                <ol>
+                    <li>If the consumer buys 4 pizzas, how many sodas can they buy?</li>
+                    <li>If the consumer buys 6 pizzas, how many sodas can they buy?</li>
+                    <li>If the consumer buys 30 sodas, how many pizzas can they buy?</li>
+                    <li>If the consumer's income increases to $200, what happens to the budget line?</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 2.2:</strong>
+                <p>Budget constraint: 100 = 10P + 2S, where P = pizza quantity, S = soda quantity</p>
+                <p>a) If P = 4: 100 = 10(4) + 2S = 40 + 2S → 2S = 60 → S = 30</p>
+                <p>b) If P = 6: 100 = 10(6) + 2S = 60 + 2S → 2S = 40 → S = 20</p>
+                <p>c) If S = 30: 100 = 10P + 2(30) = 10P + 60 → 10P = 40 → P = 4</p>
+                <p>d) If income doubles to $200: The budget line shifts outward parallel to itself. Both intercepts double: maximum pizza = 20, maximum soda = 100. The slope remains unchanged at -5.</p>
+                <div class="key-point">
+                    <strong>Key Point:</strong> When income changes, the budget line shifts parallel (same slope) because prices remain the same.
+                </div>
+            </div>
+
+            <h3>Problem Set 3: Consumer Equilibrium</h3>
+
+            <div class="exercise">
+                <strong>Exercise 3.1:</strong> A consumer has utility function U(X, Y) = XY with income I = $100. The prices are P<sub>X</sub> = $5 and P<sub>Y</sub> = $5.
+                <ol>
+                    <li>Find the marginal utilities MU<sub>X</sub> and MU<sub>Y</sub>.</li>
+                    <li>Write the optimality condition (MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub>).</li>
+                    <li>Find the optimal quantities of X and Y.</li>
+                    <li>Calculate the maximum utility at the optimum.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 5</div>
+        </div>
+
+        <!-- Page 6 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 3.1:</strong>
+                <p>For U(X, Y) = XY:</p>
+                <p>MU<sub>X</sub> = ∂U/∂X = Y</p>
+                <p>MU<sub>Y</sub> = ∂U/∂Y = X</p>
+                <br>
+                <p>b) Optimality condition: Y/5 = X/5</p>
+                <p>Y = X</p>
+                <br>
+                <p>c) Budget constraint: 100 = 5X + 5Y</p>
+                <p>Substitute Y = X: 100 = 5X + 5X = 10X</p>
+                <p>X = 10, Y = 10</p>
+                <br>
+                <p>d) Maximum utility: U = X × Y = 10 × 10 = 100</p>
+                <div class="key-point">
+                    <strong>Verification:</strong> At optimum (10, 10):
+                    <br>MU<sub>X</sub>/P<sub>X</sub> = 10/5 = 2
+                    <br>MU<sub>Y</sub>/P<sub>Y</sub> = 10/5 = 2
+                    <br>Since MU/P is equal across goods, consumer is at equilibrium. ✓
+                </div>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 3.2:</strong> Consider a consumer with U(X, Y) = X<sup>0.5</sup>Y<sup>0.5</sup>, I = $200, P<sub>X</sub> = $4, P<sub>Y</sub> = $4.
+                <ol>
+                    <li>Set up the Lagrangian.</li>
+                    <li>Write down the first-order conditions.</li>
+                    <li>Solve for the optimal bundle.</li>
+                    <li>Find the Lagrange multiplier λ and interpret its meaning.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 6</div>
+        </div>
+
+        <!-- Page 7 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 3.2:</strong>
+                <p>a) Lagrangian: ℒ = X<sup>0.5</sup>Y<sup>0.5</sup> + λ(200 - 4X - 4Y)</p>
+                <p>b) First-order conditions:</p>
+                <div class="math-block">
+                    ∂ℒ/∂X = 0.5X<sup>-0.5</sup>Y<sup>0.5</sup> - 4λ = 0
+                </div>
+                <div class="math-block">
+                    ∂ℒ/∂Y = 0.5X<sup>0.5</sup>Y<sup>-0.5</sup> - 4λ = 0
+                </div>
+                <div class="math-block">
+                    ∂ℒ/∂λ = 200 - 4X - 4Y = 0
+                </div>
+                <p>c) From first two FOCs: 0.5X<sup>-0.5</sup>Y<sup>0.5</sup> = 0.5X<sup>0.5</sup>Y<sup>-0.5</sup></p>
+                <p>This implies: X<sup>-1</sup>Y = XY<sup>-1</sup></p>
+                <p>Y = X</p>
+                <p>From budget: 200 = 4X + 4Y = 4X + 4X = 8X</p>
+                <p>X = 25, Y = 25</p>
+                <br>
+                <p>d) Lagrange multiplier:</p>
+                <p>From ∂ℒ/∂X: 4λ = 0.5(25)<sup>-0.5</sup>(25)<sup>0.5</sup> = 0.5 × 0.2 × 5 = 0.5</p>
+                <p>λ = 0.5/4 = 0.125</p>
+                <p><strong>Interpretation:</strong> The marginal utility of income is 0.125 utils per dollar. An additional $1 of income would increase maximum utility by approximately 0.125 utils.</p>
+            </div>
+
+            <h3>Problem Set 4: Indifference Curves</h3>
+
+            <div class="exercise">
+                <strong>Exercise 4.1:</strong> For the utility function U(X, Y) = XY:
+                <ol>
+                    <li>Derive the equation of the indifference curve for U = 25.</li>
+                    <li>Calculate the MRS at point (5, 5) and at point (10, 2.5).</li>
+                    <li>Explain the pattern in MRS as you move along the indifference curve.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 7</div>
+        </div>
+
+        <!-- Page 8 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 4.1:</strong>
+                <p>a) Indifference curve for U = 25: XY = 25 → Y = 25/X</p>
+                <p>This is a hyperbola.</p>
+                <br>
+                <p>b) MRS calculation:</p>
+                <p>For U = XY: MRS = Y/X</p>
+                <p>At point (5, 5): MRS = 5/5 = 1</p>
+                <p>At point (10, 2.5): MRS = 2.5/10 = 0.25</p>
+                <br>
+                <p>c) Pattern in MRS:</p>
+                <p>As you move rightward along the indifference curve (more X, less Y), the MRS decreases. This demonstrates diminishing marginal rate of substitution. When you have more X, you value additional X less and Y more, so you're less willing to trade Y for X.</p>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 4.2:</strong> Sketch indifference curves for the following utility functions:
+                <ol>
+                    <li>U(X, Y) = 2X + Y (perfect substitutes)</li>
+                    <li>U(X, Y) = min{X, 2Y} (perfect complements)</li>
+                </ol>
+                <p>For each, indicate the shape and calculate the MRS (if applicable).</p>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 4.2:</strong>
+                <p>a) U = 2X + Y (Perfect Substitutes):</p>
+                <ul>
+                    <li>Shape: Straight, parallel lines</li>
+                    <li>MRS = MU<sub>X</sub>/MU<sub>Y</sub> = 2/1 = 2 (constant)</li>
+                    <li>Consumer is always willing to trade 2 units of Y for 1 unit of X</li>
+                </ul>
+                <p>b) U = min{X, 2Y} (Perfect Complements):</p>
+                <ul>
+                    <li>Shape: L-shaped curves</li>
+                    <li>MRS is undefined at the kink and 0 or ∞ elsewhere</li>
+                    <li>Optimal consumption always at the kink where X = 2Y</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Page 8</div>
+        </div>
+
+        <!-- Page 9 -->
+        <div class="page">
+            <h3>Problem Set 5: Income and Price Effects</h3>
+
+            <div class="exercise">
+                <strong>Exercise 5.1:</strong> Consider a consumer with U(X, Y) = XY, I = 100, P<sub>X</sub> = 10, P<sub>Y</sub> = 10.
+                <ol>
+                    <li>Find the initial optimal bundle.</li>
+                    <li>If P<sub>X</sub> decreases to 5, find the new optimal bundle.</li>
+                    <li>Calculate the total effect, substitution effect, and income effect for good X.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 5.1:</strong>
+                <p>For U = XY, MU<sub>X</sub> = Y, MU<sub>Y</sub> = X</p>
+                <br>
+                <p>a) Initial (P<sub>X</sub> = P<sub>Y</sub> = 10):</p>
+                <p>Optimality: Y/X = 10/10 = 1 → Y = X</p>
+                <p>Budget: 100 = 10X + 10Y = 10X + 10X = 20X</p>
+                <p>X = 5, Y = 5, U = 25</p>
+                <br>
+                <p>b) New (P<sub>X</sub> = 5, P<sub>Y</sub> = 10):</p>
+                <p>Optimality: Y/X = 5/10 = 0.5 → 2Y = X</p>
+                <p>Budget: 100 = 5X + 10Y = 5(2Y) + 10Y = 20Y</p>
+                <p>Y = 5, X = 10, U = 50</p>
+                <br>
+                <p>c) Effects for good X:</p>
+                <ul>
+                    <li><strong>Total effect:</strong> X increases from 5 to 10 (ΔX = +5)</li>
+                    <li><strong>Substitution effect:</strong> Find bundle at U = 25 with new prices:
+                    <br>At U = 25, XY = 25 → Y = 25/X
+                    <br>MRS = Y/X = 5/10 = 0.5
+                    <br>New optimality condition (same): Y/X = 0.5 → 2Y = X
+                    <br>From budget: 100 = 5X + 10Y = 5(2Y) + 10Y = 20Y
+                    <br>Y = 5, X = 10 (but this is the new optimum, not the SE!)
+                    <br>SE: For proper SE, we need the compensated demand. At the same utility (U = 25):
+                    <br>Y/X = P<sub>X</sub>/P<sub>Y</sub> = 5/10 = 0.5 → Y = 0.5X
+                    <br>U = X(0.5X) = 0.5X<sup>2</sup> = 25
+                    <br>X = √50 ≈ 7.07, Y = 3.54
+                    <br>SE = 7.07 - 5 = 2.07
+                </li>
+                    <li><strong>Income effect:</strong> IE = Total - SE = 5 - 2.07 = 2.93</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Page 9</div>
+        </div>
+
+        <!-- Page 10 -->
+        <div class="page">
+            <div class="key-point">
+                <strong>Interpretation:</strong> For good X (normal good in this case):
+                <ul>
+                    <li>Substitution effect (2.07): X increases because X became relatively cheaper</li>
+                    <li>Income effect (2.93): X increases because consumer effectively became richer</li>
+                    <li>Total effect (5): Sum of SE + IE</li>
+                    <li>Both effects work in the same direction because X is a normal good</li>
+                </ul>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 5.2:</strong> Repeat Exercise 5.1 assuming good X is inferior.
+                <ol>
+                    <li>How would the income effect differ?</li>
+                    <li>What would be the total effect on quantity of X?</li>
+                    <li>Could this result in a Giffen good scenario? Explain.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 5.2:</strong>
+                <p>If good X were inferior:</p>
+                <p>a) The income effect would work against the substitution effect. When P<sub>X</sub> decreases, the SE would increase X (as before), but the IE would decrease X because the consumer is now effectively richer and buys less inferior goods.</p>
+                <p>b) Total effect = SE + IE. If |IE| > |SE|, the total effect could be a decrease in X despite the price decrease.</p>
+                <p>c) Yes, this could result in a Giffen good scenario. If the income effect (decrease in X) is strong enough to overcome the substitution effect (increase in X), the total effect would show X decreasing as P<sub>X</sub> falls, violating the law of demand.</p>
+                <div class="note">
+                    <strong>Note:</strong> This is the theoretical case of Giffen goods, which are extremely rare in reality.
+                </div>
+            </div>
+
+            <h3>Problem Set 6: Cobb-Douglas Preferences</h3>
+
+            <div class="exercise">
+                <strong>Exercise 6.1:</strong> For U(X, Y) = X<sup>0.3</sup>Y<sup>0.7</sup> with I = 120, P<sub>X</sub> = 6, P<sub>Y</sub> = 4:
+                <ol>
+                    <li>What share of income is spent on good X?</li>
+                    <li>What share of income is spent on good Y?</li>
+                    <li>Find the optimal quantities of X and Y.</li>
+                    <li>Calculate the total expenditure at the optimum.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 10</div>
+        </div>
+
+        <!-- Page 11 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 6.1:</strong>
+                <p>For Cobb-Douglas utility U = X<sup>α</sup>Y<sup>β</sup>:</p>
+                <p>Key property: Consumer spends constant share of income on each good:</p>
+                <ul>
+                    <li>Share on X = α/(α + β)</li>
+                    <li>Share on Y = β/(α + β)</li>
+                </ul>
+                <p>Here: α = 0.3, β = 0.7</p>
+                <br>
+                <p>a) Share on X = 0.3/(0.3 + 0.7) = 0.3/1 = 30%</p>
+                <p>b) Share on Y = 0.7/(0.3 + 0.7) = 0.7/1 = 70%</p>
+                <p>c) Optimal quantities:</p>
+                <div class="math-block">
+                    X = 0.3 × (I/P<sub>X</sub>) = 0.3 × (120/6) = 0.3 × 20 = 6
+                </div>
+                <div class="math-block">
+                    Y = 0.7 × (I/P<sub>Y</sub>) = 0.7 × (120/4) = 0.7 × 30 = 21
+                </div>
+                <p>Optimal bundle: (6, 21)</p>
+                <p>d) Total expenditure: 6(6) + 4(21) = 36 + 84 = 120 = I ✓</p>
+                <p>Expenditure on X: 36/120 = 30% ✓</p>
+                <p>Expenditure on Y: 84/120 = 70% ✓</p>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 6.2:</strong> For the same utility function from Exercise 6.1:
+                <ol>
+                    <li>What happens to the optimal quantities if income doubles to I = 240?</li>
+                    <li>What happens to the optimal quantities if both prices double (P<sub>X</sub> = 12, P<sub>Y</sub> = 8)?</li>
+                    <li>What happens to the optimal quantities if income and all prices double?</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 6.2:</strong>
+                <p>a) If income doubles to 240:</p>
+                <p>X = 0.3 × (240/6) = 0.3 × 40 = 12</p>
+                <p>Y = 0.7 × (240/4) = 0.7 × 60 = 42</p>
+                <p>Both quantities double (homogeneous of degree 1).</p>
+                <br>
+                <p>b) If prices double (I = 120):</p>
+                <p>X = 0.3 × (120/12) = 0.3 × 10 = 3</p>
+                <p>Y = 0.7 × (120/8) = 0.7 × 15 = 10.5</p>
+                <p>Both quantities halve.</p>
+                <br>
+                <p>c) If income and all prices double (I = 240, P<sub>X</sub> = 12, P<sub>Y</sub> = 8):</p>
+                <p>X = 0.3 × (240/12) = 0.3 × 20 = 6</p>
+                <p>Y = 0.7 × (240/8) = 0.7 × 30 = 21</p>
+                <p>Both quantities unchanged (zero homogeneity for prices, unit homogeneity for income).</p>
+            </div>
+
+            <div class="page-number">Page 11</div>
+        </div>
+
+        <!-- Page 12 -->
+        <div class="page">
+            <h3>Problem Set 7: Comparative Statics</h3>
+
+            <div class="exercise">
+                <strong>Exercise 7.1:</strong> Consider two consumers with different utility functions facing the same prices and income:
+                <br><br>
+                Consumer A: U<sub>A</sub>(X, Y) = XY
+                <br>Consumer B: U<sub>B</sub>(X, Y) = X<sup>2</sup>Y<sup>2</sup>
+                <br>I = 100, P<sub>X</sub> = 5, P<sub>Y</sub> = 5
+                <ol>
+                    <li>Find Consumer A's optimal bundle.</li>
+                    <li>Find Consumer B's optimal bundle.</li>
+                    <li>Compare the utility levels at each consumer's optimum.</li>
+                    <li>Who has higher utility? Explain why.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 7.1:</strong>
+                <p>Consumer A (U = XY, P<sub>X</sub> = P<sub>Y</sub> = 5):</p>
+                <p>Optimality: Y/X = 1 → Y = X</p>
+                <p>Budget: 100 = 5X + 5Y = 10X</p>
+                <p>X = 10, Y = 10, U<sub>A</sub> = 100</p>
+                <br>
+                <p>Consumer B (U = X<sup>2</sup>Y<sup>2</sup>, P<sub>X</sub> = P<sub>Y</sub> = 5):</p>
+                <p>MU<sub>X</sub> = 2X, MU<sub>Y</sub> = 2Y</p>
+                <p>Optimality: 2X/5 = 2Y/5 → X = Y</p>
+                <p>Budget: 100 = 5X + 5Y = 10X</p>
+                <p>X = 10, Y = 10, U<sub>B</sub> = 100<sup>2</sup> = 10,000</p>
+                <br>
+                <p>c) Comparison: U<sub>B</sub> = 10,000 > U<sub>A</sub> = 100</p>
+                <p>d) Consumer B has much higher utility. This is because utility functions are not comparable across different functional forms—utility is ordinal, not cardinal. We cannot conclude that B is "better off" than A just because U<sub>B</sub> > U<sub>A</sub>. The important question is whether each consumer maximizes their own utility given their constraints.</p>
+                <div class="warning">
+                    <strong>Warning:</strong> Never compare utility values across different consumers directly! Utility is a tool for modeling preferences, not a measurable quantity of satisfaction.
+                </div>
+            </div>
+
+            <div class="page-number">Page 12</div>
+        </div>
+
+        <!-- Page 13 -->
+        <div class="page">
+            <div class="exercise">
+                <strong>Exercise 7.2:</strong> For a single consumer with U(X, Y) = 2X + Y (perfect substitutes), I = 60, P<sub>X</sub> = 3, P<sub>Y</sub> = 2:
+                <ol>
+                    <li>Calculate MU<sub>X</sub>/P<sub>X</sub> and MU<sub>Y</sub>/P<sub>Y</sub>.</li>
+                    <li>What is the optimal bundle?</li>
+                    <li>What type of solution is this?</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 7.2:</strong>
+                <p>For U = 2X + Y:</p>
+                <p>MU<sub>X</sub> = 2, MU<sub>Y</sub> = 1</p>
+                <p>a) MU<sub>X</sub>/P<sub>X</sub> = 2/3 ≈ 0.67</p>
+                <p>MU<sub>Y</sub>/P<sub>Y</sub> = 1/2 = 0.5</p>
+                <br>
+                <p>b) Since MU<sub>X</sub>/P<sub>X</sub> > MU<sub>Y</sub>/P<sub>Y</sub>, the consumer gets more utility per dollar from good X and should buy only X.</p>
+                <p>Optimal bundle: X = 60/3 = 20, Y = 0</p>
+                <p>c) This is a corner solution because the consumer buys zero of good Y.</p>
+                <div class="key-point">
+                    <strong>Key Point:</strong> For perfect substitutes, consumers typically specialize in the good with higher marginal utility per dollar, leading to corner solutions.
+                </div>
+            </div>
+
+            <div class="exercise">
+                <strong>Exercise 7.3:</strong> For a consumer with U(X, Y) = min{2X, Y} (perfect complements), I = 80, P<sub>X</sub> = 4, P<sub>Y</sub> = 2:
+                <ol>
+                    <li>What is the optimal consumption ratio?</li>
+                    <li>Find the optimal bundle.</li>
+                    <li>What type of solution is this?</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 13</div>
+        </div>
+
+        <!-- Page 14 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 7.3:</strong>
+                <p>For U = min{2X, Y}, at the kink (optimum): 2X = Y</p>
+                <p>a) The optimal consumption ratio is X:Y = 1:2 (or equivalently, Y = 2X)</p>
+                <br>
+                <p>b) Budget constraint: 80 = 4X + 2Y</p>
+                <p>Substitute Y = 2X: 80 = 4X + 2(2X) = 8X</p>
+                <p>X = 10, Y = 20</p>
+                <p>Optimal bundle: (10, 20)</p>
+                <p>Utility: U = min{2(10), 20} = min{20, 20} = 20</p>
+                <br>
+                <p>c) This is a corner solution (specifically, a kink solution) because optimal consumption occurs at the kink of the L-shaped indifference curve where 2X = Y.</p>
+                <div class="key-point">
+                    <strong>Note:</strong> For perfect complements, consumers always consume goods in the fixed ratio defined by the utility function coefficients.
+                </div>
+            </div>
+
+            <h3>Problem Set 8: Slutsky Equation</h3>
+
+            <div class="exercise">
+                <strong>Exercise 8.1:</strong> Consider the utility function U(X, Y) = X<sup>0.5</sup>Y<sup>0.5</sup> with I = 200, P<sub>X</sub> = 4, P<sub>Y</sub> = 5.
+                <ol>
+                    <li>Derive the demand functions for X and Y.</li>
+                    <li>Verify that the demand functions are homogenous of degree 0 in prices and homogeneous of degree 1 in income.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 8.1:</strong>
+                <p>For Cobb-Douglas U = X<sup>α</sup>Y<sup>β</sup> with α = β = 0.5:</p>
+                <p>Demand functions:</p>
+                <div class="math-block">
+                    X = (α/(α+β))(I/P<sub>X</sub>) = 0.5 × (200/4) = 0.5 × 50 = 25
+                </div>
+                <div class="math-block">
+                    Y = (β/(α+β))(I/P<sub>Y</sub>) = 0.5 × (200/5) = 0.5 × 40 = 20
+                </div>
+                <p>So X = 25/P<sub>X</sub>, Y = 20/P<sub>Y</sub></p>
+                <br>
+                <p>b) Homogeneity check:</p>
+                <ul>
+                    <li>If prices double (P<sub>X</sub> = 8, P<sub>Y</sub> = 10): X = 25/8, Y = 20/10 (both halve, homogeneity degree 0 in prices)</li>
+                    <li>If income doubles (I = 400): X = 100/4 = 25, Y = 80/5 = 16 (both double, homogeneity degree 1 in income)</li>
+                    <li>If both double: X = 50/4 = 12.5, Y = 40/5 = 8 (same as original)</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Page 14</div>
+        </div>
+
+        <!-- Page 15 -->
+        <div class="page">
+            <div class="exercise">
+                <strong>Exercise 8.2:</strong> Using the demand functions from Exercise 8.1:
+                <ol>
+                    <li>Calculate the own-price elasticity of demand for good X.</li>
+                    <li>Calculate the cross-price elasticity of demand for good X with respect to P<sub>Y</sub>.</li>
+                    <li>Calculate the income elasticity of demand for good X.</li>
+                </ol>
+            </div>
+
+            <div class="solution">
+                <strong>Solution to Exercise 8.2:</strong>
+                <p>Demand function for X: X = 25/P<sub>X</sub></p>
+                <p>At P<sub>X</sub> = 4: X = 25/4 = 6.25</p>
+                <br>
+                <p>a) Own-price elasticity E<sub>XX</sub>:</p>
+                <div class="math-block">
+                    E<sub>XX</sub> = (dX/dP<sub>X</sub>) × (P<sub>X</sub>/X) = (-25/P<sub>X</sub><sup>2</sup>) × (P<sub>X</sub>/X)
+                </div>
+                <p>For X = 25/P<sub>X</sub>: dX/dP<sub>X</sub> = -25/P<sub>X</sub><sup>2</sup></p>
+                <p>E<sub>XX</sub> = (-25/P<sub>X</sub><sup>2</sup>) × P<sub>X</sub><sup>2</sup>/25 = -25/25 = -1</p>
+                <p>Unit elastic demand for Cobb-Douglas utility.</p>
+                <br>
+                <p>b) Cross-price elasticity E<sub>XY</sub>:</p>
+                <p>Demand for X does not depend on P<sub>Y</sub>, so dX/dP<sub>Y</sub> = 0</p>
+                <p>E<sub>XY</sub> = 0</p>
+                <p>Goods X and Y are neither substitutes nor complements (independent).</p>
+                <br>
+                <p>c) Income elasticity E<sub>XI</sub>:</p>
+                <div class="math-block">
+                    E<sub>XI</sub> = (dX/dI) × (I/X) = (1/P<sub>X</sub>) × (I/X)
+                </div>
+                <p>At X = 25/P<sub>X</sub>: E<sub>XI</sub> = (1/4) × (4/(25/P<sub>X</sub>)) = (1/4) × (4P<sub>X</sub>/25) = P<sub>X</sub>/25 = (1/P<sub>X</sub>)(P<sub>X</sub>/25)</p>
+                <p>At P<sub>X</sub> = 4: E<sub>XI</sub> = 4/25 = 0.16</p>
+                <p>Since 0 < E<sub>I</sub> < 1, good X is a necessity.</p>
+            </div>
+
+            <h3>Problem Set 9: Applications</h3>
+
+            <div class="exercise">
+                <strong>Exercise 9.1:</strong> A government imposes a tax of $2 per unit on good X. Before the tax, P<sub>X</sub> = $5, P<sub>Y</sub> = $5, I = $100.
+                <br>After the tax, P<sub>X</sub> = $7 (tax-inclusive).
+                <br>For U(X, Y) = X<sup>0.5</sup>Y<sup>0.5</sup>:
+                <ol>
+                    <li>Find the optimal bundle before tax.</li>
+                    <li>Find the optimal bundle after tax.</li>
+                    <li>Calculate the tax revenue collected.</li>
+                    <li>Calculate the excess burden (deadweight loss) of the tax.</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 15</div>
+        </div>
+
+        <!-- Page 16 -->
+        <div class="page">
+            <div class="solution">
+                <strong>Solution to Exercise 9.1:</strong>
+                <p>For U = X<sup>0.5</sup>Y<sup>0.5</sup> (α = β = 0.5):</p>
+                <br>
+                <p>a) Before tax (P<sub>X</sub> = P<sub>Y</sub> = 5, I = 100):</p>
+                <p>X = Y = 0.5 × 100/5 = 10</p>
+                <p>Optimal: (10, 10), U = 100</p>
+                <br>
+                <p>b) After tax (P<sub>X</sub> = 7, P<sub>Y</sub> = 5, I = 100):</p>
+                <p>Optimality: Y/X = 7/5 = 1.4</p>
+                <p>Y = 1.4X</p>
+                <p>Budget: 100 = 7X + 5(1.4X) = 7X + 7X = 14X</p>
+                <p>X = 7.14, Y = 10</p>
+                <p>New optimal: (7.14, 10), U = 71.4</p>
+                <br>
+                <p>c) Tax revenue = tax × quantity after tax = 2 × 7.14 = $14.28</p>
+                <p>d) Excess burden (deadweight loss):</p>
+                <p>Consumer surplus lost = Change in utility + Tax revenue - Cost of tax payment</p>
+                <p>This is an advanced concept - for this course, focus on the change in quantities and utility.</p>
+                <p>Utility loss = 100 - 71.4 = 28.6</p>
+            </div>
+
+            <div class="key-point">
+                <strong>Key Point:</strong> Taxes create a wedge between what consumers pay and what producers receive (in this simplified model). The consumer reduces consumption of the taxed good, moving to a lower utility level.
+            </div>
+
+            <h2>Summary of Key Concepts</h2>
+
+            <table>
+                <tr>
+                    <th>Concept</th>
+                    <th>Key Formula</th>
+                    <th>Important Property</th>
+                </tr>
+                <tr>
+                    <td>Marginal Utility</td>
+                    <td>MU = ∂U/∂X</td>
+                    <td>Diminishes with consumption</td>
+                </tr>
+                <tr>
+                    <td>MRS</td>
+                    <td>MRS = MU<sub>X</sub>/MU<sub>Y</sub></td>
+                    <td>Rate of willing substitution</td>
+                </tr>
+                <tr>
+                    <td>Budget Constraint</td>
+                    <td>I = P<sub>X</sub>X + P<sub>Y</sub>Y</td>
+                    <td>Slope = -P<sub>X</sub>/P<sub>Y</sub></td>
+                </tr>
+                <tr>
+                    <td>Optimality</td>
+                    <td>MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></td>
+                    <td>Equal MU per dollar</td>
+                </tr>
+                <tr>
+                    <td>Price Effect</td>
+                    <td>PE = SE + IE</td>
+                    <td>SE always opposes price</td>
+                </tr>
+            </table>
+
+            <div class="page-number">Page 16</div>
+        </div>
+    </div>
+</body>
+</html>
