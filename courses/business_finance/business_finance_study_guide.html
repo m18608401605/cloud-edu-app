@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Finance 考试学习指南</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .subsection {
+            margin-bottom: 25px;
+            background: #f8f9ff;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .subsection-title {
+            font-size: 1.3em;
+            color: #555;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: #f0f4ff;
+        }
+
+        .rank-s { background: #fff3cd; }
+        .rank-a { background: #d1ecf1; }
+        .rank-b { background: #d4edda; }
+        .rank-c { background: #f8d7da; }
+
+        .divider {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #667eea, transparent);
+            margin: 30px 0;
+        }
+
+        .checklist {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item::before {
+            content: '□';
+            font-size: 1.2em;
+            margin-right: 12px;
+            color: #667eea;
+            flex-shrink: 0;
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .formula-box h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .formula {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: rgba(255,255,255,0.95);
+            padding: 18px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: #1a1a2e;
+            line-height: 1.8;
+            border-left: 4px solid #ffd700;
+        }
+
+        .formula math {
+            font-style: italic;
+        }
+
+        /* 知识图谱样式 */
+        .fusion-diagram {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0fe 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .fusion-title {
+            text-align: center;
+            font-size: 1.3em;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .fusion-core {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .core-box {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .fusion-arrow-down {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 10px 0;
+        }
+
+        .fusion-pillar-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .fusion-pillar {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .pillar-header {
+            background: #667eea;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .pillar-items {
+            list-style: none;
+        }
+
+        .pillar-items li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+            font-size: 0.95em;
+        }
+
+        .pillar-items li:last-child {
+            border-bottom: none;
+        }
+
+        .pillar-items li::before {
+            content: '→ ';
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .fusion-result {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            display: inline-block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .fusion-explanation {
+            background: rgba(255,255,255,0.8);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .fusion-explanation h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .fusion-explanation p {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* 原有样式保留 */
+        .diagram {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .diagram-box {
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 15px 25px;
+            display: inline-block;
+            margin: 10px;
+            background: #f8f9ff;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .diagram-arrow {
+            font-size: 1.5em;
+            color: #999;
+            margin: 0 10px;
+        }
+
+        .essay-structure {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .essay-step {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+        }
+
+        .essay-step strong {
+            color: #667eea;
+        }
+
+        .tips-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .warning-box {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+
+        .final-checklist {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.8em; }
+            .content { padding: 15px; }
+            th, td { padding: 8px 10px; font-size: 0.9em; }
+            .fusion-pillar-container { flex-direction: column; }
+            .formula { font-size: 0.9em; }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .badge-s { background: #ffd700; color: #333; }
+        .badge-a { background: #c0c0c0; color: #333; }
+        .badge-b { background: #cd7f32; color: white; }
+        .badge-c { background: #999; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 考试结构分析（根据考纲推断）</h1>
+            <div class="subtitle">Business Finance 考试学习指南</div>
+        </div>
+
+        <div class="content">
+            <!-- 考试结构 -->
+            <div class="section">
+                <h2 class="section-title">考试结构</h2>
+                <div class="subsection">
+                    <p><strong>Section A: 计算题 (约50-60分)</strong></p>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>NPV/IRR/WACC/CAPM计算</li>
+                        <li>现金流识别与调整</li>
+                        <li>杠杆比率计算</li>
+                    </ul>
+                </div>
+                <div class="subsection">
+                    <p><strong>Section B: 论述/分析题 (约40-50分)</strong></p>
+                    <ul style="margin: 10px 0 10px 20px;">
+                        <li>理论阐述 + 实例分析</li>
+                        <li>批判性评价</li>
+                        <li>跨章节综合问题</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 考点权重分级 -->
+            <div class="section">
+                <h2 class="section-title">📊 考点权重分级（高频到低频）</h2>
+
+                <!-- S级考点 -->
+                <div class="subsection" style="border-left-color: #ffd700;">
+                    <h3 class="subsection-title">🥇 S级考点（必考，权重30-40%）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>考点</th>
+                                <th>对应章节</th>
+                                <th>融合点</th>
+                                <th>分值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-s">
+                                <td>NPV计算</td>
+                                <td>Ch4, Ch5</td>
+                                <td>+现金流量识别 +税务调整 +通胀调整</td>
+                                <td>10-15分</td>
+                            </tr>
+                            <tr class="rank-s">
+                                <td>WACC计算</td>
+                                <td>Ch10, Ch11</td>
+                                <td>+CAPM推导re +杠杆调整</td>
+                                <td>8-12分</td>
+                            </tr>
+                            <tr class="rank-s">
+                                <td>IRR vs NPV冲突</td>
+                                <td>Ch4, Ch6</td>
+                                <td>+敏感性分析 +互斥项目</td>
+                                <td>6-10分</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- A级考点 -->
+                <div class="subsection" style="border-left-color: #c0c0c0;">
+                    <h3 class="subsection-title">🥈 A级考点（高频，权重20-30%）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>考点</th>
+                                <th>对应章节</th>
+                                <th>融合点</th>
+                                <th>分值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-a">
+                                <td>CAPM模型</td>
+                                <td>Ch7, Ch10</td>
+                                <td>+Beta估算 +项目贴现率推导</td>
+                                <td>8-10分</td>
+                            </tr>
+                            <tr class="rank-a">
+                                <td>MM理论</td>
+                                <td>Ch11, Ch12</td>
+                                <td>无税版 +有税版 +权衡理论</td>
+                                <td>6-8分</td>
+                            </tr>
+                            <tr class="rank-a">
+                                <td>现金流调整</td>
+                                <td>Ch5, Ch6</td>
+                                <td>增量现金流 +沉没成本 +机会成本</td>
+                                <td>5-8分</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- B级考点 -->
+                <div class="subsection" style="border-left-color: #cd7f32;">
+                    <h3 class="subsection-title">🥉 B级考点（中频，权重15-20%）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>考点</th>
+                                <th>对应章节</th>
+                                <th>分值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-b">
+                                <td>有效市场假说</td>
+                                <td>Ch9</td>
+                                <td>4-6分</td>
+                            </tr>
+                            <tr class="rank-b">
+                                <td>股利政策</td>
+                                <td>Ch12</td>
+                                <td>4-6分</td>
+                            </tr>
+                            <tr class="rank-b">
+                                <td>实物期权</td>
+                                <td>Ch5</td>
+                                <td>4-6分</td>
+                            </tr>
+                            <tr class="rank-b">
+                                <td>租赁购买决策</td>
+                                <td>Ch8</td>
+                                <td>4-5分</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- C级考点 -->
+                <div class="subsection" style="border-left-color: #999;">
+                    <h3 class="subsection-title">📋 C级考点（低频，权重10-15%）</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>考点</th>
+                                <th>对应章节</th>
+                                <th>分值</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="rank-c">
+                                <td>公司治理</td>
+                                <td>Ch1</td>
+                                <td>2-3分</td>
+                            </tr>
+                            <tr class="rank-c">
+                                <td>私募股权</td>
+                                <td>Ch1</td>
+                                <td>2分</td>
+                            </tr>
+                            <tr class="rank-c">
+                                <td>伊斯兰金融</td>
+                                <td>Ch8</td>
+                                <td>2分</td>
+                            </tr>
+                            <tr class="rank-c">
+                                <td>行为金融</td>
+                                <td>Ch2, Ch9</td>
+                                <td>2-3分</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 知识融合图谱 - 通俗语言解析版 -->
+            <div class="section">
+                <h2 class="section-title">🧩 跨章节知识融合图谱（通俗解析）</h2>
+
+                <div class="fusion-diagram">
+                    <div class="fusion-title">📊 估值就像"算生意值不值"的三步走</div>
+
+                    <div class="fusion-core">
+                        <div class="core-box">💰 核心问题：这个投资值不值钱？</div>
+                    </div>
+
+                    <div class="fusion-arrow-down">⬇️</div>
+
+                    <p style="text-align: center; color: #666; margin-bottom: 20px;">
+                        要回答这个问题，需要掌握三大核心模块：
+                    </p>
+
+                    <div class="fusion-pillar-container">
+                        <!-- 贴现率柱 -->
+                        <div class="fusion-pillar">
+                            <div class="pillar-header">📏 第一步：确定"贴现率"</div>
+                            <ul class="pillar-items">
+                                <li>用 <strong>CAPM模型</strong> 算股东要求的回报率（Ke）</li>
+                                <li>用 <strong>WACC</strong> 算公司整体资金成本</li>
+                                <li>简单理解：就是"借钱要付多少利息"</li>
+                            </ul>
+                            <div style="background: #e8f4fd; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9em;">
+                                <strong>💡 为什么重要？</strong><br>
+                                贴现率越高，未来钱折算到现在就越少，项目看起来就越不值钱
+                            </div>
+                        </div>
+
+                        <!-- 现金流柱 -->
+                        <div class="fusion-pillar">
+                            <div class="pillar-header">💵 第二步：预测"现金流"</div>
+                            <ul class="pillar-items">
+                                <li><strong>识别</strong>：这个项目每年能进账多少？</li>
+                                <li><strong>调整</strong>：只算增量（多出来的那部分）</li>
+                                <li>⚠️ 排除沉没成本（已经花的钱不算）</li>
+                                <li>✅ 包含机会成本（不做这个项目能赚的钱）</li>
+                            </ul>
+                            <div style="background: #e8f4fd; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9em;">
+                                <strong>💡 关键点：</strong><br>
+                                现金流不是利润！是真正进兜里的钱
+                            </div>
+                        </div>
+
+                        <!-- 决策方法柱 -->
+                        <div class="fusion-pillar">
+                            <div class="pillar-header">⚖️ 第三步：做"投资决策"</div>
+                            <ul class="pillar-items">
+                                <li><strong>NPV</strong>：算出净现值，正数就赚</li>
+                                <li><strong>IRR</strong>：算出内含回报率</li>
+                                <li>两者冲突时怎么办？（看项目规模、现金流时间分布）</li>
+                                <li><strong>风险分析</strong>：万一不顺利怎么办？</li>
+                            </ul>
+                            <div style="background: #e8f4fd; padding: 10px; border-radius: 5px; margin-top: 10px; font-size: 0.9em;">
+                                <strong>💡 决策原则：</strong><br>
+                                NPV > 0 → 投！<br>
+                                NPV < 0 → 不投！
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="fusion-arrow-down">⬇️</div>
+
+                    <div class="fusion-result">
+                        <div class="result-box">✅ 最终判断：做还是不做</div>
+                    </div>
+
+                    <!-- 通俗解释 -->
+                    <div class="fusion-explanation">
+                        <h4>📝 举个通俗的例子：</h4>
+                        <p><strong>场景：</strong>你想开一家奶茶店</p>
+                        <p><strong>第一步（贴现率）：</strong>你把钱投在奶茶店，放弃了存银行5%的利息，所以你的机会成本是5%，这就是贴现率</p>
+                        <p><strong>第二步（现金流）：</strong>算出每年奶茶店能净赚多少钱，这是你的现金流</p>
+                        <p><strong>第三步（决策）：</strong>把未来每年的赚的钱，按5%折算到现在，减去开店成本，就是NPV</p>
+                        <p><strong>结论：</strong>如果NPV是正的，说明开奶茶店比存银行更值！</p>
+                    </div>
+
+                    <!-- 融合说明 -->
+                    <div class="fusion-explanation" style="background: #f0fdf4; border-left-color: #10b981;">
+                        <h4>🔗 章节融合的关键：</h4>
+                        <p><strong>CAPM (Ch7) + WACC (Ch10)</strong> = 算出准确的贴现率</p>
+                        <p><strong>现金流识别 (Ch5) + 调整 (Ch6)</strong> = 算出准确的项目现金流</p>
+                        <p><strong>贴现率 × 现金流</strong> = NPV (Ch4)</p>
+                        <p><strong>风险分析 (Ch6) + 杠杆 (Ch11)</strong> = 评估项目有多稳</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 30天作战计划 -->
+            <div class="section">
+                <h2 class="section-title">📅 30天精确作战计划</h2>
+
+                <!-- 第一阶段 -->
+                <div class="subsection" style="background: #e8f5e9; border-left-color: #4caf50;">
+                    <h3 class="subsection-title">第一阶段：计算能力碾压期 (Day 1-10)</h3>
+                    <p style="margin-bottom: 15px;"><strong>每天目标: 完成15-20道计算题，准确率目标90%+</strong></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>天数</th>
+                                <th>模块</th>
+                                <th>核心任务</th>
+                                <th>融合练习</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>D1</td><td>TVM基础</td><td>复利/年金计算</td><td>Ch1+Ch4现金流折现</td></tr>
+                            <tr><td>D2</td><td>NPV专项</td><td>NPV计算+判断</td><td>Ch4+Ch5增量现金流</td></tr>
+                            <tr><td>D3</td><td>IRR专项</td><td>IRR计算+插值法</td><td>Ch4+Ch6NPV/IRR冲突</td></tr>
+                            <tr><td>D4</td><td>现金流识别</td><td>5类现金流判断</td><td>Ch5+Ch4综合项目评估</td></tr>
+                            <tr><td>D5</td><td>CAPM模型</td><td>Ke计算+Beta</td><td>Ch7+Ch10权益成本</td></tr>
+                            <tr><td>D6</td><td>WACC计算</td><td>完整WACC推导</td><td>Ch10+Ch11资本结构</td></tr>
+                            <tr><td>D7</td><td>杠杆比率</td><td>DFL/DOL计算</td><td>Ch11+Ch6风险分析</td></tr>
+                            <tr><td>D8</td><td>债券估值</td><td>债券价格+到期收益率</td><td>Ch8+Ch10债务成本</td></tr>
+                            <tr><td>D9</td><td>综合计算</td><td>跨章节大题</td><td>Ch4+5+7+10+11串联</td></tr>
+                            <tr><td>D10</td><td>错题复盘</td><td>D1-9错题分类</td><td>建立个人错题库</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 第二阶段 -->
+                <div class="subsection" style="background: #e3f2fd; border-left-color: #2196f3;">
+                    <h3 class="subsection-title">第二阶段：理论理解深化期 (Day 11-20)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>天数</th>
+                                <th>主题</th>
+                                <th>核心理论</th>
+                                <th>论述题准备</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>D11</td><td>MM理论</td><td>无税版+有税版证明</td><td>Ch11 杠杆效应</td></tr>
+                            <tr><td>D12</td><td>资本结构</td><td>权衡理论+优序融资</td><td>Ch11+12 融资决策</td></tr>
+                            <tr><td>D13</td><td>有效市场</td><td>三种形式+检验</td><td>Ch9 EMH讨论</td></tr>
+                            <tr><td>D14</td><td>股利政策</td><td>MM+传统+客户效应</td><td>Ch12 股利无关vs相关</td></tr>
+                            <tr><td>D15</td><td>CAPM理论</td><td>假设+检验+质疑</td><td>Ch7 CAPM有效性</td></tr>
+                            <tr><td>D16</td><td>行为金融</td><td>偏误+市场异象</td><td>Ch2+9 理性vs非理性</td></tr>
+                            <tr><td>D17</td><td>实物期权</td><td>延期+扩张+放弃</td><td>Ch5 投资灵活性</td></tr>
+                            <tr><td>D18</td><td>风险分析</td><td>敏感性+情景+概率</td><td>Ch6 风险度量</td></tr>
+                            <tr><td>D19</td><td>代理问题</td><td>股东vs管理层</td><td>Ch2 治理问题</td></tr>
+                            <tr><td>D20</td><td>理论整合</td><td>跨框架联系</td><td>综合论述模板</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="tips-box">
+                        <strong>论述题模板:</strong>
+                        <ul style="margin: 10px 0 0 20px;">
+                            <li><strong>Introduction:</strong> 定义核心概念 + 陈述论点</li>
+                            <li><strong>Body Para 1:</strong> 理论依据 + 学术支持</li>
+                            <li><strong>Body Para 2:</strong> 局限性/假设条件</li>
+                            <li><strong>Body Para 3:</strong> 实践应用/实证证据</li>
+                            <li><strong>Conclusion:</strong> 总结 + 个人观点 + 建议</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- 第三阶段 -->
+                <div class="subsection" style="background: #fff3e0; border-left-color: #ff9800;">
+                    <h3 class="subsection-title">第三阶段：冲刺模拟期 (Day 21-30)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>天数</th>
+                                <th>任务</th>
+                                <th>策略</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>D21-22</td><td>真题演练A</td><td>计时完整试卷</td></tr>
+                            <tr><td>D23-24</td><td>真题演练B</td><td>计时完整试卷</td></tr>
+                            <tr><td>D25</td><td>计算题专项</td><td>快速计算训练</td></tr>
+                            <tr><td>D26</td><td>论述题专项</td><td>模板套用练习</td></tr>
+                            <tr><td>D27</td><td>综合模拟C</td><td>全真模拟</td></tr>
+                            <tr><td>D28</td><td>错题终极复盘</td><td>按考点分类</td></tr>
+                            <tr><td>D29</td><td>公式卡最终版</td><td>考前最后一遍</td></tr>
+                            <tr><td>D30</td><td>心态准备</td><td>轻松复习</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 高分答题技巧 -->
+            <div class="section">
+                <h2 class="section-title">🎯 高分答题技巧（70+关键）</h2>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">计算题答题规范（每分必争）</h3>
+                    <div class="essay-structure">
+                        <div class="essay-step">
+                            <strong>Step 1: 明确目标 (1分)</strong><br>
+                            "Calculate the NPV of the investment project"
+                        </div>
+                        <div class="essay-step">
+                            <strong>Step 2: 写出完整公式 (2分)</strong><br>
+                            "NPV = Σ [CF<sub>t</sub> / (1+r)<sup>t</sup>] - Initial Investment"
+                        </div>
+                        <div class="essay-step">
+                            <strong>Step 3: 代入数值计算 (2分)</strong><br>
+                            "Year 1: £50,000 / (1.12)<sup>1</sup> = £44,643<br>
+                             Year 2: £60,000 / (1.12)<sup>2</sup> = £47,832"
+                        </div>
+                        <div class="essay-step">
+                            <strong>Step 4: 得出结果 (1分)</strong><br>
+                            "NPV = £44,643 + £47,832 + ... - £150,000 = £28,475"
+                        </div>
+                        <div class="essay-step" style="background: #fff3cd; border-left-color: #ffc107;">
+                            <strong>Step 5: 解释意义 (1-2分) ← 70+关键</strong><br>
+                            "The positive NPV of £28,475 indicates the project adds value to shareholders. Recommend acceptance."
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">论述题高分结构</h3>
+                    <div class="essay-structure">
+                        <p style="margin-bottom: 15px;"><strong>Question:</strong> "Discuss whether dividend policy affects shareholder wealth" (8 marks)</p>
+                        <div class="essay-step">
+                            <strong>Para 1 (1.5分): 定义与立场</strong><br>
+                            "Dividend policy refers to... The relationship between dividends and shareholder wealth remains debated."
+                        </div>
+                        <div class="essay-step">
+                            <strong>Para 2 (2分): 无关观点 (MM定理)</strong><br>
+                            "Modigliani-Miller (1961) argue dividends are irrelevant under perfect markets assumptions: no taxes, no transaction costs, symmetric information..."
+                        </div>
+                        <div class="essay-step">
+                            <strong>Para 3 (2分): 相关观点 (传统理论)</strong><br>
+                            "However, Lintner's bird-in-hand theory suggests... Clientele effect (Elton/Gruber)..."
+                        </div>
+                        <div class="essay-step">
+                            <strong>Para 4 (1.5分): 实证证据</strong><br>
+                            "Empirical evidence shows mixed results. Ang et al. (2023) found... while Baker/Wurgler (2004)..."
+                        </div>
+                        <div class="essay-step">
+                            <strong>Para 5 (1分): 结论</strong><br>
+                            "In conclusion, while MM suggests irrelevance in theory, market imperfections mean dividend policy likely does affect wealth in practice. Companies should consider investor preferences and signaling."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 高频易错点 -->
+            <div class="section">
+                <h2 class="section-title">⚠️ 高频易错点（70+必须避免）</h2>
+                <div class="warning-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>易错点</th>
+                                <th>章节融合</th>
+                                <th>正确做法</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>WACC权重错误</td><td>Ch10+11</td><td>用市场价值，不用账面价值</td></tr>
+                            <tr><td>增量现金流遗漏</td><td>Ch5+4</td><td>包含机会成本，排除沉没成本</td></tr>
+                            <tr><td>IRR多解判断</td><td>Ch4+6</td><td>标注现金流符号变化次数</td></tr>
+                            <tr><td>税务处理错误</td><td>Ch5+10</td><td>税后现金流 × 税后折现率</td></tr>
+                            <tr><td>名义/实际混淆</td><td>Ch5+6</td><td>名义现金流配名义折现率</td></tr>
+                            <tr><td>Beta调整错误</td><td>Ch7+10</td><td>Hamada公式unlever/relever</td></tr>
+                            <tr><td>EMH形式混淆</td><td>Ch9+2</td><td>弱式/半强式/强式定义区分</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 每日执行清单 - 改为时长 -->
+            <div class="section">
+                <h2 class="section-title">📋 每日执行清单（示例）</h2>
+                <div class="subsection">
+                    <h3 class="subsection-title">【Day 3: IRR专项】</h3>
+                    <div class="checklist">
+                        <div class="checklist-item"><span class="time-badge">90分钟</span>IRR公式复习 + 插值法练习 (5题)</div>
+                        <div class="checklist-item"><span class="time-badge">90分钟</span>NPV vs IRR冲突场景识别 (3题)</div>
+                        <div class="checklist-item"><span class="time-badge">60分钟</span>跨章节综合题 (Ch4+Ch6) (2题)</div>
+                        <div class="checklist-item"><span class="time-badge">60分钟</span>错题整理 → 分类标签 [公式/计算/概念]</div>
+                        <div class="checklist-item"><span class="time-badge">45分钟</span>论述题准备: "IRR的局限性"</div>
+                        <div class="checklist-item"><span class="time-badge">60分钟</span>复习Day1-2内容 + 标记薄弱点</div>
+                        <div class="checklist-item"><span class="time-badge">45分钟</span>制作IRR专题公式卡</div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 学习工具包 -->
+            <div class="section">
+                <h2 class="section-title">📈 70+学习工具包</h2>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">必备公式卡（考前最后一晚看）</h3>
+                    <div class="formula-box">
+                        <h4>【估值基础】时间价值公式</h4>
+                        <div class="formula">
+                            <strong>现值：</strong> PV = FV ÷ (1 + r)<sup>n</sup><br>
+                            <strong>终值：</strong> FV = PV × (1 + r)<sup>n</sup><br>
+                            <strong>年金现值：</strong> PVA = PMT × [1 - (1 + r)<sup>-n</sup>] ÷ r
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <h4>【资本预算】投资决策公式</h4>
+                        <div class="formula">
+                            <strong>净现值：</strong> NPV = Σ [CF<sub>t</sub> ÷ (1 + r)<sup>t</sup>] - I<sub>0</sub><br>
+                            <strong>内含回报率：</strong> Σ [CF<sub>t</sub> ÷ (1 + IRR)<sup>t</sup>] = I<sub>0</sub><br>
+                            <strong>获利指数：</strong> PI = PV(所有现金流) ÷ 初始投资<br>
+                            <strong>回收期：</strong> 累计现金流 = 初始投资的那一年
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <h4>【CAPM】资本资产定价模型</h4>
+                        <div class="formula">
+                            <strong>权益成本：</strong> K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> - R<sub>f</sub>)<br>
+                            <strong>去杠杆Beta：</strong> β<sub>u</sub> = β<sub>L</sub> ÷ [1 + (1 - 税率) × (D/E)]<br>
+                            <strong>再杠杆Beta：</strong> β<sub>L</sub> = β<sub>u</sub> × [1 + (1 - 税率) × (D/E)]
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <h4>【WACC】加权平均资本成本</h4>
+                        <div class="formula">
+                            <strong>WACC =</strong> [权益占比 × K<sub>e</sub>] + [债务占比 × K<sub>d</sub> × (1 - 税率)]<br>
+                            <br>
+                            <strong>权益占比</strong> = E ÷ (D + E)<br>
+                            <strong>债务占比</strong> = D ÷ (D + E)<br>
+                            <em>注意：使用市场价值，不是账面价值！</em>
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <h4>【杠杆】经营与财务杠杆</h4>
+                        <div class="formula">
+                            <strong>经营杠杆系数：</strong> DOL = EBIT变化% ÷ 销售变化%<br>
+                            <strong>财务杠杆系数：</strong> DFL = EPS变化% ÷ EBIT变化%<br>
+                            <strong>总杠杆：</strong> DTL = DOL × DFL
+                        </div>
+                    </div>
+                    <div class="formula-box">
+                        <h4>【债券估值】债券价格公式</h4>
+                        <div class="formula">
+                            <strong>债券价格 =</strong> 利息 × [1 - (1 + YTM)<sup>-n</sup>] ÷ YTM + 面值 ÷ (1 + YTM)<sup>n</sup><br>
+                            <br>
+                            <strong>YTM（到期收益率）：</strong> 使债券现值等于市场价格的折现率
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">错题本结构</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>日期</th>
+                                <th>题目类型</th>
+                                <th>错因</th>
+                                <th>正确解法</th>
+                                <th>融合点</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>D3</td>
+                                <td>IRR计算</td>
+                                <td>符号漏记</td>
+                                <td>插值法</td>
+                                <td>Ch4+Ch6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <hr class="divider">
+
+            <!-- 最终检查清单 -->
+            <div class="section">
+                <h2 class="section-title">🎓 70+最终检查清单</h2>
+                <p style="margin-bottom: 15px;"><strong>考前自测：</strong></p>
+                <div class="final-checklist">
+                    <div class="checklist-item">NPV/IRR/WACC计算准确率95%+</div>
+                    <div class="checklist-item">CAPM Beta调整能熟练推导</div>
+                    <div class="checklist-item">MM理论两种版本能完整写出</div>
+                    <div class="checklist-item">现金流5类判断无误</div>
+                    <div class="checklist-item">EMH三种形式能区分并举例</div>
+                    <div class="checklist-item">论述题模板能熟练套用</div>
+                    <div class="checklist-item">每道计算题在15分钟内完成</div>
+                    <div class="checklist-item">论述题能写出200+单词的完整答案</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>祝你考试顺利，取得70+高分！💪</p>
+        </div>
+    </div>
+</body>
+</html>
