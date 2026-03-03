@@ -28,6 +28,9 @@
             border-radius: 1rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
+        .glass-card.border-l-4 {
+            border-left-color: var(--brand-gold) !important;
+        }
         .formula-box {
             background-color: var(--brand-navy);
             color: white;
@@ -44,8 +47,27 @@
             border-radius: 50%;
             border: 2px solid white;
         }
+        .slider-thumb::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: var(--brand-gold);
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
         .bell-curve-area {
             transition: all 0.3s ease;
+        }
+        .badge-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        @media (min-width: 768px) {
+            .badge-container {
+                gap: 1rem;
+            }
         }
     </style>
 </head>
@@ -55,7 +77,7 @@
         <header class="mb-8 text-center">
             <h1 class="text-3xl font-bold mb-2">婴儿体重与 Z-Score 深度交互实验室</h1>
             <p class="text-gray-500 italic">Deep Interactive Lab: Baby Weight & Z-Score Analysis</p>
-            <div class="mt-4 flex justify-center gap-4 text-sm font-medium">
+            <div class="mt-4 badge-container text-sm font-medium">
                 <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">数据源: 美国 100 万新生儿真实案例</span>
                 <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full">μ = 3480g | σ = 462g</span>
             </div>
@@ -69,7 +91,7 @@
                 <div class="glass-card p-6 relative">
                     <h2 class="text-xl font-bold mb-4 flex justify-between items-center">
                         <span>正态分布可视化 / Normal Distribution</span>
-                        <span id="percentile-badge" class="text-sm font-normal text-gray-500"></span>
+                        <span id="percentile-badge" class="text-sm font-normal text-gray-500">百分位数: --</span>
                     </h2>
                     <svg id="bellCurveSvg" viewBox="0 0 800 400" class="w-full h-auto">
                         <!-- X-axis -->
@@ -107,7 +129,7 @@
                 </div>
 
                 <!-- Analysis / Scaffolding -->
-                <div class="glass-card p-6 border-l-4 border-gold" id="insightCard">
+                <div class="glass-card p-6 border-l-4" id="insightCard">
                     <h3 class="text-lg font-bold mb-2">医生视角 (Analysis Insight)</h3>
                     <p id="analysisText" class="text-lg leading-relaxed">
                         正在加载分析...
@@ -137,9 +159,9 @@
                             <p class="text-xs text-gray-400 mb-2 uppercase">Step 2: 标准化 (Normalization)</p>
                             <div id="step2-formula" class="text-md font-bold"></div>
                         </div>
-                        <div id="z-final-display" class="bg-gold/10 p-4 rounded-lg border border-gold/20 text-center">
+                        <div id="z-final-display" class="bg-yellow-50 p-4 rounded-lg border border-yellow-200 text-center">
                             <div class="text-xs uppercase text-gray-500 mb-1">当前 Z-Score</div>
-                            <div id="z-value-big" class="text-3xl font-bold text-navy"></div>
+                            <div id="z-value-big" class="text-3xl font-bold text-navy">0.00</div>
                         </div>
                     </div>
                 </div>
@@ -170,6 +192,10 @@
         const markerGroup = document.getElementById('markerGroup');
         const analysisText = document.getElementById('analysisText');
         const percentileBadge = document.getElementById('percentile-badge');
+
+        // --- Cache for performance ---
+        let gridLinesCache = null;
+        let curvePathCache = null;
 
         // --- Math Helpers ---
         // Normal PDF function
@@ -219,13 +245,14 @@
             const minX = MU - 4 * SIGMA;
             const maxX = MU + 4 * SIGMA;
 
-            // Generate Path
-            for (let x = minX; x <= maxX; x += 10) {
+            // Generate Path (更平滑的曲线 - 步长从10改为5)
+            for (let x = minX; x <= maxX; x += 5) {
                 const y = normalPDF(x, MU, SIGMA);
                 const px = mapX(x);
                 const py = mapY(y);
                 pathD += (x === minX ? "M" : "L") + `${px} ${py}`;
             }
+            curvePathCache = pathD;
             curvePath.setAttribute("d", pathD);
 
             // Draw Standard Deviation Lines
@@ -238,6 +265,7 @@
                     <text x="${px}" y="${svgH - 15}" text-anchor="middle" font-size="10" fill="#bbb">${Math.round(val)}</text>
                 `;
             }
+            gridLinesCache = gridLinesHtml;
             document.getElementById('gridLines').innerHTML = gridLinesHtml;
         }
 
@@ -261,16 +289,16 @@
             label.setAttribute("x", px);
             label.textContent = `${X}g`;
 
-            // Shading
+            // Shading (改进：使用更细致的步长)
             let shadeD = `M ${mapX(MU - 4 * SIGMA)} ${svgH - margin}`;
             const minX = MU - 4 * SIGMA;
-            for (let x = minX; x <= X; x += 10) {
+            for (let x = minX; x <= X; x += 5) {
                 shadeD += ` L ${mapX(x)} ${mapY(normalPDF(x, MU, SIGMA))}`;
             }
             shadeD += ` L ${px} ${svgH - margin} Z`;
             shadePath.setAttribute("d", shadeD);
 
-            // Render Formulas via KaTeX
+            // Render Formulas via KaTeX (添加错误处理)
             renderFormulas(X, zScore);
 
             // Analysis text logic
@@ -278,23 +306,42 @@
         }
 
         function renderFormulas(X, z) {
-            // PDF Formula (Static)
-            katex.render(`f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{1}{2}\\left(\\frac{x-\\mu}{\\sigma}\\right)^2}`, document.getElementById('pdf-formula'));
-            
-            // Step 1: X - mu
-            const diff = (X - MU).toFixed(0);
-            katex.render(`X - \\mu = ${X} - ${MU} = ${diff} \\text{ g}`, document.getElementById('step1-formula'));
+            try {
+                // PDF Formula (Static)
+                katex.render(
+                    `f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}`,
+                    document.getElementById('pdf-formula'),
+                    { throwOnError: false }
+                );
+                
+                // Step 1: X - mu
+                const diff = (X - MU).toFixed(0);
+                katex.render(
+                    `X - \mu = ${X} - ${MU} = ${diff} \text{ g}`,
+                    document.getElementById('step1-formula'),
+                    { throwOnError: false }
+                );
 
-            // Step 2: divide by sigma
-            katex.render(`Z = \\frac{${diff}}{${SIGMA}} = ${z.toFixed(2)}`, document.getElementById('step2-formula'));
+                // Step 2: divide by sigma
+                katex.render(
+                    `Z = \frac{${diff}}{${SIGMA}} = ${z.toFixed(2)}`,
+                    document.getElementById('step2-formula'),
+                    { throwOnError: false }
+                );
 
-            // Big Z
-            document.getElementById('z-value-big').textContent = z.toFixed(2);
+                // Big Z
+                document.getElementById('z-value-big').textContent = z.toFixed(2);
+            } catch (e) {
+                console.error('KaTeX rendering error:', e);
+                document.getElementById('pdf-formula').textContent = '公式加载失败';
+                document.getElementById('step1-formula').textContent = '公式加载失败';
+                document.getElementById('step2-formula').textContent = '公式加载失败';
+                document.getElementById('z-value-big').textContent = z.toFixed(2);
+            }
         }
 
         function updateAnalysis(X, z, p) {
             let msg = "";
-            let colorClass = "text-navy";
 
             if (X < LOW_BIRTH_WEIGHT) {
                 msg = `🚨 <strong class="text-red-600">触发医疗警报！</strong> 婴儿体重为 ${X}g，低于 2500g 阈值，属于<strong>低出生体重 (Low Birth Weight)</strong>。`;
@@ -311,12 +358,12 @@
         }
 
         // --- Initial Load ---
-        window.onload = () => {
+        window.addEventListener('DOMContentLoaded', function() {
             initChart();
             update();
             
             weightSlider.addEventListener('input', update);
-        };
+        });
     </script>
 </body>
 </html>
