@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="badge-container">
+            <span class="badge mobile-badge">Mobile Badge</span>
+            <span class="badge">Desktop Badge</span>
+        </div>
+        <div class="equation">
+            <script>
+                try {
+                    let equation = 'c = \sqrt{a^2 + b^2}';
+                    let renderedEquation = katex.renderToString(equation);
+                    document.getElementById('equation').innerHTML = renderedEquation;
+                } catch (error) {
+                    console.error('KaTeX rendering error:', error);
+                    document.getElementById('equation').innerHTML = 'Error rendering formula';
+                }
+            <\/script>
+            <div id="equation"></div>
+        </div>
+    </div>
+</body>
+</html>
