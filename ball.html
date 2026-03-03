@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音气球游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            text-align: center;
+        }
+
+        canvas {
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to bottom, #87CEEB 0%, #98D8C8 100%);
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .stop-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .stop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .volume-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .volume-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #4CAF50, #FFEB3B, #F44336);
+            transition: height 0.05s;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .volume-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .height-display {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .permission-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .permission-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .permission-box h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .permission-box p {
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .permission-box button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div class="volume-indicator">
+            <span class="volume-label">音量</span>
+            <div class="volume-bar" id="volumeBar"></div>
+        </div>
+        <div class="height-display" id="heightDisplay">高度: 0%</div>
+        <div class="controls">
+            <button class="start-btn" id="startBtn">开始游戏</button>
+            <button class="stop-btn" id="stopBtn" disabled>停止</button>
+        </div>
+        <div class="info">
+            <strong>玩法说明：</strong>对着麦克风说话或吹气，声音越大气球飞得越高！
+        </div>
+    </div>
+
+    <div class="permission-overlay" id="permissionOverlay">
+        <div class="permission-box">
+            <h2>需要麦克风权限</h2>
+            <p>这个游戏需要使用麦克风来检测您的声音。声音越大，气球飞得越高。</p>
+            <button id="allowMic">允许访问</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const volumeBar = document.getElementById('volumeBar');
+        const heightDisplay = document.getElementById('heightDisplay');
+        const permissionOverlay = document.getElementById('permissionOverlay');
+        const allowMic = document.getElementById('allowMic');
+
+        // 设置画布大小
+        const WIDTH = Math.min(500, window.innerWidth - 40);
+        const HEIGHT = Math.min(600, window.innerHeight - 200);
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+
+        // 游戏状态
+        let isRunning = false;
+        let audioContext = null;
+        let analyser = null;
+        let microphone = null;
+        let dataArray = null;
+
+        // 气球属性
+        const balloon = {
+            x: WIDTH / 2,
+            y: HEIGHT - 100,
+            radius: 50,
+            color: '#FF6B6B',
+            velocity: 0,
+            gravity: 0.15,
+            maxHeight: 0
+        };
+
+        // 云朵数组
+        let clouds = [];
+        let particles = [];
+
+        // 初始化云朵
+        function initClouds() {
+            clouds = [];
+            for (let i = 0; i < 5; i++) {
+                clouds.push({
+                    x: Math.random() * WIDTH,
+                    y: Math.random() * (HEIGHT / 2),
+                    size: 30 + Math.random() * 40,
+                    speed: 0.5 + Math.random() * 1
+                });
+            }
+        }
+
+        // 绘制云朵
+        function drawCloud(x, y, size) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.beginPath();
+            ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.4, y - size * 0.1, size * 0.4, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.8, y, size * 0.35, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.4, y + size * 0.2, size * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 绘制气球
+        function drawBalloon(x, y, radius, color) {
+            // 气球主体
+            const gradient = ctx.createRadialGradient(
+                x - radius * 0.3, y - radius * 0.3, 0,
+                x, y, radius
+            );
+            gradient.addColorStop(0, '#FFE66D');
+            gradient.addColorStop(0.3, color);
+            gradient.addColorStop(1, '#C0392B');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.ellipse(x, y, radius, radius * 1.1, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 高光
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.beginPath();
+            ctx.ellipse(x - radius * 0.3, y - radius * 0.35, radius * 0.15, radius * 0.25, -0.3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 气球结
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x - 8, y + radius * 1.05);
+            ctx.lineTo(x + 8, y + radius * 1.05);
+            ctx.lineTo(x, y + radius * 1.15);
+            ctx.closePath();
+            ctx.fill();
+
+            // 绳子
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x, y + radius * 1.15);
+            ctx.quadraticCurveTo(
+                x + Math.sin(Date.now() / 200) * 10,
+                y + radius * 1.15 + 50,
+                x + Math.sin(Date.now() / 300) * 15,
+                y + radius * 1.15 + 100
+            );
+            ctx.stroke();
+        }
+
+        // 添加粒子效果
+        function addParticles(x, y, count) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: Math.random() * 2,
+                    size: 2 + Math.random() * 4,
+                    alpha: 1
+                });
+            }
+        }
+
+        // 更新和绘制粒子
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                } else {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // 绘制地面
+        function drawGround() {
+            // 草地
+            const groundGradient = ctx.createLinearGradient(0, HEIGHT - 80, 0, HEIGHT);
+            groundGradient.addColorStop(0, '#90EE90');
+            groundGradient.addColorStop(1, '#228B22');
+            ctx.fillStyle = groundGradient;
+            ctx.fillRect(0, HEIGHT - 80, WIDTH, 80);
+
+            // 草丛装饰
+            ctx.strokeStyle = '#006400';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < WIDTH; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(i, HEIGHT - 80);
+                ctx.lineTo(i + 5, HEIGHT - 90 - Math.random() * 10);
+                ctx.stroke();
+            }
+
+            // 小花
+            const flowerColors = ['#FF69B4', '#FFD700', '#FF6347', '#9370DB'];
+            for (let i = 0; i < 10; i++) {
+                const fx = 50 + i * 45 + Math.random() * 10;
+                const fy = HEIGHT - 60 + Math.random() * 20;
+                ctx.fillStyle = flowerColors[Math.floor(Math.random() * flowerColors.length)];
+                ctx.beginPath();
+                ctx.arc(fx, fy, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 获取音量
+        function getVolume() {
+            if (!analyser || !dataArray) return 0;
+
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                sum += dataArray[i];
+            }
+            return sum / dataArray.length / 255; // 归一化到 0-1
+        }
+
+        // 游戏主循环
+        function gameLoop() {
+            if (!isRunning) return;
+
+            // 清空画布
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+            // 绘制背景渐变
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+            bgGradient.addColorStop(0, '#87CEEB');
+            bgGradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+            // 更新和绘制云朵
+            clouds.forEach(cloud => {
+                cloud.x -= cloud.speed;
+                if (cloud.x + cloud.size * 2 < 0) {
+                    cloud.x = WIDTH + cloud.size;
+                    cloud.y = Math.random() * (HEIGHT / 2);
+                }
+                drawCloud(cloud.x, cloud.y, cloud.size);
+            });
+
+            // 获取音量
+            const volume = getVolume();
+
+            // 更新音量显示
+            volumeBar.style.height = `${Math.min(volume * 100, 100)}%`;
+
+            // 根据音量更新气球速度
+            const liftForce = volume * 1.5;
+            balloon.velocity -= liftForce;
+            balloon.velocity += balloon.gravity;
+
+            // 限制最大速度
+            balloon.velocity = Math.max(-8, Math.min(balloon.velocity, 3));
+
+            // 更新气球位置
+            balloon.y += balloon.velocity;
+
+            // 边界检测
+            if (balloon.y - balloon.radius < 0) {
+                balloon.y = balloon.radius;
+                balloon.velocity = Math.abs(balloon.velocity) * 0.5;
+            }
+            if (balloon.y + balloon.radius * 1.15 > HEIGHT - 80) {
+                balloon.y = HEIGHT - 80 - balloon.radius * 1.15;
+                balloon.velocity = 0;
+            }
+
+            // 计算并显示高度百分比
+            const maxReachableHeight = HEIGHT - 80 - balloon.radius - 50;
+            const currentHeight = HEIGHT - 80 - balloon.radius - 50 - balloon.y;
+            balloon.maxHeight = Math.max(balloon.maxHeight, currentHeight);
+            const heightPercent = Math.max(0, Math.min(100, (currentHeight / maxReachableHeight) * 100));
+            heightDisplay.textContent = `高度: ${heightPercent.toFixed(0)}% (最高: ${(balloon.maxHeight / maxReachableHeight * 100).toFixed(0)}%)`;
+
+            // 音量大时添加粒子
+            if (volume > 0.3 && Math.random() < 0.3) {
+                addParticles(balloon.x, balloon.y + balloon.radius, Math.floor(volume * 3));
+            }
+
+            // 绘制粒子
+            updateParticles();
+
+            // 绘制地面
+            drawGround();
+
+            // 绘制气球
+            drawBalloon(balloon.x, balloon.y, balloon.radius, balloon.color);
+
+            // 音量反馈圆圈
+            if (volume > 0.2) {
+                ctx.strokeStyle = `rgba(255, 255, 255, ${volume * 0.5})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(balloon.x, balloon.y, balloon.radius + 20 + volume * 30, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 初始化音频
+        async function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                microphone = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                microphone.connect(analyser);
+                return true;
+            } catch (error) {
+                alert('无法访问麦克风: ' + error.message);
+                return false;
+            }
+        }
+
+        // 开始游戏
+        async function startGame() {
+            if (isRunning) return;
+
+            permissionOverlay.style.display = 'none';
+
+            if (!audioContext) {
+                const success = await initAudio();
+                if (!success) return;
+            }
+
+            if (audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+
+            initClouds();
+            isRunning = true;
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            gameLoop();
+        }
+
+        // 停止游戏
+        function stopGame() {
+            isRunning = false;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+        }
+
+        // 事件监听
+        startBtn.addEventListener('click', () => {
+            permissionOverlay.style.display = 'flex';
+        });
+
+        allowMic.addEventListener('click', startGame);
+        stopBtn.addEventListener('click', stopGame);
+
+        // 初始化云朵并绘制静态画面
+        initClouds();
+        function drawStatic() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+            bgGradient.addColorStop(0, '#87CEEB');
+            bgGradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+            clouds.forEach(cloud => {
+                drawCloud(cloud.x, cloud.y, cloud.size);
+            });
+
+            drawGround();
+            drawBalloon(balloon.x, balloon.y, balloon.radius, balloon.color);
+        }
+        drawStatic();
+    </script>
+</body>
+</html>
