@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>声音气球游戏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #87CEEB 0%, #E0F6FF 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+        }
+
+        .game-container {
+            position: relative;
+            text-align: center;
+        }
+
+        canvas {
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(to bottom, #87CEEB 0%, #98D8C8 100%);
+        }
+
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .stop-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .stop-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .settings-btn {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+        }
+
+        .settings-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+
+        .info {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .volume-indicator {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 150px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .volume-bar {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(to top, #4CAF50, #FFEB3B, #F44336);
+            transition: height 0.05s;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .volume-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .height-display {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .raw-volume-display {
+            position: absolute;
+            top: 50px;
+            left: 10px;
+            color: #666;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        /* 设置面板 */
+        .settings-panel {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            min-width: 350px;
+            display: none;
+        }
+
+        .settings-panel.show {
+            display: block;
+        }
+
+        .settings-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .settings-overlay.show {
+            display: block;
+        }
+
+        .settings-panel h2 {
+            margin-bottom: 25px;
+            color: #333;
+            text-align: center;
+        }
+
+        .setting-item {
+            margin-bottom: 20px;
+        }
+
+        .setting-item label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .setting-item input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .setting-item input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .setting-item input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            border: none;
+        }
+
+        .value-display {
+            color: #764ba2;
+            font-weight: bold;
+        }
+
+        .preset-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .preset-btn {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            font-size: 13px;
+            background: #f0f0f0;
+            color: #333;
+            border-radius: 8px;
+        }
+
+        .preset-btn:hover {
+            background: #e0e0e0;
+        }
+
+        .close-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-top: 10px;
+        }
+
+        .permission-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .permission-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .permission-box h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .permission-box p {
+            margin-bottom: 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .permission-box button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 40px;
+        }
+
+        /* 教室模式提示 */
+        .classroom-mode {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #666;
+            display: none;
+        }
+
+        .classroom-mode.show {
+            display: block;
+        }
+
+        /* 目标高度指示器 */
+        .target-height-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #FFD700, transparent);
+            pointer-events: none;
+        }
+
+        .target-height-label {
+            position: absolute;
+            right: 5px;
+            top: -20px;
+            background: rgba(255, 215, 0, 0.9);
+            color: #333;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        /* 语音提示显示 */
+        .voice-hint {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #FF6B6B;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            display: none;
+            animation: bounceIn 0.5s ease;
+        }
+
+        .voice-hint.show {
+            display: block;
+        }
+
+        .voice-hint.success {
+            color: #4CAF50;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: translateX(-50%) scale(0.5); opacity: 0; }
+            70% { transform: translateX(-50%) scale(1.1); }
+            100% { transform: translateX(-50%) scale(1); opacity: 1; }
+        }
+
+        /* 目标高度标记 */
+        .target-marker {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 15px solid #FFD700;
+            animation: twinkle 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.5; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div class="volume-indicator">
+            <span class="volume-label">音量</span>
+            <div class="volume-bar" id="volumeBar"></div>
+        </div>
+        <div class="height-display" id="heightDisplay">高度: 0%</div>
+        <div class="raw-volume-display" id="rawVolumeDisplay">原始: 0.00</div>
+        <div class="target-height-line" id="targetHeightLine" style="bottom: 150px;">
+            <span class="target-height-label" id="targetHeightLabel">目标: 70%</span>
+        </div>
+        <div class="voice-hint" id="voiceHint">声音再大一点哦！</div>
+        <div class="classroom-mode" id="classroomMode">教室模式</div>
+        <div class="controls">
+            <button class="start-btn" id="startBtn">开始游戏</button>
+            <button class="stop-btn" id="stopBtn" disabled>停止</button>
+            <button class="settings-btn" id="settingsBtn">设置</button>
+        </div>
+        <div class="info">
+            <strong>玩法说明：</strong>点击"设置"调节灵敏度，声音越大气球飞得越高！
+        </div>
+    </div>
+
+    <!-- 权限请求弹窗 -->
+    <div class="permission-overlay" id="permissionOverlay">
+        <div class="permission-box">
+            <h2>需要麦克风权限</h2>
+            <p>这个游戏需要使用麦克风来检测您的声音。声音越大，气球飞得越高。</p>
+            <button id="allowMic">允许访问</button>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    <div class="settings-panel" id="settingsPanel">
+        <h2>⚙️ 游戏设置</h2>
+
+        <div class="preset-buttons">
+            <button class="preset-btn" data-preset="sensitive">高灵敏度</button>
+            <button class="preset-btn" data-preset="classroom">教室模式</button>
+            <button class="preset-btn" data-preset="normal">正常模式</button>
+        </div>
+
+        <div class="setting-item">
+            <label>
+                声音灵敏度
+                <span class="value-display" id="sensitivityValue">1.0</span>
+            </label>
+            <input type="range" id="sensitivity" min="0.5" max="5" step="0.1" value="1">
+        </div>
+
+        <div class="setting-item">
+            <label>
+                上升力度
+                <span class="value-display" id="liftForceValue">1.5</span>
+            </label>
+            <input type="range" id="liftForce" min="0.5" max="4" step="0.1" value="1.5">
+        </div>
+
+        <div class="setting-item">
+            <label>
+                下降速度（重力）
+                <span class="value-display" id="gravityValue">0.15</span>
+            </label>
+            <input type="range" id="gravity" min="0.05" max="0.5" step="0.01" value="0.15">
+        </div>
+
+        <div class="setting-item">
+            <label>
+                气球大小
+                <span class="value-display" id="balloonSizeValue">50</span>
+            </label>
+            <input type="range" id="balloonSize" min="30" max="80" step="1" value="50">
+        </div>
+
+        <div class="setting-item">
+            <label>
+                噪音过滤阈值
+                <span class="value-display" id="noiseThresholdValue">0.1</span>
+            </label>
+            <input type="range" id="noiseThreshold" min="0" max="0.3" step="0.01" value="0.1">
+        </div>
+
+        <div class="setting-item">
+            <label>
+                目标高度 (%)
+                <span class="value-display" id="targetHeightValue">70</span>
+            </label>
+            <input type="range" id="targetHeight" min="30" max="90" step="5" value="70">
+        </div>
+
+        <div class="setting-item">
+            <label style="align-items: center;">
+                <span>启用语音提示</span>
+                <input type="checkbox" id="enableVoice" checked style="width: auto; height: auto;">
+            </label>
+        </div>
+
+        <div class="setting-item">
+            <label>
+                语音提示间隔（秒）
+                <span class="value-display" id="voiceIntervalValue">3</span>
+            </label>
+            <input type="range" id="voiceInterval" min="1" max="10" step="1" value="3">
+        </div>
+
+        <button class="close-btn" id="closeSettings">关闭设置</button>
+        <button class="preset-btn" id="testVoice" style="width: 100%; margin-top: 10px;">🎤 测试语音</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startBtn = document.getElementById('startBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        const settingsBtn = document.getElementById('settingsBtn');
+        const volumeBar = document.getElementById('volumeBar');
+        const heightDisplay = document.getElementById('heightDisplay');
+        const rawVolumeDisplay = document.getElementById('rawVolumeDisplay');
+        const permissionOverlay = document.getElementById('permissionOverlay');
+        const allowMic = document.getElementById('allowMic');
+        const settingsPanel = document.getElementById('settingsPanel');
+        const settingsOverlay = document.getElementById('settingsOverlay');
+        const closeSettings = document.getElementById('closeSettings');
+        const classroomMode = document.getElementById('classroomMode');
+
+        // 设置控件
+        const sensitivityInput = document.getElementById('sensitivity');
+        const liftForceInput = document.getElementById('liftForce');
+        const gravityInput = document.getElementById('gravity');
+        const balloonSizeInput = document.getElementById('balloonSize');
+        const noiseThresholdInput = document.getElementById('noiseThreshold');
+        const targetHeightInput = document.getElementById('targetHeight');
+        const enableVoiceCheckbox = document.getElementById('enableVoice');
+        const voiceIntervalInput = document.getElementById('voiceInterval');
+
+        const sensitivityValue = document.getElementById('sensitivityValue');
+        const liftForceValue = document.getElementById('liftForceValue');
+        const gravityValue = document.getElementById('gravityValue');
+        const balloonSizeValue = document.getElementById('balloonSizeValue');
+        const noiseThresholdValue = document.getElementById('noiseThresholdValue');
+        const targetHeightValue = document.getElementById('targetHeightValue');
+        const voiceIntervalValue = document.getElementById('voiceIntervalValue');
+
+        // 语音提示相关
+        const voiceHint = document.getElementById('voiceHint');
+        const targetHeightLine = document.getElementById('targetHeightLine');
+        const targetHeightLabel = document.getElementById('targetHeightLabel');
+
+        // 语音合成
+        let speechSynthesis = window.speechSynthesis;
+        let lastVoiceTime = 0;
+        let lastHintTime = 0;
+        let wasAboveTarget = false;
+        let isSpeaking = false; // 语音播放状态
+        let voiceEndTime = 0;   // 语音预计结束时间
+
+        // 鼓励语音列表（童声风格）
+        const encouragements = [
+            "太棒了！继续保持！",
+            "哇，你真厉害！",
+            "声音真好听！",
+            "做得好，继续保持！",
+            "你是最棒的！",
+            "继续加油哦！",
+            "好厉害呀！",
+            "你的声音真好！",
+            "太强了！",
+            "继续努力！"
+        ];
+
+        // 设置画布大小
+        const WIDTH = Math.min(500, window.innerWidth - 40);
+        const HEIGHT = Math.min(600, window.innerHeight - 200);
+        canvas.width = WIDTH;
+        canvas.height = HEIGHT;
+
+        // 游戏状态
+        let isRunning = false;
+        let audioContext = null;
+        let analyser = null;
+        let microphone = null;
+        let dataArray = null;
+
+        // 游戏设置（默认值）
+        let settings = {
+            sensitivity: 1.0,      // 声音灵敏度
+            liftForce: 1.5,        // 上升力度
+            gravity: 0.15,         // 重力
+            balloonSize: 50,       // 气球大小
+            noiseThreshold: 0.1,   // 噪音过滤阈值
+            targetHeight: 70,      // 目标高度百分比
+            enableVoice: true,     // 是否启用语音
+            voiceInterval: 3       // 语音提示间隔（秒）
+        };
+
+        // 预设配置
+        const presets = {
+            sensitive: {
+                sensitivity: 2.5,
+                liftForce: 2.0,
+                gravity: 0.12,
+                balloonSize: 50,
+                noiseThreshold: 0.05,
+                targetHeight: 80,
+                enableVoice: true,
+                voiceInterval: 2
+            },
+            classroom: {
+                sensitivity: 1.5,
+                liftForce: 2.5,
+                gravity: 0.10,
+                balloonSize: 55,
+                noiseThreshold: 0.15,
+                targetHeight: 70,
+                enableVoice: true,
+                voiceInterval: 3
+            },
+            normal: {
+                sensitivity: 1.0,
+                liftForce: 1.5,
+                gravity: 0.15,
+                balloonSize: 50,
+                noiseThreshold: 0.1,
+                targetHeight: 70,
+                enableVoice: true,
+                voiceInterval: 3
+            }
+        };
+
+        // 气球属性
+        const balloon = {
+            x: WIDTH / 2,
+            y: HEIGHT - 100,
+            radius: settings.balloonSize,
+            color: '#FF6B6B',
+            velocity: 0,
+            maxHeight: 0
+        };
+
+        // 云朵数组
+        let clouds = [];
+        let particles = [];
+
+        // 初始化云朵
+        function initClouds() {
+            clouds = [];
+            for (let i = 0; i < 5; i++) {
+                clouds.push({
+                    x: Math.random() * WIDTH,
+                    y: Math.random() * (HEIGHT / 2),
+                    size: 30 + Math.random() * 40,
+                    speed: 0.5 + Math.random() * 1
+                });
+            }
+        }
+
+        // 绘制云朵
+        function drawCloud(x, y, size) {
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+            ctx.beginPath();
+            ctx.arc(x, y, size * 0.5, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.4, y - size * 0.1, size * 0.4, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.8, y, size * 0.35, 0, Math.PI * 2);
+            ctx.arc(x + size * 0.4, y + size * 0.2, size * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        // 绘制气球
+        function drawBalloon(x, y, radius, color) {
+            // 气球主体
+            const gradient = ctx.createRadialGradient(
+                x - radius * 0.3, y - radius * 0.3, 0,
+                x, y, radius
+            );
+            gradient.addColorStop(0, '#FFE66D');
+            gradient.addColorStop(0.3, color);
+            gradient.addColorStop(1, '#C0392B');
+
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.ellipse(x, y, radius, radius * 1.1, 0, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 高光
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+            ctx.beginPath();
+            ctx.ellipse(x - radius * 0.3, y - radius * 0.35, radius * 0.15, radius * 0.25, -0.3, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 气球结
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.moveTo(x - 8, y + radius * 1.05);
+            ctx.lineTo(x + 8, y + radius * 1.05);
+            ctx.lineTo(x, y + radius * 1.15);
+            ctx.closePath();
+            ctx.fill();
+
+            // 绳子
+            ctx.strokeStyle = '#8B4513';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(x, y + radius * 1.15);
+            ctx.quadraticCurveTo(
+                x + Math.sin(Date.now() / 200) * 10,
+                y + radius * 1.15 + 50,
+                x + Math.sin(Date.now() / 300) * 15,
+                y + radius * 1.15 + 100
+            );
+            ctx.stroke();
+        }
+
+        // 添加粒子效果
+        function addParticles(x, y, count) {
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: x,
+                    y: y,
+                    vx: (Math.random() - 0.5) * 3,
+                    vy: Math.random() * 2,
+                    size: 2 + Math.random() * 4,
+                    alpha: 1
+                });
+            }
+        }
+
+        // 更新和绘制粒子
+        function updateParticles() {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.02;
+
+                if (p.alpha <= 0) {
+                    particles.splice(i, 1);
+                } else {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+        }
+
+        // 绘制地面
+        function drawGround() {
+            // 草地
+            const groundGradient = ctx.createLinearGradient(0, HEIGHT - 80, 0, HEIGHT);
+            groundGradient.addColorStop(0, '#90EE90');
+            groundGradient.addColorStop(1, '#228B22');
+            ctx.fillStyle = groundGradient;
+            ctx.fillRect(0, HEIGHT - 80, WIDTH, 80);
+
+            // 草丛装饰
+            ctx.strokeStyle = '#006400';
+            ctx.lineWidth = 2;
+            for (let i = 0; i < WIDTH; i += 20) {
+                ctx.beginPath();
+                ctx.moveTo(i, HEIGHT - 80);
+                ctx.lineTo(i + 5, HEIGHT - 90 - Math.random() * 10);
+                ctx.stroke();
+            }
+
+            // 小花
+            const flowerColors = ['#FF69B4', '#FFD700', '#FF6347', '#9370DB'];
+            for (let i = 0; i < 10; i++) {
+                const fx = 50 + i * 45 + Math.random() * 10;
+                const fy = HEIGHT - 60 + Math.random() * 20;
+                ctx.fillStyle = flowerColors[Math.floor(Math.random() * flowerColors.length)];
+                ctx.beginPath();
+                ctx.arc(fx, fy, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        // 获取音量
+        function getVolume() {
+            if (!analyser || !dataArray) return 0;
+
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for (let i = 0; i < dataArray.length; i++) {
+                sum += dataArray[i];
+            }
+            return sum / dataArray.length / 255; // 归一化到 0-1
+        }
+
+        // 应用预设
+        function applyPreset(presetName) {
+            const preset = presets[presetName];
+            if (!preset) return;
+
+            settings = { ...preset };
+            updateSettingsUI();
+
+            // 显示教室模式提示
+            classroomMode.classList.toggle('show', presetName === 'classroom');
+        }
+
+        // 更新设置UI
+        function updateSettingsUI() {
+            sensitivityInput.value = settings.sensitivity;
+            liftForceInput.value = settings.liftForce;
+            gravityInput.value = settings.gravity;
+            balloonSizeInput.value = settings.balloonSize;
+            noiseThresholdInput.value = settings.noiseThreshold;
+            targetHeightInput.value = settings.targetHeight;
+            enableVoiceCheckbox.checked = settings.enableVoice;
+            voiceIntervalInput.value = settings.voiceInterval;
+
+            sensitivityValue.textContent = settings.sensitivity.toFixed(1);
+            liftForceValue.textContent = settings.liftForce.toFixed(1);
+            gravityValue.textContent = settings.gravity.toFixed(2);
+            balloonSizeValue.textContent = settings.balloonSize;
+            noiseThresholdValue.textContent = settings.noiseThreshold.toFixed(2);
+            targetHeightValue.textContent = settings.targetHeight;
+            voiceIntervalValue.textContent = settings.voiceInterval;
+
+            balloon.radius = settings.balloonSize;
+
+            // 更新目标高度线位置
+            updateTargetHeightLine();
+        }
+
+        // 更新目标高度线位置
+        function updateTargetHeightLine() {
+            const groundY = HEIGHT - 80;
+            const maxReachableHeight = groundY - balloon.radius - 50;
+            const targetY = groundY - (maxReachableHeight * settings.targetHeight / 100);
+            const bottom = groundY - targetY;
+            targetHeightLine.style.bottom = `${bottom}px`;
+            targetHeightLabel.textContent = `目标: ${settings.targetHeight}%`;
+        }
+
+        // 语音合成函数
+        function speak(text, isUrgent = false) {
+            if (!settings.enableVoice) return;
+
+            // 检查是否需要间隔
+            const now = Date.now();
+            const interval = isUrgent ? 1000 : settings.voiceInterval * 1000;
+            if (now - lastVoiceTime < interval) return;
+
+            // 取消之前的语音
+            speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 1.1;  // 稍快一点的语速（儿童说话通常较快）
+            utterance.pitch = 1.8; // 高音调，接近童声
+            utterance.volume = 0.8;
+
+            // 语音播放时标记状态，防止影响气球高度
+            isSpeaking = true;
+
+            // 预估语音时长（每个汉字约0.3秒）
+            const charCount = text.replace(/[^\u4e00-\u9fa5]/g, '').length;
+            const otherCharCount = text.length - charCount;
+            voiceEndTime = now + (charCount * 300 + otherCharCount * 150);
+
+            utterance.onend = () => {
+                isSpeaking = false;
+            };
+
+            // 尝试选择中文声音
+            const voices = speechSynthesis.getVoices();
+            // 优先选择可能更可爱的声音
+            const chineseVoice = voices.find(v => v.lang === 'zh-CN' || v.lang === 'zh');
+            if (chineseVoice) {
+                utterance.voice = chineseVoice;
+            }
+
+            speechSynthesis.speak(utterance);
+            lastVoiceTime = now;
+
+            // 同时显示文字提示
+            showVoiceHint(text, !text.includes('再大一点'));
+        }
+
+        // 显示文字提示
+        function showVoiceHint(text, isSuccess = false) {
+            const now = Date.now();
+            if (now - lastHintTime < 1500) return;
+
+            voiceHint.textContent = text;
+            voiceHint.classList.remove('success');
+            if (isSuccess) {
+                voiceHint.classList.add('success');
+            }
+            voiceHint.classList.add('show');
+
+            setTimeout(() => {
+                voiceHint.classList.remove('show');
+            }, 2000);
+
+            lastHintTime = now;
+        }
+
+        // 游戏主循环
+        function gameLoop() {
+            if (!isRunning) return;
+
+            // 清空画布
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+            // 绘制背景渐变
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+            bgGradient.addColorStop(0, '#87CEEB');
+            bgGradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+            // 更新和绘制云朵
+            clouds.forEach(cloud => {
+                cloud.x -= cloud.speed;
+                if (cloud.x + cloud.size * 2 < 0) {
+                    cloud.x = WIDTH + cloud.size;
+                    cloud.y = Math.random() * (HEIGHT / 2);
+                }
+                drawCloud(cloud.x, cloud.y, cloud.size);
+            });
+
+            // 获取音量（语音播放时忽略系统输出）
+            let rawVolume = getVolume();
+
+            // 如果正在播放语音或语音刚结束不久，忽略麦克风输入
+            // 防止系统语音被麦克风捕捉导致气球受影响
+            const now = Date.now();
+            if (isSpeaking || (voiceEndTime > 0 && now < voiceEndTime + 500)) {
+                rawVolume = 0;
+            }
+
+            // 噪音过滤
+            if (rawVolume < settings.noiseThreshold) {
+                rawVolume = 0;
+            }
+
+            // 应用灵敏度
+            const volume = rawVolume * settings.sensitivity;
+
+            // 更新音量显示
+            const volumePercent = Math.min(volume * 100, 100);
+            volumeBar.style.height = `${volumePercent}%`;
+
+            // 显示原始音量值（用于调试）
+            rawVolumeDisplay.textContent = `原始: ${getVolume().toFixed(2)} | 过滤后: ${volume.toFixed(2)}`;
+
+            // 根据音量更新气球速度
+            const liftForce = volume * settings.liftForce;
+            balloon.velocity -= liftForce;
+            balloon.velocity += settings.gravity;
+
+            // 限制最大速度
+            balloon.velocity = Math.max(-10, Math.min(balloon.velocity, 3));
+
+            // 更新气球位置
+            balloon.y += balloon.velocity;
+
+            // 边界检测
+            if (balloon.y - balloon.radius < 0) {
+                balloon.y = balloon.radius;
+                balloon.velocity = Math.abs(balloon.velocity) * 0.5;
+            }
+            if (balloon.y + balloon.radius * 1.15 > HEIGHT - 80) {
+                balloon.y = HEIGHT - 80 - balloon.radius * 1.15;
+                balloon.velocity = 0;
+            }
+
+            // 计算并显示高度百分比
+            const maxReachableHeight = HEIGHT - 80 - balloon.radius - 50;
+            const currentHeight = HEIGHT - 80 - balloon.radius - 50 - balloon.y;
+            balloon.maxHeight = Math.max(balloon.maxHeight, currentHeight);
+            const heightPercent = Math.max(0, Math.min(100, (currentHeight / maxReachableHeight) * 100));
+
+            // 更新高度显示
+            let displayText = `高度: ${heightPercent.toFixed(0)}%`;
+            if (heightPercent >= settings.targetHeight) {
+                displayText += ` ✅ 已达标!`;
+                heightDisplay.style.background = 'rgba(76, 175, 80, 0.9)';
+            } else {
+                displayText += ` (最高: ${(balloon.maxHeight / maxReachableHeight * 100).toFixed(0)}%)`;
+                heightDisplay.style.background = 'rgba(255, 255, 255, 0.8)';
+            }
+            heightDisplay.textContent = displayText;
+
+            // 检测是否达到目标高度并播放鼓励语音
+            const isAboveTarget = heightPercent >= settings.targetHeight;
+            if (isAboveTarget && !wasAboveTarget) {
+                // 刚刚达到目标，播放鼓励
+                const encouragement = encouragements[Math.floor(Math.random() * encouragements.length)];
+                speak(encouragement, true);
+            } else if (!isAboveTarget && wasAboveTarget && heightPercent < settings.targetHeight - 10) {
+                // 从目标高度掉落下来
+                speak("声音再大一点哦！");
+            } else if (!isAboveTarget && heightPercent < settings.targetHeight - 20) {
+                // 远低于目标高度，定时提示
+                const now = Date.now();
+                if (now - lastVoiceTime > settings.voiceInterval * 1000) {
+                    speak("声音再大一点哦！");
+                }
+            }
+            wasAboveTarget = isAboveTarget;
+
+            // 音量大时添加粒子
+            if (volume > 0.3 && Math.random() < 0.3) {
+                addParticles(balloon.x, balloon.y + balloon.radius, Math.floor(volume * 3));
+            }
+
+            // 绘制粒子
+            updateParticles();
+
+            // 绘制地面
+            drawGround();
+
+            // 绘制气球
+            drawBalloon(balloon.x, balloon.y, balloon.radius, balloon.color);
+
+            // 音量反馈圆圈
+            if (volume > 0.2) {
+                ctx.strokeStyle = `rgba(255, 255, 255, ${Math.min(volume * 0.5, 1)})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(balloon.x, balloon.y, balloon.radius + 20 + volume * 30, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // 初始化音频
+        async function initAudio() {
+            try {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                microphone = audioContext.createMediaStreamSource(stream);
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                microphone.connect(analyser);
+                return true;
+            } catch (error) {
+                alert('无法访问麦克风: ' + error.message);
+                return false;
+            }
+        }
+
+        // 开始游戏
+        async function startGame() {
+            if (isRunning) return;
+
+            permissionOverlay.style.display = 'none';
+
+            if (!audioContext) {
+                const success = await initAudio();
+                if (!success) return;
+            }
+
+            if (audioContext.state === 'suspended') {
+                await audioContext.resume();
+            }
+
+            initClouds();
+            wasAboveTarget = false;
+            balloon.y = HEIGHT - 100;
+            balloon.velocity = 0;
+            balloon.maxHeight = 0;
+            isRunning = true;
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+
+            // 开始语音提示
+            if (settings.enableVoice) {
+                setTimeout(() => {
+                    speak("开始啦！声音再大一点哦！", true);
+                }, 500);
+            }
+
+            gameLoop();
+        }
+
+        // 停止游戏
+        function stopGame() {
+            isRunning = false;
+            isSpeaking = false;
+            voiceEndTime = 0;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            speechSynthesis.cancel(); // 停止语音
+            voiceHint.classList.remove('show');
+        }
+
+        // 事件监听
+        startBtn.addEventListener('click', () => {
+            permissionOverlay.style.display = 'flex';
+        });
+
+        allowMic.addEventListener('click', startGame);
+        stopBtn.addEventListener('click', stopGame);
+
+        // 设置面板
+        settingsBtn.addEventListener('click', () => {
+            settingsPanel.classList.add('show');
+            settingsOverlay.classList.add('show');
+        });
+
+        closeSettings.addEventListener('click', () => {
+            settingsPanel.classList.remove('show');
+            settingsOverlay.classList.remove('show');
+        });
+
+        settingsOverlay.addEventListener('click', () => {
+            settingsPanel.classList.remove('show');
+            settingsOverlay.classList.remove('show');
+        });
+
+        // 预设按钮
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const presetName = btn.dataset.preset;
+                applyPreset(presetName);
+            });
+        });
+
+        // 设置滑块事件
+        sensitivityInput.addEventListener('input', (e) => {
+            settings.sensitivity = parseFloat(e.target.value);
+            sensitivityValue.textContent = settings.sensitivity.toFixed(1);
+            classroomMode.classList.remove('show');
+        });
+
+        liftForceInput.addEventListener('input', (e) => {
+            settings.liftForce = parseFloat(e.target.value);
+            liftForceValue.textContent = settings.liftForce.toFixed(1);
+        });
+
+        gravityInput.addEventListener('input', (e) => {
+            settings.gravity = parseFloat(e.target.value);
+            gravityValue.textContent = settings.gravity.toFixed(2);
+        });
+
+        balloonSizeInput.addEventListener('input', (e) => {
+            settings.balloonSize = parseInt(e.target.value);
+            balloonSizeValue.textContent = settings.balloonSize;
+            balloon.radius = settings.balloonSize;
+        });
+
+        noiseThresholdInput.addEventListener('input', (e) => {
+            settings.noiseThreshold = parseFloat(e.target.value);
+            noiseThresholdValue.textContent = settings.noiseThreshold.toFixed(2);
+        });
+
+        targetHeightInput.addEventListener('input', (e) => {
+            settings.targetHeight = parseInt(e.target.value);
+            targetHeightValue.textContent = settings.targetHeight;
+            updateTargetHeightLine();
+        });
+
+        enableVoiceCheckbox.addEventListener('change', (e) => {
+            settings.enableVoice = e.target.checked;
+        });
+
+        voiceIntervalInput.addEventListener('input', (e) => {
+            settings.voiceInterval = parseInt(e.target.value);
+            voiceIntervalValue.textContent = settings.voiceInterval;
+        });
+
+        // 测试语音按钮
+        document.getElementById('testVoice').addEventListener('click', () => {
+            const testMessages = [
+                "你好！我是你的小助手！",
+                "声音再大一点哦！",
+                "太棒了！继续保持！"
+            ];
+            const msg = testMessages[Math.floor(Math.random() * testMessages.length)];
+            speak(msg, true);
+        });
+
+        // 加载语音列表
+        speechSynthesis.onvoiceschanged = () => {
+            const voices = speechSynthesis.getVoices();
+            console.log('可用语音:', voices.map(v => `${v.name} (${v.lang})`));
+        };
+
+        // 初始化云朵并绘制静态画面
+        initClouds();
+        updateTargetHeightLine();
+        function drawStatic() {
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+
+            const bgGradient = ctx.createLinearGradient(0, 0, 0, HEIGHT);
+            bgGradient.addColorStop(0, '#87CEEB');
+            bgGradient.addColorStop(1, '#E0F6FF');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+            clouds.forEach(cloud => {
+                drawCloud(cloud.x, cloud.y, cloud.size);
+            });
+
+            drawGround();
+            drawBalloon(balloon.x, balloon.y, balloon.radius, balloon.color);
+        }
+        drawStatic();
+    </script>
+</body>
+</html>
