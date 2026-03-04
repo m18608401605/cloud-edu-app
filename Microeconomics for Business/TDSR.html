@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>价格变动的分解：替代效应与收入效应</title>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-blue: #003366;
+            --highlight-red: #cc0000;
+            --highlight-green: #008000;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 0;
+        }
+        .container {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .left-panel {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            background: #fdfdfd;
+            border-left: 3px solid var(--primary-blue);
+            border-radius: 0 8px 8px 0;
+            overflow-y: auto;
+            max-height: 600px;
+        }
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid var(--primary-blue);
+            background: white;
+            color: var(--primary-blue);
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        button:hover, button.active {
+            background: var(--primary-blue);
+            color: white;
+        }
+        svg {
+            border: 1px solid #eee;
+            background: #fff;
+            border-radius: 8px;
+        }
+        .explanation-block {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .explanation-block.active {
+            display: block;
+        }
+        .formula-box {
+            background: #eef5fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        h3 {
+            color: var(--primary-blue);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        .concept-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .tag-se { background-color: #2c3e50; }
+        .tag-ie { background-color: #c0392b; }
+        .tag-pe { background-color: #2980b9; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>价格变动的分解 (Decomposition of Price Effects)</h1>
+        <p>比较静态分析与需求 (Comparative Statics and Demand) —— 交互式概念实验室</p>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            <svg id="chart" width="550" height="550" viewBox="0 0 550 550">
+                <line x1="50" y1="450" x2="520" y2="450" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <line x1="50" y1="450" x2="50" y2="20" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="525" y="455" font-weight="bold">X (需求量)</text>
+                <text x="20" y="20" font-weight="bold">Y</text>
+
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                    </marker>
+                    <marker id="arrow-se" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#2c3e50" />
+                    </marker>
+                    <marker id="arrow-ie" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#c0392b" />
+                    </marker>
+                    <marker id="arrow-pe" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                        <polygon points="0 0, 8 3, 0 6" fill="#2980b9" />
+                    </marker>
+                </defs>
+
+                <line x1="50" y1="50" x2="250" y2="450" stroke="#0000CD" stroke-width="2.5" />
+                <text x="255" y="445" fill="#0000CD" font-weight="bold">B₁</text>
+                
+                <line x1="50" y1="50" x2="450" y2="450" stroke="#0000CD" stroke-width="2.5" />
+                <text x="455" y="445" fill="#0000CD" font-weight="bold">B₂</text>
+
+                <line x1="50" y1="160" x2="340" y2="450" stroke="#cc0000" stroke-width="2" stroke-dasharray="6,4" />
+                <text x="55" y="150" fill="#cc0000" font-weight="bold">Bc</text>
+
+                <path d="M 80 120 Q 150 250 270 380" fill="none" stroke="#008000" stroke-width="2.5" />
+                <text x="275" y="380" fill="#008000" font-weight="bold">U₁</text>
+
+                <circle cx="130" cy="210" r="6" fill="#00BFFF" stroke="#000" stroke-width="1.5" />
+                <text x="140" y="200" font-weight="bold" font-size="16">A</text>
+                <line x1="130" y1="210" x2="130" y2="450" stroke="#666" stroke-dasharray="3,3" />
+                <text x="120" y="470" font-weight="bold">Xₐ</text>
+
+                <circle cx="210" cy="320" r="6" fill="#00BFFF" stroke="#000" stroke-width="1.5" />
+                <text x="220" y="315" font-weight="bold" font-size="16">B</text>
+                <line x1="210" y1="320" x2="210" y2="450" stroke="#666" stroke-dasharray="3,3" />
+                <text x="200" y="470" font-weight="bold">X_b</text>
+
+                <g id="dynamic-elements">
+                    <path id="curve-u2" fill="none" stroke="#008000" stroke-width="2.5" />
+                    <text id="label-u2" fill="#008000" font-weight="bold">U₂</text>
+                    
+                    <circle id="point-c" r="6" fill="#00BFFF" stroke="#000" stroke-width="1.5" />
+                    <text id="text-c" font-weight="bold" font-size="16">C</text>
+                    <line id="line-c" stroke="#666" stroke-dasharray="3,3" />
+                    <text id="label-xc" font-weight="bold">X_c</text>
+                </g>
+
+                <g id="effect-arrows">
+                    <line id="arr-se" y1="490" y2="490" stroke="#2c3e50" stroke-width="2" marker-end="url(#arrow-se)" />
+                    <text id="txt-se" y="485" fill="#2c3e50" font-size="12" font-weight="bold">SE</text>
+                    
+                    <line id="arr-ie" y1="510" y2="510" stroke="#c0392b" stroke-width="2" marker-end="url(#arrow-ie)" />
+                    <text id="txt-ie" y="505" fill="#c0392b" font-size="12" font-weight="bold">IE</text>
+
+                    <line id="arr-pe" y1="530" y2="530" stroke="#2980b9" stroke-width="2" marker-end="url(#arrow-pe)" />
+                    <text id="txt-pe" y="525" fill="#2980b9" font-size="12" font-weight="bold">PE</text>
+                </g>
+            </svg>
+
+            <div class="controls">
+                <button id="btn-normal" class="active" onclick="setGoodType('normal')">正常物品 (Normal Good)</button>
+                <button id="btn-inferior" onclick="setGoodType('inferior')">劣等品 (Inferior Good)</button>
+                <button id="btn-giffen" onclick="setGoodType('giffen')">吉芬物品 (Giffen Good)</button>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2>理论指引 (Theoretical Guide)</h2>
+            <p>当商品X的价格下降（\(P_x \downarrow\)）时，预算线由 <b>$B_1$</b> 顺时针旋转至更平缓的 <b>$B_2$</b>。需求量的总变化被称为<b>价格效应 (PE)</b>，它可以分解为两步：</p>
+            
+            <div class="formula-box">
+                <b>斯卢茨基/希克斯分解公式：</b><br>
+                $$PE = SE + IE$$
+            </div>
+
+            <p><span class="concept-tag tag-se">替代效应 (SE)</span>：<b>A 移动到 B</b>。假设实际效用水平不变（仍在 $U_1$ 上），由于 X 相对变便宜了（机会成本下降），消费者会自发增加 X 的消费。图形上体现为平移的新预算线 $B_c$（补偿预算线）与原无差异曲线 $U_1$ 相切于点 B。<br>
+            $\rightarrow$ <b>核心规律：替代效应永远是负相关的（价格降，数量升）。</b></p>
+            
+            <p><span class="concept-tag tag-ie">收入效应 (IE)</span>：<b>B 移动到 C</b>。因为价格下降，消费者的“实际购买力/真实收入”增加了。图形上体现为预算线从 $B_c$ 平移到真正的最终预算线 $B_2$（效用提升到 $U_2$）。</p>
+
+            <hr>
+
+            <div id="desc-normal" class="explanation-block active">
+                <h3>分析：正常物品 (Normal Good)</h3>
+                <p>对于正常物品，收入增加会导致需求量增加。</p>
+                <ul>
+                    <li><b>SE (A $\rightarrow$ B):</b> 价格下降 $\rightarrow$ 需求增加 ($X_A \rightarrow X_B$)</li>
+                    <li><b>IE (B $\rightarrow$ C):</b> 实际收入增加 $\rightarrow$ 需求继续增加 ($X_B \rightarrow X_C$)</li>
+                </ul>
+                <div class="formula-box">
+                    结论：<b>IE 强化了 SE (IE reinforces SE)</b>。<br>
+                    总价格效应 PE 为正增长。<br>
+                    $$X_C > X_B > X_A$$
+                </div>
+            </div>
+
+            <div id="desc-inferior" class="explanation-block">
+                <h3>分析：劣等品 (Inferior Good)</h3>
+                <p>对于劣等品，收入增加反而会导致需求量减少，例如方便面、低质量淀粉等。</p>
+                <ul>
+                    <li><b>SE (A $\rightarrow$ B):</b> 价格下降 $\rightarrow$ 需求增加 ($X_A \rightarrow X_B$)</li>
+                    <li><b>IE (B $\rightarrow$ C):</b> 实际收入增加 $\rightarrow$ 需求反而减少 ($X_B \rightarrow X_C$向左移动)</li>
+                </ul>
+                <div class="formula-box">
+                    结论：IE 与 SE 反向，但 <b>SE 占据主导地位 (SE dominates IE)</b>。<br>
+                    总需求量依然是增加的。<br>
+                    $$X_B > X_C > X_A$$
+                </div>
+            </div>
+
+            <div id="desc-giffen" class="explanation-block">
+                <h3>分析：吉芬物品 (Giffen Good)</h3>
+                <p>吉芬物品是劣等品的一种极端情况（如爱尔兰土豆饥荒时的土豆）。</p>
+                <ul>
+                    <li><b>SE (A $\rightarrow$ B):</b> 价格下降 $\rightarrow$ 需求增加 ($X_A \rightarrow X_B$)</li>
+                    <li><b>IE (B $\rightarrow$ C):</b> 实际收入增加 $\rightarrow$ 需求大幅度减少 ($X_B \rightarrow X_C$大幅向左移动)</li>
+                </ul>
+                <div class="formula-box">
+                    结论：IE 与 SE 反向，且 <b>IE 占据绝对主导地位 (IE dominates SE)</b>。<br>
+                    反常理现象发生：价格下降，总需求量反而下降！这违背了普通需求定理。<br>
+                    $$X_B > X_A > X_C$$
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        // 定义三种物品下的C点坐标和无差异曲线U2
+        const states = {
+            normal: {
+                cx: 300, cy: 300, 
+                u2: "M 190 150 Q 250 250 370 380", labelU2X: 375, labelU2Y: 385,
+                ieArrow: {x1: 210, x2: 295, txtX: 250, reverse: false},
+                peArrow: {x1: 130, x2: 295, txtX: 210, reverse: false}
+            },
+            inferior: {
+                cx: 170, cy: 170, 
+                u2: "M 100 80 Q 140 140 220 230", labelU2X: 225, labelU2Y: 235,
+                ieArrow: {x1: 210, x2: 175, txtX: 185, reverse: true}, // IE反向
+                peArrow: {x1: 130, x2: 165, txtX: 140, reverse: false}
+            },
+            giffen: {
+                cx: 110, cy: 110, 
+                u2: "M 60 50 Q 90 90 150 160", labelU2X: 155, labelU2Y: 165,
+                ieArrow: {x1: 210, x2: 115, txtX: 150, reverse: true}, // IE大幅反向
+                peArrow: {x1: 130, x2: 115, txtX: 115, reverse: true}  // PE也反向了
+            }
+        };
+
+        function setGoodType(type) {
+            // 1. 更新按钮样式
+            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + type).classList.add('active');
+
+            // 2. 更新文字显示块
+            document.querySelectorAll('.explanation-block').forEach(block => block.classList.remove('active'));
+            document.getElementById('desc-' + type).classList.add('active');
+
+            // 3. 更新 SVG 图形
+            const data = states[type];
+            
+            // 更新 C 点及其辅助线
+            const cCircle = document.getElementById('point-c');
+            cCircle.setAttribute('cx', data.cx);
+            cCircle.setAttribute('cy', data.cy);
+            
+            const cText = document.getElementById('text-c');
+            cText.setAttribute('x', data.cx + 10);
+            cText.setAttribute('y', data.cy - 10);
+
+            const cLine = document.getElementById('line-c');
+            cLine.setAttribute('x1', data.cx);
+            cLine.setAttribute('y1', data.cy);
+            cLine.setAttribute('x2', data.cx);
+            cLine.setAttribute('y2', 450);
+
+            const labelXc = document.getElementById('label-xc');
+            labelXc.setAttribute('x', data.cx - 10);
+            labelXc.setAttribute('y', 470);
+
+            // 更新 U2 曲线
+            const u2Curve = document.getElementById('curve-u2');
+            u2Curve.setAttribute('d', data.u2);
+            const labelU2 = document.getElementById('label-u2');
+            labelU2.setAttribute('x', data.labelU2X);
+            labelU2.setAttribute('y', data.labelU2Y);
+
+            // 更新底层箭头 (SE是固定的: X_A 130 到 X_B 210)
+            document.getElementById('arr-se').setAttribute('x1', 130);
+            document.getElementById('arr-se').setAttribute('x2', 205); // 留点空隙给箭头
+            document.getElementById('txt-se').setAttribute('x', 160);
+
+            // 更新 IE 箭头
+            const arrIe = document.getElementById('arr-ie');
+            arrIe.setAttribute('x1', data.ieArrow.x1);
+            arrIe.setAttribute('x2', data.ieArrow.x2);
+            arrIe.setAttribute('marker-end', 'url(#arrow-ie)'); 
+            document.getElementById('txt-ie').setAttribute('x', data.ieArrow.txtX);
+
+            // 更新 PE 箭头
+            const arrPe = document.getElementById('arr-pe');
+            arrPe.setAttribute('x1', data.peArrow.x1);
+            arrPe.setAttribute('x2', data.peArrow.x2);
+            arrPe.setAttribute('marker-end', 'url(#arrow-pe)');
+            document.getElementById('txt-pe').setAttribute('x', data.peArrow.txtX);
+        }
+
+        // 初始化默认状态为 Normal
+        window.onload = function() {
+            setGoodType('normal');
+        };
+    </script>
+</body>
+</html>
