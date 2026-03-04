@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>交叉价格效应：替代品与互补品交互实验</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --sub-color: #3498db; 
+            --comp-color: #27ae60; 
+            --danger: #e74c3c;
+            --bg: #f8f9fa;
+            --secondary: #2c3e50;
+        }
+        body { font-family: 'PingFang SC', system-ui, sans-serif; background: var(--bg); padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 1000px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .header { grid-column: 1 / -1; text-align: center; margin-bottom: 20px; }
+        svg { width: 100%; height: 350px; background: #fff; border: 1px solid #eee; overflow: visible; }
+        .axis { stroke: #333; stroke-width: 2; }
+        .budget-line { stroke: var(--danger); stroke-width: 3; transition: all 0.3s; }
+        .opt-point { fill: #2c3e50; transition: all 0.3s; }
+        .label { font-size: 12px; fill: #666; }
+        .controls { margin-top: 15px; border-top: 1px solid #eee; padding-top: 15px; }
+        .math-box { background: #f0f4f8; padding: 15px; border-radius: 6px; margin: 10px 0; font-size: 0.95em; min-height: 50px; }
+        .term { font-weight: bold; color: var(--secondary); border-bottom: 1px dotted var(--secondary); }
+        .toggle-group { margin-bottom: 20px; text-align: center; grid-column: 1 / -1; }
+        .btn { padding: 10px 20px; cursor: pointer; border: 2px solid #ddd; background: white; border-radius: 8px; font-weight: bold; transition: all 0.2s; }
+        .btn.active { border-color: var(--sub-color); color: var(--sub-color); background: #ebf5fb; }
+        .btn.comp-active { border-color: var(--comp-color); color: var(--comp-color); background: #eafaf1; }
+        
+        .edu-section { grid-column: 1 / -1; margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .edu-card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-top: 4px solid var(--secondary); }
+        .highlight { color: var(--danger); font-weight: bold; }
+        ul { padding-left: 20px; line-height: 1.8; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>交叉价格效应：消费决策模拟</h1>
+    <p><i>Cross-price Effects: Substitutes vs. Complements</i></p>
+</div>
+
+<div class="toggle-group">
+    <button id="btnSub" class="btn active" onclick="switchMode('sub')">替代品 (Substitutes)</button>
+    <button id="btnComp" class="btn" onclick="switchMode('comp')">互补品 (Complements)</button>
+</div>
+
+<div class="container">
+    <div class="panel">
+        <h3 id="chartTitle">替代品：海洛因 vs 美沙酮</h3>
+        <svg id="viz" viewBox="0 0 400 400">
+            <line x1="50" y1="350" x2="380" y2="350" class="axis" /> 
+            <line x1="50" y1="350" x2="50" y2="20" class="axis" />  
+            <text x="380" y="375" text-anchor="end" class="label" id="labelX">商品 X</text>
+            <text x="10" y="30" class="label" id="labelY">商品 Y</text>
+            
+            <line id="budgetLine" x1="50" y1="50" x2="350" y2="350" class="budget-line" />
+            
+            <circle id="optPoint" cx="200" cy="200" r="6" class="opt-point" />
+            <text id="pointTag" x="210" y="190" font-weight="bold">e</text>
+        </svg>
+
+        <div class="controls">
+            <label>提高商品 X 的价格 $P_X$ (使预算线旋转):</label>
+            <input type="range" id="priceSlider" min="0" max="100" value="0">
+        </div>
+    </div>
+
+    <div class="panel">
+        <h3>核心逻辑 <small>(Logic)</small></h3>
+        <div class="math-box">
+            <div id="formula">
+                当 $P_X \uparrow \implies Q_Y \uparrow$
+            </div>
+        </div>
+
+        <div id="analysisText">
+            <p><b>大白话解析：</b></p>
+            <p>当商品 X 变贵了，消费者会减少对它的使用，转而寻找能满足相似需求的商品 Y。因此，商品 Y 的消费量增加了。</p>
+        </div>
+
+        <div class="math-box" style="background:#fff3cd; border-left:4px solid #ffc107;">
+            <p><b>术语表 (Glossary):</b></p>
+            <ul>
+                <li><span class="term">Cross-price effect</span>: 交叉价格效应</li>
+                <li><span class="term">Substitutes</span>: 替代品</li>
+                <li><span class="term">Complements</span>: 互补品</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="edu-section">
+        <div class="edu-card">
+            <h3>📘 核心教学内容解析 (Key Takeaways)</h3>
+            <ul>
+                <li><b>交叉价格效应</b>：本质上是一种商品的价格变化对另一种商品消费的影响 [cite: 42]。</li>
+                <li><b>替代品 (Substitutes)</b>：一种商品价格上涨，会导致另一种替代商品的消费增加 [cite: 53, 54]。</li>
+                <li><b>互补品 (Complements)</b>：一种商品价格上涨，会导致其互补商品的消费减少 [cite: 63, 64]。</li>
+                <li><span class="highlight">关键区别</span>：交叉价格效应导致整个<b>需求曲线的位移 (Shifts)</b>，而自身价格变动仅导致<b>沿曲线移动 (Movements along)</b> [cite: 74, 77]。</li>
+            </ul>
+        </div>
+
+        <div class="edu-card">
+            <h3>🚀 交互练习建议 (Interactive Tasks)</h3>
+            <ul>
+                <li><b>观察旋转</b>：拖动滑块模拟 $P_X$ 上升，观察预算约束线如何向内旋转 (Budget constraint pivot) 。</li>
+                <li><b>对比效应</b>：切换到“替代品”模式，观察均衡点 $e$ 在 Y 轴方向上的上升趋势。</li>
+                <li><b>互补实验</b>：在“互补品”模式下，注意 $e$ 点如何向坐标原点方向靠拢，说明 $Q_X$ 和 $Q_Y$ 都在减少。</li>
+                <li><b>深度思考</b>：如果价格变动对另一种商品毫无影响，这说明它们在消费中是<span class="term">无关的 (Unrelated)</span> [cite: 68]。</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    let mode = 'sub'; 
+    const slider = document.getElementById('priceSlider');
+    const budgetLine = document.getElementById('budgetLine');
+    const optPoint = document.getElementById('optPoint');
+    const pointTag = document.getElementById('pointTag');
+    const formulaDiv = document.getElementById('formula');
+    const analysisText = document.getElementById('analysisText');
+
+    function switchMode(m) {
+        mode = m;
+        document.getElementById('btnSub').className = 'btn' + (m==='sub'?' active':'');
+        document.getElementById('btnComp').className = 'btn' + (m==='comp'?' comp-active':'');
+        
+        const labels = {
+            sub: { x: "Heroin (海洛因)", y: "Methadone (美沙酮)", title: "替代品：海洛因 vs 美沙酮" },
+            comp: { x: "Weed-killer (除草剂)", y: "Fertilizer (肥料)", title: "互补品：除草剂 vs 肥料" }
+        };
+        
+        document.getElementById('labelX').textContent = labels[m].x;
+        document.getElementById('labelY').textContent = labels[m].y;
+        document.getElementById('chartTitle').textContent = labels[m].title;
+        
+        slider.value = 0;
+        update(0);
+    }
+
+    function update(val) {
+        const offset = val * 2;
+        const xIntercept = 350 - offset;
+        budgetLine.setAttribute('x2', xIntercept);
+
+        let x, y;
+        if (mode === 'sub') {
+            x = 50 + (xIntercept - 50) * 0.3;
+            y = 50 + (350 - 50) * (0.3 + (val/250)); 
+            formulaDiv.innerHTML = "$$P_{X} \\uparrow \\implies Q_{Y} \\uparrow \\text{ (Substitutes)}$$";
+            analysisText.innerHTML = `
+                <p><b>大白话解析：</b></p>
+                <p>海洛因涨价了，人们买不起海洛因，所以转而去买更多的美沙酮来替代它 [cite: 54]。</p>
+            `;
+        } else {
+            x = 50 + (xIntercept - 50) * 0.6;
+            y = 50 + (350 - 50) * (0.6 - (val/300)); 
+            formulaDiv.innerHTML = "$$P_{X} \\uparrow \\implies Q_{Y} \\downarrow \\text{ (Complements)}$$";
+            analysisText.innerHTML = `
+                <p><b>大白话解析：</b></p>
+                <p>除草剂变贵了，大家少买除草剂的同时，因为不需要给那么多地施肥，连带着肥料也少买了 [cite: 64]。</p>
+            `;
+        }
+        
+        optPoint.setAttribute('cx', x);
+        optPoint.setAttribute('cy', y);
+        pointTag.setAttribute('x', x + 10);
+        pointTag.setAttribute('y', y - 10);
+        
+        // 执行 MathJax 重新渲染
+        if (window.MathJax) {
+            MathJax.typesetPromise([formulaDiv]);
+        }
+    }
+
+    slider.addEventListener('input', (e) => update(e.target.value));
+    
+    // 初始渲染
+    window.addEventListener('load', () => switchMode('sub'));
+</script>
+
+</body>
+</html>
