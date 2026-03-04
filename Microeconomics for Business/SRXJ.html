@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实物补贴 vs 现金补贴交互实验</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; }
+        .slider-container { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        input[type=range] { flex-grow: 1; cursor: pointer; height: 6px; border-radius: 4px; background: #cbd5e1; outline: none; }
+        canvas { background: white; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .panel { background: white; border-radius: 8px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        h1 { color: #0f172a; font-weight: 800; font-size: 2rem; margin-bottom: 0.5rem; letter-spacing: -0.025em; }
+        h2 { color: #334155; font-weight: 700; font-size: 1.25rem; margin-top: 15px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+        h2::before { content: ""; display: inline-block; width: 4px; height: 18px; background: #3b82f6; border-radius: 2px; }
+        .formula-box { background: #eff6ff; padding: 12px 16px; border-radius: 6px; border: 1px solid #bfdbfe; margin: 15px 0; }
+        .highlight-text { font-weight: bold; color: #2563eb; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;}
+        .badge-inkind { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0;}
+        .badge-cash { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca;}
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-10 text-center border-b pb-6">
+            <h1>In-kind vs Cash Transfers</h1>
+            <p class="text-gray-600 text-lg font-medium">实物补贴与现金补贴对消费者均衡的净效应影响</p>
+        </header>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full lg:w-[55%] flex flex-col gap-4">
+                <div class="panel">
+                    <div class="slider-container bg-gray-50 p-4 rounded-lg border border-gray-100">
+                        <label class="font-bold text-gray-700 w-36 whitespace-nowrap">黄油补贴额度 ($S$)</label>
+                        <input type="range" id="subsidySlider" min="0" max="100" step="1" value="60">
+                        <span id="subsidyVal" class="font-mono text-blue-600 font-bold w-16 text-right text-lg">60 kg</span>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-4 px-2">拖动滑块改变政府发放的黄油实物额度，观察预算线的形态变化以及最优点 F 和 G 的轨迹分离。</p>
+
+                    <div class="relative w-full flex justify-center">
+                        <canvas id="graphCanvas" width="600" height="480"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-[45%] panel flex flex-col">
+                <h2>实验原理 (Core Concepts)</h2>
+                <div class="text-gray-700 text-sm space-y-3 leading-relaxed">
+                    <p>政府可以通过两种方式向低收入群体提供支持：直接提供商品（<span class="highlight-text">实物补贴 In-kind transfer</span>）或提供等额的金钱（<span class="highlight-text">现金补贴 Cash transfer</span>）。</p>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><span class="badge badge-inkind mr-2">实物补贴</span> 假设受赠者<strong class="text-red-500">被禁止在市场上转售</strong>补贴商品。这会导致预算线产生一个<strong>水平折点 (Kink)</strong>。</li>
+                        <li><span class="badge badge-cash mr-2">现金补贴</span> 将原预算线向外<strong>平行平移</strong>，赋予消费者完全的配置自由。</li>
+                    </ul>
+                </div>
+
+                <h2>数学模型 (Mathematical Model)</h2>
+                <div class="formula-box text-sm text-gray-800">
+                    <p>设定：初始收入 $I=300$，黄油价格 $P_X=2$，住房价格 $P_Y=1$。</p>
+                    <p class="mt-2"><strong>1. 现金补贴预算线 (红色直线):</strong></p>
+                    <p class="text-center">$$Y + 2X = 300 + 2S$$</p>
+                    <p class="mt-2"><strong>2. 实物补贴预算线 (蓝色折线):</strong></p>
+                    <p class="text-center">$$Y + 2 \max(X - S, 0) = 300$$</p>
+                </div>
+
+                <h2>当前均衡状态 (Dynamic Analysis)</h2>
+                <div id="dynamicContent" class="bg-gray-50 rounded-lg p-5 text-sm space-y-4 border border-gray-200">
+                    </div>
+                
+                <div class="mt-5 p-4 bg-blue-50 rounded-lg border border-blue-200 shadow-sm">
+                    <h3 class="font-bold text-blue-800 mb-2 flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                        经济学结论 (Conclusion)
+                    </h3>
+                    <p id="conclusionText" class="text-gray-700 text-sm leading-relaxed font-medium"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 经济学参数与效用函数设定 ---
+        // 为了完美复现课件中点 E(20,260) 和 G(38,344)[S=60时]，
+        // 我们反推出隐含的 Stone-Geary 效用函数: U = (X - 5)^0.3 * (Y - 190)^0.7
+        const I = 300;
+        const Px = 2;
+        const Py = 1;
+        const X0 = 5;
+        const Y0 = 190;
+        const alpha = 0.3;
+        
+        let S = 60; // 初始补贴量
+
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        const slider = document.getElementById('subsidySlider');
+        const subsidyVal = document.getElementById('subsidyVal');
+
+        // --- 画布坐标转换函数 ---
+        const originX = 50;
+        const originY = 430;
+        const scaleX = 4;   // X轴缩放 (Max X = 130 -> 520px)
+        const scaleY = 0.75;// Y轴缩放 (Max Y = 500 -> 375px)
+
+        function getCx(x) { return originX + x * scaleX; }
+        function getCy(y) { return originY - y * scaleY; }
+
+        // --- 核心计算逻辑 ---
+        function calculateEquilibrium(subsidy) {
+            // 初始状态 E
+            const XE = 20;
+            const YE = 260;
+            const UE = Math.pow(XE - X0, alpha) * Math.pow(YE - Y0, 1 - alpha);
+
+            // 现金补贴下的无约束最优点 G
+            // 收入增加 \Delta I = 2 * subsidy
+            // 线性恩格尔曲线 (Expansion path):
+            const XG = 20 + 0.3 * subsidy;
+            const YG = 260 + 1.4 * subsidy;
+            const UG = Math.pow(XG - X0, alpha) * Math.pow(YG - Y0, 1 - alpha);
+
+            // 实物补贴下的受约束最优点 F
+            let XF, YF, UF;
+            let isConstrained = false;
+
+            if (XG >= subsidy) {
+                // 如果自然需求量大于补贴量，实物=现金
+                XF = XG;
+                YF = YG;
+                UF = UG;
+            } else {
+                // 否则被约束在折点 (由于边际替代率在折点处低于价格比，但无法出售黄油)
+                XF = subsidy;
+                YF = 300; 
+                UF = Math.pow(XF - X0, alpha) * Math.pow(YF - Y0, 1 - alpha);
+                isConstrained = true;
+            }
+
+            return { E: {x:XE, y:YE, u:UE}, G: {x:XG, y:YG, u:UG}, F: {x:XF, y:YF, u:UF}, isConstrained };
+        }
+
+        // --- 辅助绘图函数 ---
+        function drawIndifferenceCurve(U_val, color, label, targetX, targetY) {
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            
+            let started = false;
+            // 遍历X绘制曲线
+            for (let x = 6; x <= 130; x += 1) {
+                let inner = U_val / Math.pow(x - X0, alpha);
+                let y = Y0 + Math.pow(inner, 1 / (1 - alpha));
+                
+                if (y > 500 || y < 0 || isNaN(y)) continue;
+                
+                if (!started) {
+                    ctx.moveTo(getCx(x), getCy(y));
+                    started = true;
+                } else {
+                    ctx.lineTo(getCx(x), getCy(y));
+                }
+            }
+            ctx.stroke();
+
+            if(targetX && targetY) {
+                 ctx.fillStyle = color;
+                 ctx.font = "italic 14px Arial";
+                 ctx.fillText(label, getCx(targetX) + 25, getCy(targetY) + 5);
+            }
+        }
+
+        function drawDashedLine(x1, y1, x2, y2) {
+            ctx.beginPath();
+            ctx.moveTo(getCx(x1), getCy(y1));
+            ctx.lineTo(getCx(x2), getCy(y2));
+            ctx.strokeStyle = "#94a3b8"; // Slate 400
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.setLineDash([]);
+        }
+
+        function drawPoint(x, y, color, label, offset = {x: 8, y: -8}) {
+            ctx.beginPath();
+            ctx.arc(getCx(x), getCy(y), 5, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+            ctx.strokeStyle = "#fff";
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            
+            ctx.fillStyle = "#1e293b";
+            ctx.font = "bold 15px Arial";
+            ctx.fillText(label, getCx(x) + offset.x, getCy(y) + offset.y);
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const eq = calculateEquilibrium(S);
+
+            // 1. 坐标轴
+            ctx.beginPath();
+            ctx.moveTo(originX, 20);
+            ctx.lineTo(originX, originY);
+            ctx.lineTo(canvas.width - 20, originY);
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            
+            ctx.fillStyle = "#334155";
+            ctx.font = "14px Arial";
+            ctx.fillText("Kg of butter / month (X)", canvas.width - 160, originY - 10);
+            ctx.save();
+            ctx.translate(originX - 35, 140);
+            ctx.rotate(-Math.PI / 2);
+            ctx.fillText("Housing / month (Y)", 0, 0);
+            ctx.restore();
+
+            // 2. 初始预算线 (黑色虚线) B1
+            ctx.beginPath();
+            ctx.moveTo(getCx(0), getCy(300));
+            ctx.lineTo(getCx(150), getCy(0));
+            ctx.strokeStyle = "#64748b";
+            ctx.setLineDash([5, 5]);
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // 3. 现金补贴预算线 (红色) HD
+            const max_Y_cash = 300 + 2 * S;
+            const max_X_cash = 150 + S;
+            ctx.beginPath();
+            ctx.moveTo(getCx(0), getCy(max_Y_cash));
+            ctx.lineTo(getCx(max_X_cash), getCy(0));
+            ctx.strokeStyle = "#ef4444"; // Red 500
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // 4. 实物补贴预算线 (蓝色粗线) AFD
+            ctx.beginPath();
+            ctx.moveTo(getCx(0), getCy(300));
+            ctx.lineTo(getCx(S), getCy(300)); // 水平部分 AF
+            ctx.lineTo(getCx(max_X_cash), getCy(0)); // 向下倾斜 FD
+            ctx.strokeStyle = "#0ea5e9"; // Sky 500
+            ctx.lineWidth = 3;
+            ctx.stroke();
+
+            // 辅助线 (坐标轴投影)
+            drawDashedLine(eq.E.x, eq.E.y, eq.E.x, 0);
+            drawDashedLine(eq.E.x, eq.E.y, 0, eq.E.y);
+            
+            drawDashedLine(eq.F.x, eq.F.y, eq.F.x, 0);
+            if(eq.isConstrained) drawDashedLine(eq.F.x, eq.F.y, 0, eq.F.y);
+
+            if(eq.isConstrained) {
+                drawDashedLine(eq.G.x, eq.G.y, eq.G.x, 0);
+                drawDashedLine(eq.G.x, eq.G.y, 0, eq.G.y);
+            }
+
+            // 轴刻度文本
+            ctx.fillStyle = "#64748b";
+            ctx.font = "12px Arial";
+            ctx.fillText(eq.E.x.toFixed(0), getCx(eq.E.x) - 8, originY + 15);
+            ctx.fillText(eq.E.y.toFixed(0), originX - 30, getCy(eq.E.y) + 4);
+            
+            ctx.fillText(eq.F.x.toFixed(0), getCx(eq.F.x) - 8, originY + 28);
+            if(eq.isConstrained) {
+                ctx.fillText(eq.G.x.toFixed(0), getCx(eq.G.x) - 8, originY + 15);
+                ctx.fillText(eq.G.y.toFixed(0), originX - 30, getCy(eq.G.y) + 4);
+                ctx.fillText(eq.F.y.toFixed(0), originX - 30, getCy(eq.F.y) - 10);
+            } else {
+                ctx.fillText(eq.F.y.toFixed(0), originX - 30, getCy(eq.F.y) + 4);
+            }
+
+            // 5. 无差异曲线
+            drawIndifferenceCurve(eq.E.u, "#22c55e", "U1", eq.E.x, eq.E.y); // Green 500
+            
+            if(eq.isConstrained) {
+                drawIndifferenceCurve(eq.F.u, "#16a34a", "U2", eq.F.x, eq.F.y);
+                drawIndifferenceCurve(eq.G.u, "#15803d", "U3", eq.G.x, eq.G.y);
+            } else {
+                // F 和 G 重合，U2 = U3
+                drawIndifferenceCurve(eq.G.u, "#15803d", "U2/U3", eq.G.x, eq.G.y);
+            }
+
+            // 6. 标记点
+            drawPoint(0, 300, "#f59e0b", "A", {x: -15, y: -10});
+            drawPoint(eq.E.x, eq.E.y, "#0ea5e9", "E");
+            
+            if(eq.isConstrained) {
+                drawPoint(eq.F.x, eq.F.y, "#0ea5e9", "F", {x: 10, y: 15});
+                drawPoint(eq.G.x, eq.G.y, "#ef4444", "G", {x: -15, y: -10});
+            } else {
+                drawPoint(eq.F.x, eq.F.y, "#8b5cf6", "F = G", {x: 10, y: -10});
+            }
+
+            // 更新右侧文本
+            updateTextInfo(eq);
+        }
+
+        function updateTextInfo(eq) {
+            let html = `
+                <div class="grid grid-cols-2 gap-y-4 gap-x-2">
+                    <div class="col-span-2 pb-2 border-b">
+                        <span class="text-gray-500">初始状态 E:</span> 
+                        <span class="font-mono">($X=20, Y=260$)</span> 
+                        <span class="text-xs text-gray-400">效用 $U_1 \\approx ${eq.E.u.toFixed(1)}$</span>
+                    </div>
+                    
+                    <div class="bg-blue-50/50 p-2 rounded border border-blue-100">
+                        <div class="text-blue-800 font-bold mb-1">点 F (实物补贴均衡)</div>
+                        <div class="font-mono">黄油 $X_F = ${eq.F.x.toFixed(1)}$</div>
+                        <div class="font-mono">住房 $Y_F = ${eq.F.y.toFixed(1)}$</div>
+                        <div class="text-xs mt-1 text-blue-600">效用 $U_2 \\approx ${eq.F.u.toFixed(1)}$</div>
+                    </div>
+                    
+                    <div class="bg-red-50/50 p-2 rounded border border-red-100">
+                        <div class="text-red-800 font-bold mb-1">点 G (现金补贴均衡)</div>
+                        <div class="font-mono">黄油 $X_G = ${eq.G.x.toFixed(1)}$</div>
+                        <div class="font-mono">住房 $Y_G = ${eq.G.y.toFixed(1)}$</div>
+                        <div class="text-xs mt-1 text-red-600">效用 $U_3 \\approx ${eq.G.u.toFixed(1)}$</div>
+                    </div>
+                </div>
+            `;
+            
+            let conclusion = "";
+
+            if (!eq.isConstrained) {
+                conclusion = `
+                    由于补贴量较小 ($S \\le 28.6$)，消费者理想的黄油需求量 ($X_G = ${eq.G.x.toFixed(1)}$) <strong>大于</strong>补贴发放量 ($S = ${S}$)。<br><br>
+                    在此区间内，实物补贴的“禁止转售”约束并未生效，消费者处于预算线斜率为 -2 的阶段。<strong class="text-blue-700">此时，实物补贴与等额现金补贴对消费者的影响完全相同 (F点与G点重合)。</strong>
+                `;
+            } else {
+                conclusion = `
+                    当补贴量较大 ($S = ${S}$) 时，等额现金下消费者理想的黄油消费量 ($X_G = ${eq.G.x.toFixed(1)}$) <strong>小于</strong>政府强行发放的实物额度。<br><br>
+                    由于无法将多余的黄油变现换取住房，消费者被“困”在预算线的水平折点 F 处。<strong class="text-red-600">此时，现金补贴严格优于实物补贴 ($U_3 > U_2$)。</strong> 现金转移赋予了低收入人群根据自身偏好最大化效用的自由。
+                `;
+            }
+
+            document.getElementById('dynamicContent').innerHTML = html;
+            document.getElementById('conclusionText').innerHTML = conclusion;
+
+            // 重新渲染 MathJax 公式
+            if (window.MathJax) {
+                MathJax.typesetPromise([document.getElementById('dynamicContent')]).catch((err) => console.log(err.message));
+            }
+        }
+
+        // --- 事件监听 ---
+        slider.addEventListener('input', (e) => {
+            S = parseInt(e.target.value);
+            subsidyVal.innerText = S + " kg";
+            requestAnimationFrame(render);
+        });
+
+        // 初始渲染
+        render();
+    </script>
+</body>
+</html>
