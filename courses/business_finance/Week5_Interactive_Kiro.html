@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 | Interactive | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#2d1b69 0%,#7c3aed 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:600px;margin:0 auto}
+  main{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .lab{background:#0f172a;border-radius:14px;padding:2rem;color:#e2e8f0;margin-bottom:1.5rem}
+  .lab h2{color:#f8fafc;font-size:1.2rem;margin-bottom:.4rem}
+  .lab .subtitle{color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem}
+  .lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media(max-width:700px){.lab-grid{grid-template-columns:1fr}}
+  .control-group{margin-bottom:1.2rem}
+  .control-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.88rem;color:#cbd5e1}
+  .control-label .val{font-weight:700;color:#f8fafc;font-size:1rem;font-family:monospace}
+  input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#334155;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(232,160,32,.3)}
+  .result-panel{background:#1e293b;border-radius:10px;padding:1.4rem}
+  .result-panel h3{color:#94a3b8;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+  .metric{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid #334155}
+  .metric:last-child{border-bottom:none}
+  .metric .label{color:#94a3b8;font-size:.88rem}
+  .metric .value{font-weight:700;font-family:monospace;font-size:1.05rem}
+  .metric .value.positive{color:#4ade80}
+  .metric .value.negative{color:#f87171}
+  .metric .value.neutral{color:#fbbf24}
+  .insight{background:#1e3a5f;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-top:1.2rem;font-size:.9rem;color:#bfdbfe}
+  .insight strong{color:#fff}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+  canvas{background:#1e293b;border-radius:8px;width:100%;height:200px}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 5</span>
+</nav>
+<div class="hero">
+  <div class="tag">🧪 Interactive Lab · Week 5</div>
+  <h1>Portfolio Theory Lab 投资组合实验室</h1>
+  <p>Portfolio risk, CAPM, and Beta — all interactive. Adjust sliders and see results instantly.</p>
+</div>
+<main>
+
+  <div class="section-label">🔬 Lab 1 — Portfolio Risk Calculator 两资产组合风险计算器</div>
+  <div class="lab">
+    <h2>📊 Two-Asset Portfolio Risk Explorer</h2>
+    <div class="subtitle">调整两资产的权重和相关系数，实时观察组合风险如何变化。注意：当相关系数降低时，分散化效果如何提升。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Weight of Asset A (w_A)</span><span class="val" id="wA-val">60%</span></div>
+          <input type="range" id="wA" min="0" max="100" value="60" oninput="updatePortfolio()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Asset A Std Dev (σ_A)</span><span class="val" id="sigA-val">10%</span></div>
+          <input type="range" id="sigA" min="1" max="40" value="10" oninput="updatePortfolio()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Asset B Std Dev (σ_B)</span><span class="val" id="sigB-val">20%</span></div>
+          <input type="range" id="sigB" min="1" max="40" value="20" oninput="updatePortfolio()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Correlation ρ(A,B)</span><span class="val" id="rho-val">0.30</span></div>
+          <input type="range" id="rho" min="-100" max="100" value="30" oninput="updatePortfolio()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>E(R_A)</span><span class="val" id="erA-val">12%</span></div>
+          <input type="range" id="erA" min="0" max="30" value="12" oninput="updatePortfolio()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>E(R_B)</span><span class="val" id="erB-val">18%</span></div>
+          <input type="range" id="erB" min="0" max="30" value="18" oninput="updatePortfolio()">
+        </div>
+      </div>
+      <div class="result-panel">
+        <h3>📈 Portfolio Results</h3>
+        <div class="metric"><span class="label">Weight A / B</span><span class="value neutral" id="r-weights">60% / 40%</span></div>
+        <div class="metric"><span class="label">Portfolio E(R)</span><span class="value positive" id="r-er">—</span></div>
+        <div class="metric"><span class="label">Portfolio Variance σ²</span><span class="value neutral" id="r-var">—</span></div>
+        <div class="metric"><span class="label">Portfolio Std Dev σ_p</span><span class="value neutral" id="r-sig">—</span></div>
+        <div class="metric"><span class="label">Weighted Avg σ (no diversif.)</span><span class="value neutral" id="r-wavg">—</span></div>
+        <div class="metric"><span class="label">Diversification Benefit</span><span class="value positive" id="r-div">—</span></div>
+        <div class="insight" id="r-insight">Adjust sliders to see results.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">📈 Lab 2 — CAPM Line Explorer CAPM安全市场线</div>
+  <div class="lab">
+    <h2>📉 Security Market Line (SML) Explorer</h2>
+    <div class="subtitle">调整无风险利率和市场收益率，观察SML如何变化。输入任意β值，立即得到CAPM要求收益率。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Risk-Free Rate R_f</span><span class="val" id="rf-val">4.0%</span></div>
+          <input type="range" id="rf" min="0" max="10" value="40" oninput="updateCAPM()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Market Return R_m</span><span class="val" id="rm-val">10.0%</span></div>
+          <input type="range" id="rm" min="50" max="200" value="100" oninput="updateCAPM()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Asset Beta β</span><span class="val" id="beta-val">1.40</span></div>
+          <input type="range" id="beta" min="0" max="300" value="140" oninput="updateCAPM()">
+        </div>
+      </div>
+      <div class="result-panel">
+        <h3>📊 CAPM Results</h3>
+        <div class="metric"><span class="label">Risk-Free Rate R_f</span><span class="value neutral" id="c-rf">—</span></div>
+        <div class="metric"><span class="label">Market Return R_m</span><span class="value neutral" id="c-rm">—</span></div>
+        <div class="metric"><span class="label">Equity Risk Premium (ERP)</span><span class="value neutral" id="c-erp">—</span></div>
+        <div class="metric"><span class="label">Beta β</span><span class="value neutral" id="c-beta">—</span></div>
+        <div class="metric"><span class="label">β × ERP</span><span class="value neutral" id="c-berp">—</span></div>
+        <div class="metric"><span class="label">Required Return K_e</span><span class="value positive" id="c-ke">—</span></div>
+        <div class="insight" id="c-insight">K_e = R_f + β(R_m − R_f)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">🎯 Lab 3 — Beta Estimator 贝塔系数估算器</div>
+  <div class="lab">
+    <h2>🔢 Beta Calculator from Returns</h2>
+    <div class="subtitle">输入资产收益率和市场收益率数据，自动计算β系数。β = Cov(Asset, Market) / Var(Market)</div>
+    <div style="margin-bottom:1rem">
+      <p style="color:#94a3b8;font-size:.88rem;margin-bottom:.8rem">Enter comma-separated returns (e.g. 5,12,-3,8,15):</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem">
+        <div>
+          <label style="color:#cbd5e1;font-size:.85rem;display:block;margin-bottom:.3rem">Asset Returns (%)</label>
+          <input type="text" id="asset-returns" value="5,12,-3,8,15,2,-8,20" style="width:100%;background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:.6rem .8rem;border-radius:6px;font-size:.9rem">
+        </div>
+        <div>
+          <label style="color:#cbd5e1;font-size:.85rem;display:block;margin-bottom:.3rem">Market Returns (%)</label>
+          <input type="text" id="market-returns" value="4,10,-2,6,12,1,-6,15" style="width:100%;background:#1e293b;border:1px solid #334155;color:#e2e8f0;padding:.6rem .8rem;border-radius:6px;font-size:.9rem">
+        </div>
+      </div>
+      <button onclick="calcBeta()" style="background:var(--accent);color:#fff;border:none;padding:.7rem 1.4rem;border-radius:8px;font-weight:700;cursor:pointer;font-size:.9rem">Calculate Beta →</button>
+    </div>
+    <div class="result-panel" id="beta-results" style="display:none">
+      <h3>📊 Beta Estimation Results</h3>
+      <div class="metric"><span class="label">Number of observations</span><span class="value neutral" id="b-n">—</span></div>
+      <div class="metric"><span class="label">Mean Asset Return</span><span class="value neutral" id="b-mean-a">—</span></div>
+      <div class="metric"><span class="label">Mean Market Return</span><span class="value neutral" id="b-mean-m">—</span></div>
+      <div class="metric"><span class="label">Cov(Asset, Market)</span><span class="value neutral" id="b-cov">—</span></div>
+      <div class="metric"><span class="label">Var(Market)</span><span class="value neutral" id="b-var-m">—</span></div>
+      <div class="metric"><span class="label">Beta β = Cov/Var(Market)</span><span class="value positive" id="b-beta">—</span></div>
+      <div class="insight" id="b-insight">—</div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html" class="btn btn-outline">← Lecture</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html" class="btn btn-primary">✏️ Take Quiz →</a>
+  </div>
+</main>
+<script>
+function updatePortfolio(){
+  const wA=parseInt(document.getElementById('wA').value)/100;
+  const wB=1-wA;
+  const sA=parseInt(document.getElementById('sigA').value)/100;
+  const sB=parseInt(document.getElementById('sigB').value)/100;
+  const rho=parseInt(document.getElementById('rho').value)/100;
+  const erA=parseInt(document.getElementById('erA').value)/100;
+  const erB=parseInt(document.getElementById('erB').value)/100;
+
+  document.getElementById('wA-val').textContent=Math.round(wA*100)+'%';
+  document.getElementById('sigA-val').textContent=Math.round(sA*100)+'%';
+  document.getElementById('sigB-val').textContent=Math.round(sB*100)+'%';
+  document.getElementById('rho-val').textContent=rho.toFixed(2);
+  document.getElementById('erA-val').textContent=Math.round(erA*100)+'%';
+  document.getElementById('erB-val').textContent=Math.round(erB*100)+'%';
+
+  const cov=rho*sA*sB;
+  const varP=wA*wA*sA*sA + wB*wB*sB*sB + 2*wA*wB*cov;
+  const sigP=Math.sqrt(varP);
+  const erP=wA*erA+wB*erB;
+  const wAvg=wA*sA+wB*sB;
+  const divBenefit=wAvg-sigP;
+
+  document.getElementById('r-weights').textContent=Math.round(wA*100)+'% / '+Math.round(wB*100)+'%';
+  document.getElementById('r-er').textContent=(erP*100).toFixed(2)+'%';
+  document.getElementById('r-var').textContent=(varP*10000).toFixed(2)+' (%²)';
+  document.getElementById('r-sig').textContent=(sigP*100).toFixed(2)+'%';
+  document.getElementById('r-wavg').textContent=(wAvg*100).toFixed(2)+'%';
+  document.getElementById('r-div').textContent=(divBenefit*100).toFixed(2)+'%';
+
+  let msg='';
+  const saving = (divBenefit*100).toFixed(2);
+  if(rho>=0.99) msg=`<strong>ρ = +1 (Perfect positive correlation):</strong> Zero diversification benefit — portfolio σ equals the weighted average. This is the worst case. In practice, even shares in the same industry rarely reach ρ = +1.`;
+  else if(rho>=0.5) msg=`<strong>High positive correlation (ρ = ${rho.toFixed(2)}):</strong> Limited diversification. You're saving ${saving}% in risk vs. the weighted average. Think: two UK bank stocks — they tend to move together in financial crises.`;
+  else if(rho>=0) msg=`<strong>Moderate correlation (ρ = ${rho.toFixed(2)}):</strong> Good diversification benefit — saving ${saving}% in risk. This is typical for stocks in different sectors (e.g. financials + utilities). Most real portfolios operate in this range.`;
+  else if(rho>=-0.5) msg=`<strong>Low/negative correlation (ρ = ${rho.toFixed(2)}):</strong> Strong diversification — saving ${saving}% in risk. Think: equities + government bonds. When markets crash, bonds often rally, offsetting equity losses.`;
+  else msg=`<strong>Strong negative correlation (ρ = ${rho.toFixed(2)}):</strong> Near-perfect hedge — saving ${saving}% in risk. ρ = −1 would eliminate all risk entirely. This is extremely rare in practice but is the theoretical ideal for hedging strategies.`;
+  document.getElementById('r-insight').innerHTML=msg;
+}
+
+function updateCAPM(){
+  const rf=parseInt(document.getElementById('rf').value)/10/100;
+  const rm=parseInt(document.getElementById('rm').value)/10/100;
+  const beta=parseInt(document.getElementById('beta').value)/100;
+
+  document.getElementById('rf-val').textContent=(rf*100).toFixed(1)+'%';
+  document.getElementById('rm-val').textContent=(rm*100).toFixed(1)+'%';
+  document.getElementById('beta-val').textContent=beta.toFixed(2);
+
+  const erp=rm-rf;
+  const ke=rf+beta*erp;
+
+  document.getElementById('c-rf').textContent=(rf*100).toFixed(2)+'%';
+  document.getElementById('c-rm').textContent=(rm*100).toFixed(2)+'%';
+  document.getElementById('c-erp').textContent=(erp*100).toFixed(2)+'%';
+  document.getElementById('c-beta').textContent=beta.toFixed(2);
+  document.getElementById('c-berp').textContent=(beta*erp*100).toFixed(2)+'%';
+  document.getElementById('c-ke').textContent=(ke*100).toFixed(2)+'%';
+
+  let msg=`<strong>K_e = ${(rf*100).toFixed(1)}% + ${beta.toFixed(2)} × ${(erp*100).toFixed(1)}% = ${(ke*100).toFixed(2)}%</strong><br>`;
+  if(beta>1.5) msg+=`Highly aggressive (β = ${beta.toFixed(2)}): This stock amplifies market swings. Think mining companies or early-stage tech. Investors demand a high premium — ${(ke*100).toFixed(2)}% — to compensate for the extra volatility.`;
+  else if(beta>1) msg+=`Aggressive (β = ${beta.toFixed(2)}): Above-market risk. Required return of ${(ke*100).toFixed(2)}% exceeds the market return of ${(rm*100).toFixed(1)}%. Typical of cyclical sectors like construction or retail.`;
+  else if(beta===1) msg+=`Market portfolio (β = 1.00): Required return equals the market return exactly — ${(ke*100).toFixed(2)}%. This is the FTSE 100 index itself.`;
+  else if(beta>0.5) msg+=`Defensive (β = ${beta.toFixed(2)}): Below-market risk. Required return of ${(ke*100).toFixed(2)}% is lower than the market. Typical of utilities (National Grid, Severn Trent) or telecoms (Vodafone).`;
+  else if(beta>0) msg+=`Very defensive (β = ${beta.toFixed(2)}): Minimal market sensitivity. Required return barely above the risk-free rate. Think regulated monopolies or supermarkets.`;
+  else msg+=`Negative beta (β = ${beta.toFixed(2)}): This asset moves against the market — it's a natural hedge. Required return falls below the risk-free rate (${(ke*100).toFixed(2)}%). Gold and some government bonds exhibit this property.`;
+  document.getElementById('c-insight').innerHTML=msg;
+}
+
+function calcBeta(){
+  const aRaw=document.getElementById('asset-returns').value.split(',').map(x=>parseFloat(x.trim()));
+  const mRaw=document.getElementById('market-returns').value.split(',').map(x=>parseFloat(x.trim()));
+  const n=Math.min(aRaw.length,mRaw.length);
+  if(n<2){alert('Need at least 2 data points');return;}
+  const a=aRaw.slice(0,n), m=mRaw.slice(0,n);
+  const meanA=a.reduce((s,v)=>s+v,0)/n;
+  const meanM=m.reduce((s,v)=>s+v,0)/n;
+  let cov=0,varM=0;
+  for(let i=0;i<n;i++){cov+=(a[i]-meanA)*(m[i]-meanM);varM+=(m[i]-meanM)*(m[i]-meanM);}
+  cov/=n; varM/=n;
+  const beta=cov/varM;
+
+  document.getElementById('b-n').textContent=n;
+  document.getElementById('b-mean-a').textContent=meanA.toFixed(2)+'%';
+  document.getElementById('b-mean-m').textContent=meanM.toFixed(2)+'%';
+  document.getElementById('b-cov').textContent=cov.toFixed(4);
+  document.getElementById('b-var-m').textContent=varM.toFixed(4);
+  document.getElementById('b-beta').textContent=beta.toFixed(4);
+
+  let interp='';
+  if(beta>1.5) interp='Very aggressive — amplifies market moves significantly.';
+  else if(beta>1) interp='Aggressive — moves more than the market.';
+  else if(beta>0.5) interp='Defensive — moves less than the market.';
+  else if(beta>0) interp='Very defensive — barely responds to market.';
+  else interp='Negative beta — moves against the market (rare).';
+  document.getElementById('b-insight').innerHTML=`<strong>β = ${beta.toFixed(3)}</strong> — ${interp}`;
+  document.getElementById('beta-results').style.display='block';
+}
+
+updatePortfolio();
+updateCAPM();
+</script>
+</body>
+</html>

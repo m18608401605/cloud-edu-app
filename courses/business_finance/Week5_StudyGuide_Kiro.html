@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 | Study Guide | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea;--purple:#7c3aed}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#0c1445 0%,#1a3a5c 60%,#2d5986 100%);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+  .hero .week-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);font-size:.8rem;font-weight:600;padding:.35rem 1rem;border-radius:20px;margin-bottom:1.2rem;letter-spacing:.06em}
+  .hero h1{font-size:2.2rem;font-weight:900;margin-bottom:.6rem;line-height:1.2}
+  .hero .subtitle{font-size:1.1rem;opacity:.8;max-width:580px;margin:0 auto 1.5rem}
+  .hero .meta-row{display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem}
+  .professor-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid #f0d080;border-radius:16px;padding:2rem;margin-bottom:2.5rem;position:relative}
+  .professor-card::before{content:'👨‍🏫';position:absolute;top:-1rem;left:1.5rem;font-size:2rem;background:var(--bg);padding:0 .4rem}
+  .professor-card h2{color:#7a5800;font-size:1.1rem;margin-bottom:.8rem}
+  .professor-card p{color:#5a4000;margin-bottom:.7rem;font-size:.95rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1.2rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:2rem}
+  .tip-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.4rem;border-top:4px solid var(--primary)}
+  .tip-card.t2{border-top-color:var(--purple)}
+  .tip-card.t3{border-top-color:var(--green)}
+  .tip-card .tip-icon{font-size:1.6rem;margin-bottom:.6rem}
+  .tip-card h3{font-size:.95rem;font-weight:700;color:var(--primary);margin-bottom:.5rem}
+  .tip-card p{font-size:.88rem;color:var(--muted);line-height:1.6}
+  .module-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+  .module-item{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;display:flex;gap:1.2rem;align-items:flex-start}
+  .module-num{background:var(--primary);color:#fff;font-weight:900;font-size:1.1rem;width:2.4rem;height:2.4rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+  .module-num.m2{background:var(--purple)}
+  .module-num.m3{background:var(--green)}
+  .module-num.m4{background:var(--accent)}
+  .module-num.m5{background:#0891b2}
+  .module-content h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:.4rem}
+  .module-content p{font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+  .module-content .tags{display:flex;gap:.4rem;flex-wrap:wrap}
+  .module-content .tag{background:#eef4ff;color:var(--primary);font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:10px}
+  .module-content .tag.exam{background:#fff0f0;color:var(--red)}
+  .module-content .tag.calc{background:#f0fdf4;color:var(--green)}
+  .checklist{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;margin-bottom:2rem}
+  .checklist h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem}
+  .check-item{display:flex;align-items:flex-start;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.9rem;cursor:pointer}
+  .check-item:last-child{border-bottom:none}
+  .check-item .cb{width:1.2rem;height:1.2rem;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:.15rem;transition:all .2s}
+  .check-item .cb.done{background:var(--green);border-color:var(--green)}
+  .check-item .cb.done::after{content:'✓';color:#fff;font-size:.75rem;display:flex;align-items:center;justify-content:center;height:100%}
+  .check-item .cb-text.done{text-decoration:line-through;color:var(--muted)}
+  .start-banner{background:linear-gradient(135deg,var(--primary),#2c5282);border-radius:14px;padding:2rem;text-align:center;color:#fff;margin-top:2rem}
+  .start-banner h3{font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+  .start-banner p{opacity:.8;margin-bottom:1.5rem;font-size:.95rem}
+  .start-banner .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;border-radius:8px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-white{background:#fff;color:var(--primary)}
+  .btn-outline-white{border:2px solid rgba(255,255,255,.5);color:#fff}
+  .formula-highlight{background:#0f172a;color:#fbbf24;font-family:monospace;padding:.8rem 1.2rem;border-radius:8px;font-size:1rem;margin:.5rem 0;display:block}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html" class="active">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 5</span>
+</nav>
+<div class="hero">
+  <div class="week-tag">Week 5 · Chapter 7 · Study Guide</div>
+  <h1>Portfolio Theory</h1>
+  <div class="subtitle">投资组合理论 — 期望收益、风险分散、有效前沿与CAPM</div>
+  <div class="meta-row">
+    <span>📖 McLaney Ch.7</span>
+    <span>⏱ ~30 min prep</span>
+    <span>🎯 Exam Weight: Very High</span>
+  </div>
+</div>
+<main>
+
+  <div class="professor-card">
+    <h2>🎯 本周学习目标 Learning Objectives</h2>
+    <p>本周我们进入投资组合理论的核心领域。你将学会如何计算组合的期望收益与风险，理解分散化的数学原理，掌握有效前沿的概念，并能运用CAPM模型计算股权成本。</p>
+    <p><strong>关键公式预警：</strong> CAPM: K<sub>e</sub> = R<sub>f</sub> + β(R<sub>m</sub> − R<sub>f</sub>) — 这是本章最重要的公式，必须能默写并应用。</p>
+    <p>By the end of this week, you should be able to calculate portfolio expected return and variance, explain the efficient frontier, and apply CAPM to find the cost of equity.</p>
+  </div>
+
+  <div class="section-label">📌 Why This Chapter Matters</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">📊</div>
+      <h3>Risk Decomposition</h3>
+      <p>Total risk = Systematic + Unsystematic. Only systematic risk is priced by the market — this is the foundation of modern finance.</p>
+    </div>
+    <div class="tip-card t2">
+      <div class="tip-icon">🔗</div>
+      <h3>Diversification Power</h3>
+      <p>Combining assets with low correlation reduces portfolio risk below the weighted average of individual risks. Correlation is the key variable.</p>
+    </div>
+    <div class="tip-card t3">
+      <div class="tip-icon">📈</div>
+      <h3>CAPM in Practice</h3>
+      <p>CAPM links β (systematic risk) to required return. Used in investment appraisal, valuation, and regulatory rate-setting worldwide.</p>
+    </div>
+  </div>
+
+  <div class="section-label">📚 Module Breakdown</div>
+  <div class="module-list">
+    <div class="module-item">
+      <div class="module-num">1</div>
+      <div class="module-content">
+        <h3>Expected Return & Variance 期望收益与方差</h3>
+        <p>E(R) = Σ pᵢ × Rᵢ; Variance σ² = Σ pᵢ(Rᵢ − E(R))². The building blocks of all portfolio math.</p>
+        <div class="tags"><span class="tag calc">Calculator</span><span class="tag exam">Exam Core</span></div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m2">2</div>
+      <div class="module-content">
+        <h3>Covariance & Correlation 协方差与相关系数</h3>
+        <p>Cov(A,B) = Σ pᵢ(Rₐ−E(Rₐ))(R_b−E(R_b)); ρ = Cov/σₐσ_b. Correlation ranges from −1 to +1.</p>
+        <div class="tags"><span class="tag calc">Calculator</span><span class="tag exam">Exam Core</span></div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m3">3</div>
+      <div class="module-content">
+        <h3>Two-Asset Portfolio Risk 两资产组合风险</h3>
+        <p>σ²_p = w²_A σ²_A + w²_B σ²_B + 2w_A w_B Cov(A,B). Adjust weights to see risk change.</p>
+        <div class="tags"><span class="tag calc">Calculator</span><span class="tag exam">Exam Core</span></div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m4">4</div>
+      <div class="module-content">
+        <h3>Efficient Frontier & Diversification 有效前沿</h3>
+        <p>The set of portfolios offering maximum return for a given risk level. Rational investors choose on the frontier.</p>
+        <div class="tags"><span class="tag">Conceptual</span><span class="tag exam">Exam Core</span></div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m5">5</div>
+      <div class="module-content">
+        <h3>CAPM & Beta CAPM与贝塔系数</h3>
+        <p>K_e = R_f + β(R_m − R_f). Beta measures sensitivity to market movements. β=1 moves with market; β>1 amplifies; β&lt;1 dampens.</p>
+        <div class="tags"><span class="tag calc">Calculator</span><span class="tag exam">Exam Core</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">✅ Pre-Lecture Checklist</div>
+  <div class="checklist">
+    <h3>完成以下准备工作 Complete before lecture:</h3>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Read McLaney Ch.7 pp.1–15 (Expected Return & Variance)</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Memorise: E(R) = Σ pᵢRᵢ and σ² = Σ pᵢ(Rᵢ−E(R))²</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Understand what correlation coefficient ρ means (−1 to +1)</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Memorise CAPM: K_e = R_f + β(R_m − R_f)</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Know what β=0, β=1, β=2 means intuitively</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Try the Interactive Lab: Portfolio Risk Calculator</span>
+    </div>
+  </div>
+
+  <div class="section-label">🔑 Key Formulas at a Glance</div>
+  <div style="background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;margin-bottom:2rem">
+    <code class="formula-highlight">E(R) = Σ pᵢ × Rᵢ</code>
+    <code class="formula-highlight">σ²  = Σ pᵢ × (Rᵢ − E(R))²</code>
+    <code class="formula-highlight">σ²_p = w²_A σ²_A + w²_B σ²_B + 2·w_A·w_B·Cov(A,B)</code>
+    <code class="formula-highlight">Cov(A,B) = Σ pᵢ(Rₐ−E(Rₐ))(R_b−E(R_b))</code>
+    <code class="formula-highlight">K_e = R_f + β(R_m − R_f)   ← CAPM</code>
+  </div>
+
+  <div class="section-label">⚠️ Exam Pitfall Rapid-Fire</div>
+  <div style="background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;margin-bottom:2rem">
+    <div style="display:flex;flex-direction:column;gap:.8rem">
+      <div style="background:#fff5f5;border-left:4px solid #e74c3c;padding:.8rem 1rem;border-radius:0 6px 6px 0;font-size:.9rem">
+        <strong style="color:#c0392b">❌ Trap 1:</strong> "Portfolio standard deviation = weighted average of individual σ's"<br>
+        <span style="color:#555">→ FALSE. You must include the covariance term. σ_p is always ≤ weighted average (when ρ &lt; 1).</span>
+      </div>
+      <div style="background:#fff5f5;border-left:4px solid #e74c3c;padding:.8rem 1rem;border-radius:0 6px 6px 0;font-size:.9rem">
+        <strong style="color:#c0392b">❌ Trap 2:</strong> "Diversification eliminates all risk"<br>
+        <span style="color:#555">→ FALSE. Only specific (unsystematic) risk is eliminated. Systematic risk remains no matter how many assets you hold.</span>
+      </div>
+      <div style="background:#fff5f5;border-left:4px solid #e74c3c;padding:.8rem 1rem;border-radius:0 6px 6px 0;font-size:.9rem">
+        <strong style="color:#c0392b">❌ Trap 3:</strong> "A high standard deviation means a high required return (CAPM)"<br>
+        <span style="color:#555">→ FALSE. CAPM uses beta (systematic risk only), not total σ. A high-σ stock with low beta may have a lower required return than a low-σ stock with high beta.</span>
+      </div>
+      <div style="background:#fff5f5;border-left:4px solid #e74c3c;padding:.8rem 1rem;border-radius:0 6px 6px 0;font-size:.9rem">
+        <strong style="color:#c0392b">❌ Trap 4:</strong> "Diversification is only beneficial when correlation is negative"<br>
+        <span style="color:#555">→ FALSE. Any ρ &lt; +1 gives some diversification benefit. You don't need negative correlation — just less than perfect positive correlation.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">🧠 Self-Check Before the Exam</div>
+  <div class="checklist" style="margin-bottom:2rem">
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Can I calculate E(R) and σ² from a probability table without looking at notes?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Can I calculate portfolio variance using the two-asset formula, including the covariance term?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Can I explain why portfolio σ &lt; weighted average σ when ρ &lt; 1?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Can I apply CAPM: K_e = R_f + β(R_m − R_f) and interpret the result?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Do I know what β = 0, 0.7, 1.0, 1.5 means in plain English?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Can I explain the difference between systematic and unsystematic risk, and which CAPM cares about?</span>
+    </div>
+    <div class="check-item" onclick="toggle(this)">
+      <div class="cb"></div><span class="cb-text">Do I know what "two-fund separation" means and what the two funds are?</span>
+    </div>
+  </div>
+
+  <div class="start-banner">
+    <h3>Ready to dive in? 🚀</h3>
+    <p>Start with the Lecture for full explanations, then test yourself in the Interactive Lab and Quiz.</p>
+    <div class="btn-row">
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html" class="btn btn-white">📖 Start Lecture</a>
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html" class="btn btn-outline-white">🧪 Interactive Lab</a>
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html" class="btn btn-outline-white">✏️ Take Quiz</a>
+    </div>
+  </div>
+
+</main>
+<script>
+function toggle(el){
+  const cb=el.querySelector('.cb');
+  const txt=el.querySelector('.cb-text');
+  cb.classList.toggle('done');
+  txt.classList.toggle('done');
+}
+</script>
+</body>
+</html>
