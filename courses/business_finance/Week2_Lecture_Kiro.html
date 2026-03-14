@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 | Lecture | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
+  .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem}
+  .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
+  .card p{margin-bottom:.8rem}
+  .card ul,.card ol{padding-left:1.4rem;margin-bottom:.8rem}
+  .card li{margin-bottom:.4rem}
+  .concept-box{background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem 1.5rem;margin:1rem 0}
+  .concept-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:.06em;margin-bottom:.5rem}
+  .case{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .case .case-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#b7860b;letter-spacing:.06em;margin-bottom:.6rem}
+  .case h4{font-size:1rem;color:#7a5800;margin-bottom:.6rem}
+  .pitfall{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .pitfall .pitfall-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:.6rem}
+  .pitfall .rule{background:#fee2e2;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600;color:#991b1b}
+  .formula-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1.4rem;margin:1rem 0;font-family:monospace}
+  .formula-box .f-title{color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+  .formula-box .f-main{font-size:1.1rem;color:#fbbf24;margin-bottom:.4rem}
+  .formula-box .f-note{font-size:.82rem;color:#64748b}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+  @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+  .pill{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;border-top:4px solid var(--primary)}
+  .pill h4{font-size:.95rem;font-weight:700;color:var(--primary);margin-bottom:.4rem}
+  .pill p{font-size:.88rem;color:var(--muted)}
+  .pill.green{border-top-color:var(--green)}
+  .pill.red{border-top-color:var(--red)}
+  .pill.amber{border-top-color:#f59e0b}
+  table.data{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  table.data th{background:var(--primary);color:#fff;padding:.7rem 1rem;text-align:left}
+  table.data td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+  table.data tr:nth-child(even) td{background:#f8fafc}
+  table.data .check{color:var(--green);font-weight:700}
+  table.data .cross{color:var(--red);font-weight:700}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 2</span>
+</nav>
+<div class="hero">
+  <div class="tag">Week 2 · Chapter 4</div>
+  <h1>Time Value of Money &amp; Investment Appraisal</h1>
+  <p>时间价值与投资评估 — PV, FV, NPV, IRR, Payback &amp; ARR</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.4</span>
+    <span>⏱ ~60 min read</span>
+    <span>🎯 Exam Weight: Critical</span>
+  </div>
+</div>
+<main>
+
+  <div class="section-label">⏰ Part 1 — Time Value of Money</div>
+
+  <div class="card">
+    <h2>📚 Why Does Time Matter? 为什么时间有价值？</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比</div>
+      <p>今天给你£1,000，你可以存银行，一年后变成£1,050（5%利率）。所以"今天的£1,000"和"一年后的£1,000"不是同一回事——今天的更值钱。这就是时间价值的全部直觉。</p>
+    </div>
+    <div class="grid2">
+      <div class="formula-box">
+        <div class="f-title">Future Value 终值</div>
+        <div class="f-main">FV = PV × (1 + r)ⁿ</div>
+        <div class="f-note">今天的钱 → 未来值多少</div>
+      </div>
+      <div class="formula-box">
+        <div class="f-title">Present Value 现值</div>
+        <div class="f-main">PV = FV ÷ (1 + r)ⁿ</div>
+        <div class="f-note">未来的钱 → 今天值多少</div>
+      </div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Lecture Example</div>
+      <h4>Tuition Payment Problem</h4>
+      <p>需要在4年后支付$7,000学费，银行利率3%。现在需要存多少？</p>
+      <p><strong>PV = $7,000 ÷ (1.03)⁴ = $7,000 ÷ 1.1255 = $6,219.41</strong></p>
+      <p style="font-size:.88rem;color:var(--muted)">折现因子 = 1/(1.03)⁴ = 0.8885。今天存$6,219.41，4年后正好变成$7,000。</p>
+    </div>
+    <h3>Fisher Effect: Nominal vs Real Rate 名义利率 vs 实际利率</h3>
+    <div class="formula-box">
+      <div class="f-title">Fisher Equation</div>
+      <div class="f-main">(1 + nominal) = (1 + real) × (1 + inflation)</div>
+      <div class="f-note">近似：nominal ≈ real + inflation</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🍕 Pizza Example</div>
+      <h4>Real Interest = Compensation for Delayed Consumption</h4>
+      <p>名义利率5%，通胀3%。实际利率 = 1.05/1.03 − 1 = <strong>1.94%</strong>。意思是：你延迟消费一年，能多买1.94%的披萨。实际利率 = 延迟消费的真实补偿。</p>
+    </div>
+  </div>
+
+  <div class="section-label">💰 Part 2 — NPV: The Gold Standard</div>
+
+  <div class="card">
+    <h2>📚 Net Present Value 净现值</h2>
+    <div class="concept-box">
+      <div class="label">核心定义</div>
+      <p><strong>NPV = 所有未来现金流的现值之和 − 初始投资</strong></p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">NPV > 0 → 接受（创造财富）｜NPV < 0 → 拒绝（销毁财富）｜NPV = 0 → 无差异</p>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">NPV Formula</div>
+      <div class="f-main">NPV = −C₀ + C₁/(1+r) + C₂/(1+r)² + ... + Cₙ/(1+r)ⁿ</div>
+      <div class="f-note">C₀ = 初始投资（负数）｜Cₙ = 第n年现金流｜r = 折现率</div>
+    </div>
+    <h3>Annuity Shortcut 年金快捷计算</h3>
+    <div class="concept-box">
+      <div class="label">年金 = 等额、连续、期末的现金流</div>
+      <p>PV of Annuity = C × AF(r, n)</p>
+      <p style="margin-top:.4rem;font-size:.9rem">AF(r,n) = [1 − 1/(1+r)ⁿ] ÷ r　（年金因子，可查表）</p>
+      <p style="margin-top:.4rem;font-size:.9rem"><strong>永续年金（Perpetuity）：</strong>PV = C ÷ r　（无限期等额现金流）</p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q3 陷阱 — 年金表 vs 折现因子表</div>
+      <p>年金表（Annuity Table）的数字 = 未来n年每年£1的现值之和。折现因子表（Discount Factor Table）= 第n年£1的现值。两者完全不同，不能混用。</p>
+      <div class="rule">✅ 年金表：5年10% = 3.791，意思是未来5年每年£1，今天值£3.791</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q4 陷阱 — 折现率变化对 NPV 和 IRR 的影响</div>
+      <p>折现率上升 → NPV 下降（未来现金流折现更多）。IRR 本身不变（它是项目固有属性，不受折现率影响）。</p>
+      <div class="rule">✅ 折现率↑ → NPV↓，IRR 不变。这是高频考点。</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🏢 Real Case — Amazon AWS NPV Decision</div>
+      <h4>How Amazon Justified $Billions in Cloud Infrastructure</h4>
+      <p>Amazon 投资 AWS 自动化合同处理平台时，CFO 团队做了 NPV 分析：初始投资巨大（负现金流），但未来5年节省80%人工成本（正现金流）。NPV > 0，项目获批。这就是 NPV 在真实世界的用法——不是"感觉值得"，而是数字说话。</p>
+    </div>
+  </div>
+
+  <div class="section-label">📈 Part 3 — IRR &amp; Other Methods</div>
+
+  <div class="card">
+    <h2>📚 Internal Rate of Return 内部收益率</h2>
+    <div class="concept-box">
+      <div class="label">定义</div>
+      <p>IRR = 使 NPV = 0 的折现率。如果 IRR > 资本成本（hurdle rate），接受项目。</p>
+    </div>
+    <h3>Interpolation Formula 插值法</h3>
+    <div class="formula-box">
+      <div class="f-title">IRR Approximation</div>
+      <div class="f-main">IRR ≈ r₁ + [NPV₁ ÷ (NPV₁ − NPV₂)] × (r₂ − r₁)</div>
+      <div class="f-note">r₁ = 低折现率（NPV为正）｜r₂ = 高折现率（NPV为负）</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Q7 — Sienna plc IRR Calculation</div>
+      <h4>插值法实例</h4>
+      <p>已知：折现率20%时 NPV = +£200，折现率30%时 NPV = −£100。</p>
+      <p><strong>IRR ≈ 20% + [200 ÷ (200+100)] × (30%−20%) = 20% + 0.667 × 10% = 26.7%</strong></p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ IRR 的致命缺陷 — Q6 & Q9</div>
+      <p><strong>再投资假设问题（Q6）：</strong>IRR 隐含假设项目释放的现金流可以按 IRR 本身再投资——这通常不现实。NPV 假设按资本成本再投资，更合理。</p>
+      <p style="margin-top:.5rem"><strong>变动折现率问题（Q9）：</strong>如果每年的资本成本不同，IRR 无法处理（只有一个 IRR，无法与多个折现率比较）。NPV 可以逐年用不同折现率。</p>
+      <div class="rule">✅ IRR 不总是促进财富最大化。NPV 才是唯一直接对应股东财富的方法（Q10）。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Payback &amp; ARR — 为什么它们不够好</h2>
+    <div class="grid2">
+      <div class="pill amber">
+        <h4>Payback Period 回收期</h4>
+        <p>多少年收回初始投资。简单直观，但<strong>忽略时间价值</strong>，忽略回收期后的现金流。</p>
+      </div>
+      <div class="pill red">
+        <h4>ARR 会计收益率</h4>
+        <p>平均利润 ÷ 平均投资。基于<strong>会计利润而非现金流</strong>，受折旧方法影响，不可靠。</p>
+      </div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q8 — 实际调查结论</div>
+      <p>调查显示：企业倾向于<strong>同时使用多种方法</strong>（NPV + IRR + Payback），而不是只用一种。IRR 和 Payback 的使用并没有减少。</p>
+      <div class="rule">✅ Q8 答案：A tendency for businesses to use more than one method.</div>
+    </div>
+  </div>
+
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="card">
+    <h2>🎯 Week 2 Quick-Reference</h2>
+    <table class="data">
+      <thead><tr><th>考点</th><th>正确答案</th><th>常见错误</th></tr></thead>
+      <tbody>
+        <tr><td>NPV 的含义</td><td class="check">财富增减量（绝对值）</td><td class="cross">不是回报率，不是现金流总和</td></tr>
+        <tr><td>折现因子（5年，15%）</td><td class="check">1/(1.15)⁵</td><td class="cross">不是 (0.15)⁵ 或 (1.15)⁵</td></tr>
+        <tr><td>年金表含义</td><td class="check">未来n年每年£1的现值之和</td><td class="cross">不是第n年£1的现值</td></tr>
+        <tr><td>折现率↑，NPV 和 IRR 变化</td><td class="check">NPV↓，IRR 不变</td><td class="cross">两者都变</td></tr>
+        <tr><td>IRR 的再投资假设</td><td class="check">按 IRR 本身再投资（不现实）</td><td class="cross">按资本成本再投资（那是 NPV）</td></tr>
+        <tr><td>哪种方法直接促进财富最大化</td><td class="check">NPV</td><td class="cross">IRR（有缺陷）</td></tr>
+        <tr><td>实际调查：企业用几种方法</td><td class="check">多种方法并用</td><td class="cross">只用 NPV</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_StudyGuide_Kiro.html" class="btn btn-outline">← Study Guide</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 1 of 3</span>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html" class="btn btn-primary">Interactive Lab →</a>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 | Interactive Lab | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#2d1b69 0%,#7c3aed 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:600px;margin:0 auto}
+  main{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .lab{background:#0f172a;border-radius:14px;padding:2rem;color:#e2e8f0;margin-bottom:1.5rem}
+  .lab h2{color:#f8fafc;font-size:1.2rem;margin-bottom:.4rem}
+  .lab .subtitle{color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem}
+  .lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media(max-width:700px){.lab-grid{grid-template-columns:1fr}}
+  .control-group{margin-bottom:1.2rem}
+  .control-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.88rem;color:#cbd5e1}
+  .control-label .val{font-weight:700;color:#f8fafc;font-size:1rem;font-family:monospace}
+  input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#334155;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(232,160,32,.3)}
+  .result-panel{background:#1e293b;border-radius:10px;padding:1.4rem}
+  .result-panel h3{color:#94a3b8;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+  .metric{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid #334155}
+  .metric:last-child{border-bottom:none}
+  .metric .label{color:#94a3b8;font-size:.88rem}
+  .metric .value{font-weight:700;font-family:monospace;font-size:1.05rem}
+  .metric .value.positive{color:#4ade80}
+  .metric .value.negative{color:#f87171}
+  .metric .value.neutral{color:#fbbf24}
+  .insight{background:#1e3a5f;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-top:1.2rem;font-size:.9rem;color:#bfdbfe}
+  .insight strong{color:#fff}
+  .step{background:#1e293b;border-radius:8px;padding:.8rem 1rem;margin-bottom:.6rem;font-size:.88rem}
+  .step .step-num{color:var(--accent);font-weight:700;font-size:.75rem;text-transform:uppercase;margin-bottom:.2rem}
+  .step .step-eq{font-family:monospace;color:#e2e8f0;font-size:.95rem}
+  .scenario-btns{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.2rem}
+  .scenario-btn{padding:.4rem .9rem;border-radius:20px;border:1px solid #334155;background:transparent;color:#94a3b8;font-size:.82rem;cursor:pointer;transition:all .2s}
+  .scenario-btn:hover,.scenario-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+  .timeline{display:flex;align-items:flex-end;gap:0;margin:1rem 0;overflow-x:auto;padding-bottom:.5rem}
+  .tl-item{display:flex;flex-direction:column;align-items:center;min-width:60px}
+  .tl-bar{width:40px;border-radius:4px 4px 0 0;transition:height .4s ease,background .3s}
+  .tl-label{font-size:.7rem;color:#94a3b8;margin-top:.3rem;font-family:monospace}
+  .tl-year{font-size:.7rem;color:#64748b;margin-top:.2rem}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 2</span>
+</nav>
+<div class="hero">
+  <div class="tag">🧪 Interactive Lab · Week 2</div>
+  <h1>NPV &amp; IRR 实验室</h1>
+  <p>拖动滑块，看现金流如何折现，感受 NPV 和 IRR 的直觉。</p>
+</div>
+<main>
+
+  <div class="section-label">🔬 Lab 1 — PV / FV 时间机器</div>
+  <div class="lab">
+    <h2>⏰ Present Value Explorer 现值探索器</h2>
+    <div class="subtitle">调整金额、利率和年数，实时看到折现的效果。感受"时间越长、折现越多"的直觉。</div>
+    <div class="scenario-btns">
+      <button class="scenario-btn active" onclick="setPVScenario(10000,10,5,this)">📊 Base Case</button>
+      <button class="scenario-btn" onclick="setPVScenario(50000,5,10,this)">🏠 Mortgage</button>
+      <button class="scenario-btn" onclick="setPVScenario(1000000,8,30,this)">🏦 Pension</button>
+      <button class="scenario-btn" onclick="setPVScenario(7000,3,4,this)">🎓 Tuition</button>
+    </div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Future Cash Flow (£)</span><span class="val" id="fv-val">£10,000</span></div>
+          <input type="range" id="fv" min="1000" max="100000" step="500" value="10000" oninput="updatePV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Discount Rate (%)</span><span class="val" id="dr-val">10%</span></div>
+          <input type="range" id="dr" min="1" max="25" step="0.5" value="10" oninput="updatePV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Years (n)</span><span class="val" id="yr-val">5</span></div>
+          <input type="range" id="yr" min="1" max="30" step="1" value="5" oninput="updatePV()">
+        </div>
+        <div id="pv-steps"></div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>📊 Results</h3>
+          <div class="metric"><span class="label">Future Value</span><span class="value neutral" id="r-fv">£10,000</span></div>
+          <div class="metric"><span class="label">Discount Factor 1/(1+r)ⁿ</span><span class="value neutral" id="r-df">0.6209</span></div>
+          <div class="metric"><span class="label">Present Value</span><span class="value positive" id="r-pv">£6,209</span></div>
+          <div class="metric"><span class="label">Value Lost to Time</span><span class="value negative" id="r-lost">£3,791</span></div>
+          <div class="metric"><span class="label">% of FV retained</span><span class="value neutral" id="r-pct">62.1%</span></div>
+        </div>
+        <div class="insight" id="pv-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">💰 Lab 2 — NPV Project Evaluator</div>
+  <div class="lab">
+    <h2>📊 NPV Calculator 项目评估器</h2>
+    <div class="subtitle">输入项目参数，实时计算 NPV。看看折现率如何影响项目的可行性。</div>
+    <div class="scenario-btns">
+      <button class="scenario-btn active" onclick="setNPVScenario(100000,30000,5,10,this)">🏭 Factory</button>
+      <button class="scenario-btn" onclick="setNPVScenario(500000,120000,6,8,this)">🏢 Office</button>
+      <button class="scenario-btn" onclick="setNPVScenario(50000,18000,4,15,this)">💻 Tech</button>
+    </div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Initial Investment (£)</span><span class="val" id="inv-val">£100,000</span></div>
+          <input type="range" id="inv" min="10000" max="1000000" step="5000" value="100000" oninput="updateNPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Annual Cash Flow (£)</span><span class="val" id="acf-val">£30,000</span></div>
+          <input type="range" id="acf" min="1000" max="300000" step="1000" value="30000" oninput="updateNPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Project Life (years)</span><span class="val" id="life-val">5</span></div>
+          <input type="range" id="life" min="1" max="20" step="1" value="5" oninput="updateNPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Discount Rate (%)</span><span class="val" id="npv-dr-val">10%</span></div>
+          <input type="range" id="npv-dr" min="1" max="30" step="0.5" value="10" oninput="updateNPV()">
+        </div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>📊 NPV Analysis</h3>
+          <div class="metric"><span class="label">Initial Investment</span><span class="value negative" id="n-inv">−£100,000</span></div>
+          <div class="metric"><span class="label">Annuity Factor AF(r,n)</span><span class="value neutral" id="n-af">3.791</span></div>
+          <div class="metric"><span class="label">PV of Cash Flows</span><span class="value positive" id="n-pvcf">£113,730</span></div>
+          <div class="metric"><span class="label">NPV</span><span class="value" id="n-npv">+£13,730</span></div>
+          <div class="metric"><span class="label">Decision</span><span class="value" id="n-dec">✅ ACCEPT</span></div>
+          <div class="metric"><span class="label">Payback Period</span><span class="value neutral" id="n-pb">3.3 years</span></div>
+        </div>
+        <div class="insight" id="npv-insight"></div>
+        <div id="npv-timeline" style="margin-top:1rem"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">📈 Lab 3 — IRR Interpolation Calculator</div>
+  <div class="lab">
+    <h2>🎯 IRR Finder — 插值法计算器</h2>
+    <div class="subtitle">输入两个折现率下的 NPV，自动用插值法计算 IRR。这正是 Q7 Sienna plc 的解法。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Lower Rate r₁ (%)</span><span class="val" id="r1-val">20%</span></div>
+          <input type="range" id="r1" min="1" max="40" step="1" value="20" oninput="updateIRR()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>NPV at r₁ (£)</span><span class="val" id="npv1-val">+£200</span></div>
+          <input type="range" id="npv1" min="10" max="10000" step="10" value="200" oninput="updateIRR()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Higher Rate r₂ (%)</span><span class="val" id="r2-val">30%</span></div>
+          <input type="range" id="r2" min="5" max="60" step="1" value="30" oninput="updateIRR()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>NPV at r₂ (£, negative)</span><span class="val" id="npv2-val">−£100</span></div>
+          <input type="range" id="npv2" min="10" max="10000" step="10" value="100" oninput="updateIRR()">
+        </div>
+        <div id="irr-steps"></div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>🎯 IRR Result</h3>
+          <div class="metric"><span class="label">r₁ (NPV positive)</span><span class="value positive" id="i-r1">20%</span></div>
+          <div class="metric"><span class="label">r₂ (NPV negative)</span><span class="value negative" id="i-r2">30%</span></div>
+          <div class="metric"><span class="label">Interpolated IRR</span><span class="value neutral" id="i-irr">26.7%</span></div>
+          <div class="metric"><span class="label">vs Cost of Capital (10%)</span><span class="value positive" id="i-vs">IRR > CoC → ACCEPT</span></div>
+        </div>
+        <div class="insight" id="irr-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Lecture_Kiro.html" class="btn btn-outline">← Lecture</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 2 of 3</span>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Quiz_Kiro.html" class="btn btn-primary">Quiz →</a>
+  </div>
+</main>
+
+<script>
+const fmt = n => '£' + Math.abs(n).toLocaleString('en-GB', {maximumFractionDigits:0});
+
+// LAB 1: PV
+function setPVScenario(fv,dr,yr,btn){
+  document.getElementById('fv').value=fv;
+  document.getElementById('dr').value=dr;
+  document.getElementById('yr').value=yr;
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updatePV();
+}
+function updatePV(){
+  const fv=+document.getElementById('fv').value;
+  const dr=+document.getElementById('dr').value/100;
+  const yr=+document.getElementById('yr').value;
+  document.getElementById('fv-val').textContent=fmt(fv);
+  document.getElementById('dr-val').textContent=(dr*100).toFixed(1)+'%';
+  document.getElementById('yr-val').textContent=yr;
+  const df=1/Math.pow(1+dr,yr);
+  const pv=fv*df;
+  const lost=fv-pv;
+  document.getElementById('r-fv').textContent=fmt(fv);
+  document.getElementById('r-df').textContent=df.toFixed(4);
+  document.getElementById('r-pv').textContent=fmt(pv);
+  document.getElementById('r-lost').textContent='−'+fmt(lost);
+  document.getElementById('r-pct').textContent=(df*100).toFixed(1)+'%';
+  document.getElementById('pv-steps').innerHTML=`
+    <div class="step"><div class="step-num">Discount Factor</div><div class="step-eq">1 ÷ (1 + ${(dr*100).toFixed(1)}%)^${yr} = ${df.toFixed(4)}</div></div>
+    <div class="step"><div class="step-num">Present Value</div><div class="step-eq">${fmt(fv)} × ${df.toFixed(4)} = ${fmt(pv)}</div></div>
+  `;
+  document.getElementById('pv-insight').innerHTML=`<strong>${fmt(fv)} in ${yr} years</strong> is only worth <strong>${fmt(pv)} today</strong> at ${(dr*100).toFixed(1)}%. Time and interest rates erode ${((1-df)*100).toFixed(1)}% of the value.`;
+}
+
+// LAB 2: NPV
+function setNPVScenario(inv,acf,life,dr,btn){
+  document.getElementById('inv').value=inv;
+  document.getElementById('acf').value=acf;
+  document.getElementById('life').value=life;
+  document.getElementById('npv-dr').value=dr;
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  updateNPV();
+}
+function updateNPV(){
+  const inv=+document.getElementById('inv').value;
+  const acf=+document.getElementById('acf').value;
+  const life=+document.getElementById('life').value;
+  const dr=+document.getElementById('npv-dr').value/100;
+  document.getElementById('inv-val').textContent=fmt(inv);
+  document.getElementById('acf-val').textContent=fmt(acf);
+  document.getElementById('life-val').textContent=life;
+  document.getElementById('npv-dr-val').textContent=(dr*100).toFixed(1)+'%';
+  const af=(1-1/Math.pow(1+dr,life))/dr;
+  const pvcf=acf*af;
+  const npv=pvcf-inv;
+  const pb=inv/acf;
+  document.getElementById('n-inv').textContent='−'+fmt(inv);
+  document.getElementById('n-af').textContent=af.toFixed(3);
+  document.getElementById('n-pvcf').textContent=fmt(pvcf);
+  const npvEl=document.getElementById('n-npv');
+  npvEl.textContent=(npv>=0?'+':'')+fmt(npv);
+  npvEl.className='value '+(npv>=0?'positive':'negative');
+  const decEl=document.getElementById('n-dec');
+  if(npv>0){decEl.textContent='✅ ACCEPT';decEl.className='value positive';}
+  else if(npv<0){decEl.textContent='❌ REJECT';decEl.className='value negative';}
+  else{decEl.textContent='⚖️ INDIFFERENT';decEl.className='value neutral';}
+  document.getElementById('n-pb').textContent=pb.toFixed(1)+' years';
+  document.getElementById('npv-insight').innerHTML=`<strong>AF(${(dr*100).toFixed(1)}%, ${life}yr) = ${af.toFixed(3)}</strong>. PV of cash flows = ${fmt(pvcf)}. NPV = ${npv>=0?'+':''}${fmt(npv)}. ${npv>0?'Project creates value — proceed.':'Project destroys value — reject.'}`;
+}
+
+// LAB 3: IRR
+function updateIRR(){
+  const r1=+document.getElementById('r1').value;
+  const npv1=+document.getElementById('npv1').value;
+  const r2=+document.getElementById('r2').value;
+  const npv2=+document.getElementById('npv2').value;
+  document.getElementById('r1-val').textContent='+'+r1+'%';
+  document.getElementById('npv1-val').textContent='+£'+npv1;
+  document.getElementById('r2-val').textContent=r2+'%';
+  document.getElementById('npv2-val').textContent='−£'+npv2;
+  if(r2<=r1){document.getElementById('irr-insight').innerHTML='<strong>⚠️ r₂ must be greater than r₁</strong>';return;}
+  const irr=r1+(npv1/(npv1+npv2))*(r2-r1);
+  document.getElementById('i-r1').textContent=r1+'% (NPV = +£'+npv1+')';
+  document.getElementById('i-r2').textContent=r2+'% (NPV = −£'+npv2+')';
+  document.getElementById('i-irr').textContent=irr.toFixed(1)+'%';
+  const vsEl=document.getElementById('i-vs');
+  vsEl.textContent=irr>10?'IRR '+irr.toFixed(1)+'% > 10% CoC → ACCEPT':'IRR '+irr.toFixed(1)+'% < 10% CoC → REJECT';
+  vsEl.className='value '+(irr>10?'positive':'negative');
+  document.getElementById('irr-steps').innerHTML=`
+    <div class="step"><div class="step-num">Interpolation Formula</div><div class="step-eq">IRR ≈ r₁ + [NPV₁ ÷ (NPV₁ + |NPV₂|)] × (r₂ − r₁)</div></div>
+    <div class="step"><div class="step-num">Substituting</div><div class="step-eq">= ${r1}% + [${npv1} ÷ (${npv1}+${npv2})] × (${r2}%−${r1}%)</div></div>
+    <div class="step"><div class="step-num">Result</div><div class="step-eq">= ${r1}% + ${(npv1/(npv1+npv2)).toFixed(3)} × ${r2-r1}% = ${irr.toFixed(1)}%</div></div>
+  `;
+  document.getElementById('irr-insight').innerHTML=`<strong>IRR ≈ ${irr.toFixed(1)}%</strong>. This is the rate at which NPV = 0. Compare to your cost of capital: if IRR > CoC, the project earns more than it costs to finance → accept.`;
+}
+
+updatePV(); updateNPV(); updateIRR();
+</script>
+</body>
+</html>

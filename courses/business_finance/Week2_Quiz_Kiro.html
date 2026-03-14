@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 2 | Quiz | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:600px;margin:0 auto}
+  .progress-wrap{background:rgba(255,255,255,.2);border-radius:20px;height:8px;max-width:400px;margin:1.5rem auto 0;overflow:hidden}
+  .progress-fill{height:100%;background:var(--accent);border-radius:20px;transition:width .4s ease;width:0%}
+  .progress-label{text-align:center;font-size:.85rem;opacity:.8;margin-top:.5rem}
+  main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .score-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:2rem;text-align:center;margin-bottom:2rem;display:none}
+  .score-card .big-score{font-size:4rem;font-weight:900;color:var(--primary);line-height:1}
+  .score-card .score-label{color:var(--muted);margin-top:.4rem}
+  .score-card .score-msg{font-size:1.1rem;font-weight:600;margin-top:1rem}
+  .q-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .q-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem}
+  .source-badge{display:inline-block;font-size:.72rem;font-weight:600;padding:.15rem .55rem;border-radius:10px;margin-left:.5rem;vertical-align:middle;background:#dbeafe;color:#1e40af}
+  .q-text{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.8rem}
+  .q-context{background:#f8fafc;border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:.9rem;border-left:3px solid var(--border)}
+  .options{list-style:none;padding:0;margin:1rem 0}
+  .options li{padding:.7rem 1rem;border-radius:8px;margin-bottom:.5rem;border:2px solid var(--border);cursor:pointer;transition:all .2s;font-size:.93rem;display:flex;align-items:flex-start;gap:.7rem}
+  .options li:hover{border-color:var(--primary);background:#f0f4ff}
+  .options li.selected{border-color:var(--primary);background:#eef4ff;font-weight:600}
+  .options li.correct{border-color:var(--green);background:#f0fdf4;color:#166534;font-weight:600;pointer-events:none}
+  .options li.wrong{border-color:var(--red);background:#fff5f5;color:#991b1b;pointer-events:none}
+  .options li.reveal{border-color:var(--green);background:#f0fdf4;color:#166534;pointer-events:none}
+  .options li .opt-letter{font-weight:700;min-width:1.4rem;color:var(--muted)}
+  .options li.correct .opt-letter,.options li.reveal .opt-letter{color:var(--green)}
+  .options li.wrong .opt-letter{color:var(--red)}
+  .explanation{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:1.2rem;margin-top:1rem;display:none;font-size:.9rem}
+  .explanation .exp-title{font-weight:700;color:#166534;margin-bottom:.5rem}
+  .explanation .exp-body{color:#374151;margin-bottom:.6rem}
+  .explanation .wrong-note{background:#fff5f5;border-radius:6px;padding:.7rem;font-size:.88rem;color:#7f1d1d}
+  .sb-card{background:var(--card);border-radius:12px;border:2px solid var(--accent);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(232,160,32,.15)}
+  .sb-header{background:linear-gradient(135deg,var(--primary),#2c5282);color:#fff;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.2rem}
+  .sb-header h3{font-size:1rem;font-weight:700;margin-bottom:.2rem}
+  .sb-header p{font-size:.85rem;opacity:.8;margin:0}
+  .sb-tag{display:inline-block;background:var(--accent);color:#fff;font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:10px;margin-bottom:.8rem}
+  .sb-card h4{font-size:.95rem;font-weight:700;color:var(--primary);margin:.8rem 0 .4rem}
+  .data-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:.6rem 0}
+  .data-table th{background:#f1f5f9;padding:.5rem .8rem;border:1px solid var(--border);text-align:left}
+  .data-table td{padding:.5rem .8rem;border:1px solid var(--border)}
+  .answer-box{background:#f8fafc;border-radius:8px;padding:1.2rem;margin-top:1rem;display:none}
+  .answer-box .ans-title{font-weight:700;color:var(--primary);margin-bottom:.8rem}
+  .calc-line{font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between}
+  .calc-line:last-child{border-bottom:none;font-weight:700;color:var(--green)}
+  .show-ans-btn{background:var(--primary);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:.85rem;cursor:pointer;margin-top:.8rem}
+  .show-ans-btn:hover{background:#2c5282}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text);background:transparent}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+  .btn-green{background:var(--green);color:#fff}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 2</span>
+</nav>
+<div class="hero">
+  <div class="tag">✏️ Quiz · Week 2 · Chapter 4</div>
+  <h1>Time Value &amp; Investment Appraisal</h1>
+  <p>10 MCQ + Section B calculation questions · Pearson McLaney 11th Ed</p>
+  <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label">0 / 10 answered</div>
+</div>
+<main>
+  <div class="score-card" id="score-card">
+    <div class="big-score" id="final-score">0/10</div>
+    <div class="score-label">Your Score</div>
+    <div class="score-msg" id="score-msg"></div>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="resetQuiz()">🔄 Try Again</button>
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Lecture_Kiro.html" class="btn btn-primary">📖 Review Lecture</a>
+    </div>
+  </div>
+  <div id="quiz-container"></div>
+  <div style="text-align:center;margin-top:2rem">
+    <button class="btn btn-green" id="submit-btn" onclick="submitAll()" style="display:none">📊 See My Results</button>
+  </div>
+
+  <!-- SECTION B -->
+  <div style="margin-top:2.5rem">
+    <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1.2rem">
+      <span>📝 Section B — Calculation Practice</span>
+      <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-header"><h3>Section B Style Question 1</h3><p>Practice Question · NPV Full Calculation · 20 marks</p></div>
+      <div class="sb-tag">🔢 NPV + Annuity + Decision</div>
+      <p style="font-size:.92rem;margin-bottom:.8rem">Riverside plc is considering investing in a new machine. The following data are available:</p>
+      <table class="data-table">
+        <tr><th>Item</th><th>Amount</th></tr>
+        <tr><td>Cost of machine (Year 0)</td><td>£80,000</td></tr>
+        <tr><td>Annual net cash inflow (Years 1–5)</td><td>£22,000</td></tr>
+        <tr><td>Scrap value at end of Year 5</td><td>£5,000</td></tr>
+        <tr><td>Cost of capital</td><td>12% p.a.</td></tr>
+      </table>
+      <h4>Required: Calculate the NPV and advise whether to proceed. (20 marks)</h4>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">👁 Show Full Solution</button>
+      <div class="answer-box">
+        <div class="ans-title">✅ Full Solution</div>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.8rem">AF(12%, 5 years) = 3.605 | DF(12%, Year 5) = 0.567</p>
+        <div class="calc-line"><span>PV of annual cash flows: £22,000 × 3.605</span><span>£79,310</span></div>
+        <div class="calc-line"><span>PV of scrap value: £5,000 × 0.567</span><span>£2,835</span></div>
+        <div class="calc-line"><span>Total PV of inflows</span><span>£82,145</span></div>
+        <div class="calc-line"><span>Less: Initial investment</span><span>−£80,000</span></div>
+        <div class="calc-line"><span>NPV</span><span>+£2,145</span></div>
+        <p style="font-size:.9rem;margin-top:.8rem"><strong>Decision:</strong> NPV is positive (+£2,145), so Riverside plc should PROCEED. The project creates £2,145 of shareholder wealth. Note: the scrap value is a single cash flow in Year 5, so use the discount factor (not annuity factor) for that component.</p>
+      </div>
+    </div>
+
+    <div class="sb-card">
+      <div class="sb-header"><h3>Section B Style Question 2</h3><p>Practice Question · IRR Interpolation · 15 marks</p></div>
+      <div class="sb-tag">🔢 IRR Interpolation + NPV Comparison</div>
+      <p style="font-size:.92rem;margin-bottom:.8rem">Using the same Riverside plc data above, you have calculated:</p>
+      <table class="data-table">
+        <tr><th>Discount Rate</th><th>NPV</th></tr>
+        <tr><td>12%</td><td>+£2,145</td></tr>
+        <tr><td>15%</td><td>−£3,820</td></tr>
+      </table>
+      <h4>Required: (a) Calculate the approximate IRR. (b) Should the project be accepted if the cost of capital is 13%? (15 marks)</h4>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">👁 Show Full Solution</button>
+      <div class="answer-box">
+        <div class="ans-title">✅ Full Solution</div>
+        <p style="font-size:.9rem;font-weight:600;margin-bottom:.4rem">(a) IRR by Interpolation:</p>
+        <div class="calc-line"><span>IRR ≈ 12% + [2,145 ÷ (2,145 + 3,820)] × (15% − 12%)</span><span></span></div>
+        <div class="calc-line"><span>= 12% + [2,145 ÷ 5,965] × 3%</span><span></span></div>
+        <div class="calc-line"><span>= 12% + 0.3597 × 3%</span><span></span></div>
+        <div class="calc-line"><span>IRR ≈</span><span>13.08%</span></div>
+        <p style="font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem">(b) Decision at 13% cost of capital:</p>
+        <p style="font-size:.9rem">IRR (13.08%) > Cost of Capital (13%) → <strong>ACCEPT</strong> (marginally). However, the margin is very small — in practice, management should consider the sensitivity of this result to estimation errors in cash flows.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html" class="btn btn-outline">← Interactive</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 3 of 3</span>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/" class="btn btn-primary">🏠 Course Home</a>
+  </div>
+</main>
+
+<script>
+const questions = [
+  {num:1,text:"The net present value of a particular investment project represents:",
+   options:["the discounted value of the inflows from the project.","the present investment required to undertake the project.","the increase or decrease in wealth that the project will generate for the investing business.","the rate of return that the project will earn for the investing business."],
+   correct:"the increase or decrease in wealth that the project will generate for the investing business.",
+   explanation:"NPV = PV of all future cash flows − Initial investment. It directly measures the change in shareholder wealth. A positive NPV means the project creates value; negative means it destroys value.",
+   wrongNote:"'Discounted value of inflows' ignores the initial investment. 'Rate of return' describes IRR, not NPV."},
+  {num:2,text:"To find the PV of a cash flow in exactly 5 years at 15% p.a., multiply the cash flow by:",
+   options:["(0.15)⁵","1/(0.15)⁵","(1.15)⁵","1/(1.15)⁵"],
+   correct:"1/(1.15)⁵",
+   explanation:"The discount factor for year n at rate r is 1/(1+r)ⁿ. Here: 1/(1.15)⁵ = 0.4972. Multiplying the future cash flow by this gives its present value.",
+   wrongNote:"(1.15)⁵ is the future value factor — it compounds forward, not discounts back. (0.15)⁵ has no financial meaning."},
+  {num:3,text:"In an annuity table, the figure for 5 years and 10% represents:",
+   options:["the present value of £1 receivable at the end of five years.","the future value of £1 receivable at the end of each of the next five years.","the future value of £1 receivable immediately.","the present value of £1 receivable at the end of each of the next five years."],
+   correct:"the present value of £1 receivable at the end of each of the next five years.",
+   explanation:"An annuity factor (AF) gives the PV of £1 received at the END of each year for n years. AF(10%,5) = 3.791 means: receiving £1/year for 5 years at 10% discount rate is worth £3.791 today.",
+   wrongNote:"The first option describes a single discount factor (not annuity). Annuity tables deal with PRESENT values, not future values."},
+  {num:4,text:"You underestimated the discount rate. Correcting this will:",
+   context:"Project: immediate outflow + cash inflows over 7 years. You deduced NPV and IRR. Now you discover the discount rate was underestimated.",
+   options:["D: NPV lower, IRR unchanged","A: NPV higher, IRR higher","B: NPV lower, IRR lower","C: NPV higher, IRR unchanged"],
+   correct:"D: NPV lower, IRR unchanged",
+   explanation:"A higher discount rate reduces the PV of future cash inflows → NPV falls. IRR is the rate that makes NPV = 0 — it depends only on the project's cash flows, not on the discount rate used. So IRR is unchanged.",
+   wrongNote:"IRR is a property of the project's cash flows, not of the discount rate. Only NPV changes when the discount rate changes."},
+  {num:5,text:"The internal rate of return can best be described as:",
+   options:["the rate which the business has to pay to raise finance for an investment.","the discount rate at which a set of cash flows have a zero net present value.","the discount rate at which a set of cash flows have a positive net present value.","the return required by the managers of the business."],
+   correct:"the discount rate at which a set of cash flows have a zero net present value.",
+   explanation:"IRR is defined as the discount rate r* such that NPV = 0. It is the project's own internal rate of return, independent of the cost of finance.",
+   wrongNote:"The cost of finance is the hurdle rate (cost of capital), not the IRR. IRR is compared TO the cost of finance, not equal to it."},
+  {num:6,text:"When using IRR, an assumption is made which is not usually valid. This assumption is that:",
+   options:["funds released by the project can be reinvested at the business's cost of finance.","the IRR of the project is less than the business's cost of finance.","the IRR of the project is greater than the business's cost of finance.","funds released by the project can be reinvested at the IRR of the project."],
+   correct:"funds released by the project can be reinvested at the IRR of the project.",
+   explanation:"IRR implicitly assumes that all intermediate cash flows are reinvested at the IRR rate. This is usually unrealistic — especially for high-IRR projects. NPV assumes reinvestment at the cost of capital, which is more realistic.",
+   wrongNote:"This is the key weakness of IRR. The reinvestment rate assumption at IRR (not cost of capital) is what makes IRR potentially misleading."},
+  {num:7,text:"Sienna plc: NPV at 20% = +£X, NPV at 30% = −£Y. What is the approximate IRR?",
+   context:"Discount rate 20% → NPV = +£200. Discount rate 30% → NPV = −£100.",
+   options:["23.3%","26.7%","33.3%","16.7%"],
+   correct:"26.7%",
+   explanation:"IRR ≈ 20% + [200 ÷ (200+100)] × (30%−20%) = 20% + (200/300) × 10% = 20% + 6.67% = 26.7%",
+   wrongNote:"23.3% uses the wrong formula. 33.3% and 16.7% are outside the range [20%,30%] — IRR must be between the two rates used."},
+  {num:8,text:"Which effect is clearly shown by published survey evidence on investment appraisal methods?",
+   options:["A decreasing use of internal rate of return over time.","A decreasing use of pay back period over time.","A tendency for businesses to use more than one method.","A decreasing use of accounting rate of return over time."],
+   correct:"A tendency for businesses to use more than one method.",
+   explanation:"Survey evidence consistently shows that businesses use multiple appraisal methods simultaneously — typically NPV or IRR combined with Payback. No single method has shown a clear declining trend.",
+   wrongNote:"IRR and Payback remain widely used despite their theoretical limitations. The key finding is multi-method usage, not the decline of any particular method."},
+  {num:9,text:"Which one of the following is TRUE of the IRR approach?",
+   options:["Use of IRR can be problematical when finance costs are changing from year to year.","IRR fails to take all of the cash flows into account.","Use of IRR always promotes wealth maximisation.","IRR does not properly take the timing of cash flows into account."],
+   correct:"Use of IRR can be problematical when finance costs are changing from year to year.",
+   explanation:"IRR produces a single rate, which must be compared to a single hurdle rate. If the cost of capital varies year by year, there is no single rate to compare IRR against — making the decision rule ambiguous. NPV handles this easily by discounting each year at its own rate.",
+   wrongNote:"IRR does take all cash flows into account (unlike Payback). IRR does consider timing (unlike ARR). But it cannot handle varying discount rates."},
+  {num:10,text:"Use of which investment appraisal method directly promotes wealth maximisation?",
+   options:["Internal rate of return.","Accounting rate of return.","Payback period.","Net present value."],
+   correct:"Net present value.",
+   explanation:"NPV directly measures the change in shareholder wealth (in £). Accepting all positive-NPV projects is equivalent to maximising shareholder wealth. IRR can give wrong rankings when projects are mutually exclusive. ARR and Payback ignore time value of money.",
+   wrongNote:"IRR promotes wealth maximisation only when used correctly and only for independent projects. NPV is the only method that ALWAYS directly measures wealth creation."}
+];
+
+let answers={}, submitted=false;
+
+function renderQuiz(){
+  const c=document.getElementById('quiz-container');
+  c.innerHTML=questions.map((q,i)=>{
+    let ctx='';
+    if(q.context) ctx=`<div class="q-context">${q.context}</div>`;
+    const opts=q.options.map((opt,oi)=>`<li onclick="pick(${i},'${opt.replace(/'/g,"\\'")}',this)" data-val="${opt}"><span class="opt-letter">${String.fromCharCode(65+oi)}.</span>${opt}</li>`).join('');
+    return `<div class="q-card" id="qc-${i}">
+      <div class="q-num">Question ${q.num} / 10 <span class="source-badge">📚 Pearson MCQ · McLaney 11th Ed Ch.4</span></div>
+      <div class="q-text">${q.text}</div>${ctx}
+      <ul class="options" id="opts-${i}">${opts}</ul>
+      <div class="explanation" id="exp-${i}">
+        <div class="exp-title">✅ Answer &amp; Explanation</div>
+        <div class="exp-body" id="expb-${i}"></div>
+        <div class="wrong-note" id="wrn-${i}"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function pick(qi,val,el){
+  if(submitted)return;
+  answers[qi]=val;
+  document.querySelectorAll(`#opts-${qi} li`).forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const done=Object.keys(answers).length;
+  document.getElementById('progress-fill').style.width=(done/questions.length*100)+'%';
+  document.getElementById('progress-label').textContent=`${done} / ${questions.length} answered`;
+  if(done===questions.length) document.getElementById('submit-btn').style.display='inline-flex';
+}
+
+function submitAll(){
+  submitted=true;
+  let score=0;
+  questions.forEach((q,i)=>{
+    const ua=answers[i];
+    document.querySelectorAll(`#opts-${i} li`).forEach(o=>{
+      o.classList.remove('selected');
+      if(o.dataset.val===q.correct) o.classList.add('reveal');
+      else if(o.dataset.val===ua&&ua!==q.correct) o.classList.add('wrong');
+    });
+    if(ua===q.correct) score++;
+    document.getElementById(`exp-${i}`).style.display='block';
+    document.getElementById(`expb-${i}`).textContent=q.explanation;
+    if(q.wrongNote) document.getElementById(`wrn-${i}`).innerHTML='⚠️ Common Mistake: '+q.wrongNote;
+  });
+  document.getElementById('submit-btn').style.display='none';
+  const sc=document.getElementById('score-card');
+  sc.style.display='block';
+  document.getElementById('final-score').textContent=score+'/10';
+  const p=score/10;
+  document.getElementById('score-msg').textContent=p>=.9?'🏆 Excellent! Chapter 4 mastered.':p>=.7?'✅ Good work! Review the questions you missed.':p>=.5?'📖 Keep going — revisit the lecture and try again.':'💪 Go back to the lecture and interactive lab first.';
+  sc.scrollIntoView({behavior:'smooth'});
+}
+
+function resetQuiz(){
+  answers={};submitted=false;
+  document.getElementById('score-card').style.display='none';
+  document.getElementById('submit-btn').style.display='none';
+  document.getElementById('progress-fill').style.width='0%';
+  document.getElementById('progress-label').textContent='0 / 10 answered';
+  renderQuiz();
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
