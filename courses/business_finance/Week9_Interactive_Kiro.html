@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 Interactive – Payout Policy Labs</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#0f172a;--panel:#1e293b;--text:#e2e8f0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  nav{position:sticky;top:0;z-index:100;background:#0f172a;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.1);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);color:#fff;padding:48px 24px 36px;text-align:center;border-bottom:1px solid #1e293b}
+  .hero .eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:10px}
+  .hero p{font-size:.95rem;color:#94a3b8;max-width:520px;margin:0 auto}
+  .container{max-width:900px;margin:0 auto;padding:40px 24px}
+  .lab{background:var(--panel);border-radius:16px;padding:32px;margin-bottom:32px;border:1px solid #334155}
+  .lab-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .lab-badge{background:var(--accent);color:#fff;font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:20px}
+  .lab-header h2{font-size:1.2rem;color:#f1f5f9}
+  .lab-header .sub{font-size:.8rem;color:#64748b;margin-top:2px}
+  .slider-group{margin-bottom:20px}
+  .slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .slider-label span{font-size:.875rem;color:#94a3b8}
+  .slider-label .val{font-size:1rem;font-weight:700;color:var(--accent)}
+  input[type=range]{width:100%;accent-color:var(--accent);height:6px;cursor:pointer}
+  .result-panel{background:#0f172a;border-radius:10px;padding:20px 24px;margin-top:16px;border:1px solid #334155}
+  .result-panel h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:14px}
+  .result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1e293b;font-size:.9rem}
+  .result-row:last-child{border-bottom:none}
+  .result-row .label{color:#94a3b8}
+  .result-row .value{font-weight:700;color:#f1f5f9}
+  .result-row .value.highlight{color:var(--accent);font-size:1.05rem}
+  .insight{background:#1e3a5f;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.875rem;color:#cbd5e1}
+  .insight strong{color:var(--accent)}
+  .signal-bar{height:12px;border-radius:6px;transition:width .4s,background .4s;margin-top:8px}
+  .compare-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .col-card{background:#0f172a;border-radius:10px;padding:16px;border:1px solid #334155}
+  .col-card h5{font-size:.85rem;color:#94a3b8;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+  .col-card .big-num{font-size:1.6rem;font-weight:800;color:var(--accent);margin-bottom:4px}
+  .col-card .desc{font-size:.8rem;color:#64748b}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+  @media(max-width:600px){.compare-cols{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 9</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 9 · Interactive Labs</div>
+  <h1>🧪 Payout Policy Labs</h1>
+  <p>拖动滑块，实时验证 MM 无关定理、信号效应与回购 vs 股利的对比</p>
+</div>
+
+<div class="container">
+
+  <!-- Lab 1 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 1</span>
+      <div>
+        <h2>Dividend vs Retention — MM 无关定理验证</h2>
+        <div class="sub">无论股利比例如何，股东总财富不变</div>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>股利比例（Payout Ratio）</span>
+        <span class="val" id="l1-payout-val">50%</span>
+      </div>
+      <input type="range" min="0" max="100" value="50" id="l1-payout" oninput="updateLab1()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>公司总价值（£m）</span>
+        <span class="val" id="l1-value-val">£500m</span>
+      </div>
+      <input type="range" min="100" max="1000" step="10" value="500" id="l1-value" oninput="updateLab1()">
+    </div>
+
+    <div class="result-panel">
+      <h4>📊 股东财富分析（持有 1% 股权）</h4>
+      <div class="result-row"><span class="label">公司总价值</span><span class="value" id="l1-total">£500m</span></div>
+      <div class="result-row"><span class="label">发放股利（现金）</span><span class="value" id="l1-div">£2.50m</span></div>
+      <div class="result-row"><span class="label">除息后股票价值</span><span class="value" id="l1-stock">£2.50m</span></div>
+      <div class="result-row"><span class="label">股东总财富</span><span class="value highlight" id="l1-wealth">£5.00m</span></div>
+    </div>
+    <div class="insight">
+      <strong>MM 核心结论：</strong>无论股利比例是 0% 还是 100%，持有 1% 股权的股东总财富始终等于公司总价值的 1%。发股利只是把财富从"股票"转移到"现金"，总量不变。
+    </div>
+  </div>
+
+  <!-- Lab 2 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 2</span>
+      <div>
+        <h2>Signalling Effect — 股利信号效应</h2>
+        <div class="sub">股利变化如何影响市场对股价的预期</div>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>股利变化幅度</span>
+        <span class="val" id="l2-change-val">0%</span>
+      </div>
+      <input type="range" min="-50" max="50" value="0" id="l2-change" oninput="updateLab2()">
+    </div>
+
+    <div class="result-panel">
+      <h4>📊 市场反应模拟（基准股价 £10）</h4>
+      <div class="result-row"><span class="label">股利变化</span><span class="value" id="l2-div-change">0%</span></div>
+      <div class="result-row"><span class="label">预期股价变化</span><span class="value" id="l2-price-change">0%</span></div>
+      <div class="result-row"><span class="label">新股价</span><span class="value highlight" id="l2-new-price">£10.00</span></div>
+      <div style="margin-top:12px">
+        <div style="font-size:.8rem;color:#64748b;margin-bottom:6px">市场情绪</div>
+        <div class="signal-bar" id="l2-bar" style="width:50%;background:#64748b"></div>
+        <div style="font-size:.85rem;color:#94a3b8;margin-top:6px" id="l2-sentiment">中性</div>
+      </div>
+    </div>
+    <div class="insight" id="l2-insight">
+      <strong>提示：</strong>拖动滑块观察股利变化对股价的影响。注意不对称效应——减少股利的负面冲击通常大于增加股利的正面效应。
+    </div>
+  </div>
+
+  <!-- Lab 3 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 3</span>
+      <div>
+        <h2>Buyback vs Dividend — 回购与股利对比</h2>
+        <div class="sub">EPS=£2, 股价=£20, 股数=100m, 可分配资金=£50m</div>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>回购比例（剩余为股利）</span>
+        <span class="val" id="l3-buyback-val">50%</span>
+      </div>
+      <input type="range" min="0" max="100" value="50" id="l3-buyback" oninput="updateLab3()">
+    </div>
+
+    <div class="compare-cols">
+      <div class="col-card">
+        <h5>🔄 股票回购部分</h5>
+        <div class="big-num" id="l3-buyback-fund">£25m</div>
+        <div class="desc">回购资金</div>
+        <div style="margin-top:12px">
+          <div class="result-row"><span class="label" style="font-size:.8rem">回购股数</span><span class="value" id="l3-shares-bought" style="font-size:.85rem">1.25m</span></div>
+          <div class="result-row"><span class="label" style="font-size:.8rem">剩余股数</span><span class="value" id="l3-shares-left" style="font-size:.85rem">98.75m</span></div>
+          <div class="result-row"><span class="label" style="font-size:.8rem">新 EPS</span><span class="value highlight" id="l3-new-eps" style="font-size:.85rem">£2.025</span></div>
+        </div>
+      </div>
+      <div class="col-card">
+        <h5>💰 现金股利部分</h5>
+        <div class="big-num" id="l3-div-fund">£25m</div>
+        <div class="desc">股利资金</div>
+        <div style="margin-top:12px">
+          <div class="result-row"><span class="label" style="font-size:.8rem">每股股利</span><span class="value" id="l3-dps" style="font-size:.85rem">£0.25</span></div>
+          <div class="result-row"><span class="label" style="font-size:.8rem">除息后股价</span><span class="value" id="l3-ex-price" style="font-size:.85rem">£19.75</span></div>
+          <div class="result-row"><span class="label" style="font-size:.8rem">股东总财富/股</span><span class="value highlight" id="l3-total-wealth" style="font-size:.85rem">£20.00</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="insight">
+      <strong>MM 结论验证：</strong>无论如何分配回购与股利的比例，持有股票的股东总财富（股票价值 + 现金）在完美市场下保持不变，均等于原始股价 £20。
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Lecture_Kiro.html" class="btn">← Lecture</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Quiz_Kiro.html" class="btn accent">✏️ Quiz →</a>
+  </div>
+</div>
+
+<script>
+function updateLab1(){
+  const payout = +document.getElementById('l1-payout').value;
+  const total = +document.getElementById('l1-value').value;
+  document.getElementById('l1-payout-val').textContent = payout + '%';
+  document.getElementById('l1-value-val').textContent = '£' + total + 'm';
+  const share = 0.01; // 1% ownership
+  const divCash = (total * payout / 100 * share).toFixed(2);
+  const stockVal = (total * (1 - payout/100) * share).toFixed(2);
+  const wealth = (total * share).toFixed(2);
+  document.getElementById('l1-total').textContent = '£' + total + 'm';
+  document.getElementById('l1-div').textContent = '£' + divCash + 'm';
+  document.getElementById('l1-stock').textContent = '£' + stockVal + 'm';
+  document.getElementById('l1-wealth').textContent = '£' + wealth + 'm';
+}
+
+function updateLab2(){
+  const change = +document.getElementById('l2-change').value;
+  document.getElementById('l2-change-val').textContent = (change >= 0 ? '+' : '') + change + '%';
+  // Asymmetric signalling: positive change has smaller effect, negative has larger
+  let priceEffect;
+  if(change >= 0){
+    priceEffect = change * 0.3; // positive signal: 30% of dividend change
+  } else {
+    priceEffect = change * 0.6; // negative signal: 60% of dividend change (asymmetric)
+  }
+  const newPrice = (10 * (1 + priceEffect/100)).toFixed(2);
+  document.getElementById('l2-div-change').textContent = (change >= 0 ? '+' : '') + change + '%';
+  document.getElementById('l2-price-change').textContent = (priceEffect >= 0 ? '+' : '') + priceEffect.toFixed(1) + '%';
+  document.getElementById('l2-new-price').textContent = '£' + newPrice;
+  const bar = document.getElementById('l2-bar');
+  const sentiment = document.getElementById('l2-sentiment');
+  const insight = document.getElementById('l2-insight');
+  const pct = 50 + priceEffect;
+  bar.style.width = Math.max(5, Math.min(95, pct)) + '%';
+  if(change > 10){
+    bar.style.background = '#22c55e';
+    sentiment.textContent = '📈 强烈正面信号 — 管理层对未来盈利充满信心';
+    insight.innerHTML = '<strong>正面信号：</strong>增加股利传递管理层对未来盈利的信心，市场以股价上涨回应。但注意：增加股利的正面效应相对温和（约为股利变化的30%）。';
+  } else if(change > 0){
+    bar.style.background = '#86efac';
+    sentiment.textContent = '📈 轻微正面信号';
+    insight.innerHTML = '<strong>正面信号：</strong>小幅增加股利，市场温和正面回应。';
+  } else if(change === 0){
+    bar.style.background = '#64748b';
+    sentiment.textContent = '➡️ 中性';
+    insight.innerHTML = '<strong>提示：</strong>拖动滑块观察股利变化对股价的影响。注意不对称效应——减少股利的负面冲击通常大于增加股利的正面效应。';
+  } else if(change > -20){
+    bar.style.background = '#fca5a5';
+    sentiment.textContent = '📉 负面信号 — 市场担忧公司盈利前景';
+    insight.innerHTML = '<strong>负面信号：</strong>减少股利被市场解读为公司陷入困境。注意不对称效应：负面冲击（60%）远大于正面效应（30%）。';
+  } else {
+    bar.style.background = '#ef4444';
+    sentiment.textContent = '📉 强烈负面信号 — 股价大幅下跌';
+    insight.innerHTML = '<strong>⚠️ 强烈负面信号：</strong>大幅削减股利通常引发股价暴跌。这正是股利"粘性"的原因——公司轻易不敢削减股利。';
+  }
+}
+
+function updateLab3(){
+  const buybackPct = +document.getElementById('l3-buyback').value;
+  const divPct = 100 - buybackPct;
+  const totalFund = 50; // £50m
+  const eps = 2, price = 20, shares = 100; // shares in millions
+  const buybackFund = totalFund * buybackPct / 100;
+  const divFund = totalFund * divPct / 100;
+  document.getElementById('l3-buyback-val').textContent = buybackPct + '%';
+  document.getElementById('l3-buyback-fund').textContent = '£' + buybackFund.toFixed(1) + 'm';
+  document.getElementById('l3-div-fund').textContent = '£' + divFund.toFixed(1) + 'm';
+  const sharesBought = buybackFund / price;
+  const sharesLeft = shares - sharesBought;
+  const totalEarnings = eps * shares; // £200m
+  const newEps = sharesLeft > 0 ? (totalEarnings / sharesLeft).toFixed(3) : '0';
+  document.getElementById('l3-shares-bought').textContent = sharesBought.toFixed(2) + 'm';
+  document.getElementById('l3-shares-left').textContent = sharesLeft.toFixed(2) + 'm';
+  document.getElementById('l3-new-eps').textContent = '£' + newEps;
+  const dps = divFund / shares;
+  const exPrice = price - dps;
+  document.getElementById('l3-dps').textContent = '£' + dps.toFixed(3);
+  document.getElementById('l3-ex-price').textContent = '£' + exPrice.toFixed(3);
+  document.getElementById('l3-total-wealth').textContent = '£' + (exPrice + dps).toFixed(2);
+}
+
+updateLab1(); updateLab2(); updateLab3();
+</script>
+</body>
+</html>

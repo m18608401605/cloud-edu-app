@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Lecture – Cost of Capital & WACC</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,var(--primary) 0%,#2d5f8a 100%); color:#fff; padding:48px 24px 40px; text-align:center; }
+  .hero .eyebrow { font-size:.85rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
+  .hero h1 { font-size:2rem; font-weight:800; }
+
+  .container { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+
+  .section { background:#fff; border-radius:12px; padding:32px; margin-bottom:28px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+  .section h2 { color:var(--primary); font-size:1.2rem; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #eef4ff; }
+  .section h3 { color:var(--primary); font-size:1rem; margin:20px 0 10px; }
+  .section p { color:#444; line-height:1.75; margin-bottom:12px; font-size:.95rem; }
+
+  .concept-box { background:#eef4ff; border-left:4px solid var(--primary); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .concept-box .formula { font-size:1.3rem; font-weight:700; color:var(--primary); text-align:center; padding:12px 0; letter-spacing:.5px; }
+  .concept-box p { margin-bottom:6px; font-size:.92rem; }
+
+  .case { background:#fffbf0; border-left:4px solid var(--accent); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .case h4 { color:#b07010; font-size:.95rem; margin-bottom:10px; }
+  .case p, .case li { color:#555; font-size:.92rem; line-height:1.7; }
+  .case ul { padding-left:20px; }
+  .case .calc-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f0e0b0; font-size:.9rem; }
+  .case .calc-row:last-child { border-bottom:none; font-weight:700; color:var(--primary); }
+
+  .pitfall { background:#fff5f5; border-left:4px solid #e53e3e; border-radius:8px; padding:18px 22px; margin:12px 0; }
+  .pitfall h4 { color:#c53030; font-size:.92rem; margin-bottom:6px; }
+  .pitfall p { color:#666; font-size:.88rem; line-height:1.6; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:600px){ .two-col { grid-template-columns:1fr; } }
+
+  table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.9rem; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid #eee; }
+  tr:last-child td { border-bottom:none; }
+  tr:nth-child(even) td { background:#f8f9fa; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 7</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 7 · Chapter 10 · Lecture</div>
+  <h1>Cost of Capital &amp; WACC</h1>
+</div>
+
+<div class="container">
+
+  <!-- Section 1: WACC Formula -->
+  <div class="section">
+    <h2>Section 1 · WACC 公式</h2>
+    <p>WACC（Weighted Average Cost of Capital，加权平均资本成本）是企业所有资金来源成本的加权平均值，以<strong>市场价值权重</strong>计算。</p>
+    <div class="concept-box">
+      <div class="formula">WACC = W<sub>d</sub> × K<sub>d</sub>(1−t) + W<sub>e</sub> × K<sub>e</sub></div>
+      <p>• <strong>W<sub>d</sub></strong>：债务占总资本的市值比例</p>
+      <p>• <strong>K<sub>d</sub></strong>：债务成本（税前），通常用 YTM 估算</p>
+      <p>• <strong>t</strong>：企业所得税率（利息可抵税，产生税盾）</p>
+      <p>• <strong>W<sub>e</sub></strong>：股权占总资本的市值比例（= 1 − W<sub>d</sub>）</p>
+      <p>• <strong>K<sub>e</sub></strong>：权益成本，用 CAPM 或股利增长模型计算</p>
+    </div>
+    <p>⚠️ 权重必须使用<strong>市场价值</strong>，而非账面价值。市场价值反映投资者当前对资产的定价，更能代表真实的资本成本。</p>
+  </div>
+
+  <!-- Section 2: Cost of Equity -->
+  <div class="section">
+    <h2>Section 2 · 权益成本 K<sub>e</sub></h2>
+    <p>权益成本是股东要求的最低回报率。有两种主要计算方法：</p>
+
+    <div class="two-col">
+      <div class="concept-box">
+        <h3 style="color:var(--primary);margin-bottom:10px;">方法一：CAPM</h3>
+        <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> − R<sub>f</sub>)</div>
+        <p>• <strong>R<sub>f</sub></strong>：无风险利率（国债收益率）</p>
+        <p>• <strong>β</strong>：系统性风险系数（市场敏感度）</p>
+        <p>• <strong>(R<sub>m</sub>−R<sub>f</sub>)</strong>：市场风险溢价</p>
+        <p style="margin-top:8px;color:#666;font-size:.85rem;">β=1 表示与市场同步；β&gt;1 波动更大；β&lt;1 更稳定</p>
+      </div>
+      <div class="concept-box">
+        <h3 style="color:var(--primary);margin-bottom:10px;">方法二：股利增长模型</h3>
+        <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</div>
+        <p>• <strong>D<sub>1</sub></strong>：下一期<em>预期</em>股利（非历史股利！）</p>
+        <p>• <strong>P<sub>0</sub></strong>：当前股票市价</p>
+        <p>• <strong>g</strong>：股利永续增长率</p>
+        <p style="margin-top:8px;color:#666;font-size:.85rem;">仅适用于稳定支付且增长的股利公司</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3: Cost of Debt -->
+  <div class="section">
+    <h2>Section 3 · 债务成本 K<sub>d</sub></h2>
+    <p>债务成本是企业向债权人支付的利率。最准确的估算方法是使用现有债券的<strong>到期收益率（YTM）</strong>，即债券的内部收益率（IRR）。</p>
+    <div class="concept-box">
+      <p><strong>YTM 的含义：</strong>使债券未来所有现金流（利息+本金）的现值等于当前市价的折现率。</p>
+      <p style="margin-top:8px;"><strong>税后债务成本 = K<sub>d</sub> × (1 − t)</strong></p>
+      <p style="margin-top:6px;color:#555;font-size:.9rem;">因为利息支出可以在税前扣除，政府实际上补贴了部分债务成本。税率越高，税盾效益越大。</p>
+    </div>
+    <table>
+      <tr><th>债务类型</th><th>成本估算方法</th><th>备注</th></tr>
+      <tr><td>上市债券</td><td>市场 YTM</td><td>最准确</td></tr>
+      <tr><td>银行贷款</td><td>贷款利率</td><td>直接使用合同利率</td></tr>
+      <tr><td>新发债券</td><td>当前市场利率</td><td>用类似评级债券的 YTM</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 4: Pitfalls -->
+  <div class="section">
+    <h2>Section 4 · ⚠️ 常见陷阱</h2>
+
+    <div class="pitfall">
+      <h4>❌ 陷阱 1：使用账面价值权重</h4>
+      <p>账面价值是历史成本，不反映当前市场对资产的定价。WACC 必须使用<strong>市场价值权重</strong>。例如，一家公司账面债务比率 30%，但市场价值债务比率可能只有 15%——两者差距巨大。</p>
+    </div>
+
+    <div class="pitfall">
+      <h4>❌ 陷阱 2：忘记税盾 (1−t)</h4>
+      <p>债务成本必须乘以 (1−t) 得到税后成本。如果直接用 K<sub>d</sub> 而不调整税率，会高估 WACC，导致拒绝本应接受的好项目。</p>
+    </div>
+
+    <div class="pitfall">
+      <h4>❌ 陷阱 3：使用历史股利而非预期股利</h4>
+      <p>股利增长模型中的 D<sub>1</sub> 是<strong>下一期预期股利</strong>，不是上一期已支付的股利 D<sub>0</sub>。正确做法：D<sub>1</sub> = D<sub>0</sub> × (1+g)。混淆两者会低估权益成本。</p>
+    </div>
+  </div>
+
+  <!-- Section 5: Apple Case -->
+  <div class="section">
+    <h2>Section 5 · 📱 真实案例：Apple WACC 计算</h2>
+    <p>以下是基于简化假设的 Apple WACC 估算示例：</p>
+
+    <div class="case">
+      <h4>Step 1：计算权益成本 K<sub>e</sub>（CAPM）</h4>
+      <div class="calc-row"><span>无风险利率 R<sub>f</sub></span><span>4.0%</span></div>
+      <div class="calc-row"><span>Beta (β)</span><span>1.2</span></div>
+      <div class="calc-row"><span>市场风险溢价 (R<sub>m</sub>−R<sub>f</sub>)</span><span>6.0%</span></div>
+      <div class="calc-row"><span><strong>K<sub>e</sub> = 4% + 1.2 × 6%</strong></span><span><strong>= 11.2%</strong></span></div>
+    </div>
+
+    <div class="case">
+      <h4>Step 2：计算税后债务成本</h4>
+      <div class="calc-row"><span>税前债务成本 K<sub>d</sub></span><span>3.0%</span></div>
+      <div class="calc-row"><span>企业税率 t</span><span>21%</span></div>
+      <div class="calc-row"><span><strong>税后 K<sub>d</sub> = 3% × (1−21%)</strong></span><span><strong>= 2.37%</strong></span></div>
+    </div>
+
+    <div class="case">
+      <h4>Step 3：计算 WACC</h4>
+      <div class="calc-row"><span>股权权重 W<sub>e</sub></span><span>85%</span></div>
+      <div class="calc-row"><span>债务权重 W<sub>d</sub></span><span>15%</span></div>
+      <div class="calc-row"><span>债务贡献：0.15 × 2.37%</span><span>0.36%</span></div>
+      <div class="calc-row"><span>股权贡献：0.85 × 11.2%</span><span>9.52%</span></div>
+      <div class="calc-row"><span>🎯 WACC</span><span>≈ 9.88%</span></div>
+    </div>
+
+    <p style="margin-top:16px;color:#666;font-size:.88rem;">💡 这意味着 Apple 的任何新投资项目，回报率必须超过 9.88% 才能为股东创造价值。</p>
+  </div>
+
+</div>
+</body>
+</html>

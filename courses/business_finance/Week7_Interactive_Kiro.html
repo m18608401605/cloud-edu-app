@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Interactive – WACC & CAPM Labs</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#0f172a; color:#e2e8f0; }
+
+  nav { position:sticky; top:0; z-index:100; background:#0a1628; display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; border-bottom:1px solid rgba(255,255,255,.08); }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.1); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,#0a1628 0%,#1a3a5c 100%); padding:48px 24px 36px; text-align:center; border-bottom:1px solid rgba(255,255,255,.08); }
+  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .hero h1 { font-size:1.9rem; font-weight:800; color:#fff; }
+  .hero p { color:#94a3b8; margin-top:8px; font-size:.95rem; }
+
+  .container { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+
+  .lab { background:#1e293b; border-radius:14px; padding:32px; margin-bottom:32px; border:1px solid rgba(255,255,255,.07); }
+  .lab-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+  .lab-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+  .lab h2 { color:#f1f5f9; font-size:1.15rem; }
+  .lab p { color:#94a3b8; font-size:.9rem; line-height:1.6; margin-bottom:20px; }
+
+  .slider-group { margin-bottom:18px; }
+  .slider-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .slider-label span { color:#cbd5e1; font-size:.88rem; }
+  .slider-label .val { color:var(--accent); font-weight:700; font-size:1rem; min-width:60px; text-align:right; }
+  input[type=range] { width:100%; accent-color:var(--accent); height:6px; cursor:pointer; }
+
+  .result-panel { background:#0f172a; border-radius:10px; padding:20px 24px; margin-top:20px; border:1px solid rgba(232,160,32,.3); }
+  .result-panel .result-label { color:#94a3b8; font-size:.85rem; margin-bottom:6px; }
+  .result-panel .result-value { color:var(--accent); font-size:2rem; font-weight:800; }
+  .result-panel .result-sub { color:#64748b; font-size:.82rem; margin-top:4px; }
+
+  .constraint-note { background:rgba(232,160,32,.1); border:1px solid rgba(232,160,32,.3); border-radius:8px; padding:10px 14px; font-size:.83rem; color:#fbbf24; margin-bottom:16px; }
+
+  .breakdown { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .breakdown-item { background:#162032; border-radius:8px; padding:14px; text-align:center; }
+  .breakdown-item .bi-label { color:#64748b; font-size:.78rem; margin-bottom:4px; }
+  .breakdown-item .bi-val { color:#e2e8f0; font-size:1.1rem; font-weight:700; }
+
+  .bar-chart { margin-top:16px; }
+  .bar-row { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+  .bar-row-label { color:#94a3b8; font-size:.82rem; width:120px; flex-shrink:0; }
+  .bar-track { flex:1; background:#0f172a; border-radius:4px; height:22px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; transition:width .3s; display:flex; align-items:center; padding-left:8px; font-size:.78rem; font-weight:600; color:#fff; }
+  .bar-rf { background:#3b82f6; }
+  .bar-rp { background:var(--accent); }
+
+  .compare-panel { background:#162032; border-radius:10px; padding:16px 20px; margin-top:16px; }
+  .compare-panel h4 { color:#94a3b8; font-size:.85rem; margin-bottom:12px; }
+  .compare-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid rgba(255,255,255,.05); font-size:.88rem; }
+  .compare-row:last-child { border-bottom:none; }
+  .compare-row .cr-label { color:#94a3b8; }
+  .compare-row .cr-val { color:#f1f5f9; font-weight:600; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 7</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 7 · Interactive Labs</div>
+  <h1>🧪 WACC &amp; Cost of Capital Explorer</h1>
+  <p>拖动滑块，实时观察各参数如何影响资本成本</p>
+</div>
+
+<div class="container">
+
+  <!-- Lab 1: WACC Calculator -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 1</span>
+      <h2>WACC Calculator</h2>
+    </div>
+    <p>调整资本结构和成本参数，实时计算加权平均资本成本。注意：W<sub>e</sub> 自动等于 1 − W<sub>d</sub>。</p>
+
+    <div class="constraint-note">⚡ 约束：W<sub>e</sub> = 1 − W<sub>d</sub>（股权权重自动计算，两者之和恒为 100%）</div>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>债务权重 W<sub>d</sub></span><span class="val" id="wdVal">30%</span></div>
+      <input type="range" id="wd" min="0" max="100" value="30" oninput="calcWACC()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>债务成本 K<sub>d</sub>（税前）</span><span class="val" id="kdVal">5.0%</span></div>
+      <input type="range" id="kd" min="0" max="150" value="50" oninput="calcWACC()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>税率 t</span><span class="val" id="taxVal">25%</span></div>
+      <input type="range" id="tax" min="0" max="40" value="25" oninput="calcWACC()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>权益成本 K<sub>e</sub></span><span class="val" id="keVal">12.0%</span></div>
+      <input type="range" id="ke" min="0" max="200" value="120" oninput="calcWACC()">
+    </div>
+
+    <div class="result-panel">
+      <div class="result-label">WACC = W<sub>d</sub> × K<sub>d</sub>(1−t) + W<sub>e</sub> × K<sub>e</sub></div>
+      <div class="result-value" id="waccResult">9.55%</div>
+      <div class="result-sub" id="waccFormula">= 0.30 × 5.0% × 0.75 + 0.70 × 12.0%</div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-item">
+        <div class="bi-label">股权权重 W<sub>e</sub></div>
+        <div class="bi-val" id="weDisplay">70%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">税后债务成本</div>
+        <div class="bi-val" id="kdAfterTax">3.75%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">债务贡献</div>
+        <div class="bi-val" id="debtContrib">1.13%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">股权贡献</div>
+        <div class="bi-val" id="equityContrib">8.40%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab 2: CAPM Explorer -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 2</span>
+      <h2>CAPM Explorer</h2>
+    </div>
+    <p>探索 Beta 和市场风险溢价如何影响权益成本。无风险利率固定为 R<sub>f</sub> = 4%。</p>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>Beta (β) — 系统性风险</span><span class="val" id="betaVal">1.20</span></div>
+      <input type="range" id="beta" min="0" max="300" value="120" oninput="calcCAPM()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>市场风险溢价 (R<sub>m</sub>−R<sub>f</sub>)</span><span class="val" id="mrpVal">6.0%</span></div>
+      <input type="range" id="mrp" min="0" max="150" value="60" oninput="calcCAPM()">
+    </div>
+
+    <div class="result-panel">
+      <div class="result-label">K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub>−R<sub>f</sub>) = 4% + β × MRP</div>
+      <div class="result-value" id="capmResult">11.2%</div>
+      <div class="result-sub" id="capmFormula">= 4% + 1.20 × 6.0%</div>
+    </div>
+
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-row-label">基础利率 R<sub>f</sub></div>
+        <div class="bar-track"><div class="bar-fill bar-rf" id="rfBar" style="width:30%">4%</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-row-label">风险溢价 β×MRP</div>
+        <div class="bar-track"><div class="bar-fill bar-rp" id="rpBar" style="width:50%">7.2%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab 3: Dividend Growth Model -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 3</span>
+      <h2>Dividend Growth Model</h2>
+    </div>
+    <p>用股利增长模型计算权益成本，并与 CAPM 结果（来自 Lab 2）对比。</p>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>预期股利 D<sub>1</sub> (£)</span><span class="val" id="d1Val">£2.00</span></div>
+      <input type="range" id="d1" min="10" max="500" value="200" oninput="calcDGM()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>当前股价 P<sub>0</sub> (£)</span><span class="val" id="p0Val">£50.0</span></div>
+      <input type="range" id="p0" min="100" max="2000" value="500" oninput="calcDGM()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>股利增长率 g</span><span class="val" id="gVal">5.0%</span></div>
+      <input type="range" id="g" min="0" max="150" value="50" oninput="calcDGM()">
+    </div>
+
+    <div class="result-panel">
+      <div class="result-label">K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</div>
+      <div class="result-value" id="dgmResult">9.0%</div>
+      <div class="result-sub" id="dgmFormula">= £2.00/£50.0 + 5.0%</div>
+    </div>
+
+    <div class="compare-panel">
+      <h4>📊 两种方法对比</h4>
+      <div class="compare-row"><span class="cr-label">股利增长模型 K<sub>e</sub></span><span class="cr-val" id="dgmCompare">9.0%</span></div>
+      <div class="compare-row"><span class="cr-label">CAPM K<sub>e</sub>（来自 Lab 2）</span><span class="cr-val" id="capmCompare">11.2%</span></div>
+      <div class="compare-row"><span class="cr-label">差异</span><span class="cr-val" id="diffCompare">−2.2%</span></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function calcWACC() {
+  const wd = +document.getElementById('wd').value / 100;
+  const kd = +document.getElementById('kd').value / 10 / 100;
+  const tax = +document.getElementById('tax').value / 100;
+  const ke = +document.getElementById('ke').value / 10 / 100;
+  const we = 1 - wd;
+
+  document.getElementById('wdVal').textContent = (wd*100).toFixed(0) + '%';
+  document.getElementById('kdVal').textContent = (kd*100).toFixed(1) + '%';
+  document.getElementById('taxVal').textContent = (tax*100).toFixed(0) + '%';
+  document.getElementById('keVal').textContent = (ke*100).toFixed(1) + '%';
+  document.getElementById('weDisplay').textContent = (we*100).toFixed(0) + '%';
+
+  const kdAt = kd * (1 - tax);
+  const debtC = wd * kdAt;
+  const equityC = we * ke;
+  const wacc = debtC + equityC;
+
+  document.getElementById('kdAfterTax').textContent = (kdAt*100).toFixed(2) + '%';
+  document.getElementById('debtContrib').textContent = (debtC*100).toFixed(2) + '%';
+  document.getElementById('equityContrib').textContent = (equityC*100).toFixed(2) + '%';
+  document.getElementById('waccResult').textContent = (wacc*100).toFixed(2) + '%';
+  document.getElementById('waccFormula').textContent =
+    `= ${(wd*100).toFixed(0)}% × ${(kd*100).toFixed(1)}% × ${(1-tax).toFixed(2)} + ${(we*100).toFixed(0)}% × ${(ke*100).toFixed(1)}%`;
+}
+
+let capmKe = 11.2;
+function calcCAPM() {
+  const beta = +document.getElementById('beta').value / 100;
+  const mrp = +document.getElementById('mrp').value / 10 / 100;
+  const rf = 0.04;
+  const ke = rf + beta * mrp;
+  capmKe = ke * 100;
+
+  document.getElementById('betaVal').textContent = beta.toFixed(2);
+  document.getElementById('mrpVal').textContent = (mrp*100).toFixed(1) + '%';
+  document.getElementById('capmResult').textContent = capmKe.toFixed(1) + '%';
+  document.getElementById('capmFormula').textContent = `= 4% + ${beta.toFixed(2)} × ${(mrp*100).toFixed(1)}%`;
+
+  const total = ke * 100;
+  const rfPct = total > 0 ? Math.min(rf*100/total*100, 100) : 0;
+  const rpPct = total > 0 ? Math.min((beta*mrp*100)/total*100, 100) : 0;
+  document.getElementById('rfBar').style.width = rfPct + '%';
+  document.getElementById('rfBar').textContent = '4%';
+  document.getElementById('rpBar').style.width = Math.min(rpPct, 100) + '%';
+  document.getElementById('rpBar').textContent = (beta*mrp*100).toFixed(1) + '%';
+
+  document.getElementById('capmCompare').textContent = capmKe.toFixed(1) + '%';
+  updateDiff();
+}
+
+let dgmKe = 9.0;
+function calcDGM() {
+  const d1 = +document.getElementById('d1').value / 100;
+  const p0 = +document.getElementById('p0').value / 10;
+  const g = +document.getElementById('g').value / 10 / 100;
+  const ke = d1 / p0 + g;
+  dgmKe = ke * 100;
+
+  document.getElementById('d1Val').textContent = '£' + d1.toFixed(2);
+  document.getElementById('p0Val').textContent = '£' + p0.toFixed(1);
+  document.getElementById('gVal').textContent = (g*100).toFixed(1) + '%';
+  document.getElementById('dgmResult').textContent = dgmKe.toFixed(1) + '%';
+  document.getElementById('dgmFormula').textContent = `= £${d1.toFixed(2)}/£${p0.toFixed(1)} + ${(g*100).toFixed(1)}%`;
+  document.getElementById('dgmCompare').textContent = dgmKe.toFixed(1) + '%';
+  updateDiff();
+}
+
+function updateDiff() {
+  const diff = dgmKe - capmKe;
+  const el = document.getElementById('diffCompare');
+  el.textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%';
+  el.style.color = Math.abs(diff) < 1 ? '#4ade80' : '#fbbf24';
+}
+
+calcWACC(); calcCAPM(); calcDGM();
+</script>
+</body>
+</html>

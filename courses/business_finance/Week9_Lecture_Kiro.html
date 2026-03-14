@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 Lecture – Payout Policy</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f8fafc;--text:#1e293b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{position:sticky;top:0;z-index:100;background:var(--primary);display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.15);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2d5986 100%);color:#fff;padding:56px 24px 40px;text-align:center}
+  .hero .eyebrow{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:10px}
+  .hero h1{font-size:2.2rem;font-weight:800;margin-bottom:12px}
+  .hero p{font-size:1rem;opacity:.85;max-width:560px;margin:0 auto}
+  .container{max-width:900px;margin:0 auto;padding:40px 24px}
+  .section{background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+  .section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .section-num{width:44px;height:44px;background:var(--primary);color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0}
+  .section-header h2{font-size:1.3rem;color:var(--primary)}
+  .section-header .subtitle{font-size:.85rem;color:#64748b;margin-top:2px}
+  .concept-box{background:#eef4ff;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid #3b82f6}
+  .concept-box h4{color:#1d4ed8;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .concept-box p,.concept-box ul{font-size:.875rem;color:#374151}
+  .concept-box ul{padding-left:18px;margin-top:6px}
+  .concept-box ul li{margin-bottom:4px}
+  .case{background:#fffbf0;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid var(--accent)}
+  .case h4{color:#92400e;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .case p,.case ul{font-size:.875rem;color:#374151}
+  .case ul{padding-left:18px;margin-top:6px}
+  .case ul li{margin-bottom:4px}
+  .pitfall{background:#fff5f5;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid #ef4444}
+  .pitfall h4{color:#b91c1c;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .pitfall p,.pitfall ul{font-size:.875rem;color:#374151}
+  .pitfall ul{padding-left:18px;margin-top:6px}
+  .pitfall ul li{margin-bottom:4px}
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+  .compare-card{background:#f1f5f9;border-radius:8px;padding:16px}
+  .compare-card h5{font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--primary)}
+  .compare-card ul{padding-left:16px;font-size:.85rem;color:#475569}
+  .compare-card ul li{margin-bottom:4px}
+  .timeline{position:relative;padding-left:24px;margin-top:12px}
+  .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#e2e8f0}
+  .tl-item{position:relative;margin-bottom:16px;padding-left:16px}
+  .tl-item::before{content:'';position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+  .tl-item .year{font-size:.8rem;font-weight:700;color:var(--accent);margin-bottom:2px}
+  .tl-item p{font-size:.875rem;color:#374151}
+  .signal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+  .signal-up{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:14px}
+  .signal-up h5{color:#166534;font-size:.9rem;margin-bottom:6px}
+  .signal-up p{font-size:.85rem;color:#374151}
+  .signal-down{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:14px}
+  .signal-down h5{color:#991b1b;font-size:.9rem;margin-bottom:6px}
+  .signal-down p{font-size:.85rem;color:#374151}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+  @media(max-width:600px){.compare-grid,.signal-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 9</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 9 · Chapter 12 · Lecture</div>
+  <h1>Payout Policy</h1>
+  <p>从 MM 无关定理到 Apple 的千亿回购，理解股利政策的完整逻辑</p>
+</div>
+
+<div class="container">
+
+  <!-- Section 1 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <div>
+        <h2>MM Dividend Irrelevance</h2>
+        <div class="subtitle">完美市场下，股利政策不影响股东财富</div>
+      </div>
+    </div>
+    <div class="concept-box">
+      <h4>📐 三大完美市场假设</h4>
+      <ul>
+        <li><strong>无税（No Taxes）</strong>：股利收入与资本利得税率相同</li>
+        <li><strong>无交易成本（No Transaction Costs）</strong>：买卖股票没有摩擦成本</li>
+        <li><strong>完美信息（Perfect Information）</strong>：所有投资者信息对称</li>
+      </ul>
+    </div>
+    <div class="concept-box">
+      <h4>💡 核心逻辑：自制股利（Homemade Dividend）</h4>
+      <p>如果公司不发股利，股东可以<strong>卖出部分股票</strong>来自己创造现金流。反之，如果公司发了股利但股东不需要现金，可以用股利<strong>买回股票</strong>。因此，股利政策只是改变了财富的形式（现金 vs 股票），不改变总量。</p>
+    </div>
+    <div class="concept-box">
+      <h4>🔢 数学验证</h4>
+      <p>股价 = £10，发放 £1 股利 → 除息后股价 = £9</p>
+      <p>持有 100 股的股东：<strong>100×£9 + £100现金 = £1,000</strong>（与发股利前相同）</p>
+    </div>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <div>
+        <h2>Dividend Signalling</h2>
+        <div class="subtitle">股利变化传递管理层对未来盈利的信号</div>
+      </div>
+    </div>
+    <p style="font-size:.9rem;color:#475569;margin-bottom:16px">在现实中，信息并不完美。管理层比外部投资者更了解公司前景，因此股利变化成为一种<strong>信号机制</strong>。</p>
+    <div class="signal-grid">
+      <div class="signal-up">
+        <h5>📈 增加股利 → 正面信号</h5>
+        <p>管理层对未来盈利有信心，愿意承诺更高的现金支出。市场通常以股价上涨回应。</p>
+      </div>
+      <div class="signal-down">
+        <h5>📉 减少股利 → 负面信号</h5>
+        <p>市场解读为公司盈利前景恶化。反应通常<strong>不对称</strong>——减少股利的负面冲击远大于增加股利的正面效应。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <div>
+        <h2>Clientele Effect</h2>
+        <div class="subtitle">不同投资者偏好不同的股利政策</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h5>💼 高税率个人投资者</h5>
+        <ul>
+          <li>偏好<strong>低股利</strong>政策</li>
+          <li>资本利得税率通常低于股利税率</li>
+          <li>希望公司留存利润，通过股价上涨获益</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h5>🏦 退休基金 / 机构投资者</h5>
+        <ul>
+          <li>偏好<strong>高股利</strong>政策</li>
+          <li>需要稳定现金流支付养老金</li>
+          <li>通常享有税收优惠，股利税负较低</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concept-box" style="margin-top:16px">
+      <h4>💡 含义</h4>
+      <p>公司改变股利政策会导致投资者基础（clientele）的更替。短期内可能引发股价波动，但长期来看，新的投资者群体会填补空缺。</p>
+    </div>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <div>
+        <h2>Share Buybacks vs Dividends</h2>
+        <div class="subtitle">两种股东回报方式的比较</div>
+      </div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <h5>🔄 股票回购（Buybacks）</h5>
+        <ul>
+          <li>✅ 灵活：无需持续承诺</li>
+          <li>✅ 税收效率高：资本利得税率更低</li>
+          <li>✅ 传递股价被低估的信号</li>
+          <li>✅ 提升每股收益（EPS）</li>
+          <li>❌ 信号效应不如股利稳定</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h5>💰 现金股利（Dividends）</h5>
+        <ul>
+          <li>✅ 稳定：投资者可预期</li>
+          <li>✅ 信号效应强（承诺性更高）</li>
+          <li>✅ 吸引偏好现金流的投资者</li>
+          <li>❌ 有"粘性"：难以削减</li>
+          <li>❌ 税收效率相对较低</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 Pitfall -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <div>
+        <h2>⚠️ 常见陷阱</h2>
+        <div class="subtitle">考试高频易错点</div>
+      </div>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 1：MM 无关定理的假设条件</h4>
+      <p>MM 无关定理在<strong>完美市场</strong>下成立。现实中存在税收、交易成本和信息不对称，因此股利政策<strong>确实</strong>会影响公司价值。不要把理论结论直接套用到现实。</p>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 2：股利政策 ≠ 股利水平</h4>
+      <p><strong>股利政策</strong>是指公司如何决定股利（如固定比例、剩余股利政策等）；<strong>股利水平</strong>是指具体发多少。两者不同，不要混淆。</p>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 3：减少股利的不对称效应</h4>
+      <p>市场对减少股利的负面反应通常<strong>远大于</strong>增加股利的正面反应。这是因为减少股利被视为公司陷入困境的强烈信号。</p>
+    </div>
+  </div>
+
+  <!-- Section 6 Case Study -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <div>
+        <h2>🍎 真实案例：Apple Inc.</h2>
+        <div class="subtitle">从零股利到史上最大回购计划</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="year">1995–2012</div>
+        <p>Jobs 认为留存现金比发股利更有价值，Apple <strong>不发任何股利</strong>。公司积累了大量现金储备用于研发和战略收购。</p>
+      </div>
+      <div class="tl-item">
+        <div class="year">2012</div>
+        <p>Jobs 去世后，Cook 宣布<strong>恢复股利</strong>（$2.65/股），回应机构投资者的压力。</p>
+      </div>
+      <div class="tl-item">
+        <div class="year">2013 至今</div>
+        <p>Apple 开始<strong>大规模股票回购</strong>，累计回购超过 <strong>$600 Billion</strong>，成为全球最大的股票回购计划。</p>
+      </div>
+      <div class="tl-item">
+        <div class="year">2023</div>
+        <p>单年回购 <strong>$90 Billion</strong>，创史上最大单年回购记录。Apple 选择回购而非股利，体现了税收效率优先的策略。</p>
+      </div>
+    </div>
+    <div class="case" style="margin-top:16px">
+      <h4>📊 Apple 案例的财务逻辑</h4>
+      <p>Apple 偏好回购的原因：① 税收效率更高（资本利得 vs 股利税）；② 灵活性更强（可随时调整规模）；③ 传递股价被低估的信号；④ 提升 EPS，支撑股价。</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html" class="btn">← Guide</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html" class="btn accent">🧪 Interactive →</a>
+  </div>
+</div>
+</body>
+</html>

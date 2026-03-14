@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 Quiz – Cost of Capital & WACC</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; --green:#064e3b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,var(--green) 0%,#0d6b4e 100%); color:#fff; padding:52px 24px 44px; text-align:center; }
+  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
+  .hero h1 { font-size:2rem; font-weight:800; margin-bottom:10px; }
+  .hero p { opacity:.85; font-size:.95rem; }
+
+  .progress-bar { background:rgba(255,255,255,.2); height:6px; border-radius:3px; margin:20px auto 0; max-width:400px; }
+  .progress-fill { background:#4ade80; height:100%; border-radius:3px; transition:width .4s; }
+  .progress-text { color:rgba(255,255,255,.8); font-size:.82rem; margin-top:6px; }
+
+  .container { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
+
+  .section-title { color:var(--primary); font-size:1.15rem; font-weight:700; margin:32px 0 16px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+
+  .question { background:#fff; border-radius:12px; padding:28px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+  .question .q-num { color:var(--accent); font-weight:700; font-size:.82rem; margin-bottom:8px; }
+  .question .q-text { color:#1a202c; font-size:1rem; font-weight:600; line-height:1.6; margin-bottom:16px; }
+  .question .q-hint { color:#718096; font-size:.82rem; margin-bottom:12px; font-style:italic; }
+
+  .options { display:flex; flex-direction:column; gap:8px; }
+  .option { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border:2px solid #e2e8f0; border-radius:8px; cursor:pointer; transition:.2s; }
+  .option:hover { border-color:var(--primary); background:#f0f4ff; }
+  .option.correct { border-color:#16a34a; background:#f0fdf4; }
+  .option.wrong { border-color:#dc2626; background:#fef2f2; }
+  .option.disabled { cursor:default; }
+  .option .opt-letter { font-weight:700; color:var(--primary); min-width:20px; font-size:.9rem; }
+  .option .opt-text { color:#374151; font-size:.92rem; line-height:1.5; }
+  .option.correct .opt-letter { color:#16a34a; }
+  .option.wrong .opt-letter { color:#dc2626; }
+
+  .feedback { margin-top:12px; padding:10px 14px; border-radius:8px; font-size:.88rem; display:none; }
+  .feedback.show { display:block; }
+  .feedback.correct-fb { background:#f0fdf4; color:#166534; border-left:3px solid #16a34a; }
+  .feedback.wrong-fb { background:#fef2f2; color:#991b1b; border-left:3px solid #dc2626; }
+
+  .score-panel { background:var(--green); color:#fff; border-radius:12px; padding:28px; text-align:center; margin-bottom:28px; display:none; }
+  .score-panel.show { display:block; }
+  .score-panel .score-num { font-size:3rem; font-weight:800; }
+  .score-panel p { opacity:.85; margin-top:6px; }
+
+  .calc-section { background:#fff; border-radius:12px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:20px; }
+  .calc-section h3 { color:var(--primary); font-size:1rem; margin-bottom:12px; }
+  .calc-section p { color:#444; font-size:.93rem; line-height:1.7; margin-bottom:10px; }
+  .calc-section ol { padding-left:20px; color:#444; font-size:.93rem; line-height:1.9; }
+
+  details { margin-top:16px; }
+  summary { cursor:pointer; background:var(--primary); color:#fff; padding:10px 16px; border-radius:8px; font-size:.9rem; font-weight:600; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary::before { content:'▶ '; }
+  details[open] summary::before { content:'▼ '; }
+  .answer-content { background:#eef4ff; border-radius:0 0 8px 8px; padding:20px; font-size:.9rem; line-height:1.8; color:#333; }
+  .answer-content strong { color:var(--primary); }
+
+  .submit-btn { display:block; width:100%; padding:16px; background:var(--green); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:24px; transition:.2s; }
+  .submit-btn:hover { background:#0d6b4e; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 7</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 7 · Chapter 10 · Quiz</div>
+  <h1>✏️ Cost of Capital &amp; WACC</h1>
+  <p>10道选择题 + 1道计算题，测试你的掌握程度</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-text" id="progressText">0 / 10 已完成</div>
+</div>
+
+<div class="container">
+  <div class="score-panel" id="scorePanel">
+    <div class="score-num" id="scoreNum">0/10</div>
+    <p id="scoreMsg">完成所有题目后查看得分</p>
+  </div>
+
+  <div class="section-title">Section A · Multiple Choice Questions</div>
+
+  <div id="quiz-container"></div>
+
+  <div class="section-title">Section B · 计算题</div>
+
+  <div class="calc-section">
+    <h3>📝 综合计算题</h3>
+    <p><strong>题目：</strong>XYZ 公司资本结构如下：</p>
+    <ul style="padding-left:20px;color:#444;font-size:.93rem;line-height:1.9;">
+      <li>债务市值 £200m，债券 YTM = 6%</li>
+      <li>股权市值 £800m，β = 1.3，R<sub>f</sub> = 4%，市场风险溢价 = 5%</li>
+      <li>企业所得税率 = 20%</li>
+    </ul>
+    <p style="margin-top:12px;">请计算：(a) 权益成本 K<sub>e</sub>（用 CAPM）&nbsp;&nbsp;(b) 税后债务成本&nbsp;&nbsp;(c) WACC</p>
+
+    <details>
+      <summary>点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) 权益成本 K<sub>e</sub>（CAPM）：</strong></p>
+        <p>K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub>−R<sub>f</sub>) = 4% + 1.3 × 5% = <strong>10.5%</strong></p>
+        <br>
+        <p><strong>(b) 税后债务成本：</strong></p>
+        <p>税后 K<sub>d</sub> = YTM × (1−t) = 6% × (1−20%) = 6% × 0.8 = <strong>4.8%</strong></p>
+        <br>
+        <p><strong>(c) WACC：</strong></p>
+        <p>总资本 = £200m + £800m = £1,000m</p>
+        <p>W<sub>d</sub> = 200/1000 = 20%，W<sub>e</sub> = 800/1000 = 80%</p>
+        <p>WACC = 0.20 × 4.8% + 0.80 × 10.5% = 0.96% + 8.4% = <strong>9.36%</strong></p>
+      </div>
+    </details>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  { q: "WACC 公式中，债务成本为何要乘以 (1−t)？", opts: ["因为利息支出可以抵税，降低实际债务成本","因为债务比股权便宜","因为税率影响股权成本","这是会计惯例"], correct: 0, explain: "利息支出在税前扣除，政府实际补贴了部分债务成本，税后实际债务成本 = Kd × (1−t)。" },
+  { q: "用 CAPM 计算权益成本，β=1.5，Rf=3%，市场回报率=9%，Ke=?", opts: ["12%","9%","13.5%","6%"], correct: 0, explain: "Ke = Rf + β×(Rm−Rf) = 3% + 1.5×(9%−3%) = 3% + 1.5×6% = 3% + 9% = 12%。" },
+  { q: "计算 WACC 时，权重应使用：", opts: ["账面价值权重","市场价值权重","历史成本权重","任意权重均可"], correct: 1, explain: "市场价值反映投资者当前对资产的定价，是资本成本的真实体现。账面价值是历史成本，不适用。" },
+  { q: "股利增长模型 Ke = D₁/P₀ + g，其中 D₁ 是：", opts: ["上一期已支付的股利","下一期预期股利","历史平均股利","股利增长率"], correct: 1, explain: "D₁ 是下一期预期股利。如果已知 D₀（上期股利），则 D₁ = D₀ × (1+g)。混淆 D₀ 和 D₁ 是常见错误。" },
+  { q: "某公司债券 YTM=6%，税率25%，税后债务成本为：", opts: ["6%","4.5%","7.5%","1.5%"], correct: 1, explain: "税后 Kd = 6% × (1−25%) = 6% × 0.75 = 4.5%。" },
+  { q: "MM 理论中，WACC 与资本结构的关系（无税）：", opts: ["债务越多 WACC 越低","WACC 保持不变","债务越多 WACC 越高","取决于行业"], correct: 1, explain: "MM 无税定理：在完美市场中，资本结构不影响企业价值，WACC 保持不变。增加债务虽降低债务成本，但会提高股权风险，使 Ke 上升，两者恰好抵消。" },
+  { q: "Apple β=1.2，Rf=4%，市场溢价6%，Apple 的权益成本为：", opts: ["10%","11.2%","7.2%","12%"], correct: 1, explain: "Ke = 4% + 1.2 × 6% = 4% + 7.2% = 11.2%。" },
+  { q: "以下哪项是计算 WACC 的常见错误？", opts: ["使用市场价值权重","使用账面价值权重","使用税后债务成本","使用 CAPM 计算权益成本"], correct: 1, explain: "使用账面价值权重是常见错误。账面价值是历史成本，不反映当前市场定价，应使用市场价值权重。" },
+  { q: "若 Wd=40%, Kd=5%, t=30%, We=60%, Ke=12%，WACC=?", opts: ["8.6%","9.2%","7.8%","10%"], correct: 0, explain: "WACC = 0.4×5%×(1−0.3) + 0.6×12% = 0.4×3.5% + 7.2% = 1.4% + 7.2% = 8.6%。" },
+  { q: "股利增长模型的局限性是：", opts: ["只适用于支付股利且股利稳定增长的公司","不考虑风险","需要知道 β 值","只适用于债券"], correct: 0, explain: "股利增长模型假设股利永续稳定增长，不适用于不支付股利的公司（如成长型科技公司）或股利不稳定的公司。" }
+];
+
+let answered = 0;
+let score = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.id = 'q' + i;
+    const optLetters = ['A','B','C','D'];
+    div.innerHTML = `
+      <div class="q-num">Q${i+1} / 10</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts${i}">
+        ${q.opts.map((o,j) => `<div class="option" onclick="selectOption(${i},${j})" id="opt${i}_${j}">
+          <span class="opt-letter">${optLetters[j]}</span>
+          <span class="opt-text">${o}</span>
+        </div>`).join('')}
+      </div>
+      <div class="feedback" id="fb${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function selectOption(qi, oi) {
+  const q = questions[qi];
+  const opts = document.getElementById('opts' + qi).querySelectorAll('.option');
+  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+
+  const selected = document.getElementById(`opt${qi}_${oi}`);
+  const correct = document.getElementById(`opt${qi}_${q.correct}`);
+  const fb = document.getElementById('fb' + qi);
+
+  if (oi === q.correct) {
+    selected.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.textContent = '✅ 正确！' + q.explain;
+    score++;
+  } else {
+    selected.classList.add('wrong');
+    correct.classList.add('correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.textContent = '❌ 错误。' + q.explain;
+  }
+
+  answered++;
+  updateProgress();
+  if (answered === questions.length) showScore();
+}
+
+function updateProgress() {
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${answered} / ${questions.length} 已完成`;
+}
+
+function showScore() {
+  const panel = document.getElementById('scorePanel');
+  panel.classList.add('show');
+  document.getElementById('scoreNum').textContent = `${score} / ${questions.length}`;
+  const pct = score / questions.length;
+  let msg = pct >= 0.9 ? '🏆 优秀！完全掌握本周内容！' :
+            pct >= 0.7 ? '👍 良好！建议复习错题。' :
+            '📚 需要加强复习，重点看 Lecture 和 Interactive。';
+  document.getElementById('scoreMsg').textContent = msg;
+  panel.scrollIntoView({ behavior:'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>

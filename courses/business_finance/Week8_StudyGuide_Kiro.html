@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Study Guide – Capital Structure</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,#1a3a5c 0%,#2d5f8a 100%); color:#fff; padding:60px 24px 48px; text-align:center; }
+  .hero .eyebrow { font-size:.85rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:12px; }
+  .hero h1 { font-size:2.4rem; font-weight:800; margin-bottom:12px; }
+  .hero p { font-size:1.05rem; opacity:.85; max-width:560px; margin:0 auto; }
+
+  .container { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+
+  .prof-card { background:#fff; border-left:5px solid var(--accent); border-radius:10px; padding:28px 32px; margin-bottom:36px; box-shadow:0 2px 12px rgba(0,0,0,.07); display:flex; gap:20px; align-items:flex-start; }
+  .prof-avatar { font-size:2.8rem; flex-shrink:0; }
+  .prof-card h3 { color:var(--primary); font-size:1rem; margin-bottom:8px; }
+  .prof-card p { color:#444; line-height:1.7; font-size:.95rem; }
+
+  .objectives { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; margin-bottom:36px; }
+  .obj-card { background:#fff; border-radius:10px; padding:24px; box-shadow:0 2px 10px rgba(0,0,0,.06); border-top:4px solid var(--primary); }
+  .obj-card .num { font-size:2rem; font-weight:800; color:var(--accent); line-height:1; margin-bottom:8px; }
+  .obj-card h4 { color:var(--primary); font-size:.95rem; margin-bottom:8px; }
+  .obj-card p { color:#555; font-size:.88rem; line-height:1.6; }
+
+  .checklist-section { background:#fff; border-radius:10px; padding:28px 32px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:36px; }
+  .checklist-section h2 { color:var(--primary); font-size:1.15rem; margin-bottom:20px; }
+  .checklist-item { display:flex; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #f0f0f0; cursor:pointer; }
+  .checklist-item:last-child { border-bottom:none; }
+  .checklist-item input[type=checkbox] { width:18px; height:18px; accent-color:var(--primary); cursor:pointer; flex-shrink:0; }
+  .checklist-item label { cursor:pointer; font-size:.93rem; color:#333; line-height:1.5; }
+  .checklist-item.done label { text-decoration:line-through; color:#999; }
+
+  .tension-box { background:#fff; border-radius:10px; padding:24px 28px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:36px; }
+  .tension-box h3 { color:var(--primary); font-size:1rem; margin-bottom:16px; }
+  .tension-row { display:flex; gap:16px; align-items:stretch; }
+  .tension-side { flex:1; border-radius:8px; padding:16px; text-align:center; }
+  .tension-side.benefit { background:#f0fdf4; border:2px solid #16a34a; }
+  .tension-side.cost { background:#fef2f2; border:2px solid #dc2626; }
+  .tension-side h4 { font-size:.9rem; margin-bottom:8px; }
+  .tension-side.benefit h4 { color:#166534; }
+  .tension-side.cost h4 { color:#991b1b; }
+  .tension-side p { font-size:.85rem; color:#555; line-height:1.5; }
+  .tension-vs { display:flex; align-items:center; font-size:1.5rem; font-weight:800; color:#718096; padding:0 8px; }
+
+  .bottom-nav { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; padding:14px 28px; border-radius:8px; text-decoration:none; font-weight:600; font-size:.95rem; transition:.2s; }
+  .btn-primary { background:var(--primary); color:#fff; }
+  .btn-primary:hover { background:#2d5f8a; }
+  .btn-accent { background:var(--accent); color:#fff; }
+  .btn-accent:hover { background:#d4911a; }
+  .btn-outline { border:2px solid var(--primary); color:var(--primary); }
+  .btn-outline:hover { background:var(--primary); color:#fff; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html" class="active">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 8</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 8 · Chapter 11 · Study Guide</div>
+  <h1>Capital Structure</h1>
+  <p>为什么融资方式会影响企业价值？税盾收益与财务困境成本的永恒博弈。</p>
+</div>
+
+<div class="container">
+
+  <div class="prof-card">
+    <div class="prof-avatar">👨‍🏫</div>
+    <div>
+      <h3>教授视角 · Professor's Insight</h3>
+      <p>资本结构决策的核心矛盾是：<strong>债务融资有税盾收益</strong>（利息抵税，政府帮你付一部分利息），但<strong>债务越多，财务困境风险越高</strong>（破产成本、失去客户信任、管理层精力分散）。</p>
+      <p style="margin-top:10px">Modigliani 和 Miller（MM）给了我们两个极端答案：无税时资本结构无关（V<sub>L</sub>=V<sub>U</sub>），有税时债务越多越好（V<sub>L</sub>=V<sub>U</sub>+tD）。但现实中，<strong>传统观点</strong>认为存在一个最优资本结构，在税盾收益和财务困境成本之间取得平衡。</p>
+    </div>
+  </div>
+
+  <div class="tension-box">
+    <h3>⚖️ 资本结构的核心矛盾</h3>
+    <div class="tension-row">
+      <div class="tension-side benefit">
+        <h4>✅ 债务税盾收益</h4>
+        <p>利息支出可抵税<br>税盾价值 = t × D<br>政府补贴债务成本</p>
+      </div>
+      <div class="tension-vs">VS</div>
+      <div class="tension-side cost">
+        <h4>❌ 财务困境成本</h4>
+        <p>直接成本：法律/重组费用<br>间接成本：失去客户/供应商<br>管理层精力分散</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 style="color:var(--primary);margin-bottom:20px;font-size:1.2rem;">📌 本周学习目标</h2>
+  <div class="objectives">
+    <div class="obj-card">
+      <div class="num">01</div>
+      <h4>MM 无税定理</h4>
+      <p>理解完美市场假设下，资本结构为何不影响企业价值（V<sub>L</sub> = V<sub>U</sub>）。</p>
+    </div>
+    <div class="obj-card">
+      <div class="num">02</div>
+      <h4>MM 有税定理</h4>
+      <p>掌握债务税盾如何增加企业价值：V<sub>L</sub> = V<sub>U</sub> + tD，理论上债务越多越好。</p>
+    </div>
+    <div class="obj-card">
+      <div class="num">03</div>
+      <h4>传统观点</h4>
+      <p>理解最优资本结构的存在：在税盾收益和财务困境成本之间找到平衡点，WACC 最低。</p>
+    </div>
+  </div>
+
+  <div class="checklist-section">
+    <h2>✅ 学习检查清单</h2>
+    <div class="checklist-item" id="ci1">
+      <input type="checkbox" id="c1" onchange="toggleDone('ci1')">
+      <label for="c1">我能说出 MM 无税定理的核心结论和假设条件</label>
+    </div>
+    <div class="checklist-item" id="ci2">
+      <input type="checkbox" id="c2" onchange="toggleDone('ci2')">
+      <label for="c2">我能用 V_L = V_U + tD 计算有税情况下的企业价值</label>
+    </div>
+    <div class="checklist-item" id="ci3">
+      <input type="checkbox" id="c3" onchange="toggleDone('ci3')">
+      <label for="c3">我理解 MM 无税和有税结论的区别（不要混淆！）</label>
+    </div>
+    <div class="checklist-item" id="ci4">
+      <input type="checkbox" id="c4" onchange="toggleDone('ci4')">
+      <label for="c4">我能解释传统观点中最优资本结构的形成原因</label>
+    </div>
+    <div class="checklist-item" id="ci5">
+      <input type="checkbox" id="c5" onchange="toggleDone('ci5')">
+      <label for="c5">我能列举财务困境的直接成本和间接成本各两个例子</label>
+    </div>
+    <div class="checklist-item" id="ci6">
+      <input type="checkbox" id="c6" onchange="toggleDone('ci6')">
+      <label for="c6">我理解 Tesla 资本结构演变的逻辑（为何从高债务转向股权融资）</label>
+    </div>
+    <div class="checklist-item" id="ci7">
+      <input type="checkbox" id="c7" onchange="toggleDone('ci7')">
+      <label for="c7">我完成了本周 Interactive Lab 的三个实验</label>
+    </div>
+    <div class="checklist-item" id="ci8">
+      <input type="checkbox" id="c8" onchange="toggleDone('ci8')">
+      <label for="c8">我完成了本周 Quiz 并得分 ≥ 80%</label>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html" class="btn btn-primary">📖 开始学习 Lecture →</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html" class="btn btn-accent">🧪 动手实验 Interactive →</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html" class="btn btn-outline">✏️ 测试自己 Quiz →</a>
+  </div>
+
+</div>
+
+<script>
+function toggleDone(id) {
+  const item = document.getElementById(id);
+  const cb = item.querySelector('input');
+  item.classList.toggle('done', cb.checked);
+}
+</script>
+</body>
+</html>
