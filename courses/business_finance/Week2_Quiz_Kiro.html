@@ -158,6 +158,94 @@
     </div>
   </div>
 
+  <!-- TEXTBOOK PROBLEMS -->
+  <div style="margin-top:2.5rem">
+    <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1.2rem">
+      <span>📖 教材原题 — McLaney Business Finance 11th Ed, Ch.4</span>
+      <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+    </div>
+
+    <!-- Problem 4.1 -->
+    <div class="sb-card">
+      <div class="sb-header">
+        <h3>Problem 4.1 — Barclay plc</h3>
+        <p>McLaney Business Finance 11th Ed · Ch.4 · NPV &amp; Discounted Payback Period</p>
+      </div>
+      <div class="sb-tag">🔢 NPV + Discounted PBP + Decision Conflict</div>
+      <p style="font-size:.92rem;margin-bottom:.8rem">Barclay plc is considering a project with the following cash flows:</p>
+      <table class="data-table">
+        <tr><th>Year</th><th>Cash Flow</th></tr>
+        <tr><td>Year 0 (Investment)</td><td>−£10m</td></tr>
+        <tr><td>Year 1</td><td>+£5m</td></tr>
+        <tr><td>Year 2</td><td>+£4m</td></tr>
+        <tr><td>Year 3</td><td>+£3m</td></tr>
+        <tr><td>Year 4</td><td>+£2m</td></tr>
+      </table>
+      <p style="font-size:.9rem;margin:.6rem 0">Cost of finance: <strong>15%</strong>. Maximum acceptable discounted payback period: <strong>3 years</strong>.</p>
+      <h4>Required: Should the project be undertaken on the basis of (a) NPV and (b) discounted payback period?</h4>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">👁 Show Full Solution</button>
+      <div class="answer-box">
+        <div class="ans-title">✅ Full Solution</div>
+        <p style="font-size:.9rem;font-weight:600;margin-bottom:.4rem">(a) NPV Calculation</p>
+        <div class="calc-line"><span>Year 1: £5m ÷ 1.15</span><span>£4.348m</span></div>
+        <div class="calc-line"><span>Year 2: £4m ÷ 1.15²</span><span>£3.025m</span></div>
+        <div class="calc-line"><span>Year 3: £3m ÷ 1.15³</span><span>£1.975m</span></div>
+        <div class="calc-line"><span>Year 4: £2m ÷ 1.15⁴</span><span>£1.144m</span></div>
+        <div class="calc-line"><span>Total PV of inflows</span><span>£10.492m</span></div>
+        <div class="calc-line"><span>Less: Initial investment</span><span>−£10.000m</span></div>
+        <div class="calc-line"><span>NPV</span><span>+£0.492m → <strong>ACCEPT</strong></span></div>
+        <p style="font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem">(b) Discounted Payback Period</p>
+        <div class="calc-line"><span>Cumulative PV after Year 1</span><span>£4.348m</span></div>
+        <div class="calc-line"><span>Cumulative PV after Year 2</span><span>£7.373m</span></div>
+        <div class="calc-line"><span>Cumulative PV after Year 3</span><span>£9.348m (still &lt; £10m)</span></div>
+        <div class="calc-line"><span>Cumulative PV after Year 4</span><span>£10.492m (exceeds £10m)</span></div>
+        <p style="font-size:.9rem;margin-top:.8rem">Discounted PBP falls between Year 3 and Year 4 — <strong>exceeds the 3-year maximum → REJECT</strong> on PBP criterion.</p>
+        <p style="font-size:.9rem;margin-top:.6rem"><strong>Conflict:</strong> NPV says ACCEPT; discounted PBP says REJECT. <strong>NPV is the theoretically correct method</strong> — it directly measures shareholder wealth creation. PBP ignores cash flows beyond the payback date (here, the Year 4 inflow of £1.144m PV). The project should be accepted on NPV grounds.</p>
+      </div>
+    </div>
+
+    <!-- Problem 4.2 -->
+    <div class="sb-card">
+      <div class="sb-header">
+        <h3>Problem 4.2 — Branton &amp; Co</h3>
+        <p>McLaney Business Finance 11th Ed · Ch.4 · Mutually Exclusive Projects · NPV, IRR &amp; Payback</p>
+      </div>
+      <div class="sb-tag">🔢 NPV + IRR Interpolation + Payback · Mutually Exclusive</div>
+      <p style="font-size:.92rem;margin-bottom:.8rem">Branton &amp; Co is choosing between two mutually exclusive projects. Cost of finance: <strong>10%</strong>.</p>
+      <table class="data-table">
+        <tr><th>Year</th><th>Project A</th><th>Project B</th></tr>
+        <tr><td>Year 0 (Investment)</td><td>−£50,000</td><td>−£36,000</td></tr>
+        <tr><td>Year 1</td><td>+£39,000</td><td>+£28,000</td></tr>
+        <tr><td>Year 2</td><td>+£9,000</td><td>+£8,000</td></tr>
+        <tr><td>Year 3 (operating)</td><td>+£12,000</td><td>+£14,000</td></tr>
+        <tr><td>Year 3 (residual value)</td><td>+£7,000</td><td>+£6,000</td></tr>
+      </table>
+      <h4>Required: (a) NPV for both projects. (b) Approximate IRR for Project A. (c) Payback period for both.</h4>
+      <button class="show-ans-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">👁 Show Full Solution</button>
+      <div class="answer-box">
+        <div class="ans-title">✅ Full Solution</div>
+        <p style="font-size:.9rem;font-weight:600;margin-bottom:.4rem">(a) NPV Calculation</p>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:.4rem">Discount factors at 10%: Y1 = 0.909, Y2 = 0.826, Y3 = 0.751</p>
+        <div class="calc-line"><span>Project A: 39/1.1 + 9/1.21 + 19/1.331 − 50</span><span></span></div>
+        <div class="calc-line"><span>= 35.45 + 7.44 + 14.27 − 50</span><span>NPV_A = +£7,160</span></div>
+        <div class="calc-line"><span>Project B: 28/1.1 + 8/1.21 + 20/1.331 − 36</span><span></span></div>
+        <div class="calc-line"><span>= 25.45 + 6.61 + 15.03 − 36</span><span>NPV_B = +£11,090</span></div>
+        <p style="font-size:.9rem;margin-top:.6rem"><strong>Decision: Choose Project B</strong> — higher NPV means greater shareholder wealth creation.</p>
+        <p style="font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem">(b) Approximate IRR for Project A (by interpolation)</p>
+        <div class="calc-line"><span>At 20%: NPV_A ≈ +£1,300</span><span></span></div>
+        <div class="calc-line"><span>At 25%: NPV_A ≈ −£2,100</span><span></span></div>
+        <div class="calc-line"><span>IRR ≈ 20% + [1,300 ÷ (1,300 + 2,100)] × (25% − 20%)</span><span></span></div>
+        <div class="calc-line"><span>= 20% + (1,300 ÷ 3,400) × 5%</span><span>IRR_A ≈ 21.9%</span></div>
+        <p style="font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem">(c) Payback Period</p>
+        <div class="calc-line"><span>Project A: £50k − £39k = £11k remaining after Y1; £11k − £9k = £2k after Y2</span><span></span></div>
+        <div class="calc-line"><span>PBP_A = 2 years + (2/12) months ≈ <strong>2 years 2 months</strong></span><span></span></div>
+        <div class="calc-line"><span>Project B: £36k − £28k = £8k remaining after Y1; £8k − £8k = £0 after Y2</span><span></span></div>
+        <div class="calc-line"><span>PBP_B = exactly <strong>2 years</strong></span><span></span></div>
+        <p style="font-size:.9rem;margin-top:.6rem">On payback, Project B recovers investment faster. <strong>All three methods favour Project B.</strong> Note: NPV is the primary decision criterion — it correctly accounts for time value and total wealth creation.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="bottom-nav">
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week2_Interactive_Kiro.html" class="btn btn-outline">← Interactive</a>
     <span style="font-size:.85rem;color:var(--muted)">Page 3 of 3</span>
