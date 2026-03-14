@@ -95,6 +95,45 @@
     <button class="btn btn-green" id="submit-btn" onclick="submitAll()" style="display:none">📊 See My Results</button>
   </div>
 
+
+  <!-- TEXTBOOK PROBLEMS -->
+  <div style="margin-top:2.5rem">
+    <div style="display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1.2rem">
+      <span>📖 教材原题 Textbook Problems</span>
+      <span style="flex:1;height:1px;background:var(--border);display:block"></span>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem">Source: McLaney, Business Finance: Theory and Practice, 11th Ed. — Ch.1 &amp; Ch.2</p>
+
+    <div style="background:var(--card);border-radius:12px;border:2px solid #7c3aed;padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(124,58,237,.1)">
+      <div style="background:linear-gradient(135deg,#4c1d95,#7c3aed);color:#fff;border-radius:8px;padding:1rem 1.2rem;margin-bottom:1.2rem">
+        <h3 style="font-size:1rem;font-weight:700;margin-bottom:.2rem">Ch.2 Problem 2.1 — Talco Ltd</h3>
+        <p style="font-size:.85rem;opacity:.8;margin:0">Textbook Problem · Relevant Costs &amp; Wealth Maximisation · McLaney 11th Ed p.33</p>
+      </div>
+      <div style="display:inline-block;background:#7c3aed;color:#fff;font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:10px;margin-bottom:.8rem">🔢 Decision Analysis · Sunk Costs</div>
+      <p style="font-size:.92rem;margin-bottom:.8rem">Talco Ltd undertakes research work and manufactures engineering products. It is engaged on a research project which, when completed, will be sold for £250,000. So far, Talco has incurred costs totalling £200,000. The question arises whether to complete or abandon the project.</p>
+      <p style="font-size:.9rem;font-weight:600;margin-bottom:.6rem">To complete the project requires:</p>
+      <table style="width:100%;border-collapse:collapse;font-size:.88rem;margin:.6rem 0">
+        <tr><th style="background:#f1f5f9;padding:.5rem .8rem;border:1px solid var(--border);text-align:left">Item</th><th style="background:#f1f5f9;padding:.5rem .8rem;border:1px solid var(--border)">Details</th></tr>
+        <tr><td style="padding:.5rem .8rem;border:1px solid var(--border)">Material (already bought, £40,000)</td><td style="padding:.5rem .8rem;border:1px solid var(--border)">Toxic, no other use. Disposal cost if abandoned: £8,000</td></tr>
+        <tr><td style="padding:.5rem .8rem;border:1px solid var(--border)">Labour</td><td style="padding:.5rem .8rem;border:1px solid var(--border)">£25,000. If abandoned, used to make 2,000 units @ £25 each, material cost £12 each</td></tr>
+        <tr><td style="padding:.5rem .8rem;border:1px solid var(--border)">Project management</td><td style="padding:.5rem .8rem;border:1px solid var(--border)">£10,000. If abandoned, redundancy cost £8,000</td></tr>
+      </table>
+      <p style="font-size:.9rem;font-weight:600;margin:.8rem 0 .4rem">Required: Should the project be continued or abandoned? (Assume wealth maximisation objective.)</p>
+      <button style="background:#7c3aed;color:#fff;border:none;padding:.6rem 1.2rem;border-radius:6px;font-weight:600;font-size:.85rem;cursor:pointer;margin-top:.8rem" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">👁 Show Solution</button>
+      <div style="background:#f8fafc;border-radius:8px;padding:1.2rem;margin-top:1rem;display:none">
+        <div style="font-weight:700;color:var(--primary);margin-bottom:.8rem">✅ Solution — Incremental Analysis</div>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem">The £200,000 already spent is a <strong>sunk cost</strong> — irrelevant. The £40,000 material cost is also sunk. Focus only on future incremental flows.</p>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Revenue from completing project</span><span>+£250,000</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Labour cost to complete</span><span>−£25,000</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Opportunity cost of labour (2,000 × (£25−£12))</span><span>−£26,000</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Project management cost</span><span>−£10,000</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Saving on material disposal (avoid £8,000 cost)</span><span>+£8,000</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.25rem 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span>Saving on redundancy (avoid £8,000 if complete)</span><span>+£0 (redundancy only if abandoned)</span></div>
+        <div style="font-family:monospace;font-size:.88rem;padding:.5rem 0;font-weight:700;color:var(--green);display:flex;justify-content:space-between"><span>Net benefit of completing</span><span>+£197,000</span></div>
+        <p style="font-size:.9rem;margin-top:.8rem"><strong>Decision: COMPLETE the project.</strong> The incremental benefit of completing (£197,000) far exceeds the cost. The £200,000 already spent is irrelevant — it cannot be recovered either way.</p>
+      </div>
+    </div>
+  </div>
   <div class="bottom-nav">
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Interactive_Kiro.html" class="btn btn-outline">← Interactive</a>
     <span style="font-size:.85rem;color:var(--muted)">Page 3 of 3</span>
