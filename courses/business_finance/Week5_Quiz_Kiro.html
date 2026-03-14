@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 Quiz — Portfolio Theory | BUSI1070</title>
+<style>
+:root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--green:#27ae60;--red:#e74c3c;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:#333;}
+nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:56px;position:sticky;top:0;z-index:100;}
+nav .logo{color:var(--accent);font-weight:700;font-size:1.1rem;margin-right:auto;}
+nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem;padding:.3rem .7rem;border-radius:4px;transition:background .2s;}
+nav a:hover,nav a.active{background:rgba(255,255,255,.15);color:#fff;}
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#2d6a9f 100%);color:white;padding:3rem 2rem 2rem;text-align:center;}
+.hero h1{font-size:2rem;margin-bottom:.5rem;}
+.hero p{opacity:.85;font-size:1rem;}
+.hero .meta{margin-top:1rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.75;}
+.progress-bar-wrap{background:#e0e0e0;border-radius:8px;height:8px;margin:2rem auto;max-width:700px;}
+.progress-bar{background:var(--accent);height:8px;border-radius:8px;transition:width .4s;width:0%;}
+.progress-label{text-align:center;font-size:.85rem;color:#666;margin-top:.4rem;}
+main{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+.section-header{background:var(--primary);color:white;padding:.8rem 1.2rem;border-radius:8px 8px 0 0;font-weight:600;font-size:1rem;margin-top:2.5rem;}
+.q-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;margin-bottom:0;}
+.q-card:last-of-type{border-radius:0 0 8px 8px;}
+.q-num{color:var(--accent);font-weight:700;font-size:.85rem;margin-bottom:.5rem;}
+.q-text{font-size:1rem;line-height:1.6;margin-bottom:1rem;font-weight:500;}
+.q-source{font-size:.75rem;color:#999;margin-bottom:1rem;font-style:italic;}
+.options{display:flex;flex-direction:column;gap:.5rem;}
+.option{padding:.7rem 1rem;border:2px solid #e0e0e0;border-radius:6px;cursor:pointer;transition:all .2s;font-size:.95rem;background:#fafafa;}
+.option:hover{border-color:var(--primary);background:#eef3f8;}
+.option.selected{border-color:var(--primary);background:#dce8f5;font-weight:600;}
+.option.correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.option.wrong{border-color:var(--red);background:#f8d7da;color:#721c24;}
+.option.reveal-correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.explanation{display:none;margin-top:1rem;padding:1rem;background:#f0f7ff;border-left:4px solid var(--primary);border-radius:0 6px 6px 0;font-size:.9rem;line-height:1.6;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--primary);}
+.calc-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;border-radius:0 0 8px 8px;}
+.scenario-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:1.2rem;margin-bottom:1.2rem;font-size:.9rem;line-height:1.7;}
+.scenario-box h4{color:var(--primary);margin-bottom:.5rem;font-size:.95rem;}
+details{margin-top:1rem;}
+details summary{cursor:pointer;padding:.7rem 1rem;background:var(--primary);color:white;border-radius:6px;font-size:.9rem;font-weight:600;user-select:none;}
+details summary:hover{background:#2d6a9f;}
+details[open] summary{border-radius:6px 6px 0 0;}
+.answer-content{background:#f0f7ff;border:1px solid #c8dff5;border-top:none;padding:1.2rem;border-radius:0 0 6px 6px;font-size:.88rem;line-height:1.8;}
+.answer-content h4{color:var(--primary);margin:.8rem 0 .3rem;}
+.answer-content .formula{background:#1a3a5c;color:#e8f4fd;padding:.6rem 1rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.4rem 0;}
+.answer-content .verdict{background:#d4edda;border:1px solid #c3e6cb;border-radius:4px;padding:.6rem 1rem;color:#155724;font-weight:600;margin-top:.8rem;}
+.submit-area{text-align:center;margin:2rem 0;}
+.btn-submit{background:var(--accent);color:white;border:none;padding:.9rem 2.5rem;font-size:1rem;font-weight:700;border-radius:8px;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:#c8880e;}
+.score-card{display:none;background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin:2rem 0;}
+.score-card.show{display:block;}
+.score-big{font-size:3rem;font-weight:700;color:var(--primary);}
+.score-label{color:#666;margin-top:.3rem;}
+.score-msg{margin-top:1rem;font-size:1rem;color:#444;}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e0e0e0;}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;background:var(--primary);color:white;text-decoration:none;border-radius:6px;font-size:.9rem;transition:background .2s;}
+.btn-nav:hover{background:#2d6a9f;}
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<nav>
+  <span class="logo">🎓 BUSI1070</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html">Study Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html">Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html">Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html" class="active">Quiz</a>
+</nav>
+<div class="hero">
+  <h1>Week 5 Quiz</h1>
+  <p>Portfolio Theory — Risk, Return, Diversification &amp; CAPM</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.7</span>
+    <span>⏱ ~20 min</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 1 Calculation</span>
+  </div>
+</div>
+<main>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 10 answered</div>
+  <div class="section-header">Section A — Multiple Choice Questions (Pearson Ch.7)</div>
+
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-num">Question 1 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">How do you assess the following two statements?<br>
+    (1) In the London Stock Exchange, it is quite common to find two securities that are perfectly positively correlated.<br>
+    (2) In the London Stock Exchange, it is quite common to find two securities that are perfectly negatively correlated.</div>
+    <div class="options" data-q="1" data-answer="c">
+      <div class="option" data-val="a">A: False, False</div>
+      <div class="option" data-val="b">B: False, True</div>
+      <div class="option" data-val="c">C: True, False</div>
+      <div class="option" data-val="d">D: True, True</div>
+    </div>
+    <div class="explanation" id="exp1">
+      <strong>✅ Correct: C — True, False.</strong><br><br>
+      <strong>Statement 1 is TRUE:</strong> Perfect positive correlation (ρ = +1) is not common but does occur — e.g., two shares in the same industry with identical business models can move almost in lockstep.<br><br>
+      <strong>Statement 2 is FALSE:</strong> Perfect negative correlation (ρ = −1) is extremely rare in practice. It would require one security to always go up exactly when another goes down — almost impossible in real markets. This is why complete risk elimination through diversification is theoretical, not practical.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-num">Question 2 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">How do you assess the following two statements?<br>
+    (1) The standard deviation of returns of a portfolio is the weighted average of the standard deviations of the securities that make up the portfolio.<br>
+    (2) The expected return of a portfolio is the weighted average of the expected returns of the securities that make up the portfolio.</div>
+    <div class="options" data-q="2" data-answer="b">
+      <div class="option" data-val="a">A: False, False</div>
+      <div class="option" data-val="b">B: False, True</div>
+      <div class="option" data-val="c">C: True, False</div>
+      <div class="option" data-val="d">D: True, True</div>
+    </div>
+    <div class="explanation" id="exp2">
+      <strong>✅ Correct: B — False, True.</strong><br><br>
+      <strong>Statement 1 is FALSE:</strong> This is one of the most important exam traps in portfolio theory. Portfolio standard deviation is NOT a simple weighted average — it depends on the covariance between assets. The formula is: σ²_p = w²_A σ²_A + w²_B σ²_B + 2·w_A·w_B·Cov(A,B). The covariance term means portfolio risk is usually <em>less</em> than the weighted average.<br><br>
+      <strong>Statement 2 is TRUE:</strong> Expected portfolio return IS simply the weighted average: E(R_p) = w_A·E(R_A) + w_B·E(R_B). No covariance needed here.
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-num">Question 3 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">Combining about 20 different, equally valued, holdings of equity shares listed on the London Stock Exchange will lead to the elimination of most of the portfolio's:</div>
+    <div class="options" data-q="3" data-answer="b">
+      <div class="option" data-val="a">a) Total risk</div>
+      <div class="option" data-val="b">b) Specific risk</div>
+      <div class="option" data-val="c">c) Market risk</div>
+      <div class="option" data-val="d">d) Systematic risk</div>
+    </div>
+    <div class="explanation" id="exp3">
+      <strong>✅ Correct: B — Specific risk.</strong><br><br>
+      Research shows that holding ~20 randomly selected shares eliminates most <em>specific (unsystematic) risk</em> — the company-specific risks like management failures, product recalls, or strikes. These risks are uncorrelated across firms, so they cancel out in a portfolio.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • Total risk = systematic + specific. You can only eliminate the specific portion.<br>
+      • Market risk / Systematic risk: These affect all companies simultaneously (recessions, interest rate changes) and <em>cannot</em> be diversified away — no matter how many shares you hold.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-num">Question 4 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">The standard deviation of returns of an investment is:</div>
+    <div class="options" data-q="4" data-answer="b">
+      <div class="option" data-val="a">a) A measure of the range of possibilities</div>
+      <div class="option" data-val="b">b) A measure of the dispersion of possible returns</div>
+      <div class="option" data-val="c">c) A measure of the expected return</div>
+      <div class="option" data-val="d">d) The square root of the expected value</div>
+    </div>
+    <div class="explanation" id="exp4">
+      <strong>✅ Correct: B — A measure of the dispersion of possible returns.</strong><br><br>
+      Standard deviation (σ) measures how spread out returns are around the expected value. A higher σ means returns are more variable — i.e., more risk. It is calculated as σ = √[Σ pᵢ(Rᵢ − E(R))²].<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: "Range" implies max minus min — that's a different, cruder measure.<br>
+      • C: Standard deviation measures risk, not expected return (that's E(R) = Σ pᵢRᵢ).<br>
+      • D: Standard deviation is the square root of <em>variance</em>, not the expected value.
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-num">Question 5 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">The only circumstances where diversification is NOT beneficial in terms of risk reduction is where investments:</div>
+    <div class="options" data-q="5" data-answer="d">
+      <div class="option" data-val="a">a) Are perfectly negatively correlated</div>
+      <div class="option" data-val="b">b) Are negatively correlated but less than perfectly so</div>
+      <div class="option" data-val="c">c) Are positively correlated but less than perfectly so</div>
+      <div class="option" data-val="d">d) Are perfectly positively correlated (ρ = +1)</div>
+    </div>
+    <div class="explanation" id="exp5">
+      <strong>✅ Correct: D — Perfectly positively correlated (ρ = +1).</strong><br><br>
+      When ρ = +1, the two assets move in perfect lockstep. Combining them gives a portfolio standard deviation that is exactly the weighted average of the individual standard deviations — no risk reduction at all.<br><br>
+      For any ρ &lt; +1, diversification reduces portfolio risk below the weighted average. The lower the correlation, the greater the benefit. At ρ = −1, risk can theoretically be eliminated entirely.<br><br>
+      <strong>Key rule:</strong> Diversification benefits exist whenever ρ &lt; +1.
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-num">Question 6 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">An asset with a negative beta will have an expected return:</div>
+    <div class="options" data-q="6" data-answer="b">
+      <div class="option" data-val="a">a) Higher than the risk-free rate</div>
+      <div class="option" data-val="b">b) Lower than the risk-free rate</div>
+      <div class="option" data-val="c">c) Equal to the risk-free rate</div>
+      <div class="option" data-val="d">d) Equal to the expected return on the market portfolio</div>
+    </div>
+    <div class="explanation" id="exp6">
+      <strong>✅ Correct: B — Lower than the risk-free rate.</strong><br><br>
+      Using CAPM: K_e = R_f + β(R_m − R_f)<br><br>
+      If β &lt; 0, then β(R_m − R_f) is negative (since R_m &gt; R_f in normal markets). So K_e = R_f + (negative number) &lt; R_f.<br><br>
+      <strong>Why would anyone accept below-risk-free returns?</strong> A negative-beta asset acts as insurance — it tends to go UP when the market goes DOWN. Investors value this hedging property so much they accept lower expected returns. Gold is a classic example of a near-zero or negative beta asset.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-num">Question 7 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">Which one of the following statements about CAPM is correct?</div>
+    <div class="options" data-q="7" data-answer="d">
+      <div class="option" data-val="a">a) CAPM can only be used to deduce the expected return of an individual Stock Exchange listed security</div>
+      <div class="option" data-val="b">b) CAPM can only be used to deduce the expected return of an efficient portfolio of Stock Exchange listed securities</div>
+      <div class="option" data-val="c">c) CAPM can only be used to deduce the expected return of individual assets, be they Stock Exchange listed or not</div>
+      <div class="option" data-val="d">d) CAPM can be used to deduce the expected returns of any assets or portfolios of assets irrespective of whether they are held in efficient portfolios or not</div>
+    </div>
+    <div class="explanation" id="exp7">
+      <strong>✅ Correct: D — CAPM applies to any asset or portfolio, efficient or not.</strong><br><br>
+      This is a key strength of CAPM. Unlike mean-variance analysis (which only applies to efficient portfolios), CAPM gives a required return for <em>any</em> asset based solely on its beta — whether it's a listed share, an unlisted company, a real asset, or an inefficient portfolio.<br><br>
+      This is why CAPM is so widely used in capital budgeting: you can estimate the required return for a specific project by finding a comparable listed company's beta.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-num">Question 8 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">In the context of modern portfolio theory, 'efficiency' means:</div>
+    <div class="options" data-q="8" data-answer="c">
+      <div class="option" data-val="a">a) Rationally reflecting all information</div>
+      <div class="option" data-val="b">b) Having no systematic risk</div>
+      <div class="option" data-val="c">c) Having no specific risk</div>
+      <div class="option" data-val="d">d) Having no risk</div>
+    </div>
+    <div class="explanation" id="exp8">
+      <strong>✅ Correct: C — Having no specific risk.</strong><br><br>
+      In portfolio theory, an "efficient" portfolio is one that is fully diversified — all specific (unsystematic) risk has been eliminated. Only systematic (market) risk remains, which cannot be diversified away.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: "Rationally reflecting all information" is the definition of market efficiency (EMH) — a different concept entirely.<br>
+      • B: No portfolio can eliminate systematic risk through diversification.<br>
+      • D: Even a fully diversified portfolio still bears systematic risk — it can never have zero risk (unless it's the risk-free asset).
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-num">Question 9 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">In 'two fund separation', what are the two funds?</div>
+    <div class="options" data-q="9" data-answer="b">
+      <div class="option" data-val="a">a) The risk-free investment and any portfolio of risky investments which lies on the efficient frontier</div>
+      <div class="option" data-val="b">b) The risk-free investment and the market portfolio</div>
+      <div class="option" data-val="c">c) Shares and loan notes</div>
+      <div class="option" data-val="d">d) The risk-free investment and shares</div>
+    </div>
+    <div class="explanation" id="exp9">
+      <strong>✅ Correct: B — The risk-free investment and the market portfolio.</strong><br><br>
+      Two-fund separation (Tobin's Separation Theorem) states that every investor's optimal portfolio is a combination of just two funds: the risk-free asset and the <em>market portfolio</em> (the tangency portfolio on the efficient frontier).<br><br>
+      The investor's risk preference determines the <em>mix</em> (how much in each fund), but the <em>risky portion</em> is always the same market portfolio for everyone. This is the theoretical foundation for index investing.<br><br>
+      <strong>Why A is wrong:</strong> It's not just any efficient portfolio — it must specifically be the market portfolio (the tangency point where the Capital Market Line touches the efficient frontier).
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-num">Question 10 of 10</div>
+    <div class="q-source">Pearson Ch.7 MCQ</div>
+    <div class="q-text">According to research evidence, CAPM is used by about what percentage of larger UK businesses in their assessment of investment projects?</div>
+    <div class="options" data-q="10" data-answer="c">
+      <div class="option" data-val="a">a) More than 41%</div>
+      <div class="option" data-val="b">b) 10 to 20%</div>
+      <div class="option" data-val="c">c) 21 to 40%</div>
+      <div class="option" data-val="d">d) Less than 10%</div>
+    </div>
+    <div class="explanation" id="exp10">
+      <strong>✅ Correct: C — 21 to 40%.</strong><br><br>
+      Survey evidence (cited in McLaney Ch.7) shows that around 21–40% of larger UK businesses use CAPM to estimate the cost of equity for investment appraisal. This is a significant minority — CAPM is theoretically dominant but not universally applied in practice.<br><br>
+      Many firms use simpler approaches (e.g., a fixed hurdle rate) or the dividend growth model instead. CAPM's practical limitations (estimating beta, the equity risk premium) mean adoption is lower than its theoretical prominence suggests.
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitQuiz()">Submit Section A</button>
+  </div>
+  <div class="score-card" id="scoreCard">
+    <div class="score-big" id="scoreNum">—</div>
+    <div class="score-label">out of 10</div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- SECTION B -->
+  <div class="section-header" style="margin-top:3rem;">Section B — Calculation Question (Ch.7 Portfolio Theory)</div>
+  <div class="calc-card">
+    <div class="q-num">Calculation Question</div>
+    <div class="q-text">Two-Asset Portfolio Risk &amp; CAPM Application</div>
+    <div class="scenario-box">
+      <h4>📋 Part (a) — Portfolio Variance</h4>
+      <p>An investor holds two assets with the following characteristics:</p>
+      <table style="width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.88rem;">
+        <tr style="background:#1a3a5c;color:white;"><th style="padding:.5rem .8rem;text-align:left;">Item</th><th style="padding:.5rem .8rem;">Asset A</th><th style="padding:.5rem .8rem;">Asset B</th></tr>
+        <tr><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;">Expected Return E(R)</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">12%</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">18%</td></tr>
+        <tr style="background:#f8f9fa;"><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;">Standard Deviation σ</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">8%</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">15%</td></tr>
+        <tr><td style="padding:.5rem .8rem;">Portfolio Weight</td><td style="padding:.5rem .8rem;text-align:center;">60%</td><td style="padding:.5rem .8rem;text-align:center;">40%</td></tr>
+      </table>
+      <p>The correlation coefficient between A and B is <strong>ρ = 0.4</strong>.</p>
+      <p style="margin-top:.8rem;"><strong>Required:</strong> Calculate (i) the portfolio expected return, (ii) the portfolio variance and standard deviation.</p>
+    </div>
+    <div class="scenario-box" style="margin-top:1rem;">
+      <h4>📋 Part (b) — CAPM Required Return</h4>
+      <p>The risk-free rate is <strong>R_f = 5%</strong> and the expected market return is <strong>R_m = 11%</strong>.</p>
+      <p>Asset X has a beta of <strong>β = 1.6</strong>. Asset Y has a beta of <strong>β = 0.7</strong>.</p>
+      <p style="margin-top:.5rem;"><strong>Required:</strong> Calculate the required return for each asset using CAPM. Which asset offers a higher required return, and why?</p>
+    </div>
+    <details>
+      <summary>🔍 Click to reveal full solution</summary>
+      <div class="answer-content">
+        <h4>Part (a) — Portfolio Expected Return</h4>
+        <div class="formula">\( E(R_p) = w_A \times E(R_A) + w_B \times E(R_B) \)</div>
+        <div class="formula">\( E(R_p) = 0.6 \times 12\% + 0.4 \times 18\% = 14.4\% \)</div>
+
+        <h4>Part (a) — Covariance</h4>
+        <div class="formula">\( Cov(A,B) = \rho \times \sigma_A \times \sigma_B = 0.4 \times 8\% \times 15\% = 48\%^2 \)</div>
+
+        <h4>Part (a) — Portfolio Variance</h4>
+        <div class="formula">\( \sigma^2_p = w^2_A \sigma^2_A + w^2_B \sigma^2_B + 2 w_A w_B \cdot Cov(A,B) \)</div>
+        <div class="formula">\( \sigma^2_p = (0.6)^2(64) + (0.4)^2(225) + 2(0.6)(0.4)(48) \)</div>
+        <div class="formula">\( = 0.36 \times 64 + 0.16 \times 225 + 0.48 \times 48 \)</div>
+        <div class="formula">\( = 23.04 + 36.00 + 23.04 = 82.08\%^2 \)</div>
+        <div class="formula">\( \sigma_p = \sqrt{82.08} \approx 9.06\% \)</div>
+        <p style="margin-top:.6rem;">Note: The weighted average of individual σ's = 0.6×8% + 0.4×15% = 4.8% + 6% = 10.8%. Portfolio σ (9.06%) is <strong>less than 10.8%</strong> — this is the diversification benefit from ρ = 0.4 &lt; 1.</p>
+
+        <h4>Part (b) — CAPM: Asset X (β = 1.6)</h4>
+        <div class="formula">\( K_e = R_f + \beta(R_m - R_f) = 5\% + 1.6 \times (11\% - 5\%) \)</div>
+        <div class="formula">\( K_e = 5\% + 1.6 \times 6\% = 14.6\% \)</div>
+
+        <h4>Part (b) — CAPM: Asset Y (β = 0.7)</h4>
+        <div class="formula">\( K_e = 5\% + 0.7 \times 6\% = 9.2\% \)</div>
+
+        <div class="verdict">
+          Asset X requires a higher return (14.6% vs 9.2%) because it has higher systematic risk (β = 1.6 vs 0.7). Asset X amplifies market movements — when the market rises 1%, X rises 1.6%. Investors demand extra compensation for bearing this additional market risk.
+        </div>
+
+        <h4>📌 Exam Anti-Pitfall</h4>
+        <p>The most common error: using σ_A and σ_B directly in CAPM instead of beta. CAPM uses <em>beta</em> (systematic risk only), not total standard deviation. A high-σ asset with low beta may have a lower required return than a low-σ asset with high beta.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html" class="btn-nav">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/" class="btn-nav">🏠 All Weeks</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_StudyGuide_Kiro.html" class="btn-nav">Week 6 →</a>
+  </div>
+</main>
+
+<script>
+const answers = {1:'c',2:'b',3:'b',4:'b',5:'d',6:'b',7:'d',8:'c',9:'b',10:'c'};
+const answered = {};
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = optGroup.dataset.q;
+      if (answered[q] === 'submitted') return;
+      optGroup.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answered[q] = opt.dataset.val;
+      updateProgress();
+    });
+  });
+});
+function updateProgress() {
+  const count = Object.keys(answered).filter(k => answered[k] !== 'submitted').length;
+  document.getElementById('progressBar').style.width = (count/10*100) + '%';
+  document.getElementById('progressLabel').textContent = count + ' / 10 answered';
+}
+function submitQuiz() {
+  let score = 0;
+  for (let q = 1; q <= 10; q++) {
+    const optGroup = document.querySelector(`.options[data-q="${q}"]`);
+    const correct = answers[q];
+    const chosen = answered[q];
+    answered[q] = 'submitted';
+    optGroup.querySelectorAll('.option').forEach(opt => {
+      opt.style.pointerEvents = 'none';
+      if (opt.dataset.val === correct) opt.classList.add('reveal-correct');
+      if (opt.dataset.val === chosen && chosen !== correct) { opt.classList.add('wrong'); opt.classList.remove('selected'); }
+      if (opt.dataset.val === chosen && chosen === correct) { opt.classList.add('correct'); opt.classList.remove('selected'); score++; }
+    });
+    document.getElementById('exp' + q).classList.add('show');
+  }
+  const scoreCard = document.getElementById('scoreCard');
+  scoreCard.classList.add('show');
+  document.getElementById('scoreNum').textContent = score;
+  const msgs = {10:'🏆 Perfect! Portfolio theory mastered.',9:'🥇 Excellent — one slip, check the explanation.',8:'🥈 Strong. Review the ones you missed.',7:'🥉 Good effort. A few concepts need work.',6:'📚 Passing — revisit the CAPM section.',5:'⚠️ Below average — go back to the Interactive lab.',4:'⚠️ Needs work — re-read Ch.7.',3:'🔄 Significant gaps — start from the Study Guide.',2:'🔄 Please revisit all Week 5 materials.',1:'🔄 Please revisit all Week 5 materials.',0:'🔄 Please revisit all Week 5 materials.'};
+  document.getElementById('scoreMsg').textContent = msgs[score] || msgs[0];
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = '10 / 10 answered';
+  scoreCard.scrollIntoView({behavior:'smooth',block:'center'});
+  document.querySelector('.btn-submit').style.display = 'none';
+}
+</script>
+</body>
+</html>

@@ -233,6 +233,13 @@ details[open] summary { border-radius: 6px 6px 0 0; }
 .btn-nav:hover { background: #2d6a9f; }
 .btn-nav.disabled { background: #ccc; pointer-events: none; }
 </style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 </head>
 <body>
 
@@ -454,14 +461,14 @@ details[open] summary { border-radius: 6px 6px 0 0; }
     <div class="explanation" id="exp9">
       <strong>✅ Correct: C — £2.4 million.</strong><br><br>
       <strong>Step 1: Expected NPV without perfect information</strong><br>
-      E(NPV) = 0.6 × £10m + 0.4 × (−£3m) = £6m − £1.2m = <strong>£3.6m</strong><br>
+      \( E(NPV) = 0.6 \times £10m + 0.4 \times (-£3m) = £6m - £1.2m = \) <strong>£3.6m</strong><br>
       (Since E(NPV) &gt; 0, the firm would proceed with the project.)<br><br>
       <strong>Step 2: Expected NPV with perfect information</strong><br>
       With perfect info, the firm only invests when the good outcome occurs:<br>
-      E(NPV | perfect info) = 0.6 × £10m + 0.4 × £0 = <strong>£6m</strong><br>
+      \( E(NPV_{\text{perfect info}}) = 0.6 \times £10m + 0.4 \times £0 = \) <strong>£6m</strong><br>
       (When bad outcome is predicted, the firm walks away — NPV = £0, not −£3m.)<br><br>
       <strong>Step 3: Value of perfect information</strong><br>
-      EVPI = £6m − £3.6m = <strong>£2.4 million</strong>
+      \( EVPI = £6m - £3.6m = \) <strong>£2.4 million</strong>
     </div>
   </div>
 
@@ -528,8 +535,8 @@ details[open] summary { border-radius: 6px 6px 0 0; }
       <div class="answer-content">
 
         <h4>Step 1: Annual Contribution per unit</h4>
-        <div class="formula">Machine A: £4.00 − £1.00 = £3.00 per unit</div>
-        <div class="formula">Machine B: £4.00 − £0.50 = £3.50 per unit</div>
+        <div class="formula">\( \text{Machine A: } £4.00 - £1.00 = £3.00 \text{ per unit} \)</div>
+        <div class="formula">\( \text{Machine B: } £4.00 - £0.50 = £3.50 \text{ per unit} \)</div>
 
         <h4>Step 2: Annual Net Cash Flow = (Contribution × Demand) − Fixed Costs</h4>
         <table>
@@ -540,15 +547,15 @@ details[open] summary { border-radius: 6px 6px 0 0; }
         </table>
 
         <h4>Step 3: Expected Annual Cash Flow</h4>
-        <div class="formula">E(NCF_A) = 0.2×2000 + 0.6×5000 + 0.2×11000 = 400 + 3000 + 2200 = £5,600</div>
-        <div class="formula">E(NCF_B) = 0.2×3000 + 0.6×6500 + 0.2×13500 = 600 + 3900 + 2700 = £7,200</div>
+        <div class="formula">\( E(NCF_A) = 0.2 \times 2000 + 0.6 \times 5000 + 0.2 \times 11000 = £5{,}600 \)</div>
+        <div class="formula">\( E(NCF_B) = 0.2 \times 3000 + 0.6 \times 6500 + 0.2 \times 13500 = £7{,}200 \)</div>
 
         <h4>Step 4: Annuity Factor (3 years @ 6%)</h4>
-        <div class="formula">AF = (1 − 1/1.06³) / 0.06 = (1 − 0.8396) / 0.06 = 0.1604 / 0.06 ≈ 2.673</div>
+        <div class="formula">\( AF = \dfrac{1 - \frac{1}{1.06^3}}{0.06} = \dfrac{1 - 0.8396}{0.06} \approx 2.673 \)</div>
 
         <h4>Step 5: Expected NPV</h4>
-        <div class="formula">E(NPV_A) = £5,600 × 2.673 − £15,000 = £14,969 − £15,000 = −£31</div>
-        <div class="formula">E(NPV_B) = £7,200 × 2.673 − £20,000 = £19,246 − £20,000 = −£754</div>
+        <div class="formula">\( E(NPV_A) = £5{,}600 \times 2.673 - £15{,}000 = -£31 \)</div>
+        <div class="formula">\( E(NPV_B) = £7{,}200 \times 2.673 - £20{,}000 = -£754 \)</div>
 
         <h4>Step 6: NPV at each demand level (for fuller analysis)</h4>
         <table>
