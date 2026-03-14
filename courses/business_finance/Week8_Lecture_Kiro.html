@@ -107,6 +107,11 @@
     </div>
 
     <p>💡 <strong>直觉理解：</strong>就像把一块蛋糕切成不同大小的块，切法不同，但蛋糕总量不变。资本结构只是改变了现金流的分配方式，不改变总价值。</p>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：MM无税 = 换容器不改变水量</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你有一桶水（企业价值），可以用一个大桶装（纯股权），也可以用一个大桶+几个小瓶装（股权+债务）。不管怎么分装，水的总量不变。MM无税说的就是：<strong>分装方式（资本结构）不影响水的总量（企业价值）</strong>。增加债务只是把一部分"水"从股东的桶转移到债权人的瓶，总量不变，WACC也不变。</p>
+    </div>
   </div>
 
   <!-- Section 2: MM With Tax -->
@@ -128,6 +133,11 @@
       <p>税盾价值 = t × D = 0.30 × £200m = <strong>£60m</strong></p>
       <p>V<sub>L</sub> = £500m + £60m = <strong>£560m</strong></p>
       <p style="margin-top:8px;color:#888;font-size:.85rem;">债务融资使企业价值增加了 £60m，这部分来自政府的税收补贴。</p>
+    </div>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：税盾 = 政府帮你还债</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你借了 £200 万，年利率 10%，每年付 £20 万利息。税率 30% 意味着政府通过少收 £6 万税来"报销"你。实际净利息成本只有 £14 万。MM有税说：<strong>债务越多，政府"报销"越多，企业价值越高</strong>。税盾现值 = t × D = 30% × £200m = £60m，这 £60m 是政府白送给股东的礼物。</p>
     </div>
   </div>
 
@@ -160,6 +170,11 @@
       <li><strong>直接成本：</strong>法律费用、重组费用、管理人员费用（约占企业价值 3-5%）</li>
       <li><strong>间接成本：</strong>失去客户信任、供应商收紧信用、优秀员工离职、管理层精力分散（往往更大）</li>
     </ul>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：最优资本结构 = 咖啡加糖的甜蜜点</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">咖啡太苦（零债务）→ 加糖（加债务）→ 越来越好喝（税盾↑，企业价值↑）。但糖加太多（过度杠杆）→ 甜得发腻（财务困境成本↑）→ 反而难喝。<strong>最优资本结构就是那个"刚刚好"的加糖量</strong>——税盾的边际收益 = 财务困境成本的边际增加。传统观点认为这个甜蜜点存在，MM有税认为糖越多越好（忽略了"腻"的问题）。</p>
+    </div>
   </div>
 
   <!-- Section 4: Pitfalls -->
@@ -177,6 +192,18 @@
       <h4>❌ 陷阱 2：忽视 MM 假设条件的严格性</h4>
       <p>MM 理论建立在极其严格的完美市场假设上（无税、无交易成本、无破产成本等）。现实中这些条件均不成立，因此 MM 理论是理论基准，而非实际决策指南。传统观点更接近现实。</p>
     </div>
+
+    <h3 style="margin-top:24px;margin-bottom:12px;">📋 Pitfall 汇总表</h3>
+    <table>
+      <tr><th>场景</th><th>常见错误</th><th>正确理解</th></tr>
+      <tr><td>MM无税结论</td><td>认为债务越多企业价值越高</td><td>VL = VU，资本结构无关，WACC不变</td></tr>
+      <tr><td>MM有税结论</td><td>认为资本结构无关</td><td>VL = VU + tD，债务产生税盾，价值增加</td></tr>
+      <tr><td>MM无税中Ke</td><td>认为Ke不变</td><td>Ke随杠杆上升（补偿股东承担的额外财务风险）</td></tr>
+      <tr><td>经营杠杆 vs 财务杠杆</td><td>混淆两者</td><td>经营杠杆=固定成本比例；财务杠杆=债务比例</td></tr>
+      <tr><td>传统观点</td><td>认为债务越多越好</td><td>存在最优点：税盾收益 = 财务困境成本边际增量</td></tr>
+      <tr><td>APV计算</td><td>用WACC折现</td><td>APV = 无杠杆NPV + PV(税盾)，分开计算</td></tr>
+      <tr><td>资产Beta vs 股权Beta</td><td>混用两者</td><td>资产Beta = 加权平均(股权Beta, 债务Beta)，杠杆越高股权Beta越大</td></tr>
+    </table>
   </div>
 
   <!-- Section 5: Tesla Case -->

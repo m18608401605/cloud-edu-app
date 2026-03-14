@@ -1,216 +1,441 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 8 Quiz – Capital Structure</title>
+<title>Week 8 Quiz — Capital Structure | BUSI1070</title>
 <style>
-  :root { --primary:#1a3a5c; --accent:#e8a020; --green:#064e3b; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
-
-  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
-  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
-  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
-  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
-  nav a.active { color:#fff; background:var(--accent); }
-  nav .spacer { flex:1; }
-  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
-
-  .hero { background:linear-gradient(135deg,var(--green) 0%,#0d6b4e 100%); color:#fff; padding:52px 24px 44px; text-align:center; }
-  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
-  .hero h1 { font-size:2rem; font-weight:800; margin-bottom:10px; }
-  .hero p { opacity:.85; font-size:.95rem; }
-
-  .progress-bar { background:rgba(255,255,255,.2); height:6px; border-radius:3px; margin:20px auto 0; max-width:400px; }
-  .progress-fill { background:#4ade80; height:100%; border-radius:3px; transition:width .4s; }
-  .progress-text { color:rgba(255,255,255,.8); font-size:.82rem; margin-top:6px; }
-
-  .container { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
-
-  .section-title { color:var(--primary); font-size:1.15rem; font-weight:700; margin:32px 0 16px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
-
-  .question { background:#fff; border-radius:12px; padding:28px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
-  .question .q-num { color:var(--accent); font-weight:700; font-size:.82rem; margin-bottom:8px; }
-  .question .q-text { color:#1a202c; font-size:1rem; font-weight:600; line-height:1.6; margin-bottom:16px; }
-
-  .options { display:flex; flex-direction:column; gap:8px; }
-  .option { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border:2px solid #e2e8f0; border-radius:8px; cursor:pointer; transition:.2s; }
-  .option:hover { border-color:var(--primary); background:#f0f4ff; }
-  .option.correct { border-color:#16a34a; background:#f0fdf4; }
-  .option.wrong { border-color:#dc2626; background:#fef2f2; }
-  .option.disabled { cursor:default; }
-  .option .opt-letter { font-weight:700; color:var(--primary); min-width:20px; font-size:.9rem; }
-  .option .opt-text { color:#374151; font-size:.92rem; line-height:1.5; }
-  .option.correct .opt-letter { color:#16a34a; }
-  .option.wrong .opt-letter { color:#dc2626; }
-
-  .feedback { margin-top:12px; padding:10px 14px; border-radius:8px; font-size:.88rem; display:none; }
-  .feedback.show { display:block; }
-  .feedback.correct-fb { background:#f0fdf4; color:#166534; border-left:3px solid #16a34a; }
-  .feedback.wrong-fb { background:#fef2f2; color:#991b1b; border-left:3px solid #dc2626; }
-
-  .score-panel { background:var(--green); color:#fff; border-radius:12px; padding:28px; text-align:center; margin-bottom:28px; display:none; }
-  .score-panel.show { display:block; }
-  .score-panel .score-num { font-size:3rem; font-weight:800; }
-  .score-panel p { opacity:.85; margin-top:6px; }
-
-  .calc-section { background:#fff; border-radius:12px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:20px; }
-  .calc-section h3 { color:var(--primary); font-size:1rem; margin-bottom:12px; }
-  .calc-section p { color:#444; font-size:.93rem; line-height:1.7; margin-bottom:10px; }
-
-  details { margin-top:16px; }
-  summary { cursor:pointer; background:var(--primary); color:#fff; padding:10px 16px; border-radius:8px; font-size:.9rem; font-weight:600; list-style:none; }
-  summary::-webkit-details-marker { display:none; }
-  summary::before { content:'▶ '; }
-  details[open] summary::before { content:'▼ '; }
-  .answer-content { background:#eef4ff; border-radius:0 0 8px 8px; padding:20px; font-size:.9rem; line-height:1.8; color:#333; }
-  .answer-content strong { color:var(--primary); }
+:root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--green:#27ae60;--red:#e74c3c;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:#333;}
+nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:56px;position:sticky;top:0;z-index:100;}
+nav .logo{color:var(--accent);font-weight:700;font-size:1.1rem;margin-right:auto;}
+nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem;padding:.3rem .7rem;border-radius:4px;transition:background .2s;}
+nav a:hover,nav a.active{background:rgba(255,255,255,.15);color:#fff;}
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#2d6a9f 100%);color:white;padding:3rem 2rem 2rem;text-align:center;}
+.hero h1{font-size:2rem;margin-bottom:.5rem;}
+.hero p{opacity:.85;font-size:1rem;}
+.hero .meta{margin-top:1rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.75;}
+.progress-bar-wrap{background:#e0e0e0;border-radius:8px;height:8px;margin:2rem auto;max-width:700px;}
+.progress-bar{background:var(--accent);height:8px;border-radius:8px;transition:width .4s;width:0%;}
+.progress-label{text-align:center;font-size:.85rem;color:#666;margin-top:.4rem;}
+main{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+.section-header{background:var(--primary);color:white;padding:.8rem 1.2rem;border-radius:8px 8px 0 0;font-weight:600;font-size:1rem;margin-top:2.5rem;}
+.q-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;margin-bottom:0;}
+.q-card:last-of-type{border-radius:0 0 8px 8px;}
+.q-num{color:var(--accent);font-weight:700;font-size:.85rem;margin-bottom:.5rem;}
+.q-text{font-size:1rem;line-height:1.6;margin-bottom:1rem;font-weight:500;}
+.q-source{font-size:.75rem;color:#999;margin-bottom:1rem;font-style:italic;}
+.options{display:flex;flex-direction:column;gap:.5rem;}
+.option{padding:.7rem 1rem;border:2px solid #e0e0e0;border-radius:6px;cursor:pointer;transition:all .2s;font-size:.95rem;background:#fafafa;}
+.option:hover{border-color:var(--primary);background:#eef3f8;}
+.option.correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.option.wrong{border-color:var(--red);background:#f8d7da;color:#721c24;}
+.option.reveal-correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.explanation{display:none;margin-top:1rem;padding:1rem;background:#f0f7ff;border-left:4px solid var(--primary);border-radius:0 6px 6px 0;font-size:.9rem;line-height:1.6;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--primary);}
+.calc-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;border-radius:0 0 8px 8px;}
+.scenario-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:1.2rem;margin-bottom:1.2rem;font-size:.9rem;line-height:1.7;}
+.scenario-box h4{color:var(--primary);margin-bottom:.5rem;font-size:.95rem;}
+details{margin-top:1rem;}
+details summary{cursor:pointer;padding:.7rem 1rem;background:var(--primary);color:white;border-radius:6px;font-size:.9rem;font-weight:600;user-select:none;}
+details summary:hover{background:#2d6a9f;}
+details[open] summary{border-radius:6px 6px 0 0;}
+.answer-content{background:#f0f7ff;border:1px solid #c8dff5;border-top:none;padding:1.2rem;border-radius:0 0 6px 6px;font-size:.88rem;line-height:1.8;}
+.answer-content h4{color:var(--primary);margin:.8rem 0 .3rem;}
+.answer-content .formula{background:#1a3a5c;color:#e8f4fd;padding:.6rem 1rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.4rem 0;}
+.answer-content .verdict{background:#d4edda;border:1px solid #c3e6cb;border-radius:4px;padding:.6rem 1rem;color:#155724;font-weight:600;margin-top:.8rem;}
+.submit-area{text-align:center;margin:2rem 0;}
+.btn-submit{background:var(--accent);color:white;border:none;padding:.9rem 2.5rem;font-size:1rem;font-weight:700;border-radius:8px;cursor:pointer;}
+.btn-submit:hover{background:#c8880e;}
+.score-card{display:none;background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin:2rem 0;}
+.score-card.show{display:block;}
+.score-big{font-size:3rem;font-weight:700;color:var(--primary);}
+.score-label{color:#666;margin-top:.3rem;}
+.score-msg{margin-top:1rem;font-size:1rem;color:#444;}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e0e0e0;}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;background:var(--primary);color:white;text-decoration:none;border-radius:6px;font-size:.9rem;}
+.btn-nav:hover{background:#2d6a9f;}
 </style>
+<script>
+MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 </head>
 <body>
-
 <nav>
-  <span class="brand">📚 Business Finance</span>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html">🗺️ Guide</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html">📖 Lecture</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html">🧪 Interactive</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html" class="active">✏️ Quiz</a>
-  <span class="spacer"></span>
-  <span class="week-badge">Week 8</span>
+  <span class="logo">🎓 BUSI1070</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html">Study Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html">Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html">Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html" class="active">Quiz</a>
 </nav>
-
 <div class="hero">
-  <div class="eyebrow">Week 8 · Chapter 11 · Quiz</div>
-  <h1>✏️ Capital Structure</h1>
-  <p>10道选择题 + 1道计算题，测试 MM 理论与资本结构掌握程度</p>
-  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-  <div class="progress-text" id="progressText">0 / 10 已完成</div>
+  <h1>Week 8 Quiz</h1>
+  <p>Capital Structure — MM Theory, Tax Shield &amp; Traditional View</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.11</span>
+    <span>⏱ ~20 min</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 2 Calculations</span>
+  </div>
 </div>
+<main>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 10 answered</div>
+  <div class="section-header">Section A — Multiple Choice Questions (Pearson Ch.11)</div>
 
-<div class="container">
-  <div class="score-panel" id="scorePanel">
-    <div class="score-num" id="scoreNum">0/10</div>
-    <p id="scoreMsg">完成所有题目后查看得分</p>
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-num">Question 1 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">A profitable business is partly financed by loan notes. If there were to be an increase in the rate of Corporation Tax, the value of the business would:</div>
+    <div class="options" data-q="1" data-answer="a">
+      <div class="option" data-val="a">A: increase.</div>
+      <div class="option" data-val="b">B: decrease.</div>
+      <div class="option" data-val="c">C: stay the same.</div>
+      <div class="option" data-val="d">D: any one of the above depending on the business's level of gearing and its operating cost structure.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — increase</strong><br><br>
+      Under MM with taxes: V<sub>L</sub> = V<sub>U</sub> + <strong>t × D</strong><br><br>
+      If the corporation tax rate <em>t</em> increases, the tax shield value (t × D) increases, so V<sub>L</sub> increases.<br><br>
+      <strong>Intuition:</strong> A higher tax rate means the government "subsidises" more of the interest cost. The debt tax shield becomes more valuable, boosting firm value.<br><br>
+      <strong>⚠️ Pitfall:</strong> Don't confuse the effect on the firm's tax bill (which rises) with the effect on firm value (which also rises, because the tax shield is worth more).
+    </div>
   </div>
 
-  <div class="section-title">Section A · Multiple Choice Questions</div>
-  <div id="quiz-container"></div>
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-num">Question 2 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">The beta of a business with some financial (capital) gearing is:</div>
+    <div class="options" data-q="2" data-answer="d">
+      <div class="option" data-val="a">A: the simple (unweighted) average of the betas of the equity and loan finance.</div>
+      <div class="option" data-val="b">B: the beta of the business's equity plus the beta of the business's loan finance.</div>
+      <div class="option" data-val="c">C: the beta of the business's equity less the beta of the business's loan finance.</div>
+      <div class="option" data-val="d">D: the average of the betas of the equity and loan finance, weighted by their market values.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — weighted average by market values</strong><br><br>
+      The asset (business) beta reflects the overall risk of the firm's assets. It equals the market-value-weighted average of equity beta and debt beta:<br><br>
+      β<sub>asset</sub> = (V<sub>E</sub>/V<sub>L</sub>) × β<sub>equity</sub> + (V<sub>D</sub>/V<sub>L</sub>) × β<sub>debt</sub><br><br>
+      Since debt is relatively safe, β<sub>debt</sub> ≈ 0, so in practice:<br>
+      β<sub>asset</sub> ≈ (V<sub>E</sub>/V<sub>L</sub>) × β<sub>equity</sub><br><br>
+      This means β<sub>equity</sub> > β<sub>asset</sub> for a geared firm — equity holders bear more risk than the underlying business.
+    </div>
+  </div>
 
-  <div class="section-title">Section B · 计算题</div>
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-num">Question 3 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">In Modigliani and Miller's original (no taxes) assertion on capital gearing, they show that increasing the proportion of debt:</div>
+    <div class="options" data-q="3" data-answer="c">
+      <div class="option" data-val="a">A: decreases the weighted average cost of capital.</div>
+      <div class="option" data-val="b">B: increases the value of the business.</div>
+      <div class="option" data-val="c">C: increases the cost of equity.</div>
+      <div class="option" data-val="d">D: increases the value of each of its equity shares.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — increases the cost of equity</strong><br><br>
+      Under MM (no tax): V<sub>L</sub> = V<sub>U</sub> and WACC is constant. So how can adding cheap debt keep WACC unchanged?<br><br>
+      Answer: As debt increases, equity holders face more financial risk (they're last in line if the firm fails). They demand a higher return to compensate → <strong>K<sub>e</sub> rises</strong>.<br><br>
+      The rise in K<sub>e</sub> exactly offsets the benefit of cheaper debt, keeping WACC constant and firm value unchanged.<br><br>
+      <strong>⚠️ Pitfall:</strong> Options A and B describe MM <em>with</em> taxes. In the no-tax world, neither WACC falls nor firm value rises.
+    </div>
+  </div>
 
-  <div class="calc-section">
-    <h3>📝 综合计算题</h3>
-    <p><strong>题目：</strong>ABC 公司无杠杆价值 V<sub>U</sub> = £400m，企业所得税率 = 30%，考虑发行 £150m 债务。</p>
-    <ol style="padding-left:20px;color:#444;font-size:.93rem;line-height:2;">
-      <li>(a) 根据 MM 有税定理，计算有杠杆企业价值 V<sub>L</sub></li>
-      <li>(b) 债务税盾价值是多少？</li>
-      <li>(c) 如果财务困境成本现值为 £20m，实际企业价值是多少？</li>
-    </ol>
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-num">Question 4 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">In Modigliani and Miller's revised (with taxes) assertion on capital gearing, which one of the following will <strong>NOT</strong> result from increasing the proportion of debt?</div>
+    <div class="options" data-q="4" data-answer="d">
+      <div class="option" data-val="a">A: An increase in the value of the business.</div>
+      <div class="option" data-val="b">B: An increase in the value of each of its equity shares.</div>
+      <div class="option" data-val="c">C: A decrease in the weighted average cost of capital.</div>
+      <div class="option" data-val="d">D: A decrease in the cost of debt.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — A decrease in the cost of debt</strong><br><br>
+      Under MM with taxes, increasing debt:<br>
+      • A ✓ — V<sub>L</sub> = V<sub>U</sub> + tD increases<br>
+      • B ✓ — Higher firm value → higher equity value per share<br>
+      • C ✓ — WACC falls as more cheap (tax-shielded) debt is used<br>
+      • D ✗ — The cost of debt K<sub>d</sub> is set by the market (lenders' required return). It is not affected by how much debt the firm issues — it depends on the firm's credit risk.<br><br>
+      <strong>⚠️ Pitfall:</strong> This is a "NOT" question. The cost of debt is determined by the market, not by the firm's capital structure decisions.
+    </div>
+  </div>
 
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-num">Question 5 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">The traditional view of capital gearing is that:</div>
+    <div class="options" data-q="5" data-answer="b">
+      <div class="option" data-val="a">A: there is no optimal capital structure.</div>
+      <div class="option" data-val="b">B: a business with zero debt can increase its value by substituting some debt for equity in its capital structure.</div>
+      <div class="option" data-val="c">C: a business with zero debt will increase its business risk by substituting some debt for equity in its capital structure.</div>
+      <div class="option" data-val="d">D: a business with zero debt can increase its weighted average cost of capital by substituting some debt for equity in its capital structure.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — adding some debt increases value</strong><br><br>
+      The traditional view holds that an all-equity firm can increase its value by introducing <em>some</em> debt, because:<br>
+      • Debt is cheaper than equity (lower required return)<br>
+      • Interest is tax-deductible (tax shield benefit)<br>
+      • At low gearing levels, financial distress risk is minimal<br><br>
+      However, beyond the optimal point, financial distress costs outweigh the tax shield benefit, so value falls.<br><br>
+      <strong>A is wrong</strong> — the traditional view explicitly says an optimal structure exists.<br>
+      <strong>D is wrong</strong> — adding cheap debt initially <em>lowers</em> WACC, not raises it.
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-num">Question 6 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">When deducing the 'adjusted' net present value (APV) of a project, it is necessary to:</div>
+    <div class="options" data-q="6" data-answer="b">
+      <div class="option" data-val="a">A: calculate the NPV as if there were no financial risk and adjust it by an amount to allow for financial risk.</div>
+      <div class="option" data-val="b">B: deduce the NPV as if the project were undertaken by an ungeared business and make an adjustment for the tax benefit arising from the fact that the project is being undertaken by a geared business.</div>
+      <div class="option" data-val="c">C: adjust the cash flow estimations to allow for financial risk.</div>
+      <div class="option" data-val="d">D: adjust the discount rate to allow for the additional risk to which gearing gives rise.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — APV = ungeared NPV + PV(tax shield)</strong><br><br>
+      APV separates the investment decision from the financing decision:<br><br>
+      <strong>APV = Base-case NPV + PV(financing side effects)</strong><br><br>
+      • Base-case NPV: discount project cash flows at the <em>ungeared</em> cost of equity (as if all-equity financed)<br>
+      • Financing side effects: mainly the PV of the debt tax shield<br><br>
+      This is particularly useful when the capital structure changes over the project's life (e.g., LBOs, project finance).<br><br>
+      <strong>⚠️ Pitfall:</strong> APV does NOT adjust the discount rate (that's WACC approach). It keeps the discount rate clean and adds financing benefits separately.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-num">Question 7 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">According to Modigliani and Miller, in their 'with taxes' analysis, the relationship of the value of a geared business (V<sub>G</sub>), the value of its ungeared counterpart (V<sub>U</sub>), the Corporation Tax rate (T) and the value of the debt (D) is:</div>
+    <div class="options" data-q="7" data-answer="a">
+      <div class="option" data-val="a">A: V<sub>G</sub> = V<sub>U</sub> + TD</div>
+      <div class="option" data-val="b">B: V<sub>U</sub> = D + TV<sub>G</sub></div>
+      <div class="option" data-val="c">C: V<sub>U</sub> = V<sub>G</sub> + TD</div>
+      <div class="option" data-val="d">D: V<sub>G</sub> = D + TV<sub>U</sub></div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — V<sub>G</sub> = V<sub>U</sub> + TD</strong><br><br>
+      This is the core MM with-tax formula. The geared firm is worth more than the ungeared firm by exactly the present value of the perpetual tax shield:<br><br>
+      PV(tax shield) = T × K<sub>d</sub> × D / K<sub>d</sub> = <strong>T × D</strong><br><br>
+      (Assuming debt is permanent and the tax shield is discounted at K<sub>d</sub>)<br><br>
+      <strong>Memory trick:</strong> V<sub>G</sub> > V<sub>U</sub> because gearing adds value via tax shield. So V<sub>G</sub> = V<sub>U</sub> + something positive (TD). Options C and D have the inequality backwards.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-num">Question 8 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">A business which has high 'operating gearing' has:</div>
+    <div class="options" data-q="8" data-answer="b">
+      <div class="option" data-val="a">A: high interest charges compared to its pre-interest profit.</div>
+      <div class="option" data-val="b">B: a high proportion of fixed costs in its total costs figure.</div>
+      <div class="option" data-val="c">C: a high proportion of variable costs in its total cost figure.</div>
+      <div class="option" data-val="d">D: a large proportion of debt in its capital structure.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — high proportion of fixed costs</strong><br><br>
+      <strong>Operating gearing</strong> relates to the cost structure of the business (fixed vs variable costs), NOT to debt financing.<br><br>
+      • High fixed costs → profits are highly sensitive to revenue changes → high operating risk<br>
+      • Example: Airlines (high fixed costs: planes, staff) vs. consultancies (mostly variable costs)<br><br>
+      <strong>⚠️ Pitfall:</strong> Don't confuse operating gearing with financial gearing:<br>
+      • <strong>Operating gearing</strong> = fixed costs / total costs (cost structure)<br>
+      • <strong>Financial gearing</strong> = debt / total capital (capital structure)<br>
+      Options A and D describe financial gearing, not operating gearing.
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-num">Question 9 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">The existence of potential bankruptcy costs, when coupled with Modigliani and Miller's (with taxes) assertion on capital gearing, tends to mean that:</div>
+    <div class="options" data-q="9" data-answer="c">
+      <div class="option" data-val="a">A: capital gearing has little or no effect on the business's weighted average cost of capital.</div>
+      <div class="option" data-val="b">B: businesses seek to gear up to very high levels.</div>
+      <div class="option" data-val="c">C: there is likely to be an optimum capital gearing level.</div>
+      <div class="option" data-val="d">D: businesses regard capital gearing as of no net benefit.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — there is likely to be an optimum capital gearing level</strong><br><br>
+      MM with taxes alone says "gear up as much as possible" (more debt = more tax shield = more value). But add bankruptcy costs:<br><br>
+      V<sub>L</sub> = V<sub>U</sub> + PV(tax shield) − <strong>PV(bankruptcy costs)</strong><br><br>
+      At low gearing: tax shield benefit > bankruptcy cost → value rises with debt<br>
+      At high gearing: bankruptcy cost rises sharply → value starts to fall<br><br>
+      The optimal point is where marginal tax shield benefit = marginal bankruptcy cost. This is the <strong>Trade-off Theory</strong> of capital structure.<br><br>
+      <strong>B is wrong</strong> — bankruptcy costs prevent firms from gearing up indefinitely.
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-num">Question 10 of 10</div>
+    <div class="q-source">Pearson Ch.11 MCQ</div>
+    <div class="q-text">A business is all-equity financed and has a cost of equity of 25% a year. The directors intend to expand the business by issuing debentures with an interest cost of 10% a year, to the value of 40% of the existing value of the business. Making the Modigliani and Miller assumptions, including that of no taxes, what will be the cost of equity after the debenture issue?</div>
+    <div class="options" data-q="10" data-answer="b">
+      <div class="option" data-val="a">A: 29.3%</div>
+      <div class="option" data-val="b">B: 35.0%</div>
+      <div class="option" data-val="c">C: 31.0%</div>
+      <div class="option" data-val="d">D: 29.0%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — 35.0%</strong><br><br>
+      Under MM (no tax), WACC is constant = K<sub>0</sub> = 25% (the all-equity cost).<br><br>
+      After issuing debt worth 40% of original firm value:<br>
+      • D = 0.40 × V<sub>U</sub>, so E = 0.60 × V<sub>U</sub><br>
+      • D/E = 0.40/0.60 = 2/3<br><br>
+      Using MM no-tax Ke formula:<br>
+      K<sub>e</sub> = K<sub>0</sub> + (K<sub>0</sub> − K<sub>d</sub>) × D/E<br>
+      K<sub>e</sub> = 25% + (25% − 10%) × (2/3)<br>
+      K<sub>e</sub> = 25% + 15% × 0.667<br>
+      K<sub>e</sub> = 25% + 10% = <strong>35%</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> The D/E ratio uses the <em>new</em> capital structure values. D = 40% of original V, E = remaining 60% of original V (since VL = VU under no-tax MM). So D/E = 40/60 = 2/3, not 40/100.
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitQuiz()">Submit Section A</button>
+  </div>
+  <div class="score-card" id="scoreCard">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-label">Section A Score</div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- Section B -->
+  <div class="section-header" style="margin-top:3rem;">Section B — Calculation Questions</div>
+
+  <!-- B1: MM with tax shield -->
+  <div class="calc-card">
+    <div class="q-num">Question B1 — MM With Tax: Firm Value &amp; WACC</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Orion plc</h4>
+      Orion plc is currently all-equity financed. Its equity has a market value of <strong>£400 million</strong> and its cost of equity is <strong>18%</strong>. The company is considering issuing <strong>£150 million</strong> of permanent debt at an interest rate of <strong>8%</strong>. The proceeds will be used to repurchase shares. The corporation tax rate is <strong>30%</strong>.
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> Calculate the value of Orion plc after the debt issue (MM with tax).<br>
+      <strong>(b)</strong> Calculate the new WACC after the debt issue.<br>
+      <strong>(c)</strong> Explain why the WACC falls when debt is introduced (under MM with tax).
+    </p>
     <details>
-      <summary>点击查看答案与解析</summary>
+      <summary>📖 Click to reveal full worked solution</summary>
       <div class="answer-content">
-        <p><strong>(a) MM 有税定理 V<sub>L</sub>：</strong></p>
-        <p>V<sub>L</sub> = V<sub>U</sub> + t × D = £400m + 0.30 × £150m = £400m + £45m = <strong>£445m</strong></p>
-        <br>
-        <p><strong>(b) 债务税盾价值：</strong></p>
-        <p>税盾 = t × D = 0.30 × £150m = <strong>£45m</strong></p>
-        <p>这 £45m 来自政府的税收补贴（利息抵税）。</p>
-        <br>
-        <p><strong>(c) 考虑财务困境成本后的实际企业价值：</strong></p>
-        <p>实际价值 = V<sub>L</sub> − PV(财务困境成本) = £445m − £20m = <strong>£425m</strong></p>
-        <p>这体现了传统观点：最终价值 = V<sub>U</sub> + PV(税盾) − PV(财务困境成本)。</p>
+        <h4>Part (a): New Firm Value</h4>
+        <div class="formula">V_U = £400m (current all-equity value)</div>
+        <div class="formula">PV(tax shield) = t × D = 0.30 × £150m = £45m</div>
+        <div class="formula">V_L = V_U + tD = £400m + £45m = £445m</div>
+
+        <h4>Part (b): New WACC</h4>
+        <p>After the debt issue:</p>
+        <div class="formula">Equity value = V_L − D = £445m − £150m = £295m</div>
+        <div class="formula">We = 295/445 = 66.3% | Wd = 150/445 = 33.7%</div>
+        <p>New cost of equity (MM with tax):</p>
+        <div class="formula">Ke_new = Ke_U + (Ke_U − Kd) × (D/E) × (1−t)</div>
+        <div class="formula">= 18% + (18% − 8%) × (150/295) × 0.70</div>
+        <div class="formula">= 18% + 10% × 0.508 × 0.70 = 18% + 3.56% = 21.56%</div>
+        <div class="formula">WACC = 0.663 × 21.56% + 0.337 × 8% × (1−0.30)</div>
+        <div class="formula">= 14.29% + 1.89% = 16.18%</div>
+        <p style="margin-top:.5rem;font-size:.85rem;color:#555;">Alternatively: WACC = Ke_U × (1 − t×D/V_L) = 18% × (1 − 0.30×150/445) = 18% × 0.899 = <strong>16.2%</strong></p>
+
+        <h4>Part (c): Why WACC Falls</h4>
+        <p>Under MM with tax, introducing debt lowers WACC because:</p>
+        <ul style="margin:.5rem 0 .5rem 1.2rem;line-height:1.8;">
+          <li>Debt is cheaper than equity (lenders bear less risk)</li>
+          <li>Interest is tax-deductible — the government effectively subsidises part of the debt cost</li>
+          <li>Although K<sub>e</sub> rises (equity holders face more financial risk), the tax shield benefit more than compensates</li>
+        </ul>
+        <div class="verdict">✅ WACC falls from 18% to ~16.2% — the tax shield creates real value for shareholders.</div>
       </div>
     </details>
   </div>
 
-</div>
+  <!-- B2: Operating vs Financial Gearing -->
+  <div class="calc-card" style="margin-top:1.5rem;border-top:1px solid #e0e0e0;">
+    <div class="q-num">Question B2 — MM No Tax: Cost of Equity After Gearing</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Stellar plc</h4>
+      Stellar plc is currently all-equity financed with a firm value of <strong>£600 million</strong> and a cost of equity of <strong>20%</strong>. The company plans to issue <strong>£200 million</strong> of permanent debt at <strong>9%</strong> interest and use the proceeds to buy back shares. Assume MM with <strong>no taxes</strong>.
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> What is the value of Stellar plc after the debt issue?<br>
+      <strong>(b)</strong> What is the new cost of equity K<sub>e</sub>?<br>
+      <strong>(c)</strong> Verify that WACC remains unchanged.
+    </p>
+    <details>
+      <summary>📖 Click to reveal full worked solution</summary>
+      <div class="answer-content">
+        <h4>Part (a): Firm Value (MM No Tax)</h4>
+        <div class="formula">V_L = V_U = £600m (capital structure irrelevant under no-tax MM)</div>
+        <p>The debt issue and share buyback simply rearrange the capital structure — total value is unchanged.</p>
+        <div class="formula">Equity value = V_L − D = £600m − £200m = £400m</div>
+
+        <h4>Part (b): New Cost of Equity</h4>
+        <div class="formula">D/E = £200m / £400m = 0.5</div>
+        <div class="formula">Ke = K0 + (K0 − Kd) × D/E</div>
+        <div class="formula">= 20% + (20% − 9%) × 0.5</div>
+        <div class="formula">= 20% + 11% × 0.5 = 20% + 5.5% = 25.5%</div>
+
+        <h4>Part (c): Verify WACC Unchanged</h4>
+        <div class="formula">We = 400/600 = 66.7% | Wd = 200/600 = 33.3%</div>
+        <div class="formula">WACC = 0.667 × 25.5% + 0.333 × 9%</div>
+        <div class="formula">= 17.0% + 3.0% = 20.0% ✓</div>
+        <div class="verdict">✅ WACC = 20% = K₀ — unchanged, as MM no-tax predicts. The higher Ke exactly offsets the benefit of cheaper debt.</div>
+        <p style="margin-top:.8rem;font-size:.85rem;color:#555;"><strong>Key insight:</strong> Under MM no tax, gearing is a zero-sum game for shareholders. They get a higher return (25.5% vs 20%) but only because they're bearing more financial risk — not because any value has been created.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html" class="btn-nav">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/index.html" class="btn-nav">🏠 Course Home</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html" class="btn-nav">Week 9 →</a>
+  </div>
+</main>
 
 <script>
-const questions = [
-  { q: "MM 无税定理的核心结论是：", opts: ["债务越多企业价值越高","资本结构不影响企业价值","股权融资优于债务融资","最优债务比率为50%"], correct: 1, explain: "MM 无税定理（1958）：在完美市场假设下，V_L = V_U，资本结构不影响企业价值。就像蛋糕切法不同，总量不变。" },
-  { q: "MM 有税定理中，V_L = V_U + tD，其中 tD 代表：", opts: ["税率乘以股利","债务税盾的现值","财务困境成本","债务的市场价值"], correct: 1, explain: "tD 是债务税盾的现值。利息支出可以抵税，政府实际补贴了 t×D 的价值，使有杠杆企业价值高于无杠杆企业。" },
-  { q: "传统观点认为，最优资本结构存在是因为：", opts: ["债务成本始终低于股权成本","税盾收益与财务困境成本的权衡","MM 理论的假设不现实","监管要求"], correct: 1, explain: "传统观点：随着债务增加，税盾收益增加，但财务困境成本也增加。最优点在两者边际效益相等处，此时 WACC 最低，企业价值最大。" },
-  { q: "财务困境成本包括：", opts: ["利息支出","直接成本（法律费用）和间接成本（失去客户/供应商）","股利支付","资本支出"], correct: 1, explain: "财务困境成本分两类：直接成本（法律、重组费用，约占企业价值3-5%）和间接成本（失去客户信任、供应商收紧信用、优秀员工离职，往往更大）。" },
-  { q: "若 V_U=£500m，t=25%，D=£200m，V_L=?", opts: ["£550m","£500m","£450m","£600m"], correct: 0, explain: "V_L = V_U + t×D = £500m + 0.25×£200m = £500m + £50m = £550m。" },
-  { q: "MM 理论的假设条件不包括：", opts: ["无税","无交易成本","存在财务困境成本","完美资本市场"], correct: 2, explain: "MM 理论假设无破产成本（即无财务困境成本）。正是因为现实中存在财务困境成本，MM 有税定理的'债务越多越好'结论才不成立。" },
-  { q: "Tesla 从高债务转向股权融资的主要原因是：", opts: ["股权成本更低","避免财务困境，保持融资灵活性","MM 理论要求","监管限制"], correct: 1, explain: "Tesla 作为高成长、高不确定性公司，财务困境成本极高（失去客户信任、供应链断裂）。降低债务可以避免财务困境，保持战略灵活性。" },
-  { q: "根据 MM 有税定理，企业应该：", opts: ["使用尽可能多的债务（理论上）","避免使用债务","保持50/50的资本结构","只使用股权融资"], correct: 0, explain: "MM 有税定理的逻辑推论：V_L = V_U + tD，债务 D 越大，税盾 tD 越大，企业价值越高。但这是理论极端，现实中财务困境成本会制约债务规模。" },
-  { q: "传统观点的 WACC 曲线形状是：", opts: ["单调递减","单调递增","U形（先降后升）","水平线"], correct: 2, explain: "传统观点：初期增加债务，税盾效应使 WACC 下降；超过最优点后，财务困境成本使 Ke 急剧上升，WACC 反弹。因此 WACC 呈 U 形曲线，最低点对应最优资本结构。" },
-  { q: "以下哪项会增加财务困境成本？", opts: ["低债务比率","高债务比率","高盈利能力","低利率"], correct: 1, explain: "高债务比率意味着更高的财务杠杆，一旦经营出现问题，偿债压力更大，财务困境风险更高，相应的直接和间接成本也更大。" }
-];
-
+const answers = {};
 let answered = 0;
-let score = 0;
-
-function buildQuiz() {
-  const container = document.getElementById('quiz-container');
-  questions.forEach((q, i) => {
-    const div = document.createElement('div');
-    div.className = 'question';
-    div.id = 'q' + i;
-    const optLetters = ['A','B','C','D'];
-    div.innerHTML = `
-      <div class="q-num">Q${i+1} / 10</div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="opts${i}">
-        ${q.opts.map((o,j) => `<div class="option" onclick="selectOption(${i},${j})" id="opt${i}_${j}">
-          <span class="opt-letter">${optLetters[j]}</span>
-          <span class="opt-text">${o}</span>
-        </div>`).join('')}
-      </div>
-      <div class="feedback" id="fb${i}"></div>
-    `;
-    container.appendChild(div);
+const total = 10;
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = optGroup.dataset.q;
+      if (answers[q]) return;
+      const val = opt.dataset.val;
+      const correct = optGroup.dataset.answer;
+      answers[q] = val;
+      answered++;
+      if (val === correct) { opt.classList.add('correct'); }
+      else { opt.classList.add('wrong'); optGroup.querySelector(`[data-val="${correct}"]`).classList.add('reveal-correct'); }
+      const exp = optGroup.closest('.q-card').querySelector('.explanation');
+      if (exp) exp.classList.add('show');
+      const pct = (answered / total) * 100;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressLabel').textContent = answered + ' / ' + total + ' answered';
+    });
   });
+});
+function submitQuiz() {
+  let score = 0;
+  document.querySelectorAll('.options').forEach(og => { if (answers[og.dataset.q] === og.dataset.answer) score++; });
+  const msgs = ['Keep going! 💪','Good effort! 📖','Solid work! 👍','Great job! 🎉','Outstanding! 🏆'];
+  document.getElementById('scoreBig').textContent = score + ' / ' + total;
+  document.getElementById('scoreMsg').textContent = msgs[Math.min(Math.floor(score/2), 4)];
+  const card = document.getElementById('scoreCard');
+  card.classList.add('show');
+  card.scrollIntoView({behavior:'smooth'});
 }
-
-function selectOption(qi, oi) {
-  const q = questions[qi];
-  const opts = document.getElementById('opts' + qi).querySelectorAll('.option');
-  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
-
-  const selected = document.getElementById(`opt${qi}_${oi}`);
-  const correct = document.getElementById(`opt${qi}_${q.correct}`);
-  const fb = document.getElementById('fb' + qi);
-
-  if (oi === q.correct) {
-    selected.classList.add('correct');
-    fb.className = 'feedback show correct-fb';
-    fb.textContent = '✅ 正确！' + q.explain;
-    score++;
-  } else {
-    selected.classList.add('wrong');
-    correct.classList.add('correct');
-    fb.className = 'feedback show wrong-fb';
-    fb.textContent = '❌ 错误。' + q.explain;
-  }
-
-  answered++;
-  updateProgress();
-  if (answered === questions.length) showScore();
-}
-
-function updateProgress() {
-  const pct = (answered / questions.length) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = `${answered} / ${questions.length} 已完成`;
-}
-
-function showScore() {
-  const panel = document.getElementById('scorePanel');
-  panel.classList.add('show');
-  document.getElementById('scoreNum').textContent = `${score} / ${questions.length}`;
-  const pct = score / questions.length;
-  let msg = pct >= 0.9 ? '🏆 优秀！MM 理论完全掌握！' :
-            pct >= 0.7 ? '👍 良好！建议复习 MM 无税 vs 有税的区别。' :
-            '📚 需要加强复习，重点看 Lecture Section 1-3。';
-  document.getElementById('scoreMsg').textContent = msg;
-  panel.scrollIntoView({ behavior:'smooth' });
-}
-
-buildQuiz();
 </script>
 </body>
 </html>

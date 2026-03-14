@@ -25,6 +25,8 @@
   .container { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
 
   .lab { background:#1e293b; border-radius:14px; padding:32px; margin-bottom:32px; border:1px solid rgba(255,255,255,.07); }
+  .scenario-btn { background:rgba(232,160,32,.15); border:1px solid rgba(232,160,32,.4); color:#fbbf24; padding:.4rem .9rem; border-radius:20px; font-size:.82rem; cursor:pointer; transition:all .2s; }
+  .scenario-btn:hover { background:rgba(232,160,32,.3); border-color:var(--accent); }
   .lab-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
   .lab-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
   .lab h2 { color:#f1f5f9; font-size:1.15rem; }
@@ -91,6 +93,13 @@
     </div>
     <p>根据 MM 有税定理 V<sub>L</sub> = V<sub>U</sub> + t×D，调整参数观察税盾如何增加企业价值。</p>
 
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setTS(400,100,20)">🏪 小型企业（低债务）</button>
+      <button class="scenario-btn" onclick="setTS(500,200,25)">🏢 典型上市公司</button>
+      <button class="scenario-btn" onclick="setTS(800,400,30)">🏦 高杠杆企业</button>
+      <button class="scenario-btn" onclick="setTS(600,0,25)">📱 零债务企业</button>
+    </div>
+
     <div class="slider-group">
       <div class="slider-label"><span>无杠杆企业价值 V<sub>U</sub> (£m)</span><span class="val" id="vuVal">£500m</span></div>
       <input type="range" id="vu" min="100" max="1000" value="500" oninput="calcTaxShield()">
@@ -134,6 +143,13 @@
     </div>
     <p>比较 MM 有税理论（WACC 随杠杆单调下降）与传统观点（U 形曲线）。拖动滑块选择当前债务比例。</p>
 
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setLev(0)">🟢 零杠杆</button>
+      <button class="scenario-btn" onclick="setLev(30)">📊 低杠杆 (30%)</button>
+      <button class="scenario-btn" onclick="setLev(50)">⚖️ 中等杠杆 (50%)</button>
+      <button class="scenario-btn" onclick="setLev(70)">🔴 高杠杆 (70%)</button>
+    </div>
+
     <div class="slider-group">
       <div class="slider-label"><span>债务比例 D/(D+E)</span><span class="val" id="leverageVal">30%</span></div>
       <input type="range" id="leverage" min="0" max="80" value="30" oninput="updateChart()">
@@ -160,6 +176,13 @@
       <h2>Financial Distress Cost Optimizer</h2>
     </div>
     <p>调整杠杆比例和困境成本系数，找到净收益最大的最优杠杆点。</p>
+
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setDistress(40,20)">🏢 典型制造业</button>
+      <button class="scenario-btn" onclick="setDistress(60,35)">✈️ 高固定成本行业</button>
+      <button class="scenario-btn" onclick="setDistress(25,10)">💊 低风险行业</button>
+      <button class="scenario-btn" onclick="setDistress(80,45)">⚡ 激进杠杆策略</button>
+    </div>
 
     <div class="slider-group">
       <div class="slider-label"><span>杠杆比例 L (%)</span><span class="val" id="lVal">40%</span></div>
@@ -207,6 +230,23 @@
 </div>
 
 <script>
+// Scenario preset functions
+function setTS(vu, d, t) {
+  document.getElementById('vu').value = vu;
+  document.getElementById('d').value = d;
+  document.getElementById('t').value = t;
+  calcTaxShield();
+}
+function setLev(v) {
+  document.getElementById('leverage').value = v;
+  updateChart();
+}
+function setDistress(l, k) {
+  document.getElementById('lev').value = l;
+  document.getElementById('kk').value = k;
+  calcDistress();
+}
+
 // Lab 1
 function calcTaxShield() {
   const vu = +document.getElementById('vu').value;
