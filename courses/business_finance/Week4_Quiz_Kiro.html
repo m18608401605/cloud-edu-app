@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 Quiz — Investment Risk | BUSI1070</title>
+<style>
+:root {
+  --primary: #1a3a5c;
+  --accent: #e8a020;
+  --bg: #f5f7fa;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --card: #ffffff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: #333; }
+
+/* NAV */
+nav {
+  background: var(--primary);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 56px;
+  position: sticky; top: 0; z-index: 100;
+}
+nav .logo { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin-right: auto; }
+nav a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.85rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+nav a:hover, nav a.active { background: rgba(255,255,255,0.15); color: #fff; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #2d6a9f 100%);
+  color: white;
+  padding: 3rem 2rem 2rem;
+  text-align: center;
+}
+.hero h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+.hero p { opacity: 0.85; font-size: 1rem; }
+.hero .meta { margin-top: 1rem; display: flex; justify-content: center; gap: 2rem; font-size: 0.85rem; opacity: 0.75; }
+
+/* PROGRESS */
+.progress-bar-wrap { background: #e0e0e0; border-radius: 8px; height: 8px; margin: 2rem auto; max-width: 700px; }
+.progress-bar { background: var(--accent); height: 8px; border-radius: 8px; transition: width 0.4s; width: 0%; }
+.progress-label { text-align: center; font-size: 0.85rem; color: #666; margin-top: 0.4rem; }
+
+/* MAIN */
+main { max-width: 800px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+
+/* SECTION HEADER */
+.section-header {
+  background: var(--primary);
+  color: white;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 2.5rem;
+}
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card);
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  padding: 1.5rem;
+  margin-bottom: 0;
+}
+.q-card:last-of-type { border-radius: 0 0 8px 8px; }
+.q-num { color: var(--accent); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.5rem; }
+.q-text { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; font-weight: 500; }
+.q-source { font-size: 0.75rem; color: #999; margin-bottom: 1rem; font-style: italic; }
+
+/* OPTIONS */
+.options { display: flex; flex-direction: column; gap: 0.5rem; }
+.option {
+  padding: 0.7rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  background: #fafafa;
+}
+.option:hover { border-color: var(--primary); background: #eef3f8; }
+.option.selected { border-color: var(--primary); background: #dce8f5; font-weight: 600; }
+.option.correct { border-color: var(--green); background: #d4edda; color: #155724; }
+.option.wrong { border-color: var(--red); background: #f8d7da; color: #721c24; }
+.option.reveal-correct { border-color: var(--green); background: #d4edda; color: #155724; }
+
+/* EXPLANATION */
+.explanation {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f0f7ff;
+  border-left: 4px solid var(--primary);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.explanation.show { display: block; }
+.explanation strong { color: var(--primary); }
+
+/* SECTION B */
+.calc-card {
+  background: var(--card);
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  padding: 1.5rem;
+  border-radius: 0 0 8px 8px;
+}
+.scenario-box {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+.scenario-box h4 { color: var(--primary); margin-bottom: 0.5rem; font-size: 0.95rem; }
+.data-table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.88rem; }
+.data-table th { background: var(--primary); color: white; padding: 0.5rem 0.8rem; text-align: left; }
+.data-table td { padding: 0.5rem 0.8rem; border-bottom: 1px solid #e0e0e0; }
+.data-table tr:nth-child(even) td { background: #f8f9fa; }
+
+details { margin-top: 1rem; }
+details summary {
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  background: var(--primary);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  user-select: none;
+}
+details summary:hover { background: #2d6a9f; }
+details[open] summary { border-radius: 6px 6px 0 0; }
+.answer-content {
+  background: #f0f7ff;
+  border: 1px solid #c8dff5;
+  border-top: none;
+  padding: 1.2rem;
+  border-radius: 0 0 6px 6px;
+  font-size: 0.88rem;
+  line-height: 1.8;
+}
+.answer-content h4 { color: var(--primary); margin: 0.8rem 0 0.3rem; }
+.answer-content .formula {
+  background: #1a3a5c;
+  color: #e8f4fd;
+  padding: 0.6rem 1rem;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.85rem;
+  margin: 0.4rem 0;
+}
+.answer-content table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.85rem; }
+.answer-content table th { background: #1a3a5c; color: white; padding: 0.4rem 0.6rem; }
+.answer-content table td { padding: 0.4rem 0.6rem; border-bottom: 1px solid #ddd; }
+.answer-content .verdict {
+  background: #d4edda;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  padding: 0.6rem 1rem;
+  color: #155724;
+  font-weight: 600;
+  margin-top: 0.8rem;
+}
+
+/* SUBMIT */
+.submit-area { text-align: center; margin: 2rem 0; }
+.btn-submit {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-submit:hover { background: #c8880e; }
+
+/* SCORE */
+.score-card {
+  display: none;
+  background: var(--card);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+.score-card.show { display: block; }
+.score-big { font-size: 3rem; font-weight: 700; color: var(--primary); }
+.score-label { color: #666; margin-top: 0.3rem; }
+.score-msg { margin-top: 1rem; font-size: 1rem; color: #444; }
+
+/* BOTTOM NAV */
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+.btn-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.btn-nav:hover { background: #2d6a9f; }
+.btn-nav.disabled { background: #ccc; pointer-events: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">🎓 BUSI1070</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_StudyGuide_Kiro.html">Study Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Lecture_Kiro.html">Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html">Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Quiz_Kiro.html" class="active">Quiz</a>
+</nav>
+
+<div class="hero">
+  <h1>Week 4 Quiz</h1>
+  <p>Investment Risk — Sensitivity, Scenario Analysis & Risk Attitudes</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.6</span>
+    <span>⏱ ~20 min</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 1 Calculation</span>
+  </div>
+</div>
+
+<main>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="progress-label" id="progressLabel">0 / 10 answered</div>
+
+  <!-- SECTION A -->
+  <div class="section-header">Section A — Multiple Choice Questions (Pearson Ch.6)</div>
+
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-num">Question 1 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">Which of the following is the most serious problem with sensitivity analysis?</div>
+    <div class="options" data-q="1" data-answer="c">
+      <div class="option" data-val="a">a) It requires a computer to carry out</div>
+      <div class="option" data-val="b">b) It is too complex for most managers to understand</div>
+      <div class="option" data-val="c">c) It is difficult to estimate input values</div>
+      <div class="option" data-val="d">d) It only works for short-term projects</div>
+    </div>
+    <div class="explanation" id="exp1">
+      <strong>✅ Correct: C — It is difficult to estimate input values.</strong><br><br>
+      Sensitivity analysis asks "what if one variable changes?" — but the whole exercise is only useful if you can reliably estimate the range of that variable. In practice, forecasting future sales volumes, costs, or discount rates is notoriously hard. <br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: Sensitivity analysis can be done on a simple spreadsheet — no special software needed.<br>
+      • B: It's actually one of the <em>simpler</em> risk tools — managers find it intuitive.<br>
+      • D: It applies equally to long-term capital investment decisions.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-num">Question 2 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">Which method involves simultaneously changing a number of variables to represent a particular set of circumstances?</div>
+    <div class="options" data-q="2" data-answer="b">
+      <div class="option" data-val="a">a) Sensitivity analysis</div>
+      <div class="option" data-val="b">b) Scenario building</div>
+      <div class="option" data-val="c">c) Simulation</div>
+      <div class="option" data-val="d">d) Expected value analysis</div>
+    </div>
+    <div class="explanation" id="exp2">
+      <strong>✅ Correct: B — Scenario building.</strong><br><br>
+      Scenario building constructs coherent "stories" about the future (e.g., "recession scenario" or "boom scenario") where <em>multiple variables change together</em> in a consistent way. This is its key distinction.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: Sensitivity analysis changes <em>one variable at a time</em>, holding others constant.<br>
+      • C: Simulation (Monte Carlo) randomly samples from probability distributions — it's more sophisticated and computer-intensive.<br>
+      • D: Expected value uses probabilities to calculate a weighted average outcome — it doesn't "build scenarios."
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-num">Question 3 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">A project has 2 possible selling prices, 3 possible variable costs, 4 possible fixed costs, and 5 possible sales volumes. How many possible outcomes does this project have?</div>
+    <div class="options" data-q="3" data-answer="c">
+      <div class="option" data-val="a">a) 14</div>
+      <div class="option" data-val="b">b) 60</div>
+      <div class="option" data-val="c">c) 120</div>
+      <div class="option" data-val="d">d) 240</div>
+    </div>
+    <div class="explanation" id="exp3">
+      <strong>✅ Correct: C — 120.</strong><br><br>
+      When variables are independent, total combinations = product of all possibilities:<br>
+      2 × 3 × 4 × 5 = <strong>120</strong><br><br>
+      This illustrates why simulation is needed for complex projects — manually evaluating 120 scenarios is impractical, let alone thousands.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A (14): This is the <em>sum</em> (2+3+4+5), not the product — a common mistake.<br>
+      • B (60): Missing one factor — perhaps only multiplying 3×4×5=60.<br>
+      • D (240): Overcounting — perhaps doubling the correct answer.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-num">Question 4 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">Which of the following best describes specific (unsystematic) risk?</div>
+    <div class="options" data-q="4" data-answer="b">
+      <div class="option" data-val="a">a) Risk that affects all investments equally</div>
+      <div class="option" data-val="b">b) Risk that relates to a particular investment but not to most other investments</div>
+      <div class="option" data-val="c">c) Risk that cannot be reduced through diversification</div>
+      <div class="option" data-val="d">d) Risk measured by the market beta coefficient</div>
+    </div>
+    <div class="explanation" id="exp4">
+      <strong>✅ Correct: B — Risk that relates to a particular investment but not to most other investments.</strong><br><br>
+      Specific (unsystematic) risk is <em>company-specific</em> — e.g., a factory fire, a CEO scandal, a product recall. It affects one firm but not the broader market.<br><br>
+      <strong>Key insight:</strong> Because specific risk is uncorrelated across firms, it can be <em>diversified away</em> by holding a portfolio. Rational investors won't be compensated for bearing it.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: That describes <em>systematic</em> (market) risk — e.g., interest rate changes, recessions.<br>
+      • C: This is the definition of <em>systematic</em> risk — it cannot be diversified away.<br>
+      • D: Beta measures <em>systematic</em> risk (sensitivity to market movements).
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-num">Question 5 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">What does it mean to say an investor is indifferent between two points on the same indifference (utility) curve?</div>
+    <div class="options" data-q="5" data-answer="d">
+      <div class="option" data-val="a">a) The investor prefers the point with higher return</div>
+      <div class="option" data-val="b">b) The investor prefers the point with lower risk</div>
+      <div class="option" data-val="c">c) The investor is irrational</div>
+      <div class="option" data-val="d">d) The individual does not mind where they are on that curve</div>
+    </div>
+    <div class="explanation" id="exp5">
+      <strong>✅ Correct: D — The individual does not mind where they are on that curve.</strong><br><br>
+      An indifference curve represents combinations of risk and return that give the investor <em>equal utility</em>. Moving along the curve (accepting more risk for more return, or vice versa) leaves the investor equally satisfied — they are truly indifferent.<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A & B: If the investor preferred one point over another, they would <em>not</em> be on the same indifference curve — they'd be on different curves.<br>
+      • C: Indifference is a rational concept in utility theory — it means equal satisfaction, not irrationality.
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-num">Question 6 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">A risk-averse investor facing an uncertain investment would:</div>
+    <div class="options" data-q="6" data-answer="c">
+      <div class="option" data-val="a">a) Pay exactly the expected value of the investment</div>
+      <div class="option" data-val="b">b) Pay more than the expected value</div>
+      <div class="option" data-val="c">c) Not pay as much as the expected value</div>
+      <div class="option" data-val="d">d) Be indifferent between the investment and its expected value</div>
+    </div>
+    <div class="explanation" id="exp6">
+      <strong>✅ Correct: C — Would not pay as much as the expected value.</strong><br><br>
+      A risk-averse investor dislikes uncertainty. Given a choice between a certain £100 and a gamble with expected value £100, they prefer the certain £100. Therefore, they would only buy the risky investment at a <em>discount</em> to its expected value — the discount represents their "risk premium."<br><br>
+      <strong>Why others are wrong:</strong><br>
+      • A: Paying exactly the expected value describes a <em>risk-neutral</em> investor.<br>
+      • B: Paying <em>more</em> than expected value describes a <em>risk-seeking</em> investor (e.g., a gambler who enjoys the thrill).<br>
+      • D: Indifference between risky and certain outcomes of equal expected value = risk-neutral.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-num">Question 7 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ — True/False</div>
+    <div class="q-text">
+      Statement 1: Objective probabilities are based on the opinions of experts.<br>
+      Statement 2: Diversification involves investing in a range of projects or securities so that the returns are not perfectly positively correlated.<br><br>
+      Which combination is correct?
+    </div>
+    <div class="options" data-q="7" data-answer="b">
+      <div class="option" data-val="a">a) True, True</div>
+      <div class="option" data-val="b">b) False, True</div>
+      <div class="option" data-val="c">c) True, False</div>
+      <div class="option" data-val="d">d) False, False</div>
+    </div>
+    <div class="explanation" id="exp7">
+      <strong>✅ Correct: B — False, True.</strong><br><br>
+      <strong>Statement 1 is FALSE:</strong> Objective probabilities are based on <em>historical data and observed frequencies</em> (e.g., "this machine fails 3% of the time based on 10 years of records"). Probabilities based on expert opinion are called <em>subjective</em> probabilities.<br><br>
+      <strong>Statement 2 is TRUE:</strong> Diversification works precisely because different assets don't move in perfect lockstep. If returns are not perfectly positively correlated (correlation &lt; +1), combining them reduces overall portfolio risk.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-num">Question 8 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ — True/False</div>
+    <div class="q-text">
+      Statement 1: Most businesses do not formally consider risk when making investment decisions.<br>
+      Statement 2: Sensitivity analysis is the most widely used method of risk assessment in practice.<br><br>
+      Which combination is correct?
+    </div>
+    <div class="options" data-q="8" data-answer="b">
+      <div class="option" data-val="a">a) True, True</div>
+      <div class="option" data-val="b">b) False, True</div>
+      <div class="option" data-val="c">c) True, False</div>
+      <div class="option" data-val="d">d) False, False</div>
+    </div>
+    <div class="explanation" id="exp8">
+      <strong>✅ Correct: B — False, True.</strong><br><br>
+      <strong>Statement 1 is FALSE:</strong> Survey evidence consistently shows that the <em>majority</em> of businesses formally consider risk in capital investment decisions — through sensitivity analysis, scenario analysis, or adjusted discount rates.<br><br>
+      <strong>Statement 2 is TRUE:</strong> Sensitivity analysis ("what if" analysis) is the most commonly used risk assessment tool in practice because it is simple, intuitive, and requires no probability estimates. McLaney cites survey evidence confirming this.
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-num">Question 9 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ — Calculation</div>
+    <div class="q-text">
+      A project has two possible outcomes:<br>
+      • 60% probability: NPV = £10 million<br>
+      • 40% probability: NPV = −£3 million<br><br>
+      What is the value of perfect information about which outcome will occur?
+    </div>
+    <div class="options" data-q="9" data-answer="c">
+      <div class="option" data-val="a">a) £1.8 million</div>
+      <div class="option" data-val="b">b) £3.0 million</div>
+      <div class="option" data-val="c">c) £2.4 million</div>
+      <div class="option" data-val="d">d) £6.0 million</div>
+    </div>
+    <div class="explanation" id="exp9">
+      <strong>✅ Correct: C — £2.4 million.</strong><br><br>
+      <strong>Step 1: Expected NPV without perfect information</strong><br>
+      E(NPV) = 0.6 × £10m + 0.4 × (−£3m) = £6m − £1.2m = <strong>£3.6m</strong><br>
+      (Since E(NPV) &gt; 0, the firm would proceed with the project.)<br><br>
+      <strong>Step 2: Expected NPV with perfect information</strong><br>
+      With perfect info, the firm only invests when the good outcome occurs:<br>
+      E(NPV | perfect info) = 0.6 × £10m + 0.4 × £0 = <strong>£6m</strong><br>
+      (When bad outcome is predicted, the firm walks away — NPV = £0, not −£3m.)<br><br>
+      <strong>Step 3: Value of perfect information</strong><br>
+      EVPI = £6m − £3.6m = <strong>£2.4 million</strong>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-num">Question 10 of 10</div>
+    <div class="q-source">Pearson Ch.6 MCQ</div>
+    <div class="q-text">When assessing a high-risk project, a firm should (compared to a normal project):</div>
+    <div class="options" data-q="10" data-answer="a">
+      <div class="option" data-val="a">a) Increase the discount rate and reduce the maximum payback period</div>
+      <div class="option" data-val="b">b) Decrease the discount rate and increase the maximum payback period</div>
+      <div class="option" data-val="c">c) Increase the discount rate only</div>
+      <div class="option" data-val="d">d) Reduce the maximum payback period only</div>
+    </div>
+    <div class="explanation" id="exp10">
+      <strong>✅ Correct: A — Increase the discount rate and reduce the maximum payback period.</strong><br><br>
+      Two common practical adjustments for high-risk projects:<br><br>
+      1. <strong>Higher discount rate:</strong> Adds a risk premium to the cost of capital, making the NPV hurdle harder to clear. Riskier cash flows are worth less in present value terms.<br><br>
+      2. <strong>Shorter payback period:</strong> Requires the investment to be recovered faster, reducing exposure to long-term uncertainty. The further into the future, the less reliable the forecasts.<br><br>
+      Both adjustments work in the same direction — they make it <em>harder</em> for risky projects to be approved, which is appropriate.
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitQuiz()">Submit Section A</button>
+  </div>
+
+  <div class="score-card" id="scoreCard">
+    <div class="score-big" id="scoreNum">—</div>
+    <div class="score-label">out of 10</div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- SECTION B -->
+  <div class="section-header" style="margin-top:3rem;">Section B — Calculation Question (Problem 6.1)</div>
+  <div class="calc-card">
+    <div class="q-num">Calculation Question</div>
+    <div class="q-text">Easton Ltd — Machine Selection Under Risk</div>
+
+    <div class="scenario-box">
+      <h4>📋 Scenario</h4>
+      Easton Ltd is choosing between two machines to manufacture a new product. Both machines have a <strong>3-year life</strong> and the cost of capital is <strong>6%</strong>. The product sells for <strong>£4 per unit</strong>.
+
+      <table class="data-table">
+        <tr><th>Item</th><th>Machine A</th><th>Machine B</th></tr>
+        <tr><td>Initial cost</td><td>£15,000</td><td>£20,000</td></tr>
+        <tr><td>Variable cost per unit</td><td>£1.00</td><td>£0.50</td></tr>
+        <tr><td>Fixed costs per year</td><td>£4,000</td><td>£4,000</td></tr>
+      </table>
+
+      Annual demand is uncertain with the following probabilities:
+      <table class="data-table">
+        <tr><th>Demand (units/year)</th><th>Probability</th></tr>
+        <tr><td>2,000</td><td>0.2</td></tr>
+        <tr><td>3,000</td><td>0.6</td></tr>
+        <tr><td>5,000</td><td>0.2</td></tr>
+      </table>
+
+      <strong>Required:</strong> Calculate the expected NPV for each machine and recommend which to choose.
+    </div>
+
+    <details>
+      <summary>🔍 Click to reveal full solution & analysis</summary>
+      <div class="answer-content">
+
+        <h4>Step 1: Annual Contribution per unit</h4>
+        <div class="formula">Machine A: £4.00 − £1.00 = £3.00 per unit</div>
+        <div class="formula">Machine B: £4.00 − £0.50 = £3.50 per unit</div>
+
+        <h4>Step 2: Annual Net Cash Flow = (Contribution × Demand) − Fixed Costs</h4>
+        <table>
+          <tr><th>Demand</th><th>Prob</th><th>Machine A NCF</th><th>Machine B NCF</th></tr>
+          <tr><td>2,000</td><td>0.2</td><td>3×2000 − 4000 = <strong>£2,000</strong></td><td>3.5×2000 − 4000 = <strong>£3,000</strong></td></tr>
+          <tr><td>3,000</td><td>0.6</td><td>3×3000 − 4000 = <strong>£5,000</strong></td><td>3.5×3000 − 4000 = <strong>£6,500</strong></td></tr>
+          <tr><td>5,000</td><td>0.2</td><td>3×5000 − 4000 = <strong>£11,000</strong></td><td>3.5×5000 − 4000 = <strong>£13,500</strong></td></tr>
+        </table>
+
+        <h4>Step 3: Expected Annual Cash Flow</h4>
+        <div class="formula">E(NCF_A) = 0.2×2000 + 0.6×5000 + 0.2×11000 = 400 + 3000 + 2200 = £5,600</div>
+        <div class="formula">E(NCF_B) = 0.2×3000 + 0.6×6500 + 0.2×13500 = 600 + 3900 + 2700 = £7,200</div>
+
+        <h4>Step 4: Annuity Factor (3 years @ 6%)</h4>
+        <div class="formula">AF = (1 − 1/1.06³) / 0.06 = (1 − 0.8396) / 0.06 = 0.1604 / 0.06 ≈ 2.673</div>
+
+        <h4>Step 5: Expected NPV</h4>
+        <div class="formula">E(NPV_A) = £5,600 × 2.673 − £15,000 = £14,969 − £15,000 = −£31</div>
+        <div class="formula">E(NPV_B) = £7,200 × 2.673 − £20,000 = £19,246 − £20,000 = −£754</div>
+
+        <h4>Step 6: NPV at each demand level (for fuller analysis)</h4>
+        <table>
+          <tr><th>Demand</th><th>Prob</th><th>NPV_A</th><th>NPV_B</th></tr>
+          <tr><td>2,000</td><td>0.2</td><td>2000×2.673−15000 = <strong>−£9,654</strong></td><td>3000×2.673−20000 = <strong>−£11,981</strong></td></tr>
+          <tr><td>3,000</td><td>0.6</td><td>5000×2.673−15000 = <strong>−£1,635</strong></td><td>6500×2.673−20000 = <strong>−£2,626</strong></td></tr>
+          <tr><td>5,000</td><td>0.2</td><td>11000×2.673−15000 = <strong>£14,403</strong></td><td>13500×2.673−20000 = <strong>£16,086</strong></td></tr>
+        </table>
+
+        <div class="verdict">
+          ⚠️ Both machines have slightly negative expected NPV — neither is clearly attractive on pure NPV grounds.<br><br>
+          However, <strong>Machine B dominates Machine A at every demand level</strong> (higher NPV in all three scenarios). If the project must proceed, Machine B is preferred.<br><br>
+          💡 <strong>Key exam insight:</strong> When E(NPV) ≈ 0, the decision is sensitive to the accuracy of your estimates — this is exactly where sensitivity analysis adds value. A small improvement in demand or cost assumptions could flip the decision.
+        </div>
+
+        <h4>📌 Exam Anti-Pitfall</h4>
+        <p>Common mistake: forgetting to subtract fixed costs before multiplying by the annuity factor. Fixed costs are <em>annual</em> cash outflows — they must be included in the annual net cash flow, not treated separately.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html" class="btn-nav">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/" class="btn-nav">🏠 All Weeks</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html" class="btn-nav">Week 5 →</a>
+  </div>
+
+</main>
+
+<script>
+const answers = {1:'c',2:'b',3:'c',4:'b',5:'d',6:'c',7:'b',8:'b',9:'c',10:'a'};
+const answered = {};
+
+// Option click handler
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = optGroup.dataset.q;
+      if (answered[q] === 'submitted') return; // locked after submit
+      optGroup.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      answered[q] = opt.dataset.val;
+      updateProgress();
+    });
+  });
+});
+
+function updateProgress() {
+  const count = Object.keys(answered).filter(k => answered[k] !== 'submitted').length;
+  const pct = (count / 10) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = count + ' / 10 answered';
+}
+
+function submitQuiz() {
+  let score = 0;
+  for (let q = 1; q <= 10; q++) {
+    const optGroup = document.querySelector(`.options[data-q="${q}"]`);
+    const correct = answers[q];
+    const chosen = answered[q];
+    answered[q] = 'submitted';
+
+    optGroup.querySelectorAll('.option').forEach(opt => {
+      opt.style.pointerEvents = 'none';
+      if (opt.dataset.val === correct) {
+        opt.classList.add('reveal-correct');
+      }
+      if (opt.dataset.val === chosen && chosen !== correct) {
+        opt.classList.add('wrong');
+        opt.classList.remove('selected');
+      }
+      if (opt.dataset.val === chosen && chosen === correct) {
+        opt.classList.add('correct');
+        opt.classList.remove('selected');
+        score++;
+      }
+    });
+
+    document.getElementById('exp' + q).classList.add('show');
+  }
+
+  // Show score
+  const scoreCard = document.getElementById('scoreCard');
+  scoreCard.classList.add('show');
+  document.getElementById('scoreNum').textContent = score;
+
+  const msgs = {
+    10: "🏆 Perfect score! You've mastered investment risk.",
+    9: "🥇 Excellent! One slip — check the explanation above.",
+    8: "🥈 Strong performance. Review the ones you missed.",
+    7: "🥉 Good effort. A few concepts need reinforcing.",
+    6: "📚 Passing, but revisit the lecture on risk attitudes.",
+    5: "⚠️ Below average — go back to the Interactive lab.",
+    4: "⚠️ Needs work — re-read Ch.6 before the exam.",
+    3: "🔄 Significant gaps — start from the Study Guide.",
+    2: "🔄 Please revisit all Week 4 materials.",
+    1: "🔄 Please revisit all Week 4 materials.",
+    0: "🔄 Please revisit all Week 4 materials."
+  };
+  document.getElementById('scoreMsg').textContent = msgs[score] || msgs[0];
+
+  // Update progress bar to 100%
+  document.getElementById('progressBar').style.width = '100%';
+  document.getElementById('progressLabel').textContent = '10 / 10 answered';
+
+  // Scroll to score
+  scoreCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  // Hide submit button
+  document.querySelector('.btn-submit').style.display = 'none';
+}
+</script>
+</body>
+</html>
