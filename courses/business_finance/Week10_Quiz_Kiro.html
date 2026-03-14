@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 | Quiz | Market Efficiency & Ethics</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3);flex-wrap:wrap;gap:.2rem}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+
+  .hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 60%,#047857 100%);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+  .hero .week-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:.8rem;font-weight:600;padding:.35rem 1rem;border-radius:20px;margin-bottom:1.2rem;letter-spacing:.06em;text-transform:uppercase}
+  .hero h1{font-size:2.2rem;font-weight:900;margin-bottom:.6rem}
+  .hero .subtitle{font-size:1rem;opacity:.8;max-width:560px;margin:0 auto 1.5rem}
+  .hero .meta-row{display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+
+  main{max-width:800px;margin:0 auto;padding:3rem 1.5rem 5rem}
+
+  .progress-bar-wrap{background:#e2e8f0;border-radius:20px;height:10px;margin-bottom:2rem;overflow:hidden}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--green),#16a34a);border-radius:20px;transition:width .4s ease;width:0%}
+  .progress-label{text-align:center;font-size:.85rem;color:var(--muted);margin-bottom:.5rem}
+
+  .score-board{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.2rem 1.5rem;display:flex;align-items:center;gap:1rem;margin-bottom:2rem}
+  .score-board .score-num{font-size:2rem;font-weight:900;color:var(--primary)}
+  .score-board .score-label{font-size:.85rem;color:var(--muted)}
+
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1.2rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+  .question-card{background:var(--card);border-radius:14px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+  .question-card .q-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
+  .question-card .q-text{font-size:1rem;font-weight:600;color:var(--primary);margin-bottom:1.2rem;line-height:1.5}
+  .options{display:flex;flex-direction:column;gap:.6rem}
+  .option{display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 1rem;border-radius:8px;border:2px solid var(--border);cursor:pointer;transition:all .2s;font-size:.92rem}
+  .option:hover{border-color:var(--primary);background:#f0f4ff}
+  .option.correct{border-color:var(--green);background:#f0fdf4;color:#166534}
+  .option.wrong{border-color:var(--red);background:#fff5f5;color:#991b1b}
+  .option.disabled{pointer-events:none}
+  .option .opt-letter{font-weight:700;min-width:1.4rem;color:var(--muted)}
+  .option.correct .opt-letter{color:var(--green)}
+  .option.wrong .opt-letter{color:var(--red)}
+  .feedback{margin-top:1rem;padding:.8rem 1rem;border-radius:8px;font-size:.88rem;display:none}
+  .feedback.show{display:block}
+  .feedback.correct-fb{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+  .feedback.wrong-fb{background:#fff5f5;border:1px solid #fecaca;color:#991b1b}
+
+  .section-b{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid #f0d080;border-radius:14px;padding:2rem;margin-top:2rem}
+  .section-b h2{color:#7a5800;font-size:1.1rem;font-weight:700;margin-bottom:1rem}
+  .section-b .problem{background:#fff;border-radius:8px;padding:1.2rem;border:1px solid #f0d080;margin-bottom:1rem;font-size:.95rem;line-height:1.7}
+  .section-b .sub-q{margin-bottom:.8rem;font-weight:600;color:var(--primary)}
+  details{margin-top:1rem}
+  summary{cursor:pointer;font-weight:600;color:var(--primary);padding:.6rem 1rem;background:#eef4ff;border-radius:8px;font-size:.9rem;list-style:none;display:flex;align-items:center;gap:.5rem}
+  summary::before{content:'▶';font-size:.7rem;transition:transform .2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  .answer-content{background:#f8faff;border:1px solid #c7d7f0;border-radius:0 0 8px 8px;padding:1.2rem;font-size:.9rem;line-height:1.8}
+  .answer-content .step{margin-bottom:.5rem;padding-left:1rem;border-left:3px solid var(--accent)}
+  .answer-content strong{color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 10</span>
+</nav>
+
+<div class="hero">
+  <div class="week-tag">Week 10 · Chapter 9 · Quiz</div>
+  <h1>Market Efficiency &amp; Ethics</h1>
+  <div class="subtitle">10道 MCQ + Section B 计算题 — 测试你对有效市场假说的真正理解</div>
+  <div class="meta-row">
+    <span>📝 10 MCQ</span>
+    <span>🧮 Section B 计算题</span>
+    <span>📖 McLaney Ch.9</span>
+  </div>
+</div>
+
+<main>
+  <div class="progress-label">答题进度：<span id="prog-text">0 / 10</span></div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="prog-bar"></div></div>
+  <div class="score-board">
+    <div class="score-num" id="score-num">0</div>
+    <div>
+      <div style="font-weight:700;color:var(--primary)">当前得分</div>
+      <div class="score-label">答对题数 / 已答题数</div>
+    </div>
+  </div>
+
+  <div class="section-label">📝 Section A — Multiple Choice (10题)</div>
+
+  <!-- Q1 -->
+  <div class="question-card">
+    <div class="q-num">Question 1 / 10</div>
+    <div class="q-text">弱式有效市场假说 (Weak Form EMH) 意味着：</div>
+    <div class="options" data-correct="0">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>技术分析无法持续获得超额收益</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>基本面分析无效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>内幕交易无效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>所有投资策略均无效</div>
+    </div>
+    <div class="feedback" id="fb1"></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-card">
+    <div class="q-num">Question 2 / 10</div>
+    <div class="q-text">半强式有效市场中，以下哪种策略理论上无效？</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>内幕交易</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>基本面分析</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>技术分析</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>以上都无效</div>
+    </div>
+    <div class="feedback" id="fb2"></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-card">
+    <div class="q-num">Question 3 / 10</div>
+    <div class="q-text">强式有效市场假说认为：</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>只有内幕信息有价值</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>连内幕信息也无法获得超额收益</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>技术分析有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>市场价格总是正确的</div>
+    </div>
+    <div class="feedback" id="fb3"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-card">
+    <div class="q-num">Question 4 / 10</div>
+    <div class="q-text">行为金融学中的"锚定效应"(Anchoring) 是指：</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>投资者过度自信于自己的判断</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>投资者过度依赖初始参考信息</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>投资者跟随大众行为</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>投资者厌恶损失超过喜爱收益</div>
+    </div>
+    <div class="feedback" id="fb4"></div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="question-card">
+    <div class="q-num">Question 5 / 10</div>
+    <div class="q-text">Warren Buffett 长期跑赢市场（年化约20%），这说明：</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>证明市场完全无效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>挑战了半强式有效，但学术界仍有争议</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>证明技术分析有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>与市场效率理论无关</div>
+    </div>
+    <div class="feedback" id="fb5"></div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="question-card">
+    <div class="q-num">Question 6 / 10</div>
+    <div class="q-text">事件研究 (Event Study) 通常用于检验哪种形式的市场有效性？</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>弱式有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>半强式有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>强式有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>行为金融学</div>
+    </div>
+    <div class="feedback" id="fb6"></div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="question-card">
+    <div class="q-num">Question 7 / 10</div>
+    <div class="q-text">以下哪项是弱式有效市场的主要证据？</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>公告后股价立即调整</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>股价遵循随机游走 (Random Walk)</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>内幕交易无法获利</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>基本面分析无效</div>
+    </div>
+    <div class="feedback" id="fb7"></div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="question-card">
+    <div class="q-num">Question 8 / 10</div>
+    <div class="q-text">"羊群效应" (Herding) 在金融市场中会导致：</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>市场更加有效</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>资产价格泡沫和崩溃</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>投资者获得持续超额收益</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>市场价格更加准确</div>
+    </div>
+    <div class="feedback" id="fb8"></div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="question-card">
+    <div class="q-num">Question 9 / 10</div>
+    <div class="q-text">根据半强式有效市场，公司发布盈利预警后，股价应该：</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>缓慢下跌（市场需要时间消化信息）</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>立即下跌至新的均衡价格</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>保持不变（已被市场预期）</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>上涨（坏消息出尽是利好）</div>
+    </div>
+    <div class="feedback" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="question-card">
+    <div class="q-num">Question 10 / 10</div>
+    <div class="q-text">以下哪项行为违反了市场伦理（内幕交易）？</div>
+    <div class="options" data-correct="1">
+      <div class="option" onclick="answer(this)"><span class="opt-letter">A</span>基于公开财报分析买入股票</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">B</span>利用未公开的并购信息进行交易</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">C</span>使用技术分析图表预测走势</div>
+      <div class="option" onclick="answer(this)"><span class="opt-letter">D</span>跟随知名分析师的公开建议</div>
+    </div>
+    <div class="feedback" id="fb10"></div>
+  </div>
+
+  <!-- Section B -->
+  <div class="section-label">🧮 Section B — 计算与分析题</div>
+  <div class="section-b">
+    <h2>📋 综合分析题</h2>
+    <div class="problem">
+      <p>某投资者声称发现了一种基于历史价格的技术分析策略，过去5年每年超额收益 (α) = 3%。市场平均回报率为8%，初始投资 £10,000。</p>
+    </div>
+    <div class="sub-q">(a) 这与哪种形式的有效市场假说相矛盾？请解释原因。</div>
+    <div class="sub-q">(b) 如果市场是弱式有效的，如何解释这种超额收益？（至少给出2个理由）</div>
+    <div class="sub-q">(c) 计算：若 α=3%，市场回报=8%，初始投资 £10,000，5年后两种情况的财富差异是多少？</div>
+    <details>
+      <summary>📖 点击查看答案与深度解析</summary>
+      <div class="answer-content">
+        <div class="step"><strong>(a) 矛盾的有效市场形式：</strong><br>
+        与<strong>弱式有效市场假说 (Weak Form EMH)</strong> 相矛盾。<br>
+        原因：弱式有效认为股价已反映所有历史价格信息，因此基于历史价格的技术分析策略不应能持续获得超额收益。如果该策略确实有效，说明市场未能充分反映历史信息。</div>
+        <div class="step"><strong>(b) 超额收益的可能解释（弱式有效框架下）：</strong><br>
+        ① <strong>样本期太短/运气因素</strong>：5年数据量不足，可能只是统计上的偶然，而非真正的系统性超额收益<br>
+        ② <strong>未考虑交易成本和风险</strong>：技术分析策略通常交易频繁，扣除手续费后超额收益可能消失；且可能承担了更高风险<br>
+        ③ <strong>数据挖掘偏差 (Data Mining Bias)</strong>：从大量策略中筛选出表现好的，必然存在幸存者偏差<br>
+        ④ <strong>市场异常 (Market Anomaly)</strong>：即使在有效市场中，也存在短期异常，但这些异常一旦被发现就会消失</div>
+        <div class="step"><strong>(c) 财富计算：</strong><br>
+        市场回报（α=0）：£10,000 × (1.08)⁵ = £10,000 × 1.4693 = <strong>£14,693</strong><br>
+        超额策略（α=3%，总回报=11%）：£10,000 × (1.11)⁵ = £10,000 × 1.6851 = <strong>£16,851</strong><br>
+        <strong>财富差异 = £16,851 - £14,693 = £2,158</strong><br>
+        注：这仅是理论计算，实际中需扣除交易成本、税收，并考虑风险调整后的收益。</div>
+      </div>
+    </details>
+  </div>
+</main>
+
+<script>
+let answered = 0, correct = 0;
+const total = 10;
+const feedbacks = [
+  '✅ 正确！弱式有效意味着历史价格信息已被充分反映，技术分析（基于历史价格）无法持续获利。',
+  '✅ 正确！半强式有效中，所有公开信息（包括财报、新闻）已被定价，基本面分析无法获得超额收益。',
+  '✅ 正确！强式有效是最严格的形式，认为连内幕信息也已被反映在价格中（现实中不成立）。',
+  '✅ 正确！锚定效应指投资者过度依赖第一个获得的信息（如分析师目标价、历史高点）作为参考基准。',
+  '✅ 正确！Buffett的成功确实挑战了半强式有效，但学术界认为可能是技能+运气+规模效应的综合结果。',
+  '✅ 正确！事件研究通过观察公告（如盈利、并购）后股价的调整速度来检验半强式有效。',
+  '✅ 正确！随机游走理论是弱式有效的核心证据——如果价格变化是随机的，技术分析就无效。',
+  '✅ 正确！羊群效应导致投资者集体追涨杀跌，形成泡沫和崩溃，是行为金融学的重要研究对象。',
+  '✅ 正确！半强式有效要求价格对公开信息立即、完全地调整，不存在缓慢消化的过程。',
+  '✅ 正确！利用未公开的内幕信息交易是违法行为，违反了市场公平原则和证券法规。'
+];
+const wrongMsg = '❌ 答错了。请仔细回顾课件中关于有效市场假说三种形式的区别。';
+
+function answer(el) {
+  const opts = el.parentElement;
+  if (opts.classList.contains('done')) return;
+  opts.classList.add('done');
+  const allOpts = opts.querySelectorAll('.option');
+  allOpts.forEach(o => o.classList.add('disabled'));
+  const correctIdx = parseInt(opts.dataset.correct);
+  const clickedIdx = Array.from(allOpts).indexOf(el);
+  const card = opts.closest('.question-card');
+  const qNum = parseInt(card.querySelector('.q-num').textContent.match(/\d+/)[0]);
+  const fb = document.getElementById('fb' + qNum);
+  answered++;
+  if (clickedIdx === correctIdx) {
+    el.classList.add('correct');
+    correct++;
+    fb.className = 'feedback show correct-fb';
+    fb.textContent = feedbacks[qNum - 1];
+  } else {
+    el.classList.add('wrong');
+    allOpts[correctIdx].classList.add('correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.textContent = wrongMsg;
+  }
+  document.getElementById('score-num').textContent = correct + ' / ' + answered;
+  document.getElementById('prog-text').textContent = answered + ' / ' + total;
+  document.getElementById('prog-bar').style.width = (answered / total * 100) + '%';
+}
+</script>
+</body>
+</html>

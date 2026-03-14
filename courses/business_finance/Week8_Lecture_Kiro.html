@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Lecture – Capital Structure</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,var(--primary) 0%,#2d5f8a 100%); color:#fff; padding:48px 24px 40px; text-align:center; }
+  .hero .eyebrow { font-size:.85rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
+  .hero h1 { font-size:2rem; font-weight:800; }
+
+  .container { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+
+  .section { background:#fff; border-radius:12px; padding:32px; margin-bottom:28px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+  .section h2 { color:var(--primary); font-size:1.2rem; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #eef4ff; }
+  .section h3 { color:var(--primary); font-size:1rem; margin:20px 0 10px; }
+  .section p { color:#444; line-height:1.75; margin-bottom:12px; font-size:.95rem; }
+
+  .concept-box { background:#eef4ff; border-left:4px solid var(--primary); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .concept-box .formula { font-size:1.3rem; font-weight:700; color:var(--primary); text-align:center; padding:12px 0; }
+  .concept-box p { margin-bottom:6px; font-size:.92rem; }
+
+  .case { background:#fffbf0; border-left:4px solid var(--accent); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .case h4 { color:#b07010; font-size:.95rem; margin-bottom:10px; }
+  .case p, .case li { color:#555; font-size:.92rem; line-height:1.7; }
+  .case ul { padding-left:20px; }
+
+  .pitfall { background:#fff5f5; border-left:4px solid #e53e3e; border-radius:8px; padding:18px 22px; margin:12px 0; }
+  .pitfall h4 { color:#c53030; font-size:.92rem; margin-bottom:6px; }
+  .pitfall p { color:#666; font-size:.88rem; line-height:1.6; }
+
+  .mm-compare { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:16px 0; }
+  @media(max-width:600px){ .mm-compare { grid-template-columns:1fr; } }
+  .mm-card { border-radius:10px; padding:20px; text-align:center; }
+  .mm-card.notax { background:#eef4ff; border:2px solid var(--primary); }
+  .mm-card.withtax { background:#fff8e1; border:2px solid var(--accent); }
+  .mm-card h4 { font-size:.9rem; margin-bottom:10px; }
+  .mm-card.notax h4 { color:var(--primary); }
+  .mm-card.withtax h4 { color:#b07010; }
+  .mm-card .formula { font-size:1.2rem; font-weight:800; margin:8px 0; }
+  .mm-card.notax .formula { color:var(--primary); }
+  .mm-card.withtax .formula { color:var(--accent); }
+  .mm-card p { font-size:.82rem; color:#666; }
+
+  .timeline { position:relative; padding-left:28px; }
+  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:#e2e8f0; }
+  .tl-item { position:relative; margin-bottom:20px; }
+  .tl-item::before { content:''; position:absolute; left:-24px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--accent); border:2px solid #fff; box-shadow:0 0 0 2px var(--accent); }
+  .tl-item h4 { color:var(--primary); font-size:.92rem; margin-bottom:4px; }
+  .tl-item p { color:#555; font-size:.88rem; line-height:1.6; }
+
+  .assumptions { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:12px; margin:16px 0; }
+  .assumption-tag { background:#eef4ff; border-radius:8px; padding:10px 14px; text-align:center; font-size:.85rem; color:var(--primary); font-weight:600; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 8</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 8 · Chapter 11 · Lecture</div>
+  <h1>Capital Structure</h1>
+</div>
+
+<div class="container">
+
+  <!-- Section 1: MM No Tax -->
+  <div class="section">
+    <h2>Section 1 · MM 无税定理（Modigliani-Miller, No Tax）</h2>
+    <p>1958年，Modigliani 和 Miller 提出：在<strong>完美资本市场</strong>假设下，企业价值与资本结构无关。</p>
+
+    <div class="concept-box">
+      <div class="formula">V<sub>L</sub> = V<sub>U</sub></div>
+      <p>• <strong>V<sub>L</sub></strong>：有杠杆企业（使用债务）的价值</p>
+      <p>• <strong>V<sub>U</sub></strong>：无杠杆企业（纯股权）的价值</p>
+      <p>• 结论：债务融资不会增加也不会减少企业价值</p>
+    </div>
+
+    <h3>完美市场假设条件</h3>
+    <div class="assumptions">
+      <div class="assumption-tag">无企业所得税</div>
+      <div class="assumption-tag">无交易成本</div>
+      <div class="assumption-tag">无破产成本</div>
+      <div class="assumption-tag">完全信息对称</div>
+      <div class="assumption-tag">个人可自由借贷</div>
+      <div class="assumption-tag">无代理成本</div>
+    </div>
+
+    <p>💡 <strong>直觉理解：</strong>就像把一块蛋糕切成不同大小的块，切法不同，但蛋糕总量不变。资本结构只是改变了现金流的分配方式，不改变总价值。</p>
+  </div>
+
+  <!-- Section 2: MM With Tax -->
+  <div class="section">
+    <h2>Section 2 · MM 有税定理（With Corporate Tax）</h2>
+    <p>1963年，MM 修正了模型，加入企业所得税。由于利息支出可以抵税，债务融资产生<strong>税盾（Tax Shield）</strong>，增加企业价值。</p>
+
+    <div class="concept-box">
+      <div class="formula">V<sub>L</sub> = V<sub>U</sub> + t × D</div>
+      <p>• <strong>t × D</strong>：债务税盾的现值（假设债务永续）</p>
+      <p>• <strong>t</strong>：企业所得税率</p>
+      <p>• <strong>D</strong>：债务的市场价值</p>
+      <p>• 结论：债务越多，税盾越大，企业价值越高（理论上）</p>
+    </div>
+
+    <div class="case">
+      <h4>📊 数值示例</h4>
+      <p>V<sub>U</sub> = £500m，税率 t = 30%，债务 D = £200m</p>
+      <p>税盾价值 = t × D = 0.30 × £200m = <strong>£60m</strong></p>
+      <p>V<sub>L</sub> = £500m + £60m = <strong>£560m</strong></p>
+      <p style="margin-top:8px;color:#888;font-size:.85rem;">债务融资使企业价值增加了 £60m，这部分来自政府的税收补贴。</p>
+    </div>
+  </div>
+
+  <!-- Section 3: Traditional View -->
+  <div class="section">
+    <h2>Section 3 · 传统观点（Traditional View）</h2>
+    <p>MM 有税定理预测"债务越多越好"，但现实中企业不会无限加杠杆。传统观点认为存在<strong>最优资本结构</strong>，在税盾收益和财务困境成本之间取得平衡。</p>
+
+    <div class="mm-compare">
+      <div class="mm-card notax">
+        <h4>MM 无税</h4>
+        <div class="formula">V<sub>L</sub> = V<sub>U</sub></div>
+        <p>资本结构无关，WACC 不变</p>
+      </div>
+      <div class="mm-card withtax">
+        <h4>MM 有税</h4>
+        <div class="formula">V<sub>L</sub> = V<sub>U</sub> + tD</div>
+        <p>债务越多越好，WACC 随杠杆下降</p>
+      </div>
+    </div>
+
+    <div class="concept-box">
+      <p><strong>传统观点：</strong>最优资本结构存在于税盾收益 = 财务困境成本边际增量的点</p>
+      <p style="margin-top:8px;">企业价值 = V<sub>U</sub> + PV(税盾) − PV(财务困境成本)</p>
+      <p style="margin-top:8px;color:#666;font-size:.88rem;">在最优点，WACC 最低，企业价值最大。超过最优点后，财务困境成本上升速度超过税盾收益。</p>
+    </div>
+
+    <h3>财务困境成本的两类</h3>
+    <ul style="padding-left:20px;color:#444;font-size:.92rem;line-height:1.9;">
+      <li><strong>直接成本：</strong>法律费用、重组费用、管理人员费用（约占企业价值 3-5%）</li>
+      <li><strong>间接成本：</strong>失去客户信任、供应商收紧信用、优秀员工离职、管理层精力分散（往往更大）</li>
+    </ul>
+  </div>
+
+  <!-- Section 4: Pitfalls -->
+  <div class="section">
+    <h2>Section 4 · ⚠️ 常见陷阱</h2>
+
+    <div class="pitfall">
+      <h4>❌ 陷阱 1：混淆 MM 无税和有税的结论</h4>
+      <p>MM 无税：V<sub>L</sub> = V<sub>U</sub>（资本结构无关）<br>
+      MM 有税：V<sub>L</sub> = V<sub>U</sub> + tD（债务增加价值）<br>
+      两个结论<strong>完全相反</strong>！考试中最常见的混淆错误。记忆技巧：有税 → 有税盾 → 有额外价值。</p>
+    </div>
+
+    <div class="pitfall">
+      <h4>❌ 陷阱 2：忽视 MM 假设条件的严格性</h4>
+      <p>MM 理论建立在极其严格的完美市场假设上（无税、无交易成本、无破产成本等）。现实中这些条件均不成立，因此 MM 理论是理论基准，而非实际决策指南。传统观点更接近现实。</p>
+    </div>
+  </div>
+
+  <!-- Section 5: Tesla Case -->
+  <div class="section">
+    <h2>Section 5 · 🚗 真实案例：Tesla 资本结构演变</h2>
+    <p>Tesla 的融资历程完美诠释了资本结构理论在实践中的应用：</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <h4>2013年前 · 高债务期</h4>
+        <p>债务比率超过 60%。早期扩张需要大量资金，依赖债务融资。但高杠杆带来财务压力，市场对其生存能力存疑。</p>
+      </div>
+      <div class="tl-item">
+        <h4>2017-2019年 · 转型期</h4>
+        <p>Model 3 量产危机，现金流紧张。开始通过增发股票补充流动性，逐步降低债务依赖。</p>
+      </div>
+      <div class="tl-item">
+        <h4>2020年 · 大规模股权融资</h4>
+        <p>增发股票筹资约 $50亿。股价高涨使股权融资成本相对较低，同时大幅降低财务困境风险。</p>
+      </div>
+      <div class="tl-item">
+        <h4>2021年至今 · 低债务期</h4>
+        <p>债务比率大幅下降，依赖股权和强劲的内部现金流。高成长期需要融资灵活性，避免财务困境束缚战略决策。</p>
+      </div>
+    </div>
+
+    <div class="case">
+      <h4>💡 理论解读</h4>
+      <p>Tesla 的选择符合传统观点：高成长、高不确定性的公司，财务困境成本极高（失去客户信任、供应链断裂），因此最优资本结构偏向低债务。这与 MM 有税定理的"债务越多越好"形成对比——现实中财务困境成本不可忽视。</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

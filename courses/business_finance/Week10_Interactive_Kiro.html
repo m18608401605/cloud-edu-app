@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 Interactive – Market Efficiency Labs</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#0f172a;--panel:#1e293b;--text:#e2e8f0}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  nav{position:sticky;top:0;z-index:100;background:#0f172a;border-bottom:1px solid #1e293b;display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.1);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.1);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%);color:#fff;padding:48px 24px 36px;text-align:center;border-bottom:1px solid #1e293b}
+  .hero .eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:10px}
+  .hero p{font-size:.95rem;color:#94a3b8;max-width:520px;margin:0 auto}
+  .container{max-width:900px;margin:0 auto;padding:40px 24px}
+  .lab{background:var(--panel);border-radius:16px;padding:32px;margin-bottom:32px;border:1px solid #334155}
+  .lab-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .lab-badge{background:var(--accent);color:#fff;font-weight:800;font-size:.85rem;padding:6px 14px;border-radius:20px}
+  .lab-header h2{font-size:1.2rem;color:#f1f5f9}
+  .lab-header .sub{font-size:.8rem;color:#64748b;margin-top:2px}
+  /* Lab 1 EMH Cards */
+  .emh-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  .emh-btn{border-radius:12px;padding:20px;cursor:pointer;border:2px solid transparent;transition:all .25s;text-align:center}
+  .emh-btn:hover{transform:translateY(-2px)}
+  .emh-weak-btn{background:#1c1a0a;border-color:#f59e0b}
+  .emh-semi-btn{background:#0a1020;border-color:#3b82f6}
+  .emh-strong-btn{background:#1a0a14;border-color:#ec4899}
+  .emh-btn.active{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
+  .emh-weak-btn.active{background:#2d2200;border-color:#fbbf24}
+  .emh-semi-btn.active{background:#0f1e3d;border-color:#60a5fa}
+  .emh-strong-btn.active{background:#2d0a1a;border-color:#f472b6}
+  .emh-btn .icon{font-size:1.8rem;margin-bottom:8px}
+  .emh-btn h4{font-size:.9rem;font-weight:700;margin-bottom:4px}
+  .emh-weak-btn h4{color:#fbbf24}
+  .emh-semi-btn h4{color:#60a5fa}
+  .emh-strong-btn h4{color:#f472b6}
+  .emh-btn p{font-size:.75rem;color:#94a3b8}
+  .emh-detail{background:#0f172a;border-radius:10px;padding:20px 24px;border:1px solid #334155;display:none}
+  .emh-detail.show{display:block}
+  .emh-detail h4{font-size:.95rem;font-weight:700;margin-bottom:12px}
+  .emh-detail .row{display:flex;gap:12px;margin-bottom:8px;font-size:.85rem}
+  .emh-detail .row .tag{padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:600;white-space:nowrap}
+  .tag-valid{background:#166534;color:#bbf7d0}
+  .tag-invalid{background:#991b1b;color:#fecaca}
+  .emh-detail .evidence{background:#1e293b;border-radius:8px;padding:12px;margin-top:12px;font-size:.8rem;color:#94a3b8}
+  /* Lab 2 */
+  .slider-group{margin-bottom:20px}
+  .slider-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .slider-label span{font-size:.875rem;color:#94a3b8}
+  .slider-label .val{font-size:1rem;font-weight:700;color:var(--accent)}
+  input[type=range]{width:100%;accent-color:var(--accent);height:6px;cursor:pointer}
+  .result-panel{background:#0f172a;border-radius:10px;padding:20px 24px;margin-top:16px;border:1px solid #334155}
+  .result-panel h4{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:14px}
+  .result-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #1e293b;font-size:.9rem}
+  .result-row:last-child{border-bottom:none}
+  .result-row .label{color:#94a3b8}
+  .result-row .value{font-weight:700;color:#f1f5f9}
+  .result-row .value.highlight{color:var(--accent);font-size:1.05rem}
+  .result-row .value.green{color:#4ade80}
+  .insight{background:#1e3a5f;border-left:4px solid var(--accent);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:16px;font-size:.875rem;color:#cbd5e1}
+  .insight strong{color:var(--accent)}
+  /* Lab 3 Bias Checker */
+  .scenario{background:#0f172a;border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #334155}
+  .scenario h4{font-size:.9rem;font-weight:700;color:#f1f5f9;margin-bottom:12px}
+  .scenario p{font-size:.875rem;color:#94a3b8;margin-bottom:14px}
+  .choice-btns{display:flex;flex-direction:column;gap:8px}
+  .choice-btn{background:#1e293b;border:1px solid #334155;color:#cbd5e1;padding:10px 16px;border-radius:8px;cursor:pointer;font-size:.875rem;text-align:left;transition:all .2s}
+  .choice-btn:hover{border-color:var(--accent);color:#fff}
+  .choice-btn.selected-bias{border-color:#ef4444;background:#2d1515;color:#fca5a5}
+  .choice-btn.selected-rational{border-color:#22c55e;background:#0d2d1a;color:#86efac}
+  .bias-result{margin-top:12px;padding:12px 16px;border-radius:8px;font-size:.85rem;display:none}
+  .bias-result.show{display:block}
+  .bias-result.bias-type{background:#2d1515;border-left:4px solid #ef4444;color:#fca5a5}
+  .bias-result.rational-type{background:#0d2d1a;border-left:4px solid #22c55e;color:#86efac}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+  @media(max-width:600px){.emh-cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 10</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 10 · Interactive Labs</div>
+  <h1>🧪 Market Efficiency Labs</h1>
+  <p>探索三种 EMH 形式、超额收益模拟，以及识别你自己的行为偏差</p>
+</div>
+
+<div class="container">
+
+  <!-- Lab 1 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 1</span>
+      <div>
+        <h2>Efficiency Forms Explorer</h2>
+        <div class="sub">点击卡片，探索三种有效市场形式的含义</div>
+      </div>
+    </div>
+
+    <div class="emh-cards">
+      <div class="emh-btn emh-weak-btn" onclick="showEMH('weak')">
+        <div class="icon">🟡</div>
+        <h4>Weak Form</h4>
+        <p>历史价格信息</p>
+      </div>
+      <div class="emh-btn emh-semi-btn" onclick="showEMH('semi')">
+        <div class="icon">🔵</div>
+        <h4>Semi-Strong</h4>
+        <p>所有公开信息</p>
+      </div>
+      <div class="emh-btn emh-strong-btn" onclick="showEMH('strong')">
+        <div class="icon">🔴</div>
+        <h4>Strong Form</h4>
+        <p>所有信息含内幕</p>
+      </div>
+    </div>
+
+    <div class="emh-detail" id="detail-weak">
+      <h4 style="color:#fbbf24">🟡 弱式有效市场（Weak Form EMH）</h4>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>技术分析（K线图、均线、RSI等历史价格策略）</span></div>
+      <div class="row"><span class="tag tag-valid">✅ 可能有效</span><span>基本面分析（财报、行业分析）</span></div>
+      <div class="row"><span class="tag tag-valid">✅ 可能有效</span><span>内幕信息交易</span></div>
+      <div class="evidence">📊 <strong>现实证据：</strong>随机游走检验、序列相关检验。大多数研究支持弱式有效，但存在动量效应等异常。</div>
+    </div>
+
+    <div class="emh-detail" id="detail-semi">
+      <h4 style="color:#60a5fa">🔵 半强式有效市场（Semi-Strong Form EMH）</h4>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>技术分析</span></div>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>基本面分析（公开信息已被定价）</span></div>
+      <div class="row"><span class="tag tag-valid">✅ 可能有效</span><span>内幕信息交易</span></div>
+      <div class="evidence">📊 <strong>现实证据：</strong>事件研究显示，公告后股价通常立即调整。但存在盈利公告后漂移（PEAD）等异常，挑战半强式有效。</div>
+    </div>
+
+    <div class="emh-detail" id="detail-strong">
+      <h4 style="color:#f472b6">🔴 强式有效市场（Strong Form EMH）</h4>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>技术分析</span></div>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>基本面分析</span></div>
+      <div class="row"><span class="tag tag-invalid">❌ 无效</span><span>内幕信息交易（理论上）</span></div>
+      <div class="evidence">📊 <strong>现实证据：</strong>强式有效在现实中<strong>不成立</strong>。内幕交易者确实能获得超额收益，这也是内幕交易被法律禁止的原因。</div>
+    </div>
+  </div>
+
+  <!-- Lab 2 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 2</span>
+      <div>
+        <h2>Abnormal Returns Simulator</h2>
+        <div class="sub">如果持续获得超额收益，10年后财富差异有多大？</div>
+      </div>
+    </div>
+
+    <div class="slider-group">
+      <div class="slider-label">
+        <span>超额收益率 α（Alpha）</span>
+        <span class="val" id="l2-alpha-val">+2.0%</span>
+      </div>
+      <input type="range" min="-5" max="10" step="0.5" value="2" id="l2-alpha" oninput="updateLab2()">
+    </div>
+
+    <div class="result-panel">
+      <h4>📊 10年财富模拟（初始投资 £10,000，市场回报 8%）</h4>
+      <div class="result-row"><span class="label">市场回报（α=0，有效市场）</span><span class="value green" id="l2-market">£21,589</span></div>
+      <div class="result-row"><span class="label">你的策略（市场 + α）</span><span class="value highlight" id="l2-strategy">£23,674</span></div>
+      <div class="result-row"><span class="label">10年财富差异</span><span class="value highlight" id="l2-diff">+£2,085</span></div>
+      <div class="result-row"><span class="label">年化总回报率</span><span class="value" id="l2-total-return">10.0%</span></div>
+    </div>
+    <div class="insight" id="l2-insight">
+      <strong>Buffett 级别：</strong>α=2% 对应 Buffett 的超额收益水平。10年差异看似不大，但50年复利效应惊人。在有效市场中，持续的正 α 理论上不应存在。
+    </div>
+  </div>
+
+  <!-- Lab 3 -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 3</span>
+      <div>
+        <h2>Behavioural Bias Checker</h2>
+        <div class="sub">你会做出理性决策，还是陷入行为偏差？</div>
+      </div>
+    </div>
+
+    <div class="scenario">
+      <h4>场景 1：股票从 £10 涨到 £15</h4>
+      <p>你持有的股票从 £10 涨到了 £15（+50%）。分析师认为公司基本面没有变化，合理价值仍为 £12。你会怎么做？</p>
+      <div class="choice-btns">
+        <div class="choice-btn" onclick="chooseScenario(1,'A',this)">A) 继续持有，相信它还会涨——我的判断是对的</div>
+        <div class="choice-btn" onclick="chooseScenario(1,'B',this)">B) 卖出部分，因为股价已超过合理价值 £12</div>
+        <div class="choice-btn" onclick="chooseScenario(1,'C',this)">C) 全部卖出，锁定利润</div>
+      </div>
+      <div class="bias-result" id="result-1"></div>
+    </div>
+
+    <div class="scenario">
+      <h4>场景 2：分析师目标价 £20，当前股价 £18</h4>
+      <p>你看到一份分析师报告，目标价 £20，当前股价 £18。但最新财报显示公司盈利下滑 15%。你会怎么做？</p>
+      <div class="choice-btns">
+        <div class="choice-btn" onclick="chooseScenario(2,'A',this)">A) 买入，因为距离目标价 £20 还有上涨空间</div>
+        <div class="choice-btn" onclick="chooseScenario(2,'B',this)">B) 重新评估，盈利下滑可能意味着目标价需要下调</div>
+        <div class="choice-btn" onclick="chooseScenario(2,'C',this)">C) 等待更多信息再决定</div>
+      </div>
+      <div class="bias-result" id="result-2"></div>
+    </div>
+
+    <div class="scenario">
+      <h4>场景 3：所有朋友都在买某只股票</h4>
+      <p>你的朋友圈里大家都在讨论某只科技股，说它"一定会涨"。你没有做过任何研究，但感觉不买会错过机会。你会怎么做？</p>
+      <div class="choice-btns">
+        <div class="choice-btn" onclick="chooseScenario(3,'A',this)">A) 立刻买入，不能错过这个机会</div>
+        <div class="choice-btn" onclick="chooseScenario(3,'B',this)">B) 先做独立研究，再决定是否买入</div>
+        <div class="choice-btn" onclick="chooseScenario(3,'C',this)">C) 小仓位试探性买入</div>
+      </div>
+      <div class="bias-result" id="result-3"></div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Lecture_Kiro.html" class="btn">← Lecture</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Quiz_Kiro.html" class="btn accent">✏️ Quiz →</a>
+  </div>
+</div>
+
+<script>
+let activeEMH = null;
+function showEMH(type){
+  ['weak','semi','strong'].forEach(t=>{
+    document.getElementById('detail-'+t).classList.remove('show');
+    document.querySelectorAll('.emh-btn').forEach((b,i)=>{
+      if(['weak','semi','strong'][i]===t) b.classList.remove('active');
+    });
+  });
+  const cards = document.querySelectorAll('.emh-btn');
+  const map = {weak:0,semi:1,strong:2};
+  if(activeEMH===type){activeEMH=null;return;}
+  activeEMH=type;
+  cards[map[type]].classList.add('active');
+  const d = document.getElementById('detail-'+type);
+  d.classList.add('show');
+}
+
+function updateLab2(){
+  const alpha = +document.getElementById('l2-alpha').value;
+  document.getElementById('l2-alpha-val').textContent = (alpha>=0?'+':'')+alpha.toFixed(1)+'%';
+  const market = 10000 * Math.pow(1.08, 10);
+  const strategy = 10000 * Math.pow(1 + 0.08 + alpha/100, 10);
+  const diff = strategy - market;
+  document.getElementById('l2-market').textContent = '£'+market.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('l2-strategy').textContent = '£'+strategy.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('l2-diff').textContent = (diff>=0?'+':'')+' £'+Math.abs(diff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+  document.getElementById('l2-total-return').textContent = (8+alpha).toFixed(1)+'%';
+  const insight = document.getElementById('l2-insight');
+  if(alpha===0){
+    insight.innerHTML = '<strong>有效市场基准：</strong>α=0 代表有效市场，你只能获得市场平均回报。没有超额收益，也没有超额损失。';
+  } else if(alpha>0 && alpha<=2){
+    insight.innerHTML = '<strong>Buffett 级别：</strong>α='+alpha.toFixed(1)+'% 对应顶级价值投资者的超额收益水平。10年差异看似不大，但50年复利效应惊人。在有效市场中，持续的正 α 理论上不应存在。';
+  } else if(alpha>2){
+    insight.innerHTML = '<strong>⚠️ 高度怀疑：</strong>α='+alpha.toFixed(1)+'% 的持续超额收益极为罕见。如果真实存在，要么市场存在严重无效，要么存在数据挖掘偏差或未计入的风险。';
+  } else {
+    insight.innerHTML = '<strong>负超额收益：</strong>α='+alpha.toFixed(1)+'% 意味着你的策略持续跑输市场。在有效市场中，这通常意味着策略存在缺陷或承担了不必要的成本。';
+  }
+}
+
+const scenarios = {
+  1: {
+    A: {type:'bias', name:'过度自信（Overconfidence）', msg:'你高估了自己的判断能力。股价已超过合理价值 £12，继续持有是基于情绪而非理性分析。过度自信的投资者往往持有高估股票过久。'},
+    B: {type:'rational', name:'理性决策 ✅', msg:'正确！你基于合理价值（£12）而非情绪做决策。股价 £15 已高于合理价值，卖出部分是理性的风险管理。'},
+    C: {type:'rational', name:'保守理性 ✅', msg:'全部卖出也是理性选择，锁定了超额收益。但如果公司基本面良好，可能过于保守。'}
+  },
+  2: {
+    A: {type:'bias', name:'锚定效应（Anchoring）', msg:'你被分析师的目标价 £20 锚定了，忽视了最新的负面信息（盈利下滑15%）。锚定效应让你过度依赖初始参考点，而不是充分更新判断。'},
+    B: {type:'rational', name:'理性决策 ✅', msg:'正确！你能够根据新信息（盈利下滑）更新判断，而不是被旧的目标价锚定。这是理性投资者应有的行为。'},
+    C: {type:'rational', name:'谨慎理性 ✅', msg:'等待更多信息是合理的，避免了在信息不完整时仓促决策。'}
+  },
+  3: {
+    A: {type:'bias', name:'羊群效应（Herding）', msg:'你在没有独立研究的情况下跟随大众，这是典型的羊群效应。历史上许多泡沫（如2000年科技泡沫）都是羊群效应的结果。'},
+    B: {type:'rational', name:'理性决策 ✅', msg:'正确！独立研究是理性投资的基础。不因为"大家都在买"就盲目跟风，这正是避免羊群效应的关键。'},
+    C: {type:'bias', name:'轻微羊群效应', msg:'小仓位试探虽然风险较低，但仍然是在没有充分研究的情况下跟随大众。建议先做独立研究再决定是否参与。'}
+  }
+};
+
+function chooseScenario(num, choice, btn){
+  const container = btn.parentElement;
+  if(container.dataset.done) return;
+  container.dataset.done='1';
+  const result = scenarios[num][choice];
+  const btns = container.querySelectorAll('.choice-btn');
+  btns.forEach(b=>b.style.cursor='default');
+  btn.classList.add(result.type==='rational'?'selected-rational':'selected-bias');
+  const resultEl = document.getElementById('result-'+num);
+  resultEl.className = 'bias-result show ' + (result.type==='rational'?'rational-type':'bias-type');
+  resultEl.innerHTML = '<strong>'+result.name+'</strong><br>'+result.msg;
+}
+
+updateLab2();
+</script>
+</body>
+</html>

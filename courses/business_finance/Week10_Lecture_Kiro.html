@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 10 Lecture – Market Efficiency & Ethics</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f8fafc;--text:#1e293b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{position:sticky;top:0;z-index:100;background:var(--primary);display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.15);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#1e4d8c 100%);color:#fff;padding:56px 24px 40px;text-align:center}
+  .hero .eyebrow{font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;opacity:.75;margin-bottom:10px}
+  .hero h1{font-size:2.2rem;font-weight:800;margin-bottom:12px}
+  .hero p{font-size:1rem;opacity:.85;max-width:560px;margin:0 auto}
+  .container{max-width:900px;margin:0 auto;padding:40px 24px}
+  .section{background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.07)}
+  .section-header{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+  .section-num{width:44px;height:44px;color:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0}
+  .num-weak{background:#f59e0b}
+  .num-semi{background:#3b82f6}
+  .num-strong{background:#ec4899}
+  .num-behav{background:#8b5cf6}
+  .num-trap{background:#ef4444}
+  .num-case{background:#10b981}
+  .section-header h2{font-size:1.3rem;color:var(--primary)}
+  .section-header .subtitle{font-size:.85rem;color:#64748b;margin-top:2px}
+  .concept-box{background:#eef4ff;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid #3b82f6}
+  .concept-box h4{color:#1d4ed8;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .concept-box p,.concept-box ul{font-size:.875rem;color:#374151}
+  .concept-box ul{padding-left:18px;margin-top:6px}
+  .concept-box ul li{margin-bottom:4px}
+  .case{background:#fffbf0;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid var(--accent)}
+  .case h4{color:#92400e;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .case p,.case ul{font-size:.875rem;color:#374151}
+  .case ul{padding-left:18px;margin-top:6px}
+  .case ul li{margin-bottom:4px}
+  .pitfall{background:#fff5f5;border-radius:10px;padding:20px 24px;margin-bottom:16px;border-left:4px solid #ef4444}
+  .pitfall h4{color:#b91c1c;margin-bottom:8px;font-size:.95rem;font-weight:700}
+  .pitfall p,.pitfall ul{font-size:.875rem;color:#374151}
+  .pitfall ul{padding-left:18px;margin-top:6px}
+  .pitfall ul li{margin-bottom:4px}
+  .emh-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.875rem}
+  .emh-table th{background:var(--primary);color:#fff;padding:10px 14px;text-align:left}
+  .emh-table td{padding:10px 14px;border-bottom:1px solid #e2e8f0}
+  .emh-table tr:nth-child(even) td{background:#f8fafc}
+  .emh-table .yes{color:#166534;font-weight:600}
+  .emh-table .no{color:#991b1b;font-weight:600}
+  .bias-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .bias-card{border-radius:10px;padding:16px}
+  .bias-overconf{background:#fef3c7;border-left:4px solid #f59e0b}
+  .bias-anchor{background:#dbeafe;border-left:4px solid #3b82f6}
+  .bias-herd{background:#fce7f3;border-left:4px solid #ec4899}
+  .bias-loss{background:#f3e8ff;border-left:4px solid #8b5cf6}
+  .bias-card h5{font-size:.9rem;font-weight:700;margin-bottom:6px}
+  .bias-card p{font-size:.8rem;color:#374151}
+  .buffett-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px}
+  .buffett-card{background:#f1f5f9;border-radius:8px;padding:14px}
+  .buffett-card h5{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:8px}
+  .buffett-card ul{padding-left:16px;font-size:.8rem;color:#475569}
+  .buffett-card ul li{margin-bottom:4px}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+  @media(max-width:600px){.bias-grid,.buffett-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 10</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 10 · Chapter 9 · Lecture</div>
+  <h1>Market Efficiency & Ethics</h1>
+  <p>从随机游走到行为金融，理解市场定价机制的边界与现实</p>
+</div>
+
+<div class="container">
+
+  <!-- Section 1 Weak Form -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-weak">W</div>
+      <div>
+        <h2>Weak Form EMH</h2>
+        <div class="subtitle">价格反映所有历史价格信息</div>
+      </div>
+    </div>
+    <div class="concept-box">
+      <h4>📐 核心定义</h4>
+      <p>弱式有效市场中，当前股价已完全反映<strong>所有历史价格和交易量信息</strong>。因此，基于历史数据的技术分析无法持续获得超额收益。</p>
+    </div>
+    <div class="concept-box">
+      <h4>📊 随机游走理论（Random Walk）</h4>
+      <p>股价变动是随机的，过去的价格走势无法预测未来。就像抛硬币——上一次的结果不影响下一次。</p>
+      <ul>
+        <li>技术分析（K线图、均线等）在弱式有效市场中<strong>无效</strong></li>
+        <li>基本面分析和内幕信息仍可能有效</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Section 2 Semi-Strong -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-semi">SS</div>
+      <div>
+        <h2>Semi-Strong Form EMH</h2>
+        <div class="subtitle">价格反映所有公开可获得的信息</div>
+      </div>
+    </div>
+    <div class="concept-box">
+      <h4>📐 核心定义</h4>
+      <p>半强式有效市场中，股价反映所有<strong>公开信息</strong>，包括财务报告、新闻、分析师报告、宏观经济数据等。</p>
+    </div>
+    <div class="concept-box">
+      <h4>🔬 检验方法：事件研究（Event Study）</h4>
+      <ul>
+        <li>研究公告（如盈利报告、并购消息）发布后股价的反应速度</li>
+        <li>如果市场是半强式有效的，股价应在公告后<strong>立即调整</strong>到新均衡价格</li>
+        <li>实证证据：大多数情况下，股价确实在公告后迅速反应</li>
+      </ul>
+    </div>
+    <div class="concept-box">
+      <h4>💡 含义</h4>
+      <p>基本面分析（分析财报、行业前景等）在半强式有效市场中<strong>无法持续获得超额收益</strong>，因为公开信息已被定价。</p>
+    </div>
+  </div>
+
+  <!-- Section 3 Strong Form -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-strong">S</div>
+      <div>
+        <h2>Strong Form EMH</h2>
+        <div class="subtitle">价格反映所有信息，包括内幕信息</div>
+      </div>
+    </div>
+    <div class="concept-box">
+      <h4>📐 核心定义</h4>
+      <p>强式有效市场中，股价反映<strong>所有信息</strong>，包括未公开的内幕信息。即使是公司内部人员也无法通过内幕信息获得超额收益。</p>
+    </div>
+    <div class="pitfall">
+      <h4>⚠️ 现实：强式 EMH 不成立</h4>
+      <p>大量实证研究表明，内幕交易者确实能获得超额收益。这正是各国法律<strong>禁止内幕交易</strong>的原因——如果强式有效成立，内幕交易就没有意义了。</p>
+    </div>
+    <table class="emh-table">
+      <tr><th>EMH 形式</th><th>技术分析</th><th>基本面分析</th><th>内幕信息</th></tr>
+      <tr><td>弱式</td><td class="no">❌ 无效</td><td class="yes">✅ 可能有效</td><td class="yes">✅ 可能有效</td></tr>
+      <tr><td>半强式</td><td class="no">❌ 无效</td><td class="no">❌ 无效</td><td class="yes">✅ 可能有效</td></tr>
+      <tr><td>强式</td><td class="no">❌ 无效</td><td class="no">❌ 无效</td><td class="no">❌ 无效</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 4 Behavioural Finance -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-behav">BF</div>
+      <div>
+        <h2>行为金融学挑战</h2>
+        <div class="subtitle">人类非理性行为对有效市场的挑战</div>
+      </div>
+    </div>
+    <p style="font-size:.9rem;color:#475569;margin-bottom:16px">行为金融学认为，投资者并非完全理性，系统性的认知偏差会导致市场定价偏离理论均衡。</p>
+    <div class="bias-grid">
+      <div class="bias-card bias-overconf">
+        <h5>🦁 过度自信（Overconfidence）</h5>
+        <p>投资者高估自己的判断能力和信息质量，导致过度交易和风险低估。</p>
+      </div>
+      <div class="bias-card bias-anchor">
+        <h5>⚓ 锚定效应（Anchoring）</h5>
+        <p>过度依赖初始参考信息（如买入价格），即使新信息出现也难以充分调整判断。</p>
+      </div>
+      <div class="bias-card bias-herd">
+        <h5>🐑 羊群效应（Herding）</h5>
+        <p>跟随大众行为而非独立判断，导致资产价格泡沫和崩溃（如2000年科技泡沫）。</p>
+      </div>
+      <div class="bias-card bias-loss">
+        <h5>😰 损失厌恶（Loss Aversion）</h5>
+        <p>损失带来的痛苦约是同等收益带来的快乐的 2 倍，导致持有亏损股票过久。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5 Pitfalls -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-trap">⚠</div>
+      <div>
+        <h2>常见陷阱</h2>
+        <div class="subtitle">考试高频易错点</div>
+      </div>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 1：三种形式的层级关系</h4>
+      <p>强式 ⊃ 半强式 ⊃ 弱式（包含关系）。如果市场是半强式有效，它<strong>必然也是</strong>弱式有效。但反过来不成立。</p>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 2：弱式有效 ≠ 市场完全随机</h4>
+      <p>弱式有效只是说<strong>历史价格信息</strong>无法预测未来，并不意味着市场完全随机或无规律。基本面因素仍然影响股价。</p>
+    </div>
+    <div class="pitfall">
+      <h4>陷阱 3：事件研究检验的是哪种形式</h4>
+      <p>事件研究（公告后股价反应速度）检验的是<strong>半强式有效</strong>，不是弱式。弱式有效用随机游走/序列相关检验。</p>
+    </div>
+  </div>
+
+  <!-- Section 6 Buffett Case -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-num num-case">W</div>
+      <div>
+        <h2>📈 真实案例：Warren Buffett</h2>
+        <div class="subtitle">长期跑赢市场——挑战还是幸运？</div>
+      </div>
+    </div>
+    <div class="case">
+      <h4>📊 Buffett 的业绩记录</h4>
+      <ul>
+        <li>Berkshire Hathaway 年化回报率：约 <strong>~20%</strong>（1965-2023）</li>
+        <li>同期标普500年化回报率：约 <strong>~10%</strong></li>
+        <li>持续跑赢市场超过 <strong>50年</strong></li>
+      </ul>
+    </div>
+    <div class="buffett-grid">
+      <div class="buffett-card">
+        <h5>🔴 挑战 EMH 的观点</h5>
+        <ul>
+          <li>持续超额收益难以用运气解释</li>
+          <li>基于公开信息的价值投资策略有效</li>
+          <li>挑战半强式有效市场假说</li>
+        </ul>
+      </div>
+      <div class="buffett-card">
+        <h5>🟢 支持 EMH 的反驳</h5>
+        <ul>
+          <li>幸存者偏差：只看到成功的投资者</li>
+          <li>Buffett 的规模效应和信息优势</li>
+          <li>市场大部分时间有效，但存在异常</li>
+          <li>技能 + 运气 + 规模效应的综合结果</li>
+        </ul>
+      </div>
+    </div>
+    <div class="concept-box" style="margin-top:16px">
+      <h4>💡 学术界共识</h4>
+      <p>市场<strong>大部分时间</strong>是有效的，但存在系统性异常（如价值溢价、动量效应）。完全有效和完全无效都是极端情况，现实介于两者之间。</p>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html" class="btn">← Guide</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_Interactive_Kiro.html" class="btn accent">🧪 Interactive →</a>
+  </div>
+</div>
+</body>
+</html>

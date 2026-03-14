@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 Quiz – Payout Policy</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--green:#064e3b;--bg:#f0fdf4;--text:#1e293b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  nav{position:sticky;top:0;z-index:100;background:var(--primary);display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.15);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,var(--green) 0%,#065f46 100%);color:#fff;padding:56px 24px 40px;text-align:center}
+  .hero .eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#6ee7b7;margin-bottom:10px}
+  .hero h1{font-size:2.2rem;font-weight:800;margin-bottom:10px}
+  .hero p{font-size:.95rem;color:#a7f3d0;max-width:520px;margin:0 auto 20px}
+  .progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;max-width:400px;margin:0 auto}
+  .progress-fill{background:#6ee7b7;height:8px;border-radius:20px;transition:width .4s;width:0%}
+  .progress-text{font-size:.8rem;color:#a7f3d0;margin-top:6px}
+  .container{max-width:800px;margin:0 auto;padding:40px 24px}
+  .section-title{font-size:1.3rem;font-weight:700;color:var(--green);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid #bbf7d0}
+  .question-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .q-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:8px}
+  .q-text{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:16px}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .option{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;border:2px solid #e2e8f0;cursor:pointer;transition:all .2s;font-size:.9rem;background:#fff}
+  .option:hover{border-color:#86efac;background:#f0fdf4}
+  .option.correct{border-color:#22c55e;background:#f0fdf4;color:#166534}
+  .option.wrong{border-color:#ef4444;background:#fef2f2;color:#991b1b}
+  .option .opt-key{font-weight:700;min-width:20px;color:#64748b}
+  .option.correct .opt-key{color:#166534}
+  .option.wrong .opt-key{color:#991b1b}
+  .feedback{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.875rem;display:none}
+  .feedback.show{display:block}
+  .feedback.correct{background:#dcfce7;color:#166534;border-left:4px solid #22c55e}
+  .feedback.wrong{background:#fef2f2;color:#991b1b;border-left:4px solid #ef4444}
+  .calc-section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .calc-section h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:12px}
+  .calc-section p{font-size:.9rem;color:#374151;margin-bottom:8px}
+  .calc-section ol{padding-left:20px;font-size:.9rem;color:#374151}
+  .calc-section ol li{margin-bottom:6px}
+  details{margin-top:16px}
+  summary{cursor:pointer;background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;font-size:.875rem;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▶';font-size:.7rem;transition:transform .2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  .answer-content{background:#f0fdf4;border-radius:0 0 8px 8px;padding:16px;font-size:.875rem;color:#374151;border:1px solid #bbf7d0;border-top:none}
+  .answer-content p{margin-bottom:6px}
+  .answer-content strong{color:var(--green)}
+  .score-panel{background:var(--green);color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:32px;display:none}
+  .score-panel h3{font-size:1.5rem;margin-bottom:8px}
+  .score-panel p{color:#a7f3d0;font-size:.9rem}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 9</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 9 · Chapter 12 · Quiz</div>
+  <h1>✏️ Payout Policy Quiz</h1>
+  <p>10道选择题 + 计算题，测试你对股利政策的掌握程度</p>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-text" id="progress-text">0 / 10 已完成</div>
+</div>
+
+<div class="container">
+  <div class="score-panel" id="score-panel">
+    <h3 id="score-text">🎉 完成！</h3>
+    <p id="score-sub"></p>
+  </div>
+
+  <div class="section-title">Section A — Multiple Choice Questions</div>
+
+  <div id="quiz-container"></div>
+
+  <div class="section-title" style="margin-top:32px">Section B — 计算题</div>
+  <div class="calc-section">
+    <h3>📝 题目</h3>
+    <p>DEF公司当前股价 <strong>£5</strong>，共 <strong>1000万股</strong>，计划分配 <strong>£500万</strong>（可选择股利或回购）。</p>
+    <ol>
+      <li>(a) 若选择现金股利，每股股利是多少？发放后股价是多少？</li>
+      <li>(b) 若选择回购，能回购多少股？回购后每股价值是多少？</li>
+      <li>(c) 两种方式下，持有100股的股东财富有何不同？</li>
+    </ol>
+    <details>
+      <summary>📖 点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) 现金股利方式：</strong></p>
+        <p>每股股利 = £500万 ÷ 1000万股 = <strong>£0.50/股</strong></p>
+        <p>发放后股价 = £5 − £0.50 = <strong>£4.50</strong>（除息效应）</p>
+        <br>
+        <p><strong>(b) 股票回购方式：</strong></p>
+        <p>回购股数 = £500万 ÷ £5 = <strong>100万股</strong></p>
+        <p>剩余股数 = 1000万 − 100万 = <strong>900万股</strong></p>
+        <p>公司剩余价值 = £5000万 − £500万 = £4500万</p>
+        <p>回购后每股价值 = £4500万 ÷ 900万 = <strong>£5.00</strong>（不变）</p>
+        <br>
+        <p><strong>(c) 持有100股的股东财富对比：</strong></p>
+        <p>股利方式：100股 × £4.50 + £50现金 = £450 + £50 = <strong>£500</strong></p>
+        <p>回购方式：100股 × £5.00 = <strong>£500</strong></p>
+        <p>✅ <strong>两种方式财富完全相同</strong>，验证了 MM 股利无关定理。</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html" class="btn">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html" class="btn accent">Week 10 →</a>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {q:"Q1. MM 股利无关定理的核心假设<strong>不包括</strong>：",opts:["无税","无交易成本","存在信息不对称","完美资本市场"],correct:2,exp:"MM 无关定理假设<strong>完美信息</strong>（信息对称），而非信息不对称。信息不对称是现实中的摩擦，会使股利政策产生信号效应。"},
+  {q:"Q2. "自制股利"(homemade dividend)是指：",opts:["公司自行决定股利金额","股东通过卖出部分股票来创造现金流","股利再投资计划","特别股利"],correct:1,exp:"自制股利是指股东<strong>自行卖出部分股票</strong>来获得现金流，无需依赖公司发放股利。这是 MM 无关定理的核心机制。"},
+  {q:"Q3. 股利信号效应表明，公司增加股利通常意味着：",opts:["公司缺乏好的投资机会","管理层对未来盈利有信心","公司股价被高估","公司负债过高"],correct:1,exp:"增加股利是一种<strong>正面信号</strong>，表明管理层对未来盈利有信心，愿意承诺更高的现金支出。注意：也有观点认为增加股利意味着缺乏投资机会，但信号效应理论强调的是管理层信心。"},
+  {q:"Q4. 客户效应(Clientele Effect)是指：",opts:["客户偏好购买高股利公司的产品","不同投资者因税收和偏好而倾向于不同股利政策的公司","机构投资者控制股利政策","股利政策影响客户忠诚度"],correct:1,exp:"客户效应指<strong>不同类型的投资者</strong>（如高税率个人 vs 退休基金）因税收和现金流需求不同，而偏好不同股利政策的公司。"},
+  {q:"Q5. 与现金股利相比，股票回购的优势是：",opts:["信号效应更强","更灵活，税收效率更高","更稳定，投资者更喜欢","会计处理更简单"],correct:1,exp:"股票回购的主要优势：① <strong>灵活性</strong>（无需持续承诺）；② <strong>税收效率</strong>（资本利得税率通常低于股利税率）。股利的优势在于稳定性和信号效应。"},
+  {q:"Q6. Apple 在2013年后主要采用哪种股东回报方式？",opts:["高现金股利","大规模股票回购","股票股利","特别股利"],correct:1,exp:"Apple 自2013年起开始<strong>大规模股票回购</strong>，累计超过 $600B，2023年单年回购 $90B，成为史上最大回购计划。"},
+  {q:"Q7. 股利的"粘性"(stickiness)是指：",opts:["股利金额固定不变","公司不愿意削减股利，因为市场反应强烈","股利必须每年支付","股利与利润完全挂钩"],correct:1,exp:"股利粘性指公司<strong>不愿意削减股利</strong>，因为减少股利会被市场解读为强烈负面信号，导致股价大幅下跌。这使得股利一旦建立就难以降低。"},
+  {q:"Q8. 根据 MM 股利无关定理，公司价值取决于：",opts:["股利政策","投资决策和盈利能力","融资方式","股利支付频率"],correct:1,exp:"MM 理论认为，公司价值由<strong>投资决策和盈利能力</strong>决定，而非股利政策。股利只是改变财富的形式，不创造或销毁价值。"},
+  {q:"Q9. 若公司股价£10，发放£1股利后，根据 MM 理论，股价变为：",opts:["£10","£9","£11","£8"],correct:1,exp:"根据 MM 理论，发放 £1 股利后，股价下降相同金额：£10 − £1 = <strong>£9</strong>（除息效应）。股东总财富不变：£9（股票）+ £1（现金）= £10。"},
+  {q:"Q10. 减少股利通常导致：",opts:["股价上涨（节省现金）","股价大幅下跌（负面信号）","股价不变（MM理论）","取决于行业"],correct:1,exp:"减少股利通常导致<strong>股价大幅下跌</strong>，因为市场将其解读为公司盈利前景恶化的强烈负面信号。这体现了股利信号效应的不对称性。"}
+];
+
+let answered = 0;
+const container = document.getElementById('quiz-container');
+
+questions.forEach((q, i) => {
+  const card = document.createElement('div');
+  card.className = 'question-card';
+  card.innerHTML = `<div class="q-num">Question ${i+1} of ${questions.length}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="options" id="opts-${i}">
+      ${q.opts.map((o,j)=>`<div class="option" onclick="answer(${i},${j})" id="opt-${i}-${j}"><span class="opt-key">${String.fromCharCode(65+j)})</span><span>${o}</span></div>`).join('')}
+    </div>
+    <div class="feedback" id="fb-${i}"></div>`;
+  container.appendChild(card);
+});
+
+function answer(qi, oi){
+  const opts = document.getElementById('opts-'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  answered++;
+  const q = questions[qi];
+  for(let j=0;j<q.opts.length;j++){
+    const el = document.getElementById('opt-'+qi+'-'+j);
+    el.style.cursor='default';
+    if(j===q.correct) el.classList.add('correct');
+    else if(j===oi) el.classList.add('wrong');
+  }
+  const fb = document.getElementById('fb-'+qi);
+  fb.className = 'feedback show ' + (oi===q.correct?'correct':'wrong');
+  fb.innerHTML = (oi===q.correct?'✅ 正确！':'❌ 错误。') + ' ' + q.exp;
+  const pct = (answered/questions.length*100).toFixed(0);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' / '+questions.length+' 已完成';
+  if(answered===questions.length){
+    const panel = document.getElementById('score-panel');
+    panel.style.display='block';
+    document.getElementById('score-text').textContent='🎉 全部完成！';
+    document.getElementById('score-sub').textContent='继续完成 Section B 计算题，巩固你的理解。';
+    panel.scrollIntoView({behavior:'smooth'});
+  }
+}
+</script>
+</body>
+</html>

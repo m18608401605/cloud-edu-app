@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Interactive – Capital Structure Labs</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#0f172a; color:#e2e8f0; }
+
+  nav { position:sticky; top:0; z-index:100; background:#0a1628; display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; border-bottom:1px solid rgba(255,255,255,.08); }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.6); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.1); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,#0a1628 0%,#1a3a5c 100%); padding:48px 24px 36px; text-align:center; border-bottom:1px solid rgba(255,255,255,.08); }
+  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+  .hero h1 { font-size:1.9rem; font-weight:800; color:#fff; }
+  .hero p { color:#94a3b8; margin-top:8px; font-size:.95rem; }
+
+  .container { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
+
+  .lab { background:#1e293b; border-radius:14px; padding:32px; margin-bottom:32px; border:1px solid rgba(255,255,255,.07); }
+  .lab-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
+  .lab-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+  .lab h2 { color:#f1f5f9; font-size:1.15rem; }
+  .lab p { color:#94a3b8; font-size:.9rem; line-height:1.6; margin-bottom:20px; }
+
+  .slider-group { margin-bottom:18px; }
+  .slider-label { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .slider-label span { color:#cbd5e1; font-size:.88rem; }
+  .slider-label .val { color:var(--accent); font-weight:700; font-size:1rem; min-width:80px; text-align:right; }
+  input[type=range] { width:100%; accent-color:var(--accent); height:6px; cursor:pointer; }
+
+  .result-panel { background:#0f172a; border-radius:10px; padding:20px 24px; margin-top:20px; border:1px solid rgba(232,160,32,.3); }
+  .result-panel .result-label { color:#94a3b8; font-size:.85rem; margin-bottom:6px; }
+  .result-panel .result-value { color:var(--accent); font-size:2rem; font-weight:800; }
+  .result-panel .result-sub { color:#64748b; font-size:.82rem; margin-top:4px; }
+
+  .breakdown { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+  @media(max-width:500px){ .breakdown { grid-template-columns:1fr 1fr; } }
+  .breakdown-item { background:#162032; border-radius:8px; padding:14px; text-align:center; }
+  .breakdown-item .bi-label { color:#64748b; font-size:.75rem; margin-bottom:4px; }
+  .breakdown-item .bi-val { color:#e2e8f0; font-size:1rem; font-weight:700; }
+  .breakdown-item.highlight .bi-val { color:var(--accent); }
+
+  canvas { width:100%; border-radius:8px; background:#0f172a; display:block; margin-top:16px; }
+
+  .optimal-indicator { background:#162032; border-radius:8px; padding:14px 18px; margin-top:12px; display:flex; justify-content:space-between; align-items:center; }
+  .optimal-indicator .oi-label { color:#94a3b8; font-size:.85rem; }
+  .optimal-indicator .oi-val { color:#4ade80; font-weight:700; font-size:1rem; }
+  .optimal-indicator .oi-val.negative { color:#f87171; }
+
+  .net-bar { margin-top:16px; }
+  .net-bar-label { color:#94a3b8; font-size:.82rem; margin-bottom:6px; }
+  .net-bar-track { background:#0f172a; border-radius:6px; height:28px; overflow:hidden; position:relative; }
+  .net-bar-fill { height:100%; border-radius:6px; transition:width .3s; display:flex; align-items:center; padding:0 10px; font-size:.8rem; font-weight:600; color:#fff; }
+  .net-bar-fill.positive { background:#16a34a; }
+  .net-bar-fill.negative { background:#dc2626; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 8</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 8 · Interactive Labs</div>
+  <h1>🧪 Capital Structure Explorer</h1>
+  <p>探索 MM 理论与传统观点，找到最优资本结构</p>
+</div>
+
+<div class="container">
+
+  <!-- Lab 1: MM Tax Shield Calculator -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 1</span>
+      <h2>MM Tax Shield Calculator</h2>
+    </div>
+    <p>根据 MM 有税定理 V<sub>L</sub> = V<sub>U</sub> + t×D，调整参数观察税盾如何增加企业价值。</p>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>无杠杆企业价值 V<sub>U</sub> (£m)</span><span class="val" id="vuVal">£500m</span></div>
+      <input type="range" id="vu" min="100" max="1000" value="500" oninput="calcTaxShield()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>债务规模 D (£m)</span><span class="val" id="dVal">£200m</span></div>
+      <input type="range" id="d" min="0" max="500" value="200" oninput="calcTaxShield()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>税率 t</span><span class="val" id="tVal">25%</span></div>
+      <input type="range" id="t" min="0" max="40" value="25" oninput="calcTaxShield()">
+    </div>
+
+    <div class="result-panel">
+      <div class="result-label">V<sub>L</sub> = V<sub>U</sub> + t × D</div>
+      <div class="result-value" id="vlResult">£550m</div>
+      <div class="result-sub" id="vlFormula">= £500m + 25% × £200m</div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-item">
+        <div class="bi-label">无杠杆价值 V<sub>U</sub></div>
+        <div class="bi-val" id="vuDisplay">£500m</div>
+      </div>
+      <div class="breakdown-item highlight">
+        <div class="bi-label">税盾价值 t×D</div>
+        <div class="bi-val" id="taxShieldDisplay">£50m</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">有杠杆价值 V<sub>L</sub></div>
+        <div class="bi-val" id="vlDisplay">£550m</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab 2: WACC vs Leverage Chart -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 2</span>
+      <h2>WACC vs Leverage</h2>
+    </div>
+    <p>比较 MM 有税理论（WACC 随杠杆单调下降）与传统观点（U 形曲线）。拖动滑块选择当前债务比例。</p>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>债务比例 D/(D+E)</span><span class="val" id="leverageVal">30%</span></div>
+      <input type="range" id="leverage" min="0" max="80" value="30" oninput="updateChart()">
+    </div>
+
+    <canvas id="waccChart" height="220"></canvas>
+
+    <div class="breakdown" style="grid-template-columns:1fr 1fr;margin-top:16px;">
+      <div class="breakdown-item">
+        <div class="bi-label">MM有税 WACC（当前）</div>
+        <div class="bi-val" id="mmWacc">8.1%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">传统观点 WACC（当前）</div>
+        <div class="bi-val" id="tradWacc">8.4%</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lab 3: Financial Distress Cost -->
+  <div class="lab">
+    <div class="lab-header">
+      <span class="lab-badge">Lab 3</span>
+      <h2>Financial Distress Cost Optimizer</h2>
+    </div>
+    <p>调整杠杆比例和困境成本系数，找到净收益最大的最优杠杆点。</p>
+
+    <div class="slider-group">
+      <div class="slider-label"><span>杠杆比例 L (%)</span><span class="val" id="lVal">40%</span></div>
+      <input type="range" id="lev" min="0" max="100" value="40" oninput="calcDistress()">
+    </div>
+    <div class="slider-group">
+      <div class="slider-label"><span>困境成本系数 k (%)</span><span class="val" id="kVal">20%</span></div>
+      <input type="range" id="kk" min="0" max="50" value="20" oninput="calcDistress()">
+    </div>
+
+    <div class="result-panel">
+      <div class="result-label">净收益 = 税盾收益 − 财务困境成本</div>
+      <div class="result-value" id="netResult">+4.8%</div>
+      <div class="result-sub" id="netFormula">= 税盾 8.0% − 困境成本 3.2%</div>
+    </div>
+
+    <div class="breakdown">
+      <div class="breakdown-item highlight">
+        <div class="bi-label">税盾收益 = t×L</div>
+        <div class="bi-val" id="taxBenefit">8.0%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">困境成本 = L²×k</div>
+        <div class="bi-val" id="distressCost">3.2%</div>
+      </div>
+      <div class="breakdown-item">
+        <div class="bi-label">最优杠杆点</div>
+        <div class="bi-val" id="optimalLev">50%</div>
+      </div>
+    </div>
+
+    <div class="net-bar">
+      <div class="net-bar-label">净收益可视化</div>
+      <div class="net-bar-track">
+        <div class="net-bar-fill" id="netBar" style="width:50%">+4.8%</div>
+      </div>
+    </div>
+
+    <div class="optimal-indicator">
+      <span class="oi-label">💡 当前状态</span>
+      <span class="oi-val" id="optimalStatus">低于最优杠杆，可适当增加债务</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Lab 1
+function calcTaxShield() {
+  const vu = +document.getElementById('vu').value;
+  const d = +document.getElementById('d').value;
+  const t = +document.getElementById('t').value / 100;
+  const shield = t * d;
+  const vl = vu + shield;
+
+  document.getElementById('vuVal').textContent = '£' + vu + 'm';
+  document.getElementById('dVal').textContent = '£' + d + 'm';
+  document.getElementById('tVal').textContent = (t*100).toFixed(0) + '%';
+  document.getElementById('vlResult').textContent = '£' + vl.toFixed(0) + 'm';
+  document.getElementById('vlFormula').textContent = `= £${vu}m + ${(t*100).toFixed(0)}% × £${d}m`;
+  document.getElementById('vuDisplay').textContent = '£' + vu + 'm';
+  document.getElementById('taxShieldDisplay').textContent = '£' + shield.toFixed(0) + 'm';
+  document.getElementById('vlDisplay').textContent = '£' + vl.toFixed(0) + 'm';
+}
+
+// Lab 2
+function getMMWacc(lev) {
+  // MM with tax: WACC decreases linearly with leverage
+  // Base WACC at 0 leverage = 10%, decreases by tax shield effect
+  const t = 0.25;
+  return 10 - lev * t * 0.1;
+}
+
+function getTradWacc(lev) {
+  // Traditional: U-shape, minimum around 30-40%
+  const base = 10;
+  const benefit = lev * 0.08;
+  const distress = Math.pow(lev / 100, 2.5) * 15;
+  return base - benefit + distress;
+}
+
+function updateChart() {
+  const lev = +document.getElementById('leverage').value;
+  document.getElementById('leverageVal').textContent = lev + '%';
+
+  const canvas = document.getElementById('waccChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 800;
+  const H = 220;
+  canvas.width = W;
+  canvas.height = H;
+
+  const pad = { l:50, r:20, t:20, b:40 };
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(0, 0, W, H);
+
+  // Grid
+  ctx.strokeStyle = 'rgba(255,255,255,.06)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) {
+    const y = pad.t + (ch / 5) * i;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l + cw, y); ctx.stroke();
+  }
+
+  const minY = 6, maxY = 12;
+  function toX(l) { return pad.l + (l / 80) * cw; }
+  function toY(w) { return pad.t + ch - ((w - minY) / (maxY - minY)) * ch; }
+
+  // MM line (blue)
+  ctx.beginPath();
+  ctx.strokeStyle = '#3b82f6';
+  ctx.lineWidth = 2.5;
+  for (let l = 0; l <= 80; l++) {
+    const w = getMMWacc(l);
+    if (l === 0) ctx.moveTo(toX(l), toY(w));
+    else ctx.lineTo(toX(l), toY(w));
+  }
+  ctx.stroke();
+
+  // Traditional line (orange)
+  ctx.beginPath();
+  ctx.strokeStyle = '#e8a020';
+  ctx.lineWidth = 2.5;
+  for (let l = 0; l <= 80; l++) {
+    const w = getTradWacc(l);
+    if (l === 0) ctx.moveTo(toX(l), toY(w));
+    else ctx.lineTo(toX(l), toY(w));
+  }
+  ctx.stroke();
+
+  // Current position marker
+  const mmW = getMMWacc(lev);
+  const tradW = getTradWacc(lev);
+  ctx.fillStyle = '#3b82f6';
+  ctx.beginPath(); ctx.arc(toX(lev), toY(mmW), 6, 0, Math.PI*2); ctx.fill();
+  ctx.fillStyle = '#e8a020';
+  ctx.beginPath(); ctx.arc(toX(lev), toY(tradW), 6, 0, Math.PI*2); ctx.fill();
+
+  // Axes
+  ctx.strokeStyle = 'rgba(255,255,255,.3)';
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.l, pad.t); ctx.lineTo(pad.l, pad.t+ch); ctx.lineTo(pad.l+cw, pad.t+ch); ctx.stroke();
+
+  // Labels
+  ctx.fillStyle = '#94a3b8';
+  ctx.font = '11px sans-serif';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= 5; i++) {
+    const w = minY + (maxY - minY) * (5-i) / 5;
+    ctx.fillText(w.toFixed(0) + '%', pad.l - 6, pad.t + (ch/5)*i + 4);
+  }
+  ctx.textAlign = 'center';
+  for (let l = 0; l <= 80; l += 20) {
+    ctx.fillText(l + '%', toX(l), pad.t + ch + 18);
+  }
+
+  // Legend
+  ctx.fillStyle = '#3b82f6'; ctx.fillRect(pad.l, 8, 20, 3);
+  ctx.fillStyle = '#94a3b8'; ctx.font = '11px sans-serif'; ctx.textAlign = 'left';
+  ctx.fillText('MM有税', pad.l + 24, 14);
+  ctx.fillStyle = '#e8a020'; ctx.fillRect(pad.l + 80, 8, 20, 3);
+  ctx.fillStyle = '#94a3b8';
+  ctx.fillText('传统观点', pad.l + 104, 14);
+
+  document.getElementById('mmWacc').textContent = mmW.toFixed(1) + '%';
+  document.getElementById('tradWacc').textContent = tradW.toFixed(1) + '%';
+}
+
+// Lab 3
+function calcDistress() {
+  const lev = +document.getElementById('lev').value;
+  const k = +document.getElementById('kk').value / 100;
+  const t = 0.20; // fixed tax rate for this lab
+
+  const taxBenefit = t * lev; // as percentage
+  const distressCost = Math.pow(lev/100, 2) * k * 100;
+  const net = taxBenefit - distressCost;
+
+  // Find optimal leverage: d(net)/d(L) = 0 => t - 2*L*k = 0 => L* = t/(2k)
+  const optL = k > 0 ? Math.min((t / (2 * k)) * 100, 100) : 100;
+
+  document.getElementById('lVal').textContent = lev + '%';
+  document.getElementById('kVal').textContent = (k*100).toFixed(0) + '%';
+  document.getElementById('taxBenefit').textContent = taxBenefit.toFixed(1) + '%';
+  document.getElementById('distressCost').textContent = distressCost.toFixed(1) + '%';
+  document.getElementById('optimalLev').textContent = optL.toFixed(0) + '%';
+
+  const netEl = document.getElementById('netResult');
+  netEl.textContent = (net >= 0 ? '+' : '') + net.toFixed(1) + '%';
+  netEl.style.color = net >= 0 ? '#4ade80' : '#f87171';
+
+  document.getElementById('netFormula').textContent =
+    `= 税盾 ${taxBenefit.toFixed(1)}% − 困境成本 ${distressCost.toFixed(1)}%`;
+
+  const maxNet = t * optL - Math.pow(optL/100, 2) * k * 100;
+  const barPct = maxNet > 0 ? Math.max(0, Math.min(net / maxNet * 100, 100)) : 0;
+  const bar = document.getElementById('netBar');
+  bar.style.width = barPct + '%';
+  bar.textContent = (net >= 0 ? '+' : '') + net.toFixed(1) + '%';
+  bar.className = 'net-bar-fill ' + (net >= 0 ? 'positive' : 'negative');
+
+  const statusEl = document.getElementById('optimalStatus');
+  if (Math.abs(lev - optL) < 5) {
+    statusEl.textContent = '✅ 接近最优杠杆点！';
+    statusEl.className = 'oi-val';
+  } else if (lev < optL) {
+    statusEl.textContent = `低于最优杠杆（${optL.toFixed(0)}%），可适当增加债务`;
+    statusEl.className = 'oi-val';
+  } else {
+    statusEl.textContent = `超过最优杠杆（${optL.toFixed(0)}%），财务困境成本过高`;
+    statusEl.className = 'oi-val negative';
+  }
+}
+
+calcTaxShield();
+setTimeout(updateChart, 100);
+calcDistress();
+window.addEventListener('resize', () => updateChart());
+</script>
+</body>
+</html>

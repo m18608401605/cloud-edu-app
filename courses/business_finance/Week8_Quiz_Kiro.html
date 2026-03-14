@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 8 Quiz – Capital Structure</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; --green:#064e3b; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,var(--green) 0%,#0d6b4e 100%); color:#fff; padding:52px 24px 44px; text-align:center; }
+  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
+  .hero h1 { font-size:2rem; font-weight:800; margin-bottom:10px; }
+  .hero p { opacity:.85; font-size:.95rem; }
+
+  .progress-bar { background:rgba(255,255,255,.2); height:6px; border-radius:3px; margin:20px auto 0; max-width:400px; }
+  .progress-fill { background:#4ade80; height:100%; border-radius:3px; transition:width .4s; }
+  .progress-text { color:rgba(255,255,255,.8); font-size:.82rem; margin-top:6px; }
+
+  .container { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
+
+  .section-title { color:var(--primary); font-size:1.15rem; font-weight:700; margin:32px 0 16px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
+
+  .question { background:#fff; border-radius:12px; padding:28px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
+  .question .q-num { color:var(--accent); font-weight:700; font-size:.82rem; margin-bottom:8px; }
+  .question .q-text { color:#1a202c; font-size:1rem; font-weight:600; line-height:1.6; margin-bottom:16px; }
+
+  .options { display:flex; flex-direction:column; gap:8px; }
+  .option { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border:2px solid #e2e8f0; border-radius:8px; cursor:pointer; transition:.2s; }
+  .option:hover { border-color:var(--primary); background:#f0f4ff; }
+  .option.correct { border-color:#16a34a; background:#f0fdf4; }
+  .option.wrong { border-color:#dc2626; background:#fef2f2; }
+  .option.disabled { cursor:default; }
+  .option .opt-letter { font-weight:700; color:var(--primary); min-width:20px; font-size:.9rem; }
+  .option .opt-text { color:#374151; font-size:.92rem; line-height:1.5; }
+  .option.correct .opt-letter { color:#16a34a; }
+  .option.wrong .opt-letter { color:#dc2626; }
+
+  .feedback { margin-top:12px; padding:10px 14px; border-radius:8px; font-size:.88rem; display:none; }
+  .feedback.show { display:block; }
+  .feedback.correct-fb { background:#f0fdf4; color:#166534; border-left:3px solid #16a34a; }
+  .feedback.wrong-fb { background:#fef2f2; color:#991b1b; border-left:3px solid #dc2626; }
+
+  .score-panel { background:var(--green); color:#fff; border-radius:12px; padding:28px; text-align:center; margin-bottom:28px; display:none; }
+  .score-panel.show { display:block; }
+  .score-panel .score-num { font-size:3rem; font-weight:800; }
+  .score-panel p { opacity:.85; margin-top:6px; }
+
+  .calc-section { background:#fff; border-radius:12px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:20px; }
+  .calc-section h3 { color:var(--primary); font-size:1rem; margin-bottom:12px; }
+  .calc-section p { color:#444; font-size:.93rem; line-height:1.7; margin-bottom:10px; }
+
+  details { margin-top:16px; }
+  summary { cursor:pointer; background:var(--primary); color:#fff; padding:10px 16px; border-radius:8px; font-size:.9rem; font-weight:600; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary::before { content:'▶ '; }
+  details[open] summary::before { content:'▼ '; }
+  .answer-content { background:#eef4ff; border-radius:0 0 8px 8px; padding:20px; font-size:.9rem; line-height:1.8; color:#333; }
+  .answer-content strong { color:var(--primary); }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 8</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 8 · Chapter 11 · Quiz</div>
+  <h1>✏️ Capital Structure</h1>
+  <p>10道选择题 + 1道计算题，测试 MM 理论与资本结构掌握程度</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-text" id="progressText">0 / 10 已完成</div>
+</div>
+
+<div class="container">
+  <div class="score-panel" id="scorePanel">
+    <div class="score-num" id="scoreNum">0/10</div>
+    <p id="scoreMsg">完成所有题目后查看得分</p>
+  </div>
+
+  <div class="section-title">Section A · Multiple Choice Questions</div>
+  <div id="quiz-container"></div>
+
+  <div class="section-title">Section B · 计算题</div>
+
+  <div class="calc-section">
+    <h3>📝 综合计算题</h3>
+    <p><strong>题目：</strong>ABC 公司无杠杆价值 V<sub>U</sub> = £400m，企业所得税率 = 30%，考虑发行 £150m 债务。</p>
+    <ol style="padding-left:20px;color:#444;font-size:.93rem;line-height:2;">
+      <li>(a) 根据 MM 有税定理，计算有杠杆企业价值 V<sub>L</sub></li>
+      <li>(b) 债务税盾价值是多少？</li>
+      <li>(c) 如果财务困境成本现值为 £20m，实际企业价值是多少？</li>
+    </ol>
+
+    <details>
+      <summary>点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) MM 有税定理 V<sub>L</sub>：</strong></p>
+        <p>V<sub>L</sub> = V<sub>U</sub> + t × D = £400m + 0.30 × £150m = £400m + £45m = <strong>£445m</strong></p>
+        <br>
+        <p><strong>(b) 债务税盾价值：</strong></p>
+        <p>税盾 = t × D = 0.30 × £150m = <strong>£45m</strong></p>
+        <p>这 £45m 来自政府的税收补贴（利息抵税）。</p>
+        <br>
+        <p><strong>(c) 考虑财务困境成本后的实际企业价值：</strong></p>
+        <p>实际价值 = V<sub>L</sub> − PV(财务困境成本) = £445m − £20m = <strong>£425m</strong></p>
+        <p>这体现了传统观点：最终价值 = V<sub>U</sub> + PV(税盾) − PV(财务困境成本)。</p>
+      </div>
+    </details>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  { q: "MM 无税定理的核心结论是：", opts: ["债务越多企业价值越高","资本结构不影响企业价值","股权融资优于债务融资","最优债务比率为50%"], correct: 1, explain: "MM 无税定理（1958）：在完美市场假设下，V_L = V_U，资本结构不影响企业价值。就像蛋糕切法不同，总量不变。" },
+  { q: "MM 有税定理中，V_L = V_U + tD，其中 tD 代表：", opts: ["税率乘以股利","债务税盾的现值","财务困境成本","债务的市场价值"], correct: 1, explain: "tD 是债务税盾的现值。利息支出可以抵税，政府实际补贴了 t×D 的价值，使有杠杆企业价值高于无杠杆企业。" },
+  { q: "传统观点认为，最优资本结构存在是因为：", opts: ["债务成本始终低于股权成本","税盾收益与财务困境成本的权衡","MM 理论的假设不现实","监管要求"], correct: 1, explain: "传统观点：随着债务增加，税盾收益增加，但财务困境成本也增加。最优点在两者边际效益相等处，此时 WACC 最低，企业价值最大。" },
+  { q: "财务困境成本包括：", opts: ["利息支出","直接成本（法律费用）和间接成本（失去客户/供应商）","股利支付","资本支出"], correct: 1, explain: "财务困境成本分两类：直接成本（法律、重组费用，约占企业价值3-5%）和间接成本（失去客户信任、供应商收紧信用、优秀员工离职，往往更大）。" },
+  { q: "若 V_U=£500m，t=25%，D=£200m，V_L=?", opts: ["£550m","£500m","£450m","£600m"], correct: 0, explain: "V_L = V_U + t×D = £500m + 0.25×£200m = £500m + £50m = £550m。" },
+  { q: "MM 理论的假设条件不包括：", opts: ["无税","无交易成本","存在财务困境成本","完美资本市场"], correct: 2, explain: "MM 理论假设无破产成本（即无财务困境成本）。正是因为现实中存在财务困境成本，MM 有税定理的'债务越多越好'结论才不成立。" },
+  { q: "Tesla 从高债务转向股权融资的主要原因是：", opts: ["股权成本更低","避免财务困境，保持融资灵活性","MM 理论要求","监管限制"], correct: 1, explain: "Tesla 作为高成长、高不确定性公司，财务困境成本极高（失去客户信任、供应链断裂）。降低债务可以避免财务困境，保持战略灵活性。" },
+  { q: "根据 MM 有税定理，企业应该：", opts: ["使用尽可能多的债务（理论上）","避免使用债务","保持50/50的资本结构","只使用股权融资"], correct: 0, explain: "MM 有税定理的逻辑推论：V_L = V_U + tD，债务 D 越大，税盾 tD 越大，企业价值越高。但这是理论极端，现实中财务困境成本会制约债务规模。" },
+  { q: "传统观点的 WACC 曲线形状是：", opts: ["单调递减","单调递增","U形（先降后升）","水平线"], correct: 2, explain: "传统观点：初期增加债务，税盾效应使 WACC 下降；超过最优点后，财务困境成本使 Ke 急剧上升，WACC 反弹。因此 WACC 呈 U 形曲线，最低点对应最优资本结构。" },
+  { q: "以下哪项会增加财务困境成本？", opts: ["低债务比率","高债务比率","高盈利能力","低利率"], correct: 1, explain: "高债务比率意味着更高的财务杠杆，一旦经营出现问题，偿债压力更大，财务困境风险更高，相应的直接和间接成本也更大。" }
+];
+
+let answered = 0;
+let score = 0;
+
+function buildQuiz() {
+  const container = document.getElementById('quiz-container');
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.id = 'q' + i;
+    const optLetters = ['A','B','C','D'];
+    div.innerHTML = `
+      <div class="q-num">Q${i+1} / 10</div>
+      <div class="q-text">${q.q}</div>
+      <div class="options" id="opts${i}">
+        ${q.opts.map((o,j) => `<div class="option" onclick="selectOption(${i},${j})" id="opt${i}_${j}">
+          <span class="opt-letter">${optLetters[j]}</span>
+          <span class="opt-text">${o}</span>
+        </div>`).join('')}
+      </div>
+      <div class="feedback" id="fb${i}"></div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function selectOption(qi, oi) {
+  const q = questions[qi];
+  const opts = document.getElementById('opts' + qi).querySelectorAll('.option');
+  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
+
+  const selected = document.getElementById(`opt${qi}_${oi}`);
+  const correct = document.getElementById(`opt${qi}_${q.correct}`);
+  const fb = document.getElementById('fb' + qi);
+
+  if (oi === q.correct) {
+    selected.classList.add('correct');
+    fb.className = 'feedback show correct-fb';
+    fb.textContent = '✅ 正确！' + q.explain;
+    score++;
+  } else {
+    selected.classList.add('wrong');
+    correct.classList.add('correct');
+    fb.className = 'feedback show wrong-fb';
+    fb.textContent = '❌ 错误。' + q.explain;
+  }
+
+  answered++;
+  updateProgress();
+  if (answered === questions.length) showScore();
+}
+
+function updateProgress() {
+  const pct = (answered / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${answered} / ${questions.length} 已完成`;
+}
+
+function showScore() {
+  const panel = document.getElementById('scorePanel');
+  panel.classList.add('show');
+  document.getElementById('scoreNum').textContent = `${score} / ${questions.length}`;
+  const pct = score / questions.length;
+  let msg = pct >= 0.9 ? '🏆 优秀！MM 理论完全掌握！' :
+            pct >= 0.7 ? '👍 良好！建议复习 MM 无税 vs 有税的区别。' :
+            '📚 需要加强复习，重点看 Lecture Section 1-3。';
+  document.getElementById('scoreMsg').textContent = msg;
+  panel.scrollIntoView({ behavior:'smooth' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
