@@ -85,6 +85,11 @@
       <p>• <strong>K<sub>e</sub></strong>：权益成本，用 CAPM 或股利增长模型计算</p>
     </div>
     <p>⚠️ 权重必须使用<strong>市场价值</strong>，而非账面价值。市场价值反映投资者当前对资产的定价，更能代表真实的资本成本。</p>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：WACC 就像"混合果汁的平均甜度"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">想象你用 70% 的苹果汁（甜度 12%）和 30% 的柠檬汁（甜度 3%，但政府补贴了 25%，实际只有 2.25%）混合。混合后的平均甜度 = 0.7×12% + 0.3×2.25% = 9.075%。这就是 WACC——企业所有资金来源的"加权平均价格"，也是新项目必须超越的最低回报门槛。</p>
+    </div>
   </div>
 
   <!-- Section 2: Cost of Equity -->
@@ -110,6 +115,11 @@
         <p style="margin-top:8px;color:#666;font-size:.85rem;">仅适用于稳定支付且增长的股利公司</p>
       </div>
     </div>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：K<sub>e</sub> 就像"房东要求的租金回报率"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你花 £100 买了一套房（股票），房客（公司）每年付租金（股利）。你要求的最低年化回报率就是 K<sub>e</sub>。CAPM 告诉你：这套房的"风险溢价"取决于它跟整个房市的联动程度（β）。股利增长模型则说：只要知道明年租金和预期涨租速度，就能算出你的要求回报。两种方法殊途同归，都是在问"我投这笔钱，最低要赚多少才值得？"</p>
+    </div>
   </div>
 
   <!-- Section 3: Cost of Debt -->
@@ -127,6 +137,11 @@
       <tr><td>银行贷款</td><td>贷款利率</td><td>直接使用合同利率</td></tr>
       <tr><td>新发债券</td><td>当前市场利率</td><td>用类似评级债券的 YTM</td></tr>
     </table>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：税盾就像"政府帮你还利息"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你向银行借钱，年利率 8%，税率 25%。每付 £8 利息，政府通过少收 £2 税来"报销"你。实际净成本只有 £6，即 6%。这就是税盾——债务的真实成本 = 名义利率 × (1 − 税率)。税率越高，政府"补贴"越多，债务越便宜。这也是为什么高税率国家的企业更倾向于用债务融资。</p>
+    </div>
   </div>
 
   <!-- Section 4: Pitfalls -->
@@ -147,6 +162,18 @@
       <h4>❌ 陷阱 3：使用历史股利而非预期股利</h4>
       <p>股利增长模型中的 D<sub>1</sub> 是<strong>下一期预期股利</strong>，不是上一期已支付的股利 D<sub>0</sub>。正确做法：D<sub>1</sub> = D<sub>0</sub> × (1+g)。混淆两者会低估权益成本。</p>
     </div>
+
+    <h3 style="margin-top:24px;margin-bottom:12px;">📋 Pitfall 汇总表</h3>
+    <table>
+      <tr><th>场景</th><th>常见错误</th><th>正确做法</th></tr>
+      <tr><td>计算 WACC 权重</td><td>用账面价值（资产负债表数字）</td><td>必须用市场价值（股价×股数，债券市价×数量）</td></tr>
+      <tr><td>债务成本</td><td>直接用票面利率（coupon rate）</td><td>用 YTM（市场定价的实际回报率）</td></tr>
+      <tr><td>税盾处理</td><td>忘记乘以 (1−t)</td><td>税后 K<sub>d</sub> = YTM × (1−t)</td></tr>
+      <tr><td>股利增长模型</td><td>用 D<sub>0</sub>（刚支付的股利）</td><td>用 D<sub>1</sub> = D<sub>0</sub> × (1+g)（下期预期股利）</td></tr>
+      <tr><td>永续债成本</td><td>用票面利率/面值</td><td>用票面利率/市价，再乘以 (1−t)</td></tr>
+      <tr><td>WACC 适用范围</td><td>用于风险不同的新项目</td><td>WACC 只适用于与现有业务风险相似的项目</td></tr>
+      <tr><td>股利增长率 g</td><td>直接用历史增长率</td><td>用 g = (1−派息率) × 投资回报率，或分析师预测</td></tr>
+    </table>
   </div>
 
   <!-- Section 5: Apple Case -->

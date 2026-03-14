@@ -1,223 +1,467 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 7 Quiz – Cost of Capital & WACC</title>
+<title>Week 7 Quiz — Cost of Capital & WACC | BUSI1070</title>
 <style>
-  :root { --primary:#1a3a5c; --accent:#e8a020; --green:#064e3b; }
-  * { box-sizing:border-box; margin:0; padding:0; }
-  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
-
-  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
-  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
-  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
-  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
-  nav a.active { color:#fff; background:var(--accent); }
-  nav .spacer { flex:1; }
-  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
-
-  .hero { background:linear-gradient(135deg,var(--green) 0%,#0d6b4e 100%); color:#fff; padding:52px 24px 44px; text-align:center; }
-  .hero .eyebrow { font-size:.8rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
-  .hero h1 { font-size:2rem; font-weight:800; margin-bottom:10px; }
-  .hero p { opacity:.85; font-size:.95rem; }
-
-  .progress-bar { background:rgba(255,255,255,.2); height:6px; border-radius:3px; margin:20px auto 0; max-width:400px; }
-  .progress-fill { background:#4ade80; height:100%; border-radius:3px; transition:width .4s; }
-  .progress-text { color:rgba(255,255,255,.8); font-size:.82rem; margin-top:6px; }
-
-  .container { max-width:760px; margin:0 auto; padding:40px 24px 80px; }
-
-  .section-title { color:var(--primary); font-size:1.15rem; font-weight:700; margin:32px 0 16px; padding-bottom:8px; border-bottom:2px solid #e2e8f0; }
-
-  .question { background:#fff; border-radius:12px; padding:28px; margin-bottom:20px; box-shadow:0 2px 10px rgba(0,0,0,.06); }
-  .question .q-num { color:var(--accent); font-weight:700; font-size:.82rem; margin-bottom:8px; }
-  .question .q-text { color:#1a202c; font-size:1rem; font-weight:600; line-height:1.6; margin-bottom:16px; }
-  .question .q-hint { color:#718096; font-size:.82rem; margin-bottom:12px; font-style:italic; }
-
-  .options { display:flex; flex-direction:column; gap:8px; }
-  .option { display:flex; align-items:flex-start; gap:10px; padding:12px 16px; border:2px solid #e2e8f0; border-radius:8px; cursor:pointer; transition:.2s; }
-  .option:hover { border-color:var(--primary); background:#f0f4ff; }
-  .option.correct { border-color:#16a34a; background:#f0fdf4; }
-  .option.wrong { border-color:#dc2626; background:#fef2f2; }
-  .option.disabled { cursor:default; }
-  .option .opt-letter { font-weight:700; color:var(--primary); min-width:20px; font-size:.9rem; }
-  .option .opt-text { color:#374151; font-size:.92rem; line-height:1.5; }
-  .option.correct .opt-letter { color:#16a34a; }
-  .option.wrong .opt-letter { color:#dc2626; }
-
-  .feedback { margin-top:12px; padding:10px 14px; border-radius:8px; font-size:.88rem; display:none; }
-  .feedback.show { display:block; }
-  .feedback.correct-fb { background:#f0fdf4; color:#166534; border-left:3px solid #16a34a; }
-  .feedback.wrong-fb { background:#fef2f2; color:#991b1b; border-left:3px solid #dc2626; }
-
-  .score-panel { background:var(--green); color:#fff; border-radius:12px; padding:28px; text-align:center; margin-bottom:28px; display:none; }
-  .score-panel.show { display:block; }
-  .score-panel .score-num { font-size:3rem; font-weight:800; }
-  .score-panel p { opacity:.85; margin-top:6px; }
-
-  .calc-section { background:#fff; border-radius:12px; padding:28px; box-shadow:0 2px 10px rgba(0,0,0,.06); margin-bottom:20px; }
-  .calc-section h3 { color:var(--primary); font-size:1rem; margin-bottom:12px; }
-  .calc-section p { color:#444; font-size:.93rem; line-height:1.7; margin-bottom:10px; }
-  .calc-section ol { padding-left:20px; color:#444; font-size:.93rem; line-height:1.9; }
-
-  details { margin-top:16px; }
-  summary { cursor:pointer; background:var(--primary); color:#fff; padding:10px 16px; border-radius:8px; font-size:.9rem; font-weight:600; list-style:none; }
-  summary::-webkit-details-marker { display:none; }
-  summary::before { content:'▶ '; }
-  details[open] summary::before { content:'▼ '; }
-  .answer-content { background:#eef4ff; border-radius:0 0 8px 8px; padding:20px; font-size:.9rem; line-height:1.8; color:#333; }
-  .answer-content strong { color:var(--primary); }
-
-  .submit-btn { display:block; width:100%; padding:16px; background:var(--green); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; margin-top:24px; transition:.2s; }
-  .submit-btn:hover { background:#0d6b4e; }
+:root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--green:#27ae60;--red:#e74c3c;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:#333;}
+nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:56px;position:sticky;top:0;z-index:100;}
+nav .logo{color:var(--accent);font-weight:700;font-size:1.1rem;margin-right:auto;}
+nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem;padding:.3rem .7rem;border-radius:4px;transition:background .2s;}
+nav a:hover,nav a.active{background:rgba(255,255,255,.15);color:#fff;}
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#2d6a9f 100%);color:white;padding:3rem 2rem 2rem;text-align:center;}
+.hero h1{font-size:2rem;margin-bottom:.5rem;}
+.hero p{opacity:.85;font-size:1rem;}
+.hero .meta{margin-top:1rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.75;}
+.progress-bar-wrap{background:#e0e0e0;border-radius:8px;height:8px;margin:2rem auto;max-width:700px;}
+.progress-bar{background:var(--accent);height:8px;border-radius:8px;transition:width .4s;width:0%;}
+.progress-label{text-align:center;font-size:.85rem;color:#666;margin-top:.4rem;}
+main{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+.section-header{background:var(--primary);color:white;padding:.8rem 1.2rem;border-radius:8px 8px 0 0;font-weight:600;font-size:1rem;margin-top:2.5rem;}
+.q-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;margin-bottom:0;}
+.q-card:last-of-type{border-radius:0 0 8px 8px;}
+.q-num{color:var(--accent);font-weight:700;font-size:.85rem;margin-bottom:.5rem;}
+.q-text{font-size:1rem;line-height:1.6;margin-bottom:1rem;font-weight:500;}
+.q-source{font-size:.75rem;color:#999;margin-bottom:1rem;font-style:italic;}
+.options{display:flex;flex-direction:column;gap:.5rem;}
+.option{padding:.7rem 1rem;border:2px solid #e0e0e0;border-radius:6px;cursor:pointer;transition:all .2s;font-size:.95rem;background:#fafafa;}
+.option:hover{border-color:var(--primary);background:#eef3f8;}
+.option.selected{border-color:var(--primary);background:#dce8f5;font-weight:600;}
+.option.correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.option.wrong{border-color:var(--red);background:#f8d7da;color:#721c24;}
+.option.reveal-correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.explanation{display:none;margin-top:1rem;padding:1rem;background:#f0f7ff;border-left:4px solid var(--primary);border-radius:0 6px 6px 0;font-size:.9rem;line-height:1.6;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--primary);}
+.calc-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;border-radius:0 0 8px 8px;}
+.scenario-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:1.2rem;margin-bottom:1.2rem;font-size:.9rem;line-height:1.7;}
+.scenario-box h4{color:var(--primary);margin-bottom:.5rem;font-size:.95rem;}
+details{margin-top:1rem;}
+details summary{cursor:pointer;padding:.7rem 1rem;background:var(--primary);color:white;border-radius:6px;font-size:.9rem;font-weight:600;user-select:none;}
+details summary:hover{background:#2d6a9f;}
+details[open] summary{border-radius:6px 6px 0 0;}
+.answer-content{background:#f0f7ff;border:1px solid #c8dff5;border-top:none;padding:1.2rem;border-radius:0 0 6px 6px;font-size:.88rem;line-height:1.8;}
+.answer-content h4{color:var(--primary);margin:.8rem 0 .3rem;}
+.answer-content .formula{background:#1a3a5c;color:#e8f4fd;padding:.6rem 1rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.4rem 0;}
+.answer-content .verdict{background:#d4edda;border:1px solid #c3e6cb;border-radius:4px;padding:.6rem 1rem;color:#155724;font-weight:600;margin-top:.8rem;}
+.submit-area{text-align:center;margin:2rem 0;}
+.btn-submit{background:var(--accent);color:white;border:none;padding:.9rem 2.5rem;font-size:1rem;font-weight:700;border-radius:8px;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:#c8880e;}
+.score-card{display:none;background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin:2rem 0;}
+.score-card.show{display:block;}
+.score-big{font-size:3rem;font-weight:700;color:var(--primary);}
+.score-label{color:#666;margin-top:.3rem;}
+.score-msg{margin-top:1rem;font-size:1rem;color:#444;}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e0e0e0;}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;background:var(--primary);color:white;text-decoration:none;border-radius:6px;font-size:.9rem;transition:background .2s;}
+.btn-nav:hover{background:#2d6a9f;}
 </style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
 </head>
 <body>
-
 <nav>
-  <span class="brand">📚 Business Finance</span>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">🗺️ Guide</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html">📖 Lecture</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html">🧪 Interactive</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html" class="active">✏️ Quiz</a>
-  <span class="spacer"></span>
-  <span class="week-badge">Week 7</span>
+  <span class="logo">🎓 BUSI1070</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">Study Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html">Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html">Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html" class="active">Quiz</a>
 </nav>
-
 <div class="hero">
-  <div class="eyebrow">Week 7 · Chapter 10 · Quiz</div>
-  <h1>✏️ Cost of Capital &amp; WACC</h1>
-  <p>10道选择题 + 1道计算题，测试你的掌握程度</p>
-  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-  <div class="progress-text" id="progressText">0 / 10 已完成</div>
+  <h1>Week 7 Quiz</h1>
+  <p>Cost of Capital &amp; WACC — Ke, Kd, Dividend Growth Model</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.10</span>
+    <span>⏱ ~20 min</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 2 Calculations</span>
+  </div>
 </div>
+<main>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 10 answered</div>
+  <div class="section-header">Section A — Multiple Choice Questions (Pearson Ch.10)</div>
 
-<div class="container">
-  <div class="score-panel" id="scorePanel">
-    <div class="score-num" id="scoreNum">0/10</div>
-    <p id="scoreMsg">完成所有题目后查看得分</p>
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-num">Question 1 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">How do you assess the following two statements?<br>
+    (1) Every change in the market price of loan notes affects their coupon rate.<br>
+    (2) Every change in the market price of loan notes affects their yield.</div>
+    <div class="options" data-q="1" data-answer="b">
+      <div class="option" data-val="a">A: False, False</div>
+      <div class="option" data-val="b">B: False, True</div>
+      <div class="option" data-val="c">C: True, False</div>
+      <div class="option" data-val="d">D: True, True</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — False, True</strong><br><br>
+      <strong>Statement 1 — FALSE:</strong> The coupon rate is fixed at issuance — it's a contractual obligation (e.g., 8% of £100 nominal = £8/year forever). Market price changes do not affect it.<br><br>
+      <strong>Statement 2 — TRUE:</strong> Yield (YTM) = Annual coupon ÷ Market price. If the market price falls, the yield rises; if price rises, yield falls. Yield moves inversely with price.<br><br>
+      <strong>⚠️ Pitfall:</strong> Don't confuse coupon rate (fixed, based on nominal value) with yield (variable, based on market price). This is one of the most common errors in debt valuation.
+    </div>
   </div>
 
-  <div class="section-title">Section A · Multiple Choice Questions</div>
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-num">Question 2 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">If a business pays a fixed proportion <em>p</em> of its after-tax profit as a dividend each year, has a reinvestment rate <em>r</em>, and a dividend growth rate <em>g</em>. The relationship between these factors is:</div>
+    <div class="options" data-q="2" data-answer="c">
+      <div class="option" data-val="a">A: g = p(1 − r)</div>
+      <div class="option" data-val="b">B: g = p/r</div>
+      <div class="option" data-val="c">C: g = (1 − p)r</div>
+      <div class="option" data-val="d">D: g = (1 − p)/r</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — g = (1 − p)r</strong><br><br>
+      The dividend growth rate equals the <strong>retention ratio × return on investment</strong>:<br>
+      • (1 − p) = proportion of profit retained (ploughed back)<br>
+      • r = return earned on reinvested funds<br><br>
+      <strong>Example:</strong> If p = 40% (pay out 40%), r = 15% → g = 0.6 × 15% = 9%<br><br>
+      <strong>Intuition:</strong> Growth comes from reinvesting profits. The more you retain (1−p) and the better your returns (r), the faster dividends grow.
+    </div>
+  </div>
 
-  <div id="quiz-container"></div>
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-num">Question 3 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">Cheng plc consistently pays 40% of its after-tax profit as an ordinary dividend. The return on investment is 18% a year and it is expected to remain at this level.<br><br>What is the growth rate of the business's dividends?</div>
+    <div class="options" data-q="3" data-answer="a">
+      <div class="option" data-val="a">A: 10.8%</div>
+      <div class="option" data-val="b">B: 7.2%</div>
+      <div class="option" data-val="c">C: 60.0%</div>
+      <div class="option" data-val="d">D: 18.0%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — 10.8%</strong><br><br>
+      Using g = (1 − p) × r:<br>
+      • Payout ratio p = 40%, so retention ratio = 1 − 0.40 = 60%<br>
+      • Return on investment r = 18%<br>
+      • g = 0.60 × 18% = <strong>10.8%</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Don't use p × r = 0.4 × 18% = 7.2% (option B). That's the payout ratio times return — wrong formula. Growth comes from what's <em>retained</em>, not what's paid out.
+    </div>
+  </div>
 
-  <div class="section-title">Section B · 计算题</div>
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-num">Question 4 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">If P is the current share price, d is the dividend per share just paid, k is the cost of equity and g is the rate of growth, the Gordon dividend growth model can be stated as:</div>
+    <div class="options" data-q="4" data-answer="a">
+      <div class="option" data-val="a">A: k = [d(1 + g)/P] + g</div>
+      <div class="option" data-val="b">B: P = d/(k − g)</div>
+      <div class="option" data-val="c">C: k = (g/P) + d(1 + g)</div>
+      <div class="option" data-val="d">D: P = g/(k − d)</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — k = [d(1 + g)/P] + g</strong><br><br>
+      The Gordon Growth Model rearranged for cost of equity:<br>
+      <strong>K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</strong><br><br>
+      Since d is the dividend <em>just paid</em> (D<sub>0</sub>), the next dividend D<sub>1</sub> = d(1+g). So:<br>
+      k = d(1+g)/P + g ✓<br><br>
+      <strong>Note on B:</strong> P = d/(k−g) uses D<sub>0</sub> in the numerator — this is technically incorrect. The correct price formula is P = D<sub>1</sub>/(k−g) = d(1+g)/(k−g). Option B is a common textbook shorthand but not the precise form when d = D<sub>0</sub>.
+    </div>
+  </div>
 
-  <div class="calc-section">
-    <h3>📝 综合计算题</h3>
-    <p><strong>题目：</strong>XYZ 公司资本结构如下：</p>
-    <ul style="padding-left:20px;color:#444;font-size:.93rem;line-height:1.9;">
-      <li>债务市值 £200m，债券 YTM = 6%</li>
-      <li>股权市值 £800m，β = 1.3，R<sub>f</sub> = 4%，市场风险溢价 = 5%</li>
-      <li>企业所得税率 = 20%</li>
-    </ul>
-    <p style="margin-top:12px;">请计算：(a) 权益成本 K<sub>e</sub>（用 CAPM）&nbsp;&nbsp;(b) 税后债务成本&nbsp;&nbsp;(c) WACC</p>
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-num">Question 5 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">An equity share in Alexander plc has just paid a dividend and its current market price is £3.75. The dividend that it has just paid was £0.288 per share; the investors' required return on the share is 12% pa.<br><br>The growth rate of the dividend is:</div>
+    <div class="options" data-q="5" data-answer="a">
+      <div class="option" data-val="a">A: 4.00%</div>
+      <div class="option" data-val="b">B: 12.00%</div>
+      <div class="option" data-val="c">C: 8.00%</div>
+      <div class="option" data-val="d">D: 7.35%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — 4.00%</strong><br><br>
+      Using K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g, rearrange for g:<br>
+      D<sub>1</sub> = D<sub>0</sub> × (1+g) = 0.288(1+g)<br>
+      0.12 = 0.288(1+g)/3.75 + g<br>
+      0.12 = 0.0768(1+g) + g<br>
+      0.12 = 0.0768 + 0.0768g + g<br>
+      0.0432 = 1.0768g<br>
+      g = 0.0432/1.0768 = <strong>4.01% ≈ 4%</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Don't use D<sub>0</sub>/P<sub>0</sub> = 0.288/3.75 = 7.68% and then subtract from 12% to get 4.32% — that's an approximation. The exact method above gives 4%.
+    </div>
+  </div>
 
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-num">Question 6 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">Anthony plc is partly financed by loan notes with a coupon rate of 10% a year, which were issued a few years ago for £100 for each £100 nominal. The current market price of the loan notes is £73 for each £100 nominal. The loan notes are perpetual (they will never be redeemed). The corporation tax rate is 30%.<br><br>What is the after-tax cost of the loan notes?</div>
+    <div class="options" data-q="6" data-answer="c">
+      <div class="option" data-val="a">A: 10.00%</div>
+      <div class="option" data-val="b">B: 13.70%</div>
+      <div class="option" data-val="c">C: 9.59%</div>
+      <div class="option" data-val="d">D: 7.00%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — 9.59%</strong><br><br>
+      For a <strong>perpetual bond</strong>, YTM = Annual coupon ÷ Market price:<br>
+      Annual coupon = 10% × £100 = £10<br>
+      YTM (pre-tax) = £10 ÷ £73 = <strong>13.70%</strong><br>
+      After-tax cost = 13.70% × (1 − 0.30) = 13.70% × 0.70 = <strong>9.59%</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Don't use the coupon rate (10%) as the cost — that was the yield at issuance when price = £100. Now the price is £73, so the yield has risen to 13.70%. Always use YTM based on <em>current market price</em>, then apply the tax shield.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-num">Question 7 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">Use of weighted average cost of capital (WACC) to determine the discount rate requires that certain assumptions be made.<br><br>Which of the following is <strong>NOT</strong> one of those required assumptions?</div>
+    <div class="options" data-q="7" data-answer="a">
+      <div class="option" data-val="a">A: Use of the capital asset pricing model to deduce costs of capital is inappropriate.</div>
+      <div class="option" data-val="b">B: There is a known target gearing ratio.</div>
+      <div class="option" data-val="c">C: The costs of the elements of finance will not alter in the future.</div>
+      <div class="option" data-val="d">D: The project is of similar risk to others undertaken by the business.</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — CAPM is inappropriate (this is NOT a required assumption)</strong><br><br>
+      WACC can actually use CAPM to derive K<sub>e</sub> — there's no assumption that CAPM is inappropriate. In fact, CAPM is one of the standard methods for estimating equity cost.<br><br>
+      <strong>The actual required assumptions for WACC are:</strong><br>
+      • B: Known target gearing ratio (so weights are stable)<br>
+      • C: Costs of capital won't change materially<br>
+      • D: New project has similar risk to existing business<br><br>
+      <strong>⚠️ Pitfall:</strong> This is a "NOT" question — read carefully. The question asks which is NOT an assumption, not which IS one.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-num">Question 8 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">Costas plc is financed by 50 million shares of £1 each, whose current market value is £2.50 per share, and £50 million 10% loan notes, currently quoted at £102 (per £100 nominal). Last year's interest has just been paid. The loan notes are due to be redeemed at par in exactly one year's time. The cost of equity has been estimated at 20% pa.<br><br>What is Costas plc's WACC? (Ignore taxation.)</div>
+    <div class="options" data-q="8" data-answer="d">
+      <div class="option" data-val="a">A: 15.0%</div>
+      <div class="option" data-val="b">B: 29.0%</div>
+      <div class="option" data-val="c">C: 8.5%</div>
+      <div class="option" data-val="d">D: 16.5%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — 16.5%</strong><br><br>
+      <strong>Step 1: Market values</strong><br>
+      Equity: 50m shares × £2.50 = <strong>£125m</strong><br>
+      Debt: £50m nominal × (102/100) = <strong>£51m</strong><br>
+      Total = £176m<br><br>
+      <strong>Step 2: Cost of debt (YTM, 1-year bond)</strong><br>
+      Cash flows: Pay £102 today, receive £10 coupon + £100 redemption = £110 in 1 year<br>
+      YTM = (110 − 102)/102 = 8/102 = <strong>7.84%</strong><br><br>
+      <strong>Step 3: WACC</strong><br>
+      W<sub>e</sub> = 125/176 = 71.0%, W<sub>d</sub> = 51/176 = 29.0%<br>
+      WACC = 0.710 × 20% + 0.290 × 7.84% = 14.2% + 2.27% = <strong>16.5%</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Use market value of debt (£51m), not nominal (£50m). And calculate YTM from current market price — don't use the 10% coupon rate as the cost of debt.
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-num">Question 9 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">In the year just ended, Apex plc made an after-tax profit of £50 million, out of which it has just paid a single dividend for the year of £20 million. Paying out this proportion of profit is expected to continue indefinitely. The business's cost of equity is 25% pa and its return on investments is 15% pa.<br><br>What is the market value of Apex plc's equity, to the nearest £1 million?</div>
+    <div class="options" data-q="9" data-answer="c">
+      <div class="option" data-val="a">A: £112 million</div>
+      <div class="option" data-val="b">B: £105 million</div>
+      <div class="option" data-val="c">C: £136 million</div>
+      <div class="option" data-val="d">D: £125 million</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — £136 million</strong><br><br>
+      <strong>Step 1: Dividend growth rate</strong><br>
+      Payout ratio p = £20m/£50m = 40%<br>
+      g = (1 − p) × r = (1 − 0.40) × 15% = 0.60 × 15% = <strong>9%</strong><br><br>
+      <strong>Step 2: Next year's dividend D<sub>1</sub></strong><br>
+      D<sub>1</sub> = D<sub>0</sub> × (1+g) = £20m × 1.09 = <strong>£21.8m</strong><br><br>
+      <strong>Step 3: Equity value (Gordon Growth Model)</strong><br>
+      V = D<sub>1</sub> / (K<sub>e</sub> − g) = £21.8m / (0.25 − 0.09) = £21.8m / 0.16 = <strong>£136.25m ≈ £136m</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Don't use D<sub>0</sub> = £20m directly in the denominator. You need D<sub>1</sub> = D<sub>0</sub>(1+g). Also, don't forget to calculate g first — it's not given directly.
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-num">Question 10 of 10</div>
+    <div class="q-source">Pearson Ch.10 MCQ</div>
+    <div class="q-text">How do you assess the following two statements?<br>
+    (1) If a new investment project is to be financed out of a particular issue of equity or debt, rather than out of the business's retained profits, the cost of the particular source of finance should be used as the discount rate.<br>
+    (2) Using CAPM to derive the discount rate provides a more theoretically sound approach than using WACC.</div>
+    <div class="options" data-q="10" data-answer="b">
+      <div class="option" data-val="a">A: False, False</div>
+      <div class="option" data-val="b">B: False, True</div>
+      <div class="option" data-val="c">C: True, False</div>
+      <div class="option" data-val="d">D: True, True</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — False, True</strong><br><br>
+      <strong>Statement 1 — FALSE:</strong> The discount rate should reflect the <em>risk</em> of the project, not the source of financing. Using a specific funding source's cost ignores the overall capital structure and can lead to incorrect accept/reject decisions. The correct approach is to use WACC (or CAPM-adjusted rate for the project's risk).<br><br>
+      <strong>Statement 2 — TRUE:</strong> CAPM is theoretically superior because it directly accounts for the project's systematic risk (β), rather than relying on the firm's existing capital structure. WACC assumes the new project has the same risk as the firm's existing assets — an assumption that often doesn't hold.
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitQuiz()">Submit Section A</button>
+  </div>
+  <div class="score-card" id="scoreCard">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-label">Section A Score</div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- Section B -->
+  <div class="section-header" style="margin-top:3rem;">Section B — Calculation Questions</div>
+
+  <!-- B1: Dividend Growth Model + Equity Valuation -->
+  <div class="calc-card">
+    <div class="q-num">Question B1 — Equity Valuation (Gordon Growth Model)</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Meridian plc</h4>
+      Meridian plc has just paid a dividend of <strong>£0.30 per share</strong>. The current share price is <strong>£4.20</strong>. Analysts expect dividends to grow at <strong>5% per year</strong> indefinitely.<br><br>
+      The company also has the following data: risk-free rate = 4%, market risk premium = 6%, beta (β) = 1.15.
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> Calculate the cost of equity using the Dividend Growth Model.<br>
+      <strong>(b)</strong> Calculate the cost of equity using CAPM.<br>
+      <strong>(c)</strong> Comment on why the two estimates differ and which you would prefer to use.
+    </p>
     <details>
-      <summary>点击查看答案与解析</summary>
+      <summary>📖 Click to reveal full worked solution</summary>
       <div class="answer-content">
-        <p><strong>(a) 权益成本 K<sub>e</sub>（CAPM）：</strong></p>
-        <p>K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub>−R<sub>f</sub>) = 4% + 1.3 × 5% = <strong>10.5%</strong></p>
-        <br>
-        <p><strong>(b) 税后债务成本：</strong></p>
-        <p>税后 K<sub>d</sub> = YTM × (1−t) = 6% × (1−20%) = 6% × 0.8 = <strong>4.8%</strong></p>
-        <br>
-        <p><strong>(c) WACC：</strong></p>
-        <p>总资本 = £200m + £800m = £1,000m</p>
-        <p>W<sub>d</sub> = 200/1000 = 20%，W<sub>e</sub> = 800/1000 = 80%</p>
-        <p>WACC = 0.20 × 4.8% + 0.80 × 10.5% = 0.96% + 8.4% = <strong>9.36%</strong></p>
+        <h4>Part (a): Dividend Growth Model</h4>
+        <div class="formula">D₁ = D₀ × (1+g) = £0.30 × 1.05 = £0.315</div>
+        <div class="formula">Ke = D₁/P₀ + g = £0.315/£4.20 + 0.05</div>
+        <div class="formula">Ke = 0.075 + 0.05 = 7.5%</div>
+
+        <h4>Part (b): CAPM</h4>
+        <div class="formula">Ke = Rf + β × (Rm − Rf) = 4% + 1.15 × 6%</div>
+        <div class="formula">Ke = 4% + 6.9% = 10.9%</div>
+
+        <h4>Part (c): Comment on the Difference</h4>
+        <p>The two methods give different results (7.5% vs 10.9%) because they measure different things:</p>
+        <ul style="margin:.5rem 0 .5rem 1.2rem;line-height:1.8;">
+          <li><strong>DGM</strong> is backward-looking — it's based on current market price and expected dividends. It assumes the market has correctly priced the share and that dividends grow at a constant rate forever. Sensitive to the growth rate assumption.</li>
+          <li><strong>CAPM</strong> is risk-based — it uses systematic risk (β) and market data. More theoretically rigorous but depends on accurate β estimation and a stable risk-free rate.</li>
+        </ul>
+        <p><strong>Preference:</strong> CAPM is generally preferred for its theoretical soundness. DGM is only reliable for mature, dividend-paying companies with stable growth. In practice, analysts often use both and take an average.</p>
+        <div class="verdict">✅ Key insight: Neither method is perfect. Use both as a cross-check, and be transparent about assumptions.</div>
       </div>
     </details>
   </div>
 
-</div>
+  <!-- B2: Full WACC Calculation -->
+  <div class="calc-card" style="margin-top:1.5rem;border-top:1px solid #e0e0e0;">
+    <div class="q-num">Question B2 — Full WACC Calculation</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Vantage plc</h4>
+      Vantage plc has the following capital structure:<br><br>
+      • <strong>Ordinary shares:</strong> 40 million shares, current market price £3.50 each. Beta = 1.3, R<sub>f</sub> = 4%, market risk premium = 5.5%.<br>
+      • <strong>Loan notes:</strong> £60 million nominal, 8% coupon, currently trading at £95 per £100 nominal. The notes are perpetual.<br>
+      • <strong>Corporation tax rate:</strong> 25%
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> Calculate the market value weights for equity and debt.<br>
+      <strong>(b)</strong> Calculate the cost of equity K<sub>e</sub> using CAPM.<br>
+      <strong>(c)</strong> Calculate the after-tax cost of debt K<sub>d</sub>.<br>
+      <strong>(d)</strong> Calculate Vantage plc's WACC.
+    </p>
+    <details>
+      <summary>📖 Click to reveal full worked solution</summary>
+      <div class="answer-content">
+        <h4>Part (a): Market Value Weights</h4>
+        <div class="formula">Equity MV = 40m shares × £3.50 = £140m</div>
+        <div class="formula">Debt MV = £60m × (95/100) = £57m</div>
+        <div class="formula">Total = £140m + £57m = £197m</div>
+        <div class="formula">We = 140/197 = 71.1% | Wd = 57/197 = 28.9%</div>
+
+        <h4>Part (b): Cost of Equity (CAPM)</h4>
+        <div class="formula">Ke = Rf + β × (Rm − Rf) = 4% + 1.3 × 5.5%</div>
+        <div class="formula">Ke = 4% + 7.15% = 11.15%</div>
+
+        <h4>Part (c): After-Tax Cost of Debt</h4>
+        <p>For a perpetual bond: YTM = Annual coupon ÷ Market price</p>
+        <div class="formula">Annual coupon = 8% × £100 = £8 per £100 nominal</div>
+        <div class="formula">YTM (pre-tax) = £8 ÷ £95 = 8.42%</div>
+        <div class="formula">After-tax Kd = 8.42% × (1 − 0.25) = 8.42% × 0.75 = 6.32%</div>
+
+        <h4>Part (d): WACC</h4>
+        <div class="formula">WACC = We × Ke + Wd × Kd(after-tax)</div>
+        <div class="formula">WACC = 0.711 × 11.15% + 0.289 × 6.32%</div>
+        <div class="formula">WACC = 7.93% + 1.83% = 9.76%</div>
+
+        <div class="verdict">✅ Vantage plc's WACC ≈ 9.76% — any new project must return more than this to create shareholder value.</div>
+
+        <p style="margin-top:.8rem;font-size:.85rem;color:#555;"><strong>Key reminders:</strong> (1) Use market value of debt (£57m), not nominal (£60m). (2) YTM uses market price, not coupon rate. (3) Apply tax shield to debt cost only — equity dividends are not tax-deductible.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html" class="btn-nav">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/index.html" class="btn-nav">🏠 Course Home</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week8_StudyGuide_Kiro.html" class="btn-nav">Week 8 →</a>
+  </div>
+</main>
 
 <script>
-const questions = [
-  { q: "WACC 公式中，债务成本为何要乘以 (1−t)？", opts: ["因为利息支出可以抵税，降低实际债务成本","因为债务比股权便宜","因为税率影响股权成本","这是会计惯例"], correct: 0, explain: "利息支出在税前扣除，政府实际补贴了部分债务成本，税后实际债务成本 = Kd × (1−t)。" },
-  { q: "用 CAPM 计算权益成本，β=1.5，Rf=3%，市场回报率=9%，Ke=?", opts: ["12%","9%","13.5%","6%"], correct: 0, explain: "Ke = Rf + β×(Rm−Rf) = 3% + 1.5×(9%−3%) = 3% + 1.5×6% = 3% + 9% = 12%。" },
-  { q: "计算 WACC 时，权重应使用：", opts: ["账面价值权重","市场价值权重","历史成本权重","任意权重均可"], correct: 1, explain: "市场价值反映投资者当前对资产的定价，是资本成本的真实体现。账面价值是历史成本，不适用。" },
-  { q: "股利增长模型 Ke = D₁/P₀ + g，其中 D₁ 是：", opts: ["上一期已支付的股利","下一期预期股利","历史平均股利","股利增长率"], correct: 1, explain: "D₁ 是下一期预期股利。如果已知 D₀（上期股利），则 D₁ = D₀ × (1+g)。混淆 D₀ 和 D₁ 是常见错误。" },
-  { q: "某公司债券 YTM=6%，税率25%，税后债务成本为：", opts: ["6%","4.5%","7.5%","1.5%"], correct: 1, explain: "税后 Kd = 6% × (1−25%) = 6% × 0.75 = 4.5%。" },
-  { q: "MM 理论中，WACC 与资本结构的关系（无税）：", opts: ["债务越多 WACC 越低","WACC 保持不变","债务越多 WACC 越高","取决于行业"], correct: 1, explain: "MM 无税定理：在完美市场中，资本结构不影响企业价值，WACC 保持不变。增加债务虽降低债务成本，但会提高股权风险，使 Ke 上升，两者恰好抵消。" },
-  { q: "Apple β=1.2，Rf=4%，市场溢价6%，Apple 的权益成本为：", opts: ["10%","11.2%","7.2%","12%"], correct: 1, explain: "Ke = 4% + 1.2 × 6% = 4% + 7.2% = 11.2%。" },
-  { q: "以下哪项是计算 WACC 的常见错误？", opts: ["使用市场价值权重","使用账面价值权重","使用税后债务成本","使用 CAPM 计算权益成本"], correct: 1, explain: "使用账面价值权重是常见错误。账面价值是历史成本，不反映当前市场定价，应使用市场价值权重。" },
-  { q: "若 Wd=40%, Kd=5%, t=30%, We=60%, Ke=12%，WACC=?", opts: ["8.6%","9.2%","7.8%","10%"], correct: 0, explain: "WACC = 0.4×5%×(1−0.3) + 0.6×12% = 0.4×3.5% + 7.2% = 1.4% + 7.2% = 8.6%。" },
-  { q: "股利增长模型的局限性是：", opts: ["只适用于支付股利且股利稳定增长的公司","不考虑风险","需要知道 β 值","只适用于债券"], correct: 0, explain: "股利增长模型假设股利永续稳定增长，不适用于不支付股利的公司（如成长型科技公司）或股利不稳定的公司。" }
-];
-
+const answers = {};
 let answered = 0;
-let score = 0;
+const total = 10;
 
-function buildQuiz() {
-  const container = document.getElementById('quiz-container');
-  questions.forEach((q, i) => {
-    const div = document.createElement('div');
-    div.className = 'question';
-    div.id = 'q' + i;
-    const optLetters = ['A','B','C','D'];
-    div.innerHTML = `
-      <div class="q-num">Q${i+1} / 10</div>
-      <div class="q-text">${q.q}</div>
-      <div class="options" id="opts${i}">
-        ${q.opts.map((o,j) => `<div class="option" onclick="selectOption(${i},${j})" id="opt${i}_${j}">
-          <span class="opt-letter">${optLetters[j]}</span>
-          <span class="opt-text">${o}</span>
-        </div>`).join('')}
-      </div>
-      <div class="feedback" id="fb${i}"></div>
-    `;
-    container.appendChild(div);
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = optGroup.dataset.q;
+      if (answers[q]) return;
+      const val = opt.dataset.val;
+      const correct = optGroup.dataset.answer;
+      answers[q] = val;
+      answered++;
+      optGroup.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      if (val === correct) {
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        optGroup.querySelector(`[data-val="${correct}"]`).classList.add('reveal-correct');
+      }
+      const exp = optGroup.closest('.q-card').querySelector('.explanation');
+      if (exp) { exp.classList.add('show'); }
+      updateProgress();
+    });
   });
-}
-
-function selectOption(qi, oi) {
-  const q = questions[qi];
-  const opts = document.getElementById('opts' + qi).querySelectorAll('.option');
-  opts.forEach(o => { o.classList.add('disabled'); o.onclick = null; });
-
-  const selected = document.getElementById(`opt${qi}_${oi}`);
-  const correct = document.getElementById(`opt${qi}_${q.correct}`);
-  const fb = document.getElementById('fb' + qi);
-
-  if (oi === q.correct) {
-    selected.classList.add('correct');
-    fb.className = 'feedback show correct-fb';
-    fb.textContent = '✅ 正确！' + q.explain;
-    score++;
-  } else {
-    selected.classList.add('wrong');
-    correct.classList.add('correct');
-    fb.className = 'feedback show wrong-fb';
-    fb.textContent = '❌ 错误。' + q.explain;
-  }
-
-  answered++;
-  updateProgress();
-  if (answered === questions.length) showScore();
-}
+});
 
 function updateProgress() {
-  const pct = (answered / questions.length) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = `${answered} / ${questions.length} 已完成`;
+  const pct = (answered / total) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = answered + ' / ' + total + ' answered';
 }
 
-function showScore() {
-  const panel = document.getElementById('scorePanel');
-  panel.classList.add('show');
-  document.getElementById('scoreNum').textContent = `${score} / ${questions.length}`;
-  const pct = score / questions.length;
-  let msg = pct >= 0.9 ? '🏆 优秀！完全掌握本周内容！' :
-            pct >= 0.7 ? '👍 良好！建议复习错题。' :
-            '📚 需要加强复习，重点看 Lecture 和 Interactive。';
-  document.getElementById('scoreMsg').textContent = msg;
-  panel.scrollIntoView({ behavior:'smooth' });
+function submitQuiz() {
+  let score = 0;
+  document.querySelectorAll('.options').forEach(optGroup => {
+    const q = optGroup.dataset.q;
+    if (answers[q] && answers[q] === optGroup.dataset.answer) score++;
+  });
+  const card = document.getElementById('scoreCard');
+  document.getElementById('scoreBig').textContent = score + ' / ' + total;
+  const msgs = ['Keep going — review the explanations above! 💪', 'Good effort — check the pitfalls! 📖', 'Solid work! 👍', 'Great job! 🎉', 'Outstanding! 🏆'];
+  const idx = Math.min(Math.floor(score / 2), msgs.length - 1);
+  document.getElementById('scoreMsg').textContent = msgs[idx];
+  card.classList.add('show');
+  card.scrollIntoView({behavior:'smooth'});
 }
-
-buildQuiz();
 </script>
 </body>
 </html>

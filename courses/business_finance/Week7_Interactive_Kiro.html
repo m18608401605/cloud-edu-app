@@ -25,6 +25,8 @@
   .container { max-width:900px; margin:0 auto; padding:40px 24px 80px; }
 
   .lab { background:#1e293b; border-radius:14px; padding:32px; margin-bottom:32px; border:1px solid rgba(255,255,255,.07); }
+  .scenario-btn { background:rgba(232,160,32,.15); border:1px solid rgba(232,160,32,.4); color:#fbbf24; padding:.4rem .9rem; border-radius:20px; font-size:.82rem; cursor:pointer; transition:all .2s; }
+  .scenario-btn:hover { background:rgba(232,160,32,.3); border-color:var(--accent); }
   .lab-header { display:flex; align-items:center; gap:12px; margin-bottom:24px; }
   .lab-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
   .lab h2 { color:#f1f5f9; font-size:1.15rem; }
@@ -94,6 +96,13 @@
 
     <div class="constraint-note">⚡ 约束：W<sub>e</sub> = 1 − W<sub>d</sub>（股权权重自动计算，两者之和恒为 100%）</div>
 
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setWACC(20,40,20,100)">🏦 保守型（低杠杆）</button>
+      <button class="scenario-btn" onclick="setWACC(40,60,25,120)">🏢 典型企业</button>
+      <button class="scenario-btn" onclick="setWACC(60,80,25,150)">⚡ 高杠杆企业</button>
+      <button class="scenario-btn" onclick="setWACC(0,0,25,110)">📱 纯股权（Apple式）</button>
+    </div>
+
     <div class="slider-group">
       <div class="slider-label"><span>债务权重 W<sub>d</sub></span><span class="val" id="wdVal">30%</span></div>
       <input type="range" id="wd" min="0" max="100" value="30" oninput="calcWACC()">
@@ -145,6 +154,13 @@
     </div>
     <p>探索 Beta 和市场风险溢价如何影响权益成本。无风险利率固定为 R<sub>f</sub> = 4%。</p>
 
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setCAPM(50,53)">🛡️ 防御型股票 (β=0.5)</button>
+      <button class="scenario-btn" onclick="setCAPM(100,60)">📊 市场平均 (β=1.0)</button>
+      <button class="scenario-btn" onclick="setCAPM(150,60)">🚀 成长型科技 (β=1.5)</button>
+      <button class="scenario-btn" onclick="setCAPM(200,80)">💥 高风险初创 (β=2.0)</button>
+    </div>
+
     <div class="slider-group">
       <div class="slider-label"><span>Beta (β) — 系统性风险</span><span class="val" id="betaVal">1.20</span></div>
       <input type="range" id="beta" min="0" max="300" value="120" oninput="calcCAPM()">
@@ -180,6 +196,12 @@
     </div>
     <p>用股利增长模型计算权益成本，并与 CAPM 结果（来自 Lab 2）对比。</p>
 
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">
+      <button class="scenario-btn" onclick="setDGM(30,420,50)">🏪 成熟零售股 (低增长)</button>
+      <button class="scenario-btn" onclick="setDGM(200,5000,80)">💊 制药公司 (中增长)</button>
+      <button class="scenario-btn" onclick="setDGM(50,2000,120)">⚡ 公用事业 (稳定高息)</button>
+    </div>
+
     <div class="slider-group">
       <div class="slider-label"><span>预期股利 D<sub>1</sub> (£)</span><span class="val" id="d1Val">£2.00</span></div>
       <input type="range" id="d1" min="10" max="500" value="200" oninput="calcDGM()">
@@ -210,6 +232,26 @@
 </div>
 
 <script>
+// Scenario preset functions
+function setWACC(wd, kd, tax, ke) {
+  document.getElementById('wd').value = wd;
+  document.getElementById('kd').value = kd;
+  document.getElementById('tax').value = tax;
+  document.getElementById('ke').value = ke;
+  calcWACC();
+}
+function setCAPM(beta, mrp) {
+  document.getElementById('beta').value = beta;
+  document.getElementById('mrp').value = mrp;
+  calcCAPM();
+}
+function setDGM(d1, p0, g) {
+  document.getElementById('d1').value = d1;
+  document.getElementById('p0').value = p0;
+  document.getElementById('g').value = g;
+  calcDGM();
+}
+
 function calcWACC() {
   const wd = +document.getElementById('wd').value / 100;
   const kd = +document.getElementById('kd').value / 10 / 100;
