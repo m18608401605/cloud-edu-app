@@ -43,6 +43,10 @@
   .metric .value.neutral{color:#fbbf24}
   .insight{background:#1e3a5f;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-top:1.2rem;font-size:.9rem;color:#bfdbfe}
   .insight strong{color:#fff}
+  .scenario-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+  .scenario-btn{background:#1e293b;border:1px solid #334155;color:#94a3b8;padding:.4rem .9rem;border-radius:20px;font-size:.8rem;cursor:pointer;transition:all .2s}
+  .scenario-btn:hover{border-color:var(--accent);color:#fbbf24}
+  .scenario-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
   .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
   .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
   .btn-primary{background:var(--primary);color:#fff}
@@ -73,6 +77,12 @@
   <div class="lab">
     <h2>📊 Two-Asset Portfolio Risk Explorer</h2>
     <div class="subtitle">调整两资产的权重和相关系数，实时观察组合风险如何变化。注意：当相关系数降低时，分散化效果如何提升。</div>
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setPortfolioScenario(60,10,20,0.3,12,18,this)">📊 Barclays + National Grid</button>
+      <button class="scenario-btn" onclick="setPortfolioScenario(50,15,15,-0.2,10,10,this)">🛡️ Equity + Bonds</button>
+      <button class="scenario-btn" onclick="setPortfolioScenario(50,20,20,0.9,15,15,this)">⚠️ Two Banks (High ρ)</button>
+      <button class="scenario-btn" onclick="setPortfolioScenario(50,15,15,-1,12,12,this)">🎯 Perfect Hedge (ρ=−1)</button>
+    </div>
     <div class="lab-grid">
       <div>
         <div class="control-group">
@@ -117,6 +127,12 @@
   <div class="lab">
     <h2>📉 Security Market Line (SML) Explorer</h2>
     <div class="subtitle">调整无风险利率和市场收益率，观察SML如何变化。输入任意β值，立即得到CAPM要求收益率。</div>
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setCAPMScenario(45,105,70,this)">📱 Vodafone (β=0.7)</button>
+      <button class="scenario-btn" onclick="setCAPMScenario(45,105,100,this)">📈 FTSE Market (β=1.0)</button>
+      <button class="scenario-btn" onclick="setCAPMScenario(45,105,160,this)">⛏️ Mining Co (β=1.6)</button>
+      <button class="scenario-btn" onclick="setCAPMScenario(45,105,0,this)">🏦 Risk-Free (β=0)</button>
+    </div>
     <div class="lab-grid">
       <div>
         <div class="control-group">
@@ -282,6 +298,27 @@ function calcBeta(){
 
 updatePortfolio();
 updateCAPM();
+
+function setPortfolioScenario(wA,sA,sB,rho,erA,erB,btn){
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('wA').value=wA;
+  document.getElementById('sigA').value=sA;
+  document.getElementById('sigB').value=sB;
+  document.getElementById('rho').value=Math.round(rho*100);
+  document.getElementById('erA').value=erA;
+  document.getElementById('erB').value=erB;
+  updatePortfolio();
+}
+
+function setCAPMScenario(rf10,rm10,beta100,btn){
+  document.querySelectorAll('.scenario-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('rf').value=rf10;
+  document.getElementById('rm').value=rm10;
+  document.getElementById('beta').value=beta100;
+  updateCAPM();
+}
 </script>
 </body>
 </html>

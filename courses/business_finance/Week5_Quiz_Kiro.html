@@ -81,7 +81,7 @@ MathJax = {
   <div class="meta">
     <span>📖 McLaney Ch.7</span>
     <span>⏱ ~20 min</span>
-    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 1 Calculation</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 2 Calculations</span>
   </div>
 </div>
 <main>
@@ -347,6 +347,60 @@ MathJax = {
 
         <h4>📌 Exam Anti-Pitfall</h4>
         <p>The most common error: using σ_A and σ_B directly in CAPM instead of beta. CAPM uses <em>beta</em> (systematic risk only), not total standard deviation. A high-σ asset with low beta may have a lower required return than a low-σ asset with high beta.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="calc-card" style="margin-top:1.5rem">
+    <div class="q-num">Calculation Question 2</div>
+    <div class="q-text">Expected Return, Variance &amp; Covariance from Probability Scenarios</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario Data — Two Shares: Apex plc &amp; Beacon plc</h4>
+      <p>An analyst assigns probabilities to three economic scenarios for the coming year:</p>
+      <table style="width:100%;border-collapse:collapse;margin:.8rem 0;font-size:.88rem;">
+        <tr style="background:#1a3a5c;color:white;"><th style="padding:.5rem .8rem;text-align:left;">Scenario</th><th style="padding:.5rem .8rem;">Probability</th><th style="padding:.5rem .8rem;">Apex Return</th><th style="padding:.5rem .8rem;">Beacon Return</th></tr>
+        <tr><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;">Boom</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">0.25</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">30%</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">10%</td></tr>
+        <tr style="background:#f8f9fa;"><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;">Normal</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">0.50</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">12%</td><td style="padding:.5rem .8rem;border-bottom:1px solid #e0e0e0;text-align:center;">12%</td></tr>
+        <tr><td style="padding:.5rem .8rem;">Recession</td><td style="padding:.5rem .8rem;text-align:center;">0.25</td><td style="padding:.5rem .8rem;text-align:center;">−8%</td><td style="padding:.5rem .8rem;text-align:center;">14%</td></tr>
+      </table>
+      <p style="margin-top:.8rem;"><strong>Required:</strong></p>
+      <ol style="margin:.5rem 0 0 1.2rem;font-size:.9rem;line-height:2">
+        <li>Calculate E(R) and σ for both Apex and Beacon.</li>
+        <li>Calculate Cov(Apex, Beacon) and the correlation coefficient ρ.</li>
+        <li>An investor puts 50% in each. Calculate the portfolio E(R) and σ_p.</li>
+        <li>Comment on the diversification benefit and what the covariance sign tells you.</li>
+      </ol>
+    </div>
+    <details>
+      <summary>🔍 Click to reveal full solution</summary>
+      <div class="answer-content">
+        <h4>Part 1 — Expected Returns</h4>
+        <div class="formula">\( E(R_{Apex}) = 0.25(30\%) + 0.50(12\%) + 0.25(-8\%) = 7.5 + 6 - 2 = 11.5\% \)</div>
+        <div class="formula">\( E(R_{Beacon}) = 0.25(10\%) + 0.50(12\%) + 0.25(14\%) = 2.5 + 6 + 3.5 = 12\% \)</div>
+
+        <h4>Part 1 — Variances &amp; Standard Deviations</h4>
+        <div class="formula">\( \sigma^2_{Apex} = 0.25(30-11.5)^2 + 0.50(12-11.5)^2 + 0.25(-8-11.5)^2 \)</div>
+        <div class="formula">\( = 0.25(342.25) + 0.50(0.25) + 0.25(380.25) = 85.5625 + 0.125 + 95.0625 = 180.75 \)</div>
+        <div class="formula">\( \sigma_{Apex} = \sqrt{180.75} \approx 13.44\% \)</div>
+        <div class="formula">\( \sigma^2_{Beacon} = 0.25(10-12)^2 + 0.50(12-12)^2 + 0.25(14-12)^2 = 0.25(4) + 0 + 0.25(4) = 2 \)</div>
+        <div class="formula">\( \sigma_{Beacon} = \sqrt{2} \approx 1.41\% \)</div>
+
+        <h4>Part 2 — Covariance</h4>
+        <div class="formula">\( Cov = 0.25(30-11.5)(10-12) + 0.50(12-11.5)(12-12) + 0.25(-8-11.5)(14-12) \)</div>
+        <div class="formula">\( = 0.25(18.5)(-2) + 0 + 0.25(-19.5)(2) = -9.25 + 0 - 9.75 = -19 \)</div>
+        <div class="formula">\( \rho = \frac{Cov}{\sigma_A \sigma_B} = \frac{-19}{13.44 \times 1.41} \approx \frac{-19}{18.95} \approx -1.00 \)</div>
+        <p style="margin-top:.6rem;color:#c0392b;font-weight:600">⚠️ ρ ≈ −1: Apex and Beacon are nearly perfectly negatively correlated — they move in opposite directions. This is the ideal diversification scenario.</p>
+
+        <h4>Part 3 — Portfolio (50/50)</h4>
+        <div class="formula">\( E(R_p) = 0.5(11.5\%) + 0.5(12\%) = 11.75\% \)</div>
+        <div class="formula">\( \sigma^2_p = (0.5)^2(180.75) + (0.5)^2(2) + 2(0.5)(0.5)(-19) \)</div>
+        <div class="formula">\( = 45.1875 + 0.5 - 9.5 = 36.1875 \)</div>
+        <div class="formula">\( \sigma_p = \sqrt{36.1875} \approx 6.02\% \)</div>
+
+        <h4>Part 4 — Diversification Comment</h4>
+        <div class="verdict">
+          The weighted average σ = 0.5×13.44% + 0.5×1.41% = 7.43%. The portfolio σ (6.02%) is lower — a saving of 1.41%. The negative covariance (−19) is the key: Apex performs best in booms, Beacon is stable across all scenarios. Combining them smooths out the boom/bust swings. The negative covariance term (−9.5) directly reduces portfolio variance, demonstrating why assets with negative or low correlation are valuable in a portfolio.
+        </div>
       </div>
     </details>
   </div>
