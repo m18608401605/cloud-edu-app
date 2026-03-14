@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 | Lecture | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
+  .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem}
+  .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
+  .card p{margin-bottom:.8rem}
+  .card ul,.card ol{padding-left:1.4rem;margin-bottom:.8rem}
+  .card li{margin-bottom:.4rem}
+  .concept-box{background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem 1.5rem;margin:1rem 0}
+  .concept-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:.06em;margin-bottom:.5rem}
+  .case{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .case .case-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#b7860b;letter-spacing:.06em;margin-bottom:.6rem}
+  .case h4{font-size:1rem;color:#7a5800;margin-bottom:.6rem}
+  .pitfall{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .pitfall .pitfall-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:.6rem}
+  .pitfall .rule{background:#fee2e2;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600;color:#991b1b}
+  .formula-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1.4rem;margin:1rem 0;font-family:monospace}
+  .formula-box .f-title{color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+  .formula-box .f-main{font-size:1.1rem;color:#fbbf24;margin-bottom:.4rem}
+  .formula-box .f-note{font-size:.82rem;color:#64748b}
+  table.data{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  table.data th{background:var(--primary);color:#fff;padding:.7rem 1rem;text-align:left}
+  table.data td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+  table.data tr:nth-child(even) td{background:#f8fafc}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">&#128218; Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_StudyGuide_Kiro.html">&#128506;&#65039; Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Lecture_Kiro.html" class="active">&#128214; Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Interactive_Kiro.html">&#129514; Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Quiz_Kiro.html">&#9999;&#65039; Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 6</span>
+</nav>
+
+<div class="hero">
+  <div class="tag">Week 6 &middot; Chapter 8</div>
+  <h1>Sources of Long-Term Finance</h1>
+  <p>&#38271;&#26399;&#34701;&#36164;&#26469;&#28304; &mdash; Equity, Debt, Convertibles, Leasing &amp; Islamic Finance</p>
+  <div class="meta">
+    <span>&#128214; McLaney Ch.8</span>
+    <span>&#9201; ~50 min read</span>
+    <span>&#127919; Exam Weight: High</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- PART 1 -->
+  <div class="section-label">&#128200; Part 1 &mdash; Ordinary Shares &#26222;&#36890;&#32929;</div>
+  <div class="card">
+    <h2>1.1 Characteristics &#29305;&#24449;</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把公司融资想象成<strong>开餐厅借钱</strong>：银行贷款（债务）是你向朋友借的钱，每月固定还利息，朋友不管你生意好不好都要收利息，但生意倒了他先拿回钱。普通股股东像是<strong>合伙人</strong>——生意好了分红，生意差了不分，倒闭了最后才能拿剩余资产。风险最高，所以要求回报也最高。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Ordinary shareholders = residual claimants. Highest risk → highest required return. No fixed obligation for the company.</p>
+    </div>
+    <p>Ordinary shareholders are <strong>residual claimants</strong> &mdash; they get paid last, after all creditors and preference shareholders. In return they receive:</p>
+    <ul>
+      <li><strong>Voting rights</strong> &mdash; one share, one vote (typically)</li>
+      <li><strong>Dividends</strong> &mdash; not guaranteed; paid only if the board declares them</li>
+      <li><strong>Capital gains</strong> &mdash; if the share price rises</li>
+    </ul>
+    <h3>Advantages for the Company</h3>
+    <ul>
+      <li><strong>No fixed obligation</strong> &mdash; dividends can be cut or omitted in hard times</li>
+      <li><strong>Permanent capital</strong> &mdash; no repayment date, strengthens the balance sheet</li>
+      <li>Improves debt capacity (lower gearing)</li>
+    </ul>
+    <h3>Disadvantages for the Company</h3>
+    <ul>
+      <li><strong>Most expensive source of finance</strong> &mdash; shareholders bear the highest risk, so they demand the highest return</li>
+      <li><strong>Dilutes control</strong> &mdash; new shareholders get voting rights</li>
+      <li>Dividends paid from after-tax profits (no tax shield)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>1.2 Rights Issue &#37197;&#32929;</h2>
+    <p>A <strong>rights issue</strong> offers new shares to <em>existing</em> shareholders at a discount to the current market price, in proportion to their existing holdings. This protects existing shareholders from dilution.</p>
+    <div class="formula-box">
+      <div class="f-title">Theoretical Ex-Rights Price (TERP)</div>
+      <div class="f-main">TERP = (N &times; P<sub style="font-size:.8em">old</sub> + P<sub style="font-size:.8em">issue</sub>) / (N + 1)</div>
+      <div class="f-note">N = number of existing shares needed to get 1 new share &nbsp;|&nbsp; P_old = current market price &nbsp;|&nbsp; P_issue = issue price</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">&#128221; Worked Example</div>
+      <h4>4-for-1 Rights Issue</h4>
+      <p>A company offers a <strong>4-for-1 rights issue</strong> at <strong>&pound;2.50</strong>. Current share price = <strong>&pound;3.20</strong>.</p>
+      <table class="data">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Existing shares (N)</td><td>4</td></tr>
+        <tr><td>Current price (P_old)</td><td>&pound;3.20</td></tr>
+        <tr><td>Issue price (P_issue)</td><td>&pound;2.50</td></tr>
+        <tr><td>TERP = (4 &times; 3.20 + 2.50) / 5</td><td><strong>&pound;3.06</strong></td></tr>
+      </table>
+      <p>After the rights issue, the share price should theoretically fall to <strong>&pound;3.06</strong>. Shareholders are no better or worse off &mdash; the value of their rights compensates for the price drop.</p>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="section-label">&#127381; Part 2 &mdash; Preference Shares &#20248;&#20808;&#32929;</div>
+  <div class="card">
+    <h2>2.1 Key Features</h2>
+    <ul>
+      <li><strong>Fixed dividend</strong> (expressed as % of nominal value) &mdash; paid <em>before</em> ordinary dividends</li>
+      <li><strong>Cumulative preference shares</strong>: unpaid dividends accumulate and must be paid before ordinary dividends resume</li>
+      <li><strong>Non-cumulative</strong>: missed dividends are lost forever</li>
+      <li><strong>No voting rights</strong> (usually) &mdash; unless dividends are in arrears</li>
+    </ul>
+    <div class="pitfall">
+      <div class="pitfall-tag">&#9888;&#65039; Exam Pitfall</div>
+      <p>Preference dividends are <strong>NOT tax-deductible</strong> &mdash; they are paid from after-tax profits, just like ordinary dividends. This makes preference shares more expensive than debt despite having a fixed payment.</p>
+      <div class="rule">Tax shield applies to DEBT interest only &mdash; not preference dividends!</div>
+    </div>
+    <h2>2.2 Comparison: Ordinary vs Preference vs Debt</h2>
+    <table class="data">
+      <tr><th>Feature</th><th>Ordinary Shares</th><th>Preference Shares</th><th>Debt (Bonds)</th></tr>
+      <tr><td>Return to investor</td><td>Variable dividend + capital gain</td><td>Fixed dividend</td><td>Fixed interest (coupon)</td></tr>
+      <tr><td>Priority on liquidation</td><td>Last (residual)</td><td>Before ordinary</td><td>First (creditor)</td></tr>
+      <tr><td>Voting rights</td><td>Yes</td><td>Usually no</td><td>No</td></tr>
+      <tr><td>Tax deductible?</td><td>No</td><td>No</td><td>Yes</td></tr>
+      <tr><td>Repayment date</td><td>None (permanent)</td><td>Usually none</td><td>Yes (maturity)</td></tr>
+      <tr><td>Cost to company</td><td>Highest</td><td>Medium-High</td><td>Lowest (after tax)</td></tr>
+    </table>
+  </div>
+
+  <!-- PART 3 -->
+  <div class="section-label">&#128181; Part 3 &mdash; Bonds &amp; Loan Notes &#20debt;&#20238;&#19982;&#36151;&#27454;&#31080;&#25454;</div>
+  <div class="card">
+    <h2>3.1 Bond Basics</h2>
+    <p>A <strong>bond</strong> (or loan note / debenture) is a long-term debt instrument with:</p>
+    <ul>
+      <li><strong>Face value</strong> (par value) &mdash; typically &pound;100, repaid at maturity</li>
+      <li><strong>Coupon rate</strong> &mdash; fixed annual interest as % of face value</li>
+      <li><strong>Maturity date</strong> &mdash; when the principal is repaid</li>
+    </ul>
+    <h3>Secured vs Unsecured</h3>
+    <ul>
+      <li><strong>Secured debentures</strong>: backed by specific assets (fixed charge) or all assets (floating charge) &mdash; lower risk to lender, lower interest rate</li>
+      <li><strong>Unsecured loan notes</strong>: no asset backing &mdash; higher risk, higher coupon required</li>
+    </ul>
+    <h2>3.2 Tax Shield on Debt</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把税盾想象成<strong>政府替你付了一部分利息</strong>：你借钱付8%利息，但这8%可以从利润里扣掉再交税。税率30%，相当于政府帮你承担了 8%×30%=2.4% 的利息，你实际只付 5.6%。股权股息没有这个优惠——股息是税后利润分配，政府不补贴。这就是为什么债务比股权便宜。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Interest is tax-deductible → government subsidises part of the cost. Dividends are not → no subsidy. This is the core reason debt is cheaper than equity.</p>
+    </div>
+    <p>Interest payments on debt are <strong>tax-deductible</strong>. This reduces the effective cost of debt to the company &mdash; the government effectively subsidises part of the interest cost.</p>
+    <div class="formula-box">
+      <div class="f-title">After-Tax Cost of Debt</div>
+      <div class="f-main">K<sub style="font-size:.8em">d(after-tax)</sub> = Coupon Rate &times; (1 &minus; Tax Rate)</div>
+      <div class="f-note">Also written as: K<sub style="font-size:.8em">d</sub> &times; (1 &minus; t)</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">&#128221; Worked Example</div>
+      <h4>8% Bond, 30% Corporation Tax</h4>
+      <table class="data">
+        <tr><th>Item</th><th>Value</th></tr>
+        <tr><td>Coupon rate</td><td>8%</td></tr>
+        <tr><td>Tax rate (t)</td><td>30%</td></tr>
+        <tr><td>After-tax cost = 8% &times; (1 &minus; 0.30)</td><td><strong>5.6%</strong></td></tr>
+      </table>
+      <p>The company pays 8% interest but the effective cost is only <strong>5.6%</strong> because the 2.4% tax saving reduces the net outflow.</p>
+    </div>
+    <div class="concept-box">
+      <div class="label">&#128161; Why Debt is Cheaper than Equity</div>
+      <p><strong>1. Lower risk to the lender</strong> &mdash; debt holders are paid before shareholders, so they accept a lower return.</p>
+      <p><strong>2. Tax deductibility</strong> &mdash; interest reduces taxable profit, creating a government subsidy. Dividends do not.</p>
+      <p>These two factors together make debt the cheapest source of long-term finance (though too much debt increases financial risk).</p>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="section-label">&#128260; Part 4 &mdash; Convertible Bonds &#21487;&#36716;&#25442;&#20debt;&#20238;</div>
+  <div class="card">
+    <h2>4.1 How Convertibles Work</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>可转换债券就像<strong>买了一张"期权票"的债券</strong>：你先借给公司钱（收低利息），同时拿到一张票，说"如果公司股价涨到某个价格，我可以把债券换成股票"。公司股价涨了你换股票赚差价；股价没涨你就继续收利息拿回本金。对投资者：下有保底（债券），上有弹性（股票）。对公司：初始利率低，且如果转换了就不用还本金。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Convertible = bond + call option on shares. Lower coupon for company; upside potential for investor. Win-win — until conversion dilutes existing shareholders.</p>
+    </div>
+    <p>A <strong>convertible bond</strong> starts as debt but gives the holder the <em>option</em> to convert into ordinary shares at a predetermined price/ratio.</p>
+    <ul>
+      <li><strong>Conversion ratio</strong>: number of shares received per bond</li>
+      <li><strong>Conversion price</strong>: effective price paid per share on conversion</li>
+      <li><strong>Conversion premium</strong>: how much above the current share price the conversion price is</li>
+    </ul>
+    <div class="formula-box">
+      <div class="f-title">Conversion Price</div>
+      <div class="f-main">Conversion Price = Bond Face Value / Conversion Ratio</div>
+      <div class="f-note">e.g. &pound;100 bond converting to 40 shares &rarr; Conversion Price = &pound;100/40 = &pound;2.50</div>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Conversion Premium</div>
+      <div class="f-main">Premium = (Conversion Price &minus; Current Share Price) / Current Share Price &times; 100%</div>
+      <div class="f-note">Measures how far the share price must rise before conversion is worthwhile</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">&#128221; Worked Example</div>
+      <h4>Convertible Bond Analysis</h4>
+      <p>A &pound;100 bond converts into <strong>40 shares</strong>. Current share price = <strong>&pound;2.20</strong>.</p>
+      <table class="data">
+        <tr><th>Calculation</th><th>Result</th></tr>
+        <tr><td>Conversion price = &pound;100 / 40</td><td><strong>&pound;2.50</strong></td></tr>
+        <tr><td>Conversion premium = (2.50 &minus; 2.20) / 2.20 &times; 100%</td><td><strong>13.6%</strong></td></tr>
+      </table>
+      <p>The share price must rise by at least <strong>13.6%</strong> before conversion becomes financially attractive to the bondholder.</p>
+    </div>
+    <h2>4.2 Why Companies Issue Convertibles</h2>
+    <ul>
+      <li><strong>Lower coupon rate</strong> &mdash; investors accept less interest in exchange for the conversion option</li>
+      <li><strong>Deferred equity</strong> &mdash; company avoids immediate dilution; shares only issued if conversion occurs</li>
+      <li><strong>No immediate dilution</strong> of EPS or control at issue date</li>
+      <li>Attractive to investors who want downside protection (bond floor) with upside potential (equity)</li>
+    </ul>
+  </div>
+
+  <!-- PART 5 -->
+  <div class="section-label">&#127968; Part 5 &mdash; Leasing &#31199;&#36161;</div>
+  <div class="card">
+    <h2>5.1 Types of Lease</h2>
+    <h3>Operating Lease</h3>
+    <ul>
+      <li><strong>Short-term</strong> &mdash; lease period is less than the asset's useful life</li>
+      <li><strong>Lessor bears obsolescence risk</strong> &mdash; they own the asset and must re-lease or sell it</li>
+      <li>Under old rules: <strong>off-balance-sheet</strong> (kept debt ratios artificially low)</li>
+    </ul>
+    <h3>Finance Lease</h3>
+    <ul>
+      <li><strong>Long-term</strong> &mdash; covers most of the asset's useful life</li>
+      <li><strong>Lessee bears risks and rewards</strong> of ownership (even though legal title stays with lessor)</li>
+      <li><strong>On-balance-sheet</strong> &mdash; asset and liability both recognised</li>
+    </ul>
+    <h3>Sale and Leaseback</h3>
+    <p>Company <strong>sells an asset</strong> (e.g. property) to a financial institution, then <strong>leases it back</strong> immediately. This raises cash while retaining use of the asset.</p>
+    <h2>5.2 Advantages of Leasing</h2>
+    <ul>
+      <li><strong>Preserves cash</strong> &mdash; no large upfront capital outlay</li>
+      <li><strong>Avoids obsolescence</strong> &mdash; especially with operating leases on technology</li>
+      <li><strong>100% financing</strong> &mdash; unlike bank loans which may require a deposit</li>
+      <li>Lease payments may be tax-deductible</li>
+    </ul>
+    <div class="pitfall">
+      <div class="pitfall-tag">&#9888;&#65039; IFRS 16 Pitfall</div>
+      <p>Under <strong>IFRS 16</strong> (effective 2019), the distinction between operating and finance leases has largely been eliminated for lessees. <strong>Almost all leases must now be recognised on the balance sheet</strong> as a right-of-use asset and a lease liability.</p>
+      <div class="rule">The "off-balance-sheet" advantage of operating leases is gone under IFRS 16!</div>
+    </div>
+  </div>
+
+  <!-- PART 6 -->
+  <div class="section-label">&#9733; Part 6 &mdash; Islamic Finance &#20234;&#26031;&#20848;&#37329;&#34701;</div>
+  <div class="card">
+    <h2>6.1 Core Principle: Prohibition of Riba</h2>
+    <p>Islamic finance is governed by <strong>Sharia law</strong>, which prohibits <strong>riba</strong> (interest). The principle is that money cannot earn money simply by existing &mdash; returns must be linked to real economic activity and risk-sharing.</p>
+    <h2>6.2 Key Instruments</h2>
+    <table class="data">
+      <tr><th>Instrument</th><th>Conventional Equivalent</th><th>How It Works</th></tr>
+      <tr><td><strong>Murabaha</strong></td><td>Loan / trade finance</td><td>Bank buys the asset and sells it to the customer at a <strong>cost-plus markup</strong>, payable in instalments. No interest &mdash; the profit is built into the price.</td></tr>
+      <tr><td><strong>Ijara</strong></td><td>Leasing</td><td>Bank buys and owns the asset, then <strong>leases it</strong> to the customer for a fee. Similar to a finance lease but structured to avoid interest.</td></tr>
+      <tr><td><strong>Musharaka</strong></td><td>Equity / partnership</td><td><strong>Profit-sharing partnership</strong> &mdash; bank and customer jointly own the asset/business and share profits and losses according to agreed ratios.</td></tr>
+      <tr><td><strong>Sukuk</strong></td><td>Bonds</td><td><strong>Islamic bonds</strong> &mdash; asset-backed securities where investors receive a share of profits from the underlying asset, not interest payments.</td></tr>
+    </table>
+    <div class="concept-box">
+      <div class="label">&#128161; Key Insight: Same Economic Effect, Different Structure</div>
+      <p>Islamic finance instruments achieve the <strong>same economic outcomes</strong> as conventional finance &mdash; funding asset purchases, raising capital, providing liquidity &mdash; but are structured around <strong>profit-sharing, asset ownership, and trade</strong> rather than interest-bearing loans.</p>
+      <p>For example, a Murabaha transaction and a conventional loan both allow a business to acquire an asset and pay over time. The difference is that in Murabaha, the bank takes temporary ownership of the asset and earns a trade profit, not interest.</p>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div class="section-label">&#128203; Summary &mdash; Comparison of All 5 Sources</div>
+  <div class="card">
+    <h2>Long-Term Finance: At a Glance</h2>
+    <table class="data">
+      <tr>
+        <th>Source</th>
+        <th>Cost</th>
+        <th>Risk to Company</th>
+        <th>Tax Deductible?</th>
+        <th>Control Impact</th>
+        <th>Maturity</th>
+      </tr>
+      <tr>
+        <td><strong>Ordinary Shares</strong></td>
+        <td>Highest (K<sub>e</sub>)</td>
+        <td>Low (no fixed obligation)</td>
+        <td>No</td>
+        <td>Dilutes voting control</td>
+        <td>Permanent</td>
+      </tr>
+      <tr>
+        <td><strong>Preference Shares</strong></td>
+        <td>Medium-High</td>
+        <td>Low-Medium (fixed div. but can omit)</td>
+        <td>No</td>
+        <td>Minimal (usually no vote)</td>
+        <td>Usually permanent</td>
+      </tr>
+      <tr>
+        <td><strong>Bonds / Loan Notes</strong></td>
+        <td>Lowest after tax (K<sub>d</sub>)</td>
+        <td>High (fixed interest + repayment)</td>
+        <td>Yes</td>
+        <td>None (no voting rights)</td>
+        <td>Fixed maturity</td>
+      </tr>
+      <tr>
+        <td><strong>Convertible Bonds</strong></td>
+        <td>Low initially; rises if converted</td>
+        <td>Medium (lower coupon, deferred equity)</td>
+        <td>Yes (while debt)</td>
+        <td>Deferred dilution on conversion</td>
+        <td>Fixed; converts or redeems</td>
+      </tr>
+      <tr>
+        <td><strong>Leasing</strong></td>
+        <td>Medium</td>
+        <td>Medium (lease obligations)</td>
+        <td>Partially (lease payments)</td>
+        <td>None</td>
+        <td>Lease term</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="card">
+    <h2>🎯 Week 6 Quick-Reference Pitfall Table</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Common Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Preference dividends</td><td>"Preference dividends are tax-deductible like interest"</td><td>❌ Wrong — preference dividends are paid from after-tax profit. Only debt interest gets a tax shield.</td></tr>
+        <tr><td>After-tax cost of debt</td><td>Using the coupon rate directly as cost of debt</td><td>K_d(after-tax) = Coupon Rate × (1 − Tax Rate). Always adjust for tax.</td></tr>
+        <tr><td>Rights issue TERP</td><td>Thinking shareholders lose money when price falls to TERP</td><td>Shareholders are no worse off — the value of the rights exactly compensates for the price drop.</td></tr>
+        <tr><td>Convertible bond conversion</td><td>"Conversion is always good for the bondholder"</td><td>Only convert if conversion value > bond redemption value. Share price must exceed conversion price.</td></tr>
+        <tr><td>Operating lease (pre-IFRS 16)</td><td>"Operating leases keep debt off the balance sheet"</td><td>Under IFRS 16 (2019+), almost all leases must be on-balance-sheet. The off-balance-sheet advantage is gone.</td></tr>
+        <tr><td>Islamic finance instruments</td><td>Confusing Murabaha (trade) with Musharaka (partnership)</td><td>Murabaha = cost-plus sale (like a loan); Musharaka = profit-sharing partnership (like equity); Ijara = leasing.</td></tr>
+        <tr><td>Ordinary vs preference shares cost</td><td>"Preference shares are cheaper than ordinary shares because dividend is fixed"</td><td>Preference shares are still more expensive than debt — no tax deductibility. Fixed ≠ cheap.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_StudyGuide_Kiro.html" class="btn btn-outline">&larr; Study Guide</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Interactive_Kiro.html" class="btn btn-primary">Interactive Lab &rarr;</a>
+  </div>
+
+</main>
+</body>
+</html>
