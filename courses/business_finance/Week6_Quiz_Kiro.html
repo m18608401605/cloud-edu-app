@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 6 Quiz — Sources of Finance | BUSI1070</title>
+<style>
+:root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--green:#27ae60;--red:#e74c3c;--card:#fff;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',sans-serif;background:var(--bg);color:#333;}
+nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;gap:1rem;height:56px;position:sticky;top:0;z-index:100;}
+nav .logo{color:var(--accent);font-weight:700;font-size:1.1rem;margin-right:auto;}
+nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.85rem;padding:.3rem .7rem;border-radius:4px;transition:background .2s;}
+nav a:hover,nav a.active{background:rgba(255,255,255,.15);color:#fff;}
+.hero{background:linear-gradient(135deg,var(--primary) 0%,#2d6a9f 100%);color:white;padding:3rem 2rem 2rem;text-align:center;}
+.hero h1{font-size:2rem;margin-bottom:.5rem;}
+.hero p{opacity:.85;font-size:1rem;}
+.hero .meta{margin-top:1rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.75;}
+.progress-bar-wrap{background:#e0e0e0;border-radius:8px;height:8px;margin:2rem auto;max-width:700px;}
+.progress-bar{background:var(--accent);height:8px;border-radius:8px;transition:width .4s;width:0%;}
+.progress-label{text-align:center;font-size:.85rem;color:#666;margin-top:.4rem;}
+main{max-width:800px;margin:0 auto;padding:1.5rem 1rem 4rem;}
+.section-header{background:var(--primary);color:white;padding:.8rem 1.2rem;border-radius:8px 8px 0 0;font-weight:600;font-size:1rem;margin-top:2.5rem;}
+.q-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;margin-bottom:0;}
+.q-card:last-of-type{border-radius:0 0 8px 8px;}
+.q-num{color:var(--accent);font-weight:700;font-size:.85rem;margin-bottom:.5rem;}
+.q-text{font-size:1rem;line-height:1.6;margin-bottom:1rem;font-weight:500;}
+.q-source{font-size:.75rem;color:#999;margin-bottom:1rem;font-style:italic;}
+.options{display:flex;flex-direction:column;gap:.5rem;}
+.option{padding:.7rem 1rem;border:2px solid #e0e0e0;border-radius:6px;cursor:pointer;transition:all .2s;font-size:.95rem;background:#fafafa;}
+.option:hover{border-color:var(--primary);background:#eef3f8;}
+.option.selected{border-color:var(--primary);background:#dce8f5;font-weight:600;}
+.option.correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.option.wrong{border-color:var(--red);background:#f8d7da;color:#721c24;}
+.option.reveal-correct{border-color:var(--green);background:#d4edda;color:#155724;}
+.explanation{display:none;margin-top:1rem;padding:1rem;background:#f0f7ff;border-left:4px solid var(--primary);border-radius:0 6px 6px 0;font-size:.9rem;line-height:1.6;}
+.explanation.show{display:block;}
+.explanation strong{color:var(--primary);}
+.calc-card{background:var(--card);border:1px solid #e0e0e0;border-top:none;padding:1.5rem;border-radius:0 0 8px 8px;}
+.scenario-box{background:#f8f9fa;border:1px solid #dee2e6;border-radius:6px;padding:1.2rem;margin-bottom:1.2rem;font-size:.9rem;line-height:1.7;}
+.scenario-box h4{color:var(--primary);margin-bottom:.5rem;font-size:.95rem;}
+details{margin-top:1rem;}
+details summary{cursor:pointer;padding:.7rem 1rem;background:var(--primary);color:white;border-radius:6px;font-size:.9rem;font-weight:600;user-select:none;}
+details summary:hover{background:#2d6a9f;}
+details[open] summary{border-radius:6px 6px 0 0;}
+.answer-content{background:#f0f7ff;border:1px solid #c8dff5;border-top:none;padding:1.2rem;border-radius:0 0 6px 6px;font-size:.88rem;line-height:1.8;}
+.answer-content h4{color:var(--primary);margin:.8rem 0 .3rem;}
+.answer-content .formula{background:#1a3a5c;color:#e8f4fd;padding:.6rem 1rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.4rem 0;}
+.answer-content .verdict{background:#d4edda;border:1px solid #c3e6cb;border-radius:4px;padding:.6rem 1rem;color:#155724;font-weight:600;margin-top:.8rem;}
+.submit-area{text-align:center;margin:2rem 0;}
+.btn-submit{background:var(--accent);color:white;border:none;padding:.9rem 2.5rem;font-size:1rem;font-weight:700;border-radius:8px;cursor:pointer;transition:background .2s;}
+.btn-submit:hover{background:#c8880e;}
+.score-card{display:none;background:var(--card);border:2px solid var(--accent);border-radius:12px;padding:2rem;text-align:center;margin:2rem 0;}
+.score-card.show{display:block;}
+.score-big{font-size:3rem;font-weight:700;color:var(--primary);}
+.score-label{color:#666;margin-top:.3rem;}
+.score-msg{margin-top:1rem;font-size:1rem;color:#444;}
+.bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid #e0e0e0;}
+.btn-nav{display:inline-flex;align-items:center;gap:.4rem;padding:.6rem 1.2rem;background:var(--primary);color:white;text-decoration:none;border-radius:6px;font-size:.9rem;transition:background .2s;}
+.btn-nav:hover{background:#2d6a9f;}
+</style>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<nav>
+  <span class="logo">🎓 BUSI1070</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_StudyGuide_Kiro.html">Study Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Lecture_Kiro.html">Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Interactive_Kiro.html">Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Quiz_Kiro.html" class="active">Quiz</a>
+</nav>
+<div class="hero">
+  <h1>Week 6 Quiz</h1>
+  <p>Sources of Finance — Equity, Debt &amp; Convertibles</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.8</span>
+    <span>⏱ ~20 min</span>
+    <span>📝 Section A: 10 MCQ &nbsp;|&nbsp; Section B: 2 Calculations</span>
+  </div>
+</div>
+<main>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 10 answered</div>
+  <div class="section-header">Section A — Multiple Choice Questions (Pearson Ch.8)</div>
+
+  <!-- Q1 -->
+  <div class="q-card">
+    <div class="q-num">Question 1 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Mozar plc, an all-equity financed business, currently has 20 million ordinary shares of £0.25 each. These are quoted at £1.70 each. The business is about to announce a three-for-ten rights issue at £1.20 each.<br><br>What will be the theoretical value of the right to buy one of the new shares?</div>
+    <div class="options" data-q="1" data-answer="d">
+      <div class="option" data-val="a">A: £1.58</div>
+      <div class="option" data-val="b">B: £0.50</div>
+      <div class="option" data-val="c">C: £1.20</div>
+      <div class="option" data-val="d">D: £0.38</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — £0.38</strong><br><br>
+      <strong>Step 1: Calculate TERP (Theoretical Ex-Rights Price)</strong><br>
+      10 existing shares × £1.70 = £17.00<br>
+      3 new shares × £1.20 = £3.60<br>
+      Total value = £20.60 for 13 shares<br>
+      TERP = £20.60 ÷ 13 = <strong>£1.585</strong><br><br>
+      <strong>Step 2: Value of Right</strong><br>
+      Value of right = TERP − Issue price = £1.585 − £1.20 = <strong>£0.385 ≈ £0.38</strong><br><br>
+      <strong>⚠️ Pitfall:</strong> Don't confuse TERP (£1.585) with the value of the right. The right is the <em>benefit</em> of buying at a discount, not the post-rights share price.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card">
+    <div class="q-num">Question 2 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Which of the following sources of equity finance has the highest opportunity cost?</div>
+    <div class="options" data-q="2" data-answer="c">
+      <div class="option" data-val="a">A: Rights issue</div>
+      <div class="option" data-val="b">B: Public issue of new shares</div>
+      <div class="option" data-val="c">C: Retained earnings</div>
+      <div class="option" data-val="d">D: Bonus issue</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — Retained earnings</strong><br><br>
+      Retained earnings represent profits that <em>could</em> have been paid as dividends to shareholders. Shareholders forgo that cash, so the opportunity cost equals the shareholders' required return — the same as ordinary equity.<br><br>
+      <strong>⚠️ Pitfall:</strong> Many students think retained earnings are "free" because no cash leaves the firm. Wrong — the opportunity cost is real. Shareholders could have invested that money elsewhere at their required rate of return.
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card">
+    <div class="q-num">Question 3 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">In a rights issue, what is the role of an underwriter?</div>
+    <div class="options" data-q="3" data-answer="b">
+      <div class="option" data-val="a">A: To set the issue price above the market price</div>
+      <div class="option" data-val="b">B: To guarantee that all shares will be sold by buying any unsold shares</div>
+      <div class="option" data-val="c">C: To advise shareholders whether to take up their rights</div>
+      <div class="option" data-val="d">D: To calculate the TERP for the issuing company</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — Guarantee all shares will be sold</strong><br><br>
+      An underwriter agrees to purchase any shares not taken up by existing shareholders. This removes the risk of a failed issue for the company — in exchange for an underwriting fee.<br><br>
+      <strong>⚠️ Pitfall:</strong> The issue price must always be <em>below</em> the current market price (not above) to make the rights attractive. If set above, no rational shareholder would exercise their rights.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card">
+    <div class="q-num">Question 4 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">When a company makes a rights issue, which of the following must be true?</div>
+    <div class="options" data-q="4" data-answer="d">
+      <div class="option" data-val="a">A: The issue price must equal the current market price</div>
+      <div class="option" data-val="b">B: All shareholders must take up their rights</div>
+      <div class="option" data-val="c">C: The issue price must be above the current market price</div>
+      <div class="option" data-val="d">D: The issue price must stay below the current market price</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — Issue price must stay below market price</strong><br><br>
+      If the issue price equals or exceeds the market price, shareholders would simply buy shares in the open market instead. The discount is what makes rights valuable and ensures take-up.<br><br>
+      Shareholders who don't want to exercise their rights can <strong>sell the rights</strong> in the market — so they are never forced to participate (B is false).
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card">
+    <div class="q-num">Question 5 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Which of the following methods of raising equity finance is generally the most expensive?</div>
+    <div class="options" data-q="5" data-answer="d">
+      <div class="option" data-val="a">A: Rights issue</div>
+      <div class="option" data-val="b">B: Placing</div>
+      <div class="option" data-val="c">C: Bonus issue</div>
+      <div class="option" data-val="d">D: Public issue of ordinary shares</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: D — Public issue of ordinary shares</strong><br><br>
+      A full public issue (IPO or seasoned offering) involves extensive marketing, prospectus preparation, regulatory compliance, and underwriting fees — making it the most costly method.<br><br>
+      <strong>Cost ranking (cheapest → most expensive):</strong><br>
+      Bonus issue (no cash raised) → Retained earnings → Rights issue → Placing → Public issue
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card">
+    <div class="q-num">Question 6 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Which of the following correctly ranks these securities from lowest to highest required return?</div>
+    <div class="options" data-q="6" data-answer="c">
+      <div class="option" data-val="a">A: Ordinary shares &lt; Preference shares &lt; Government securities</div>
+      <div class="option" data-val="b">B: Preference shares &lt; Government securities &lt; Ordinary shares</div>
+      <div class="option" data-val="c">C: Government securities &lt; Preference shares &lt; Ordinary shares</div>
+      <div class="option" data-val="d">D: Government securities &lt; Ordinary shares &lt; Preference shares</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — Govt &lt; Preference &lt; Ordinary</strong><br><br>
+      Required return reflects risk. Government securities (gilts) are essentially risk-free. Preference shares have fixed dividends and priority over ordinary shareholders in liquidation — less risky than ordinary shares but riskier than gilts. Ordinary shareholders bear the most residual risk, so they demand the highest return.<br><br>
+      <strong>Risk = Return:</strong> Higher risk → higher required return. This is the fundamental risk-return trade-off.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card">
+    <div class="q-num">Question 7 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Which of the following is the most important source of equity finance for UK businesses?</div>
+    <div class="options" data-q="7" data-answer="a">
+      <div class="option" data-val="a">A: Retained profit</div>
+      <div class="option" data-val="b">B: Rights issues</div>
+      <div class="option" data-val="c">C: Public issues of new shares</div>
+      <div class="option" data-val="d">D: Venture capital</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — Retained profit</strong><br><br>
+      In practice, retained earnings (ploughed-back profits) are by far the dominant source of equity finance for UK companies. Rights issues and public issues are used for large capital raises but are relatively infrequent.<br><br>
+      <strong>Why?</strong> Retained earnings avoid flotation costs, don't dilute existing shareholders, and signal management confidence in future prospects.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card">
+    <div class="q-num">Question 8 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">How do you assess the following two statements?<br>
+    (1) A warrant is a type of bond that gives the holder the right to buy shares at a fixed price.<br>
+    (2) A finance lease is similar to a loan in that the lessee effectively owns the asset and bears the risks and rewards of ownership.</div>
+    <div class="options" data-q="8" data-answer="b">
+      <div class="option" data-val="a">A: True, True</div>
+      <div class="option" data-val="b">B: False, True</div>
+      <div class="option" data-val="c">C: True, False</div>
+      <div class="option" data-val="d">D: False, False</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: B — False, True</strong><br><br>
+      <strong>Statement 1 — FALSE:</strong> A warrant is an <em>option</em> (not a bond) that gives the holder the right to buy shares at a fixed price within a specified period. It is typically attached to a bond as a sweetener but is itself an equity derivative.<br><br>
+      <strong>Statement 2 — TRUE:</strong> Under a finance lease, the lessee uses the asset for most of its economic life, bears maintenance costs, and cannot cancel easily. It is economically equivalent to borrowing to buy — hence similar to a loan.
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card">
+    <div class="q-num">Question 9 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Approximately what are the long-run annual real returns for UK government securities and UK equities respectively?</div>
+    <div class="options" data-q="9" data-answer="a">
+      <div class="option" data-val="a">A: ~1% and ~5.3%</div>
+      <div class="option" data-val="b">B: ~3% and ~8%</div>
+      <div class="option" data-val="c">C: ~5% and ~10%</div>
+      <div class="option" data-val="d">D: ~0% and ~3%</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: A — ~1% and ~5.3%</strong><br><br>
+      Historical UK data (Dimson, Marsh &amp; Staunton) shows long-run real returns of approximately:<br>
+      • Government bonds (gilts): ~1% per year<br>
+      • Equities: ~5.3% per year<br><br>
+      The <strong>equity risk premium</strong> (ERP) ≈ 5.3% − 1% = <strong>~4.3%</strong> — the extra return investors demand for bearing equity risk over the risk-free rate.
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card">
+    <div class="q-num">Question 10 of 10</div>
+    <div class="q-source">Pearson Ch.8 MCQ</div>
+    <div class="q-text">Compared to secured debt, unsecured debt (loan stock) is best described as:</div>
+    <div class="options" data-q="10" data-answer="c">
+      <div class="option" data-val="a">A: Expensive and safe</div>
+      <div class="option" data-val="b">B: Cheap and safe</div>
+      <div class="option" data-val="c">C: Cheap and risky</div>
+      <div class="option" data-val="d">D: Expensive and risky</div>
+    </div>
+    <div class="explanation">
+      <strong>✅ Answer: C — Cheap and risky</strong><br><br>
+      From the <strong>company's perspective</strong>, unsecured debt is cheaper to issue (no asset pledging, less legal complexity). But from the <strong>lender's perspective</strong>, it is riskier — no collateral means lower recovery in default.<br><br>
+      <strong>⚠️ Pitfall:</strong> "Cheap" here refers to issuance cost, not interest rate. Lenders actually charge <em>higher</em> interest on unsecured debt to compensate for the extra risk — so the coupon rate is higher, but flotation costs are lower.
+    </div>
+  </div>
+
+  <div class="submit-area">
+    <button class="btn-submit" onclick="submitQuiz()">Submit Section A</button>
+  </div>
+  <div class="score-card" id="scoreCard">
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-label">Section A Score</div>
+    <div class="score-msg" id="scoreMsg"></div>
+  </div>
+
+  <!-- Section B -->
+  <div class="section-header" style="margin-top:3rem;">Section B — Calculation Questions</div>
+
+  <!-- B1: Rights Issue -->
+  <div class="calc-card">
+    <div class="q-num">Question B1 — Rights Issue Analysis</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Mozar plc Rights Issue</h4>
+      Mozar plc currently has <strong>20 million ordinary shares</strong> of £0.25 nominal value, quoted at <strong>£1.70 each</strong>. The company announces a <strong>3-for-10 rights issue</strong> at <strong>£1.20 per share</strong>.<br><br>
+      Shareholder A holds <strong>1,000 shares</strong> and is deciding what to do with her rights.
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> Calculate the Theoretical Ex-Rights Price (TERP).<br>
+      <strong>(b)</strong> Calculate the value of one right.<br>
+      <strong>(c)</strong> Show that Shareholder A's wealth is the same whether she:<br>
+      &nbsp;&nbsp;&nbsp;(i) exercises all her rights, or<br>
+      &nbsp;&nbsp;&nbsp;(ii) sells all her rights in the market.
+    </p>
+    <details>
+      <summary>📖 Click to reveal full worked solution</summary>
+      <div class="answer-content">
+        <h4>Part (a): TERP Calculation</h4>
+        <div class="formula">10 shares × £1.70 = £17.00 (existing)</div>
+        <div class="formula"> 3 shares × £1.20 = £3.60  (new)</div>
+        <div class="formula">Total = £20.60 for 13 shares</div>
+        <div class="formula">TERP = £20.60 ÷ 13 = £1.585</div>
+
+        <h4>Part (b): Value of One Right</h4>
+        <div class="formula">Value of right = TERP − Issue price = £1.585 − £1.20 = £0.385</div>
+        <p style="margin-top:.5rem;">Alternatively: (Market price − Issue price) ÷ (n + 1) = (£1.70 − £1.20) ÷ (10/3 + 1) = £0.50 ÷ 13/3 = £0.385 ✓</p>
+
+        <h4>Part (c): Shareholder A's Wealth Comparison</h4>
+        <p>Shareholder A holds 1,000 shares → entitled to <strong>300 rights</strong> (3 for every 10 held)</p>
+
+        <p style="margin-top:.8rem;"><strong>(i) Exercise all rights:</strong></p>
+        <div class="formula">Pay: 300 × £1.20 = £360 cash outflow</div>
+        <div class="formula">New holding: 1,300 shares × £1.585 = £2,060.50</div>
+        <div class="formula">Net wealth = £2,060.50 − £360 = £1,700.50</div>
+
+        <p style="margin-top:.8rem;"><strong>(ii) Sell all rights:</strong></p>
+        <div class="formula">Sell 300 rights × £0.385 = £115.50 cash inflow</div>
+        <div class="formula">Remaining: 1,000 shares × £1.585 = £1,585.00</div>
+        <div class="formula">Total wealth = £1,585.00 + £115.50 = £1,700.50</div>
+
+        <div class="verdict">✅ Both strategies yield £1,700.50 — rights issues are wealth-neutral for shareholders who act rationally.</div>
+
+        <p style="margin-top:.8rem;font-size:.85rem;color:#555;"><strong>Key insight:</strong> The only way a shareholder loses wealth is if they do nothing — letting rights lapse means forfeiting the £115.50 value of the rights.</p>
+      </div>
+    </details>
+  </div>
+
+  <!-- B2: Cost of Debt + Convertible Bond -->
+  <div class="calc-card" style="margin-top:1.5rem;border-top:1px solid #e0e0e0;">
+    <div class="q-num">Question B2 — Debt Financing Costs</div>
+    <div class="scenario-box">
+      <h4>📋 Scenario: Nexus plc Debt Instruments</h4>
+      <strong>Part A — Straight Debt:</strong><br>
+      Nexus plc issues a bond with <strong>£100 nominal value</strong>, <strong>7% coupon rate</strong> (paid annually). The company's corporation tax rate is <strong>25%</strong>.<br><br>
+      <strong>Part B — Convertible Bond:</strong><br>
+      Nexus also issues a convertible bond. Each £100 bond can be converted into <strong>35 ordinary shares</strong>. The current market price of Nexus shares is <strong>£2.60</strong>.
+    </div>
+    <p style="font-size:.95rem;line-height:1.7;margin-bottom:1rem;">
+      <strong>(a)</strong> Calculate the after-tax cost of debt (as a % of nominal value).<br>
+      <strong>(b)</strong> Calculate the conversion price of the convertible bond.<br>
+      <strong>(c)</strong> Calculate the conversion premium (as a %).<br>
+      <strong>(d)</strong> Explain why a company might prefer to issue convertible bonds rather than straight debt.
+    </p>
+    <details>
+      <summary>📖 Click to reveal full worked solution</summary>
+      <div class="answer-content">
+        <h4>Part (a): After-Tax Cost of Debt</h4>
+        <div class="formula">Annual coupon = 7% × £100 = £7.00</div>
+        <div class="formula">Tax relief = £7.00 × 25% = £1.75</div>
+        <div class="formula">After-tax interest = £7.00 − £1.75 = £5.25</div>
+        <div class="formula">After-tax cost of debt = £5.25 ÷ £100 = 5.25%</div>
+        <p style="margin-top:.5rem;">Or simply: <strong>Kd(after-tax) = Coupon rate × (1 − tax rate) = 7% × (1 − 0.25) = 5.25%</strong></p>
+
+        <h4>Part (b): Conversion Price</h4>
+        <div class="formula">Conversion price = Nominal value ÷ Conversion ratio</div>
+        <div class="formula">= £100 ÷ 35 shares = £2.857 per share</div>
+
+        <h4>Part (c): Conversion Premium</h4>
+        <div class="formula">Conversion premium = (Conversion price − Current share price) ÷ Current share price × 100</div>
+        <div class="formula">= (£2.857 − £2.60) ÷ £2.60 × 100</div>
+        <div class="formula">= £0.257 ÷ £2.60 × 100 = 9.9%</div>
+        <p style="margin-top:.5rem;">The bond converts at a <strong>9.9% premium</strong> to the current share price — investors accept this because they get a fixed coupon in the meantime.</p>
+
+        <h4>Part (d): Why Issue Convertibles?</h4>
+        <p>Companies prefer convertibles over straight debt for several reasons:</p>
+        <ul style="margin:.5rem 0 .5rem 1.2rem;line-height:1.8;">
+          <li><strong>Lower coupon rate:</strong> The conversion option is valuable, so investors accept a lower interest rate than on straight debt</li>
+          <li><strong>Deferred equity dilution:</strong> Shares are only issued if/when conversion occurs — no immediate dilution</li>
+          <li><strong>Attractive to growth companies:</strong> If the share price rises above the conversion price, bondholders convert — effectively raising equity at a premium to today's price</li>
+          <li><strong>Tax efficiency:</strong> Interest payments are tax-deductible until conversion</li>
+        </ul>
+        <div class="verdict">✅ Convertibles are a "best of both worlds" instrument — cheaper than straight debt, less dilutive than immediate equity issuance.</div>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week6_Interactive_Kiro.html" class="btn-nav">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/index.html" class="btn-nav">🏠 Course Home</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html" class="btn-nav">Week 7 →</a>
+  </div>
+</main>
+
+<script>
+const answers = {};
+let answered = 0;
+const total = 10;
+
+document.querySelectorAll('.options').forEach(optGroup => {
+  optGroup.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const q = optGroup.dataset.q;
+      if (answers[q]) return;
+      const val = opt.dataset.val;
+      const correct = optGroup.dataset.answer;
+      answers[q] = val;
+      answered++;
+      optGroup.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      if (val === correct) {
+        opt.classList.add('correct');
+      } else {
+        opt.classList.add('wrong');
+        optGroup.querySelector(`[data-val="${correct}"]`).classList.add('reveal-correct');
+      }
+      const exp = optGroup.closest('.q-card').querySelector('.explanation');
+      if (exp) { exp.classList.add('show'); }
+      updateProgress();
+    });
+  });
+});
+
+function updateProgress() {
+  const pct = (answered / total) * 100;
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = answered + ' / ' + total + ' answered';
+}
+
+function submitQuiz() {
+  let score = 0;
+  document.querySelectorAll('.options').forEach(optGroup => {
+    const q = optGroup.dataset.q;
+    if (answers[q] && answers[q] === optGroup.dataset.answer) score++;
+  });
+  const card = document.getElementById('scoreCard');
+  document.getElementById('scoreBig').textContent = score + ' / ' + total;
+  const msgs = ['Keep going — review the explanations above! 💪', 'Good effort — check the pitfalls! 📖', 'Solid work! 👍', 'Great job! 🎉', 'Outstanding! 🏆'];
+  const idx = Math.min(Math.floor(score / 2), msgs.length - 1);
+  document.getElementById('scoreMsg').textContent = msgs[idx];
+  card.classList.add('show');
+  card.scrollIntoView({behavior:'smooth'});
+}
+</script>
+</body>
+</html>
