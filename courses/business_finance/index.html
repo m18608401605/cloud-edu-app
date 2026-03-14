@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Business Finance BUSI1070 | 课程主页</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea;--purple:#7c3aed}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,#0c1445 0%,#1a3a5c 60%,#2d5986 100%);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+  .hero .course-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);font-size:.8rem;font-weight:600;padding:.35rem 1rem;border-radius:20px;margin-bottom:1.2rem;letter-spacing:.06em}
+  .hero h1{font-size:2.4rem;font-weight:900;margin-bottom:.5rem}
+  .hero .sub{font-size:1.05rem;opacity:.8;margin-bottom:1.5rem}
+  .hero .meta{display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.65;flex-wrap:wrap}
+
+  /* MAIN */
+  main{max-width:1000px;margin:0 auto;padding:3rem 1.5rem 5rem}
+
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1.2rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+  /* WEEK CARDS */
+  .week-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+  .week-card{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}
+  .week-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+  .week-card .wc-header{padding:1.4rem 1.5rem 1rem;border-bottom:1px solid var(--border)}
+  .week-card .wc-header .week-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
+  .week-card .wc-header h3{font-size:1.05rem;font-weight:700;color:var(--primary);margin-bottom:.3rem}
+  .week-card .wc-header .chapter-tag{font-size:.78rem;color:var(--muted)}
+  .week-card .wc-header .status{display:inline-block;font-size:.72rem;font-weight:700;padding:.2rem .6rem;border-radius:10px;margin-top:.4rem}
+  .status-done{background:#dcfce7;color:#166534}
+  .status-wip{background:#fef9c3;color:#854d0e}
+  .status-todo{background:#f1f5f9;color:var(--muted)}
+  .week-card .wc-links{padding:1rem 1.5rem}
+  .wc-links a{display:flex;align-items:center;gap:.6rem;padding:.55rem .8rem;border-radius:8px;text-decoration:none;font-size:.88rem;color:var(--text);transition:all .2s;margin-bottom:.3rem;border:1px solid transparent}
+  .wc-links a:hover{background:#f0f4ff;border-color:var(--border);color:var(--primary)}
+  .wc-links a .link-icon{font-size:1rem;width:1.4rem;text-align:center}
+  .wc-links a .link-label{flex:1;font-weight:500}
+  .wc-links a .link-arrow{color:var(--muted);font-size:.8rem}
+  .wc-links a.disabled{opacity:.4;pointer-events:none}
+  .wc-links .divider{height:1px;background:var(--border);margin:.4rem 0}
+
+  /* EXAM INFO */
+  .exam-card{background:linear-gradient(135deg,#fff8e8,#fffbf0);border:1px solid #f0d080;border-radius:14px;padding:1.8rem;margin-bottom:2rem}
+  .exam-card h3{color:#7a5800;font-size:1rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+  @media(max-width:500px){.exam-grid{grid-template-columns:1fr}}
+  .exam-item{background:#fff;border-radius:8px;padding:.9rem 1rem;border:1px solid #f0d080}
+  .exam-item .ei-label{font-size:.75rem;color:#b7860b;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+  .exam-item .ei-val{font-size:.95rem;font-weight:700;color:#3d2c00}
+
+  /* QUICK LINKS */
+  .quick-links{display:flex;gap:.8rem;flex-wrap:wrap;margin-bottom:2rem}
+  .ql-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;border-radius:20px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;border:1px solid var(--border);color:var(--text);background:var(--card)}
+  .ql-btn:hover{border-color:var(--primary);color:var(--primary);background:#f0f4ff}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="course-tag">BUSI1070 · University of Nottingham Ningbo</div>
+  <h1>Business Finance</h1>
+  <div class="sub">商业金融 · Spring 2025–2026 · McLaney 11th Edition</div>
+  <div class="meta">
+    <span>📚 10 Weeks</span>
+    <span>📝 100% Exam</span>
+    <span>👩‍🏫 Xiaolan Zheng</span>
+    <span>📖 Pearson Higher Education</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="section-label">📋 考试信息</div>
+  <div class="exam-card">
+    <h3>🎯 Final Exam Format</h3>
+    <div class="exam-grid">
+      <div class="exam-item"><div class="ei-label">Section A</div><div class="ei-val">25 MCQ · 50%</div></div>
+      <div class="exam-item"><div class="ei-label">Section B</div><div class="ei-val">4选2大题 · 50%</div></div>
+      <div class="exam-item"><div class="ei-label">时长</div><div class="ei-val">2 小时</div></div>
+      <div class="exam-item"><div class="ei-label">公式表</div><div class="ei-val">❌ 不提供</div></div>
+    </div>
+  </div>
+
+  <div class="section-label">🔗 快速跳转</div>
+  <div class="quick-links">
+    <a class="ql-btn" href="Week3_StudyGuide_Kiro.html">🗺️ Week 3 导学单</a>
+    <a class="ql-btn" href="Week3_Lecture_Kiro.html">📖 Week 3 课件</a>
+    <a class="ql-btn" href="Week3_Interactive_Kiro.html">🧪 Week 3 交互</a>
+    <a class="ql-btn" href="Week3_Quiz_Kiro.html">✏️ Week 3 Quiz</a>
+    <a class="ql-btn" href="Week1_Lecture_Kiro.html">📖 Week 1 课件</a>
+    <a class="ql-btn" href="Week1_Quiz_Kiro.html">✏️ Week 1 Quiz</a>
+  </div>
+
+  <div class="section-label">📅 课程周次</div>
+  <div class="week-grid">
+
+    <!-- WEEK 1 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 1</div>
+        <h3>Introduction to Business Finance</h3>
+        <div class="chapter-tag">McLaney Ch.1 &amp; Ch.2</div>
+        <div class="status status-done">✅ 已完成</div>
+      </div>
+      <div class="wc-links">
+        <a href="Week1_Lecture_Kiro.html"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a href="Week1_Interactive_Kiro.html"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a href="Week1_Quiz_Kiro.html"><span class="link-icon">✏️</span><span class="link-label">Quiz · 20题 (Ch1+Ch2)</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 2 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 2</div>
+        <h3>Time Value of Money &amp; Investment Appraisal</h3>
+        <div class="chapter-tag">McLaney Ch.4</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 3 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 3</div>
+        <h3>Practical Aspects of Investment Appraisal</h3>
+        <div class="chapter-tag">McLaney Ch.5</div>
+        <div class="status status-done">✅ 已完成</div>
+      </div>
+      <div class="wc-links">
+        <a href="Week3_StudyGuide_Kiro.html"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a href="Week3_Lecture_Kiro.html"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a href="Week3_Interactive_Kiro.html"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a href="Week3_Quiz_Kiro.html"><span class="link-icon">✏️</span><span class="link-label">Quiz · 10题 + Section B</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 4 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 4</div>
+        <h3>Risks in Investment Appraisal</h3>
+        <div class="chapter-tag">McLaney Ch.6</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 5 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 5</div>
+        <h3>Portfolio Theory</h3>
+        <div class="chapter-tag">McLaney Ch.7</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 6 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 6</div>
+        <h3>Sources of Long-Term Finance</h3>
+        <div class="chapter-tag">McLaney Ch.8</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 7 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 7</div>
+        <h3>Cost of Capital &amp; WACC</h3>
+        <div class="chapter-tag">McLaney Ch.10</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 8 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 8</div>
+        <h3>Capital Structure</h3>
+        <div class="chapter-tag">McLaney Ch.11</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 9 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 9</div>
+        <h3>Payout Policy</h3>
+        <div class="chapter-tag">McLaney Ch.12</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+    <!-- WEEK 10 -->
+    <div class="week-card">
+      <div class="wc-header">
+        <div class="week-num">Week 10</div>
+        <h3>Market Efficiency &amp; Ethics</h3>
+        <div class="chapter-tag">McLaney Ch.9</div>
+        <div class="status status-todo">⏳ 制作中</div>
+      </div>
+      <div class="wc-links">
+        <a class="disabled"><span class="link-icon">🗺️</span><span class="link-label">导学单 Study Guide</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">📖</span><span class="link-label">课件 Lecture</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">🧪</span><span class="link-label">交互实验 Interactive</span><span class="link-arrow">→</span></a>
+        <a class="disabled"><span class="link-icon">✏️</span><span class="link-label">Quiz</span><span class="link-arrow">→</span></a>
+      </div>
+    </div>
+
+  </div>
+</main>
+</body>
+</html>
