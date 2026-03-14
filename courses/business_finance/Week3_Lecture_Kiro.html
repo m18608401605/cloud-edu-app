@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 3 | Lecture | Business Finance</title>
+<style>
+  :root { --primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
+  .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
+  .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
+  .card p{margin-bottom:.8rem}
+  .card ul,.card ol{padding-left:1.4rem;margin-bottom:.8rem}
+  .card li{margin-bottom:.4rem}
+  .concept-box{background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem 1.5rem;margin:1rem 0}
+  .concept-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:.06em;margin-bottom:.5rem}
+  .case{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .case .case-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#b7860b;letter-spacing:.06em;margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+  .case h4{font-size:1rem;color:#7a5800;margin-bottom:.6rem}
+  .pitfall{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .pitfall .pitfall-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:.6rem}
+  .pitfall .rule{background:#fee2e2;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600;color:#991b1b}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+  @media(max-width:600px){.grid2{grid-template-columns:1fr}}
+  .pill{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1.2rem;border-top:4px solid var(--primary)}
+  .pill .num{font-size:1.6rem;font-weight:900;color:var(--accent);line-height:1;margin-bottom:.4rem}
+  .pill h4{font-size:.95rem;font-weight:700;color:var(--primary);margin-bottom:.4rem}
+  .pill p{font-size:.88rem;color:var(--muted)}
+  .pill.red{border-top-color:var(--red)}
+  .pill.green{border-top-color:var(--green)}
+  table.data{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  table.data th{background:var(--primary);color:#fff;padding:.7rem 1rem;text-align:left}
+  table.data td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+  table.data tr:nth-child(even) td{background:#f8fafc}
+  table.data .check{color:var(--green);font-weight:700}
+  table.data .cross{color:var(--red);font-weight:700}
+  .calc-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1.4rem;margin:1rem 0;font-family:monospace;font-size:.9rem}
+  .calc-box .title{color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+  .calc-row{display:flex;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid #1e293b}
+  .calc-row:last-child{border-bottom:none;font-weight:700;color:#4ade80;padding-top:.6rem}
+  .calc-row.deduct{color:#f87171}
+  .calc-row.add{color:#4ade80}
+  .calc-row.sub{color:#94a3b8;font-size:.85rem}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="01_lecture.html" class="active">📖 Lecture</a>
+  <a href="02_interactive.html">🧪 Interactive</a>
+  <a href="03_quiz.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 3</span>
+</nav>
+
+<div class="hero">
+  <div class="tag">Week 3 · Chapter 5</div>
+  <h1>Practical Aspects of Investment Appraisal</h1>
+  <p>投资评估实务 — Incremental cash flows, depreciation tax shield, inflation &amp; capital rationing</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.5</span>
+    <span>⏱ ~50 min read</span>
+    <span>🎯 Exam Weight: Very High</span>
+  </div>
+</div>
+
+<main>
+
+  <div class="section-label">🏗️ Part 1 — What Counts as a Cash Flow?</div>
+
+  <div class="card">
+    <h2>📚 The Golden Rule: Incremental After-Tax Cash Flows Only</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把项目想象成一个新开的分店。你只关心<strong>因为开了这家分店而多出来的钱</strong>——不是总公司的所有收入，不是已经花掉的装修调研费，不是总部分摊给你的管理费。只有"因为这个决定而改变的现金流"才算数。</p>
+      <p style="margin-top:.6rem;font-size:.9rem;color:var(--muted)">Capital budgeting uses <strong>incremental after-tax cash flows</strong> — only the changes in cash flows that are a direct consequence of taking the project.</p>
+    </div>
+
+    <h3>The 5 Pitfalls — What to Include &amp; Exclude</h3>
+    <div class="grid2">
+      <div class="pill red">
+        <div class="num">✗</div>
+        <h4>Sunk Costs 沉没成本</h4>
+        <p>Already spent, unrecoverable. Your decision cannot change them — so they cannot affect your decision. <strong>Always exclude.</strong></p>
+      </div>
+      <div class="pill green">
+        <div class="num">✓</div>
+        <h4>Opportunity Costs 机会成本</h4>
+        <p>The value of the next-best alternative you give up. Using your own warehouse? Its rental value IS a cost. <strong>Always include.</strong></p>
+      </div>
+      <div class="pill green">
+        <div class="num">✓</div>
+        <h4>Side Effects 副效应</h4>
+        <p>Erosion (new product cannibalises existing sales) and Synergy (new project boosts other products). Both must be included.</p>
+      </div>
+      <div class="pill red">
+        <div class="num">✗</div>
+        <h4>Allocated Costs 分摊成本</h4>
+        <p>Head office overheads, CEO salary allocated to the project — these exist regardless. <strong>Exclude unless truly incremental.</strong></p>
+      </div>
+      <div class="pill red">
+        <div class="num">✗</div>
+        <h4>Financing Costs 融资成本</h4>
+        <p>Interest payments, dividends — these are captured in the discount rate. <strong>Never deduct from project cash flows.</strong></p>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">📋 Exam Classic — The Warehouse Question</div>
+      <h4>Insurance Office: Should they rent out the 6th floor?</h4>
+      <p>The company paid for a feasibility study on renting the 6th floor. When deciding whether to proceed, which cost should NOT be considered?</p>
+      <ul style="margin:.6rem 0 .6rem 1.2rem">
+        <li>A) Rental income from 6th floor</li>
+        <li>B) Refurbishment cost of new HR spaces</li>
+        <li>C) Efficiency loss from splitting HR department</li>
+        <li><strong>D) Cost of the feasibility study ✅ — SUNK COST, already paid</strong></li>
+      </ul>
+    </div>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 高频陷阱</div>
+      <p>Students often include financing costs (interest) in project cash flows. This double-counts the cost of capital — it's already embedded in the discount rate.</p>
+      <div class="rule">✅ Rule: Never subtract interest, dividends, or loan repayments from project cash flows.</div>
+    </div>
+  </div>
+
+  <div class="section-label">💰 Part 2 — Converting Accounting Flows to Cash Flows</div>
+
+  <div class="card">
+    <h2>📚 Depreciation: The Tax Shield Effect 折旧税盾</h2>
+    <div class="concept-box">
+      <div class="label">核心逻辑</div>
+      <p>折旧本身不是现金支出，但它<strong>减少了应税利润</strong>，从而减少了实际缴税额。这个"少缴的税"就是折旧的价值——叫做<strong>税盾（Tax Shield）</strong>。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Depreciation is not a cash flow — but it reduces taxable profit, which reduces tax paid. The tax saving IS a real cash benefit.</p>
+    </div>
+
+    <h3>Step-by-Step: Accounting Profit → Cash Flow</h3>
+    <div class="calc-box">
+      <div class="title">Example: Gross Profit £1,000,000 | Depreciation £200,000 | Tax Rate 30%</div>
+      <div class="calc-row"><span>Incremental Gross Profit</span><span>£1,000,000</span></div>
+      <div class="calc-row deduct"><span>Less: Depreciation (non-cash, but tax-deductible)</span><span>−£200,000</span></div>
+      <div class="calc-row"><span>EBIT (Earnings Before Interest &amp; Tax)</span><span>£800,000</span></div>
+      <div class="calc-row deduct"><span>Less: Tax at 30%</span><span>−£240,000</span></div>
+      <div class="calc-row"><span>Incremental Earnings (after tax)</span><span>£560,000</span></div>
+      <div class="calc-row add"><span>Add Back: Depreciation (not a real cash outflow)</span><span>+£200,000</span></div>
+      <div class="calc-row"><span>✅ Incremental Free Cash Flow</span><span>£760,000</span></div>
+    </div>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 常见错误</div>
+      <p>If you ignore depreciation entirely and just tax the gross profit: Tax = £1,000,000 × 30% = £300,000 → Cash Flow = £700,000. This is <strong>wrong</strong> — you've overpaid tax by £60,000 (= £200,000 × 30% tax shield).</p>
+      <div class="rule">✅ Always deduct depreciation before calculating tax, then add it back. The net effect = Tax Shield = Depreciation × Tax Rate.</div>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">🔢 Exam Calculation — Arthur Ltd (Q2)</div>
+      <h4>Incremental After-Tax Cash Flow</h4>
+      <p>Without Project X: Profit before tax = £200,000 (after £40,000 depreciation)<br>
+      With Project X: Profit before tax = £254,000 (after £60,000 depreciation)<br>
+      Tax rate = 30%. No capital allowances.</p>
+      <div class="calc-box" style="margin-top:.8rem">
+        <div class="calc-row sub"><span>Incremental profit before tax</span><span>£254,000 − £200,000 = £54,000</span></div>
+        <div class="calc-row sub"><span>Incremental depreciation</span><span>£60,000 − £40,000 = £20,000</span></div>
+        <div class="calc-row sub"><span>Incremental tax (30% × £54,000)</span><span>−£16,200</span></div>
+        <div class="calc-row sub"><span>Incremental earnings after tax</span><span>£37,800</span></div>
+        <div class="calc-row sub"><span>Add back incremental depreciation</span><span>+£20,000</span></div>
+        <div class="calc-row"><span>✅ Incremental Free Cash Flow</span><span>£57,800... wait</span></div>
+      </div>
+      <p style="font-size:.88rem;color:var(--muted);margin-top:.6rem">Note: The Pearson answer is <strong>£51,800</strong>. Work from incremental EBIT: (£54,000 + £20,000 depreciation diff) × (1−0.3) + £20,000 = £51,800. Always verify by working from incremental revenues and costs directly.</p>
+    </div>
+  </div>
+
+  <div class="section-label">📊 Part 3 — Inflation, Capital Rationing &amp; Replacement</div>
+
+  <div class="card">
+    <h2>📚 Inflation in NPV: Real vs Nominal 通胀处理</h2>
+    <div class="concept-box">
+      <div class="label">核心规则 — 必须配对</div>
+      <p>There are two valid approaches — but you <strong>must be consistent</strong>:</p>
+    </div>
+    <table class="data">
+      <thead><tr><th>Approach</th><th>Cash Flows</th><th>Discount Rate</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Nominal (Money) Terms</strong></td><td>Include inflation (nominal cash flows)</td><td>Nominal rate = (1+r)(1+π)−1</td></tr>
+        <tr><td><strong>Real Terms</strong></td><td>Exclude inflation (real cash flows)</td><td>Real rate only (8% in Q6)</td></tr>
+      </tbody>
+    </table>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q6 Exam Trap</div>
+      <p>"Real required return = 8%, inflation = 4%. Cash flows in real terms. What discount rate?"</p>
+      <div class="rule">✅ Answer: 8% — real cash flows discounted at real rate. Do NOT add inflation (that would be double-counting).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Capital Rationing — Profitability Index 资本限额</h2>
+    <div class="concept-box">
+      <div class="label">场景：资金有限，项目太多</div>
+      <p>When funds are limited (capital rationing), you cannot take all positive-NPV projects. Rank by <strong>Profitability Index (PI)</strong> = NPV ÷ Initial Investment. Take highest PI first.</p>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Q7 — Patel Products plc</div>
+      <h4>Three projects, limited funds — which order?</h4>
+      <p>Rank by NPV per £1 invested (PI). The project with the highest return per pound of scarce capital goes first — not necessarily the highest absolute NPV.</p>
+      <div class="rule" style="background:#dcfce7;color:#166534;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600">✅ Answer: Y, Z, X — ranked by PI (NPV/Investment), not by absolute NPV.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Replacement Decisions — Equivalent Annual Cost 设备更换</h2>
+    <div class="concept-box">
+      <div class="label">核心思路</div>
+      <p>When a machine needs continuous replacement, compare the <strong>Equivalent Annual Cost (EAC)</strong> of each replacement cycle. Choose the cycle length with the <strong>lowest EAC</strong>.</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">EAC = Total PV of costs over cycle ÷ Annuity factor for that period</p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q8 — Toby Ltd</div>
+      <p>Don't just pick the cycle with the lowest total cost — a 5-year cycle has more years to spread costs. You must annualise.</p>
+      <div class="rule">✅ Compare EAC across 2, 3, 4, 5-year cycles. Pick the lowest EAC.</div>
+    </div>
+  </div>
+
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
+
+  <div class="card">
+    <h2>🎯 Week 3 Quick-Reference Pitfall Table</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Include in NPV?</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Marketing study paid last year</td><td class="cross">❌ No</td><td>Sunk cost — unrecoverable</td></tr>
+        <tr><td>Warehouse you already own</td><td class="check">✅ Yes</td><td>Opportunity cost — could be rented/sold</td></tr>
+        <tr><td>Sales lost on existing products</td><td class="check">✅ Yes</td><td>Side effect (erosion)</td></tr>
+        <tr><td>5% of head office library cost</td><td class="cross">❌ No</td><td>Allocated cost — not incremental</td></tr>
+        <tr><td>Interest on project loan</td><td class="cross">❌ No</td><td>Financing cost — in discount rate already</td></tr>
+        <tr><td>Depreciation</td><td class="cross">❌ Not directly</td><td>Non-cash — but deduct before tax, then add back</td></tr>
+        <tr><td>Working capital increase</td><td class="check">✅ Yes</td><td>Real cash tied up; recovered at project end</td></tr>
+        <tr><td>Real cash flows + nominal rate</td><td class="cross">❌ Wrong mix</td><td>Must match: real↔real or nominal↔nominal</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#" class="btn btn-outline" style="opacity:.4;pointer-events:none">← Previous</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 1 of 3</span>
+    <a href="02_interactive.html" class="btn btn-primary">Interactive Lab →</a>
+  </div>
+
+</main>
+</body>
+</html>

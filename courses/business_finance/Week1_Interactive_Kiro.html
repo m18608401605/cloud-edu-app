@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 | Interactive Lab | Business Finance</title>
+<style>
+  :root {
+    --primary: #1a3a5c; --accent: #e8a020; --bg: #f5f7fa; --card: #ffffff;
+    --text: #2c3e50; --muted: #7f8c8d; --green: #27ae60; --red: #e74c3c;
+    --border: #dde3ea; --purple: #7c3aed;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  nav { background: var(--primary); padding: 0 2rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  nav .brand { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,.2); margin-right: 1rem; white-space: nowrap; }
+  nav a { color: rgba(255,255,255,.75); text-decoration: none; padding: 1rem .9rem; font-size: .9rem; transition: all .2s; border-bottom: 3px solid transparent; }
+  nav a:hover { color: #fff; }
+  nav a.active { color: #fff; border-bottom-color: var(--accent); font-weight: 600; }
+  nav .spacer { flex: 1; }
+  nav .week-badge { background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; padding: .3rem .7rem; border-radius: 20px; }
+  .hero { background: linear-gradient(135deg, #2d1b69 0%, #7c3aed 100%); color: #fff; padding: 3rem 2rem 2.5rem; text-align: center; }
+  .hero .tag { display: inline-block; background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem; letter-spacing: .05em; text-transform: uppercase; }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: .5rem; }
+  .hero p { font-size: 1.05rem; opacity: .85; max-width: 600px; margin: 0 auto; }
+  main { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+  .section-label { display: flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 2.5rem 0 1rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 1.8rem; margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+  .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem; }
+
+  /* LAB STYLES */
+  .lab { background: #0f172a; border-radius: 14px; padding: 2rem; color: #e2e8f0; margin-bottom: 1.5rem; }
+  .lab h2 { color: #f8fafc; font-size: 1.2rem; margin-bottom: .4rem; }
+  .lab .subtitle { color: #94a3b8; font-size: .9rem; margin-bottom: 1.5rem; }
+  .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:700px){ .lab-grid { grid-template-columns: 1fr; } }
+
+  /* SLIDER CONTROL */
+  .control-group { margin-bottom: 1.2rem; }
+  .control-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: .4rem; font-size: .88rem; color: #cbd5e1; }
+  .control-label .val { font-weight: 700; color: #f8fafc; font-size: 1rem; font-family: monospace; }
+  input[type=range] { width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: #334155; outline: none; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--accent); cursor: pointer; box-shadow: 0 0 0 3px rgba(232,160,32,.3); }
+
+  /* RESULT PANEL */
+  .result-panel { background: #1e293b; border-radius: 10px; padding: 1.4rem; }
+  .result-panel h3 { color: #94a3b8; font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 1rem; }
+  .metric { display: flex; justify-content: space-between; align-items: center; padding: .5rem 0; border-bottom: 1px solid #334155; }
+  .metric:last-child { border-bottom: none; }
+  .metric .label { color: #94a3b8; font-size: .88rem; }
+  .metric .value { font-weight: 700; font-family: monospace; font-size: 1.05rem; }
+  .metric .value.positive { color: #4ade80; }
+  .metric .value.negative { color: #f87171; }
+  .metric .value.neutral { color: #fbbf24; }
+
+  /* INSIGHT BOX */
+  .insight { background: #1e3a5f; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 1rem 1.2rem; margin-top: 1.2rem; font-size: .9rem; color: #bfdbfe; }
+  .insight strong { color: #fff; }
+
+  /* STEP DISPLAY */
+  .steps { margin-top: 1.2rem; }
+  .step { background: #1e293b; border-radius: 8px; padding: .8rem 1rem; margin-bottom: .6rem; font-size: .88rem; }
+  .step .step-num { color: var(--accent); font-weight: 700; font-size: .75rem; text-transform: uppercase; margin-bottom: .2rem; }
+  .step .step-eq { font-family: monospace; color: #e2e8f0; font-size: .95rem; }
+
+  /* SCENARIO BUTTONS */
+  .scenario-btns { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
+  .scenario-btn { padding: .4rem .9rem; border-radius: 20px; border: 1px solid #334155; background: transparent; color: #94a3b8; font-size: .82rem; cursor: pointer; transition: all .2s; }
+  .scenario-btn:hover, .scenario-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* RISK-RETURN VISUALIZER */
+  .rr-canvas-wrap { position: relative; background: #1e293b; border-radius: 10px; padding: 1rem; }
+  canvas { width: 100%; height: 220px; display: block; }
+
+  /* AGENCY COST SIMULATOR */
+  .agency-bar { height: 24px; border-radius: 4px; background: #334155; margin: .4rem 0; overflow: hidden; position: relative; }
+  .agency-bar-fill { height: 100%; border-radius: 4px; transition: width .4s ease; display: flex; align-items: center; padding-left: .6rem; font-size: .78rem; font-weight: 600; color: #fff; white-space: nowrap; }
+
+  /* BOTTOM NAV */
+  .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: .9rem; text-decoration: none; transition: all .2s; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #2c5282; }
+  .btn-outline { border: 2px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="01_lecture.html">📖 Lecture</a>
+  <a href="02_interactive.html" class="active">🧪 Interactive</a>
+  <a href="03_quiz.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 1</span>
+</nav>
+
+<div class="hero">
+  <div class="tag">🧪 Interactive Lab · Week 1</div>
+  <h1>思维实验室 / Thought Lab</h1>
+  <p>Drag the sliders. Watch the numbers change. Build intuition, not just formulas.</p>
+</div>
+
+<main>
+
+  <!-- LAB 1: RISK-RETURN -->
+  <div class="section-label">🎯 Lab 1 — Risk &amp; Return Relationship</div>
+
+  <div class="lab">
+    <h2>⚡ Risk-Return Explorer 风险回报探索器</h2>
+    <div class="subtitle">Adjust the risk-free rate and risk premium to see how required returns are built up — and why doubling risk does NOT double the return.</div>
+
+    <div class="scenario-btns">
+      <button class="scenario-btn active" onclick="setScenario(4,3,6)">📊 Base Case</button>
+      <button class="scenario-btn" onclick="setScenario(2,2,4)">🏦 Low Rate Environment</button>
+      <button class="scenario-btn" onclick="setScenario(6,4,8)">🔥 High Rate Environment</button>
+      <button class="scenario-btn" onclick="setScenario(4,5,10)">🚀 High Risk Assets</button>
+    </div>
+
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Risk-Free Rate (rf) 无风险利率</span>
+            <span class="val" id="rf-val">4.0%</span>
+          </div>
+          <input type="range" id="rf" min="0" max="12" step="0.5" value="4" oninput="updateRR()">
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#64748b;margin-top:.2rem"><span>0%</span><span>12%</span></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Risk Premium of Y (rp_Y)</span>
+            <span class="val" id="rpy-val">3.0%</span>
+          </div>
+          <input type="range" id="rpy" min="0.5" max="15" step="0.5" value="3" oninput="updateRR()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Risk Premium of X (rp_X = 2× rp_Y)</span>
+            <span class="val" id="rpx-val">6.0%</span>
+          </div>
+          <input type="range" id="rpx" min="1" max="30" step="0.5" value="6" disabled style="opacity:.5">
+          <div style="font-size:.75rem;color:#64748b;margin-top:.2rem">Auto-calculated: X is twice as risky as Y</div>
+        </div>
+
+        <div class="steps" id="rr-steps"></div>
+      </div>
+
+      <div>
+        <div class="result-panel">
+          <h3>📊 Required Returns</h3>
+          <div class="metric">
+            <span class="label">Risk-Free Rate (rf)</span>
+            <span class="value neutral" id="r-rf">4.0%</span>
+          </div>
+          <div class="metric">
+            <span class="label">Required Return — Y</span>
+            <span class="value positive" id="r-y">7.0%</span>
+          </div>
+          <div class="metric">
+            <span class="label">Required Return — X</span>
+            <span class="value positive" id="r-x">10.0%</span>
+          </div>
+          <div class="metric">
+            <span class="label">X / Y ratio</span>
+            <span class="value neutral" id="r-ratio">1.43×</span>
+          </div>
+          <div class="metric">
+            <span class="label">Would 2× risk = 2× return?</span>
+            <span class="value negative" id="r-2x">14.0% (NO)</span>
+          </div>
+        </div>
+        <div class="insight" id="rr-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAB 2: SEPARATION THEOREM -->
+  <div class="section-label">🔬 Lab 2 — Separation Theorem Simulator</div>
+
+  <div class="lab">
+    <h2>🔀 Separation Theorem: Investment vs Consumption</h2>
+    <div class="subtitle">A company earns £X. You (the shareholder) want to consume £Y now. The theorem says: it doesn't matter what dividend the company pays — you can always borrow/lend to get what you want.</div>
+
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Company's Investment Return (£)</span>
+            <span class="val" id="inv-val">£10,000</span>
+          </div>
+          <input type="range" id="inv" min="1000" max="50000" step="500" value="10000" oninput="updateSep()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Dividend Paid to You (£)</span>
+            <span class="val" id="div-val">£4,000</span>
+          </div>
+          <input type="range" id="div" min="0" max="50000" step="500" value="4000" oninput="updateSep()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Your Desired Consumption Now (£)</span>
+            <span class="val" id="cons-val">£7,000</span>
+          </div>
+          <input type="range" id="cons" min="0" max="50000" step="500" value="7000" oninput="updateSep()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Market Interest Rate (%)</span>
+            <span class="val" id="rate-val">5.0%</span>
+          </div>
+          <input type="range" id="rate" min="1" max="20" step="0.5" value="5" oninput="updateSep()">
+        </div>
+      </div>
+
+      <div>
+        <div class="result-panel">
+          <h3>💡 What Happens?</h3>
+          <div class="metric">
+            <span class="label">Dividend received</span>
+            <span class="value neutral" id="s-div">£4,000</span>
+          </div>
+          <div class="metric">
+            <span class="label">You want to consume</span>
+            <span class="value neutral" id="s-cons">£7,000</span>
+          </div>
+          <div class="metric">
+            <span class="label">Gap (borrow/lend)</span>
+            <span class="value" id="s-gap">Borrow £3,000</span>
+          </div>
+          <div class="metric">
+            <span class="label">Interest cost/earned</span>
+            <span class="value" id="s-interest">£150</span>
+          </div>
+          <div class="metric">
+            <span class="label">Retained value (future)</span>
+            <span class="value positive" id="s-future">£6,300</span>
+          </div>
+        </div>
+        <div class="insight" id="sep-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAB 3: AGENCY COST -->
+  <div class="section-label">🏢 Lab 3 — Agency Cost Simulator</div>
+
+  <div class="lab">
+    <h2>👔 Agency Problem: Where Does Shareholder Value Go?</h2>
+    <div class="subtitle">Adjust manager alignment to see how agency costs erode shareholder value. This is why corporate governance matters.</div>
+
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Manager Alignment with Shareholders (%)</span>
+            <span class="val" id="align-val">60%</span>
+          </div>
+          <input type="range" id="align" min="0" max="100" step="5" value="60" oninput="updateAgency()">
+          <div style="display:flex;justify-content:space-between;font-size:.75rem;color:#64748b;margin-top:.2rem"><span>0% (pure self-interest)</span><span>100% (perfect agent)</span></div>
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Monitoring Spend (£)</span>
+            <span class="val" id="monitor-val">£5,000</span>
+          </div>
+          <input type="range" id="monitor" min="0" max="50000" step="1000" value="5000" oninput="updateAgency()">
+        </div>
+        <div class="control-group">
+          <div class="control-label">
+            <span>Total Company Value (£)</span>
+            <span class="val" id="cval-val">£100,000</span>
+          </div>
+          <input type="range" id="cval" min="10000" max="1000000" step="10000" value="100000" oninput="updateAgency()">
+        </div>
+      </div>
+
+      <div>
+        <div class="result-panel">
+          <h3>📉 Value Breakdown</h3>
+          <div id="agency-bars"></div>
+        </div>
+        <div class="insight" id="agency-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="01_lecture.html" class="btn btn-outline">← Lecture</a>
+    <span style="font-size:.85rem; color:var(--muted)">Page 2 of 3</span>
+    <a href="03_quiz.html" class="btn btn-primary">Quiz →</a>
+  </div>
+
+</main>
+
+<script>
+// ===== LAB 1: RISK-RETURN =====
+function updateRR() {
+  const rf = parseFloat(document.getElementById('rf').value);
+  const rpy = parseFloat(document.getElementById('rpy').value);
+  const rpx = rpy * 2;
+
+  document.getElementById('rf-val').textContent = rf.toFixed(1) + '%';
+  document.getElementById('rpy-val').textContent = rpy.toFixed(1) + '%';
+  document.getElementById('rpx-val').textContent = rpx.toFixed(1) + '%';
+  document.getElementById('rpx').value = rpx;
+
+  const ry = rf + rpy;
+  const rx = rf + rpx;
+  const ratio = rx / ry;
+  const hypothetical2x = ry * 2;
+
+  document.getElementById('r-rf').textContent = rf.toFixed(1) + '%';
+  document.getElementById('r-y').textContent = ry.toFixed(1) + '%';
+  document.getElementById('r-x').textContent = rx.toFixed(1) + '%';
+  document.getElementById('r-ratio').textContent = ratio.toFixed(2) + '×';
+  document.getElementById('r-2x').textContent = hypothetical2x.toFixed(1) + '% (NO)';
+
+  document.getElementById('rr-steps').innerHTML = `
+    <div class="step"><div class="step-num">Step 1 — Required Return for Y</div><div class="step-eq">r_Y = rf + rp_Y = ${rf}% + ${rpy}% = ${ry.toFixed(1)}%</div></div>
+    <div class="step"><div class="step-num">Step 2 — Risk Premium of X (2× riskier)</div><div class="step-eq">rp_X = 2 × rp_Y = 2 × ${rpy}% = ${rpx.toFixed(1)}%</div></div>
+    <div class="step"><div class="step-num">Step 3 — Required Return for X</div><div class="step-eq">r_X = rf + rp_X = ${rf}% + ${rpx.toFixed(1)}% = ${rx.toFixed(1)}%</div></div>
+    <div class="step"><div class="step-num">Step 4 — Is r_X = 2 × r_Y?</div><div class="step-eq">${rx.toFixed(1)}% vs ${hypothetical2x.toFixed(1)}% → ${rx < hypothetical2x ? '✅ Less than 2×' : '⚠️ Check inputs'}</div></div>
+  `;
+
+  document.getElementById('rr-insight').innerHTML = `<strong>Key Insight:</strong> X is 2× riskier, but its required return (${rx.toFixed(1)}%) is only ${ratio.toFixed(2)}× that of Y (${ry.toFixed(1)}%). The risk-free rate (${rf}%) is shared by both — only the <em>risk premium</em> doubles.`;
+}
+
+function setScenario(rf, rpy, rpx) {
+  document.getElementById('rf').value = rf;
+  document.getElementById('rpy').value = rpy;
+  document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  updateRR();
+}
+
+// ===== LAB 2: SEPARATION THEOREM =====
+function updateSep() {
+  const inv = parseFloat(document.getElementById('inv').value);
+  const div = parseFloat(document.getElementById('div').value);
+  const cons = parseFloat(document.getElementById('cons').value);
+  const rate = parseFloat(document.getElementById('rate').value) / 100;
+
+  document.getElementById('inv-val').textContent = '£' + inv.toLocaleString();
+  document.getElementById('div-val').textContent = '£' + div.toLocaleString();
+  document.getElementById('cons-val').textContent = '£' + cons.toLocaleString();
+  document.getElementById('rate-val').textContent = (rate * 100).toFixed(1) + '%';
+
+  const gap = cons - div;
+  const interest = Math.abs(gap) * rate;
+  const retained = inv - div;
+  const futureValue = retained * (1 + rate);
+
+  document.getElementById('s-div').textContent = '£' + div.toLocaleString();
+  document.getElementById('s-cons').textContent = '£' + cons.toLocaleString();
+
+  const gapEl = document.getElementById('s-gap');
+  if (gap > 0) {
+    gapEl.textContent = 'Borrow £' + gap.toLocaleString();
+    gapEl.className = 'value negative';
+  } else if (gap < 0) {
+    gapEl.textContent = 'Lend £' + Math.abs(gap).toLocaleString();
+    gapEl.className = 'value positive';
+  } else {
+    gapEl.textContent = 'No adjustment needed';
+    gapEl.className = 'value neutral';
+  }
+
+  const intEl = document.getElementById('s-interest');
+  intEl.textContent = (gap > 0 ? 'Cost: ' : 'Earn: ') + '£' + interest.toFixed(0);
+  intEl.className = gap > 0 ? 'value negative' : 'value positive';
+
+  document.getElementById('s-future').textContent = '£' + futureValue.toFixed(0);
+
+  const insightEl = document.getElementById('sep-insight');
+  if (gap > 0) {
+    insightEl.innerHTML = `<strong>You borrow £${gap.toLocaleString()}</strong> to top up your dividend to your desired consumption. The separation theorem says: the company should ignore your personal preference and just maximise NPV. You handle the rest by borrowing at ${(rate*100).toFixed(1)}%.`;
+  } else if (gap < 0) {
+    insightEl.innerHTML = `<strong>You lend £${Math.abs(gap).toLocaleString()}</strong> — you received more dividend than you want to consume now. You invest the surplus at ${(rate*100).toFixed(1)}% for future consumption. The company's dividend policy didn't constrain you.`;
+  } else {
+    insightEl.innerHTML = `<strong>Perfect match!</strong> Your dividend exactly equals your desired consumption. No borrowing or lending needed.`;
+  }
+}
+
+// ===== LAB 3: AGENCY COST =====
+function updateAgency() {
+  const align = parseFloat(document.getElementById('align').value) / 100;
+  const monitor = parseFloat(document.getElementById('monitor').value);
+  const cval = parseFloat(document.getElementById('cval').value);
+
+  document.getElementById('align-val').textContent = (align * 100).toFixed(0) + '%';
+  document.getElementById('monitor-val').textContent = '£' + monitor.toLocaleString();
+  document.getElementById('cval-val').textContent = '£' + cval.toLocaleString();
+
+  const misalignmentLoss = cval * (1 - align) * 0.15;
+  const totalAgencyCost = misalignmentLoss + monitor;
+  const shareholderValue = Math.max(0, cval - totalAgencyCost);
+
+  const bars = [
+    { label: 'Shareholder Value', value: shareholderValue, max: cval, color: '#4ade80' },
+    { label: 'Monitoring Costs', value: monitor, max: cval, color: '#fbbf24' },
+    { label: 'Misalignment Loss', value: misalignmentLoss, max: cval, color: '#f87171' },
+  ];
+
+  document.getElementById('agency-bars').innerHTML = bars.map(b => `
+    <div style="margin-bottom:.8rem">
+      <div style="display:flex;justify-content:space-between;font-size:.82rem;color:#94a3b8;margin-bottom:.3rem">
+        <span>${b.label}</span><span style="color:#f8fafc;font-weight:700">£${b.value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</span>
+      </div>
+      <div class="agency-bar">
+        <div class="agency-bar-fill" style="width:${Math.min(100,(b.value/b.max)*100).toFixed(1)}%;background:${b.color}">
+          ${((b.value/b.max)*100).toFixed(1)}%
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('agency-insight').innerHTML = `
+    <strong>At ${(align*100).toFixed(0)}% alignment:</strong> Agency costs total £${totalAgencyCost.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 
+    (${((totalAgencyCost/cval)*100).toFixed(1)}% of company value). 
+    ${align < 0.5 ? '⚠️ Low alignment — shareholders are losing significant value to managerial self-interest.' : align > 0.8 ? '✅ High alignment — good governance is protecting shareholder value.' : '📊 Moderate alignment — typical of most public companies without strong incentive schemes.'}
+  `;
+}
+
+// Init all labs
+updateRR();
+updateSep();
+updateAgency();
+</script>
+</body>
+</html>

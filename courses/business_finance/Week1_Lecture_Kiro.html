@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 | Lecture | Business Finance</title>
+<style>
+  :root {
+    --primary: #1a3a5c;
+    --accent: #e8a020;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --border: #dde3ea;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+  /* NAV */
+  nav { background: var(--primary); padding: 0 2rem; display: flex; align-items: center; gap: 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,.3); }
+  nav .brand { color: #fff; font-weight: 700; font-size: 1rem; padding: 1rem 1.5rem 1rem 0; border-right: 1px solid rgba(255,255,255,.2); margin-right: 1rem; white-space: nowrap; }
+  nav a { color: rgba(255,255,255,.75); text-decoration: none; padding: 1rem .9rem; font-size: .9rem; transition: all .2s; border-bottom: 3px solid transparent; }
+  nav a:hover { color: #fff; }
+  nav a.active { color: #fff; border-bottom-color: var(--accent); font-weight: 600; }
+  nav .spacer { flex: 1; }
+  nav .week-badge { background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; padding: .3rem .7rem; border-radius: 20px; }
+
+  /* HERO */
+  .hero { background: linear-gradient(135deg, var(--primary) 0%, #2c5282 100%); color: #fff; padding: 3rem 2rem 2.5rem; text-align: center; }
+  .hero .tag { display: inline-block; background: var(--accent); color: #fff; font-size: .75rem; font-weight: 700; padding: .3rem .8rem; border-radius: 20px; margin-bottom: 1rem; letter-spacing: .05em; text-transform: uppercase; }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: .5rem; }
+  .hero p { font-size: 1.05rem; opacity: .85; max-width: 600px; margin: 0 auto; }
+  .hero .meta { margin-top: 1.2rem; display: flex; justify-content: center; gap: 2rem; font-size: .85rem; opacity: .7; }
+
+  /* MAIN */
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+  /* SECTION HEADERS */
+  .section-label { display: flex; align-items: center; gap: .6rem; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 2.5rem 0 1rem; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* CARDS */
+  .card { background: var(--card); border-radius: 12px; border: 1px solid var(--border); padding: 1.8rem; margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+  .card h2 { font-size: 1.2rem; color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+  .card h3 { font-size: 1rem; color: var(--primary); margin: 1.2rem 0 .6rem; }
+  .card p { margin-bottom: .8rem; }
+  .card ul, .card ol { padding-left: 1.4rem; margin-bottom: .8rem; }
+  .card li { margin-bottom: .4rem; }
+
+  /* CONCEPT BOX */
+  .concept-box { background: #eef4ff; border-left: 4px solid var(--primary); border-radius: 0 8px 8px 0; padding: 1.2rem 1.5rem; margin: 1rem 0; }
+  .concept-box .label { font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--primary); letter-spacing: .06em; margin-bottom: .5rem; }
+
+  /* CASE STUDY */
+  .case { background: #fffbf0; border: 1px solid #f0d080; border-radius: 10px; padding: 1.4rem; margin: 1rem 0; }
+  .case .case-tag { font-size: .75rem; font-weight: 700; text-transform: uppercase; color: #b7860b; letter-spacing: .06em; margin-bottom: .6rem; display: flex; align-items: center; gap: .4rem; }
+  .case h4 { font-size: 1rem; color: #7a5800; margin-bottom: .6rem; }
+
+  /* PITFALL BOX */
+  .pitfall { background: #fff5f5; border: 1px solid #fca5a5; border-radius: 10px; padding: 1.4rem; margin: 1rem 0; }
+  .pitfall .pitfall-tag { font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--red); letter-spacing: .06em; margin-bottom: .6rem; }
+  .pitfall .rule { background: #fee2e2; border-radius: 6px; padding: .8rem 1rem; margin-top: .8rem; font-weight: 600; color: #991b1b; }
+
+  /* THREE PILLARS GRID */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1rem 0; }
+  .pillar { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; border-top: 4px solid var(--primary); }
+  .pillar .num { font-size: 1.8rem; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: .4rem; }
+  .pillar h4 { font-size: .95rem; font-weight: 700; color: var(--primary); margin-bottom: .4rem; }
+  .pillar p { font-size: .88rem; color: var(--muted); }
+
+  /* EXAM Q */
+  .exam-q { background: #f0fdf4; border: 1px solid #86efac; border-radius: 10px; padding: 1.4rem; margin: 1rem 0; }
+  .exam-q .eq-tag { font-size: .75rem; font-weight: 700; text-transform: uppercase; color: var(--green); letter-spacing: .06em; margin-bottom: .8rem; }
+  .exam-q .options { list-style: none; padding: 0; margin: .8rem 0; }
+  .exam-q .options li { padding: .5rem .8rem; border-radius: 6px; margin-bottom: .4rem; border: 1px solid #d1fae5; background: #fff; font-size: .93rem; }
+  .exam-q .options li.correct { background: #dcfce7; border-color: #86efac; font-weight: 600; color: #166534; }
+  .exam-q .rationale { background: #fff; border-radius: 6px; padding: .8rem 1rem; margin-top: .8rem; font-size: .9rem; border-left: 3px solid var(--green); }
+
+  /* OBJECTIVE COMPARISON TABLE */
+  .obj-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+  .obj-table th { background: var(--primary); color: #fff; padding: .7rem 1rem; text-align: left; }
+  .obj-table td { padding: .65rem 1rem; border-bottom: 1px solid var(--border); }
+  .obj-table tr:nth-child(even) td { background: #f8fafc; }
+  .obj-table .check { color: var(--green); font-weight: 700; }
+  .obj-table .cross { color: var(--red); font-weight: 700; }
+
+  /* BOTTOM NAV */
+  .bottom-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .btn { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: .9rem; text-decoration: none; transition: all .2s; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #2c5282; }
+  .btn-outline { border: 2px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-disabled { opacity: .4; pointer-events: none; }
+
+  /* PROGRESS */
+  .progress-bar { display: flex; gap: .4rem; justify-content: center; margin: 1.5rem 0 0; }
+  .progress-bar .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
+  .progress-bar .dot.active { background: var(--accent); }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.4rem; }
+    nav .brand { display: none; }
+    .pillars { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="01_lecture.html" class="active">📖 Lecture</a>
+  <a href="02_interactive.html">🧪 Interactive</a>
+  <a href="03_quiz.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 1</span>
+</nav>
+
+<div class="hero">
+  <div class="tag">Week 1 · Chapters 1 &amp; 2</div>
+  <h1>Introduction to Business Finance</h1>
+  <p>商业金融导论 — The nature of firms, financial objectives, and the separation theorem</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.1 &amp; Ch.2</span>
+    <span>⏱ ~45 min read</span>
+    <span>🎯 Exam Weight: High</span>
+  </div>
+  <div class="progress-bar">
+    <div class="dot active"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ===== PART 1: CHAPTER 1 ===== -->
+  <div class="section-label">📘 Chapter 1 — The Nature of Business Finance</div>
+
+  <div class="card">
+    <h2>📚 Core Concept: What is a Limited Company? 有限公司是什么？</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把有限公司想象成一个<strong>独立的机器人</strong>。这个机器人可以签合同、拥有财产、被起诉——但它不是任何一个人。股东只是"给机器人充电的人"，机器人欠的债，不会追到充电人身上。</p>
+      <p style="margin-top:.6rem; font-size:.9rem; color: var(--muted)">A limited company is a <strong>separate legal entity</strong> — it can own assets, enter contracts, and be sued independently of its shareholders. Shareholders enjoy <strong>limited liability</strong>: their maximum loss is what they invested.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num">01</div>
+        <h4>Separate Legal Entity</h4>
+        <p>The company exists independently of its owners. It can sue and be sued in its own name.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">02</div>
+        <h4>Limited Liability</h4>
+        <p>Shareholders can only lose what they paid for their shares — personal assets are protected.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">03</div>
+        <h4>Perpetual Succession</h4>
+        <p>The company continues to exist even if shareholders change or die.</p>
+      </div>
+    </div>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 常见陷阱 Exam Pitfall</div>
+      <p>Many students confuse <strong>"limited liability"</strong> with the company having a right to limit its debts. Wrong!</p>
+      <div class="rule">✅ Rule: It is the <em>shareholders</em> who have limited liability — not the company. The company itself is fully liable for ALL its debts.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Types of Business &amp; Securities 企业类型与证券</h2>
+    <p>In terms of business activity volume, <strong>limited companies</strong> dominate the UK economy — not partnerships or co-operatives.</p>
+
+    <h3>Risk Ranking of Securities (least → most risky)</h3>
+    <table class="obj-table">
+      <thead>
+        <tr><th>Security</th><th>Priority in Liquidation</th><th>Risk to Investor</th><th>Potential Return</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Loan Notes / Debentures</strong></td><td>Paid first</td><td class="check">Lowest ✓</td><td>Fixed interest only</td></tr>
+        <tr><td><strong>Preference Shares</strong></td><td>After debt</td><td>Medium</td><td>Fixed dividend</td></tr>
+        <tr><td><strong>Ordinary Shares</strong></td><td>Last (residual)</td><td class="cross">Highest ✗</td><td>Unlimited upside</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 陷阱 Pitfall</div>
+      <p>Q: "Who has most to gain if the business does well AND most to lose if it does badly?"</p>
+      <div class="rule">✅ Answer: Ordinary shareholders — they are the residual claimants. Debenture holders get fixed returns regardless.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Risk &amp; Return Relationship 风险与回报</h2>
+    <div class="concept-box">
+      <div class="label">核心原则</div>
+      <p>Higher risk → Higher <em>required</em> return. But the relationship is <strong>not proportional</strong>.</p>
+      <p style="margin-top:.5rem">If Investment X is twice as risky as Y, the required return from X is <strong>larger than Y's, but less than twice as large</strong>. Why? Because there is a risk-free rate of return (e.g., government bonds) that applies to both — only the <em>risk premium</em> doubles, not the total return.</p>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">🏦 Real World Example</div>
+      <h4>UK Government Bonds vs. Tech Startup Equity</h4>
+      <p>If UK gilts yield 4% (risk-free), and a startup equity requires a 10% risk premium, the total required return is 14%. If another startup is "twice as risky", its risk premium doubles to 20%, giving a total of 24% — not 28% (which would be twice 14%).</p>
+    </div>
+  </div>
+
+  <!-- ===== PART 2: CHAPTER 2 ===== -->
+  <div class="section-label">📗 Chapter 2 — Financial Objectives &amp; the Separation Theorem</div>
+
+  <div class="card">
+    <h2>📚 The Corporate Objective 企业目标</h2>
+    <div class="concept-box">
+      <div class="label">核心答案</div>
+      <p>The generally accepted corporate objective in business finance is: <strong>Maximisation of Shareholders' Wealth</strong> — NOT profit maximisation.</p>
+    </div>
+
+    <h3>Why NOT profit maximisation? 为什么不是利润最大化？</h3>
+    <table class="obj-table">
+      <thead>
+        <tr><th>Problem with Profit Max</th><th>Why it Fails</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Ignores timing</td><td>£1 today ≠ £1 in 10 years (time value of money)</td></tr>
+        <tr><td>Ignores risk</td><td>A risky £100 profit ≠ a certain £100 profit</td></tr>
+        <tr><td>Ignores long-term</td><td>Cutting R&amp;D boosts this year's profit but destroys future value</td></tr>
+        <tr><td>Ignores wealth generation</td><td>Profit ≠ cash flow; accounting profit can be manipulated</td></tr>
+      </tbody>
+    </table>
+
+    <div class="case">
+      <div class="case-tag">💥 Case Study — Bed Bath &amp; Beyond</div>
+      <h4>The Danger of Short-Term Profit Focus</h4>
+      <p>Bed Bath &amp; Beyond spent ~$11.8 billion on stock buybacks since 2004, boosting short-term EPS (earnings per share) and appearing profitable. But this depleted cash reserves. When the macro environment deteriorated, they couldn't service their debts — and filed for bankruptcy in 2023. <strong>Short-term profit maximisation destroyed long-term shareholder wealth.</strong></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 Agency Problem &amp; Agency Costs 代理问题</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比</div>
+      <p>你雇了一个管家（经理）来管理你的房子（公司）。但管家可能会用你的钱买他自己喜欢的家具。<strong>Agency costs</strong> = 你为了监督管家、防止他乱花钱而付出的代价。</p>
+      <p style="margin-top:.5rem; font-size:.9rem; color:var(--muted)">Agency costs = the cost to shareholders of managers NOT acting in shareholders' best interests (monitoring costs, bonding costs, residual loss).</p>
+    </div>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 陷阱</div>
+      <p>Agency costs are NOT advertising costs, travel costs, or costs of hiring temp staff.</p>
+      <div class="rule">✅ Agency costs = costs arising from the principal-agent conflict between shareholders and managers.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 The Separation Theorem 分离定理</h2>
+    <div class="concept-box">
+      <div class="label">核心思想</div>
+      <p>The separation theorem says: <strong>investment decisions</strong> and <strong>consumption decisions</strong> can be made separately — because shareholders can borrow/lend at the market rate to adjust their personal consumption timing.</p>
+    </div>
+
+    <h3>Key Assumptions 关键假设</h3>
+    <ul>
+      <li>Returns from investments are known with <strong>certainty</strong></li>
+      <li>Individuals can borrow and lend at the <strong>same</strong> market interest rate</li>
+      <li>No taxes or transaction costs</li>
+    </ul>
+
+    <h3>Key Implications 关键推论</h3>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num">→</div>
+        <h4>Investment Decision</h4>
+        <p>Business should invest in all positive-NPV projects — regardless of shareholders' personal consumption preferences.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">→</div>
+        <h4>Dividend Irrelevance</h4>
+        <p>Shareholders don't necessarily care how much dividend they receive — they can borrow/lend to adjust their own cash flow timing.</p>
+      </div>
+      <div class="pillar">
+        <div class="num">→</div>
+        <h4>Financing Irrelevance</h4>
+        <p>Shareholders' wealth is NOT affected by the financing method used (debt vs equity) — under the theorem's assumptions.</p>
+      </div>
+    </div>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 高频陷阱 High-Frequency Pitfall</div>
+      <p>The separation theorem says investment and <strong>consumption</strong> should be separated — NOT investment and financing.</p>
+      <div class="rule">✅ The two areas: Investment decisions vs. Consumption decisions (not financing!)</div>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">📊 Exam Classic Question</div>
+      <p><em>Q: The separation theorem implies that shareholders would:</em></p>
+      <ul style="margin:.6rem 0 .6rem 1.2rem">
+        <li>A. Always prefer maximum dividend</li>
+        <li>B. Always prefer 50% dividend</li>
+        <li>C. Always prefer no dividend</li>
+        <li><strong>D. Not necessarily care how much dividend they receive ✅</strong></li>
+      </ul>
+      <p style="font-size:.9rem; color:var(--muted)">Because they can borrow or lend at the market rate to achieve their preferred consumption pattern regardless of dividend policy.</p>
+    </div>
+  </div>
+
+  <!-- ===== EXAM PREP ===== -->
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary 考试防坑总结</div>
+
+  <div class="card">
+    <h2>🎯 Quick Reference — Week 1 Pitfalls</h2>
+    <table class="obj-table">
+      <thead>
+        <tr><th>Common Mistake</th><th>Correct Answer</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Limited company = group of individuals</td><td class="cross">❌ False — it's a separate legal entity</td></tr>
+        <tr><td>UK law requires financial statements every 6 months</td><td class="cross">❌ False — it's annually</td></tr>
+        <tr><td>Limited company can limit its own debts</td><td class="cross">❌ False — shareholders have limited liability, not the company</td></tr>
+        <tr><td>Corporate objective = profit maximisation</td><td class="cross">❌ Wrong — it's shareholder wealth maximisation</td></tr>
+        <tr><td>Agency costs = advertising/travel costs</td><td class="cross">❌ Wrong — it's the cost of principal-agent conflict</td></tr>
+        <tr><td>Separation theorem separates investment &amp; financing</td><td class="cross">❌ Wrong — it separates investment &amp; consumption</td></tr>
+        <tr><td>If X is 2× riskier than Y, required return is 2× Y's</td><td class="cross">❌ Wrong — larger than Y but less than 2×</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="#" class="btn btn-outline btn-disabled">← Previous</a>
+    <span style="font-size:.85rem; color:var(--muted)">Page 1 of 3</span>
+    <a href="02_interactive.html" class="btn btn-primary">Interactive Lab →</a>
+  </div>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 | Quiz | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#064e3b 0%,#065f46 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:600px;margin:0 auto}
+  .progress-wrap{background:rgba(255,255,255,.2);border-radius:20px;height:8px;max-width:400px;margin:1.5rem auto 0;overflow:hidden}
+  .progress-fill{height:100%;background:var(--accent);border-radius:20px;transition:width .4s ease;width:0%}
+  .progress-label{text-align:center;font-size:.85rem;opacity:.8;margin-top:.5rem}
+  main{max-width:800px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .score-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:2rem;text-align:center;margin-bottom:2rem;display:none}
+  .score-card .big-score{font-size:4rem;font-weight:900;color:var(--primary);line-height:1}
+  .score-card .score-label{color:var(--muted);margin-top:.4rem}
+  .score-card .score-msg{font-size:1.1rem;font-weight:600;margin-top:1rem}
+  .q-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .q-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.8rem}
+  .q-text{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:.8rem}
+  .q-context{background:#f8fafc;border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:.9rem;border-left:3px solid var(--border)}
+  .stmt-list{margin:.5rem 0 .8rem 1.2rem;font-size:.9rem}
+  .stmt-list li{margin-bottom:.3rem}
+  .truth-table{border-collapse:collapse;font-size:.85rem;margin:.6rem 0 .8rem}
+  .truth-table th{padding:.4rem .8rem;background:#f1f5f9;border:1px solid var(--border)}
+  .truth-table td{padding:.4rem .8rem;border:1px solid var(--border);text-align:center}
+  .options{list-style:none;padding:0;margin:1rem 0}
+  .options li{padding:.7rem 1rem;border-radius:8px;margin-bottom:.5rem;border:2px solid var(--border);cursor:pointer;transition:all .2s;font-size:.93rem;display:flex;align-items:flex-start;gap:.7rem}
+  .options li:hover{border-color:var(--primary);background:#f0f4ff}
+  .options li.selected{border-color:var(--primary);background:#eef4ff;font-weight:600}
+  .options li.correct{border-color:var(--green);background:#f0fdf4;color:#166534;font-weight:600;pointer-events:none}
+  .options li.wrong{border-color:var(--red);background:#fff5f5;color:#991b1b;pointer-events:none}
+  .options li.reveal{border-color:var(--green);background:#f0fdf4;color:#166534;pointer-events:none}
+  .options li .opt-letter{font-weight:700;min-width:1.4rem;color:var(--muted)}
+  .options li.correct .opt-letter,.options li.reveal .opt-letter{color:var(--green)}
+  .options li.wrong .opt-letter{color:var(--red)}
+  .explanation{background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:1.2rem;margin-top:1rem;display:none;font-size:.9rem}
+  .explanation .exp-title{font-weight:700;color:#166534;margin-bottom:.5rem}
+  .explanation .exp-body{color:#374151;margin-bottom:.6rem}
+  .explanation .wrong-note{background:#fff5f5;border-radius:6px;padding:.7rem;font-size:.88rem;color:#7f1d1d}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s;border:none;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text);background:transparent}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+  .btn-green{background:var(--green);color:#fff}
+  .btn-green:hover{background:#219a52}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="01_lecture.html">📖 Lecture</a>
+  <a href="02_interactive.html">🧪 Interactive</a>
+  <a href="03_quiz.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 1</span>
+</nav>
+
+<div class="hero">
+  <div class="tag">✏️ Quiz · Week 1 · Chapters 1 &amp; 2</div>
+  <h1>Introduction to Business Finance</h1>
+  <p>20 questions from Pearson McLaney 11th Edition — Chapters 1 &amp; 2 combined</p>
+  <div class="progress-wrap"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label">0 / 20 answered</div>
+</div>
+
+<main>
+  <div class="score-card" id="score-card">
+    <div class="big-score" id="final-score">0/20</div>
+    <div class="score-label">Your Score</div>
+    <div class="score-msg" id="score-msg"></div>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-outline" onclick="resetQuiz()">🔄 Try Again</button>
+      <a href="01_lecture.html" class="btn btn-primary">📖 Review Lecture</a>
+    </div>
+  </div>
+
+  <div id="quiz-container"></div>
+
+  <div style="text-align:center;margin-top:2rem">
+    <button class="btn btn-green" id="submit-btn" onclick="submitAll()" style="display:none">📊 See My Results</button>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="02_interactive.html" class="btn btn-outline">← Interactive</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 3 of 3</span>
+    <a href="../week3/01_lecture.html" class="btn btn-primary">Week 3 →</a>
+  </div>
+</main>
+
+<script>
+const questions = [
+  // ===== CHAPTER 1 =====
+  {
+    num:1, chapter:"Chapter 1",
+    text:"How do you assess the following two statements?",
+    statements:["A limited company is legally a group of individuals who join together to form a business.","Every six months the law requires that the directors of UK limited companies prepare a set of financial statements for the shareholders."],
+    tableRows:[["A","False","False"],["B","False","True"],["C","True","False"],["D","True","True"]],
+    options:["A","B","C","D"], correct:"A",
+    explanation:"Statement (1) is FALSE: a limited company is a separate legal entity — it is NOT a group of individuals. It exists independently of its shareholders. Statement (2) is FALSE: UK law requires annual (not six-monthly) financial statements.",
+    wrongNote:"D is the most common wrong answer. Remember: the company is a legal person in its own right, not a collection of people."
+  },
+  {
+    num:2, chapter:"Chapter 1",
+    text:"How do you assess the following two statements relating to investments made by businesses?",
+    statements:["'Real' assets include such things as land, buildings and machinery.","'Financial' assets include such things as loans made to the government and shares in other businesses."],
+    tableRows:[["A","False","False"],["B","False","True"],["C","True","False"],["D","True","True"]],
+    options:["A","B","C","D"], correct:"D",
+    explanation:"Both statements are TRUE. Real assets are tangible productive assets (land, buildings, machinery). Financial assets are claims on future cash flows — government bonds and shares in other companies are classic examples.",
+    wrongNote:"C is wrong because financial assets DO include loans to government (gilts) and equity stakes in other firms."
+  },
+  {
+    num:3, chapter:"Chapter 1",
+    text:"Which one of the following statements best describes the relationship between returns required by investors for investment X and investment Y, where X is considered to be twice as risky as Y?",
+    options:["The return required from X is exactly twice that from Y.","The return required from X is larger than that from Y, but less than twice as large.","The return required from X is more than twice as large as that from Y.","The return required from X is half of that required from Y."],
+    correct:"The return required from X is larger than that from Y, but less than twice as large.",
+    explanation:"Both investments share the same risk-free rate. Only the risk premium doubles — not the total return. So r_X = rf + 2×rp_Y, while r_Y = rf + rp_Y. Since rf > 0, r_X < 2×r_Y.",
+    wrongNote:"'Exactly twice' ignores the shared risk-free component. The risk premium doubles, but the total return does not."
+  },
+  {
+    num:4, chapter:"Chapter 1",
+    text:"In terms of the level of business activity, the most important types of UK businesses are:",
+    options:["partnerships.","limited companies.","co-operatives.","multi-national corporations."],
+    correct:"limited companies.",
+    explanation:"Limited companies dominate UK business activity by volume and value. They benefit from limited liability, separate legal personality, and easier access to capital markets.",
+    wrongNote:"Partnerships are common in professions (law, accounting) but are not the dominant form by business activity volume."
+  },
+  {
+    num:5, chapter:"Chapter 1",
+    text:"Meeting the legal and administrative requirements of forming a new company in the UK costs about:",
+    options:["£100,000.","£10,000.","£1,000.","£100."],
+    correct:"£100.",
+    explanation:"Incorporating a company in the UK via Companies House costs as little as £12 online, or around £100 for same-day registration. The process is deliberately low-cost to encourage entrepreneurship.",
+    wrongNote:"Many students overestimate this. The legal minimum cost is very low — the expensive part is running the business, not forming it."
+  },
+  {
+    num:6, chapter:"Chapter 1",
+    text:"How do you assess the following two statements?",
+    statements:["A limited company has the right to place a ceiling or limit on the amount of its debts that it will pay.","A limited company is in much the same position as a human person regarding its right to limit the payment of its debts."],
+    tableRows:[["A","False","False"],["B","False","True"],["C","True","False"],["D","True","True"]],
+    options:["A","B","C","D"], correct:"A",
+    explanation:"Both FALSE. Statement (1): A limited company does NOT have the right to limit its debts — it is fully liable for all its obligations. Statement (2): A human person also cannot simply limit their debts. 'Limited' in 'limited company' refers to shareholders' liability, not the company's liability.",
+    wrongNote:"The word 'limited' confuses many students. It limits SHAREHOLDER liability, not the company's own liability to creditors."
+  },
+  {
+    num:7, chapter:"Chapter 1",
+    text:"Which one of the following correctly lists securities of the same business in order of their riskiness to investors (least risky first, most risky last)?",
+    options:["Ordinary shares, preference shares, loan notes.","Preference shares, ordinary shares, loan notes.","Loan notes, preference shares, ordinary shares.","Preference shares, loan notes, ordinary shares."],
+    correct:"Loan notes, preference shares, ordinary shares.",
+    explanation:"Loan note holders are paid first (fixed interest, secured), then preference shareholders (fixed dividend, priority over ordinary), then ordinary shareholders (residual claimants — last in line, most risk, most potential reward).",
+    wrongNote:"A common error is placing preference shares before loan notes. Debt always ranks above equity in liquidation."
+  },
+  {
+    num:8, chapter:"Chapter 1",
+    text:"The investors that normally have most to gain where the business does well and most to lose if it does badly are:",
+    options:["the debenture holders.","the ordinary shareholders.","the loan notes holders.","the preference shareholders."],
+    correct:"the ordinary shareholders.",
+    explanation:"Ordinary shareholders are residual claimants — they receive whatever is left after all other obligations are met. In good times, profits flow to them without limit. In bad times, they lose everything before other investors.",
+    wrongNote:"Debenture and loan note holders receive fixed returns regardless of performance — they don't benefit from upside."
+  },
+  {
+    num:9, chapter:"Chapter 1",
+    text:"In a UK limited company, the directors are normally appointed by:",
+    options:["the ordinary shareholders.","the Registrar of Companies.","the Auditors.","the people who first take steps to form the company."],
+    correct:"the ordinary shareholders.",
+    explanation:"In UK corporate governance, directors are appointed (and can be removed) by ordinary shareholders at the Annual General Meeting (AGM). This is the mechanism by which shareholders exercise control over management.",
+    wrongNote:"The Registrar of Companies registers the company but does not appoint directors. Auditors are independent and appointed separately."
+  },
+  {
+    num:10, chapter:"Chapter 1",
+    text:"You own shares currently worth £2.50 each. You pay £0.40 per share for an option to sell at £3 each in six months. If in six months the shares are worth £3.50 each, the value of the option (per share) is:",
+    options:["Nothing","£0.40","£0.50","£1.00"],
+    correct:"Nothing",
+    explanation:"This is a PUT option (right to sell at £3). If the market price is £3.50, you would NOT exercise the put — you'd sell in the market at £3.50 instead of £3. The option expires worthless. The £0.40 premium is already lost (sunk cost).",
+    wrongNote:"£0.50 would be the value if the market price fell to £2.50 (£3 − £2.50). £1.00 would apply if the price fell to £2. At £3.50, the put option has zero intrinsic value."
+  },
+  // ===== CHAPTER 2 =====
+  {
+    num:11, chapter:"Chapter 2",
+    text:"To be relevant to a particular decision an item of data needs to:",
+    options:["relate to the future and be verifiable.","be different between the options and relate to the objectives being pursued.","be of a financial nature and relate to the future.","relate to the future and to the objectives being pursued."],
+    correct:"be different between the options and relate to the objectives being pursued.",
+    explanation:"Relevant data must: (1) differ between the options being considered — if a cost is the same regardless of choice, it's irrelevant; and (2) relate to the decision objective. Data that is future-oriented but identical across options is still irrelevant.",
+    wrongNote:"'Relate to the future' alone is not sufficient — sunk costs relate to the past but even future costs that don't differ between options are irrelevant."
+  },
+  {
+    num:12, chapter:"Chapter 2",
+    text:"In business finance the generally accepted corporate objective is:",
+    options:["maximisation of shareholders' wealth.","maximisation of profit.","maximisation of capital employed.","maximisation of market share."],
+    correct:"maximisation of shareholders' wealth.",
+    explanation:"Shareholder wealth maximisation is the accepted objective because it accounts for timing (time value of money), risk, and long-term value — unlike profit maximisation which ignores all three.",
+    wrongNote:"Profit maximisation is the most common wrong answer. It fails because it ignores risk, timing, and can be manipulated through accounting choices."
+  },
+  {
+    num:13, chapter:"Chapter 2",
+    text:"Seeking to maximise the current year's profit is not a sensible objective for most businesses for several reasons. Which is the ONLY one of the following that is NOT such a reason?",
+    options:["It ignores longer term profitability.","It ignores risk.","It can be achieved by increasing the number of shareholders.","It ignores wealth generation."],
+    correct:"It can be achieved by increasing the number of shareholders.",
+    explanation:"Increasing the number of shareholders does NOT increase total profit — it just dilutes earnings per share. The other three ARE genuine problems with profit maximisation: it ignores long-term value, risk, and the distinction between profit and wealth.",
+    wrongNote:"This is a 'which is NOT a reason' question — read carefully. The trap is picking a genuine problem with profit max instead of the irrelevant option."
+  },
+  {
+    num:14, chapter:"Chapter 2",
+    text:"In the context of business finance, the expression 'agency costs' relates to:",
+    options:["the cost to shareholders of managers not acting in the shareholders' best interests.","the cost of advertising the business's products.","the costs of employing temporary managerial staff.","part of the costs of travel by the business's staff."],
+    correct:"the cost to shareholders of managers not acting in the shareholders' best interests.",
+    explanation:"Agency costs arise from the principal-agent problem: shareholders (principals) hire managers (agents) to run the firm. When managers pursue their own interests instead, shareholders bear costs — monitoring costs, bonding costs, and residual losses.",
+    wrongNote:"Agency costs have nothing to do with advertising, temp staff, or travel. The word 'agency' here refers to the economic concept of agency relationships, not advertising agencies."
+  },
+  {
+    num:15, chapter:"Chapter 2",
+    text:"The evidence on 'short-termist' attitudes of shareholders is that:",
+    options:["shareholders tend to be short termist and are believed to be so by businesses' managers.","shareholders tend not to be short termist, but are believed to be so by businesses' managers.","shareholders tend to be short termist, but are believed not to be so by businesses' managers.","shareholders tend not to be short termist and are believed not to be so by businesses' managers."],
+    correct:"shareholders tend not to be short termist, but are believed to be so by businesses' managers.",
+    explanation:"Research shows institutional shareholders (pension funds, insurance companies) actually have long-term horizons. However, managers BELIEVE shareholders are short-termist, which causes managers to focus on short-term results — a self-fulfilling misperception.",
+    wrongNote:"This is a nuanced empirical finding. The key insight: the short-termism problem is driven by managers' mistaken beliefs about shareholders, not by shareholders' actual behaviour."
+  },
+  {
+    num:16, chapter:"Chapter 2",
+    text:"Which is the ONLY one of the following that is a necessary assumption of the separation theorem?",
+    options:["All individuals would prefer to invest their wealth than to spend it.","Individuals have to pay higher rates of interest to borrow, than they can earn by lending.","Businesses can borrow more cheaply than can individuals.","Returns from investments are known with certainty."],
+    correct:"Returns from investments are known with certainty.",
+    explanation:"The separation theorem requires a perfect capital market with certainty. Key assumptions: (1) returns are known with certainty, (2) individuals can borrow and lend at the SAME rate, (3) no taxes or transaction costs.",
+    wrongNote:"Option B is actually the OPPOSITE of what the theorem assumes — it requires equal borrowing and lending rates. Option A is not required — some people prefer current consumption."
+  },
+  {
+    num:17, chapter:"Chapter 2",
+    text:"In the separation theorem, what factor causes all of the business's shareholders to agree that a particular investment should either be made or not made?",
+    options:["The existence of the ability to borrow and lend.","The fact that none of the shareholders are prepared to delay consumption.","The fact that the particular investment is a profitable one.","The fact that all of the shareholders are prepared to delay consumption."],
+    correct:"The existence of the ability to borrow and lend.",
+    explanation:"Because shareholders can borrow or lend at the market rate, they can all adjust their personal consumption timing independently of the firm's investment and dividend decisions. This means all shareholders agree: take any positive-NPV project, regardless of personal consumption preferences.",
+    wrongNote:"Shareholders have DIFFERENT consumption preferences — some want income now, others later. The ability to borrow/lend is what aligns them despite these differences."
+  },
+  {
+    num:18, chapter:"Chapter 2",
+    text:"The separation theorem implies that shareholders would:",
+    options:["always prefer to receive the maximum possible dividend each year.","always prefer to receive 50% of each year's profit as the dividend and for the other 50% to be invested by the business.","always prefer to receive no dividends each year.","not necessarily care how much dividend they receive each year."],
+    correct:"not necessarily care how much dividend they receive each year.",
+    explanation:"Under the separation theorem, shareholders can borrow or lend at the market rate to achieve any desired consumption pattern. If they receive too little dividend, they borrow. If too much, they lend the surplus. Dividend policy is therefore irrelevant to their welfare.",
+    wrongNote:"A, B, and C all imply a fixed preference — but the theorem says preferences vary AND can be satisfied regardless of dividend policy through borrowing/lending."
+  },
+  {
+    num:19, chapter:"Chapter 2",
+    text:"The 'separation theorem' says that two decision making areas should be considered separately, these are:",
+    options:["investment and consumption.","borrowing and lending.","borrowing and consumption.","investment and financing."],
+    correct:"investment and consumption.",
+    explanation:"The separation theorem separates the INVESTMENT decision (which projects to take — based on NPV) from the CONSUMPTION decision (when shareholders want to spend their money — handled personally through borrowing/lending).",
+    wrongNote:"'Investment and financing' is a very common wrong answer. The theorem is about investment vs consumption, not investment vs financing. Modigliani-Miller deals with investment vs financing."
+  },
+  {
+    num:20, chapter:"Chapter 2",
+    text:"How do you assess the following two statements?",
+    statements:["According to the 'separation theorem', shareholders' wealth is not affected by the financing method used by the business.","According to the 'separation theorem', the business should be guided by the personal consumption preferences of the shareholders when making investment decisions."],
+    tableRows:[["A","True","True"],["B","True","False"],["C","False","True"],["D","False","False"]],
+    options:["A","B","C","D"], correct:"B",
+    explanation:"Statement (1) is TRUE: under the separation theorem's assumptions, financing method (debt vs equity) does not affect shareholder wealth — this is the essence of the theorem. Statement (2) is FALSE: the whole point of the theorem is that investment decisions should be made on NPV grounds INDEPENDENTLY of shareholders' personal consumption preferences.",
+    wrongNote:"A is wrong because Statement (2) is the exact opposite of what the theorem says. The theorem SEPARATES investment from consumption preferences."
+  }
+];
+
+let answers = {}, submitted = false;
+
+function renderQuiz(){
+  const c = document.getElementById('quiz-container');
+  c.innerHTML = questions.map((q,i) => {
+    let ctx = '';
+    if(q.statements){
+      ctx += `<ul class="stmt-list">${q.statements.map(s=>`<li>${s}</li>`).join('')}</ul>`;
+    }
+    if(q.tableRows){
+      ctx += `<table class="truth-table"><thead><tr><th></th><th>Statement (1)</th><th>Statement (2)</th></tr></thead><tbody>${q.tableRows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+    }
+    if(q.context) ctx = `<div class="q-context">${q.context}</div>` + ctx;
+
+    const opts = q.options.map((opt,oi)=>`<li onclick="pick(${i},'${opt.replace(/'/g,"\\'")}',this)" data-val="${opt}"><span class="opt-letter">${String.fromCharCode(65+oi)}.</span>${opt}</li>`).join('');
+
+    return `<div class="q-card" id="qc-${i}">
+      <div class="q-num">${q.chapter} · Question ${q.num} / 20</div>
+      <div class="q-text">${q.text}</div>
+      ${ctx}
+      <ul class="options" id="opts-${i}">${opts}</ul>
+      <div class="explanation" id="exp-${i}">
+        <div class="exp-title">✅ Answer &amp; Explanation</div>
+        <div class="exp-body" id="expb-${i}"></div>
+        <div class="wrong-note" id="wrn-${i}"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function pick(qi, val, el){
+  if(submitted) return;
+  answers[qi] = val;
+  document.querySelectorAll(`#opts-${qi} li`).forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const done = Object.keys(answers).length;
+  document.getElementById('progress-fill').style.width = (done/questions.length*100)+'%';
+  document.getElementById('progress-label').textContent = `${done} / ${questions.length} answered`;
+  if(done === questions.length) document.getElementById('submit-btn').style.display='inline-flex';
+}
+
+function submitAll(){
+  submitted = true;
+  let score = 0;
+  questions.forEach((q,i)=>{
+    const ua = answers[i];
+    document.querySelectorAll(`#opts-${i} li`).forEach(o=>{
+      o.classList.remove('selected');
+      if(o.dataset.val === q.correct) o.classList.add('reveal');
+      else if(o.dataset.val === ua && ua !== q.correct) o.classList.add('wrong');
+    });
+    if(ua === q.correct) score++;
+    document.getElementById(`exp-${i}`).style.display='block';
+    document.getElementById(`expb-${i}`).textContent = q.explanation;
+    if(q.wrongNote) document.getElementById(`wrn-${i}`).innerHTML = '⚠️ Common Mistake: '+q.wrongNote;
+  });
+  document.getElementById('submit-btn').style.display='none';
+  const sc = document.getElementById('score-card');
+  sc.style.display='block';
+  document.getElementById('final-score').textContent = score+'/20';
+  const p = score/20;
+  document.getElementById('score-msg').textContent = p>=.9?'🏆 Excellent! Chapters 1 & 2 mastered.':p>=.7?'✅ Good work! Review the questions you missed.':p>=.5?'📖 Keep going — revisit the lecture and try again.':'💪 Go back to the lecture and interactive lab first.';
+  sc.scrollIntoView({behavior:'smooth'});
+}
+
+function resetQuiz(){
+  answers={}; submitted=false;
+  document.getElementById('score-card').style.display='none';
+  document.getElementById('submit-btn').style.display='none';
+  document.getElementById('progress-fill').style.width='0%';
+  document.getElementById('progress-label').textContent='0 / 20 answered';
+  renderQuiz();
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
