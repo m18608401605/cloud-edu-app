@@ -91,6 +91,11 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
   <div class="card">
     <h2>1.1 Expected Return 期望收益率</h2>
     <p>The expected return of an asset is the probability-weighted average of all possible returns. Think of it as the "fair" average outcome if you could repeat the investment many times.</p>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把期望收益想象成<strong>天气预报的加权平均气温</strong>：晴天概率30%×25度 + 阴天概率50%×12度 + 下雨概率20%×-5度 = 加权平均气温。期望收益就是这样——不是"最可能的结果"，而是所有可能结果按概率加权后的平均值。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Expected return = probability-weighted average of all possible outcomes. It's the "fair" long-run average if you repeated the investment many times.</p>
+    </div>
     <div class="formula-box">
       <div class="f-title">Expected Return Formula</div>
       <div class="f-main">E(R) = Σ pᵢ × Rᵢ</div>
@@ -111,7 +116,11 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
     </div>
 
     <h2>1.2 Variance &amp; Standard Deviation 方差与标准差</h2>
-    <p>Variance measures how spread out returns are around the expected value. Standard deviation (σ) is the square root of variance — it's in the same units as returns, making it more intuitive.</p>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把方差想象成<strong>射箭的散布程度</strong>：期望收益是靶心（平均落点），方差是箭矢落点的分散程度。两个弓箭手平均都射中靶心，但一个每次都很集中（低方差=低风险），另一个忽左忽右（高方差=高风险）。标准差就是把这个散布程度换算回"度数"，让你能直接比较。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Variance measures dispersion around the mean. Standard deviation (σ) is its square root — expressed in the same units as returns (%), making it directly comparable.</p>
+    </div>
     <div class="formula-box">
       <div class="f-title">Variance Formula</div>
       <div class="f-main">σ² = Σ pᵢ × (Rᵢ − E(R))²</div>
@@ -133,6 +142,11 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
   <div class="section-label">🔗 Part 2 — Covariance &amp; Correlation 协方差与相关系数</div>
   <div class="card">
     <h2>2.1 Covariance 协方差</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把协方差想象成<strong>两个朋友的情绪联动</strong>：正协方差 = 一起开心、一起难过（股市涨两人都涨）；负协方差 = 一个开心另一个难过（黄金跌股票涨）；零协方差 = 两人情绪完全独立，互不影响。投资组合里，你希望找到"情绪相反"的资产来对冲风险。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Covariance measures how two assets move together. Positive = same direction; Negative = opposite directions; Zero = independent.</p>
+    </div>
     <p>Covariance measures how two assets move together. Positive covariance = they tend to move in the same direction. Negative covariance = they tend to move in opposite directions.</p>
     <div class="formula-box">
       <div class="f-title">Covariance Formula</div>
@@ -184,6 +198,11 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
     <h2>4.1 The Efficient Frontier Concept</h2>
     <p>By varying the weights w_A and w_B across all possible combinations (0% to 100%), we trace out a curve in risk-return space. This curve is called the <strong>opportunity set</strong> or <strong>portfolio frontier</strong>.</p>
     <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy — Efficient Frontier</div>
+      <p>把有效前沿想象成<strong>手机的性价比曲线</strong>：同样的价格（风险），你想要最好的性能（收益）；同样的性能（收益），你想要最低的价格（风险）。有效前沿上的每一个点都是"性价比最高的组合"——没有任何其他组合能在同等风险下给你更高收益，或在同等收益下给你更低风险。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">The efficient frontier = the set of portfolios with maximum return for a given risk level. Rational investors always choose from this set.</p>
+    </div>
+    <div class="concept-box" style="margin-top:0">
       <div class="label">📌 Efficient Frontier Definition</div>
       <p>The <strong>efficient frontier</strong> is the upper portion of the portfolio frontier — the set of portfolios that offer the <strong>maximum expected return for a given level of risk</strong> (or minimum risk for a given return). Rational, risk-averse investors will always choose a portfolio on the efficient frontier.</p>
     </div>
@@ -212,6 +231,11 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
       <div class="capm-formula">K_e = R_f + β(R_m − R_f)</div>
       <p>K_e = Required return on equity &nbsp;|&nbsp; R_f = Risk-free rate &nbsp;|&nbsp; β = Beta &nbsp;|&nbsp; R_m = Market return</p>
       <p style="margin-top:.5rem;color:#fbbf24">(R_m − R_f) = Equity Risk Premium (ERP) — the extra return for bearing market risk</p>
+    </div>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy — CAPM & Beta</div>
+      <p>把 Beta 想象成<strong>放大镜的倍数</strong>：市场涨10%，β=1.5的股票涨15%（放大1.5倍）；市场跌10%，它跌15%。β=0.5的股票只涨5%，跌也只跌5%（缩小到0.5倍）。CAPM 就是说：你承担的"放大倍数"越高，市场要求给你的额外回报也越高。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Beta = sensitivity to market movements. Higher β = more amplification = more systematic risk = higher required return.</p>
     </div>
 
     <h2>5.2 Understanding Beta (β)</h2>
@@ -268,6 +292,25 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
       <p>CAPM assumes: investors are rational and risk-averse; markets are perfect (no taxes, transaction costs); all investors have the same expectations; investors can borrow/lend at R_f.</p>
       <div class="rule">In practice: β is estimated from historical data and may not predict future risk. CAPM is a model, not reality — but it's the best simple tool we have.</div>
     </div>
+  </div>
+
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
+
+  <div class="card">
+    <h2>🎯 Week 5 Quick-Reference Pitfall Table</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Common Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Calculating variance</td><td>Using (Rᵢ − E(R)) without squaring</td><td>σ² = Σ pᵢ × (Rᵢ − E(R))² — always square the deviation</td></tr>
+        <tr><td>Covariance sign</td><td>Assuming covariance must be positive</td><td>Covariance can be negative (assets move opposite) — that's the diversification benefit</td></tr>
+        <tr><td>Portfolio variance formula</td><td>Forgetting the 2·w_A·w_B·Cov term</td><td>σ²_p = w²_Aσ²_A + w²_Bσ²_B + <strong>2·w_A·w_B·Cov(A,B)</strong> — the cross-term is essential</td></tr>
+        <tr><td>CAPM: using wrong ERP</td><td>Using R_m instead of (R_m − R_f) as ERP</td><td>ERP = R_m − R_f (the premium above risk-free, not the total market return)</td></tr>
+        <tr><td>Beta interpretation</td><td>"β=2 means the stock returns 2%"</td><td>β=2 means the stock moves twice as much as the market — if market +10%, stock +20%</td></tr>
+        <tr><td>SML position</td><td>Confusing above/below SML signals</td><td>Above SML = underpriced (buy); Below SML = overpriced (sell)</td></tr>
+        <tr><td>Diversification limit</td><td>"Adding more stocks eliminates all risk"</td><td>Diversification eliminates unsystematic risk only. Systematic (market) risk remains — it cannot be diversified away</td></tr>
+        <tr><td>Correlation vs Covariance</td><td>Using covariance to compare asset pairs</td><td>Use correlation (ρ) for comparison — it's standardised to [−1, +1]. Covariance depends on scale.</td></tr>
+      </tbody>
+    </table>
   </div>
 
   <div class="bottom-nav">
