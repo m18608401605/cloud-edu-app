@@ -121,6 +121,37 @@
     </details>
   </div>
 
+
+  <div class="calc-section">
+    <h3>📝 题目二</h3>
+    <p>GHI公司股票当前股价 <strong>£2.50</strong>，即将发放 <strong>£0.25</strong> 股利，预期股利增长率 <strong>5%</strong>。</p>
+    <ol>
+      <li>(a) 计算除息后（ex-dividend）股价。</li>
+      <li>(b) 用 Gordon Growth Model 计算股权成本（Ke），注意应使用除息后股价作为 P₀。</li>
+      <li>(c) 若股利改为 <strong>£0.40</strong>（其他条件不变），Ke 会如何变化？说明原因。</li>
+    </ol>
+    <details>
+      <summary>📖 点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) 除息后股价：</strong></p>
+        <p>Ex-dividend price = £2.50 − £0.25 = <strong>£2.25</strong></p>
+        <br>
+        <p><strong>(b) 股权成本 Ke（Gordon Growth Model）：</strong></p>
+        <p>公式：Ke = D₁ / P₀ + g</p>
+        <p>D₁ = £0.25 × (1 + 5%) = <strong>£0.2625</strong>（下一期股利）</p>
+        <p>P₀ = 除息后股价 = <strong>£2.25</strong></p>
+        <p>Ke = £0.2625 / £2.25 + 5% = 11.67% + 5% = <strong>16.67%</strong></p>
+        <p style="color:#b45309;margin-top:6px">⚠️ 陷阱：必须用<strong>除息后股价</strong>作为 P₀，而非含息股价 £2.50。用 £2.50 会得到错误的 Ke = 10.5% + 5% = 15.5%。</p>
+        <br>
+        <p><strong>(c) 股利增至 £0.40 时：</strong></p>
+        <p>Ex-dividend price = £2.50 − £0.40 = <strong>£2.10</strong></p>
+        <p>D₁ = £0.40 × 1.05 = <strong>£0.42</strong></p>
+        <p>Ke = £0.42 / £2.10 + 5% = 20% + 5% = <strong>25%</strong></p>
+        <p>✅ Ke <strong>上升</strong>。原因：更高的股利导致除息后股价更低，分子（D₁）增大而分母（P₀）减小，Ke 显著上升。这体现了股利政策与股权成本之间的权衡。</p>
+      </div>
+    </details>
+  </div>
+
   <div class="bottom-nav">
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html" class="btn">← Interactive</a>
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html" class="btn accent">Week 10 →</a>

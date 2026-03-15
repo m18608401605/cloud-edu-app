@@ -51,6 +51,9 @@
   .btn.accent{background:var(--accent)}
   .btn.accent:hover{background:#c8880e}
   @media(max-width:600px){.compare-cols{grid-template-columns:1fr}}
+  .scenario-btn{background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.4);color:#fbbf24;padding:.4rem .9rem;border-radius:20px;font-size:.82rem;cursor:pointer;transition:all .2s;margin-bottom:4px}
+  .scenario-btn:hover{background:rgba(232,160,32,.3);border-color:var(--accent)}
+  .scenario-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
 </style>
 </head>
 <body>
@@ -82,6 +85,13 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setLab1(0,500)">📱 零股利（成长型）</button>
+      <button class="scenario-btn" onclick="setLab1(50,500)">🏢 典型上市公司</button>
+      <button class="scenario-btn" onclick="setLab1(100,500)">💰 全额派息</button>
+      <button class="scenario-btn" onclick="setLab1(50,1000)">🍎 Apple 规模</button>
+    </div>
     <div class="slider-group">
       <div class="slider-label">
         <span>股利比例（Payout Ratio）</span>
@@ -119,6 +129,13 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setLab2(0)">➡️ 维持不变</button>
+      <button class="scenario-btn" onclick="setLab2(25)">📈 增加25%</button>
+      <button class="scenario-btn" onclick="setLab2(-25)">📉 削减25%</button>
+      <button class="scenario-btn" onclick="setLab2(-50)">⚠️ 大幅削减50%</button>
+    </div>
     <div class="slider-group">
       <div class="slider-label">
         <span>股利变化幅度</span>
@@ -153,6 +170,13 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setLab3(0)">💰 全部派息</button>
+      <button class="scenario-btn" onclick="setLab3(50)">⚖️ 各半</button>
+      <button class="scenario-btn" onclick="setLab3(100)">🔄 全部回购</button>
+      <button class="scenario-btn" onclick="setLab3(80)">🍎 Apple 风格（偏回购）</button>
+    </div>
     <div class="slider-group">
       <div class="slider-label">
         <span>回购比例（剩余为股利）</span>
@@ -276,6 +300,20 @@ function updateLab3(){
   document.getElementById('l3-total-wealth').textContent = '£' + (exPrice + dps).toFixed(2);
 }
 
+
+function setLab1(payout, value){
+  document.getElementById('l1-payout').value = payout;
+  document.getElementById('l1-value').value = value;
+  updateLab1();
+}
+function setLab2(change){
+  document.getElementById('l2-change').value = change;
+  updateLab2();
+}
+function setLab3(buyback){
+  document.getElementById('l3-buyback').value = buyback;
+  updateLab3();
+}
 updateLab1(); updateLab2(); updateLab3();
 </script>
 </body>
