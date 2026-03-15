@@ -85,6 +85,9 @@
   .btn.accent{background:var(--accent)}
   .btn.accent:hover{background:#c8880e}
   @media(max-width:600px){.emh-cards{grid-template-columns:1fr}}
+  .scenario-btn{background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.4);color:#fbbf24;padding:.4rem .9rem;border-radius:20px;font-size:.82rem;cursor:pointer;transition:all .2s;margin-bottom:4px}
+  .scenario-btn:hover{background:rgba(232,160,32,.3);border-color:var(--accent)}
+  .scenario-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
 </style>
 </head>
 <body>
@@ -116,6 +119,13 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="showEMH('weak')">🟡 弱式有效</button>
+      <button class="scenario-btn" onclick="showEMH('semi')">🔵 半强式有效</button>
+      <button class="scenario-btn" onclick="showEMH('strong')">🔴 强式有效</button>
+      <button class="scenario-btn" onclick="['weak','semi','strong'].forEach(showEMH)">📊 全部展开</button>
+    </div>
     <div class="emh-cards">
       <div class="emh-btn emh-weak-btn" onclick="showEMH('weak')">
         <div class="icon">🟡</div>
@@ -169,6 +179,13 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="setAlpha(0)">📊 有效市场（α=0）</button>
+      <button class="scenario-btn" onclick="setAlpha(2)">🏆 Buffett 级（α=2%）</button>
+      <button class="scenario-btn" onclick="setAlpha(5)">🚀 高超额收益（α=5%）</button>
+      <button class="scenario-btn" onclick="setAlpha(-2)">📉 跑输市场（α=-2%）</button>
+    </div>
     <div class="slider-group">
       <div class="slider-label">
         <span>超额收益率 α（Alpha）</span>
@@ -199,6 +216,11 @@
       </div>
     </div>
 
+
+    <div class="scenario-row">
+      <button class="scenario-btn" onclick="resetScenarios()">🔄 重置所有场景</button>
+      <button class="scenario-btn" onclick="document.querySelector('.scenario').scrollIntoView({behavior:'smooth'})">▶ 开始测试</button>
+    </div>
     <div class="scenario">
       <h4>场景 1：股票从 £10 涨到 £15</h4>
       <p>你持有的股票从 £10 涨到了 £15（+50%）。分析师认为公司基本面没有变化，合理价值仍为 £12。你会怎么做？</p>
@@ -310,6 +332,22 @@ function chooseScenario(num, choice, btn){
   resultEl.innerHTML = '<strong>'+result.name+'</strong><br>'+result.msg;
 }
 
+
+function setAlpha(val){
+  document.getElementById('l2-alpha').value = val;
+  updateLab2();
+}
+function resetScenarios(){
+  [1,2,3].forEach(n=>{
+    const r = document.getElementById('result-'+n);
+    if(r){ r.className='bias-result'; r.innerHTML=''; }
+    const btns = document.querySelectorAll('#result-'+n).length ? 
+      document.getElementById('result-'+n).previousElementSibling.querySelectorAll('.choice-btn') : [];
+    btns.forEach(b=>{ b.className='choice-btn'; b.style.cursor='pointer'; });
+    const opts = document.querySelectorAll('.choice-btns')[n-1];
+    if(opts){ delete opts.dataset.done; opts.querySelectorAll('.choice-btn').forEach(b=>{ b.className='choice-btn'; b.style.cursor='pointer'; }); }
+  });
+}
 updateLab2();
 </script>
 </body>
