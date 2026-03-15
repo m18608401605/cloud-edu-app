@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Week 7 Lecture – Cost of Capital & WACC</title>
+<title>Week 7 | Lecture | Business Finance</title>
 <style>
   :root { --primary:#1a3a5c; --accent:#e8a020; }
   * { box-sizing:border-box; margin:0; padding:0; }
@@ -74,15 +74,15 @@
 
   <!-- Section 1: WACC Formula -->
   <div class="section">
-    <h2>Section 1 · WACC 公式</h2>
+    <h2>📚 WACC Formula</h2>
     <p>WACC（Weighted Average Cost of Capital，加权平均资本成本）是企业所有资金来源成本的加权平均值，以<strong>市场价值权重</strong>计算。</p>
     <div class="concept-box">
       <div class="formula">WACC = W<sub>d</sub> × K<sub>d</sub>(1−t) + W<sub>e</sub> × K<sub>e</sub></div>
-      <p>• <strong>W<sub>d</sub></strong>：债务占总资本的市值比例</p>
-      <p>• <strong>K<sub>d</sub></strong>：债务成本（税前），通常用 YTM 估算</p>
-      <p>• <strong>t</strong>：企业所得税率（利息可抵税，产生税盾）</p>
-      <p>• <strong>W<sub>e</sub></strong>：股权占总资本的市值比例（= 1 − W<sub>d</sub>）</p>
-      <p>• <strong>K<sub>e</sub></strong>：权益成本，用 CAPM 或股利增长模型计算</p>
+      <p>• <strong>W<sub>d</sub></strong>: Market value weight of debt</p>
+      <p>• <strong>K<sub>d</sub></strong>: Pre-tax cost of debt (usually YTM)</p>
+      <p>• <strong>t</strong>: Corporate tax rate (interest is tax-deductible)</p>
+      <p>• <strong>W<sub>e</sub></strong>: Market value weight of equity (= 1 − W<sub>d</sub>)</p>
+      <p>• <strong>K<sub>e</sub></strong>: Cost of equity (CAPM or dividend growth model)</p>
     </div>
     <p>⚠️ 权重必须使用<strong>市场价值</strong>，而非账面价值。市场价值反映投资者当前对资产的定价，更能代表真实的资本成本。</p>
 
@@ -94,24 +94,24 @@
 
   <!-- Section 2: Cost of Equity -->
   <div class="section">
-    <h2>Section 2 · 权益成本 K<sub>e</sub></h2>
+    <h2>📚 Cost of Equity (K<sub>e</sub>)</h2>
     <p>权益成本是股东要求的最低回报率。有两种主要计算方法：</p>
 
     <div class="two-col">
       <div class="concept-box">
         <h3 style="color:var(--primary);margin-bottom:10px;">方法一：CAPM</h3>
         <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> − R<sub>f</sub>)</div>
-        <p>• <strong>R<sub>f</sub></strong>：无风险利率（国债收益率）</p>
-        <p>• <strong>β</strong>：系统性风险系数（市场敏感度）</p>
-        <p>• <strong>(R<sub>m</sub>−R<sub>f</sub>)</strong>：市场风险溢价</p>
+        <p>• <strong>R<sub>f</sub></strong>: Risk-free rate (government bond yield)</p>
+        <p>• <strong>β</strong>: Systematic risk coefficient (market sensitivity)</p>
+        <p>• <strong>(R<sub>m</sub>−R<sub>f</sub>)</strong>: Market risk premium</p>
         <p style="margin-top:8px;color:#666;font-size:.85rem;">β=1 表示与市场同步；β&gt;1 波动更大；β&lt;1 更稳定</p>
       </div>
       <div class="concept-box">
         <h3 style="color:var(--primary);margin-bottom:10px;">方法二：股利增长模型</h3>
         <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</div>
-        <p>• <strong>D<sub>1</sub></strong>：下一期<em>预期</em>股利（非历史股利！）</p>
-        <p>• <strong>P<sub>0</sub></strong>：当前股票市价</p>
-        <p>• <strong>g</strong>：股利永续增长率</p>
+        <p>• <strong>D<sub>1</sub></strong>: Next period <em>expected</em> dividend (not historical!)</p>
+        <p>• <strong>P<sub>0</sub></strong>: Current stock market price</p>
+        <p>• <strong>g</strong>: Perpetual dividend growth rate</p>
         <p style="margin-top:8px;color:#666;font-size:.85rem;">仅适用于稳定支付且增长的股利公司</p>
       </div>
     </div>
@@ -124,7 +124,7 @@
 
   <!-- Section 3: Cost of Debt -->
   <div class="section">
-    <h2>Section 3 · 债务成本 K<sub>d</sub></h2>
+    <h2>📚 Cost of Debt (K<sub>d</sub>)</h2>
     <p>债务成本是企业向债权人支付的利率。最准确的估算方法是使用现有债券的<strong>到期收益率（YTM）</strong>，即债券的内部收益率（IRR）。</p>
     <div class="concept-box">
       <p><strong>YTM 的含义：</strong>使债券未来所有现金流（利息+本金）的现值等于当前市价的折现率。</p>
@@ -146,20 +146,20 @@
 
   <!-- Section 4: Pitfalls -->
   <div class="section">
-    <h2>Section 4 · ⚠️ 常见陷阱</h2>
+    <h2>📚 Common Pitfalls</h2>
 
     <div class="pitfall">
-      <h4>❌ 陷阱 1：使用账面价值权重</h4>
+      <h4>❌ Pitfall 1: Using Book Value Weights</h4>
       <p>账面价值是历史成本，不反映当前市场对资产的定价。WACC 必须使用<strong>市场价值权重</strong>。例如，一家公司账面债务比率 30%，但市场价值债务比率可能只有 15%——两者差距巨大。</p>
     </div>
 
     <div class="pitfall">
-      <h4>❌ 陷阱 2：忘记税盾 (1−t)</h4>
+      <h4>❌ Pitfall 2: Forgetting Tax Shield (1−t)</h4>
       <p>债务成本必须乘以 (1−t) 得到税后成本。如果直接用 K<sub>d</sub> 而不调整税率，会高估 WACC，导致拒绝本应接受的好项目。</p>
     </div>
 
     <div class="pitfall">
-      <h4>❌ 陷阱 3：使用历史股利而非预期股利</h4>
+      <h4>❌ Pitfall 3: Using Historical Dividend Instead of Expected</h4>
       <p>股利增长模型中的 D<sub>1</sub> 是<strong>下一期预期股利</strong>，不是上一期已支付的股利 D<sub>0</sub>。正确做法：D<sub>1</sub> = D<sub>0</sub> × (1+g)。混淆两者会低估权益成本。</p>
     </div>
 
@@ -178,7 +178,7 @@
 
   <!-- Section 5: Apple Case -->
   <div class="section">
-    <h2>Section 5 · 📱 真实案例：Apple WACC 计算</h2>
+    <h2>📚 Real Case: Apple WACC Calculation</h2>
     <p>以下是基于简化假设的 Apple WACC 估算示例：</p>
 
     <div class="case">
