@@ -313,6 +313,46 @@ MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
     </table>
   </div>
 
+  <div class="section-label">⚠️ Common Pitfalls & Exam Traps</div>
+  <div class="card">
+    <h2>⚠️ Pitfall Summary Table — Portfolio Theory Mistakes</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Common Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Variance Calculation</strong></td><td>Forgetting to square deviations</td><td>✅ Variance = Σ[p × (Return − E(R))²]. Must square the deviations</td></tr>
+        <tr><td><strong>Covariance Sign</strong></td><td>Ignoring whether covariance is positive or negative</td><td>✅ Positive covariance = assets move together; Negative = move opposite (better diversification)</td></tr>
+        <tr><td><strong>Portfolio Variance</strong></td><td>Missing the 2wₐwᵦCov(A,B) term</td><td>✅ σₚ² = wₐ²σₐ² + wᵦ²σᵦ² + 2wₐwᵦCov(A,B). The cross-term is critical!</td></tr>
+        <tr><td><strong>CAPM Formula</strong></td><td>Using Rₘ instead of (Rₘ − Rբ)</td><td>✅ E(Rᵢ) = Rբ + βᵢ[E(Rₘ) − Rբ]. The equity risk premium is (Rₘ − Rբ), not Rₘ</td></tr>
+        <tr><td><strong>Beta Interpretation</strong></td><td>Thinking β=2 means double the return</td><td>✅ β measures systematic risk (volatility), not return. β=2 means twice as volatile as market</td></tr>
+        <tr><td><strong>Diversification Limit</strong></td><td>Believing more stocks always reduces risk</td><td>✅ Diversification eliminates specific risk only. After ~15-20 stocks, only systematic risk remains</td></tr>
+        <tr><td><strong>SML Position</strong></td><td>Confusing above/below SML meaning</td><td>✅ Above SML = undervalued (buy); Below SML = overvalued (sell)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-label">📝 Standard Answer Templates</div>
+  <div class="card">
+    <h2>📝 Answer Template: CAPM Questions</h2>
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary)">Step 1: Identify Given Information</h3>
+      <ul style="margin-left:1.5rem;line-height:1.8">
+        <li>Risk-free rate (Rբ)</li>
+        <li>Market return (Rₘ) or Equity Risk Premium (ERP = Rₘ − Rբ)</li>
+        <li>Beta (β) of the asset</li>
+      </ul>
+    </div>
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary)">Step 2: Apply CAPM Formula</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace">
+        <div style="color:#fbbf24">E(Rᵢ) = Rբ + βᵢ × [E(Rₘ) − Rբ]</div>
+        <div style="color:#64748b;margin-top:.6rem">Example: Rբ=5%, Rₘ=12%, β=1.5</div>
+        <div style="color:#64748b">E(R) = 5% + 1.5 × (12% − 5%) = 5% + 10.5% = 15.5%</div>
+      </div>
+    </div>
+    <div style="background:#dcfce7;border:2px solid #86efac;border-radius:8px;padding:1rem;margin-top:1rem">
+      <p style="font-weight:600;color:#166534">💡 Interpretation:</p>
+      <p style="color:#166534;font-size:.9rem">The required return (15.5%) compensates investors for: (1) Time value of money (5% risk-free rate), and (2) Systematic risk (10.5% risk premium = 1.5 × 7% market risk premium)</p>
+    </div>
+  </div>
   <div class="bottom-nav">
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html" class="btn btn-outline">← Study Guide</a>
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html" class="btn btn-primary">🧪 Interactive Lab →</a>
