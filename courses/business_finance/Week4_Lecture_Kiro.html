@@ -65,6 +65,18 @@
   <span class="spacer"></span>
   <span class="week-badge">Week 4</span>
 </nav>
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">🎲 Sensitivity Analysis</a>
+    <a href="#part2">📊 Probability & Expected Value</a>
+    <a href="#part3">📈 Portfolio Theory</a>
+    <a href="#part4">⚠️ Pitfalls</a>
+  </div>
+</div>
 <div class="hero">
   <div class="tag">Week 4 · Chapter 6</div>
   <h1>Risk in Investment Appraisal</h1>
@@ -76,6 +88,22 @@
   </div>
 </div>
 <main>
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">🎲 Sensitivity Analysis</a>
+  <a href="#part2">📊 Probability & Expected Value</a>
+  <a href="#part3">📈 Portfolio Theory</a>
+  <a href="#part4">⚠️ Pitfalls</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll', function() {
+  const backToTop = document.querySelector('.back-to-top');
+  if (window.scrollY > 300) { backToTop.classList.add('show'); }
+  else { backToTop.classList.remove('show'); }
+});
+</script>
+
 
   <div class="section-label">📊 Part 1 — Sensitivity Analysis 敏感性分析</div>
   <div class="card">

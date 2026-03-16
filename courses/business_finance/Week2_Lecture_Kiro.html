@@ -73,6 +73,17 @@
   .back-to-top.show{opacity:1;visibility:visible}
   .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
   @media(min-width:1201px){main{margin-left:260px}}
+  .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
+  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
+  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
+  .mobile-toc-toggle.open{transform:rotate(180deg)}
+  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .mobile-toc-content.open{max-height:500px;border-top:1px solid var(--border)}
+  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--bg);transition:all .2s}
+  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
+  .mobile-toc-content a:last-child{border-bottom:none}
+  @media(max-width:1200px){.mobile-toc{display:block}}
   </style>
 </head>
 <body>
@@ -85,6 +96,19 @@
   <span class="spacer"></span>
   <span class="week-badge">Week 2</span>
 </nav>
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">⏰ Time Value</a>
+    <a href="#part2">💰 NPV</a>
+    <a href="#part3">📊 IRR</a>
+    <a href="#part4">⏱️ Payback</a>
+    <a href="#part5">📈 ARR</a>
+  </div>
+</div>
 <div class="hero">
   <div class="tag">Week 2 · Chapter 4</div>
   <h1>Time Value of Money &amp; Investment Appraisal</h1>
@@ -113,7 +137,7 @@ window.addEventListener('scroll', function() {
 });
 </script>
 
-  <div class="section-label">⏰ Part 1 — Time Value of Money</div>
+  <div class="section-label" id="part1">⏰ Part 1 — Time Value of Money</div>
 
   <div class="card">
     <h2>📚 Why Does Time Matter?</h2>
@@ -153,7 +177,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label">💰 Part 2 — NPV: The Gold Standard</div>
+  <div class="section-label" id="part2">💰 Part 2 — NPV: The Gold Standard</div>
 
   <div class="card">
     <h2>📚 Net Present Value</h2>
@@ -191,7 +215,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label">📈 Part 3 — IRR &amp; Other Methods</div>
+  <div class="section-label" id="part3">📈 Part 3 — IRR &amp; Other Methods</div>
 
   <div class="card">
     <h2>📚 Internal Rate of Return</h2>
