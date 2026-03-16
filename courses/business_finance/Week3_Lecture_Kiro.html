@@ -65,6 +65,18 @@
   .btn-outline{border:2px solid var(--border);color:var(--text)}
   .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
 </style>
+  <style>
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  @media(min-width:1201px){main{margin-left:260px}}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  </style>
+
 </head>
 <body>
 <nav>
@@ -89,6 +101,23 @@
 </div>
 
 <main>
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">🏗️ Relevant Cash Flows</a>
+  <a href="#part2">💰 Depreciation Tax Shield</a>
+  <a href="#part3">📊 Inflation & Rationing</a>
+  <a href="#pitfalls">⚠️ Pitfalls</a>
+  <a href="#templates">📝 Answer Templates</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll', function() {
+  const btn = document.querySelector('.back-to-top');
+  if (window.scrollY > 300) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+</script>
+
 
   <div class="section-label">🏗️ Part 1 — What Counts as a Cash Flow?</div>
 
@@ -148,6 +177,46 @@
     </div>
   </div>
 
+  <!-- Part 1 图示：Relevant Cash Flows 决策树 -->
+<div class="card" style="background:#f8fafc">
+  <h3 style="color:var(--primary);margin-bottom:1rem">🌳 决策树：这个成本要不要算进 NPV？</h3>
+  <div style="text-align:center;padding:2rem 0">
+    <div style="display:inline-block;background:#fffbf0;border:2px solid #f59e0b;border-radius:10px;padding:1rem 1.5rem;font-weight:700">
+      Is this a relevant cash flow?
+    </div>
+    <div style="display:flex;justify-content:center;gap:4rem;margin-top:2rem;flex-wrap:wrap">
+      <div style="max-width:280px">
+        <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
+        <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1.2rem;color:#166534">
+          <div style="font-size:1.3rem;margin-bottom:.5rem">✅</div>
+          <div style="font-weight:700;margin-bottom:.8rem">Include</div>
+          <ul style="text-align:left;font-size:.85rem;line-height:1.8;margin-left:1rem">
+            <li>Initial Investment</li>
+            <li>Operating Cash Flows</li>
+            <li>Working Capital</li>
+            <li>Disposal Value</li>
+            <li>Opportunity Costs</li>
+          </ul>
+        </div>
+      </div>
+      <div style="max-width:280px">
+        <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
+        <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1.2rem;color:#991b1b">
+          <div style="font-size:1.3rem;margin-bottom:.5rem">❌</div>
+          <div style="font-weight:700;margin-bottom:.8rem">Exclude</div>
+          <ul style="text-align:left;font-size:.85rem;line-height:1.8;margin-left:1rem">
+            <li>Sunk Costs</li>
+            <li>Allocated Overheads</li>
+            <li>Financing Costs</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
   <div class="section-label">💰 Part 2 — Converting Accounting Flows to Cash Flows</div>
 
   <div class="card">
@@ -193,6 +262,45 @@
       <p style="font-size:.88rem;color:var(--muted);margin-top:.6rem">Note: The Pearson answer is <strong>£51,800</strong>. Work from incremental EBIT: (£54,000 + £20,000 depreciation diff) × (1−0.3) + £20,000 = £51,800. Always verify by working from incremental revenues and costs directly.</p>
     </div>
   </div>
+
+  <!-- Part 2 图示：Depreciation Tax Shield 流程图 -->
+<div class="card" style="background:#f8fafc">
+  <h3 style="color:var(--primary);margin-bottom:1rem">🔄 流程图：Depreciation Tax Shield 如何运作</h3>
+  <div style="display:flex;align-items:center;gap:1rem;margin:2rem 0;flex-wrap:wrap;justify-content:center">
+    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
+      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">EBIT</div>
+      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£1,000k</div>
+    </div>
+    <div style="font-size:2rem;color:var(--accent)">→</div>
+    <div style="background:#eef4ff;border:2px solid var(--primary);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
+      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">− Depreciation</div>
+      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£200k</div>
+    </div>
+    <div style="font-size:2rem;color:var(--accent)">→</div>
+    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
+      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">Taxable Profit</div>
+      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£800k</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin:1rem 0;font-size:1.5rem;color:var(--accent)">⬇️</div>
+  <div style="display:flex;align-items:center;gap:1rem;margin:2rem 0;flex-wrap:wrap;justify-content:center">
+    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
+      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">Tax (30%)</div>
+      <div style="font-size:1.3rem;font-weight:900;color:var(--red)">−£240k</div>
+    </div>
+    <div style="font-size:2rem;color:var(--accent)">→</div>
+    <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:180px;border-width:3px">
+      <div style="font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:.4rem">Tax Shield Saved</div>
+      <div style="font-size:1.5rem;font-weight:900;color:var(--green)">+£60k</div>
+      <div style="font-size:.75rem;margin-top:.3rem;color:var(--green)">(£200k × 30%)</div>
+    </div>
+  </div>
+  <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:2rem">
+    <p style="font-size:.9rem"><strong>🧠 关键：</strong>折旧本身不是现金流，但它减少了税，这个"少缴的税"就是真金白银！</p>
+  </div>
+</div>
+
+
 
   <div class="section-label">📊 Part 3 — Inflation, Capital Rationing &amp; Replacement</div>
 
@@ -243,6 +351,41 @@
       <div class="rule">✅ Compare EAC across 2, 3, 4, 5-year cycles. Pick the lowest EAC.</div>
     </div>
   </div>
+
+  <!-- Part 3 图示：Inflation Consistency 对比卡片 -->
+<div class="card" style="background:#f8fafc">
+  <h3 style="color:var(--primary);margin-bottom:1rem">⚖️ 对比：Real vs Nominal — 必须配对！</h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0">
+    <div style="background:#dcfce7;border-radius:10px;padding:1.5rem;border:2px solid var(--green)">
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">✅ Approach 1: Real Terms</div>
+      <div style="font-size:.9rem;line-height:1.8">
+        <div style="margin-bottom:.8rem"><strong>Cash Flows:</strong> Real (exclude inflation)</div>
+        <div style="margin-bottom:.8rem"><strong>Discount Rate:</strong> Real rate (e.g., 8%)</div>
+        <div style="background:#fff;border-radius:6px;padding:.8rem;margin-top:1rem">
+          <code style="font-size:.85rem">NPV = CF_real / (1 + r_real)^n</code>
+        </div>
+      </div>
+    </div>
+    <div style="background:#dcfce7;border-radius:10px;padding:1.5rem;border:2px solid var(--green)">
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">✅ Approach 2: Nominal Terms</div>
+      <div style="font-size:.9rem;line-height:1.8">
+        <div style="margin-bottom:.8rem"><strong>Cash Flows:</strong> Nominal (include inflation)</div>
+        <div style="margin-bottom:.8rem"><strong>Discount Rate:</strong> Nominal rate (e.g., 12.32%)</div>
+        <div style="background:#fff;border-radius:6px;padding:.8rem;margin-top:1rem">
+          <code style="font-size:.85rem">NPV = CF_nominal / (1 + r_nominal)^n</code>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1.2rem;margin-top:1rem;text-align:center">
+    <div style="font-size:1.2rem;font-weight:700;color:var(--red);margin-bottom:.5rem">❌ NEVER Mix!</div>
+    <div style="font-size:.9rem;color:var(--red)">Real Cash Flows + Nominal Rate = WRONG<br>Nominal Cash Flows + Real Rate = WRONG</div>
+  </div>
+  <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:1.5rem">
+    <p style="font-size:.9rem"><strong>公式：</strong> (1 + r_nominal) = (1 + r_real) × (1 + inflation)</p>
+  </div>
+</div>
+
 
   <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
 
