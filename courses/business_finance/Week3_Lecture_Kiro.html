@@ -8,7 +8,7 @@
 
   :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#fff;color:var(--text);line-height:1.7}
   nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
   nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
   nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
@@ -21,10 +21,10 @@
   .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
   .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
   .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
-  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
-  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem;background:#fff}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);margin:3rem 0 1.5rem;padding-bottom:.5rem;border-bottom:2px solid var(--primary)}
   .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
-  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card{background:transparent;border-radius:0;border:none;padding:2rem 0;margin-bottom:0;box-shadow:none;border-bottom:1px solid var(--border)}
   .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem}
   .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
   .card p{margin-bottom:.8rem}
