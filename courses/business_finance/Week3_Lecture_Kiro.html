@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Week 3 | Lecture | Business Finance</title>
 <style>
-
   :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
@@ -63,8 +62,7 @@
   .btn-outline{border:2px solid var(--border);color:var(--text)}
   .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
 </style>
-<style>
-
+  <style>
   .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
   .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
   .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
@@ -74,7 +72,7 @@
   .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
   .back-to-top.show{opacity:1;visibility:visible}
   .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
-  @media(min-width:1201px){main{margin-left:260px!important;margin-right:20px!important}}
+  @media(min-width:1201px){main{margin-left:260px;margin-right:20px}}
   .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
   .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
   .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
@@ -92,848 +90,242 @@
 <nav>
   <span class="brand">📚 Business Finance</span>
   <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_StudyGuide_Kiro.html">🗺️ Guide</a>
-  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Lecture_Kiro.html" class="active">📖 Lecture</a>
   <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Interactive_Kiro.html">🧪 Interactive</a>
   <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Quiz_Kiro.html">✏️ Quiz</a>
   <span class="spacer"></span>
   <span class="week-badge">Week 3</span>
 </nav>
-
 <div class="mobile-toc">
   <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
     <h4>📑 目录导航</h4>
     <span class="mobile-toc-toggle">▼</span>
   </div>
   <div class="mobile-toc-content">
-    <a href="#part1">🏗️ Relevant Cash Flows</a>
-    <a href="#part2">💰 Depreciation Tax Shield</a>
-    <a href="#part3">📊 Inflation & Rationing</a>
-    <a href="#pitfalls">⚠️ Pitfalls</a>
-    <a href="#templates">📝 Answer Templates</a>
+    <a href="#part1">⏰ Time Value</a>
+    <a href="#part2">💰 NPV</a>
+    <a href="#part3">📊 IRR</a>
+    <a href="#part4">⏱️ Payback</a>
   </div>
 </div>
 <div class="hero">
   <div class="tag">Week 3 · Chapter 5</div>
-  <h1>Practical Aspects of Investment Appraisal</h1>
-  <p>投资评估实务 — Incremental cash flows, depreciation tax shield, inflation &amp; capital rationing</p>
+  <h1>Time Value of Money &amp; Investment Appraisal</h1>
+  <p>时间价值与投资评估 — PV, FV, NPV, IRR, Payback &amp; ARR</p>
   <div class="meta">
-    <span>📖 McLaney Ch.5</span>
-    <span>⏱ ~50 min read</span>
-    <span>🎯 Exam Weight: Very High</span>
+    <span>📖 McLaney Ch.4</span>
+    <span>⏱ ~60 min read</span>
+    <span>🎯 Exam Weight: Critical</span>
   </div>
 </div>
-
 <main>
 <div class="toc-sidebar">
   <h4>📑 目录</h4>
-  <a href="#part1">🏗️ Relevant Cash Flows</a>
-  <a href="#part2">💰 Depreciation Tax Shield</a>
-  <a href="#part3">📊 Inflation & Rationing</a>
-  <a href="#pitfalls">⚠️ Pitfalls</a>
-  <a href="#templates">📝 Answer Templates</a>
+  <a href="#part1">⏰ Time Value</a>
+  <a href="#part2">💰 NPV</a>
+  <a href="#part3">📊 IRR</a>
+  <a href="#part4">⏱️ Payback</a>
 </div>
 <div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 <script>
 window.addEventListener('scroll', function() {
-  const btn = document.querySelector('.back-to-top');
-  if (window.scrollY > 300) btn.classList.add('show');
-  else btn.classList.remove('show');
+  const backToTop = document.querySelector('.back-to-top');
+  if (window.scrollY > 300) { backToTop.classList.add('show'); }
+  else { backToTop.classList.remove('show'); }
 });
 </script>
 
-
-  <div class="section-label"><div class="section-label" id="part1">🏗️ Part 1 — What Counts as a Cash Flow?</div>
+  <div class="section-label" id="part1">⏰ Part 1 — Time Value of Money</div>
 
   <div class="card">
-    <h2>📚 The Golden Rule: Incremental After-Tax Cash Flows Only</h2>
+    <h2>📚 Why Does Time Matter?</h2>
     <div class="concept-box">
-      <div class="label">费曼类比 Feynman Analogy</div>
-      <p>把项目想象成一个新开的分店。你只关心<strong>因为开了这家分店而多出来的钱</strong>——不是总公司的所有收入，不是已经花掉的装修调研费，不是总部分摊给你的管理费。只有"因为这个决定而改变的现金流"才算数。</p>
-      <p style="margin-top:.6rem;font-size:.9rem;color:var(--muted)">Capital budgeting uses <strong>incremental after-tax cash flows</strong> — only the changes in cash flows that are a direct consequence of taking the project.</p>
+      <div class="label">费曼类比</div>
+      <p>今天给你£1,000，你可以存银行，一年后变成£1,050（5%利率）。所以"今天的£1,000"和"一年后的£1,000"不是同一回事——今天的更值钱。这就是时间价值的全部直觉。</p>
     </div>
-
-    <h3>The 5 Pitfalls — What to Include &amp; Exclude</h3>
     <div class="grid2">
-      <div class="pill red">
-        <div class="num">✗</div>
-        <h4>Sunk Costs 沉没成本</h4>
-        <p>Already spent, unrecoverable. Your decision cannot change them — so they cannot affect your decision. <strong>Always exclude.</strong></p>
+      <div class="formula-box">
+        <div class="f-title">Future Value 终值</div>
+        <div class="f-main">FV = PV × (1 + r)ⁿ</div>
+        <div class="f-note">今天的钱 → 未来值多少</div>
       </div>
-      <div class="pill green">
-        <div class="num">✓</div>
-        <h4>Opportunity Costs 机会成本</h4>
-        <p>The value of the next-best alternative you give up. Using your own warehouse? Its rental value IS a cost. <strong>Always include.</strong></p>
+      <div class="formula-box">
+        <div class="f-title">Present Value 现值</div>
+        <div class="f-main">PV = FV ÷ (1 + r)ⁿ</div>
+        <div class="f-note">未来的钱 → 今天值多少</div>
       </div>
-      <div class="pill green">
-        <div class="num">✓</div>
-        <h4>Side Effects 副效应</h4>
-        <p>Erosion (new product cannibalises existing sales) and Synergy (new project boosts other products). Both must be included.</p>
-      </div>
-      <div class="pill red">
-        <div class="num">✗</div>
-        <h4>Allocated Costs 分摊成本</h4>
-        <p>Head office overheads, CEO salary allocated to the project — these exist regardless. <strong>Exclude unless truly incremental.</strong></p>
-      </div>
-      <div class="pill red">
-        <div class="num">✗</div>
-        <h4>Financing Costs 融资成本</h4>
-        <p>Interest payments, dividends — these are captured in the discount rate. <strong>Never deduct from project cash flows.</strong></p>
-      </div>
-    </div>
-
-    <div class="case">
-      <div class="case-tag">📋 Exam Classic — The Warehouse Question</div>
-      <h4>Insurance Office: Should they rent out the 6th floor?</h4>
-      <p>The company paid for a feasibility study on renting the 6th floor. When deciding whether to proceed, which cost should NOT be considered?</p>
-      <ul style="margin:.6rem 0 .6rem 1.2rem">
-        <li>A) Rental income from 6th floor</li>
-        <li>B) Refurbishment cost of new HR spaces</li>
-        <li>C) Efficiency loss from splitting HR department</li>
-        <li><strong>D) Cost of the feasibility study ✅ — SUNK COST, already paid</strong></li>
-      </ul>
-    </div>
-
-    <div class="pitfall">
-      <div class="pitfall-tag">⚠️ 高频陷阱</div>
-      <p>Students often include financing costs (interest) in project cash flows. This double-counts the cost of capital — it's already embedded in the discount rate.</p>
-      <div class="rule">✅ Rule: Never subtract interest, dividends, or loan repayments from project cash flows.</div>
-    </div>
-  </div>
-
-  <!-- Part 1 图示：Relevant Cash Flows 决策树 -->
-<div class="card" style="background:#f8fafc">
-  <h3 style="color:var(--primary);margin-bottom:1rem">🌳 决策树：这个成本要不要算进 NPV？</h3>
-  <div style="text-align:center;padding:2rem 0">
-    <div style="display:inline-block;background:#fffbf0;border:2px solid #f59e0b;border-radius:10px;padding:1rem 1.5rem;font-weight:700">
-      Is this a relevant cash flow?
-    </div>
-    <div style="display:flex;justify-content:center;gap:4rem;margin-top:2rem;flex-wrap:wrap">
-      <div style="max-width:280px">
-        <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
-        <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1.2rem;color:#166534">
-          <div style="font-size:1.3rem;margin-bottom:.5rem">✅</div>
-          <div style="font-weight:700;margin-bottom:.8rem">Include</div>
-          <ul style="text-align:left;font-size:.85rem;line-height:1.8;margin-left:1rem">
-            <li>Initial Investment</li>
-            <li>Operating Cash Flows</li>
-            <li>Working Capital</li>
-            <li>Disposal Value</li>
-            <li>Opportunity Costs</li>
-          </ul>
-        </div>
-      </div>
-      <div style="max-width:280px">
-        <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
-        <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1.2rem;color:#991b1b">
-          <div style="font-size:1.3rem;margin-bottom:.5rem">❌</div>
-          <div style="font-weight:700;margin-bottom:.8rem">Exclude</div>
-          <ul style="text-align:left;font-size:.85rem;line-height:1.8;margin-left:1rem">
-            <li>Sunk Costs</li>
-            <li>Allocated Overheads</li>
-            <li>Financing Costs</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-  <div class="section-label"><div class="section-label" id="part2">💰 Part 2 — Converting Accounting Flows to Cash Flows</div>
-
-  <div class="card">
-    <h2>📚 Depreciation: The Tax Shield Effect 折旧税盾</h2>
-    <div class="concept-box">
-      <div class="label">核心逻辑</div>
-      <p>折旧本身不是现金支出，但它<strong>减少了应税利润</strong>，从而减少了实际缴税额。这个"少缴的税"就是折旧的价值——叫做<strong>税盾（Tax Shield）</strong>。</p>
-      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Depreciation is not a cash flow — but it reduces taxable profit, which reduces tax paid. The tax saving IS a real cash benefit.</p>
-    </div>
-
-    <h3>Step-by-Step: Accounting Profit → Cash Flow</h3>
-    <div class="calc-box">
-      <div class="title">Example: Gross Profit £1,000,000 | Depreciation £200,000 | Tax Rate 30%</div>
-      <div class="calc-row"><span>Incremental Gross Profit</span><span>£1,000,000</span></div>
-      <div class="calc-row deduct"><span>Less: Depreciation (non-cash, but tax-deductible)</span><span>−£200,000</span></div>
-      <div class="calc-row"><span>EBIT (Earnings Before Interest &amp; Tax)</span><span>£800,000</span></div>
-      <div class="calc-row deduct"><span>Less: Tax at 30%</span><span>−£240,000</span></div>
-      <div class="calc-row"><span>Incremental Earnings (after tax)</span><span>£560,000</span></div>
-      <div class="calc-row add"><span>Add Back: Depreciation (not a real cash outflow)</span><span>+£200,000</span></div>
-      <div class="calc-row"><span>✅ Incremental Free Cash Flow</span><span>£760,000</span></div>
-    </div>
-
-    <div class="pitfall">
-      <div class="pitfall-tag">⚠️ 常见错误</div>
-      <p>If you ignore depreciation entirely and just tax the gross profit: Tax = £1,000,000 × 30% = £300,000 → Cash Flow = £700,000. This is <strong>wrong</strong> — you've overpaid tax by £60,000 (= £200,000 × 30% tax shield).</p>
-      <div class="rule">✅ Always deduct depreciation before calculating tax, then add it back. The net effect = Tax Shield = Depreciation × Tax Rate.</div>
-    </div>
-
-    <div class="case">
-      <div class="case-tag">🔢 Exam Calculation — Arthur Ltd (Q2)</div>
-      <h4>Incremental After-Tax Cash Flow</h4>
-      <p>Without Project X: Profit before tax = £200,000 (after £40,000 depreciation)<br>
-      With Project X: Profit before tax = £254,000 (after £60,000 depreciation)<br>
-      Tax rate = 30%. No capital allowances.</p>
-      <div class="calc-box" style="margin-top:.8rem">
-        <div class="calc-row sub"><span>Incremental profit before tax</span><span>£254,000 − £200,000 = £54,000</span></div>
-        <div class="calc-row sub"><span>Incremental depreciation</span><span>£60,000 − £40,000 = £20,000</span></div>
-        <div class="calc-row sub"><span>Incremental tax (30% × £54,000)</span><span>−£16,200</span></div>
-        <div class="calc-row sub"><span>Incremental earnings after tax</span><span>£37,800</span></div>
-        <div class="calc-row sub"><span>Add back incremental depreciation</span><span>+£20,000</span></div>
-        <div class="calc-row"><span>✅ Incremental Free Cash Flow</span><span>£57,800... wait</span></div>
-      </div>
-      <p style="font-size:.88rem;color:var(--muted);margin-top:.6rem">Note: The Pearson answer is <strong>£51,800</strong>. Work from incremental EBIT: (£54,000 + £20,000 depreciation diff) × (1−0.3) + £20,000 = £51,800. Always verify by working from incremental revenues and costs directly.</p>
-    </div>
-  </div>
-
-  <!-- Part 2 图示：Depreciation Tax Shield 流程图 -->
-<div class="card" style="background:#f8fafc">
-  <h3 style="color:var(--primary);margin-bottom:1rem">🔄 流程图：Depreciation Tax Shield 如何运作</h3>
-  <div style="display:flex;align-items:center;gap:1rem;margin:2rem 0;flex-wrap:wrap;justify-content:center">
-    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
-      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">EBIT</div>
-      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£1,000k</div>
-    </div>
-    <div style="font-size:2rem;color:var(--accent)">→</div>
-    <div style="background:#eef4ff;border:2px solid var(--primary);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
-      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">− Depreciation</div>
-      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£200k</div>
-    </div>
-    <div style="font-size:2rem;color:var(--accent)">→</div>
-    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
-      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">Taxable Profit</div>
-      <div style="font-size:1.3rem;font-weight:900;color:var(--primary)">£800k</div>
-    </div>
-  </div>
-  <div style="text-align:center;margin:1rem 0;font-size:1.5rem;color:var(--accent)">⬇️</div>
-  <div style="display:flex;align-items:center;gap:1rem;margin:2rem 0;flex-wrap:wrap;justify-content:center">
-    <div style="background:#fff;border:2px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:140px">
-      <div style="font-size:.75rem;color:var(--primary);font-weight:600;margin-bottom:.4rem">Tax (30%)</div>
-      <div style="font-size:1.3rem;font-weight:900;color:var(--red)">−£240k</div>
-    </div>
-    <div style="font-size:2rem;color:var(--accent)">→</div>
-    <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1.2rem 1.5rem;text-align:center;min-width:180px;border-width:3px">
-      <div style="font-size:.75rem;color:var(--green);font-weight:600;margin-bottom:.4rem">Tax Shield Saved</div>
-      <div style="font-size:1.5rem;font-weight:900;color:var(--green)">+£60k</div>
-      <div style="font-size:.75rem;margin-top:.3rem;color:var(--green)">(£200k × 30%)</div>
-    </div>
-  </div>
-  <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:2rem">
-    <p style="font-size:.9rem"><strong>🧠 关键：</strong>折旧本身不是现金流，但它减少了税，这个"少缴的税"就是真金白银！</p>
-  </div>
-</div>
-
-
-
-  <div class="section-label"><div class="section-label" id="part3">📊 Part 3 — Inflation, Capital Rationing &amp; Replacement</div>
-
-  <div class="card">
-    <h2>📚 Inflation in NPV: Real vs Nominal 通胀处理</h2>
-    <div class="concept-box">
-      <div class="label">核心规则 — 必须配对</div>
-      <p>There are two valid approaches — but you <strong>must be consistent</strong>:</p>
-    </div>
-    <table class="data">
-      <thead><tr><th>Approach</th><th>Cash Flows</th><th>Discount Rate</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Nominal (Money) Terms</strong></td><td>Include inflation (nominal cash flows)</td><td>Nominal rate = (1+r)(1+π)−1</td></tr>
-        <tr><td><strong>Real Terms</strong></td><td>Exclude inflation (real cash flows)</td><td>Real rate only (8% in Q6)</td></tr>
-      </tbody>
-    </table>
-    <div class="pitfall">
-      <div class="pitfall-tag">⚠️ Q6 Exam Trap</div>
-      <p>"Real required return = 8%, inflation = 4%. Cash flows in real terms. What discount rate?"</p>
-      <div class="rule">✅ Answer: 8% — real cash flows discounted at real rate. Do NOT add inflation (that would be double-counting).</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📚 Capital Rationing — Profitability Index 资本限额</h2>
-    <div class="concept-box">
-      <div class="label">场景：资金有限，项目太多</div>
-      <p>When funds are limited (capital rationing), you cannot take all positive-NPV projects. Rank by <strong>Profitability Index (PI)</strong> = NPV ÷ Initial Investment. Take highest PI first.</p>
     </div>
     <div class="case">
-      <div class="case-tag">🔢 Q7 — Patel Products plc</div>
-      <h4>Three projects, limited funds — which order?</h4>
-      <p>Rank by NPV per £1 invested (PI). The project with the highest return per pound of scarce capital goes first — not necessarily the highest absolute NPV.</p>
-      <div class="rule" style="background:#dcfce7;color:#166534;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600">✅ Answer: Y, Z, X — ranked by PI (NPV/Investment), not by absolute NPV.</div>
+      <div class="case-tag">🔢 Lecture Example</div>
+      <h4>Tuition Payment Problem</h4>
+      <p>需要在4年后支付$7,000学费，银行利率3%。现在需要存多少？</p>
+      <p><strong>PV = $7,000 ÷ (1.03)⁴ = $7,000 ÷ 1.1255 = $6,219.41</strong></p>
+      <p style="font-size:.88rem;color:var(--muted)">折现因子 = 1/(1.03)⁴ = 0.8885。今天存$6,219.41，4年后正好变成$7,000。</p>
+    </div>
+    <h3>Fisher Effect: Nominal vs Real Rate 名义利率 vs 实际利率</h3>
+    <div class="formula-box">
+      <div class="f-title">Fisher Equation</div>
+      <div class="f-main">(1 + nominal) = (1 + real) × (1 + inflation)</div>
+      <div class="f-note">近似：nominal ≈ real + inflation</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🍕 Pizza Example</div>
+      <h4>Real Interest = Compensation for Delayed Consumption</h4>
+      <p>名义利率5%，通胀3%。实际利率 = 1.05/1.03 − 1 = <strong>1.94%</strong>。意思是：你延迟消费一年，能多买1.94%的披萨。实际利率 = 延迟消费的真实补偿。</p>
+    </div>
+  </div>
+
+  <div class="section-label" id="part2">💰 Part 2 — NPV: The Gold Standard</div>
+
+  <div class="card">
+    <h2>📚 Net Present Value</h2>
+    <div class="concept-box">
+      <div class="label">核心定义</div>
+      <p><strong>NPV = 所有未来现金流的现值之和 − 初始投资</strong></p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">NPV > 0 → 接受（创造财富）｜NPV < 0 → 拒绝（销毁财富）｜NPV = 0 → 无差异</p>
     </div>
   </div>
 
   <div class="card">
-    <h2>📚 Replacement Decisions — Equivalent Annual Cost 设备更换</h2>
+    <h2>⏰ 时间线可视化 — NPV 的本质</h2>
+    <p style="margin-bottom:1.5rem;font-size:.95rem">把未来的钱"拉回"到今天，看看值多少</p>
+    
+    <div style="position:relative;padding:3rem 0">
+      <div style="position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);transform:translateY(-50%)"></div>
+      <div style="display:flex;justify-content:space-between;position:relative;z-index:1">
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--accent);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--accent),0 0 20px rgba(232,160,32,.4)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Today (Year 0)</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#fee2e2;color:#991b1b">−£50,000</div>
+          <div style="font-size:.8rem;margin-top:.5rem">Initial Investment</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 1</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £13,636</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 2</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £12,397</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 3</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £11,270</div>
+        </div>
+      </div>
+    </div>
+    
+    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:2rem">
+      <p style="font-size:.9rem"><strong>🧠 关键洞察：</strong>未来的钱越远，"拉回今天"后越少。Year 3 的 £15,000 只值今天的 £11,270。这就是 time value of money！</p>
+    </div>
+  </div>
+
+    <div class="formula-box">
+      <div class="f-title">NPV Formula</div>
+      <div class="f-main">NPV = −C₀ + C₁/(1+r) + C₂/(1+r)² + ... + Cₙ/(1+r)ⁿ</div>
+      <div class="f-note">C₀ = 初始投资（负数）｜Cₙ = 第n年现金流｜r = 折现率</div>
+    </div>
+    <h3>Annuity Shortcut 年金快捷计算</h3>
     <div class="concept-box">
-      <div class="label">核心思路</div>
-      <p>When a machine needs continuous replacement, compare the <strong>Equivalent Annual Cost (EAC)</strong> of each replacement cycle. Choose the cycle length with the <strong>lowest EAC</strong>.</p>
-      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">EAC = Total PV of costs over cycle ÷ Annuity factor for that period</p>
+      <div class="label">年金 = 等额、连续、期末的现金流</div>
+      <p>PV of Annuity = C × AF(r, n)</p>
+      <p style="margin-top:.4rem;font-size:.9rem">AF(r,n) = [1 − 1/(1+r)ⁿ] ÷ r　（年金因子，可查表）</p>
+      <p style="margin-top:.4rem;font-size:.9rem"><strong>永续年金（Perpetuity）：</strong>PV = C ÷ r　（无限期等额现金流）</p>
     </div>
     <div class="pitfall">
-      <div class="pitfall-tag">⚠️ Q8 — Toby Ltd</div>
-      <p>Don't just pick the cycle with the lowest total cost — a 5-year cycle has more years to spread costs. You must annualise.</p>
-      <div class="rule">✅ Compare EAC across 2, 3, 4, 5-year cycles. Pick the lowest EAC.</div>
+      <div class="pitfall-tag">⚠️ Q3 陷阱 — 年金表 vs 折现因子表</div>
+      <p>年金表（Annuity Table）的数字 = 未来n年每年£1的现值之和。折现因子表（Discount Factor Table）= 第n年£1的现值。两者完全不同，不能混用。</p>
+      <div class="rule">✅ 年金表：5年10% = 3.791，意思是未来5年每年£1，今天值£3.791</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q4 陷阱 — 折现率变化对 NPV 和 IRR 的影响</div>
+      <p>折现率上升 → NPV 下降（未来现金流折现更多）。IRR 本身不变（它是项目固有属性，不受折现率影响）。</p>
+      <div class="rule">✅ 折现率↑ → NPV↓，IRR 不变。这是高频考点。</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🏢 Real Case — Amazon AWS NPV Decision</div>
+      <h4>How Amazon Justified $Billions in Cloud Infrastructure</h4>
+      <p>Amazon 投资 AWS 自动化合同处理平台时，CFO 团队做了 NPV 分析：初始投资巨大（负现金流），但未来5年节省80%人工成本（正现金流）。NPV > 0，项目获批。这就是 NPV 在真实世界的用法——不是"感觉值得"，而是数字说话。</p>
     </div>
   </div>
 
-  <!-- Part 3 图示：Inflation Consistency 对比卡片 -->
-<div class="card" style="background:#f8fafc">
-  <h3 style="color:var(--primary);margin-bottom:1rem">⚖️ 对比：Real vs Nominal — 必须配对！</h3>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0">
-    <div style="background:#dcfce7;border-radius:10px;padding:1.5rem;border:2px solid var(--green)">
-      <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">✅ Approach 1: Real Terms</div>
-      <div style="font-size:.9rem;line-height:1.8">
-        <div style="margin-bottom:.8rem"><strong>Cash Flows:</strong> Real (exclude inflation)</div>
-        <div style="margin-bottom:.8rem"><strong>Discount Rate:</strong> Real rate (e.g., 8%)</div>
-        <div style="background:#fff;border-radius:6px;padding:.8rem;margin-top:1rem">
-          <code style="font-size:.85rem">NPV = CF_real / (1 + r_real)^n</code>
-        </div>
-      </div>
-    </div>
-    <div style="background:#dcfce7;border-radius:10px;padding:1.5rem;border:2px solid var(--green)">
-      <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">✅ Approach 2: Nominal Terms</div>
-      <div style="font-size:.9rem;line-height:1.8">
-        <div style="margin-bottom:.8rem"><strong>Cash Flows:</strong> Nominal (include inflation)</div>
-        <div style="margin-bottom:.8rem"><strong>Discount Rate:</strong> Nominal rate (e.g., 12.32%)</div>
-        <div style="background:#fff;border-radius:6px;padding:.8rem;margin-top:1rem">
-          <code style="font-size:.85rem">NPV = CF_nominal / (1 + r_nominal)^n</code>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1.2rem;margin-top:1rem;text-align:center">
-    <div style="font-size:1.2rem;font-weight:700;color:var(--red);margin-bottom:.5rem">❌ NEVER Mix!</div>
-    <div style="font-size:.9rem;color:var(--red)">Real Cash Flows + Nominal Rate = WRONG<br>Nominal Cash Flows + Real Rate = WRONG</div>
-  </div>
-  <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:1.5rem">
-    <p style="font-size:.9rem"><strong>公式：</strong> (1 + r_nominal) = (1 + r_real) × (1 + inflation)</p>
-  </div>
-</div>
-
-
-  <div class="section-label"><div class="section-label" id="pitfalls">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="section-label" id="part3">📈 Part 3 — IRR &amp; Other Methods</div>
 
   <div class="card">
-    <h2>🎯 Week 3 Quick-Reference Pitfall Table</h2>
+    <h2>📚 Internal Rate of Return</h2>
+    <div class="concept-box">
+      <div class="label">定义</div>
+      <p>IRR = 使 NPV = 0 的折现率。如果 IRR > 资本成本（hurdle rate），接受项目。</p>
+    </div>
+    <h3>Interpolation Formula 插值法</h3>
+    <div class="formula-box">
+      <div class="f-title">IRR Approximation</div>
+      <div class="f-main">IRR ≈ r₁ + [NPV₁ ÷ (NPV₁ − NPV₂)] × (r₂ − r₁)</div>
+      <div class="f-note">r₁ = 低折现率（NPV为正）｜r₂ = 高折现率（NPV为负）</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Q7 — Sienna plc IRR Calculation</div>
+      <h4>插值法实例</h4>
+      <p>已知：折现率20%时 NPV = +£200，折现率30%时 NPV = −£100。</p>
+      <p><strong>IRR ≈ 20% + [200 ÷ (200+100)] × (30%−20%) = 20% + 0.667 × 10% = 26.7%</strong></p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ IRR 的致命缺陷 — Q6 & Q9</div>
+      <p><strong>再投资假设问题（Q6）：</strong>IRR 隐含假设项目释放的现金流可以按 IRR 本身再投资——这通常不现实。NPV 假设按资本成本再投资，更合理。</p>
+      <p style="margin-top:.5rem"><strong>变动折现率问题（Q9）：</strong>如果每年的资本成本不同，IRR 无法处理（只有一个 IRR，无法与多个折现率比较）。NPV 可以逐年用不同折现率。</p>
+      <div class="rule">✅ IRR 不总是促进财富最大化。NPV 才是唯一直接对应股东财富的方法（Q10）。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 id="part4">📚 Payback &amp; ARR —</h2>
+    <div class="grid2">
+      <div class="pill amber">
+        <h4>Payback Period 回收期</h4>
+        <p>多少年收回初始投资。简单直观，但<strong>忽略时间价值</strong>，忽略回收期后的现金流。</p>
+      </div>
+      <div class="pill red">
+        <h4>ARR 会计收益率</h4>
+        <p>平均利润 ÷ 平均投资。基于<strong>会计利润而非现金流</strong>，受折旧方法影响，不可靠。</p>
+      </div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q8 — 实际调查结论</div>
+      <p>调查显示：企业倾向于<strong>同时使用多种方法</strong>（NPV + IRR + Payback），而不是只用一种。IRR 和 Payback 的使用并没有减少。</p>
+      <div class="rule">✅ Q8 答案：A tendency for businesses to use more than one method.</div>
+    </div>
+  </div>
+
+  <div class="section-label">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="card">
+    <h2>🎯 Week 3 Quick-Reference</h2>
     <table class="data">
-      <thead><tr><th>Scenario</th><th>Include in NPV?</th><th>Why</th></tr></thead>
+      <thead><tr><th>考点</th><th>正确答案</th><th>常见错误</th></tr></thead>
       <tbody>
-        <tr><td>Marketing study paid last year</td><td class="cross">❌ No</td><td>Sunk cost — unrecoverable</td></tr>
-        <tr><td>Warehouse you already own</td><td class="check">✅ Yes</td><td>Opportunity cost — could be rented/sold</td></tr>
-        <tr><td>Sales lost on existing products</td><td class="check">✅ Yes</td><td>Side effect (erosion)</td></tr>
-        <tr><td>5% of head office library cost</td><td class="cross">❌ No</td><td>Allocated cost — not incremental</td></tr>
-        <tr><td>Interest on project loan</td><td class="cross">❌ No</td><td>Financing cost — in discount rate already</td></tr>
-        <tr><td>Depreciation</td><td class="cross">❌ Not directly</td><td>Non-cash — but deduct before tax, then add back</td></tr>
-        <tr><td>Working capital increase</td><td class="check">✅ Yes</td><td>Real cash tied up; recovered at project end</td></tr>
-        <tr><td>Real cash flows + nominal rate</td><td class="cross">❌ Wrong mix</td><td>Must match: real↔real or nominal↔nominal</td></tr>
+        <tr><td>NPV 的含义</td><td class="check">财富增减量（绝对值）</td><td class="cross">不是回报率，不是现金流总和</td></tr>
+        <tr><td>折现因子（5年，15%）</td><td class="check">1/(1.15)⁵</td><td class="cross">不是 (0.15)⁵ 或 (1.15)⁵</td></tr>
+        <tr><td>年金表含义</td><td class="check">未来n年每年£1的现值之和</td><td class="cross">不是第n年£1的现值</td></tr>
+        <tr><td>折现率↑，NPV 和 IRR 变化</td><td class="check">NPV↓，IRR 不变</td><td class="cross">两者都变</td></tr>
+        <tr><td>IRR 的再投资假设</td><td class="check">按 IRR 本身再投资（不现实）</td><td class="cross">按资本成本再投资（那是 NPV）</td></tr>
+        <tr><td>哪种方法直接促进财富最大化</td><td class="check">NPV</td><td class="cross">IRR（有缺陷）</td></tr>
+        <tr><td>实际调查：企业用几种方法</td><td class="check">多种方法并用</td><td class="cross">只用 NPV</td></tr>
       </tbody>
     </table>
-  </div>
-
-  <div class="section-label"><div class="section-label" id="templates">⚠️ Common Pitfalls & Exam Traps</div>
-
-  <div class="card">
-    <h2>⚠️ Pitfall Summary Table — High-Frequency Exam Mistakes</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这些是考试中最常见的错误。每一个都可能导致整道题失分。</p>
-    <table class="data">
-      <thead>
-        <tr>
-          <th style="width:25%">Scenario</th>
-          <th style="width:35%">Common Mistake</th>
-          <th style="width:40%">Correct Approach</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Sunk Costs</strong></td>
-          <td>Including past expenditures (feasibility study, R&D already spent)</td>
-          <td>✅ Exclude all sunk costs — they cannot be changed by the decision</td>
-        </tr>
-        <tr>
-          <td><strong>Opportunity Costs</strong></td>
-          <td>Ignoring the value of owned assets used in the project</td>
-          <td>✅ Include opportunity cost (rental value, resale value) as a cash outflow</td>
-        </tr>
-        <tr>
-          <td><strong>Depreciation</strong></td>
-          <td>Treating depreciation as a cash outflow</td>
-          <td>✅ Depreciation is non-cash. Deduct before tax, then add back. Net effect = Tax Shield</td>
-        </tr>
-        <tr>
-          <td><strong>Working Capital</strong></td>
-          <td>Forgetting to recover WC at project end</td>
-          <td>✅ WC is an outflow at Year 0, inflow at final year (assume full recovery unless stated)</td>
-        </tr>
-        <tr>
-          <td><strong>Financing Costs</strong></td>
-          <td>Deducting interest payments from project cash flows</td>
-          <td>✅ Never deduct interest/dividends — they are already in the discount rate (double-counting)</td>
-        </tr>
-        <tr>
-          <td><strong>Taxation</strong></td>
-          <td>Using accounting profit instead of taxable profit</td>
-          <td>✅ Taxable Profit = Accounting Profit + Depreciation − Capital Allowances</td>
-        </tr>
-        <tr>
-          <td><strong>Inflation</strong></td>
-          <td>Mixing real cash flows with nominal discount rate (or vice versa)</td>
-          <td>✅ Must match: Real CF ↔ Real r; Nominal CF ↔ Nominal r. Formula: (1+rₙ) = (1+rᵣ)(1+π)</td>
-        </tr>
-        <tr>
-          <td><strong>Capital Rationing</strong></td>
-          <td>Ranking projects by absolute NPV when funds are limited</td>
-          <td>✅ Rank by Profitability Index (PI = NPV / Initial Investment). Choose highest PI first</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-label"><div class="section-label" id="part1">📝 Standard Answer Templates</div>
-
-  <div class="card">
-    <h2>📝 Answer Template: NPV Calculation Questions</h2>
-    <p style="margin-bottom:1rem;color:var(--muted)">Use this step-by-step framework for all NPV questions. Examiners award marks for structure and process, not just the final answer.</p>
-    
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: Identify Relevant Cash Flows</h3>
-      <div style="background:#fff;border-radius:8px;padding:1rem;margin-bottom:1rem">
-        <p style="font-weight:600;margin-bottom:.6rem">✅ Include:</p>
-        <ul style="margin-left:1.5rem;line-height:1.8">
-          <li>Initial investment (Year 0)</li>
-          <li>Incremental operating cash flows (Revenue − Costs, after-tax)</li>
-          <li>Working capital (outflow at start, inflow at end)</li>
-          <li>Disposal proceeds (salvage value at project end)</li>
-          <li>Opportunity costs (value of assets used)</li>
-          <li>Side effects (erosion of existing sales, synergies)</li>
-        </ul>
-      </div>
-      <div style="background:#fff;border-radius:8px;padding:1rem">
-        <p style="font-weight:600;margin-bottom:.6rem;color:var(--red)">❌ Exclude:</p>
-        <ul style="margin-left:1.5rem;line-height:1.8">
-          <li>Sunk costs (already spent, unrecoverable)</li>
-          <li>Allocated overheads (unless truly incremental)</li>
-          <li>Financing costs (interest, dividends — already in discount rate)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Calculate After-Tax Cash Flows</h3>
-      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
-        <div style="color:#94a3b8;margin-bottom:.8rem">Method 1: Direct Calculation</div>
-        <div style="color:#fbbf24">After-Tax CF = (Revenue − Costs) × (1 − Tax Rate) + (Depreciation × Tax Rate)</div>
-        <div style="color:#64748b;margin-top:.6rem;font-size:.85rem">The second term is the Tax Shield from depreciation</div>
-      </div>
-      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem;margin-top:.8rem">
-        <div style="color:#94a3b8;margin-bottom:.8rem">Method 2: Using Capital Allowances</div>
-        <div style="color:#fbbf24">Taxable Profit = Accounting Profit + Depreciation − Capital Allowances</div>
-        <div style="color:#fbbf24;margin-top:.4rem">Tax Payable = Taxable Profit × Tax Rate</div>
-        <div style="color:#fbbf24;margin-top:.4rem">After-Tax CF = Accounting Profit − Tax Payable + Depreciation</div>
-      </div>
-    </div>
-
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Discount Cash Flows to Present Value</h3>
-      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
-        <div style="color:#fbbf24">PV = CF / (1 + r)ⁿ</div>
-        <div style="color:#64748b;margin-top:.6rem;font-size:.85rem">Or use discount factor tables: PV = CF × DF(r, n)</div>
-      </div>
-      <p style="margin-top:.8rem;font-size:.9rem"><strong>Key Point:</strong> Ensure consistency — if cash flows are in real terms, use real discount rate; if nominal, use nominal rate.</p>
-    </div>
-
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 4: Calculate NPV & Make Decision</h3>
-      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
-        <div style="color:#fbbf24">NPV = Σ PV(Cash Flows) − Initial Investment</div>
-      </div>
-      <div style="background:#dcfce7;border:2px solid #86efac;border-radius:8px;padding:1rem;margin-top:.8rem">
-        <p style="font-weight:600;color:#166534;margin-bottom:.6rem">Decision Rule:</p>
-        <ul style="margin-left:1.5rem;line-height:1.8;color:#166534">
-          <li><strong>NPV > 0</strong> → Accept project (adds value to shareholders)</li>
-          <li><strong>NPV < 0</strong> → Reject project (destroys value)</li>
-          <li><strong>NPV = 0</strong> → Indifferent (project earns exactly the required return)</li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="background:#fffbf0;border:2px solid #fbbf24;border-radius:10px;padding:1.2rem;margin-top:1rem">
-      <p style="font-weight:600;color:#7a5800;margin-bottom:.6rem">💡 Exam Tip — Show Your Working</p>
-      <p style="font-size:.9rem;color:#7a5800">Even if your final NPV is wrong, you can still earn most of the marks if your method is correct. Always:</p>
-      <ul style="margin-left:1.5rem;margin-top:.6rem;line-height:1.8;color:#7a5800">
-        <li>Label each cash flow clearly (Year 0, Year 1, etc.)</li>
-        <li>Show the calculation for each step</li>
-        <li>State your assumptions (e.g., "Assuming full WC recovery at Year 5")</li>
-        <li>Write a clear conclusion with the decision rule</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-label"><div class="section-label" id="part2">🗺️ Concept Relationship Map</div>
-
-  <div class="card">
-    <h2>🗺️ Ch.5 Concept Relationship Diagram</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这张图展示了 Ch.5 所有核心概念之间的逻辑关系。理解这些连接比记住单个公式更重要。</p>
-    
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:2rem;margin:1rem 0">
-      <svg viewBox="0 0 800 600" style="width:100%;height:auto">
-        <!-- Central Node -->
-        <rect x="300" y="20" width="200" height="60" rx="8" fill="#1a3a5c" stroke="#e8a020" stroke-width="3"/>
-        <text x="400" y="55" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">Investment Appraisal</text>
-        
-        <!-- Level 1: Core Principle -->
-        <rect x="280" y="120" width="240" height="50" rx="6" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="400" y="150" text-anchor="middle" fill="#fff" font-size="14" font-weight="600">Incremental After-Tax Cash Flows</text>
-        <line x1="400" y1="80" x2="400" y2="120" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 2: Three Pillars -->
-        <rect x="50" y="210" width="180" height="50" rx="6" fill="#27ae60" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="140" y="240" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Relevant Cash Flows</text>
-        
-        <rect x="310" y="210" width="180" height="50" rx="6" fill="#27ae60" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="400" y="240" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">After-Tax Adjustment</text>
-        
-        <rect x="570" y="210" width="180" height="50" rx="6" fill="#27ae60" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="660" y="240" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Timing & Discounting</text>
-        
-        <line x1="350" y1="170" x2="140" y2="210" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="400" y1="170" x2="400" y2="210" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="450" y1="170" x2="660" y2="210" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 3: Details -->
-        <!-- Relevant CF branch -->
-        <rect x="10" y="300" width="100" height="40" rx="4" fill="#dcfce7" stroke="#27ae60" stroke-width="1.5"/>
-        <text x="60" y="325" text-anchor="middle" fill="#166534" font-size="11" font-weight="600">✅ Include</text>
-        
-        <rect x="130" y="300" width="100" height="40" rx="4" fill="#fee2e2" stroke="#e74c3c" stroke-width="1.5"/>
-        <text x="180" y="325" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">❌ Exclude</text>
-        
-        <line x1="140" y1="260" x2="60" y2="300" stroke="#27ae60" stroke-width="1.5"/>
-        <line x1="140" y1="260" x2="180" y2="300" stroke="#e74c3c" stroke-width="1.5"/>
-        
-        <!-- Include items -->
-        <text x="60" y="360" text-anchor="middle" fill="#166534" font-size="9">Initial Investment</text>
-        <text x="60" y="375" text-anchor="middle" fill="#166534" font-size="9">Operating CF</text>
-        <text x="60" y="390" text-anchor="middle" fill="#166534" font-size="9">Working Capital</text>
-        <text x="60" y="405" text-anchor="middle" fill="#166534" font-size="9">Disposal Value</text>
-        <text x="60" y="420" text-anchor="middle" fill="#166534" font-size="9">Opportunity Cost</text>
-        
-        <!-- Exclude items -->
-        <text x="180" y="360" text-anchor="middle" fill="#991b1b" font-size="9">Sunk Costs</text>
-        <text x="180" y="375" text-anchor="middle" fill="#991b1b" font-size="9">Allocated OH</text>
-        <text x="180" y="390" text-anchor="middle" fill="#991b1b" font-size="9">Financing Costs</text>
-        
-        <!-- After-Tax branch -->
-        <rect x="280" y="300" width="110" height="40" rx="4" fill="#eef4ff" stroke="#1a3a5c" stroke-width="1.5"/>
-        <text x="335" y="325" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Tax on Profit</text>
-        
-        <rect x="410" y="300" width="110" height="40" rx="4" fill="#eef4ff" stroke="#1a3a5c" stroke-width="1.5"/>
-        <text x="465" y="325" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Tax Shield</text>
-        
-        <line x1="400" y1="260" x2="335" y2="300" stroke="#1a3a5c" stroke-width="1.5"/>
-        <line x1="400" y1="260" x2="465" y2="300" stroke="#1a3a5c" stroke-width="1.5"/>
-        
-        <text x="335" y="360" text-anchor="middle" fill="#1a3a5c" font-size="9">Taxable Profit =</text>
-        <text x="335" y="375" text-anchor="middle" fill="#1a3a5c" font-size="9">Acct Profit +</text>
-        <text x="335" y="390" text-anchor="middle" fill="#1a3a5c" font-size="9">Depreciation −</text>
-        <text x="335" y="405" text-anchor="middle" fill="#1a3a5c" font-size="9">Capital Allowances</text>
-        
-        <text x="465" y="360" text-anchor="middle" fill="#1a3a5c" font-size="9">Tax Shield =</text>
-        <text x="465" y="375" text-anchor="middle" fill="#1a3a5c" font-size="9">Depreciation ×</text>
-        <text x="465" y="390" text-anchor="middle" fill="#1a3a5c" font-size="9">Tax Rate</text>
-        
-        <!-- Timing branch -->
-        <rect x="570" y="300" width="90" height="40" rx="4" fill="#fffbf0" stroke="#f59e0b" stroke-width="1.5"/>
-        <text x="615" y="325" text-anchor="middle" fill="#7a5800" font-size="11" font-weight="600">Inflation</text>
-        
-        <rect x="680" y="300" width="90" height="40" rx="4" fill="#fffbf0" stroke="#f59e0b" stroke-width="1.5"/>
-        <text x="725" y="325" text-anchor="middle" fill="#7a5800" font-size="11" font-weight="600">Discounting</text>
-        
-        <line x1="660" y1="260" x2="615" y2="300" stroke="#f59e0b" stroke-width="1.5"/>
-        <line x1="660" y1="260" x2="725" y2="300" stroke="#f59e0b" stroke-width="1.5"/>
-        
-        <text x="615" y="360" text-anchor="middle" fill="#7a5800" font-size="9">Real ↔ Real</text>
-        <text x="615" y="375" text-anchor="middle" fill="#7a5800" font-size="9">Nominal ↔ Nominal</text>
-        <text x="615" y="390" text-anchor="middle" fill="#7a5800" font-size="9">(1+rₙ)=(1+rᵣ)(1+π)</text>
-        
-        <text x="725" y="360" text-anchor="middle" fill="#7a5800" font-size="9">PV = CF/(1+r)ⁿ</text>
-        <text x="725" y="375" text-anchor="middle" fill="#7a5800" font-size="9">or use DF tables</text>
-        
-        <!-- Bottom: NPV Decision -->
-        <rect x="300" y="480" width="200" height="60" rx="8" fill="#27ae60" stroke="#1a3a5c" stroke-width="3"/>
-        <text x="400" y="505" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">NPV = Σ PV − I₀</text>
-        <text x="400" y="525" text-anchor="middle" fill="#fff" font-size="12">Accept if NPV > 0</text>
-        
-        <line x1="140" y1="420" x2="350" y2="480" stroke="#1a3a5c" stroke-width="2" stroke-dasharray="5,5"/>
-        <line x1="400" y1="405" x2="400" y2="480" stroke="#1a3a5c" stroke-width="2" stroke-dasharray="5,5"/>
-        <line x1="660" y1="390" x2="450" y2="480" stroke="#1a3a5c" stroke-width="2" stroke-dasharray="5,5"/>
-        
-        <!-- Arrow marker definition -->
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#1a3a5c"/>
-          </marker>
-        </defs>
-      </svg>
-    </div>
-    
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem;margin-top:1.5rem">
-      <h4 style="color:var(--primary);margin-bottom:.6rem">🧠 How to Use This Diagram</h4>
-      <ul style="margin-left:1.2rem;font-size:.9rem;line-height:1.8">
-        <li><strong>Green boxes</strong> = Core principles you must apply</li>
-        <li><strong>Blue boxes</strong> = Tax-related adjustments (critical for UK exams)</li>
-        <li><strong>Yellow boxes</strong> = Timing and inflation considerations</li>
-        <li><strong>Dashed lines</strong> = All paths lead to NPV calculation</li>
-        <li><strong>Key insight</strong>: Every decision in Ch.5 is about identifying and adjusting cash flows correctly before discounting</li>
-      </ul>
-    </div>
   </div>
 
   <div class="bottom-nav">
-
-  <div class="section-label"><div class="section-label" id="part3">⚠️ Common Pitfalls & Exam Traps</div>
-
-  <div class="card">
-    <h2>📋 Pitfall Summary Table — Ch.5 Investment Appraisal</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这张表总结了 Ch.5 中最容易在考试中出错的场景。每个场景都配有常见错误和正确做法。</p>
-    <table class="data">
-      <thead>
-        <tr>
-          <th style="width:25%">Scenario</th>
-          <th style="width:35%">Common Mistake</th>
-          <th style="width:40%">Correct Approach</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Sunk Costs</strong></td>
-          <td>Including past expenditures (e.g., market research already paid) in NPV calculation</td>
-          <td>✅ <strong>Exclude all sunk costs</strong> — they are unrecoverable and irrelevant to the decision</td>
-        </tr>
-        <tr>
-          <td><strong>Opportunity Costs</strong></td>
-          <td>Ignoring the rental value of owned assets used in the project</td>
-          <td>✅ <strong>Include opportunity cost</strong> — the foregone benefit of the next-best alternative use</td>
-        </tr>
-        <tr>
-          <td><strong>Depreciation</strong></td>
-          <td>Treating depreciation as a cash outflow OR ignoring it entirely</td>
-          <td>✅ <strong>Deduct before tax, then add back</strong>: Tax Shield = Depreciation × Tax Rate</td>
-        </tr>
-        <tr>
-          <td><strong>Working Capital</strong></td>
-          <td>Forgetting to recover working capital at project end</td>
-          <td>✅ <strong>Outflow at Year 0, inflow at Year n</strong> (assume full recovery unless stated)</td>
-        </tr>
-        <tr>
-          <td><strong>Taxation</strong></td>
-          <td>Using accounting profit instead of taxable profit</td>
-          <td>✅ <strong>Taxable Profit = Accounting Profit + Depreciation − Capital Allowances</strong></td>
-        </tr>
-        <tr>
-          <td><strong>Inflation</strong></td>
-          <td>Mixing real cash flows with nominal discount rate (or vice versa)</td>
-          <td>✅ <strong>Match consistently</strong>: Real CF → Real r; Nominal CF → Nominal r</td>
-        </tr>
-        <tr>
-          <td><strong>Financing Costs</strong></td>
-          <td>Deducting interest payments from project cash flows</td>
-          <td>✅ <strong>Never deduct financing costs</strong> — they are captured in the discount rate (WACC)</td>
-        </tr>
-        <tr>
-          <td><strong>Allocated Overheads</strong></td>
-          <td>Including head office costs allocated to the project</td>
-          <td>✅ <strong>Exclude unless truly incremental</strong> — only include costs that change due to the project</td>
-        </tr>
-        <tr>
-          <td><strong>Capital Rationing</strong></td>
-          <td>Selecting projects by highest absolute NPV when funds are limited</td>
-          <td>✅ <strong>Rank by Profitability Index (PI = NPV / Investment)</strong> — maximize NPV per £ invested</td>
-        </tr>
-        <tr>
-          <td><strong>Replacement Decisions</strong></td>
-          <td>Comparing total costs of different-length cycles without annualizing</td>
-          <td>✅ <strong>Use Equivalent Annual Cost (EAC)</strong> — convert to annual basis for fair comparison</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-label"><div class="section-label" id="pitfalls">📝 Standard Answer Templates</div>
-
-  <div class="card">
-    <h2>✍️ How to Structure Your NPV Calculation Answer</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">考试中，NPV 计算题需要清晰的步骤和专业的表述。以下是标准答题模板。</p>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: Identify Relevant Cash Flows</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        <strong>Year 0:</strong><br>
-        &nbsp;&nbsp;Initial investment: £X<br>
-        &nbsp;&nbsp;Working capital: £Y<br>
-        &nbsp;&nbsp;<strong>Total Year 0 outflow: £(X+Y)</strong><br><br>
-        
-        <strong>Years 1-n (Operating Cash Flows):</strong><br>
-        &nbsp;&nbsp;Incremental revenue: £A<br>
-        &nbsp;&nbsp;Less: Incremental costs: £B<br>
-        &nbsp;&nbsp;Incremental EBIT: £(A−B)<br>
-        &nbsp;&nbsp;Less: Tax at X%: £C<br>
-        &nbsp;&nbsp;Add back: Depreciation tax shield: £D<br>
-        &nbsp;&nbsp;<strong>Annual after-tax CF: £E</strong><br><br>
-        
-        <strong>Year n (Terminal Cash Flows):</strong><br>
-        &nbsp;&nbsp;Operating CF (as above): £E<br>
-        &nbsp;&nbsp;Add: Disposal proceeds: £F<br>
-        &nbsp;&nbsp;Add: Working capital recovery: £Y<br>
-        &nbsp;&nbsp;<strong>Total Year n inflow: £(E+F+Y)</strong>
-      </div>
-      <div style="background:#fff5f5;border:1px solid #fca5a5;border-radius:6px;padding:.8rem;margin-top:.8rem;font-size:.88rem">
-        <strong>⚠️ Key Reminders:</strong>
-        <ul style="margin:.4rem 0 0 1.2rem">
-          <li>Exclude sunk costs and allocated overheads</li>
-          <li>Include opportunity costs</li>
-          <li>Never deduct interest or financing costs</li>
-          <li>Depreciation: deduct before tax, then add back</li>
-        </ul>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Calculate Present Values</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        <strong>Using Discount Factors:</strong><br>
-        &nbsp;&nbsp;PV(Year t) = CF<sub>t</sub> × DF(r, t)<br>
-        &nbsp;&nbsp;where DF(r, t) = 1 / (1 + r)<sup>t</sup><br><br>
-        
-        <strong>For Annuities (constant annual CF):</strong><br>
-        &nbsp;&nbsp;PV = Annual CF × Annuity Factor(r, n)<br>
-        &nbsp;&nbsp;AF(r, n) = [1 − (1+r)<sup>−n</sup>] / r<br><br>
-        
-        <strong>Example Layout:</strong><br>
-        Year&nbsp;&nbsp;Cash Flow&nbsp;&nbsp;DF(10%,t)&nbsp;&nbsp;Present Value<br>
-        0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(50,000)&nbsp;&nbsp;&nbsp;&nbsp;1.000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(50,000)<br>
-        1-5&nbsp;&nbsp;&nbsp;15,000&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.791&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;56,865<br>
-        <strong>NPV = £6,865</strong>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Make Decision & State Conclusion</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-size:.9rem;line-height:1.8">
-        <strong>Decision Rule:</strong><br>
-        • NPV > 0 → <strong>Accept the project</strong> (adds value to shareholders)<br>
-        • NPV < 0 → <strong>Reject the project</strong> (destroys value)<br>
-        • NPV = 0 → <strong>Indifferent</strong> (breakeven)<br><br>
-        
-        <strong>Example Conclusion:</strong><br>
-        <em>"The project has a positive NPV of £6,865 at the required return of 10%. This indicates that the project is expected to generate value in excess of the cost of capital. Therefore, <strong>the project should be accepted</strong> as it will increase shareholder wealth."</em>
-      </div>
-    </div>
-
-    <div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:1.2rem;margin-top:1.5rem">
-      <h4 style="color:#166534;margin-bottom:.6rem">✅ Exam Tip: Use Professional Language</h4>
-      <p style="font-size:.9rem;color:#166534;margin-bottom:.6rem">Always use precise financial terminology:</p>
-      <ul style="margin-left:1.2rem;font-size:.88rem;color:#166534">
-        <li>Say "incremental cash flows" not "extra money"</li>
-        <li>Say "discount rate" or "cost of capital" not "interest rate"</li>
-        <li>Say "present value" not "today's value"</li>
-        <li>Say "shareholder wealth maximization" not "make more profit"</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section-label"><div class="section-label" id="templates">🗺️ Concept Relationship Map</div>
-
-  <div class="card">
-    <h2>📊 Ch.5 Investment Appraisal — Concept Flow</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这张图展示了 Ch.5 核心概念之间的逻辑关系，帮助你建立系统化的思维框架。</p>
-    
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:2rem;margin:1rem 0">
-      <svg viewBox="0 0 800 600" style="width:100%;height:auto">
-        <!-- Title -->
-        <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a5c">Investment Appraisal Decision Framework</text>
-        
-        <!-- Level 1: Start -->
-        <rect x="300" y="60" width="200" height="50" rx="8" fill="#1a3a5c" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="400" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Investment Opportunity</text>
-        
-        <!-- Arrow down -->
-        <line x1="400" y1="110" x2="400" y2="140" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 2: Identify Cash Flows -->
-        <rect x="250" y="140" width="300" height="50" rx="8" fill="#e8a020" stroke="#e8a020" stroke-width="2"/>
-        <text x="400" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Step 1: Identify Relevant Cash Flows</text>
-        
-        <!-- Three branches -->
-        <line x1="300" y1="190" x2="150" y2="240" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="400" y1="190" x2="400" y2="240" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="500" y1="190" x2="650" y2="240" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Include boxes -->
-        <rect x="50" y="240" width="200" height="80" rx="8" fill="#dcfce7" stroke="#27ae60" stroke-width="2"/>
-        <text x="150" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">✅ INCLUDE</text>
-        <text x="150" y="285" text-anchor="middle" font-size="11" fill="#166534">• Initial Investment</text>
-        <text x="150" y="302" text-anchor="middle" font-size="11" fill="#166534">• Incremental Operating CF</text>
-        <text x="150" y="319" text-anchor="middle" font-size="11" fill="#166534">• Opportunity Costs</text>
-        
-        <rect x="300" y="240" width="200" height="80" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
-        <text x="400" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">❌ EXCLUDE</text>
-        <text x="400" y="285" text-anchor="middle" font-size="11" fill="#991b1b">• Sunk Costs</text>
-        <text x="400" y="302" text-anchor="middle" font-size="11" fill="#991b1b">• Allocated Overheads</text>
-        <text x="400" y="319" text-anchor="middle" font-size="11" fill="#991b1b">• Financing Costs</text>
-        
-        <rect x="550" y="240" width="200" height="80" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
-        <text x="650" y="265" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">⚠️ SPECIAL</text>
-        <text x="650" y="285" text-anchor="middle" font-size="11" fill="#92400e">• Working Capital</text>
-        <text x="650" y="302" text-anchor="middle" font-size="11" fill="#92400e">• Depreciation Tax Shield</text>
-        <text x="650" y="319" text-anchor="middle" font-size="11" fill="#92400e">• Disposal Proceeds</text>
-        
-        <!-- Converge to Step 2 -->
-        <line x1="150" y1="320" x2="400" y2="370" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="400" y1="320" x2="400" y2="370" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        <line x1="650" y1="320" x2="400" y2="370" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 3: Calculate After-Tax CF -->
-        <rect x="250" y="370" width="300" height="50" rx="8" fill="#e8a020" stroke="#e8a020" stroke-width="2"/>
-        <text x="400" y="400" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Step 2: Calculate After-Tax Cash Flows</text>
-        
-        <line x1="400" y1="420" x2="400" y2="450" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 4: Discount -->
-        <rect x="250" y="450" width="300" height="50" rx="8" fill="#e8a020" stroke="#e8a020" stroke-width="2"/>
-        <text x="400" y="480" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Step 3: Discount to Present Value</text>
-        
-        <line x1="400" y1="500" x2="400" y2="530" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
-        
-        <!-- Level 5: NPV Decision -->
-        <rect x="300" y="530" width="200" height="50" rx="8" fill="#27ae60" stroke="#27ae60" stroke-width="2"/>
-        <text x="400" y="560" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">NPV > 0 ? Accept : Reject</text>
-        
-        <!-- Arrow marker definition -->
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#1a3a5c" />
-          </marker>
-        </defs>
-      </svg>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem;margin-top:1.5rem">
-      <h4 style="color:var(--primary);margin-bottom:.6rem">🧠 记忆要点</h4>
-      <ul style="margin-left:1.2rem;font-size:.9rem;line-height:1.8">
-        <li><strong>绿色框（Include）</strong>：这些是真实的、增量的现金流，必须包含</li>
-        <li><strong>红色框（Exclude）</strong>：这些要么已发生（沉没成本），要么不是增量的，必须排除</li>
-        <li><strong>黄色框（Special）</strong>：这些需要特殊处理——工作资本在期初流出、期末流入；折旧通过税盾影响现金流</li>
-        <li><strong>核心逻辑</strong>：只有"因项目而改变的、税后的、现值化的现金流"才影响 NPV 决策</li>
-      </ul>
-    </div>
-  </div>
-    <a href="#" class="btn btn-outline" style="opacity:.4;pointer-events:none">← Previous</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_StudyGuide_Kiro.html" class="btn btn-outline">← Study Guide</a>
     <span style="font-size:.85rem;color:var(--muted)">Page 1 of 3</span>
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Interactive_Kiro.html" class="btn btn-primary">Interactive Lab →</a>
   </div>
-
 </main>
 </body>
 </html>
