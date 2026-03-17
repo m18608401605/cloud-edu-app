@@ -184,6 +184,50 @@ window.addEventListener('scroll', function() {
       <p><strong>NPV = 所有未来现金流的现值之和 − 初始投资</strong></p>
       <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">NPV > 0 → 接受（创造财富）｜NPV < 0 → 拒绝（销毁财富）｜NPV = 0 → 无差异</p>
     </div>
+  </div>
+
+  <div class="card">
+    <h2>⏰ 时间线可视化 — NPV 的本质</h2>
+    <p style="margin-bottom:1.5rem;font-size:.95rem">把未来的钱"拉回"到今天，看看值多少</p>
+    
+    <div style="position:relative;padding:3rem 0">
+      <div style="position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);transform:translateY(-50%)"></div>
+      <div style="display:flex;justify-content:space-between;position:relative;z-index:1">
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--accent);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--accent),0 0 20px rgba(232,160,32,.4)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Today (Year 0)</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#fee2e2;color:#991b1b">−£50,000</div>
+          <div style="font-size:.8rem;margin-top:.5rem">Initial Investment</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 1</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £13,636</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 2</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £12,397</div>
+        </div>
+        <div style="text-align:center;flex:1">
+          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
+          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 3</div>
+          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
+          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
+          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £11,270</div>
+        </div>
+      </div>
+    </div>
+    
+    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:2rem">
+      <p style="font-size:.9rem"><strong>🧠 关键洞察：</strong>未来的钱越远，"拉回今天"后越少。Year 3 的 £15,000 只值今天的 £11,270。这就是 time value of money！</p>
+    </div>
+  </div>
+
     <div class="formula-box">
       <div class="f-title">NPV Formula</div>
       <div class="f-main">NPV = −C₀ + C₁/(1+r) + C₂/(1+r)² + ... + Cₙ/(1+r)ⁿ</div>
@@ -275,109 +319,6 @@ window.addEventListener('scroll', function() {
         <tr><td>实际调查：企业用几种方法</td><td class="check">多种方法并用</td><td class="cross">只用 NPV</td></tr>
       </tbody>
     </table>
-  </div>
-
-  <div class="section-label">📊 NPV 图示化讲解</div>
-
-  <div class="card">
-    <h2>⏰ 时间线可视化 — NPV 的本质</h2>
-    <p style="margin-bottom:1.5rem;font-size:.95rem">把未来的钱"拉回"到今天，看看值多少</p>
-    
-    <div style="position:relative;padding:3rem 0">
-      <div style="position:absolute;top:50%;left:0;right:0;height:3px;background:var(--border);transform:translateY(-50%)"></div>
-      <div style="display:flex;justify-content:space-between;position:relative;z-index:1">
-        <div style="text-align:center;flex:1">
-          <div style="width:20px;height:20px;background:var(--accent);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--accent),0 0 20px rgba(232,160,32,.4)"></div>
-          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Today (Year 0)</div>
-          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#fee2e2;color:#991b1b">−£50,000</div>
-          <div style="font-size:.8rem;margin-top:.5rem">Initial Investment</div>
-        </div>
-        <div style="text-align:center;flex:1">
-          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
-          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 1</div>
-          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
-          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
-          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £13,636</div>
-        </div>
-        <div style="text-align:center;flex:1">
-          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
-          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 2</div>
-          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
-          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
-          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £12,397</div>
-        </div>
-        <div style="text-align:center;flex:1">
-          <div style="width:20px;height:20px;background:var(--primary);border-radius:50%;margin:0 auto 1rem;border:4px solid var(--card);box-shadow:0 0 0 2px var(--primary)"></div>
-          <div style="font-size:.85rem;font-weight:600;color:var(--primary);margin-bottom:.5rem">Year 3</div>
-          <div style="font-size:1.1rem;font-weight:700;padding:.5rem 1rem;border-radius:8px;display:inline-block;background:#dcfce7;color:#166534">+£15,000</div>
-          <div style="margin-top:.5rem;font-size:.8rem;color:var(--accent);font-weight:600">↓ Discount</div>
-          <div style="font-size:.85rem;margin-top:.3rem;color:var(--accent)">PV = £11,270</div>
-        </div>
-      </div>
-    </div>
-    
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1rem 1.5rem;margin-top:2rem">
-      <p style="font-size:.9rem"><strong>🧠 关键洞察：</strong>未来的钱越远，"拉回今天"后越少。Year 3 的 £15,000 只值今天的 £11,270。这就是 time value of money！</p>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>⚖️ 对比可视化 — NPV 本质上是一场"价值对决"</h2>
-    <p style="margin-bottom:1.5rem;font-size:.95rem">What You Get vs What You Pay</p>
-    
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:2rem 0">
-      <div style="background:#dcfce7;border-radius:10px;padding:1.5rem;border:2px solid var(--green)">
-        <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">💰 What You Get</div>
-        <div style="font-size:2rem;font-weight:900;color:var(--accent);margin-bottom:1rem">£56,865</div>
-        <div style="font-size:.9rem;color:var(--text);line-height:1.6">
-          <strong>Present Value of Future Cash Flows</strong><br>
-          All future money, discounted to today's value
-        </div>
-      </div>
-      <div style="background:#f8fafc;border-radius:10px;padding:1.5rem;border:2px solid var(--border)">
-        <div style="font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--primary)">💸 What You Pay</div>
-        <div style="font-size:2rem;font-weight:900;color:var(--accent);margin-bottom:1rem">£50,000</div>
-        <div style="font-size:.9rem;color:var(--text);line-height:1.6">
-          <strong>Initial Investment</strong><br>
-          Money you spend today
-        </div>
-      </div>
-    </div>
-    
-    <div style="text-align:center;margin:1.5rem 0;padding:1.5rem;background:#dcfce7;border-radius:10px">
-      <div style="font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:.5rem">Net Benefit</div>
-      <div style="font-size:2.5rem;font-weight:900;color:var(--green)">+£6,865</div>
-      <div style="font-size:.9rem;margin-top:.5rem;color:var(--text)">This project makes you £6,865 richer (in today's money)</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>🌳 决策树 — NPV 告诉你该不该投资</h2>
-    <div style="text-align:center;padding:2rem 0">
-      <div style="display:inline-block;background:#fffbf0;border:2px solid #f59e0b;border-radius:10px;padding:1rem 1.5rem;margin:.5rem;min-width:150px;font-weight:700">
-        Calculate NPV
-      </div>
-      <div style="display:flex;justify-content:center;gap:3rem;margin-top:2rem">
-        <div style="flex:1;max-width:200px">
-          <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
-          <div style="display:inline-block;background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1rem 1.5rem;margin:.5rem;min-width:150px;color:#166534;font-weight:700">
-            <div style="font-size:1.5rem;margin-bottom:.5rem">✅</div>
-            <div>NPV > 0</div>
-            <div style="font-size:.85rem;margin-top:.5rem;font-weight:400">Accept Project</div>
-            <div style="font-size:.8rem;margin-top:.3rem;color:var(--green);font-weight:400">Adds value!</div>
-          </div>
-        </div>
-        <div style="flex:1;max-width:200px">
-          <div style="height:40px;width:2px;background:var(--border);margin:0 auto"></div>
-          <div style="display:inline-block;background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1rem 1.5rem;margin:.5rem;min-width:150px;color:#991b1b;font-weight:700">
-            <div style="font-size:1.5rem;margin-bottom:.5rem">❌</div>
-            <div>NPV < 0</div>
-            <div style="font-size:.85rem;margin-top:.5rem;font-weight:400">Reject Project</div>
-            <div style="font-size:.8rem;margin-top:.3rem;color:var(--red);font-weight:400">Destroys value!</div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 
   <div class="bottom-nav">
