@@ -218,11 +218,94 @@ window.addEventListener('scroll',function(){
       </div>
     </div>
 
+<div style="margin:2rem 0;padding:1.5rem;background:#f8fafc;border-radius:12px">
+  <h4 style="text-align:center;color:var(--primary);margin-bottom:1.5rem;font-size:1rem">🔀 Separation Theorem: Investment vs Consumption</h4>
+  <svg viewBox="0 0 600 400" style="max-width:100%;height:auto">
+    <!-- Investment Decision -->
+    <rect x="50" y="50" width="220" height="120" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
+    <text x="160" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">Investment Decision</text>
+    <text x="160" y="105" text-anchor="middle" font-size="12" fill="#1e40af">Accept all NPV > 0 projects</text>
+    <text x="160" y="125" text-anchor="middle" font-size="11" fill="#1e40af">Maximize firm value</text>
+    <text x="160" y="145" text-anchor="middle" font-size="11" fill="#1e40af">Independent of shareholders'</text>
+    <text x="160" y="160" text-anchor="middle" font-size="11" fill="#1e40af">consumption preferences</text>
+    
+    <!-- Consumption Decision -->
+    <rect x="330" y="50" width="220" height="120" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="8"/>
+    <text x="440" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#166534">Consumption Decision</text>
+    <text x="440" y="105" text-anchor="middle" font-size="12" fill="#166534">Shareholders adjust timing</text>
+    <text x="440" y="125" text-anchor="middle" font-size="11" fill="#166534">by borrowing/lending</text>
+    <text x="440" y="145" text-anchor="middle" font-size="11" fill="#166534">at market rate</text>
+    
+    <!-- Separation line -->
+    <line x1="300" y1="50" x2="300" y2="170" stroke="#64748b" stroke-width="3" stroke-dasharray="10,5"/>
+    <text x="300" y="200" text-anchor="middle" font-size="14" fill="#64748b" font-weight="bold">SEPARATED</text>
+    
+    <!-- Key assumptions -->
+    <rect x="100" y="240" width="400" height="130" fill="#fffbf0" stroke="#f59e0b" stroke-width="2" rx="8"/>
+    <text x="300" y="265" text-anchor="middle" font-size="14" font-weight="bold" fill="#854d0e">Key Assumptions</text>
+    <text x="300" y="290" text-anchor="middle" font-size="12" fill="#854d0e">✓ Returns known with certainty</text>
+    <text x="300" y="310" text-anchor="middle" font-size="12" fill="#854d0e">✓ Same borrowing/lending rate for all</text>
+    <text x="300" y="330" text-anchor="middle" font-size="12" fill="#854d0e">✓ No taxes or transaction costs</text>
+    <text x="300" y="350" text-anchor="middle" font-size="12" fill="#854d0e">✓ Perfect capital markets</text>
+  </svg>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-top:1rem">
+    💡 Key: Firms should invest based on NPV, not on shareholders' personal consumption timing preferences.
+  </p>
+</div>
+
     <div class="pitfall">
       <div class="pitfall-tag">⚠️ 常见陷阱 Exam Pitfall</div>
       <p>Many students confuse <strong>"limited liability"</strong> with the company having a right to limit its debts. Wrong!</p>
       <div class="rule">✅ Rule: It is the <em>shareholders</em> who have limited liability — not the company. The company itself is fully liable for ALL its debts.</div>
     </div>
+
+<div style="margin:2rem 0;padding:1.5rem;background:#f8fafc;border-radius:12px">
+  <h4 style="text-align:center;color:var(--primary);margin-bottom:1.5rem;font-size:1rem">🏢 Limited Company Structure</h4>
+  <svg viewBox="0 0 600 400" style="max-width:100%;height:auto">
+    <!-- Shareholders -->
+    <rect x="50" y="50" width="150" height="60" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="8"/>
+    <text x="125" y="75" text-anchor="middle" font-size="14" font-weight="bold" fill="#166534">Shareholders</text>
+    <text x="125" y="95" text-anchor="middle" font-size="11" fill="#166534">(Owners)</text>
+    
+    <!-- Board of Directors -->
+    <rect x="225" y="150" width="150" height="60" fill="#fef9c3" stroke="#f59e0b" stroke-width="2" rx="8"/>
+    <text x="300" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#854d0e">Board of Directors</text>
+    <text x="300" y="195" text-anchor="middle" font-size="11" fill="#854d0e">(Elected)</text>
+    
+    <!-- Management -->
+    <rect x="400" y="250" width="150" height="60" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
+    <text x="475" y="275" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e40af">Management</text>
+    <text x="475" y="295" text-anchor="middle" font-size="11" fill="#1e40af">(Agents)</text>
+    
+    <!-- Company -->
+    <rect x="50" y="320" width="150" height="60" fill="#f3e8ff" stroke="#a855f7" stroke-width="2" rx="8"/>
+    <text x="125" y="345" text-anchor="middle" font-size="14" font-weight="bold" fill="#7e22ce">The Company</text>
+    <text x="125" y="365" text-anchor="middle" font-size="11" fill="#7e22ce">(Legal Entity)</text>
+    
+    <!-- Arrows -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#64748b"/>
+      </marker>
+    </defs>
+    
+    <line x1="125" y1="110" x2="250" y2="150" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="180" y="125" font-size="10" fill="#64748b">Elect</text>
+    
+    <line x1="325" y1="210" x2="450" y2="250" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="380" y="225" font-size="10" fill="#64748b">Appoint</text>
+    
+    <line x1="450" y1="310" x2="175" y2="340" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="300" y="320" font-size="10" fill="#64748b">Operate</text>
+    
+    <line x1="125" y1="320" x2="125" y2="110" stroke="#a855f7" stroke-width="2" stroke-dasharray="5,5"/>
+    <text x="10" y="220" font-size="10" fill="#a855f7" font-weight="bold">Limited Liability</text>
+  </svg>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-top:1rem">
+    💡 Key: Shareholders own the company but have <strong>limited liability</strong> — they can only lose their investment, not personal assets.
+  </p>
+</div>
+
   </div>
 
   <div class="card">
@@ -261,6 +344,44 @@ window.addEventListener('scroll',function(){
       <h4>UK Government Bonds vs. Tech Startup Equity</h4>
       <p>If UK gilts yield 4% (risk-free), and a startup equity requires a 10% risk premium, the total required return is 14%. If another startup is "twice as risky", its risk premium doubles to 20%, giving a total of 24% — not 28% (which would be twice 14%).</p>
     </div>
+
+<div style="margin:2rem 0;padding:1.5rem;background:#f8fafc;border-radius:12px">
+  <h4 style="text-align:center;color:var(--primary);margin-bottom:1.5rem;font-size:1rem">⚖️ Risk & Return Relationship</h4>
+  <svg viewBox="0 0 600 400" style="max-width:100%;height:auto">
+    <!-- Axes -->
+    <line x1="50" y1="350" x2="550" y2="350" stroke="#64748b" stroke-width="2"/>
+    <line x1="50" y1="350" x2="50" y2="50" stroke="#64748b" stroke-width="2"/>
+    
+    <!-- Labels -->
+    <text x="300" y="385" text-anchor="middle" font-size="14" fill="#64748b">Risk →</text>
+    <text x="20" y="200" text-anchor="middle" font-size="14" fill="#64748b" transform="rotate(-90 20 200)">Required Return →</text>
+    
+    <!-- Risk-free rate line -->
+    <line x1="50" y1="300" x2="550" y2="300" stroke="#94a3b8" stroke-width="1" stroke-dasharray="5,5"/>
+    <text x="560" y="305" font-size="12" fill="#64748b">Risk-free rate (Rf)</text>
+    
+    <!-- Risk-return curve -->
+    <path d="M 50 300 Q 200 250, 300 180 T 550 80" stroke="#3b82f6" stroke-width="3" fill="none"/>
+    
+    <!-- Points -->
+    <circle cx="80" cy="295" r="8" fill="#22c55e"/>
+    <text x="80" y="280" text-anchor="middle" font-size="12" fill="#166534" font-weight="bold">Gov Bonds</text>
+    
+    <circle cx="250" cy="210" r="8" fill="#f59e0b"/>
+    <text x="250" y="195" text-anchor="middle" font-size="12" fill="#854d0e" font-weight="bold">Blue Chips</text>
+    
+    <circle cx="450" cy="110" r="8" fill="#ef4444"/>
+    <text x="450" y="95" text-anchor="middle" font-size="12" fill="#991b1b" font-weight="bold">Startups</text>
+    
+    <!-- Risk premium annotation -->
+    <line x1="250" y1="300" x2="250" y2="210" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,3"/>
+    <text x="260" y="255" font-size="11" fill="#854d0e">Risk Premium</text>
+  </svg>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-top:1rem">
+    💡 Key: Higher risk requires higher return, but the relationship is <strong>not linear</strong> — it's curved because of diminishing marginal utility.
+  </p>
+</div>
+
   </div>
 
   <!-- ===== PART 2: CHAPTER 2 ===== -->
@@ -306,6 +427,40 @@ window.addEventListener('scroll',function(){
       <p>Agency costs are NOT advertising costs, travel costs, or costs of hiring temp staff.</p>
       <div class="rule">✅ Agency costs = costs arising from the principal-agent conflict between shareholders and managers.</div>
     </div>
+
+<div style="margin:2rem 0;padding:1.5rem;background:#fff5f5;border-radius:12px;border:1px solid #fca5a5">
+  <h4 style="text-align:center;color:#991b1b;margin-bottom:1.5rem;font-size:1rem">👔 Agency Problem: Conflict of Interest</h4>
+  <svg viewBox="0 0 600 350" style="max-width:100%;height:auto">
+    <!-- Shareholders box -->
+    <rect x="50" y="50" width="200" height="100" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="8"/>
+    <text x="150" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#166534">Shareholders</text>
+    <text x="150" y="100" text-anchor="middle" font-size="12" fill="#166534">(Principals)</text>
+    <text x="150" y="120" text-anchor="middle" font-size="11" fill="#166534">Want: Wealth Max</text>
+    <text x="150" y="135" text-anchor="middle" font-size="11" fill="#166534">📈 High stock price</text>
+    
+    <!-- Managers box -->
+    <rect x="350" y="50" width="200" height="100" fill="#fef9c3" stroke="#f59e0b" stroke-width="2" rx="8"/>
+    <text x="450" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#854d0e">Managers</text>
+    <text x="450" y="100" text-anchor="middle" font-size="12" fill="#854d0e">(Agents)</text>
+    <text x="450" y="120" text-anchor="middle" font-size="11" fill="#854d0e">Want: Personal Gain</text>
+    <text x="450" y="135" text-anchor="middle" font-size="11" fill="#854d0e">💰 High salary, perks</text>
+    
+    <!-- Conflict arrow -->
+    <line x1="250" y1="100" x2="350" y2="100" stroke="#ef4444" stroke-width="3"/>
+    <text x="300" y="90" text-anchor="middle" font-size="14" fill="#991b1b" font-weight="bold">⚡ CONFLICT</text>
+    
+    <!-- Agency costs -->
+    <rect x="150" y="200" width="300" height="120" fill="#fee2e2" stroke="#ef4444" stroke-width="2" rx="8"/>
+    <text x="300" y="225" text-anchor="middle" font-size="14" font-weight="bold" fill="#991b1b">Agency Costs</text>
+    <text x="300" y="250" text-anchor="middle" font-size="12" fill="#991b1b">1. Monitoring costs (audits, reports)</text>
+    <text x="300" y="270" text-anchor="middle" font-size="12" fill="#991b1b">2. Bonding costs (manager guarantees)</text>
+    <text x="300" y="290" text-anchor="middle" font-size="12" fill="#991b1b">3. Residual loss (remaining inefficiency)</text>
+  </svg>
+  <p style="text-align:center;font-size:0.85rem;color:#991b1b;margin-top:1rem">
+    ⚠️ Agency costs = costs arising from the conflict between shareholders and managers.
+  </p>
+</div>
+
   </div>
 
   <div class="card">
@@ -340,6 +495,41 @@ window.addEventListener('scroll',function(){
         <p>Shareholders' wealth is NOT affected by the financing method used (debt vs equity) — under the theorem's assumptions.</p>
       </div>
     </div>
+
+<div style="margin:2rem 0;padding:1.5rem;background:#f8fafc;border-radius:12px">
+  <h4 style="text-align:center;color:var(--primary);margin-bottom:1.5rem;font-size:1rem">🔀 Separation Theorem: Investment vs Consumption</h4>
+  <svg viewBox="0 0 600 400" style="max-width:100%;height:auto">
+    <!-- Investment Decision -->
+    <rect x="50" y="50" width="220" height="120" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="8"/>
+    <text x="160" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#1e40af">Investment Decision</text>
+    <text x="160" y="105" text-anchor="middle" font-size="12" fill="#1e40af">Accept all NPV > 0 projects</text>
+    <text x="160" y="125" text-anchor="middle" font-size="11" fill="#1e40af">Maximize firm value</text>
+    <text x="160" y="145" text-anchor="middle" font-size="11" fill="#1e40af">Independent of shareholders'</text>
+    <text x="160" y="160" text-anchor="middle" font-size="11" fill="#1e40af">consumption preferences</text>
+    
+    <!-- Consumption Decision -->
+    <rect x="330" y="50" width="220" height="120" fill="#dcfce7" stroke="#22c55e" stroke-width="2" rx="8"/>
+    <text x="440" y="80" text-anchor="middle" font-size="16" font-weight="bold" fill="#166534">Consumption Decision</text>
+    <text x="440" y="105" text-anchor="middle" font-size="12" fill="#166534">Shareholders adjust timing</text>
+    <text x="440" y="125" text-anchor="middle" font-size="11" fill="#166534">by borrowing/lending</text>
+    <text x="440" y="145" text-anchor="middle" font-size="11" fill="#166534">at market rate</text>
+    
+    <!-- Separation line -->
+    <line x1="300" y1="50" x2="300" y2="170" stroke="#64748b" stroke-width="3" stroke-dasharray="10,5"/>
+    <text x="300" y="200" text-anchor="middle" font-size="14" fill="#64748b" font-weight="bold">SEPARATED</text>
+    
+    <!-- Key assumptions -->
+    <rect x="100" y="240" width="400" height="130" fill="#fffbf0" stroke="#f59e0b" stroke-width="2" rx="8"/>
+    <text x="300" y="265" text-anchor="middle" font-size="14" font-weight="bold" fill="#854d0e">Key Assumptions</text>
+    <text x="300" y="290" text-anchor="middle" font-size="12" fill="#854d0e">✓ Returns known with certainty</text>
+    <text x="300" y="310" text-anchor="middle" font-size="12" fill="#854d0e">✓ Same borrowing/lending rate for all</text>
+    <text x="300" y="330" text-anchor="middle" font-size="12" fill="#854d0e">✓ No taxes or transaction costs</text>
+    <text x="300" y="350" text-anchor="middle" font-size="12" fill="#854d0e">✓ Perfect capital markets</text>
+  </svg>
+  <p style="text-align:center;font-size:0.85rem;color:var(--muted);margin-top:1rem">
+    💡 Key: Firms should invest based on NPV, not on shareholders' personal consumption timing preferences.
+  </p>
+</div>
 
     <div class="pitfall">
       <div class="pitfall-tag">⚠️ 高频陷阱 High-Frequency Pitfall</div>
