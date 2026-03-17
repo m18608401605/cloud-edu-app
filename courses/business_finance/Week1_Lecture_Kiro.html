@@ -106,6 +106,27 @@
     nav .brand { display: none; }
     .pillars { grid-template-columns: 1fr; }
   }
+
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
+  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
+  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
+  .mobile-toc-toggle.open{transform:rotate(180deg)}
+  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .mobile-toc-content.open{max-height:500px;border-top:1px solid var(--border)}
+  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--bg);transition:all .2s}
+  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
+  .mobile-toc-content a:last-child{border-bottom:none}
+  @media(max-width:1200px){.mobile-toc{display:block}}
+  @media(min-width:1201px){main{margin-left:260px;margin-right:20px}}
 </style>
 </head>
 <body>
@@ -119,6 +140,20 @@
   <span class="week-badge">Week 1</span>
 </nav>
 
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">🏢 Limited Company</a>
+    <a href="#part2">📊 Business Types</a>
+    <a href="#part3">⚖️ Risk & Return</a>
+    <a href="#part4">🎯 Corporate Objective</a>
+    <a href="#part5">👔 Agency Problem</a>
+    <a href="#part6">🔀 Separation Theorem</a>
+  </div>
+</div>
 <div class="hero">
   <div class="tag">Week 1 · Chapters 1 &amp; 2</div>
   <h1>Introduction to Business Finance</h1>
@@ -136,12 +171,29 @@
 </div>
 
 <main>
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">🏢 Limited Company</a>
+  <a href="#part2">📊 Business Types</a>
+  <a href="#part3">⚖️ Risk & Return</a>
+  <a href="#part4">🎯 Corporate Objective</a>
+  <a href="#part5">👔 Agency Problem</a>
+  <a href="#part6">🔀 Separation Theorem</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  const b=document.querySelector('.back-to-top');
+  b.classList.toggle('show',window.scrollY>300);
+});
+</script>
+
 
   <!-- ===== PART 1: CHAPTER 1 ===== -->
   <div class="section-label">📘 Chapter 1 — The Nature of Business Finance</div>
 
   <div class="card">
-    <h2>📚 Core Concept: What is a Limited Company? 有限公司是什么？</h2>
+    <h2 id="part1">📚 Core Concept: What is a Limited Company? 有限公司是什么？</h2>
     <div class="concept-box">
       <div class="label">费曼类比 Feynman Analogy</div>
       <p>把有限公司想象成一个<strong>独立的机器人</strong>。这个机器人可以签合同、拥有财产、被起诉——但它不是任何一个人。股东只是"给机器人充电的人"，机器人欠的债，不会追到充电人身上。</p>
@@ -174,7 +226,7 @@
   </div>
 
   <div class="card">
-    <h2>📚 Types of Business &amp; Securities 企业类型与证券</h2>
+    <h2 id="part2">📚 Types of Business &amp; Securities 企业类型与证券</h2>
     <p>In terms of business activity volume, <strong>limited companies</strong> dominate the UK economy — not partnerships or co-operatives.</p>
 
     <h3>Risk Ranking of Securities (least → most risky)</h3>
@@ -197,7 +249,7 @@
   </div>
 
   <div class="card">
-    <h2>📚 Risk &amp; Return Relationship 风险与回报</h2>
+    <h2 id="part3">📚 Risk &amp; Return Relationship 风险与回报</h2>
     <div class="concept-box">
       <div class="label">核心原则</div>
       <p>Higher risk → Higher <em>required</em> return. But the relationship is <strong>not proportional</strong>.</p>
@@ -215,7 +267,7 @@
   <div class="section-label">📗 Chapter 2 — Financial Objectives &amp; the Separation Theorem</div>
 
   <div class="card">
-    <h2>📚 The Corporate Objective 企业目标</h2>
+    <h2 id="part4">📚 The Corporate Objective 企业目标</h2>
     <div class="concept-box">
       <div class="label">核心答案</div>
       <p>The generally accepted corporate objective in business finance is: <strong>Maximisation of Shareholders' Wealth</strong> — NOT profit maximisation.</p>
@@ -242,7 +294,7 @@
   </div>
 
   <div class="card">
-    <h2>📚 Agency Problem &amp; Agency Costs 代理问题</h2>
+    <h2 id="part5">📚 Agency Problem &amp; Agency Costs 代理问题</h2>
     <div class="concept-box">
       <div class="label">费曼类比</div>
       <p>你雇了一个管家（经理）来管理你的房子（公司）。但管家可能会用你的钱买他自己喜欢的家具。<strong>Agency costs</strong> = 你为了监督管家、防止他乱花钱而付出的代价。</p>
@@ -257,7 +309,7 @@
   </div>
 
   <div class="card">
-    <h2>📚 The Separation Theorem 分离定理</h2>
+    <h2 id="part6">📚 The Separation Theorem 分离定理</h2>
     <div class="concept-box">
       <div class="label">核心思想</div>
       <p>The separation theorem says: <strong>investment decisions</strong> and <strong>consumption decisions</strong> can be made separately — because shareholders can borrow/lend at the market rate to adjust their personal consumption timing.</p>

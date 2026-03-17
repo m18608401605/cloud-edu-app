@@ -64,6 +64,27 @@
   .btn.accent{background:var(--accent)}
   .btn.accent:hover{background:#c8880e}
   @media(max-width:600px){.compare-grid,.signal-grid{grid-template-columns:1fr}}
+
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:#fff;border:1px solid #dde3ea;border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:#2c3e50;text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  .mobile-toc{display:none;background:#fff;border-bottom:1px solid #dde3ea;position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
+  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
+  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
+  .mobile-toc-toggle.open{transform:rotate(180deg)}
+  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .mobile-toc-content.open{max-height:500px;border-top:1px solid #dde3ea}
+  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:#2c3e50;text-decoration:none;border-bottom:1px solid #f5f7fa;transition:all .2s}
+  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
+  .mobile-toc-content a:last-child{border-bottom:none}
+  @media(max-width:1200px){.mobile-toc{display:block}}
+  @media(min-width:1201px){.container{margin-left:260px;margin-right:20px}}
 </style>
 </head>
 <body>
@@ -77,6 +98,17 @@
   <span class="week-badge">Week 9</span>
 </nav>
 
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">🏦 Efficient Market</a>
+    <a href="#part2">📊 EMH Forms</a>
+    <a href="#part3">⚠️ Implications</a>
+  </div>
+</div>
 <div class="hero">
   <div class="eyebrow">Week 9 · Chapter 12 · Lecture</div>
   <h1>Payout Policy</h1>
@@ -84,9 +116,23 @@
 </div>
 
 <div class="container">
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">🏦 Efficient Market</a>
+  <a href="#part2">📊 EMH Forms</a>
+  <a href="#part3">⚠️ Implications</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  const b=document.querySelector('.back-to-top');
+  b.classList.toggle('show',window.scrollY>300);
+});
+</script>
+
 
   <!-- Section 1 -->
-  <div class="section">
+  <div class="section" id="part1">
     <div class="section-header">
       <div class="section-num">1</div>
       <div>
@@ -146,7 +192,7 @@
   </div>
 
   <!-- Section 3 -->
-  <div class="section">
+  <div class="section" id="part2">
     <div class="section-header">
       <div class="section-num">3</div>
       <div>
@@ -217,7 +263,7 @@
   </div>
 
   <!-- Section 5 Pitfall -->
-  <div class="section">
+  <div class="section" id="part3">
     <div class="section-header">
       <div class="section-num">5</div>
       <div>
