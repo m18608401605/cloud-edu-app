@@ -51,6 +51,16 @@
   td { padding:10px 14px; border-bottom:1px solid #eee; }
   tr:last-child td { border-bottom:none; }
   tr:nth-child(even) td { background:#f8f9fa; }
+
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:#fff;border:1px solid #dde3ea;border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:#2c3e50;text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  @media(min-width:1201px){.container{margin-left:260px;margin-right:20px}}
 </style>
 </head>
 <body>
@@ -82,10 +92,26 @@
   <h1>Cost of Capital &amp; WACC</h1>
 </div>
 
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">📚 WACC Formula</a>
+  <a href="#part2">💰 Cost of Equity</a>
+  <a href="#part3">🏦 Cost of Debt</a>
+  <a href="#part4">⚠️ Pitfalls</a>
+  <a href="#part5">🍎 Apple Case</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  const b=document.querySelector('.back-to-top');
+  b.classList.toggle('show',window.scrollY>300);
+});
+</script>
+
 <div class="container">
 
   <!-- Section 1: WACC Formula -->
-  <div class="section">
+  <div class="section" id="part1">
     <h2>📚 WACC Formula</h2>
     <p>WACC（Weighted Average Cost of Capital，加权平均资本成本）是企业所有资金来源成本的加权平均值，以<strong>市场价值权重</strong>计算。</p>
     <div class="concept-box">
@@ -105,7 +131,7 @@
   </div>
 
   <!-- Section 2: Cost of Equity -->
-  <div class="section">
+  <div class="section" id="part2">
     <h2>📚 Cost of Equity (K<sub>e</sub>)</h2>
     <p>权益成本是股东要求的最低回报率。有两种主要计算方法：</p>
 
@@ -135,7 +161,7 @@
   </div>
 
   <!-- Section 3: Cost of Debt -->
-  <div class="section">
+  <div class="section" id="part3">
     <h2>📚 Cost of Debt (K<sub>d</sub>)</h2>
     <p>债务成本是企业向债权人支付的利率。最准确的估算方法是使用现有债券的<strong>到期收益率（YTM）</strong>，即债券的内部收益率（IRR）。</p>
     <div class="concept-box">
@@ -157,7 +183,7 @@
   </div>
 
   <!-- Section 4: Pitfalls -->
-  <div class="section">
+  <div class="section" id="part4">
     <h2>📚 Common Pitfalls</h2>
 
     <div class="pitfall">
@@ -189,7 +215,7 @@
   </div>
 
   <!-- Section 5: Apple Case -->
-  <div class="section">
+  <div class="section" id="part5">
     <h2>📚 Real Case: Apple WACC Calculation</h2>
     <p>以下是基于简化假设的 Apple WACC 估算示例：</p>
 
