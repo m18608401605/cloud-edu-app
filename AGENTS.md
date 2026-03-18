@@ -699,6 +699,15 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 2. **主动推进工作** - 不要等用户问，主动汇报进度
 3. **先尝试后确认** - 能自己做的先做，不能做的提供建议后确认
 
+### 新增机制（今日生效）
+1. **早会（9:00）**：每人说今天要干嘛
+2. **晚会（18:00）**：每人说今天干完了啥
+3. **任务流转**：
+   - 接任务 → 30分钟内拆解分配
+   - 有进展 → 2小时内更新状态
+   - 遇卡点 → 立即说，别等问
+4. **直接讨论**：各爪之间直接聊，过程不用经统爪
+
 ### 接收任务时（必须执行）
 
 立即创建 `.context/CURRENT_TASK.md`：
@@ -765,4 +774,31 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 ❌ 只问不建议
 
 详见：`/Users/a1/Desktop/OpenClaw_Workspace/LOBSTER_WORK_PROTOCOL_V2.md`
+
+
+---
+
+## 📊 重要补充（2026-03-18）
+
+### 可视化要求（强制执行）
+**每个核心概念必须配可视化图示：**
+- 位置：紧跟 concept-box，在费曼类比之前
+- 目的：防止大量文字阅读导致的视觉疲劳
+- 类型：决策树/流程图/对比卡片/关系图
+- 工具：SVG inline 或 styled div
+
+### 问题即记录机制（强制执行）
+**遇到任何问题时：**
+1. 立即记录到 `.learnings/ERRORS.md`
+2. 记录问题描述、原因、解决方案、预防措施
+3. 更新解决方案库，标注问题编号和日期
+4. 目标：无论是否切换新窗口，都能用最佳方案、最快效率、最好效果做出课件
+
+### 定期精简机制（每周执行）
+**每周五晚上或周末：**
+1. 检查 LEARNINGS.md、ERRORS.md、AGENTS.md 的冗余内容
+2. 精简原则：保留核心方法论，移除过度详细的解释
+3. 优化结构：使用列表、表格代替长段落
+4. 备份原始版本：`LEARNINGS.md.backup-YYYY-MM-DD`
+5. 目标：保持文档精简高效，减少阅读时间
 
