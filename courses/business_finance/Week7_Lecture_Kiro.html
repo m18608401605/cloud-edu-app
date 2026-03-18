@@ -124,6 +124,25 @@ window.addEventListener('scroll',function(){
     </div>
     <p>⚠️ 权重必须使用<strong>市场价值</strong>，而非账面价值。市场价值反映投资者当前对资产的定价，更能代表真实的资本成本。</p>
 
+    <!-- 可视化：WACC 决策树 -->
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:20px 0;">
+      <h4 style="color:var(--primary);margin-bottom:12px;">🌳 决策树：WACC 包含哪些要素？</h4>
+      <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+        <div style="background:#eef4ff;padding:12px 16px;border-radius:8px;flex:1;min-width:200px;">
+          <div style="font-weight:700;color:#1e40af;margin-bottom:8px;">📊 权重</div>
+          <div style="font-size:.9rem;color:#334155;">• 债务权重：D/(D+E)</div>
+          <div style="font-size:.9rem;color:#334155;">• 权益权重：E/(D+E)</div>
+          <div style="font-size:.85rem;color:#64748b;margin-top:8px;">必须用市场价值！</div>
+        </div>
+        <div style="background:#fef3c7;padding:12px 16px;border-radius:8px;flex:1;min-width:200px;">
+          <div style="font-weight:700;color:#b45309;margin-bottom:8px;">💰 成本</div>
+          <div style="font-size:.9rem;color:#334155;">• 债务成本：YTM×(1-t)</div>
+          <div style="font-size:.9rem;color:#334155;">• 权益成本：CAPM</div>
+          <div style="font-size:.85rem;color:#64748b;margin-top:8px;">税后债务成本！</div>
+        </div>
+      </div>
+    </div>
+
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
       <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：WACC 就像"混合果汁的平均甜度"</h4>
       <p style="color:#444;font-size:.93rem;line-height:1.7;">想象你用 70% 的苹果汁（甜度 12%）和 30% 的柠檬汁（甜度 3%，但政府补贴了 25%，实际只有 2.25%）混合。混合后的平均甜度 = 0.7×12% + 0.3×2.25% = 9.075%。这就是 WACC——企业所有资金来源的"加权平均价格"，也是新项目必须超越的最低回报门槛。</p>
@@ -175,6 +194,19 @@ window.addEventListener('scroll',function(){
       <tr><td>银行贷款</td><td>贷款利率</td><td>直接使用合同利率</td></tr>
       <tr><td>新发债券</td><td>当前市场利率</td><td>用类似评级债券的 YTM</td></tr>
     </table>
+
+    <!-- 可视化：Tax Shield 流程图 -->
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:20px 0;">
+      <h4 style="color:var(--primary);margin-bottom:12px;">🔄 流程图：税盾如何运作？</h4>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:.9rem;">
+        <div style="background:#fee2e2;padding:10px 16px;border-radius:6px;">📝 利息支出 £8</div>
+        <div style="color:#64748b;">→</div>
+        <div style="background:#fef3c7;padding:10px 16px;border-radius:6px;">💰 少交税 £2</div>
+        <div style="color:#64748b;">→</div>
+        <div style="background:#dcfce7;padding:10px 16px;border-radius:6px;">✅ 实际成本 £6</div>
+      </div>
+      <p style="text-align:center;margin-top:12px;font-size:.85rem;color:#64748b;">税后成本 = £8 × (1 - 25%) = £6</p>
+    </div>
 
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
       <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：税盾就像"政府帮你还利息"</h4>
