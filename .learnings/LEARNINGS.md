@@ -85,6 +85,33 @@ Week X | Lecture | [课程名称]
 - 术语全英文：NPV, IRR, WACC, GDP, Elasticity 等
 - 避免中英混杂：不要写"净现值 NPV"，直接写"NPV"
 
+**导航系统（强制）：**
+- **桌面端侧边栏**：
+  - 位置：固定在屏幕左侧（position: fixed; left: 20px; top: 120px）
+  - 宽度：220px
+  - 始终可见，不随页面滚动
+  - 详细层级结构：
+    ```html
+    <div class="toc-sidebar">
+      <h4>📑 目录</h4>
+      <a href="#part1">📊 Part 1: [主标题]</a>
+      <a href="#part1" style="padding-left:1.5rem;font-size:.8rem">1.1 [子标题]</a>
+      <a href="#part1" style="padding-left:1.5rem;font-size:.8rem">1.2 [子标题]</a>
+      <a href="#part2">🔗 Part 2: [主标题]</a>
+      ...
+    </div>
+    ```
+- **移动端导航**：
+  - 位置：顶部可折叠（position: sticky; top: 60px）
+  - 点击展开/收起
+  - 内容与桌面端一致
+- **返回顶部按钮**：
+  - 位置：固定在右下角（position: fixed; right: 30px; bottom: 30px）
+  - 滚动超过 300px 后显示
+- **响应式布局**：
+  - 桌面端（>1200px）：main 左边距 260px，为侧边栏留空间
+  - 移动端（≤1200px）：隐藏侧边栏，显示顶部可折叠导航
+
 ### Step 3: 制作 Quiz（测验）
 **Section A: Multiple Choice（10 题）**
 - 全英文（题目、选项、解析）
@@ -176,6 +203,10 @@ Week X | Lecture | [课程名称]
 - [ ] 折叠块 `<details>` 正常工作
 - [ ] 响应式设计（手机端可用）
 - [ ] HTML 结构清晰（无重复嵌套）
+- [ ] **左侧固定导航完整（桌面端 position: fixed）**
+- [ ] **导航包含详细层级（Part + 子标题 1.1, 1.2）**
+- [ ] **移动端可折叠导航正常工作**
+- [ ] **返回顶部按钮正常显示**
 
 ### 排版风格（流畅阅读）
 - [ ] 背景色：浅灰色（#f5f7fa）
