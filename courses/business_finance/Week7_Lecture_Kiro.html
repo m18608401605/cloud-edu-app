@@ -282,6 +282,94 @@ window.addEventListener('scroll',function(){
     <p style="margin-top:16px;color:#666;font-size:.88rem;">💡 这意味着 Apple 的任何新投资项目，回报率必须超过 9.88% 才能为股东创造价值。</p>
   </div>
 
+  <!-- Answer Templates -->
+  <div class="section" id="answer-templates">
+    <h2>📝 Standard Answer Templates — WACC Questions</h2>
+
+    <div class="case">
+      <h4>📝 Template 1: Calculate Cost of Equity (CAPM)</h4>
+      <p><strong>Formula:</strong> K<sub>e</sub> = R<sub>f</sub> + β(R<sub>m</sub> - R<sub>f</sub>)</p>
+      <p><strong>Step 1:</strong> Identify R<sub>f</sub> (risk-free rate) from question</p>
+      <p><strong>Step 2:</strong> Identify β (beta) from question</p>
+      <p><strong>Step 3:</strong> Calculate market risk premium (R<sub>m</sub> - R<sub>f</sub>)</p>
+      <p><strong>Step 4:</strong> Apply formula: K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> - R<sub>f</sub>)</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 2: Calculate Cost of Equity (Gordon Model)</h4>
+      <p><strong>Formula:</strong> K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</p>
+      <p><strong>Step 1:</strong> Calculate D<sub>1</sub> = D<sub>0</sub> × (1 + g)</p>
+      <p><strong>Step 2:</strong> Calculate D<sub>1</sub>/P<sub>0</sub></p>
+      <p><strong>Step 3:</strong> Add growth rate g</p>
+      <p><strong>Note:</strong> Remember to use D<sub>1</sub> (expected), not D<sub>0</sub> (historical)!</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 3: Calculate WACC</h4>
+      <p><strong>Formula:</strong> WACC = [E/(D+E)] × K<sub>e</sub> + [D/(D+E)] × K<sub>d</sub> × (1-t)</p>
+      <p><strong>Step 1:</strong> Calculate market value weights: E/(D+E) and D/(D+E)</p>
+      <p><strong>Step 2:</strong> Calculate after-tax cost of debt: K<sub>d</sub> × (1-t)</p>
+      <p><strong>Step 3:</strong> Apply WACC formula</p>
+      <p><strong>Key Point:</strong> Use market values, not book values!</p>
+    </div>
+  </div>
+
+  <!-- Concept Relationship Map -->
+  <div class="section" id="concept-map">
+    <h2>🗺️ Ch.10 Cost of Capital — Concept Map</h2>
+    <p style="margin-bottom:16px;color:#666;">This diagram shows the relationship between all key concepts in Chapter 10.</p>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:24px;margin:16px 0;text-align:center;">
+      <svg viewBox="0 0 800 400" style="width:100%;max-width:700px;height:auto">
+        <!-- Central node: WACC -->
+        <rect x="300" y="150" width="200" height="60" rx="8" fill="#1a3a5c" stroke="#1a3a5c" stroke-width="2"/>
+        <text x="400" y="185" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">WACC</text>
+        <text x="400" y="202" text-anchor="middle" fill="#fff" font-size="12">加权平均资本成本</text>
+
+        <!-- Cost of Equity -->
+        <rect x="50" y="50" width="150" height="50" rx="6" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+        <text x="125" y="80" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Cost of Equity (Ke)</text>
+
+        <!-- Cost of Debt -->
+        <rect x="600" y="50" width="150" height="50" rx="6" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+        <text x="675" y="80" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Cost of Debt (Kd)</text>
+
+        <!-- CAPM -->
+        <rect x="30" y="180" width="120" height="40" rx="4" fill="#82e0aa" stroke="#27ae60" stroke-width="1"/>
+        <text x="90" y="205" text-anchor="middle" fill="#1e8449" font-size="11">CAPM</text>
+
+        <!-- Gordon Model -->
+        <rect x="30" y="240" width="120" height="40" rx="4" fill="#82e0aa" stroke="#27ae60" stroke-width="1"/>
+        <text x="90" y="265" text-anchor="middle" fill="#1e8449" font-size="11">Gordon Model</text>
+
+        <!-- Tax Shield -->
+        <rect x="620" y="180" width="120" height="40" rx="4" fill="#f5b7b1" stroke="#e74c3c" stroke-width="1"/>
+        <text x="680" y="205" text-anchor="middle" fill="#c0392b" font-size="11">Tax Shield (1-t)</text>
+
+        <!-- Market Values -->
+        <rect x="620" y="240" width="120" height="40" rx="4" fill="#f5b7b1" stroke="#e74c3c" stroke-width="1"/>
+        <text x="680" y="265" text-anchor="middle" fill="#c0392b" font-size="11">Market Values</text>
+
+        <!-- Weights -->
+        <rect x="300" y="320" width="200" height="40" rx="4" fill="#f39c12" stroke="#d68910" stroke-width="1"/>
+        <text x="400" y="345" text-anchor="middle" fill="#fff" font-size="12">Weights: E/(D+E), D/(D+E)</text>
+
+        <!-- Arrows -->
+        <line x1="125" y1="100" x2="300" y2="150" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="675" y1="100" x2="500" y2="150" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="90" y1="220" x2="90" y2="150" stroke="#27ae60" stroke-width="1"/>
+        <line x1="90" y1="280" x2="90" y2="150" stroke="#27ae60" stroke-width="1"/>
+        <line x1="680" y1="220" x2="680" y2="150" stroke="#e74c3c" stroke-width="1"/>
+        <line x1="680" y1="280" x2="680" y2="150" stroke="#e74c3c" stroke-width="1"/>
+        <line x1="400" y1="210" x2="400" y2="320" stroke="#f39c12" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Definitions -->
+        <rect x="30" y="350" width="740" height="30" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+        <text x="400" y="370" text-anchor="middle" fill="#7f8c8d" font-size="10">WACC = [E/(D+E)]×Ke + [D/(D+E)]×Kd×(1-t) | Ke = Rf + β(Rm-Rf) | Kd(after-tax) = YTM × (1-t)</text>
+      </svg>
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
