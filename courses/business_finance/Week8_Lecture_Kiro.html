@@ -106,7 +106,9 @@
   <div class="mobile-toc-content">
     <a href="#part1">📊 Dividend Policy</a>
     <a href="#part2">💰 Dividend Theories</a>
-    <a href="#part3">📈 Practical Factors</a>
+    <a href="#part3">📈 Traditional View</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+  <a href="#concept-map">🗺️ Concept Map</a>
   </div>
 </div>
 <div class="hero">
@@ -119,7 +121,9 @@
   <h4>📑 目录</h4>
   <a href="#part1">📊 Dividend Policy</a>
   <a href="#part2">💰 Dividend Theories</a>
-  <a href="#part3">📈 Practical Factors</a>
+  <a href="#part3">📈 Traditional View</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+  <a href="#concept-map">🗺️ Concept Map</a>
 </div>
 <div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 <script>
@@ -157,6 +161,27 @@ window.addEventListener('scroll',function(){
     <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
       <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：MM无税 = 换容器不改变水量</h4>
       <p style="color:#444;font-size:.93rem;line-height:1.7;">你有一桶水（企业价值），可以用一个大桶装（纯股权），也可以用一个大桶+几个小瓶装（股权+债务）。不管怎么分装，水的总量不变。MM无税说的就是：<strong>分装方式（资本结构）不影响水的总量（企业价值）</strong>。增加债务只是把一部分"水"从股东的桶转移到债权人的瓶，总量不变，WACC也不变。</p>
+    </div>
+
+    <!-- 可视化：MM 定理对比 -->
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:20px 0;">
+      <h4 style="color:var(--primary);margin-bottom:12px;">📊 对比：MM 无税 vs MM 有税</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:#eef4ff;padding:16px;border-radius:8px;">
+          <div style="font-weight:700;color:#1e40af;margin-bottom:8px;">MM 无税定理</div>
+          <div style="font-size:.9rem;">📦 一桶水 = £500m</div>
+          <div style="font-size:.9rem;">🔄 怎么分装都不变</div>
+          <div style="font-size:.9rem;">➗ WACC 不变</div>
+          <div style="font-weight:700;color:#22c55e;margin-top:8px;">结论：资本结构无关</div>
+        </div>
+        <div style="background:#fef3c7;padding:16px;border-radius:8px;">
+          <div style="font-weight:700;color:#b45309;margin-bottom:8px;">MM 有税定理</div>
+          <div style="font-size:.9rem;">📦 一桶水 + 政府送的水 = £560m</div>
+          <div style="font-size:.9rem;">💰 债务越多，税盾越大</div>
+          <div style="font-size:.9rem;">📉 WACC 下降</div>
+          <div style="font-weight:700;color:#22c55e;margin-top:8px;">结论：100% 债务最优</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -279,6 +304,77 @@ window.addEventListener('scroll',function(){
     <div class="case">
       <h4>💡 理论解读</h4>
       <p>Tesla 的选择符合传统观点：高成长、高不确定性的公司，财务困境成本极高（失去客户信任、供应链断裂），因此最优资本结构偏向低债务。这与 MM 有税定理的"债务越多越好"形成对比——现实中财务困境成本不可忽视。</p>
+    </div>
+  </div>
+
+  <!-- Answer Templates -->
+  <div class="section" id="answer-templates">
+    <h2>📝 Standard Answer Templates — Capital Structure</h2>
+
+    <div class="case">
+      <h4>📝 Template 1: MM 定理对比</h4>
+      <p><strong>Step 1:</strong> 判断是否有税</p>
+      <p><strong>Step 2:</strong> 选择对应公式</p>
+      <p>• MM 无税：V<sub>L</sub> = V<sub>U</sub>，WACC 不变</p>
+      <p>• MM 有税：V<sub>L</sub> = V<sub>U</sub> + tD，WACC 下降</p>
+      <p><strong>Step 3:</strong> 分析结论的经济含义</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 2: 计算最优资本结构</h4>
+      <p><strong>Step 1:</strong> 识别边际税盾收益（每增加 £1 债务带来的 £t 税盾）</p>
+      <p><strong>Step 2:</strong> 识别边际财务困境成本（债务增加带来的额外风险成本）</p>
+      <p><strong>Step 3:</strong> 当 税盾收益 = 财务困境成本时，找到最优杠杆率</p>
+      <p><strong>Key Point:</strong> 传统观点承认存在最优资本结构，与 MM 理论形成对比。</p>
+    </div>
+  </div>
+
+  <!-- Concept Map -->
+  <div class="section" id="concept-map">
+    <h2>🗺️ Ch.11 Capital Structure — Concept Map</h2>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;text-align:center;">
+      <svg viewBox="0 0 700 350" style="width:100%;max-width:650px;height:auto">
+        <!-- Central -->
+        <rect x="250" y="130" width="200" height="50" rx="6" fill="#1a3a5c"/>
+        <text x="350" y="160" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Capital Structure</text>
+
+        <!-- MM No Tax -->
+        <rect x="30" y="30" width="140" height="40" rx="4" fill="#27ae60"/>
+        <text x="100" y="55" text-anchor="middle" fill="#fff" font-size="11">MM No Tax</text>
+
+        <!-- MM With Tax -->
+        <rect x="30" y="90" width="140" height="40" rx="4" fill="#27ae60"/>
+        <text x="100" y="115" text-anchor="middle" fill="#fff" font-size="11">MM With Tax</text>
+
+        <!-- Traditional -->
+        <rect x="530" y="30" width="140" height="40" rx="4" fill="#e8a020"/>
+        <text x="600" y="55" text-anchor="middle" fill="#fff" font-size="11">Traditional View</text>
+
+        <!-- Trade-off -->
+        <rect x="530" y="90" width="140" height="40" rx="4" fill="#e8a020"/>
+        <text x="600" y="115" text-anchor="middle" fill="#fff" font-size="11">Trade-off Theory</text>
+
+        <!-- Key Concepts -->
+        <rect x="30" y="220" width="140" height="40" rx="4" fill="#82e0aa"/>
+        <text x="100" y="245" text-anchor="middle" fill="#166534" font-size="10">VL = VU</text>
+
+        <rect x="30" y="280" width="140" height="40" rx="4" fill="#82e0aa"/>
+        <text x="100" y="305" text-anchor="middle" fill="#166534" font-size="10">VL = VU + tD</text>
+
+        <rect x="530" y="220" width="140" height="40" rx="4" fill="#fcd34d"/>
+        <text x="600" y="245" text-anchor="middle" fill="#92400e" font-size="10">Optimal D/E</text>
+
+        <!-- Arrows -->
+        <line x1="100" y1="70" x2="350" y2="130" stroke="#27ae60" stroke-width="2"/>
+        <line x1="100" y1="130" x2="350" y2="130" stroke="#27ae60" stroke-width="2"/>
+        <line x1="600" y1="70" x2="350" y2="130" stroke="#e8a020" stroke-width="2"/>
+        <line x1="600" y1="130" x2="350" y2="130" stroke="#e8a020" stroke-width="2"/>
+
+        <line x1="100" y1="260" x2="350" y2="180" stroke="#82e0aa" stroke-width="1"/>
+        <line x1="100" y1="320" x2="350" y2="180" stroke="#82e0aa" stroke-width="1"/>
+        <line x1="600" y1="260" x2="350" y2="180" stroke="#fcd34d" stroke-width="1"/>
+      </svg>
     </div>
   </div>
 
