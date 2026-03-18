@@ -240,3 +240,42 @@ git commit -m "style: Convert Week 3 Lecture to fluid reading layout"
 - 使用版本控制，定期 commit，方便回滚
 
 ---
+
+---
+
+### 错误 #11: Week 5&6 导航 CSS 缺失
+**日期：** 2026-03-18  
+**文件：** Week5_Lecture_Kiro.html, Week6_Lecture_Kiro.html  
+**问题：** 缺少 `.toc-sidebar` 和 `.mobile-toc` 的 CSS，导致左侧导航不固定
+
+**解决方案：** 添加完整的导航 CSS：
+```css
+.toc-sidebar{position:fixed;left:20px;top:120px;...}
+.mobile-toc{display:none;position:sticky;top:60px;...}
+```
+
+---
+
+### 错误 #12: 导航内容不完整
+**日期：** 2026-03-18  
+**文件：** Week4_Lecture_Kiro.html, Week5_Lecture_Kiro.html  
+**问题：** 导航只有 4-7 项，缺少详细层级（子标题 1.1, 1.2）
+
+**解决方案：** 添加详细层级结构：
+```html
+<a href="#part1">📊 Part 1: Expected Return</a>
+<a href="#part1" style="padding-left:1.5rem;font-size:.8rem">1.1 Expected Return</a>
+```
+
+---
+
+### 错误 #13: SVG 图示无法翻译
+**日期：** 2026-03-18  
+**文件：** Week4_Lecture_Kiro.html  
+**问题：** SVG 图片中的文字无法被浏览器翻译
+
+**解决方案：** 在 h2 标题中添加中英文双语：
+```html
+<h2>🗺️ Ch.6 Risk Analysis Framework 风险分析框架</h2>
+```
+
