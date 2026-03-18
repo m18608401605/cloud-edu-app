@@ -1,13 +1,575 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>kids-points-system</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="云端学堂">
+    <title>云端学堂 (商业纯净版)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <style>
+        :root {
+            --sidebar-bg: #1e2532; --sidebar-hover: #2a3441; --sidebar-active: #6366f1;
+            --bg-color: #f8fafc; --text-main: #1e293b; --text-light: #64748b;
+            --border-color: #e2e8f0; --accent-green: #10b981; --accent-purple: #6366f1;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg-color); color: var(--text-main); display: flex; height: 100vh; overflow: hidden; }
+
+        /* --- 侧边栏 --- */
+        #sidebar { width: 260px; background: var(--sidebar-bg); color: white; display: flex; flex-direction: column; transition: 0.3s; z-index: 50; }
+        .logo-area { padding: 20px; font-size: 16px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 5px; }
+        .sync-badge { font-size: 11px; padding: 4px 8px; border-radius: 12px; background: #ef4444; color: white; display: inline-block; width: fit-content; margin-top: 5px;}
+        .course-list { flex-grow: 1; overflow-y: auto; padding: 15px 10px; }
+        .course-item { padding: 12px 15px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; transition: 0.2s; color: #cbd5e1; font-size: 14px; }
+        .course-item:hover { background: var(--sidebar-hover); color: white; }
+        .course-item.active { background: var(--sidebar-active); color: white; font-weight: 600; }
+        .user-info-area { padding: 15px; border-top: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+
+        /* --- 主内容区 --- */
+        .mobile-header { display: none; background: var(--sidebar-bg); color: white; padding: 15px; justify-content: space-between; align-items: center; }
+        .menu-toggle { background: none; border: none; color: white; font-size: 20px; cursor: pointer; }
+
+        main { flex-grow: 1; overflow-y: auto; padding: 40px; position: relative; }
+        .course-title-pill { background: var(--sidebar-bg); color: white; padding: 10px 24px; border-radius: 30px; font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 40px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        .tree-container { display: flex; flex-direction: column; gap: 40px; position: relative; }
+        .tree-container::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 1px; background: #cbd5e1; z-index: 0; }
+
+        .week-row { display: flex; align-items: flex-start; position: relative; z-index: 1; }
+        .week-box { background: white; border: 1.5px solid var(--accent-purple); padding: 12px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; min-width: 200px; text-align: center; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .week-box::after { content: ''; position: absolute; right: -30px; top: 50%; width: 30px; height: 1px; background: #cbd5e1; }
+        
+        .modules-col { margin-left: 30px; display: flex; flex-direction: column; gap: 12px; position: relative; padding-top: 5px; }
+        .modules-col::before { content: ''; position: absolute; left: -1px; top: 20px; bottom: 20px; width: 1px; background: #cbd5e1; }
+
+        .module-card { background: white; border-radius: 6px; padding: 12px 16px; font-size: 14px; border-left: 3px solid var(--accent-green); box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; min-width: 350px; position: relative; transition: 0.2s; cursor: pointer; color: var(--text-main); }
+        .module-card:hover { transform: translateX(3px); box-shadow: 0 4px 6px rgba(0,0,0,0.08); }
+        .module-card::before { content: ''; position: absolute; left: -15px; top: 50%; width: 12px; height: 1px; background: #cbd5e1; }
+        .module-card.locked { border-left-color: #94a3b8; opacity: 0.7; }
+        .module-card .mod-title { display: flex; align-items: center; gap: 8px; }
+
+        /* --- 响应式 --- */
+        @media (max-width: 768px) {
+            body { flex-direction: column; }
+            #sidebar { position: fixed; left: -260px; height: 100vh; }
+            #sidebar.open { left: 0; }
+            .mobile-header { display: flex; }
+            main { padding: 20px; }
+            .week-row { flex-direction: column; gap: 20px; }
+            .week-box, .modules-col, .module-card { min-width: 100%; }
+            .week-box::after, .modules-col::before, .module-card::before { display: none; }
+            .modules-col { margin-left: 10px; }
+            .admin-panel { width: 100%; }
+        }
+
+        .btn { padding: 8px 14px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 500; transition: 0.2s; }
+        .btn-primary { background: var(--accent-purple); color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-ghost { background: transparent; color: inherit; border: 1px solid rgba(0,0,0,0.1); }
+        .btn-success { background: var(--accent-green); color: white; }
+        
+        /* 这里的 admin-only 是用于隐藏小按钮的 */
+        .admin-only { display: none !important; }
+        body.is-admin .admin-only { display: flex !important; }
+        
+        /* 这里的 admin-only-block 是专门用于隐藏侧边栏“后台”大按钮的 */
+        .admin-only-block { display: none !important; }
+        body.is-admin .admin-only-block { display: block !important; }
+
+        .sort-tool { display: flex; gap: 4px; align-items: center; }
+        .sort-tool button { background: #f1f5f9; border: none; border-radius: 4px; padding: 4px; cursor: pointer; color: #64748b; }
+        
+        /* 弹窗与面板 */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15,23,42,0.6); display: none; justify-content: center; align-items: center; z-index: 200; backdrop-filter: blur(2px); }
+        .modal-box { background: white; padding: 30px; border-radius: 12px; width: 320px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); max-height: 80vh; overflow-y: auto; }
+        .modal-box.large { width: 600px; }
+        .modal-box h2 { margin-bottom: 20px; font-size: 18px; text-align: center; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+        
+        .admin-panel { position: fixed; top: 0; right: 0; width: 400px; height: 100vh; background: white; box-shadow: -5px 0 25px rgba(0,0,0,0.1); padding: 30px; transform: translateX(100%); transition: 0.3s; z-index: 100; overflow-y: auto; }
+        .admin-panel.open { transform: translateX(0); }
+        .form-group { margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .form-group h3 { margin-bottom: 15px; font-size: 15px; color: var(--accent-purple); }
+        label { display: block; margin-bottom: 5px; font-size: 12px; color: #64748b; }
+        
+        .user-list-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+        .user-list-table th, .user-list-table td { border: 1px solid #e2e8f0; padding: 6px; text-align: left; }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-header">
+        <div style="font-weight: bold;">CloudEdu Hub</div>
+        <button class="menu-toggle" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+    </div>
+
+    <nav id="sidebar">
+        <div class="logo-area">
+            <span><i class="fas fa-cloud"></i> CloudEdu Hub</span>
+            <span id="syncStatus" class="sync-badge">🔴 正在连接云端...</span>
+        </div>
+        <div class="course-list" id="courseList"></div>
+        <div class="user-info-area">
+            <div style="margin-bottom: 10px;">当前账号: <span id="currentUserLabel" style="color:var(--accent-green);font-weight:bold;">未登录</span></div>
+            <button class="btn btn-ghost" style="width:100%; margin-bottom:8px; color:white; border-color:rgba(255,255,255,0.2);" onclick="showLogin()"><i class="fas fa-sign-in-alt"></i> 登录 / 切换账号</button>
+            <button class="btn btn-primary admin-only-block" style="width:100%;" onclick="toggleAdminPanel()"><i class="fas fa-cog"></i> 班主任管理后台</button>
+        </div>
+    </nav>
+
+    <main><div id="mainCanvas"></div></main>
+
+    <div class="admin-panel" id="adminPanel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h2>系统管理中心</h2>
+            <button onclick="toggleAdminPanel()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        </div>
+
+        <div class="form-group">
+            <h3><i class="fas fa-users"></i> 用户与授权管理</h3>
+            <button class="btn btn-primary" style="width:100%; margin-bottom:10px;" onclick="showUserManage()">管理账号 & 分配课程</button>
+        </div>
+
+        <div class="form-group">
+            <h3><i class="fas fa-book"></i> 课程管理</h3>
+            <input type="text" id="courseNameInput" placeholder="输入课程名称">
+            <div style="display:flex; gap:10px;">
+                <button class="btn btn-primary" style="flex:1;" onclick="addCourse()">新建课程</button>
+                <button class="btn btn-danger" onclick="deleteCurrentCourse()">删除当前课</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h3><i class="fas fa-file-alt"></i> 课件节点编辑</h3>
+            <label>所属课程</label> <select id="parentCourseSelect"></select>
+            <label>周次标题</label> <input type="text" id="weekInput" placeholder="例如: 第一周：商业金融导论...">
+            <label>课件名称</label> <input type="text" id="moduleNameInput" placeholder="例如: 模块一：财务经理的角色...">
+            <label>文件链接/路径</label> <input type="text" id="fileNameInput" placeholder="例如: courses/week1.html">
+            <label>观看权限</label> 
+            <select id="accessSelect">
+                <option value="free">基础可见 (Free)</option>
+                <option value="pro">仅付费/授权可见 (Pro)</option>
+            </select>
+            <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="saveModule()">发布 / 更新</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-box">
+            <h2>系统登录</h2>
+            <input type="text" id="loginId" placeholder="账号">
+            <input type="password" id="loginPwd" placeholder="密码">
+            <button class="btn btn-primary" style="width:100%; margin-top:10px;" onclick="doLogin()">登录</button>
+            <button class="btn btn-ghost" style="width:100%; margin-top:10px;" onclick="closeModal('loginModal')">取消</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="userManageModal">
+        <div class="modal-box large">
+            <h2>账号管理与课程授权</h2>
+            
+            <div style="background:#f1f5f9; padding:15px; border-radius:8px; margin-bottom:20px;">
+                <h3 style="font-size:14px; margin-bottom:10px;">添加/修改用户</h3>
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <input type="text" id="newUserId" placeholder="账号" style="margin:0;">
+                    <input type="text" id="newUserPwd" placeholder="密码" style="margin:0;">
+                    <select id="newUserRole" style="margin:0; width:auto;"><option value="student">学生</option><option value="admin">管理员</option></select>
+                </div>
+                <label style="font-weight:bold; color:var(--accent-purple);">授权课程 (勾选该生可看的课):</label>
+                <div id="courseAuthList" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-top:5px;"></div>
+                <button class="btn btn-primary" style="width:100%; margin-top:15px;" onclick="addUser()">保存用户设置</button>
+            </div>
+
+            <h3 style="font-size:14px; margin-bottom:10px;">现有用户列表</h3>
+            <div style="max-height:200px; overflow-y:auto;">
+                <table class="user-list-table" id="userTable"></table>
+            </div>
+            <button class="btn btn-ghost" style="width:100%; margin-top:15px;" onclick="closeModal('userManageModal')">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // Firebase 配置 (请勿修改)
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyAhRTe7KJmfod675diYOWc6ObjWQcxyAk0",
+            authDomain: "rdxu-edu.firebaseapp.com",
+            databaseURL: "https://rdxu-edu-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "rdxu-edu",
+            storageBucket: "rdxu-edu.firebasestorage.app",
+            messagingSenderId: "127517848907",
+            appId: "1:127517848907:web:cc84165d58e59693d224ce"
+        };
+
+        const DEFAULT_STATE = {
+            users: [
+                { id: 'admin1', pwd: '123', role: 'admin', pro: true, permissions: ['business_finance'] },
+                { id: 'hanhan', pwd: '123', role: 'student', pro: true, permissions: ['business_finance'] }
+            ],
+            courses: [{id: 'business_finance', name: 'Business Finance'}],
+            data: {
+                'business_finance': {
+                    '第一周：商业金融导论': [
+                        { name: '第一周课程导学', file: 'courses/business_finance/Week1_Study_Guide.html', type: 'free' }
+                    ]
+                }
+            },
+            currentCourseId: 'business_finance'
+        };
+
+        let state = DEFAULT_STATE;
+        let currentUser = null; 
+        let editingContext = null;
+        let dbRef = null;
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+        dbRef = db.ref('cloudEduSystemData'); 
+
+        // 监听云端数据 + 互踢安全锁
+        dbRef.on('value', (snapshot) => {
+            const cloudData = snapshot.val();
+            if (cloudData) {
+                state = cloudData; 
+                // 数据结构清洗
+                if (!state.users) state.users = [];
+                else if (!Array.isArray(state.users)) state.users = Object.values(state.users);
+                if (!state.courses) state.courses = [];
+                else if (!Array.isArray(state.courses)) state.courses = Object.values(state.courses);
+                if (!state.data) state.data = {};
+                
+                Object.keys(state.data).forEach(cid => {
+                    Object.keys(state.data[cid]).forEach(week => {
+                        if (week !== "hidden_init" && !Array.isArray(state.data[cid][week])) {
+                            state.data[cid][week] = Object.values(state.data[cid][week]);
+                        }
+                    });
+                });
+
+                // --- 商业级安全互踢检查 ---
+                if (currentUser) {
+                    const cloudUser = state.users.find(u => u.id === currentUser.id);
+                    // 如果云端令牌变了（说明有人在别处登录了），或者账号被删了
+                    if (!cloudUser || cloudUser.sessionToken !== currentUser.sessionToken) {
+                        alert("【安全警告】\n您的账号已在另一台设备登录！\n\n本设备已被强制下线。如非本人操作，请立即联系管理员。");
+                        doLogout();
+                        return; 
+                    }
+                }
+                // -----------------------
+
+            } else {
+                dbRef.set(DEFAULT_STATE);
+                state = DEFAULT_STATE;
+            }
+            document.getElementById('syncStatus').innerText = "☁️ 云端实时同步中";
+            document.getElementById('syncStatus').style.background = "#10b981"; 
+            renderAll(); 
+            
+            if(document.getElementById('userManageModal').style.display === 'flex') {
+                renderUserTable();
+                renderCourseAuthOptions();
+            }
+        });
+
+        function saveState() { if(dbRef) { dbRef.set(state); } }
+
+        function switchCourse(id) { state.currentCourseId = id; renderAll(); if(window.innerWidth <= 768) toggleSidebar(); }
+
+        // --- 核心：登录与互踢逻辑 ---
+        function showLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        
+        function doLogin() {
+            const id = document.getElementById('loginId').value;
+            const pwd = document.getElementById('loginPwd').value;
+            const userIndex = state.users.findIndex(u => u.id === id && u.pwd === pwd);
+            
+            if(userIndex >= 0) {
+                // 生成唯一安全令牌
+                const newToken = Date.now().toString() + Math.random().toString().substr(2, 5);
+                state.users[userIndex].sessionToken = newToken;
+                saveState(); // 推送云端，触发其他设备下线
+                
+                currentUser = state.users[userIndex];
+                
+                document.getElementById('currentUserLabel').innerText = `${currentUser.id}`;
+                // 修复：只有 role 是 admin 才给 body 加 is-admin 类，这控制了按钮的显示
+                if(currentUser.role === 'admin') {
+                    document.body.classList.add('is-admin');
+                } else {
+                    document.body.classList.remove('is-admin');
+                }
+                
+                closeModal('loginModal');
+                renderAll();
+            } else { 
+                alert("账号或密码错误"); 
+            }
+        }
+
+        function doLogout() {
+            currentUser = null;
+            document.getElementById('currentUserLabel').innerText = "未登录";
+            document.body.classList.remove('is-admin'); // 移除管理员权限
+            renderAll();
+        }
+
+        // --- 核心：用户与授权管理 ---
+        function showUserManage() { 
+            // 双重保险：JS 层面再次拦截非管理员
+            if(!currentUser || currentUser.role !== 'admin') return alert("无权访问");
+            renderUserTable(); 
+            renderCourseAuthOptions();
+            document.getElementById('userManageModal').style.display = 'flex'; 
+        }
+
+        function renderCourseAuthOptions() {
+            const container = document.getElementById('courseAuthList');
+            container.innerHTML = state.courses.map(c => `
+                <label style="display:flex; align-items:center; background:white; padding:8px; border-radius:4px; border:1px solid #e2e8f0; font-weight:normal;">
+                    <input type="checkbox" class="course-auth-check" value="${c.id}" style="width:auto; margin-right:8px; margin-bottom:0;"> 
+                    ${c.name}
+                </label>
+            `).join('');
+        }
+
+        function addUser() {
+            const id = document.getElementById('newUserId').value;
+            const pwd = document.getElementById('newUserPwd').value;
+            const role = document.getElementById('newUserRole').value;
+            
+            const checks = document.querySelectorAll('.course-auth-check:checked');
+            const permissions = Array.from(checks).map(c => c.value);
+
+            if(!id || !pwd) return alert("请填写完整");
+            
+            const existingIdx = state.users.findIndex(u => u.id === id);
+            
+            const newUser = {
+                id, pwd, role, 
+                pro: role === 'admin' || permissions.length > 0, 
+                permissions: permissions,
+                sessionToken: existingIdx >= 0 ? state.users[existingIdx].sessionToken : '' 
+            };
+
+            if(existingIdx >= 0) {
+                if(!confirm(`账号 ${id} 已存在，要覆盖吗？`)) return;
+                state.users[existingIdx] = newUser;
+            } else {
+                state.users.push(newUser);
+            }
+
+            saveState(); 
+            document.getElementById('newUserId').value = '';
+            document.getElementById('newUserPwd').value = '';
+            renderUserTable();
+            renderCourseAuthOptions(); 
+            alert("保存成功！");
+        }
+
+        function deleteUser(idx) { 
+            if(confirm("确定删除？")) {
+                state.users.splice(idx,1); 
+                saveState(); 
+                renderUserTable(); 
+            }
+        }
+
+        function renderUserTable() {
+            const tbody = state.users.map((u, i) => {
+                const permCount = u.permissions ? u.permissions.length : 0;
+                const permText = u.role === 'admin' ? '全部权限' : (permCount > 0 ? `已授权 ${permCount} 门` : '无');
+                
+                return `
+                <tr>
+                    <td>${u.id}</td>
+                    <td>${u.pwd}</td>
+                    <td>${u.role === 'admin' ? '管理员' : '学生'}</td>
+                    <td><span style="font-size:11px; background:#e0f2fe; color:#0284c7; padding:2px 6px; border-radius:4px;">${permText}</span></td>
+                    <td>
+                        <button onclick="fillUserEdit(${i})" class="btn btn-ghost" style="padding:2px 5px; font-size:10px;">编辑</button>
+                        <button onclick="deleteUser(${i})" class="btn btn-danger" style="padding:2px 5px; font-size:10px;">删</button>
+                    </td>
+                </tr>`;
+            }).join('');
+            document.getElementById('userTable').innerHTML = `<tr><th>账号</th><th>密码</th><th>角色</th><th>授权</th><th>操作</th></tr>${tbody}`;
+        }
+
+        function fillUserEdit(idx) {
+            const u = state.users[idx];
+            document.getElementById('newUserId').value = u.id;
+            document.getElementById('newUserPwd').value = u.pwd;
+            document.getElementById('newUserRole').value = u.role;
+            
+            const checks = document.querySelectorAll('.course-auth-check');
+            checks.forEach(chk => {
+                chk.checked = u.permissions && u.permissions.includes(chk.value);
+            });
+        }
+
+        // --- 核心：权限判断逻辑 ---
+        function checkAccess(user, courseId, modType) {
+            if (modType === 'free') return true; 
+            if (!user) return false; 
+            if (user.role === 'admin') return true; 
+            
+            if (user.permissions && user.permissions.includes(courseId)) {
+                return true;
+            }
+            return false;
+        }
+
+        // --- 渲染与交互 ---
+        function renderAll() {
+            renderNav(); 
+            renderMindMap();
+            if(currentUser?.role === 'admin') updateAdminSelects();
+        }
+
+        function renderNav() {
+            const list = document.getElementById('courseList');
+            if(!state.courses) state.courses = [];
+            list.innerHTML = state.courses.map((c, index) => `
+                <div class="course-item ${state.currentCourseId === c.id ? 'active' : ''}" onclick="switchCourse('${c.id}')">
+                    <span><i class="fas ${state.currentCourseId === c.id ? 'fa-folder-open' : 'fa-folder'}"></i> ${c.name}</span>
+                    <div class="sort-tool admin-only">
+                        <button onclick="moveCourse(${index}, -1); event.stopPropagation();"><i class="fas fa-caret-up"></i></button>
+                        <button onclick="moveCourse(${index}, 1); event.stopPropagation();"><i class="fas fa-caret-down"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderMindMap() {
+            const canvas = document.getElementById('mainCanvas');
+            const course = state.courses.find(c => c.id === state.currentCourseId);
+            if (!course) { canvas.innerHTML = "<h3 style='color:#64748b;'>请新建课程</h3>"; return; }
+
+            let html = `<div class="course-title-pill">${course.name}</div><div class="tree-container">`;
+            const courseData = state.data[course.id] || {};
+            
+            Object.keys(courseData).forEach((week, wIdx) => {
+                if (week === "hidden_init") return; 
+
+                html += `
+                    <div class="week-row">
+                        <div>
+                            <div class="week-box">
+                                ${week}
+                                <div class="admin-only" style="margin-top:8px; display:flex; justify-content:center; gap:8px;">
+                                    <button class="btn btn-ghost" style="padding:2px 6px" onclick="moveWeek('${course.id}', ${wIdx}, -1)"><i class="fas fa-arrow-up"></i></button>
+                                    <button class="btn btn-danger" style="padding:2px 6px" onclick="deleteWeek('${course.id}', '${week}')"><i class="fas fa-trash"></i></button>
+                                    <button class="btn btn-ghost" style="padding:2px 6px" onclick="moveWeek('${course.id}', ${wIdx}, 1)"><i class="fas fa-arrow-down"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modules-col">
+                `;
+                
+                courseData[week].forEach((mod, mIdx) => {
+                    const hasAccess = checkAccess(currentUser, course.id, mod.type);
+                    const isLocked = !hasAccess;
+                    const icon = isLocked ? 'fa-lock' : 'fa-file-alt';
+                    const color = isLocked ? '#94a3b8' : 'var(--accent-green)';
+
+                    let clickAction = isLocked ? "alert('您未购买或未授权该课程，请联系管理员。')" : `window.open('${mod.file}', '_blank')`;
+
+                    html += `
+                        <div class="module-card ${isLocked ? 'locked' : ''}" onclick="${clickAction}">
+                            <div class="mod-title">
+                                <i class="fas ${icon}" style="color:${color}"></i>
+                                <span>${mod.name}</span>
+                            </div>
+                            <div class="sort-tool admin-only" onclick="event.stopPropagation()">
+                                <button title="编辑" onclick="editMod('${course.id}', '${week}', ${mIdx})"><i class="fas fa-pen"></i></button>
+                                <button title="上移" onclick="moveMod('${course.id}', '${week}', ${mIdx}, -1)"><i class="fas fa-caret-up"></i></button>
+                                <button title="下移" onclick="moveMod('${course.id}', '${week}', ${mIdx}, 1)"><i class="fas fa-caret-down"></i></button>
+                                <button title="删除" onclick="deleteMod('${course.id}', '${week}', ${mIdx})" style="color:#ef4444"><i class="fas fa-times"></i></button>
+                            </div>
+                        </div>`;
+                });
+                html += `</div></div>`;
+            });
+            canvas.innerHTML = html + `</div>`;
+        }
+
+        // --- 管理逻辑 ---
+        function toggleAdminPanel() { 
+            // 安全加固：如果不是管理员，禁止打开面板
+            if(!currentUser || currentUser.role !== 'admin') return;
+            document.getElementById('adminPanel').classList.toggle('open'); 
+        }
+        function updateAdminSelects() { document.getElementById('parentCourseSelect').innerHTML = state.courses.map(c => `<option value="${c.id}">${c.name}</option>`).join(''); }
+
+        function addCourse() {
+            const name = document.getElementById('courseNameInput').value;
+            if (!name) return;
+            const id = 'c_' + Date.now(); 
+            state.courses.push({id, name});
+            if(!state.data[id]) state.data[id] = {};
+            state.data[id]["hidden_init"] = []; 
+            saveState(); 
+            document.getElementById('courseNameInput').value = '';
+        }
+
+        function deleteCurrentCourse() {
+            if(!confirm("确定删除整个课程？")) return;
+            state.courses = state.courses.filter(c => c.id !== state.currentCourseId);
+            delete state.data[state.currentCourseId];
+            state.currentCourseId = state.courses[0]?.id || null;
+            renderAll();
+            saveState(); 
+        }
+
+        function editMod(cid, week, idx) {
+            const mod = state.data[cid][week][idx];
+            editingContext = { cid, week, idx };
+            document.getElementById('parentCourseSelect').value = cid;
+            document.getElementById('weekInput').value = week;
+            document.getElementById('moduleNameInput').value = mod.name;
+            document.getElementById('fileNameInput').value = mod.file;
+            document.getElementById('accessSelect').value = mod.type;
+            if(!document.getElementById('adminPanel').classList.contains('open')) toggleAdminPanel();
+        }
+
+        function saveModule() {
+            const cid = document.getElementById('parentCourseSelect').value;
+            const week = document.getElementById('weekInput').value;
+            const mod = {
+                name: document.getElementById('moduleNameInput').value,
+                file: document.getElementById('fileNameInput').value,
+                type: document.getElementById('accessSelect').value
+            };
+            if(!week || !mod.name || !mod.file) return alert("请填写完整");
+
+            if(!state.data[cid]) state.data[cid] = {};
+            if(editingContext) state.data[editingContext.cid][editingContext.week].splice(editingContext.idx, 1);
+            if(!state.data[cid][week]) state.data[cid][week] = [];
+            state.data[cid][week].push(mod);
+            editingContext = null;
+            if(state.data[cid]["hidden_init"]) delete state.data[cid]["hidden_init"];
+            
+            saveState(); 
+            document.getElementById('moduleNameInput').value = '';
+            document.getElementById('fileNameInput').value = '';
+            alert("发布成功！");
+        }
+
+        function moveMod(cid, week, idx, dir) { const arr = state.data[cid][week]; if (arr[idx+dir]) { [arr[idx], arr[idx+dir]] = [arr[idx+dir], arr[idx]]; saveState(); } }
+        function moveCourse(idx, dir) { const arr = state.courses; if(arr[idx+dir]) { [arr[idx], arr[idx+dir]] = [arr[idx+dir], arr[idx]]; saveState(); } }
+        function moveWeek(cid, idx, dir) { const keys = Object.keys(state.data[cid]); if(keys[idx+dir]) { const newObj = {}; [keys[idx], keys[idx+dir]] = [keys[idx+dir], keys[idx]]; keys.forEach(k => newObj[k] = state.data[cid][k]); state.data[cid] = newObj; saveState(); } }
+        function deleteWeek(cid, week) { if(confirm("删除该周？")) { delete state.data[cid][week]; saveState(); } }
+        function deleteMod(cid, week, idx) { state.data[cid][week].splice(idx, 1); saveState(); }
+
+        setTimeout(showLogin, 500);
+    </script>
+</body>
 </html>

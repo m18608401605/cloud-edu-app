@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 2 - Module 2: External Finance: Equity vs. Debt</title>
+    <style>
+        :root {
+            --primary-color: #0b2447;
+            --secondary-color: #19376d;
+            --accent-color: #c84b31;
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Adaptive Title Font Size */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.6rem, 4vw, 2.6rem); 
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 45px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.2rem, 3vw, 1.7rem);
+        }
+
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-color);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-color); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* Top Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+        /* Language content toggling */
+       .lang-content { display: none; }
+       .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation Area */
+       .bottom-nav-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 1.5px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* Centered Back to Top Button */
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: #0b2447;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">Switch to Chinese (点击切换至全中文)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 2 - Module 2: The Double-Edged Sword of External Finance: Equity vs. Debt</h1>
+        
+        <p>Welcome to Module 2. When internal retained earnings are insufficient to fund a company's ambitious capital budgeting projects, the financial manager must turn to the external capital markets. The fundamental decision boils down to a critical trade-off: Should the firm sell ownership (Equity) or borrow money (Debt)? In this module, we will rigorously evaluate the mechanics, costs, and risks associated with the primary vehicles of external finance.</p>
+
+        <h2>1. Equity Finance: Ordinary and Preference Shares</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Equity Instruments</h3>
+            <p><strong>Ordinary Shares (Common Stock):</strong> This forms the backbone of a firm's financial structure, representing the ultimate risk capital. Ordinary shareholders are the true owners. They bear the highest risk because they have a <em>residual claim</em>—they receive dividends and liquidation proceeds only after all other obligations (debt and preference shares) are settled. In return, they possess voting rights that control the company's direction.</p>
+            <p><strong>Preference Shares (Preferred Stock):</strong> A hybrid form of equity offering a lower risk profile. Preference shareholders receive a fixed rate of dividend which must be paid before any ordinary dividends. They rank ahead of ordinary shareholders in the event of liquidation but generally do not possess voting rights. They can be <em>cumulative</em> (unpaid dividends accumulate and must be cleared in future years) or <em>non-cumulative</em>.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Why would a company choose to issue equity instead of debt? The primary advantage of equity is the absence of mandatory cash outflows. If a company fails to pay a dividend, it does not trigger bankruptcy. However, equity is significantly more expensive than debt because investors demand higher returns to compensate for the residual risk.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Tesla's Model 3 Liquidity Crunch</span><br>
+            Between 2017 and 2018, Tesla was burning through massive amounts of cash to ramp up the production of its Model 3. Investors were highly concerned about a potential liquidity crisis. If Tesla had relied entirely on bank loans (debt), the mandatory interest payments would have bankrupted the firm before the cars were even manufactured. Instead, Tesla frequently tapped into the primary market to issue new equity. By selling ordinary shares, they successfully transferred the immense risk to investors who were willing to accept zero short-term dividends in exchange for the prospect of massive future capital gains. This perfectly illustrates the power of equity: it provides a shock absorber during high-risk, cash-burning growth phases.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> A critical error students make is assuming that Preference Share dividends are tax-deductible, just like interest on debt. <strong>They are not.</strong> Dividends paid to preference shareholders come out of after-tax profits. This makes preference shares a highly unpopular form of long-term financing compared to debt.</p>
+            
+            <p><strong>Classic Exam MCQ:</strong><br>
+            <em>Which of the following statements regarding ordinary and preference shares is correct?</em><br>
+            A) Ordinary shareholders receive a fixed dividend regardless of profitability.<br>
+            B) Preference shareholders generally possess the voting power to elect the board of directors.<br>
+            C) In the event of liquidation, ordinary shareholders are paid before preference shareholders.<br>
+            D) Ordinary shares represent residual ownership and carry unlimited potential returns but higher risk.</p>
+            
+            <p><strong>Answer & Rationale:</strong> <strong>D</strong>. A is false (dividends fluctuate). B is false (preference shares usually lack voting rights). C is false (preference ranks above ordinary). D precisely defines the nature of ordinary equity.</p>
+        </div>
+
+        <h2>2. Debt Finance: Debentures, Bonds, and Covenants</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Debt Instruments and Safeguards</h3>
+            <p><strong>Loan Capital & Bonds:</strong> Unlike equity, debt represents a contractual obligation to pay regular interest and repay the principal amount at maturity. A <em>Debenture</em> is a long-term bond that is typically secured by a trust deed against the corporate assets.</p>
+            <p><strong>Security (Charges):</strong> Lenders mitigate their risk by securing the debt against assets. A <em>Fixed Charge</em> is tied to a specific asset (e.g., a factory), preventing the firm from selling it. A <em>Floating Charge</em> "hovers" over a shifting class of assets (e.g., inventory) and only crystallizes into a fixed charge if the firm defaults.</p>
+            <p><strong>Loan Covenants:</strong> Restrictive clauses written into the loan contract designed to protect the lenders. They limit the financial manager's freedom by setting maximum gearing ratios, restricting dividend payouts, or forbidding the issuance of further debt.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Debt is generally the cheapest source of external finance for two reasons: (1) It carries lower risk for the investor due to legal guarantees and asset security, and (2) The "Tax Shield"—interest payments are legally allowable expenses that reduce the company's taxable profit. However, excessive debt introduces fatal financial distress risks.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Bed Bath & Beyond's Debt Trap</span><br>
+            For years, the retail giant Bed Bath & Beyond utilized massive amounts of cash to repurchase its own equity. While this initially looked brilliant, the capital structure became severely imbalanced. As the retail market shifted and sales plummeted, the firm was still contractually obligated to service its debt and adhere to stringent loan covenants. The lack of financial flexibility (unlike equity, debt interest cannot be "skipped" when times are tough) directly pushed the firm into Chapter 11 bankruptcy in 2023. Debt is a powerful accelerator, but it removes a firm's margin for error.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> In essay questions evaluating financing options, <em>never</em> state that a company should "always use debt because it is cheaper." You must demonstrate an understanding of the trade-off theory: the tax benefits of debt must be weighed against the increasing probability of bankruptcy costs and the restrictive nature of loan covenants.</p>
+            
+            <p><strong>Classic Essay Question:</strong> <em>"Discuss the advantages and disadvantages for a company deciding to raise capital through the issue of debentures rather than ordinary shares." (15 Marks)</em></p>
+            
+            <p><strong>Distinction (A+) Answer Strategy:</strong> Structure your essay clearly. <strong>Advantages of Debt:</strong> Highlight the tax deductibility of interest (the tax shield), lower required rates of return compared to equity, and the fact that debt does not dilute the voting control of existing shareholders. <strong>Disadvantages:</strong> Focus heavily on the mandatory nature of cash outflows increasing bankruptcy risk (Gearing risk), and how strict Loan Covenants can paralyze management's operational flexibility during an economic downturn.</p>
+        </div>
+
+        <h2>3. Hybrid Instruments: Convertibles and Warrants</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Blurring the Lines</h3>
+            <p><strong>Convertible Loans:</strong> A financial derivative that gives the investor the right, but not the obligation, to convert their loan into ordinary shares at a specified price and future date. Until conversion, they receive regular interest.</p>
+            <p><strong>Warrants:</strong> Financial instruments usually attached to a bond issue as a "sweetener." They give the holder the right to purchase ordinary shares at a set price within a certain timeframe. Unlike convertibles, warrants can often be detached and traded separately from the underlying bond.</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Why would a CFO issue a convertible bond? Imagine you are managing a risky tech startup. Lenders are terrified to give you a straight loan unless you pay an extortionate 15% interest rate, which you cannot afford. By issuing a convertible loan, you offer the lenders a "hedge." You can negotiate a much lower interest rate (e.g., 5%), and in exchange, you grant them the right to become shareholders if your tech startup succeeds and the stock price explodes. It’s delayed equity financing that provides cheap debt today.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> Understand the timeline of cash flows. If an exam scenario asks how a warrant affects a firm's cash position when exercised: remember that when investors exercise a warrant, they must pay the pre-agreed strike price to the company. Thus, exercising warrants brings <em>new cash inflows</em> into the firm, whereas converting a convertible loan simply swaps existing debt for equity without generating new cash.</p>
+        </div>
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第二周 - 模块二：外部融资的双刃剑：股权与债务</h1>
+        
+        <p>欢迎来到模块二。当内部的留存收益不足以支撑公司宏大的资本预算项目时，财务经理必须转向外部资本市场。这个根本性的决策归结为一个关键的权衡：公司是应该出让所有权（发行股权），还是应该借钱（发行债务）？在本模块中，我们将严谨地评估外部融资主要工具的运作机制、成本与风险。</p>
+
+        <h2>1. 股权融资：普通股与优先股 (Ordinary and Preference Shares)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：股权工具</h3>
+            <p><strong>普通股 (Ordinary Shares / Common Stock):</strong> 这是企业财务结构的支柱，代表着终极的风险资本。普通股股东是企业真正的所有者。他们承担最高的风险，因为他们拥有的是<em>剩余索取权 (Residual claim)</em>——只有在所有其他义务（债务和优先股）都结清之后，他们才能获得股息和清算收益。作为回报，他们拥有控制公司发展方向的投票权。</p>
+            <p><strong>优先股 (Preference Shares / Preferred Stock):</strong> 一种风险较低的混合型股权。优先股股东享有固定比率的股息，且该股息必须在普通股股息之前支付。在破产清算时，他们的受偿顺序先于普通股，但他们通常没有投票权。优先股可分为<em>累积型 (Cumulative)</em>（未支付的股息会累积，必须在未来年份结清）或<em>非累积型</em>。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>公司为什么会选择发行股票而不是借债？股权最大的优势在于没有强制性的现金流出。如果公司今年没钱发股息，它并不会因此破产。然而，股权远比债务昂贵，因为投资者承担了剩余风险，必定要求更高的回报率作为补偿。</p>
+            
+            <p><span class="case-title">实战案例：特斯拉 (Tesla) Model 3 的流动性危机</span><br>
+            在 2017 年至 2018 年期间，为了提高 Model 3 的产能，特斯拉正在疯狂烧钱。当时投资者高度担忧其潜在的流动性危机。如果特斯拉完全依赖银行贷款（债务），强制性的利息支付甚至会在汽车造出来之前就让公司破产。相反，特斯拉频繁在初级市场发行新股（股权）。通过出售普通股，他们成功地将巨大的风险转移给了投资者，这些投资者愿意接受短期内的零股息，以换取未来巨额资本利得的前景。这完美地说明了股权的力量：在极其烧钱、高风险的增长阶段，股权是绝佳的“减震器”。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 学生常犯的一个致命错误是认为“优先股的股息和债务的利息一样，可以抵税”。<strong>绝对不可以！</strong> 支付给优先股股东的股息是从税后利润中扣除的。正是因为没有税盾效应，使得优先股在作为长期融资工具时，远不如债务受欢迎。</p>
+            
+            <p><strong>经典选择题 (MCQ)：</strong><br>
+            <em>关于普通股和优先股，以下哪项陈述是正确的？</em><br>
+            A) 无论盈利情况如何，普通股股东都会获得固定股息。<br>
+            B) 优先股股东通常拥有选举董事会的投票权。<br>
+            C) 在破产清算时，普通股股东先于优先股股东获得赔偿。<br>
+            D) 普通股代表剩余所有权，拥有无限的潜在回报，但也伴随着更高的风险。</p>
+            
+            <p><strong>答案与解析：</strong> <strong>D</strong>。A 是错的（普通股息会波动）。B 是错的（优先股通常无投票权）。C 是错的（优先股受偿顺序靠前）。D 准确定义了普通股的本质。</p>
+        </div>
+
+        <h2>2. 债务融资：公司债、债券与债务契约 (Debt Finance)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：债务工具与债权人保护</h3>
+            <p><strong>借贷资本与债券 (Loan Capital & Bonds):</strong> 与股权不同，债务代表了一种契约义务，公司必须定期支付利息，并在到期时偿还本金。<em>公司债 (Debenture)</em> 是一种长期债券，通常通过信托契约，以公司资产作为担保。</p>
+            <p><strong>担保/抵押 (Security/Charges):</strong> 贷款人通过要求资产抵押来降低风险。<em>固定抵押 (Fixed Charge)</em> 绑定在特定资产（如工厂）上，禁止公司将其出售。<em>浮动抵押 (Floating Charge)</em> 则“悬浮”在一类不断变动的资产（如存货）上，只有在公司违约时，才会固化为固定抵押。</p>
+            <p><strong>债务契约 (Loan Covenants):</strong> 写入贷款合同中的限制性条款，旨在保护贷款人。它们通过设定最大资产负债率、限制股息发放或禁止发行更多债务，来限制财务经理的自由。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>债务通常是最便宜的外部融资来源，原因有二：（1）由于有法律保障和资产抵押，投资者的风险较低；（2）“税盾效应 (Tax Shield)”——利息支付在法律上属于可扣除费用，能减少公司的应税利润。然而，过度的债务会引入致命的财务困境风险。</p>
+            
+            <p><span class="case-title">实战案例：3B家居 (Bed Bath & Beyond) 的债务陷阱</span><br>
+            多年来，零售巨头 3B家居 (BBBY) 动用大量现金回购自己的股票。虽然这在初期看起来很明智，但其资本结构变得严重失衡。随着零售市场的转变和销售额的暴跌，该公司依然受到合同约束，必须偿还债务利息并遵守严格的债务契约。这种财务灵活性的丧失（与股权不同，在困难时期，你不能“跳过”债务利息不付）直接将该公司推向了 2023 年的破产清算。债务是一个强大的加速器，但它剥夺了企业犯错的空间。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 在评估融资选项的论述题中，<em>千万不要</em>写“公司应该永远使用债务，因为它更便宜”。你必须展示出对“权衡理论 (Trade-off Theory)”的理解：债务的节税效益必须与不断增加的破产成本概率，以及债务契约在经济低迷期对管理层运营灵活性的限制进行权衡。</p>
+            
+            <p><strong>经典论述题 (Essay)：</strong> <em>“讨论一家公司决定通过发行公司债（Debentures）而不是普通股来筹集资金的优缺点。” (15分)</em></p>
+            
+            <p><strong>Distinction (A+) 答题策略：</strong> 保持清晰的文章结构。<strong>债务的优点：</strong> 强调利息的税前扣除效应（税盾）、相较于股权更低的投资者要求回报率，以及债务不会稀释现有股东的投票控制权。<strong>债务的缺点：</strong> 将重点放在强制性现金流出会增加破产风险（高杠杆风险），以及在经济下行时，严苛的“债务契约 (Loan Covenants)”如何导致管理层失去运营灵活性。</p>
+        </div>
+
+        <h2>3. 混合融资工具：可转换债券与认股权证 (Convertibles and Warrants)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：模糊界限的金融衍生品</h3>
+            <p><strong>可转换贷款 (Convertible Loans):</strong> 一种金融衍生品，赋予投资者在未来特定日期以特定价格将其贷款转换为普通股的权利（但不是义务）。在转换之前，他们将持续获得利息。</p>
+            <p><strong>认股权证 (Warrants):</strong> 通常作为债券发行的“甜头 (Sweetener)”附带发放的金融工具。它们赋予持有人在特定期限内以设定价格购买普通股的权利。与可转债不同，认股权证通常可以从标的债券中剥离出来单独交易。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>CFO 为什么要发行可转债？假设你正在管理一家高风险的科技初创公司。除非你支付 15% 的极高利息（你根本付不起），否则银行不敢给你直接发放贷款。通过发行可转换贷款，你为贷款人提供了一个“对冲”机会。你可以协商一个低得多的利率（例如 5%），作为交换，你赋予他们在公司取得成功、股价暴涨时成为股东的权利。这就是用延迟的股权稀释，换取今天低廉的债务成本。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 搞懂这两种工具对现金流时间线的影响。如果考试中问到行使认股权证如何影响公司的现金状况：请记住，当投资者行使认股权证时，他们必须向公司支付预先约定的行权价。因此，行使认股权证会给公司带来<em>新的现金流入</em>，而转换可转换贷款仅仅是将现有的债务置换为股权，并不会产生新的现金流入。</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            enContent.classList.remove('active');
+            zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active');
+            enContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to Chinese (点击切换至全中文)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>

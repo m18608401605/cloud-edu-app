@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婴儿体重与 Z-Score 交互实验室 | Baby Weight & Z-Score Lab</title>
+    
+    <!-- KaTeX for formula rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --brand-navy: #1a2b3c;
+            --brand-gold: #c5a059;
+            --brand-gray: #f4f7f9;
+            --risk-red: #e63946;
+        }
+        body {
+            background-color: var(--brand-gray);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: var(--brand-navy);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .formula-box {
+            background-color: var(--brand-navy);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+        .slider-thumb::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--brand-gold);
+            cursor: pointer;
+            border-radius: 50%;
+            border: 2px solid white;
+        }
+        .bell-curve-area {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+    <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl font-bold mb-2">婴儿体重与 Z-Score 深度交互实验室</h1>
+            <p class="text-gray-500 italic">Deep Interactive Lab: Baby Weight & Z-Score Analysis</p>
+            <div class="mt-4 flex justify-center gap-4 text-sm font-medium">
+                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">数据源: 美国 100 万新生儿真实案例</span>
+                <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full">μ = 3480g | σ = 462g</span>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Panel: Controls & Visual -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- SVG Bell Curve Visualization -->
+                <div class="glass-card p-6 relative">
+                    <h2 class="text-xl font-bold mb-4 flex justify-between items-center">
+                        <span>正态分布可视化 / Normal Distribution</span>
+                        <span id="percentile-badge" class="text-sm font-normal text-gray-500"></span>
+                    </h2>
+                    <svg id="bellCurveSvg" viewBox="0 0 800 400" class="w-full h-auto">
+                        <!-- X-axis -->
+                        <line x1="50" y1="350" x2="750" y2="350" stroke="#ccc" stroke-width="2" />
+                        
+                        <!-- Shaded Area (Left Tail) -->
+                        <path id="shadePath" fill="rgba(197, 160, 89, 0.3)" d="" />
+                        
+                        <!-- The Bell Curve Path -->
+                        <path id="curvePath" fill="none" stroke="#1a2b3c" stroke-width="3" d="" />
+                        
+                        <!-- Reference Lines (μ, ±σ) -->
+                        <g id="gridLines" stroke-dasharray="4,4" stroke="#ccc"></g>
+                        
+                        <!-- Current Weight Marker -->
+                        <g id="markerGroup">
+                            <line id="markerLine" x1="0" y1="50" x2="0" y2="350" stroke="#e63946" stroke-width="2" />
+                            <circle id="markerDot" cx="0" cy="0" r="5" fill="#e63946" />
+                            <text id="markerLabel" x="0" y="370" text-anchor="middle" font-size="12" font-weight="bold" fill="#e63946"></text>
+                        </g>
+
+                        <!-- Legend Labels -->
+                        <text x="400" y="390" text-anchor="middle" font-size="12" fill="#666">体重 (克) / Weight (g)</text>
+                    </svg>
+
+                    <!-- Slider Control -->
+                    <div class="mt-8 px-4">
+                        <div class="flex justify-between mb-2 font-bold">
+                            <span>调整当前体重 (X): <span id="currentWeightVal" class="text-blue-600">2910</span>g</span>
+                            <span class="text-gray-400">Range: 2000g - 5000g</span>
+                        </div>
+                        <input type="range" id="weightSlider" min="2000" max="5000" value="2910" 
+                               class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider-thumb">
+                    </div>
+                </div>
+
+                <!-- Analysis / Scaffolding -->
+                <div class="glass-card p-6 border-l-4 border-gold" id="insightCard">
+                    <h3 class="text-lg font-bold mb-2">医生视角 (Analysis Insight)</h3>
+                    <p id="analysisText" class="text-lg leading-relaxed">
+                        正在加载分析...
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Formulas & Math -->
+            <div class="space-y-6">
+                <!-- Theoretical Formula -->
+                <div class="formula-box">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-4">核心概率密度公式 / PDF Formula</h3>
+                    <div id="pdf-formula" class="text-lg"></div>
+                    <p class="text-xs text-gray-400 mt-4 italic">决定钟形曲线形状的数学基石</p>
+                </div>
+
+                <!-- Dynamic Calculation Steps -->
+                <div class="glass-card p-6">
+                    <h3 class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-4">实时计算步骤 / Step-by-Step</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-xs text-gray-400 mb-2 uppercase">Step 1: 离均差 (Deviation from Mean)</p>
+                            <div id="step1-formula" class="text-md"></div>
+                        </div>
+                        <div class="border-t pt-4">
+                            <p class="text-xs text-gray-400 mb-2 uppercase">Step 2: 标准化 (Normalization)</p>
+                            <div id="step2-formula" class="text-md font-bold"></div>
+                        </div>
+                        <div id="z-final-display" class="bg-gold/10 p-4 rounded-lg border border-gold/20 text-center">
+                            <div class="text-xs uppercase text-gray-500 mb-1">当前 Z-Score</div>
+                            <div id="z-value-big" class="text-3xl font-bold text-navy"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vocabulary Reference -->
+                <div class="text-sm text-gray-500 px-2">
+                    <ul class="space-y-1 italic">
+                        <li>• Mean (μ): 均值 (大部队位置)</li>
+                        <li>• Std Dev (σ): 标准差 (离散程度)</li>
+                        <li>• Percentile: 百分位数 (排名)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Constants & Data ---
+        const MU = 3480;
+        const SIGMA = 462;
+        const LOW_BIRTH_WEIGHT = 2500;
+
+        // --- DOM Elements ---
+        const weightSlider = document.getElementById('weightSlider');
+        const currentWeightVal = document.getElementById('currentWeightVal');
+        const curvePath = document.getElementById('curvePath');
+        const shadePath = document.getElementById('shadePath');
+        const markerGroup = document.getElementById('markerGroup');
+        const analysisText = document.getElementById('analysisText');
+        const percentileBadge = document.getElementById('percentile-badge');
+
+        // --- Math Helpers ---
+        // Normal PDF function
+        function normalPDF(x, mu, sigma) {
+            const part1 = 1 / (sigma * Math.sqrt(2 * Math.PI));
+            const exponent = -0.5 * Math.pow((x - mu) / sigma, 2);
+            return part1 * Math.exp(exponent);
+        }
+
+        // Error function approximation (for CDF)
+        function erf(x) {
+            const a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741;
+            const a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+            const sign = x < 0 ? -1 : 1;
+            const absX = Math.abs(x);
+            const t = 1.0 / (1.0 + p * absX);
+            const y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-absX * absX);
+            return sign * y;
+        }
+
+        function normalCDF(x, mu, sigma) {
+            return 0.5 * (1 + erf((x - mu) / (sigma * Math.sqrt(2))));
+        }
+
+        // --- SVG Mapping ---
+        const svgW = 800;
+        const svgH = 400;
+        const margin = 50;
+        const plotW = svgW - 2 * margin;
+        const plotH = svgH - margin - 20;
+
+        function mapX(val) {
+            const minX = MU - 4 * SIGMA;
+            const maxX = MU + 4 * SIGMA;
+            return margin + ((val - minX) / (maxX - minX)) * plotW;
+        }
+
+        function mapY(val) {
+            const maxY = normalPDF(MU, MU, SIGMA);
+            return (svgH - margin) - (val / maxY) * (plotH - 20);
+        }
+
+        // --- Draw Curve & Grid ---
+        function initChart() {
+            let pathD = "";
+            let gridLinesHtml = "";
+            const minX = MU - 4 * SIGMA;
+            const maxX = MU + 4 * SIGMA;
+
+            // Generate Path
+            for (let x = minX; x <= maxX; x += 10) {
+                const y = normalPDF(x, MU, SIGMA);
+                const px = mapX(x);
+                const py = mapY(y);
+                pathD += (x === minX ? "M" : "L") + `${px} ${py}`;
+            }
+            curvePath.setAttribute("d", pathD);
+
+            // Draw Standard Deviation Lines
+            for (let i = -3; i <= 3; i++) {
+                const val = MU + i * SIGMA;
+                const px = mapX(val);
+                gridLinesHtml += `
+                    <line x1="${px}" y1="${mapY(0)}" x2="${px}" y2="${mapY(normalPDF(val, MU, SIGMA))}" />
+                    <text x="${px}" y="${svgH - 30}" text-anchor="middle" font-size="10" fill="#999">${i === 0 ? 'μ' : (i > 0 ? '+'+i+'σ' : i+'σ')}</text>
+                    <text x="${px}" y="${svgH - 15}" text-anchor="middle" font-size="10" fill="#bbb">${Math.round(val)}</text>
+                `;
+            }
+            document.getElementById('gridLines').innerHTML = gridLinesHtml;
+        }
+
+        // --- Main Update Logic ---
+        function update() {
+            const X = parseFloat(weightSlider.value);
+            const zScore = (X - MU) / SIGMA;
+            const percentile = normalCDF(X, MU, SIGMA) * 100;
+
+            // UI Text
+            currentWeightVal.innerText = X;
+            
+            // Marker
+            const px = mapX(X);
+            const py = mapY(normalPDF(X, MU, SIGMA));
+            document.getElementById('markerLine').setAttribute("x1", px);
+            document.getElementById('markerLine').setAttribute("x2", px);
+            document.getElementById('markerDot').setAttribute("cx", px);
+            document.getElementById('markerDot').setAttribute("cy", py);
+            const label = document.getElementById('markerLabel');
+            label.setAttribute("x", px);
+            label.textContent = `${X}g`;
+
+            // Shading
+            let shadeD = `M ${mapX(MU - 4 * SIGMA)} ${svgH - margin}`;
+            const minX = MU - 4 * SIGMA;
+            for (let x = minX; x <= X; x += 10) {
+                shadeD += ` L ${mapX(x)} ${mapY(normalPDF(x, MU, SIGMA))}`;
+            }
+            shadeD += ` L ${px} ${svgH - margin} Z`;
+            shadePath.setAttribute("d", shadeD);
+
+            // Render Formulas via KaTeX
+            renderFormulas(X, zScore);
+
+            // Analysis text logic
+            updateAnalysis(X, zScore, percentile);
+        }
+
+        function renderFormulas(X, z) {
+            // PDF Formula (Static)
+            katex.render(`f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{1}{2}\\left(\\frac{x-\\mu}{\\sigma}\\right)^2}`, document.getElementById('pdf-formula'));
+            
+            // Step 1: X - mu
+            const diff = (X - MU).toFixed(0);
+            katex.render(`X - \\mu = ${X} - ${MU} = ${diff} \\text{ g}`, document.getElementById('step1-formula'));
+
+            // Step 2: divide by sigma
+            katex.render(`Z = \\frac{${diff}}{${SIGMA}} = ${z.toFixed(2)}`, document.getElementById('step2-formula'));
+
+            // Big Z
+            document.getElementById('z-value-big').textContent = z.toFixed(2);
+        }
+
+        function updateAnalysis(X, z, p) {
+            let msg = "";
+            let colorClass = "text-navy";
+
+            if (X < LOW_BIRTH_WEIGHT) {
+                msg = `🚨 <strong class="text-red-600">触发医疗警报！</strong> 婴儿体重为 ${X}g，低于 2500g 阈值，属于<strong>低出生体重 (Low Birth Weight)</strong>。`;
+            } else if (z < -1.2) {
+                msg = `📉 <strong>排在末尾 ${p.toFixed(1)}%：</strong> 比平均水平轻。Z 分数为 ${z.toFixed(2)}，意味着比均值低了超过 1 个标准差。`;
+            } else if (z >= -1.2 && z <= 1.2) {
+                msg = `✅ <strong>在大部队里 (Normal Range)：</strong> 体重处于正态分布的中心区域。这个范围覆盖了约 77% 的新生儿。`;
+            } else {
+                msg = `🚀 <strong>重量级选手：</strong> 婴儿体重超过了 ${p.toFixed(1)}% 的同龄人。在大样本中属于体格非常健壮的一类。`;
+            }
+
+            analysisText.innerHTML = msg;
+            percentileBadge.innerText = `百分位数 (Percentile): ${p.toFixed(1)}%`;
+        }
+
+        // --- Initial Load ---
+        window.onload = () => {
+            initChart();
+            update();
+            
+            weightSlider.addEventListener('input', update);
+        };
+    </script>
+</body>
+</html>

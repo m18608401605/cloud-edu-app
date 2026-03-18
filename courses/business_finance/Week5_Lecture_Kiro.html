@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5 | Lecture | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
+  .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem;background:transparent}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .card{background:transparent;border-radius:0;border:none;padding:0;margin-bottom:2rem;box-shadow:none;border-bottom:none}
+  .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem}
+  .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
+  .card p{margin-bottom:.8rem}
+  .card ul,.card ol{padding-left:1.4rem;margin-bottom:.8rem}
+  .card li{margin-bottom:.4rem}
+  .concept-box{background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem 1.5rem;margin:1rem 0}
+  .concept-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:.06em;margin-bottom:.5rem}
+  .case{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .case .case-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#b7860b;letter-spacing:.06em;margin-bottom:.6rem}
+  .case h4{font-size:1rem;color:#7a5800;margin-bottom:.6rem}
+  .pitfall{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .pitfall .pitfall-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:.6rem}
+  .pitfall .rule{background:#fee2e2;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600;color:#991b1b}
+  .formula-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1.4rem;margin:1rem 0;font-family:monospace}
+  .formula-box .f-title{color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+  .formula-box .f-main{font-size:1.1rem;color:#fbbf24;margin-bottom:.4rem}
+  .formula-box .f-note{font-size:.82rem;color:#64748b}
+  table.data{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  table.data th{background:var(--primary);color:#fff;padding:.7rem 1rem;text-align:left}
+  table.data td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+  table.data tr:nth-child(even) td{background:#f8fafc}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  .toc-sidebar a.active{background:var(--primary);color:#fff;font-weight:600}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  @media(min-width:1201px){main{margin-left:260px!important;margin-right:20px!important}}
+  .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
+  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
+  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
+  .mobile-toc-toggle.open{transform:rotate(180deg)}
+  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .mobile-toc-content.open{max-height:500px;border-top:1px solid var(--border)}
+  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--bg);transition:all .2s}
+  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
+  .mobile-toc-content a:last-child{border-bottom:none}
+  @media(max-width:1200px){.mobile-toc{display:block}}
+  .capm-hero{background:linear-gradient(135deg,#0f172a,#1e3a5f);border-radius:14px;padding:2rem;margin:1.5rem 0;text-align:center;color:#fff}
+  .capm-hero .capm-formula{font-size:1.6rem;font-family:monospace;color:#fbbf24;font-weight:700;margin:.8rem 0}
+  .capm-hero p{color:#94a3b8;font-size:.9rem}
+  .beta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1rem 0}
+  .beta-card{background:#1e293b;border-radius:10px;padding:1.2rem;text-align:center;color:#e2e8f0}
+  .beta-card .beta-val{font-size:2rem;font-weight:900;color:#fbbf24;font-family:monospace}
+  .beta-card .beta-label{font-size:.8rem;color:#94a3b8;margin-top:.3rem}
+  .beta-card .beta-desc{font-size:.82rem;color:#cbd5e1;margin-top:.5rem}
+</style>
+<script>
+MathJax = { tex: { inlineMath: [['\\(','\\)']] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 5</span>
+</nav>
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">📊 Expected Return</a>
+    <a href="#part2">🔗 Covariance</a>
+    <a href="#part3">📐 Portfolio Risk</a>
+    <a href="#part4">🌐 Efficient Frontier</a>
+    <a href="#part5">📈 CAPM</a>
+    <a href="#pitfalls-quick">⚠️ Pitfalls</a>
+    <a href="#answer-templates">📝 Answer Templates</a>
+  </div>
+</div>
+<div class="hero">
+  <div class="tag">Week 5 · Chapter 7</div>
+  <h1>Portfolio Theory</h1>
+  <p>投资组合理论 — Expected Return, Variance, Covariance, Efficient Frontier &amp; CAPM</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.7</span>
+    <span>⏱ ~55 min read</span>
+    <span>🎯 Exam Weight: Very High</span>
+  </div>
+</div>
+<main>
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">📊 Part 1: Expected Return &amp; Variance</a>
+  <a href="#part1" style="padding-left:1.5rem;font-size:.8rem">1.1 Expected Return</a>
+  <a href="#part1" style="padding-left:1.5rem;font-size:.8rem">1.2 Variance &amp; Standard Deviation</a>
+  <a href="#part2">🔗 Part 2: Covariance &amp; Correlation</a>
+  <a href="#part2" style="padding-left:1.5rem;font-size:.8rem">2.1 Covariance</a>
+  <a href="#part2" style="padding-left:1.5rem;font-size:.8rem">2.2 Correlation Coefficient</a>
+  <a href="#part3">📐 Part 3: Two-Asset Portfolio</a>
+  <a href="#part3" style="padding-left:1.5rem;font-size:.8rem">3.1 Portfolio Variance Formula</a>
+  <a href="#part4">🌐 Part 4: Efficient Frontier</a>
+  <a href="#part4" style="padding-left:1.5rem;font-size:.8rem">4.1 The Efficient Frontier Concept</a>
+  <a href="#part5">📈 Part 5: CAPM &amp; Beta</a>
+  <a href="#part5" style="padding-left:1.5rem;font-size:.8rem">5.1 The Capital Asset Pricing Model</a>
+  <a href="#part5" style="padding-left:1.5rem;font-size:.8rem">5.2 Understanding Beta</a>
+  <a href="#part5" style="padding-left:1.5rem;font-size:.8rem">5.3 The Security Market Line</a>
+  <a href="#pitfalls-quick">⚠️ Pitfalls</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll', function() {
+  const backToTop = document.querySelector('.back-to-top');
+  if (window.scrollY > 300) { backToTop.classList.add('show'); }
+  else { backToTop.classList.remove('show'); }
+});
+</script>
+
+
+  <div class="section-label" id="part1">📊 Part 1 — Expected Return &amp; Variance</div>
+  <div class="card">
+    <h2>1.1 Expected Return 期望收益率</h2>
+    <p>The expected return of an asset is the probability-weighted average of all possible returns. Think of it as the "fair" average outcome if you could repeat the investment many times.</p>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把期望收益想象成<strong>天气预报的加权平均气温</strong>：晴天概率30%×25度 + 阴天概率50%×12度 + 下雨概率20%×-5度 = 加权平均气温。期望收益就是这样——不是"最可能的结果"，而是所有可能结果按概率加权后的平均值。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Expected return = probability-weighted average of all possible outcomes. It's the "fair" long-run average if you repeated the investment many times.</p>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Expected Return Formula</div>
+      <div class="f-main">E(R) = Σ pᵢ × Rᵢ</div>
+      <div class="f-note">pᵢ = probability of scenario i; Rᵢ = return in scenario i</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">📋 Real Context — UK Equity Market Scenarios</div>
+      <h4>Estimating Expected Return: A UK Equity Fund</h4>
+      <p>A fund manager assigns probabilities to three macro scenarios for the coming year, based on Bank of England forecasts and FTSE 100 historical data:</p>
+      <table class="data">
+        <tr><th>Scenario</th><th>Probability</th><th>Return</th><th>p × R</th></tr>
+        <tr><td>Strong Growth (GDP &gt;2%)</td><td>0.3</td><td>25%</td><td>7.5%</td></tr>
+        <tr><td>Moderate Growth</td><td>0.5</td><td>12%</td><td>6.0%</td></tr>
+        <tr><td>Recession (GDP &lt;0%)</td><td>0.2</td><td>−5%</td><td>−1.0%</td></tr>
+        <tr><td><strong>E(R)</strong></td><td>1.0</td><td></td><td><strong>12.5%</strong></td></tr>
+      </table>
+      <p style="margin-top:.6rem;font-size:.9rem;color:#666;">Note: The FTSE 100 long-run average annual return is approximately 7–10%. A 12.5% expected return reflects an optimistic but plausible scenario mix.</p>
+    </div>
+
+    <h2>1.2 Variance &amp; Standard Deviation 方差与标准差</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把方差想象成<strong>射箭的散布程度</strong>：期望收益是靶心（平均落点），方差是箭矢落点的分散程度。两个弓箭手平均都射中靶心，但一个每次都很集中（低方差=低风险），另一个忽左忽右（高方差=高风险）。标准差就是把这个散布程度换算回"度数"，让你能直接比较。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Variance measures dispersion around the mean. Standard deviation (σ) is its square root — expressed in the same units as returns (%), making it directly comparable.</p>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Variance Formula</div>
+      <div class="f-main">σ² = Σ pᵢ × (Rᵢ − E(R))²</div>
+      <div class="f-note">σ = √σ² = Standard Deviation (risk measure)</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">📝 Continuing — Variance Calculation</div>
+      <table class="data">
+        <tr><th>Scenario</th><th>Rᵢ − E(R)</th><th>(Rᵢ − E(R))²</th><th>p × (Rᵢ − E(R))²</th></tr>
+        <tr><td>Strong Growth</td><td>25% − 12.5% = 12.5%</td><td>156.25</td><td>46.875</td></tr>
+        <tr><td>Moderate Growth</td><td>12% − 12.5% = −0.5%</td><td>0.25</td><td>0.125</td></tr>
+        <tr><td>Recession</td><td>−5% − 12.5% = −17.5%</td><td>306.25</td><td>61.25</td></tr>
+        <tr><td><strong>σ²</strong></td><td></td><td></td><td><strong>108.25 (%²)</strong></td></tr>
+      </table>
+      <p style="margin-top:.8rem">σ = √108.25 = <strong>10.4%</strong> — this fund has moderate volatility, comparable to a typical actively managed UK equity fund.</p>
+    </div>
+  </div>
+
+  <div class="section-label" id="part2">🔗 Part 2 — Covariance &amp; Correlation</div>
+  <div class="card">
+    <h2>2.1 Covariance 协方差</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy</div>
+      <p>把协方差想象成<strong>两个朋友的情绪联动</strong>：正协方差 = 一起开心、一起难过（股市涨两人都涨）；负协方差 = 一个开心另一个难过（黄金跌股票涨）；零协方差 = 两人情绪完全独立，互不影响。投资组合里，你希望找到"情绪相反"的资产来对冲风险。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Covariance measures how two assets move together. Positive = same direction; Negative = opposite directions; Zero = independent.</p>
+    </div>
+    <p>Covariance measures how two assets move together. Positive covariance = they tend to move in the same direction. Negative covariance = they tend to move in opposite directions.</p>
+    <div class="formula-box">
+      <div class="f-title">Covariance Formula</div>
+      <div class="f-main">Cov(A,B) = Σ pᵢ × (Rₐᵢ − E(Rₐ)) × (R_bᵢ − E(R_b))</div>
+    </div>
+
+    <h2>2.2 Correlation Coefficient 相关系数</h2>
+    <p>Correlation standardises covariance to a range of −1 to +1, making it easier to interpret.</p>
+    <div class="formula-box">
+      <div class="f-title">Correlation Formula</div>
+      <div class="f-main">ρ(A,B) = Cov(A,B) / (σₐ × σ_b)</div>
+      <div class="f-note">ρ = +1: perfect positive | ρ = 0: no relationship | ρ = −1: perfect negative</div>
+    </div>
+    <div class="concept-box">
+      <div class="label">💡 Key Insight — Diversification</div>
+      <p>When ρ &lt; +1, combining two assets reduces portfolio risk below the weighted average of individual risks. The lower the correlation, the greater the diversification benefit. When ρ = −1, risk can theoretically be eliminated entirely.</p>
+    </div>
+  </div>
+
+  <div class="section-label" id="part3">📐 Part 3 — Two-Asset Portfolio Risk</div>
+  <div class="card">
+    <h2>3.1 Portfolio Variance Formula</h2>
+    <p>For a portfolio of two assets A and B with weights w_A and w_B (where w_A + w_B = 1):</p>
+    <div class="formula-box">
+      <div class="f-title">Two-Asset Portfolio Variance</div>
+      <div class="f-main">σ²_p = w²_A σ²_A + w²_B σ²_B + 2·w_A·w_B·Cov(A,B)</div>
+      <div class="f-note">Equivalently: σ²_p = w²_A σ²_A + w²_B σ²_B + 2·w_A·w_B·ρ·σₐ·σ_b</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">📋 Real Context — Diversifying Between Sectors</div>
+      <h4>Portfolio: 60% UK Financials (e.g. Barclays), 40% UK Utilities (e.g. National Grid)</h4>
+      <p>Financials and utilities tend to have low correlation — banks boom in growth cycles, utilities are defensive in downturns. Suppose:</p>
+      <p style="margin-top:.5rem">σ_Financials = 10%, σ_Utilities = 15%, ρ = 0.3</p>
+      <p style="margin-top:.5rem">Cov = 0.3 × 10% × 15% = 0.45%² (= 45 in %² units)</p>
+      <p style="margin-top:.6rem">σ²_p = (0.6)²(100) + (0.4)²(225) + 2(0.6)(0.4)(45)</p>
+      <p>= 36 + 36 + 21.6 = <strong>93.6 (%²)</strong></p>
+      <p>σ_p = √93.6 = <strong>9.67%</strong></p>
+      <p style="margin-top:.6rem;color:#27ae60;font-weight:600">✅ Weighted average σ would be 0.6×10% + 0.4×15% = 12%. The portfolio σ of 9.67% is 2.33% lower — that's the diversification benefit from ρ = 0.3 &lt; 1.</p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Common Mistake</div>
+      <p>Students often forget the covariance term (the 2·w_A·w_B·Cov part). Without it, you're just adding variances — which ignores the entire point of diversification.</p>
+      <div class="rule">Always include the 2·w_A·w_B·Cov(A,B) term!</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="part4">🌐 Part 4 — Efficient Frontier</div>
+  <div class="card">
+    <h2>4.1 The Efficient Frontier Concept</h2>
+    <p>By varying the weights w_A and w_B across all possible combinations (0% to 100%), we trace out a curve in risk-return space. This curve is called the <strong>opportunity set</strong> or <strong>portfolio frontier</strong>.</p>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy — Efficient Frontier</div>
+      <p>把有效前沿想象成<strong>手机的性价比曲线</strong>：同样的价格（风险），你想要最好的性能（收益）；同样的性能（收益），你想要最低的价格（风险）。有效前沿上的每一个点都是"性价比最高的组合"——没有任何其他组合能在同等风险下给你更高收益，或在同等收益下给你更低风险。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">The efficient frontier = the set of portfolios with maximum return for a given risk level. Rational investors always choose from this set.</p>
+    </div>
+    <div class="concept-box" style="margin-top:0">
+      <div class="label">📌 Efficient Frontier Definition</div>
+      <p>The <strong>efficient frontier</strong> is the upper portion of the portfolio frontier — the set of portfolios that offer the <strong>maximum expected return for a given level of risk</strong> (or minimum risk for a given return). Rational, risk-averse investors will always choose a portfolio on the efficient frontier.</p>
+    </div>
+    <h3>Key Points:</h3>
+    <ul>
+      <li>The <strong>minimum variance portfolio (MVP)</strong> is the leftmost point on the frontier</li>
+      <li>Portfolios below the MVP are <strong>inefficient</strong> — dominated by portfolios above</li>
+      <li>Adding more assets shifts the frontier further left (more diversification)</li>
+      <li>With many assets, unsystematic risk is diversified away; only systematic risk remains</li>
+    </ul>
+    <h3>Systematic vs Unsystematic Risk:</h3>
+    <table class="data">
+      <tr><th>Type</th><th>Also Called</th><th>Diversifiable?</th><th>Examples</th></tr>
+      <tr><td>Systematic</td><td>Market risk, β risk</td><td>❌ No</td><td>Interest rates, recessions, inflation</td></tr>
+      <tr><td>Unsystematic</td><td>Specific, idiosyncratic</td><td>✅ Yes</td><td>CEO scandal, product recall, strike</td></tr>
+    </table>
+  </div>
+
+  <div class="section-label" id="part5">📈 Part 5 — CAPM &amp; Beta</div>
+  <div class="card">
+    <h2>5.1 The Capital Asset Pricing Model (CAPM)</h2>
+    <p>CAPM provides a precise relationship between an asset's systematic risk (β) and its required return. It is the most widely used model in finance for estimating the cost of equity.</p>
+
+    <div class="capm-hero">
+      <p style="color:#94a3b8;font-size:.85rem;margin-bottom:.5rem">THE CAPM FORMULA</p>
+      <div class="capm-formula">K_e = R_f + β(R_m − R_f)</div>
+      <p>K_e = Required return on equity &nbsp;|&nbsp; R_f = Risk-free rate &nbsp;|&nbsp; β = Beta &nbsp;|&nbsp; R_m = Market return</p>
+      <p style="margin-top:.5rem;color:#fbbf24">(R_m − R_f) = Equity Risk Premium (ERP) — the extra return for bearing market risk</p>
+    </div>
+    <div class="concept-box">
+      <div class="label">费曼类比 Feynman Analogy — CAPM & Beta</div>
+      <p>把 Beta 想象成<strong>放大镜的倍数</strong>：市场涨10%，β=1.5的股票涨15%（放大1.5倍）；市场跌10%，它跌15%。β=0.5的股票只涨5%，跌也只跌5%（缩小到0.5倍）。CAPM 就是说：你承担的"放大倍数"越高，市场要求给你的额外回报也越高。</p>
+      <p style="margin-top:.5rem;font-size:.9rem;color:var(--muted)">Beta = sensitivity to market movements. Higher β = more amplification = more systematic risk = higher required return.</p>
+    </div>
+
+    <h2>5.2 Understanding Beta (β)</h2>
+    <p>Beta measures how sensitive an asset's return is to movements in the overall market. It is the slope of the regression line between the asset's returns and market returns.</p>
+    <div class="beta-grid">
+      <div class="beta-card">
+        <div class="beta-val">β = 0</div>
+        <div class="beta-label">Risk-Free Asset</div>
+        <div class="beta-desc">No market sensitivity. Return = R_f (e.g., T-bills)</div>
+      </div>
+      <div class="beta-card">
+        <div class="beta-val">β = 1</div>
+        <div class="beta-label">Market Portfolio</div>
+        <div class="beta-desc">Moves exactly with the market. Average systematic risk.</div>
+      </div>
+      <div class="beta-card">
+        <div class="beta-val">β &gt; 1</div>
+        <div class="beta-label">Aggressive</div>
+        <div class="beta-desc">Amplifies market moves. Higher risk &amp; higher required return.</div>
+      </div>
+      <div class="beta-card">
+        <div class="beta-val">β &lt; 1</div>
+        <div class="beta-label">Defensive</div>
+        <div class="beta-desc">Dampens market moves. Lower risk &amp; lower required return.</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-tag">📋 Real UK Data — Vodafone Group plc</div>
+      <h4>CAPM Applied: What return do investors require from Vodafone?</h4>
+      <p>Using approximate UK market data (as of recent years):</p>
+      <ul style="margin:.5rem 0 .5rem 1.2rem;font-size:.9rem">
+        <li><strong>R_f</strong> = 4.5% (UK 10-year gilt yield)</li>
+        <li><strong>R_m</strong> = 10.5% (FTSE 100 long-run expected return)</li>
+        <li><strong>ERP</strong> = 10.5% − 4.5% = 6.0%</li>
+        <li><strong>β (Vodafone)</strong> ≈ 0.7 (telecoms are defensive — less volatile than the market)</li>
+      </ul>
+      <p style="margin-top:.6rem">K_e = 4.5% + 0.7 × 6.0% = 4.5% + 4.2% = <strong>8.7%</strong></p>
+      <p style="margin-top:.6rem;font-size:.9rem;color:#555">Interpretation: Vodafone's β &lt; 1 means it's less risky than the average FTSE stock. Investors only require 8.7% — below the market average of 10.5%. Compare this to a high-β stock like a mining company (β ≈ 1.6), which would require: 4.5% + 1.6×6% = <strong>14.1%</strong>.</p>
+      <p style="margin-top:.5rem;font-size:.85rem;color:#888;font-style:italic">Note: Real betas change over time. These figures are illustrative but based on realistic UK market parameters.</p>
+    </div>
+
+    <h2>5.3 The Security Market Line (SML)</h2>
+    <p>The SML is the graphical representation of CAPM — a straight line plotting required return against β. All correctly priced assets lie on the SML.</p>
+    <ul>
+      <li><strong>Above SML:</strong> Asset is underpriced (offers more return than required) → Buy signal</li>
+      <li><strong>Below SML:</strong> Asset is overpriced (offers less return than required) → Sell signal</li>
+      <li><strong>Y-intercept:</strong> R_f (risk-free rate)</li>
+      <li><strong>Slope:</strong> (R_m − R_f) = Equity Risk Premium</li>
+    </ul>
+
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ CAPM Assumptions &amp; Limitations</div>
+      <p>CAPM assumes: investors are rational and risk-averse; markets are perfect (no taxes, transaction costs); all investors have the same expectations; investors can borrow/lend at R_f.</p>
+      <div class="rule">In practice: β is estimated from historical data and may not predict future risk. CAPM is a model, not reality — but it's the best simple tool we have.</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="pitfalls-quick">🎯 Exam Anti-Pitfall Summary</div>
+
+  <div class="card">
+    <h2>🎯 Week 5 Quick-Reference Pitfall Table</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Common Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td>Calculating variance</td><td>Using (Rᵢ − E(R)) without squaring</td><td>σ² = Σ pᵢ × (Rᵢ − E(R))² — always square the deviation</td></tr>
+        <tr><td>Covariance sign</td><td>Assuming covariance must be positive</td><td>Covariance can be negative (assets move opposite) — that's the diversification benefit</td></tr>
+        <tr><td>Portfolio variance formula</td><td>Forgetting the 2·w_A·w_B·Cov term</td><td>σ²_p = w²_Aσ²_A + w²_Bσ²_B + <strong>2·w_A·w_B·Cov(A,B)</strong> — the cross-term is essential</td></tr>
+        <tr><td>CAPM: using wrong ERP</td><td>Using R_m instead of (R_m − R_f) as ERP</td><td>ERP = R_m − R_f (the premium above risk-free, not the total market return)</td></tr>
+        <tr><td>Beta interpretation</td><td>"β=2 means the stock returns 2%"</td><td>β=2 means the stock moves twice as much as the market — if market +10%, stock +20%</td></tr>
+        <tr><td>SML position</td><td>Confusing above/below SML signals</td><td>Above SML = underpriced (buy); Below SML = overpriced (sell)</td></tr>
+        <tr><td>Diversification limit</td><td>"Adding more stocks eliminates all risk"</td><td>Diversification eliminates unsystematic risk only. Systematic (market) risk remains — it cannot be diversified away</td></tr>
+        <tr><td>Correlation vs Covariance</td><td>Using covariance to compare asset pairs</td><td>Use correlation (ρ) for comparison — it's standardised to [−1, +1]. Covariance depends on scale.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label" id="pitfalls">⚠️ Common Pitfalls & Exam Traps</div>
+  <div class="card">
+    <h2>⚠️ Pitfall Summary Table — Portfolio Theory Mistakes</h2>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Common Mistake</th><th>Correct Approach</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Variance Calculation</strong></td><td>Forgetting to square deviations</td><td>✅ Variance = Σ[p × (Return − E(R))²]. Must square the deviations</td></tr>
+        <tr><td><strong>Covariance Sign</strong></td><td>Ignoring whether covariance is positive or negative</td><td>✅ Positive covariance = assets move together; Negative = move opposite (better diversification)</td></tr>
+        <tr><td><strong>Portfolio Variance</strong></td><td>Missing the 2wₐwᵦCov(A,B) term</td><td>✅ σₚ² = wₐ²σₐ² + wᵦ²σᵦ² + 2wₐwᵦCov(A,B). The cross-term is critical!</td></tr>
+        <tr><td><strong>CAPM Formula</strong></td><td>Using Rₘ instead of (Rₘ − Rբ)</td><td>✅ E(Rᵢ) = Rբ + βᵢ[E(Rₘ) − Rբ]. The equity risk premium is (Rₘ − Rբ), not Rₘ</td></tr>
+        <tr><td><strong>Beta Interpretation</strong></td><td>Thinking β=2 means double the return</td><td>✅ β measures systematic risk (volatility), not return. β=2 means twice as volatile as market</td></tr>
+        <tr><td><strong>Diversification Limit</strong></td><td>Believing more stocks always reduces risk</td><td>✅ Diversification eliminates specific risk only. After ~15-20 stocks, only systematic risk remains</td></tr>
+        <tr><td><strong>SML Position</strong></td><td>Confusing above/below SML meaning</td><td>✅ Above SML = undervalued (buy); Below SML = overvalued (sell)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="section-label" id="answer-templates">📝 Standard Answer Templates</div>
+  <div class="card">
+    <h2>📝 Answer Template: CAPM Questions</h2>
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary)">Step 1: Identify Given Information</h3>
+      <ul style="margin-left:1.5rem;line-height:1.8">
+        <li>Risk-free rate (Rբ)</li>
+        <li>Market return (Rₘ) or Equity Risk Premium (ERP = Rₘ − Rբ)</li>
+        <li>Beta (β) of the asset</li>
+      </ul>
+    </div>
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary)">Step 2: Apply CAPM Formula</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace">
+        <div style="color:#fbbf24">E(Rᵢ) = Rբ + βᵢ × [E(Rₘ) − Rբ]</div>
+        <div style="color:#64748b;margin-top:.6rem">Example: Rբ=5%, Rₘ=12%, β=1.5</div>
+        <div style="color:#64748b">E(R) = 5% + 1.5 × (12% − 5%) = 5% + 10.5% = 15.5%</div>
+      </div>
+    </div>
+    <div style="background:#dcfce7;border:2px solid #86efac;border-radius:8px;padding:1rem;margin-top:1rem">
+      <p style="font-weight:600;color:#166534">💡 Interpretation:</p>
+      <p style="color:#166534;font-size:.9rem">The required return (15.5%) compensates investors for: (1) Time value of money (5% risk-free rate), and (2) Systematic risk (10.5% risk premium = 1.5 × 7% market risk premium)</p>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_StudyGuide_Kiro.html" class="btn btn-outline">← Study Guide</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week5_Interactive_Kiro.html" class="btn btn-primary">🧪 Interactive Lab →</a>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>收入变动与恩格尔曲线交互实验</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0fdf4; color: #333; }
+        .panel { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        h1 { color: #166534; font-weight: bold; font-size: 2rem; margin-bottom: 0.5rem; border-bottom: 3px solid #22c55e; padding-bottom: 10px; }
+        h2 { color: #15803d; font-weight: 600; font-size: 1.3rem; margin-top: 15px; margin-bottom: 10px; }
+        .slider-container { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        input[type=range] { flex-grow: 1; cursor: pointer; height: 6px; background: #cbd5e1; border-radius: 3px; outline: none; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #22c55e; cursor: pointer; }
+        canvas { background: white; border-radius: 8px; box-shadow: inset 0 0 5px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; margin-bottom: 10px; }
+        .formula-box { background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #22c55e; margin: 15px 0; }
+        .btn-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        .btn { flex: 1; padding: 10px; text-align: center; border-radius: 8px; border: 2px solid #cbd5e1; background: white; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+        .btn.active { background: #22c55e; color: white; border-color: #166534; }
+        .btn-normal.active { background: #3b82f6; border-color: #1d4ed8; }
+        .btn-inferior.active { background: #ef4444; border-color: #b91c1c; }
+        .data-highlight { font-family: monospace; font-size: 1.1em; font-weight: bold; color: #166534; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-7xl mx-auto">
+        <header class="mb-8 text-center">
+            <h1>Income Changes and Engel Curve</h1>
+            <p class="text-gray-600 text-lg">收入变动与恩格尔曲线：正常物品与劣等物品的消费路径分析</p>
+        </header>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="w-full lg:w-[45%] flex flex-col gap-4">
+                <div class="panel text-center relative">
+                    <h3 class="font-bold text-gray-700 mb-2">消费者选择与预算约束 (Consumer Choice & Budget Constraint)</h3>
+                    <canvas id="budgetCanvas" width="450" height="300"></canvas>
+                    <p class="text-xs text-gray-500">动态展示：预算线平行外移 (Parallel shift outwards) 及最优消费束 (Optimal bundle) 的变化</p>
+                </div>
+                
+                <div class="panel text-center relative">
+                    <h3 class="font-bold text-gray-700 mb-2">恩格尔曲线 (Engel Curve)</h3>
+                    <canvas id="engelCanvas" width="450" height="250"></canvas>
+                    <p class="text-xs text-gray-500">动态展示：收入 (Income) 与商品需求量 (Quantity Demanded) 的关系</p>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-[55%] panel flex flex-col relative">
+                <h2>1. 选择物品类型 (Select Commodity Type)</h2>
+                <div class="btn-group" id="goodTypeGroup">
+                    <div class="btn btn-normal active" data-type="normal">Fish (Normal Good)<br><span class="text-sm font-normal">鱼 (正常物品)</span></div>
+                    <div class="btn btn-inferior" data-type="inferior">Chips (Inferior Good)<br><span class="text-sm font-normal">薯条 (劣等物品)</span></div>
+                </div>
+
+                <h2>2. 调节收入水平 (Adjust Income Level)</h2>
+                <div class="slider-container">
+                    <label class="font-bold text-gray-700 whitespace-nowrap">收入 (Income) $I$ :</label>
+                    <input type="range" id="incomeSlider" min="50" max="150" step="1" value="50">
+                    <span id="incomeVal" class="font-mono text-xl font-bold text-green-700 w-12 text-right">50</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-100">
+                        <div class="text-sm text-blue-800 font-bold mb-1">目标商品消费量 (Quantity of X)</div>
+                        <div id="xVal" class="text-3xl font-mono text-blue-600 font-bold">25.0</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                        <div class="text-sm text-gray-600 font-bold mb-1">其它商品消费量 (Quantity of Y)</div>
+                        <div id="yVal" class="text-3xl font-mono text-gray-500 font-bold">25.0</div>
+                    </div>
+                </div>
+
+                <h2>3. 实验原理与结论解析 (Principles & Conclusions)</h2>
+                
+                <div class="formula-box">
+                    <p class="mb-2"><strong>恩格尔曲线 (Engel Curve):</strong> 描绘了在商品价格保持不变的情况下，消费者的<span class="text-green-600 font-bold">收入水平 ($I$)</span>与某一特定<span class="text-blue-600 font-bold">商品需求量 ($Q$)</span>之间的关系。</p>
+                    <p class="text-center text-lg">$$ Q_x = f(I) $$</p>
+                </div>
+
+                <div id="dynamicConclusion" class="bg-yellow-50 p-4 rounded border border-yellow-200 text-sm leading-relaxed text-gray-800">
+                    </div>
+
+                <ul class="space-y-2 text-gray-600 text-sm mt-4 list-disc pl-5">
+                    <li><strong>预算线平行移动：</strong> 价格不变时，收入的增加表现为预算线从 $B_1$ 到 $B_2$ 到 $B_3$ 的平行外移 (Parallel shift outwards)。</li>
+                    <li><strong>收入-消费曲线 (Income Consumption Curve, ICC)：</strong> 连接不同收入水平下所有最优消费束（切点）的轨迹。</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 核心经济学参数设定 ---
+        let currentType = 'normal'; // 'normal' (Fish) 或 'inferior' (Chips)
+        const Px = 1; // 商品X的价格
+        const Py = 1; // 商品Y的价格
+        const maxI = 150; // 最大收入
+        const minI = 50;  // 最小收入
+
+        // 获取DOM元素
+        const incomeSlider = document.getElementById('incomeSlider');
+        const incomeValDisplay = document.getElementById('incomeVal');
+        const xValDisplay = document.getElementById('xVal');
+        const yValDisplay = document.getElementById('yVal');
+        const budgetCanvas = document.getElementById('budgetCanvas');
+        const engelCanvas = document.getElementById('engelCanvas');
+        const bCtx = budgetCanvas.getContext('2d');
+        const eCtx = engelCanvas.getContext('2d');
+
+        // --- 事件监听 ---
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentType = btn.getAttribute('data-type');
+                updateSimulation();
+            });
+        });
+
+        incomeSlider.addEventListener('input', () => {
+            updateSimulation();
+        });
+
+        // --- 核心计算逻辑：连续插值 ---
+        function calculateBundle(I, type) {
+            let x, y;
+            if (type === 'normal') {
+                // 正常物品 (Fish)：设效用函数为 Cobb-Douglas U = X^0.5 * Y^0.5
+                // 最优解：X = I / (2*Px), Y = I / (2*Py)
+                x = I / (2 * Px);
+                y = I / (2 * Py);
+            } else {
+                // 劣等物品 (Chips)：设为特定的拟线性或经验插值函数
+                // 收入增加，需求反而下降。设定在 I=50 时 x=35，I=150 时 x=15
+                // 线性方程：X = 45 - 0.2 * I
+                x = 45 - 0.2 * I; 
+                y = (I - Px * x) / Py; // 剩余收入全部买正常品 Y
+            }
+            return { x, y };
+        }
+
+        // --- 绘图工具函数 ---
+        // 预算线画布坐标转换 (原点在左下)
+        const bxOrigin = 40, byOrigin = 260;
+        const bScaleX = 2.5, bScaleY = 1.5;
+        function getBx(x) { return bxOrigin + x * bScaleX; }
+        function getBy(y) { return byOrigin - y * bScaleY; }
+
+        // 恩格尔曲线画布坐标转换 (原点在左下)
+        const exOrigin = 40, eyOrigin = 220;
+        const eScaleX = 3.5, eScaleY = 1.2;
+        function getEx(x) { return exOrigin + x * eScaleX; }
+        function getEy(y) { return eyOrigin - y * eScaleY; }
+
+        function drawAxes(ctx, width, height, originX, originY, xLabel, yLabel) {
+            ctx.beginPath();
+            ctx.moveTo(originX, 20);
+            ctx.lineTo(originX, originY);
+            ctx.lineTo(width - 20, originY);
+            ctx.strokeStyle = "#334155";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+
+            // 箭头
+            ctx.beginPath(); ctx.moveTo(originX - 4, 25); ctx.lineTo(originX, 15); ctx.lineTo(originX + 4, 25); ctx.fillStyle = "#334155"; ctx.fill();
+            ctx.beginPath(); ctx.moveTo(width - 25, originY - 4); ctx.lineTo(width - 15, originY); ctx.lineTo(width - 25, originY + 4); ctx.fillStyle = "#334155"; ctx.fill();
+
+            // 标签
+            ctx.font = "bold 14px Arial";
+            ctx.fillStyle = "#334155";
+            ctx.fillText(yLabel, originX - 30, 20);
+            ctx.fillText(xLabel, width - 30, originY + 20);
+            ctx.fillText("0", originX - 15, originY + 15);
+        }
+
+        function drawIndifferenceCurve(ctx, x, y, color) {
+            ctx.beginPath();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            
+            // 用简单的双曲线模拟 U = k / X
+            const k = y * Math.pow(x, 0.8); 
+            
+            let started = false;
+            for (let i = x - 15; i <= x + 25; i += 0.5) {
+                if (i <= 2) continue;
+                let plotY = k / Math.pow(i, 0.8);
+                if (plotY > 160 || plotY < 0) continue;
+                
+                let cx = getBx(i), cy = getBy(plotY);
+                if (!started) { ctx.moveTo(cx, cy); started = true; } 
+                else { ctx.lineTo(cx, cy); }
+            }
+            ctx.stroke();
+        }
+
+        // --- 主更新与渲染流程 ---
+        function updateSimulation() {
+            const currentI = parseFloat(incomeSlider.value);
+            const bundle = calculateBundle(currentI, currentType);
+            
+            // 1. 更新数值UI
+            incomeValDisplay.innerText = currentI.toFixed(0);
+            xValDisplay.innerText = bundle.x.toFixed(1);
+            yValDisplay.innerText = bundle.y.toFixed(1);
+
+            // 2. 更新结论文本
+            const conclusionDiv = document.getElementById('dynamicConclusion');
+            if (currentType === 'normal') {
+                xValDisplay.className = "text-3xl font-mono font-bold text-blue-600";
+                conclusionDiv.innerHTML = `
+                    <h4 class="font-bold text-blue-800 text-lg mb-2">☑ Normal Good (正常物品：Fish)</h4>
+                    <p>当收入 $I$ 增加时，您可以看到在顶部图表中，预算线向外平行移动。消费者对目标商品 (Fish) 的需求量同步<strong class="text-blue-700">增加 (Increases)</strong>。</p>
+                    <p class="mt-2">反映在底部的恩格尔曲线上，横轴是消费量，纵轴是收入。因为数量随收入增加而增加，因此<strong>恩格尔曲线是向右上方倾斜的 (Upward sloping)</strong>。</p>
+                `;
+            } else {
+                xValDisplay.className = "text-3xl font-mono font-bold text-red-600";
+                conclusionDiv.innerHTML = `
+                    <h4 class="font-bold text-red-800 text-lg mb-2">☑ Inferior Good (劣等物品：Chips)</h4>
+                    <p>当收入 $I$ 增加时，消费者变得更富裕，反而减少了对低档商品 (Chips) 的消费，转而购买更多的高级替代品 (Fish, 对应Y轴)。因此目标商品需求量<strong class="text-red-700">下降 (Decreases)</strong>。</p>
+                    <p class="mt-2">反映在底部的恩格尔曲线上，随着纵轴(收入)的上升，横轴(消费量)反而向左收缩，因此<strong>恩格尔曲线是向左上方倾斜/向下倾斜的 (Downward sloping)</strong>。</p>
+                `;
+            }
+
+            // 3. 渲染图表1: 预算约束与消费者选择
+            bCtx.clearRect(0, 0, budgetCanvas.width, budgetCanvas.height);
+            drawAxes(bCtx, budgetCanvas.width, budgetCanvas.height, bxOrigin, byOrigin, "Good X", "Good Y");
+            
+            // 绘制轨迹线 (ICC)
+            bCtx.beginPath();
+            bCtx.strokeStyle = "#cbd5e1";
+            bCtx.lineWidth = 4;
+            for(let i = minI; i <= maxI; i+=5) {
+                let pt = calculateBundle(i, currentType);
+                if(i === minI) bCtx.moveTo(getBx(pt.x), getBy(pt.y));
+                else bCtx.lineTo(getBx(pt.x), getBy(pt.y));
+            }
+            bCtx.stroke();
+            bCtx.fillStyle = "#94a3b8";
+            bCtx.fillText("ICC", getBx(bundle.x) + 10, getBy(bundle.y) - 20);
+
+            // 绘制三条参考预算线 (50, 100, 150)
+            [50, 100, 150].forEach(I => {
+                bCtx.beginPath();
+                bCtx.moveTo(getBx(0), getBy(I/Py));
+                bCtx.lineTo(getBx(I/Px), getBy(0));
+                bCtx.strokeStyle = (I === currentI) ? "#16a34a" : "#e2e8f0";
+                bCtx.lineWidth = (I === currentI) ? 2 : 1;
+                bCtx.stroke();
+            });
+
+            // 绘制当前无差异曲线与最优解
+            drawIndifferenceCurve(bCtx, bundle.x, bundle.y, currentType === 'normal' ? '#3b82f6' : '#ef4444');
+            
+            // 当前切点
+            bCtx.beginPath();
+            bCtx.arc(getBx(bundle.x), getBy(bundle.y), 6, 0, Math.PI * 2);
+            bCtx.fillStyle = currentType === 'normal' ? '#1d4ed8' : '#b91c1c';
+            bCtx.fill();
+            bCtx.stroke();
+
+            // 辅助线
+            bCtx.beginPath();
+            bCtx.setLineDash([4, 4]);
+            bCtx.moveTo(getBx(bundle.x), getBy(bundle.y));
+            bCtx.lineTo(getBx(bundle.x), byOrigin);
+            bCtx.strokeStyle = "#94a3b8";
+            bCtx.stroke();
+            bCtx.setLineDash([]);
+
+
+            // 4. 渲染图表2: 恩格尔曲线
+            eCtx.clearRect(0, 0, engelCanvas.width, engelCanvas.height);
+            const xLabelE = currentType === 'normal' ? 'Fish (Normal)' : 'Chips (Inferior)';
+            drawAxes(eCtx, engelCanvas.width, engelCanvas.height, exOrigin, eyOrigin, xLabelE, "Income (I)");
+
+            // 绘制完整的恩格尔曲线
+            eCtx.beginPath();
+            const curveColor = currentType === 'normal' ? '#3b82f6' : '#ef4444';
+            eCtx.strokeStyle = curveColor;
+            eCtx.lineWidth = 3;
+            for(let i = minI; i <= maxI; i+=2) {
+                let pt = calculateBundle(i, currentType);
+                if(i === minI) eCtx.moveTo(getEx(pt.x), getEy(i));
+                else eCtx.lineTo(getEx(pt.x), getEy(i));
+            }
+            eCtx.stroke();
+
+            // 绘制当前点
+            eCtx.beginPath();
+            eCtx.arc(getEx(bundle.x), getEy(currentI), 6, 0, Math.PI * 2);
+            eCtx.fillStyle = currentType === 'normal' ? '#1d4ed8' : '#b91c1c';
+            eCtx.fill();
+            eCtx.strokeStyle = "white";
+            eCtx.stroke();
+
+            // 辅助线
+            eCtx.beginPath();
+            eCtx.setLineDash([4, 4]);
+            eCtx.moveTo(getEx(bundle.x), getEy(currentI));
+            eCtx.lineTo(getEx(bundle.x), eyOrigin);
+            eCtx.moveTo(getEx(bundle.x), getEy(currentI));
+            eCtx.lineTo(exOrigin, getEy(currentI));
+            eCtx.strokeStyle = "#94a3b8";
+            eCtx.stroke();
+            eCtx.setLineDash([]);
+
+            // 重新渲染可能的 LaTeX (虽然动态文字里去掉了LaTeX以防闪烁，但保留机制)
+            if (window.MathJax && MathJax.typesetPromise) {
+                MathJax.typesetPromise([conclusionDiv]).catch(err => console.log(err));
+            }
+        }
+
+        // 初始化
+        updateSimulation();
+    </script>
+</body>
+</html>

@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics 2526 - Week 1 Lecture Notes (Original)</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #005b96;
+            --accent-bg: #f4f4f4;
+            --border-color: #ddd;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 40px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #444;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+        .page-marker {
+            font-size: 0.8em;
+            color: #999;
+            text-align: right;
+            border-top: 1px dashed #ccc;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-top: 5px;
+        }
+
+        .page-divider {
+            border-top: 2px solid var(--secondary-color);
+            margin: 40px 0;
+        }
+
+        .copyright {
+            font-size: 0.8em;
+            color: #999;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .formula-box {
+            background-color: #f0f8ff;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .formula {
+            font-family: "Courier New", Courier, monospace;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background-color: #fff9e6;
+            border-left: 5px solid #f39c12;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .note-box {
+            background-color: #e8f5e8;
+            border-left: 5px solid #27ae60;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .tree-diagram {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .card-cell {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 8px 5px;
+            text-align: center;
+            font-size: 0.9em;
+            border-radius: 3px;
+        }
+
+        .card-cell.highlight {
+            background: #ffe6e6;
+            border-color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        .venn-diagram {
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .boxed-text {
+            border: 2px solid var(--primary-color);
+            padding: 10px 15px;
+            display: inline-block;
+            margin: 10px 0;
+            background: #fff;
+            border-radius: 5px;
+        }
+
+        .probability-exercise {
+            background: #e7f3ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        .fraction {
+            display: inline-block;
+            text-align: center;
+            vertical-align: middle;
+            margin: 0 5px;
+        }
+
+        .numerator {
+            border-bottom: 1px solid #000;
+            display: block;
+            padding: 0 5px;
+        }
+
+        .denominator {
+            display: block;
+            padding: 0 5px;
+        }
+
+        .bays-table {
+            margin: 30px auto;
+            width: auto;
+        }
+
+        .highlight {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Statistics 2526 - Week 1 Lecture Notes (Original)</h1>
+    <p class="text-center"><em>Complete Course Materials - 38 Pages + 2 Pages of Examples</em></p>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 1 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Probability — "the Language of Uncertainty and Variability"</h2>
+    <p class="text-center" style="font-style: italic;">(Spiegelhalter, 2019)</p>
+    <h3>Chapter 3</h3>
+
+    <div class="page-marker">Page 1 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 2 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Introduction</h2>
+
+    <h3>What has probability got to do with statistics?</h3>
+    <ul>
+        <li>Probability underlies <strong>statistical inference</strong> – the drawing of conclusions from a sample of data</li>
+        <li>If samples are drawn at random, their characteristics (such as the sample mean) depend upon chance</li>
+        <li>Hence, to understand how to interpret sample evidence, we need to understand chance, or probability</li>
+        <li>Besides, probability is fun! Most people have a poor intuitive grasp of probability so questions are often thought-provoking</li>
+    </ul>
+
+    <div class="page-marker">Page 2 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 3 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Probability and inference</h2>
+
+    <div class="formula-box" style="max-width: 400px; margin: 30px auto;">
+        <svg width="300" height="150" viewBox="0 0 300 150">
+            <!-- Population -->
+            <rect x="10" y="10" width="100" height="60" fill="#e3f2fd" stroke="#003366" stroke-width="2" rx="5"/>
+            <text x="60" y="45" text-anchor="middle" fill="#003366" font-weight="bold">Population</text>
+
+            <!-- Sample -->
+            <rect x="10" y="80" width="100" height="60" fill="#f8f9fa" stroke="#003366" stroke-width="2" rx="5"/>
+            <text x="60" y="115" text-anchor="middle" fill="#003366" font-weight="bold">Sample</text>
+
+            <!-- Probability -->
+            <rect x="190" y="10" width="100" height="60" fill="#fff3cd" stroke="#003366" stroke-width="2" rx="5"/>
+            <text x="240" y="45" text-anchor="middle" fill="#003366" font-weight="bold">Probability</text>
+
+            <!-- Sample data -->
+            <rect x="190" y="80" width="100" height="60" fill="#d1ecf1a" stroke="#003366" stroke-width="2" rx="5"/>
+            <text x="240" y="105" text-anchor="middle" fill="#003366" font-weight="bold">Sample data</text>
+
+            <!-- Inferences -->
+            <rect x="190" y="10" width="100" height="130" fill="none" stroke="#003366" stroke-width="2" stroke-dasharray="5,5" rx="5"/>
+            <text x="240" y="75" text-anchor="middle" fill="#d63384" font-weight="bold" transform="rotate(-90, 240, 75)">Inferences…</text>
+
+            <!-- Arrow: Sample to Probability -->
+            <path d="M 120 40 Q 150 40, 180 40" fill="none" stroke="#003366" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="150" y="35" text-anchor="middle" fill="#666" font-size="10">We need to understand this</text>
+
+            <!-- Arrow: Population to Inferences -->
+            <path d="M 120 110 Q 150 110, 180 110" fill="none" stroke="#003366" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="150" y="125" text-anchor="middle" fill="#666" font-size="10">in order to be able to do this</text>
+
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#003366"/>
+                </marker>
+            </defs>
+        </svg>
+    </div>
+
+    <div class="page-marker">Page 3 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 4 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>What is the probability of an event?</h2>
+
+    <h3>Frequentist view:</h3>
+    <p>The proportion of trials in which an outcome occurs, calculated as the number of trials approaches infinity.</p>
+
+    <h3>Subjective view:</h3>
+    <p>Someone's subjective degree of belief about the likelihood of an outcome occurring. However, you should update your beliefs in the light of evidence.</p>
+
+    <div class="formula-box">
+        <p>As number of coin tosses → ∞</p>
+        <div class="fraction" style="margin: 20px;">
+            <span class="numerator">Pr(number of heads)</span>
+            <span class="denominator">number of coin tosses</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 4 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 5 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Definitions of terms</h2>
+
+    <ul>
+        <li><strong>An experiment:</strong> an activity such as tossing a coin, which has a range of possible outcomes</li>
+        <li><strong>A trial:</strong> a single performance of the experiment</li>
+        <li><strong>The sample space:</strong> all possible outcomes of the experiment.
+            <ul>
+                <li>For a single toss of a coin the sample space is <span class="boxed-text">{Heads, Tails}</span></li>
+                <li>For rolling a die it is <span class="boxed-text">{1, 2, …, 6}</span></li>
+                <li>The outcomes are <strong>mutually exclusive</strong> – only one can arise from a single trial. You cannot get both heads and tails by tossing a coin!</li>
+            </ul>
+        </li>
+        <li><strong>An event:</strong> a combination of outcomes, for example:
+            <ul>
+                <li>Rolling a die and obtaining an even number</li>
+                <li>A roulette wheel ball landing on one of the red numbers</li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="page-marker">Page 5 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 6 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>The probability of an outcome</h2>
+
+    <p>With each outcome in the sample space we can associate a probability (calculated according to either the frequentist or subjective view).</p>
+
+    <h3>Example: England v Iceland at Euro 2016? (before the game…)</h3>
+
+    <div class="formula-box">
+        <table style="width: auto; margin: 0 auto; border: none;">
+            <tr>
+                <td style="border: none; padding: 5px 20px;">Pr(England win) =</td>
+                <td style="border: none; padding: 5px 20px;">0.85</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 5px 20px;">Pr(draw) =</td>
+                <td style="border: none; padding: 5px 20px;">0.10</td>
+            </tr>
+            <tr>
+                <td style="border: none; padding: 5px 20px;">Pr(Iceland win) =</td>
+                <td style="border: none; padding: 5px 20px;">0.05</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="page-marker">Page 6 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 7 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Rules for probabilities</h2>
+
+    <p>A probability is represented by a number. But there are restrictions on the numbers that can be used.</p>
+
+    <div class="note-box">
+        <ul>
+            <li><strong>0 ≤ Pr(A) ≤ 1</strong></li>
+            <li><strong>∑<sub>i</sub> p<sub>i</sub> = 1</strong>, summed over all outcomes</li>
+            <li><strong>Pr(not-A) = 1 − Pr(A)</strong></li>
+        </ul>
+    </div>
+
+    <div class="example-box">
+        <p><strong>The complement of event A</strong></p>
+        <div class="formula-box" style="max-width: 150px;">
+            <span class="formula">Pr(not-A) = 1 - Pr(A)</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 7 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 8 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Example – picking a card from a pack</h2>
+
+    <ul>
+        <li>The probability of picking any one card from a pack (e.g. King of Spades) is 1/52. This is same for each card</li>
+        <li><strong>0 ≤ Pr(King of Spades) ≤ 1</strong></li>
+        <li>Summing over all cards: 1/52 + 1/52 + ... = 1</li>
+        <li>Pr(not-King of Spades) = 51/52 = 1 − Pr(King of Spades)</li>
+    </ul>
+
+    <div class="formula-box" style="max-width: 200px;">
+        <span class="formula">∑<sub>i</sub> p<sub>i</sub> = 1</span>
+    </div>
+
+    <div class="page-marker">Page 8 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 9 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Compound events</h2>
+
+    <p>Combining one or more events, for example:</p>
+    <ul>
+        <li>The probability of drawing any King from pack</li>
+        <li>The probability of throwing a double six with two dice</li>
+        <li>The probability that a random sample of 100 people has a majority favouring Britain leaving the EU</li>
+    </ul>
+
+    <div class="note-box">
+        <p>Note that individual outcomes are (implicitly) combined using concepts '<strong>and</strong>' and '<strong>or</strong>':</p>
+        <ul>
+            <li>Pr(K of Spades <strong>or</strong> K of Hearts <strong>or</strong> K of Diamonds <strong>or</strong> K of Clubs)</li>
+            <li>Pr(six on first die <strong>and</strong> six on second)</li>
+            <li>Complicated but doable…</li>
+        </ul>
+    </div>
+
+    <div class="page-marker">Page 9 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 10 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Rules for calculating probabilities of compound events</h2>
+
+    <h3>1. The "or" rule: adding probabilities</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A or B) = Pr(A) + Pr(B)</span>
+    </div>
+
+    <h3>Example 1:</h3>
+    <p>The probability of rolling a five or six on a single roll of a die is:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(5 or 6) = Pr(5) + Pr(6) = 1/6 + 1/6 = 2/6 = 1/3</span>
+    </div>
+
+    <div class="example-box">
+        <h3>Example 2:</h3>
+        <p>Pr(any King) from a deck of cards:</p>
+        <div class="formula-box">
+            <span class="formula">1/52 + 1/52 + 1/52 + 1/52 = 4/52 = 1/13</span>
+        </div>
+        <p>Sample space: {1, 2, 3, 4, 5, 6}</p>
+    </div>
+
+    <div class="page-marker">Page 10 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 11 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>A complication…</h2>
+
+    <div class="warning-box">
+        <h3>The rule does not always work!</h3>
+        <p>If A and B can simultaneously occur, the previous formula gives the wrong answer...</p>
+    </div>
+
+    <h3>Example: Pr(King or Heart)</h3>
+    <p>Using the simple addition rule would give:</p>
+    <div class="formula-box">
+        <span class="formula">4/52 + 13/52 = 17/52</span>
+    </div>
+    <p><strong>But this is wrong!</strong> The King of Hearts is counted twice!</p>
+
+    <!-- Card Representation -->
+    <div class="card-grid">
+        <div class="card-cell">A</div>
+        <div class="card-cell">K</div>
+        <div class="card-cell">Q</div>
+        <div class="card-cell">J</div>
+        <div class="card-cell">10</div>
+        <div class="card-cell">9</div>
+        <div class="card-cell">8</div>
+        <div class="card-cell">7</div>
+        <div class="card-cell">6</div>
+        <div class="card-cell">5</div>
+        <div class="card-cell">4</div>
+        <div class="card-cell">3</div>
+        <div class="card-cell">2</div>
+    </div>
+    <p class="text-center"><small>Spades</small></p>
+
+    <div class="card-grid">
+        <div class="card-cell highlight">A</div>
+        <div class="card-cell highlight">K</div>
+        <div class="card-cell highlight">Q</div>
+        <div class="card-cell highlight">J</div>
+        <div class="card-cell highlight">10</div>
+        <div class="card-cell highlight">9</div>
+        <div class="card-cell highlight">8</div>
+        <div class="card-cell highlight">7</div>
+        <div class="card-cell highlight">6</div>
+        <div class="card-cell highlight">5</div>
+        <div class="card-cell highlight">4</div>
+        <div class="card-cell highlight">3</div>
+        <div class="card-cell highlight">2</div>
+    </div>
+    <p class="text-center"><small>Hearts (red suit) - King of Hearts counted twice!</small></p>
+
+    <p>16 dots are highlighted in the diagram. The correct answer is <strong>16/52</strong>, not 17/52.</p>
+
+    <div class="page-marker">Page 11 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 12 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>… and solution</h2>
+
+    <div class="note-box">
+        <p>Subtract (once) the double counted King of Hearts:</p>
+        <div class="formula-box">
+            <span class="formula">Pr(King or Heart) = 4/52 + 13/52 - 1/52 = 16/52</span>
+        </div>
+    </div>
+
+    <h3>The general formula:</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A or B) = Pr(A) + Pr(B) - Pr(A and B)</span>
+    </div>
+
+    <p>When A and B cannot occur simultaneously, Pr(A and B) = 0, and the rule simplifies to:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(A or B) = Pr(A) + Pr(B)</span>
+    </div>
+
+    <div class="page-marker">Page 12 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 13 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Second rule for combining probabilities</h2>
+
+    <h3>The "and" rule: multiply probabilities</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A and B) = Pr(A) × Pr(B)</span>
+    </div>
+
+    <h3>Example:</h3>
+    <p>The probability of obtaining a double-six when rolling two dice is:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(Six and Six) = Pr(Six) × Pr(Six) = 1/6 × 1/6 = 1/36</span>
+    </div>
+
+    <div class="page-marker">Page 13 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 14 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Another complication! Independence</h2>
+
+    <div class="example-box">
+        <h3>Example: Drawing two Aces from a pack of cards, without replacement</h3>
+        <ul>
+            <li>If first card drawn is an Ace (P = 4/52), that leaves 51 cards, of which 3 are Aces</li>
+            <li>The probability of drawing second Ace is 3/51, different from the probability of drawing the first Ace</li>
+            <li><strong>They are not independent events. The probability changes!</strong></li>
+        </ul>
+        <div class="formula-box">
+            <span class="formula">Pr(two Aces) = 4/52 × 3/51 = 12/2652 = 1/221</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 14 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 15 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Solution… conditional probability</h2>
+
+    <div class="note-box">
+        <p>3/51 is the probability of drawing an Ace <strong>given that</strong> an Ace was drawn as the first card.</p>
+        <p>This is called <strong>conditional probability</strong> and is written as:</p>
+        <div class="formula-box" style="max-width: 300px;">
+            <span class="formula">Pr(Second Ace | Ace on first draw)</span>
+        </div>
+        <p>To simplify notation, write as <strong>Pr(A₂|A₁)</strong></p>
+        <p>This is the probability of event A₂ occurring, given that A₁ has occurred.</p>
+    </div>
+
+    <div class="page-marker">Page 15 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 16 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Tree diagram for drawing two Aces, without replacement</h2>
+
+    <div class="tree-diagram">
+        <pre style="font-size: 14px; line-height: 2;">
+                    ┌── Ace (4/52) ──┬── Ace (3/51) ─→ {A, A}  Pr = 1/221
+        First Draw ──┤
+                    │              └── Not-A (48/51) ─→ {A, Not-A}  Pr = 12/221
+                    │
+                    └── Not-A (48/52) ──┬── Ace (4/51) ─→ {Not-A, A}  Pr = 12/221
+                                   └── Not-A (47/51) ─→ {Not-A, Not-A}  Pr = 188/221
+        </pre>
+        <p style="margin-top: 20px;">
+            Pr(A|A) = 3/51
+        </p>
+        <p>Pr(Not-A|A) = 48/51</p>
+    </div>
+
+    <div class="page-marker">Page 16 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 17 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Independence</h2>
+
+    <div class="note-box">
+        <p>From previous slide:</p>
+        <div class="formula-box" style="max-width: 200px;">
+            <span class="formula">Pr(A|A) = 3/51 ≠ Pr(A|Not-A) = 4/51</span>
+        </div>
+        <p><strong>Hence not independent!</strong></p>
+    </div>
+
+    <h3>For independence:</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A|A) = Pr(A|Not-A) = Pr(A)</span>
+    </div>
+
+    <div class="page-marker">Page 17 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 18 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Recap of rules</h2>
+
+    <h3>Addition rule ("or" rule):</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A or B) = Pr(A) + Pr(B) – Pr(A and B)</span>
+    </div>
+    <p>If mutually exclusive, then Pr(A and B) = 0 and rule simplifies to:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(A or B) = Pr(A) + Pr(B)</span>
+    </div>
+
+    <h3>Multiplication rule ("and" rule):</h3>
+    <div class="formula-box">
+        <span class="formula">Pr(A and B) = Pr(A) × Pr(B|A)</span>
+    </div>
+    <p>If independent, Pr(B|A) = Pr(B) and the rule simplifies to:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(A and B) = Pr(A) × Pr(B)</span>
+    </div>
+
+    <div class="page-marker">Page 18 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 19 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Example: 1 head in two tosses of a coin</h2>
+
+    <div class="example-box">
+        <p>More complicated probability events can be dealt with by combining rules:</p>
+        <p><strong>Pr(1 head in two tosses):</strong></p>
+        <ul>
+            <li>= Pr([H and T] or [T and H])</li>
+            <li>= Pr([H and T]) + Pr([T and H])</li>
+        </ul>
+        <div class="formula-box">
+            <span class="formula">= 1/2 × 1/2 + 1/2 × 1/2 = 1/4 + 1/4 = 1/2</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 19 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 20 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Tree diagram again</h2>
+
+    <div class="tree-diagram">
+        <pre style="font-size: 14px; line-height: 2;">
+                    ┌── H (1/2) ──┬── H (1/2) ─→ {H, H}  P = 1/4
+        First ──┤
+                    │              └── T (1/2) ─→ {H, T}  P = 1/4
+                    │
+                    └── T (1/2) ──┬── H (1/2) ─→ {T, H}  P = 1/4
+                                   └── T (1/2) ─→ {T, T}  P = 1/4
+        </pre>
+    </div>
+
+    <div class="note-box">
+        <p>Pr(1 head) = P(H,T) + P(T,H) = 1/4 + 1/4 = 1/2</p>
+    </div>
+
+    <div class="page-marker">Page 20 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 21 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Conditional Probability — When Our Probabilities Depend on Other Events</h2>
+
+    <div class="example-box">
+        <h3>Example: Breast Cancer Screening</h3>
+        <p>When screening for breast cancer, mammography is roughly 90% accurate, in the sense that:</p>
+        <ul>
+            <li>90% of women <strong>with</strong> cancer will be correctly classified (positive test)</li>
+            <li>90% of women <strong>without</strong> cancer will be correctly classified (negative test)</li>
+        </ul>
+        <p>Suppose 1% of women being screened actually have cancer. What is:</p>
+        <ol>
+            <li>The probability that a randomly chosen woman will have a positive mammogram?</li>
+            <li>If she does, what is the chance she really has cancer?</li>
+        </ol>
+        <p class="text-center"><em>Excerpt From "The Art of Statistics" by David Spiegelhalter</em></p>
+    </div>
+
+    <div class="page-marker">Page 21 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 22 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Understanding the problem</h2>
+
+    <div class="note-box">
+        <p>In the two-coins case, events were independent, in that the probability of flipping a head on the second flip did not depend on what the first flip was.</p>
+        <p>This example is somewhat more relevant to real life!</p>
+        <p>This kind of problem is a classic in intelligence tests and is not an easy problem to solve, but using the idea of <strong>expected frequency</strong> it becomes remarkably straightforward.</p>
+        <p><strong>The crucial idea is to think of what we would expect to happen to a large group of women, say 1,000</strong>, as shown in the diagram.</p>
+    </div>
+
+    <div class="page-marker">Page 22 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 23 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Expected Frequency Table (Figure 8.4)</h2>
+
+    <!-- Tree Diagram for Breast Cancer Screening -->
+    <div class="tree-diagram">
+        <pre style="font-size: 12px; line-height: 1.8;">
+                          ┌── Has Cancer (1%) ──┬── Positive Test (90%) ─→ 9 women
+                          │                    └── Negative Test (10%) ─→ 1 woman
+                          │
+        1,000 Women ──┤
+                          │                    ┌── Positive Test (10%) ─→ 99 women
+                          └── No Cancer (99%) ──┤
+                                               └── Negative Test (90%) ─→ 891 women
+        </pre>
+    </div>
+
+    <div class="page-marker">Page 23 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 24 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Analysis of the expected frequency</h2>
+
+    <div class="probability-exercise">
+        <h3>Expected Results for 1,000 Women:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Number of Women</th>
+                    <th>Test Result</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Has cancer (1%)</td>
+                    <td>10</td>
+                    <td>9 positive (90%), 1 negative (10%)</td>
+                </tr>
+                <tr>
+                    <td>No cancer (99%)</td>
+                    <td>990</td>
+                    <td>99 positive (10%), 891 negative (90%)</td>
+                </tr>
+                <tr style="background-color: #e7f3ff;">
+                    <td><strong>TOTAL</strong></td>
+                    <td><strong>1,000</strong></td>
+                    <td><strong>108 positive, 892 negative</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-marker">Page 24 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 25 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Results and Interpretation</h2>
+
+    <div class="example-box">
+        <ul>
+            <li>Out of 1,000 women, <strong>10 (1%)</strong> actually have breast cancer</li>
+            <li>Of these 10, <strong>9 (90%)</strong> have a positive result</li>
+            <li>But out of 990 women without cancer, <strong>99 (10%)</strong> are falsely given a positive mammography result</li>
+        </ul>
+        <p>Putting these together makes a total of <strong>9 + 99 = 108</strong> positive mammograms</p>
+    </div>
+
+    <div class="note-box">
+        <h3>Key Findings:</h3>
+        <ul>
+            <li>Probability of a positive result: 108/1,000 = <strong>10.8%</strong></li>
+            <li>But of these 108 with positive results, only <strong>9</strong> truly have cancer</li>
+            <li>Probability that a woman with a positive test actually has cancer: 9/108 = <strong>8.3%</strong></li>
+        </ul>
+    </div>
+
+    <div class="page-marker">Page 25 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 26 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Counter-intuitive results</h2>
+
+    <div class="warning-box">
+        <h3>Important Lessons:</h3>
+        <p>This exercise in conditional probability helps us understand a very counter-intuitive result: <strong>in spite of the "90% accuracy" of the scan, the vast majority of women with a positive mammogram do not have breast cancer.</strong></p>
+        <ul>
+            <li>It is easy to confuse <strong>the probability of a positive test, given cancer</strong>, with <strong>the probability of cancer, given a positive test</strong>.</li>
+            <li>Pr(Positive | Cancer) = 90%</li>
+            <li>Pr(Cancer | Positive) ≈ 8%</li>
+        </ul>
+    </div>
+
+    <p>This type of confusion is popularly known as the <strong>prosecutor's fallacy</strong>, since it is so prevalent in court cases involving DNA.</p>
+
+    <div class="page-marker">Page 26 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 27 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>The Prosecutor's Fallacy Explained</h2>
+
+    <div class="example-box">
+        <h3>DNA Evidence Example:</h3>
+        <p>A forensic expert might claim, for example, that <em>"if the accused is innocent, there is only a 1 in a billion chance that they would match the DNA found at the crime scene."</em></p>
+        <p><strong>But this is wrongly interpreted as meaning:</strong> <em>"given the DNA evidence, there is only a 1 in a billion chance that the accused is innocent."</em></p>
+    </div>
+
+    <div class="note-box">
+        <h3>The Logical Flaw:</h3>
+        <p>It is an easy mistake to make, but the logic is as faulty as going from the statement:</p>
+        <div class="formula-box" style="max-width: 300px;">
+            <span class="formula">"If you're the Pope, then you're a Catholic"</span>
+        </div>
+        <p>to the statement:</p>
+        <div class="formula-box" style="max-width: 350px;">
+            <span class="formula">"If you're a Catholic, then you're the Pope"</span>
+        </div>
+        <p>where the flaw is somewhat simpler to spot!</p>
+    </div>
+
+    <div class="page-marker">Page 27 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 28 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>But it soon gets complicated…</h2>
+
+    <div class="example-box">
+        <h3>More Complex Probability Problems:</h3>
+        <ul>
+            <li>Pr(3 Heads in 5 tosses)?</li>
+            <li>Pr(30 Heads in 50 tosses)?</li>
+        </ul>
+        <p><strong>How many routes?</strong></p>
+        <p>For 30 heads in 50 tosses we need… <strong>47 thousand billion routes</strong> lead to this result!!</p>
+        <p>Drawing takes too much time. <strong>We need a formula...</strong></p>
+    </div>
+
+    <div class="page-marker">Page 28 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 29 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>The combinatorial formula</h2>
+
+    <h3>The combination formula:</h3>
+    <div class="formula-box">
+        <p>The combinatorial formula gives the number of routes through the diagram:</p>
+        <span class="formula">
+            <sup>n</sup>C<sub>r</sub> = n! / [r! × (n - r)!]
+        </span>
+    </div>
+
+    <p>where:</p>
+    <ul>
+        <li><strong>n</strong> = total number of items</li>
+        <li><strong>r</strong> = number of items to choose</li>
+    </ul>
+
+    <h3>Example:</h3>
+    <div class="example-box">
+        <p>From 5 elements {A, B, C, D, E}, choose 3 (in any order):</p>
+        <div class="formula-box">
+            <span class="formula">
+                <sup>5</sup>C<sub>3</sub> = 5! / [3! × (5-3)!] = 5! / (3! × 2!) = 10
+            </span>
+        </div>
+        <p>The 10 combinations are:</p>
+        <table style="max-width: 300px; margin: 0 auto;">
+            <tr><td>1. ABC</td><td>2. ABD</td></tr>
+            <tr><td>3. ABE</td><td>4. ACD</td></tr>
+            <tr><td>5. ACE</td><td>6. ADE</td></tr>
+            <tr><td>7. BCD</td><td>8. BDE</td></tr>
+            <tr><td>9. BDF</td><td>10. CDE</td></tr>
+        </table>
+    </div>
+
+    <p><strong>nCr</strong> gives the number of ways of choosing r elements (in any order) from a set of n elements.</p>
+
+    <div class="page-marker">Page 29 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 30 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>The combinatorial formula (continued)</h2>
+
+    <div class="note-box">
+        <p>We can write the probability of 1 Head in 2 tosses as:</p>
+        <div class="formula-box">
+            <span class="formula">Pr(2 Heads) = ½ × ½ × <sup>2</sup>C<sub>1</sub> = ¼ × 2 = ½</span>
+        </div>
+        <p>We can formalise this in the <strong>Binomial distribution</strong>...</p>
+        <ul>
+            <li>the number of possible orderings = <sup>n</sup>C<sub>r</sub></li>
+            <li>the probability of a head and a tail (in that order) = ½ × ½</li>
+        </ul>
+    </div>
+
+    <div class="formula-box">
+        <span class="formula">Pr(1 Head in 2 tosses) = ½ × ½ × <sup>2</sup>C<sub>1</sub> = 1/2</span>
+    </div>
+
+    <div class="page-marker">Page 30 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 31 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>The Binomial Distribution</h2>
+
+    <div class="formula-box">
+        <h3>Binomial Distribution Formula:</h3>
+        <p>If we define <strong>P</strong> as the probability of Heads, and hence <strong>(1 – P)</strong> is the probability of Tails, we can write:</p>
+        <span class="formula">
+            Pr(r Heads) = <sup>n</sup>C<sub>r</sub> × P<sup>r</sup> × (1 - P)<sup>n-r</sup>
+        </span>
+    </div>
+
+    <p>This is the formula for the <strong>Binomial distribution</strong>. It summarises the calculation to use in all probability problems of this type.</p>
+    <p>It gives the probability of obtaining r heads and only requires information about the two parameters, <strong>n</strong> and <strong>P</strong>.</p>
+
+    <div class="page-marker">Page 31 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 32 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Binomial Distribution - Example</h2>
+
+    <div class="example-box">
+        <h3>Calculate P(3 heads in 5 tosses):</h3>
+        <ul>
+            <li>n = 5</li>
+            <li>r = 3</li>
+            <li>P = ½</li>
+        </ul>
+        <div class="formula-box">
+            <span class="formula">
+                Pr(3 Heads) = <sup>5</sup>C<sub>3</sub> × (½)<sup>3</sup> × (½)<sup>2</sup>
+            </span>
+        </div>
+        <p>Step by step calculation:</p>
+        <table>
+            <tr>
+                <td><sup>5</sup>C<sub>3</sub></td>
+                <td>= 5! / (3! × 2!) = 10</td>
+            </tr>
+            <tr>
+                <td>(½)<sup>3</sup></td>
+                <td>= 1/8</td>
+            </tr>
+            <tr>
+                <td>(½)<sup>2</sup></td>
+                <td>= 1/4</td>
+            </tr>
+            <tr style="background-color: #e7f3ff;">
+                <td><strong>Pr(3 Heads)</strong></td>
+                <td><strong>= 10 × 1/8 × 1/4 = 10/32 = 5/16 = 0.3125</strong></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="page-marker">Page 32 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 33 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Appendix: Why does the combinatorial formula work?</h2>
+
+    <div class="note-box">
+        <h3>Example: Three girls in five births</h3>
+        <p>Three girls to fill three of five places. Let's name them: Amanda, Bridget, Caroline.</p>
+        <ul>
+            <li>For Amanda, there is a choice of <strong>five places</strong></li>
+            <li>For Bridget, there is a choice of <strong>four places</strong></li>
+            <li>For Caroline, there is a choice of <strong>three places</strong></li>
+        </ul>
+        <p>There are <strong>5 × 4 × 3 = 60</strong> possible orderings (two boys take the remaining two places).</p>
+        <p>60 is the number of permutations of three named girls in five births. This is written as:</p>
+        <div class="formula-box">
+            <span class="formula"><sup>5</sup>P<sub>3</sub> = 5! / (5-3)! = 60</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 33 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 34 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>General Permutation Formula</h2>
+
+    <div class="formula-box">
+        <h3>Permutation Formula:</h3>
+        <span class="formula">
+            <sup>n</sup>P<sub>r</sub> = n × (n-1) × ... × (n-r+1) = n! / (n-r)!
+        </span>
+    </div>
+
+    <p>A simpler formula can be obtained by dividing and multiplying by (n-r)!</p>
+    <div class="formula-box">
+        <span class="formula">
+            <sup>n</sup>P<sub>r</sub> = <sup>n</sup>C<sub>r</sub> × r!
+        </span>
+    </div>
+
+    <div class="page-marker">Page 34 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 35 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>What is the difference between nPr and nCr?</h2>
+
+    <div class="example-box">
+        <p><strong>Combination does not distinguish between the girls:</strong> Two cases {A, B, C, boy, boy} and {B, A, C, boy, boy} are the same.</p>
+        <p>So <strong>nPr is larger than nCr</strong> by a factor of the number of ways of ordering the r chosen items.</p>
+        <p>This factor is given by <strong>r!</strong> = r × (r-1) × ... × 1 = 3 × 2 × 1 = 6 (for r=3).</p>
+        <div class="formula-box">
+            <span class="formula"><sup>n</sup>P<sub>r</sub> = <sup>n</sup>C<sub>r</sub> × r!</span>
+        </div>
+    </div>
+
+    <h3>Example: Probability of three girls and two boys in a family of five children?</h3>
+    <div class="note-box">
+        <p>The different arrangements are:</p>
+        <p>GGGBB; GGBGB; GGBBG; GBGGB; GBGBG;</p>
+        <p>GBBGG; BGGGB; BGGBG; BGBGG; BBGGG.</p>
+        <p>That's <strong>10</strong> different arrangements, which equals <sup>5</sup>C<sub>3</sub>.</p>
+        <div class="formula-box">
+            <span class="formula">Probability = 10 × (½)<sup>5</sup> = 10/32 = 5/16</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Page 35 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 36 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Bayes' Theorem</h2>
+
+    <div class="example-box">
+        <h3>An example of the use of conditional probabilities:</h3>
+        <p>A ball is drawn at random from one of the boxes below. It is red.</p>
+        <p><strong>Which box is it more likely to have come from?</strong></p>
+
+        <div style="display: flex; justify-content: space-around; margin: 30px 0;">
+            <div style="text-align: center;">
+                <div style="width: 100px; height: 100px; border: 3px solid #003366; border-radius: 10px; display: inline-block; line-height: 100px; font-weight: bold; font-size: 1.2em;">
+                    Box A<br>
+                    <span style="color: #e74c3c;">RRR</span><br>
+                    <span style="color: #3498db;">BBB</span>
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <div style="width: 100px; height: 100px; border: 3px solid #003366; border-radius: 10px; display: inline-block; line-height: 100px; font-weight: bold; font-size: 1.2em;">
+                    Box B<br>
+                    <span style="color: #e74c3c;">RRR</span><br>
+                    <span style="color: #e74c3c;">R</span>
+                </div>
+            </div>
+        </div>
+
+        <p>Intuitively, it seems more likely to have come from Box A. But what is the precise probability? <strong>Bayes' theorem answers this question!</strong></p>
+    </div>
+
+    <div class="page-marker">Page 36 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 37 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Bayes' Theorem Solution</h2>
+
+    <div class="formula-box">
+        <h3>Bayes' Theorem Formula:</h3>
+        <span class="formula">Pr(A|R) = [Pr(R|A) × Pr(A)] / Pr(R)</span>
+    </div>
+
+    <p>We require <strong>Pr(A|R)</strong>. This can be written:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(A|R) = [Pr(R|A) × Pr(A)] / [Pr(R|A) × Pr(A) + Pr(R|B) × Pr(B)]</span>
+    </div>
+
+    <p>Similarly, Pr(B|R) can be calculated:</p>
+    <div class="formula-box">
+        <span class="formula">Pr(B|R) = [Pr(R|B) × Pr(B)] / [Pr(R|A) × Pr(A) + Pr(R|B) × Pr(B)]</span>
+    </div>
+
+    <div class="page-marker">Page 37 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 38 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Applying Bayes' Theorem</h2>
+
+    <div class="note-box">
+        <h3>From the boxes example:</h3>
+        <table class="bays-table">
+            <thead>
+                <tr>
+                    <th>Box</th>
+                    <th>Pr(Box)</th>
+                    <th>Pr(Red|Box)</th>
+                    <th>Prior × Likelihood</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>1/2</td>
+                    <td>3/5 = 0.6</td>
+                    <td>0.5 × 0.6 = 0.30</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>1/2</td>
+                    <td>1/4 = 0.25</td>
+                    <td>0.5 × 0.25 = 0.125</td>
+                </tr>
+                <tr style="background-color: #e7f3ff; font-weight: bold;">
+                    <td>Total</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>0.425</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Posterior probabilities:</h3>
+        <ul>
+            <li><strong>Pr(A|R)</strong> = 0.30 / 0.425 = 0.706 ≈ 70.6%</li>
+            <li><strong>Pr(B|R)</strong> = 0.125 / 0.425 = 0.294 ≈ 29.4%</li>
+        </ul>
+    </div>
+
+    <div class="page-marker">Page 38 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 39 -->
+    <!-- ========================================================================== -->
+
+    <h2>Prior and Posterior Probabilities</h2>
+
+    <div class="example-box">
+        <h3>Summary of the Bayes' Theorem Process:</h3>
+        <table class="bays-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Prior Probabilities</th>
+                    <th>Likelihoods</th>
+                    <th>Prior × Likelihood</th>
+                    <th>Posterior Probabilities</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>A</strong></td>
+                    <td>0.5</td>
+                    <td>0.6</td>
+                    <td>0.30</td>
+                    <td><strong>0.30 / 0.45 = 2/3 ≈ 66.7%</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>B</strong></td>
+                    <td>0.5</td>
+                    <td>0.3</td>
+                    <td>0.15</td>
+                    <td><strong>0.15 / 0.45 = 1/3 ≈ 33.3%</strong></td>
+                </tr>
+                <tr style="background-color: #e7f3ff;">
+                    <td><strong>Total</strong></td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><strong>0.45</strong></td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="note-box">
+        <h3>Key Concept:</h3>
+        <p><strong>Posterior probability = (Likelihood × Prior probability) / Sum of (Likelihood × Prior)</strong></p>
+        <p>This formula tells us how to update our beliefs (prior probabilities) in light of new evidence (likelihoods).</p>
+    </div>
+
+    <div class="page-marker">Page 39 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- PAGE 40 -->
+    <!-- ========================================================================== -->
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+    <h2>Lessons</h2>
+
+    <div class="example-box">
+        <h3>Summary of Key Concepts:</h3>
+        <ol>
+            <li><strong>Probability theory builds upon simple foundations</strong> – probability of an outcome, complement, etc.</li>
+            <li><strong>There are basic rules to avoid contradictions</strong> – 0 ≤ P ≤ 1, for example</li>
+            <li><strong>More complex events can be addressed using addition and multiplication rules</strong> for probabilities</li>
+            <li><strong>Independence of events simplifies rules and any analysis</strong></li>
+            <li><strong>These rules lead on to probability distributions</strong> such as the Binomial</li>
+            <li><strong>Bayes' theorem tells us how to update probabilities</strong> in light of evidence</li>
+        </ol>
+    </div>
+
+    <div class="page-marker">Page 40 of 40</div>
+
+    <!-- ========================================================================== -->
+    <!-- APPENDIX: L1 EXAMPLE ON PERMUTATIONS -->
+    <!-- ========================================================================== -->
+
+    <div class="page-divider"></div>
+    <h2 style="text-align: center;">Appendix: L1 Example on Permutations</h2>
+
+    <div class="copyright">Copyright © 2018, 2013, 2009 Pearson Education, Inc. All Rights Reserved</div>
+
+    <h3>Example</h3>
+    <p>On how many ways can the letters of the word "COMPUTER" be arranged such that <strong>Vowels occupy the even positions</strong> (the vowels can occupy only even positions)?</p>
+
+    <div class="note-box">
+        <h3>Analysis of the Problem:</h3>
+        <p>The word "COMPUTER" has <strong>8 letters</strong>. There are <strong>5 consonants</strong> and <strong>3 vowels</strong> in it.</p>
+
+        <p>Writing in the following way makes it easier to solve these types of questions:</p>
+        <div class="formula-box">
+            <table style="border: none;">
+                <tr><td style="border: none; padding: 10px;">(1)</td><td style="border: none; padding: 10px;">(2)</td><td style="border: none; padding: 10px;">(3)</td><td style="border: none; padding: 10px;">(4)</td><td style="border: none; padding: 10px;">(5)</td><td style="border: none; padding: 10px;">(6)</td><td style="border: none; padding: 10px;">(7)</td><td style="border: none; padding: 10px;">(8)</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="page-marker">Appendix Page 1 of 2</div>
+
+    <!-- ========================================================================== -->
+    <!-- APPENDIX PAGE 2 -->
+    <!-- ========================================================================== -->
+
+    <h3>Solution - Step by Step</h3>
+
+    <div class="note-box">
+        <p><strong>Step 1:</strong> There are 4 positions available for Vowels (positions 2, 4, 6, 8).</p>
+        <p>The number of ways 3 vowels can occur in 4 different places is:</p>
+        <div class="formula-box">
+            <span class="formula"><sup>4</sup>P<sub>3</sub> = 4! / (4-3)! = 4! = 24 ways</span>
+        </div>
+
+        <p><strong>Step 2:</strong> After 3 vowels take 3 places, the number of ways 5 consonants can take the 5 remaining places is:</p>
+        <div class="formula-box">
+            <span class="formula"><sup>5</sup>P<sub>5</sub> = 5! = 120 ways</span>
+        </div>
+
+        <p><strong>Step 3:</strong> Therefore, the total number of possible permutations is:</p>
+        <div class="formula-box">
+            <span class="formula">24 × 120 = 2,880 ways</span>
+        </div>
+    </div>
+
+    <div class="page-marker">Appendix Page 2 of 2</div>
+
+    <!-- ========================================================================== -->
+    <!-- END OF DOCUMENT -->
+    <!-- ========================================================================== -->
+
+    <div style="background-color: #e6f7ff; padding: 20px; border-radius: 5px; margin-top: 40px;">
+        <h3 style="margin-top: 0;">END OF WEEK 1 LECTURE MATERIALS</h3>
+        <p>This document contains <strong>38 pages</strong> of the main Statistics 2526 textbook plus <strong>2 pages</strong> of permutation examples.</p>
+        <p>All content has been preserved in its original form without modification or simplification.</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交叉价格效应：替代品与互补品</title>
+    <script>
+        MathJax = {
+            tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --primary-blue: #2c3e50;
+            --highlight-sub: #d35400; 
+            --highlight-comp: #27ae60; 
+            --bg-color: #f4f6f9;
+            --slider-color: #d35400; 
+        }
+        body {
+            font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            margin-top: 0;
+        }
+        .container {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            max-width: 1300px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .left-panel {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .right-panel {
+            flex: 1;
+            padding: 20px;
+            background: #fdfdfd;
+            border-left: 3px solid var(--primary-blue);
+            border-radius: 0 8px 8px 0;
+            overflow-y: auto;
+            max-height: 800px;
+        }
+        .controls {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid var(--primary-blue);
+            background: white;
+            color: var(--primary-blue);
+            border-radius: 6px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        button#btn-sub:hover, button#btn-sub.active {
+            background: var(--highlight-sub);
+            border-color: var(--highlight-sub);
+            color: white;
+        }
+        button#btn-comp:hover, button#btn-comp.active {
+            background: var(--highlight-comp);
+            border-color: var(--highlight-comp);
+            color: white;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 5px;
+            width: 100%;
+            justify-content: center;
+        }
+        .slider-label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 250px;
+            height: 16px;
+            border-radius: 8px;
+            border: 2px solid var(--slider-color);
+            background: linear-gradient(to right, var(--slider-color) var(--percent, 100%), #f1f5f9 var(--percent, 100%));
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--slider-color);
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(0,0,0,0.3);
+            transition: background-color 0.3s;
+        }
+
+        /* ----- 核心修复部分 ----- */
+        .chart-box {
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            border-radius: 8px;
+            position: relative;
+            padding-top: 40px; /* 新增：顶部增加 40px 内边距，把下面的 SVG 挤下去 */
+            width: 100%;
+            max-width: 500px;
+        }
+        .chart-title {
+            position: absolute;
+            top: 12px; /* 稍微调整居中 */
+            left: 15px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        /* ---------------------- */
+
+        svg {
+            display: block;
+            width: 100%;
+        }
+        
+        .explanation-block {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .explanation-block.active {
+            display: block;
+        }
+        .formula-box {
+            background: #edf2f7;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+            border-left: 4px solid var(--primary-blue);
+        }
+        h3 {
+            color: var(--primary-blue);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        .example-box {
+            background: #fff8e1;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 0.95em;
+            margin-top: 10px;
+            border: 1px dashed #f39c12;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>交叉价格效应 (Cross-price effects)</h1>
+        <p>替代品与互补品 (Substitutes and Complements in consumption)</p>
+    </div>
+
+    <div class="container">
+        <div class="left-panel">
+            
+            <div class="controls">
+                <button id="btn-sub" class="active" onclick="setGoodType('sub')">替代品 (Substitutes)</button>
+                <button id="btn-comp" onclick="setGoodType('comp')">互补品 (Complements)</button>
+            </div>
+
+            <div class="slider-container">
+                <div class="slider-label">提高商品 X 的价格 $P_X$ (使预算线旋转):</div>
+                <input type="range" id="price-slider" min="0" max="100" value="100">
+            </div>
+
+            <div class="chart-box">
+                <div class="chart-title">图1：预算线旋转与最优消费组合</div>
+                <svg id="chart1" viewBox="0 0 500 300">
+                    <defs>
+                        <marker id="arrowhead1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                        </marker>
+                    </defs>
+                    <line x1="50" y1="250" x2="480" y2="250" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+                    <line x1="50" y1="250" x2="50" y2="20" stroke="#333" stroke-width="2" marker-end="url(#arrowhead1)"/>
+                    <text x="430" y="270" font-weight="bold" font-size="14">商品 X / 年</text>
+                    <text x="10" y="15" font-weight="bold" font-size="14">商品 Y / 年</text>
+
+                    <line x1="50" y1="50" x2="350" y2="250" stroke="#000" stroke-width="2" />
+                    <text x="355" y="245" fill="#000" font-weight="bold">B₁</text>
+
+                    <line id="line-b2" x1="50" y1="50" x2="200" y2="250" stroke="#3498db" stroke-width="2" />
+                    <text id="text-b2" x="205" y="245" fill="#3498db" font-weight="bold">B₂</text>
+
+                    <path d="M 120 70 Q 200 150 330 220" fill="none" stroke="#2c3e50" stroke-width="2" />
+                    <circle cx="200" cy="150" r="5" fill="#000" />
+                    <text x="210" y="145" font-weight="bold">e₁</text>
+                    <line x1="200" y1="150" x2="200" y2="250" stroke="#999" stroke-dasharray="4,4" />
+                    <line x1="50" y1="150" x2="200" y2="150" stroke="#999" stroke-dasharray="4,4" />
+                    
+                    <path id="curve-u2" fill="none" stroke="#e74c3c" stroke-width="2.5" />
+                    <circle id="point-e2" r="6" fill="#e74c3c" />
+                    <text id="text-e2" font-weight="bold" fill="#e74c3c">e₂</text>
+                    <line id="line-x2" stroke="#e74c3c" stroke-dasharray="4,4" />
+                    <line id="line-y2" stroke="#e74c3c" stroke-dasharray="4,4" />
+                </svg>
+            </div>
+
+            <div class="chart-box">
+                <div class="chart-title">图2：商品 Y 的需求曲线移动</div>
+                <svg id="chart2" viewBox="0 0 500 250">
+                    <defs>
+                        <marker id="arrowhead2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+                        </marker>
+                        <marker id="arrow-shift" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+                            <path id="arrow-shift-path" d="M 0 0 L 10 5 L 0 10 z" fill="#8e44ad" />
+                        </marker>
+                    </defs>
+                    <line x1="50" y1="200" x2="480" y2="200" stroke="#333" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <line x1="50" y1="200" x2="50" y2="20" stroke="#333" stroke-width="2" marker-end="url(#arrowhead2)"/>
+                    <text x="400" y="220" font-weight="bold" font-size="14">商品 Y 需求量</text>
+                    <text x="10" y="15" font-weight="bold" font-size="14">商品 Y 价格</text>
+
+                    <path d="M 150 50 Q 200 120 350 180" fill="none" stroke="#333" stroke-width="2.5" />
+                    <text x="360" y="180" font-weight="bold">d (初始)</text>
+
+                    <path id="demand-curve" fill="none" stroke="#8e44ad" stroke-width="3" />
+                    <text id="text-d2" font-weight="bold" fill="#8e44ad">d' (变动后)</text>
+
+                    <line id="demand-arrow" y1="120" y2="120" stroke="#8e44ad" stroke-width="3" stroke-dasharray="5,5" marker-end="url(#arrow-shift)" />
+                </svg>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <h2>概念指南 (Theoretical Guide)</h2>
+            <p><b>交叉价格效应 (Cross-price effect)</b> 衡量的是一种商品（如商品X）的价格变化，对另一种相关商品（如商品Y）消费量的影响。</p>
+            
+            <p>我们在图1中设定：<b>商品X的价格上升了</b>。这导致预算约束线（Budget Constraint）的X轴截距变小，从黑色的 $B_1$ 向内旋转为蓝色的 $B_2$。商品Y的价格保持不变（Y轴截距不动）。</p>
+
+            <div class="formula-box">
+                <b>交叉价格弹性公式 (Cross-Price Elasticity):</b><br>
+                $$E_{XY} = \frac{\% \Delta Q_Y}{\% \Delta P_X} = \frac{\Delta Q_Y / Q_Y}{\Delta P_X / P_X}$$
+            </div>
+
+            <hr>
+
+            <div id="desc-sub" class="explanation-block active">
+                <h3 style="color: var(--highlight-sub)">分析：替代品 (Substitutes in Consumption)</h3>
+                <p>当商品X的价格上升时，由于X变得更昂贵，消费者会转而寻找它的替代选择，从而<b>增加对商品Y的消费</b>。</p>
+                <ul>
+                    <li><b>图1表现：</b> 最优点从 $e_1$ 移动到 $e_2$。此时 $e_2$ 位于更高的纵坐标位置，代表<b>商品Y的数量增加</b>（$\Delta Q_Y > 0$）。</li>
+                    <li><b>图2表现：</b> 因为在商品Y的任何给定价格下，人们现在都需要买更多的Y，所以商品Y的<b>需求曲线整体向外（右）平移</b> (Shifts outwards)。</li>
+                </ul>
+                <div class="formula-box">
+                    结论：对于替代品，<b>交叉价格弹性 $E_{XY} > 0$</b>。<br>
+                    ($P_X \uparrow \implies Q_Y \uparrow$)
+                </div>
+                <div class="example-box">
+                    <b>真实案例 (Source: PDF Slide 5 & 9)</b><br>
+                    当**海洛因 (Heroin, 商品X)**的价格上升时，消费者对替代药物**美沙酮 (Methadone, 商品Y)**的需求量会增加。美沙酮的需求曲线会向外侧平移 (Shifts outwards)。
+                </div>
+            </div>
+
+            <div id="desc-comp" class="explanation-block">
+                <h3 style="color: var(--highlight-comp)">分析：互补品 (Complements in Consumption)</h3>
+                <p>当商品X的价格上升时，由于人们必须将X和Y搭配使用，X买得少了，连带着<b>也会减少对商品Y的消费</b>。</p>
+                <ul>
+                    <li><b>图1表现：</b> 最优点从 $e_1$ 移动到 $e_2$。此时 $e_2$ 位于更低的纵坐标位置，代表<b>商品Y的数量减少</b>（$\Delta Q_Y < 0$）。</li>
+                    <li><b>图2表现：</b> 商品Y在各个价格下的需求量都萎缩了，因此商品Y的<b>需求曲线整体向内（左）平移</b> (Shifts inwards)。</li>
+                </ul>
+                <div class="formula-box">
+                    结论：对于互补品，<b>交叉价格弹性 $E_{XY} < 0$</b>。<br>
+                    ($P_X \uparrow \implies Q_Y \downarrow$)
+                </div>
+                <div class="example-box">
+                    <b>真实案例 (Source: PDF Slide 6 & 8)</b><br>
+                    当**除草剂 (Weed-killer, 商品X)**的价格上升时，农民购买除草剂变少，相应的连带**肥料 (Fertilizer, 商品Y)**的消费也减少。肥料的需求曲线会向内侧平移 (Shifts inwards)。
+                </div>
+            </div>
+            
+            <p style="margin-top:20px; color:#555; font-size:0.9em;">
+                <i>* 注：如果一种商品价格的变化对另一种商品没有任何影响，则这两种商品在消费上是**无关的 (Unrelated)**，需求曲线不发生平移。</i>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const base = {
+            b2_x: 350,
+            e2: { x: 200, y: 150 },
+            u2Path: [120, 70, 200, 150, 330, 220],
+            demandPath: [150, 50, 200, 120, 350, 180],
+            d2Label: { x: 360, y: 180 },
+            arrow: { x2: 220 }
+        };
+
+        const targetData = {
+            sub: { 
+                b2_x: 200, 
+                e2: { x: 155, y: 110 }, 
+                u2Path: [80, 50, 155, 110, 230, 190],
+                demandPath: [220, 50, 270, 120, 420, 180], 
+                d2Label: { x: 430, y: 180 },
+                arrow: { x2: 290 } 
+            },
+            comp: { 
+                b2_x: 200, 
+                e2: { x: 95, y: 190 }, 
+                u2Path: [60, 110, 95, 190, 180, 240],
+                demandPath: [80, 50, 130, 120, 280, 180], 
+                d2Label: { x: 290, y: 180 },
+                arrow: { x2: 150 } 
+            }
+        };
+
+        let currentType = 'sub';
+        const slider = document.getElementById('price-slider');
+
+        function updateVisuals() {
+            const val = slider.value;
+            slider.style.setProperty('--percent', val + '%');
+
+            const t = val / 100;
+            const tg = targetData[currentType];
+            
+            const currentB2x = base.b2_x + (tg.b2_x - base.b2_x) * t;
+            document.getElementById('line-b2').setAttribute('x2', currentB2x);
+            document.getElementById('text-b2').setAttribute('x', currentB2x + 5);
+            document.getElementById('line-b2').style.opacity = t === 0 ? 0 : 1;
+            document.getElementById('text-b2').style.opacity = t === 0 ? 0 : 1;
+
+            const ex = base.e2.x + (tg.e2.x - base.e2.x) * t;
+            const ey = base.e2.y + (tg.e2.y - base.e2.y) * t;
+            document.getElementById('point-e2').setAttribute('cx', ex);
+            document.getElementById('point-e2').setAttribute('cy', ey);
+            document.getElementById('text-e2').setAttribute('x', ex + 8);
+            document.getElementById('text-e2').setAttribute('y', ey - 8);
+
+            document.getElementById('line-x2').setAttribute('x1', ex);
+            document.getElementById('line-x2').setAttribute('y1', ey);
+            document.getElementById('line-x2').setAttribute('x2', ex);
+            document.getElementById('line-x2').setAttribute('y2', 250);
+
+            document.getElementById('line-y2').setAttribute('x1', 50);
+            document.getElementById('line-y2').setAttribute('y1', ey);
+            document.getElementById('line-y2').setAttribute('x2', ex);
+            document.getElementById('line-y2').setAttribute('y2', ey);
+
+            const u = base.u2Path.map((v, i) => v + (tg.u2Path[i] - v) * t);
+            document.getElementById('curve-u2').setAttribute('d', `M ${u[0]} ${u[1]} Q ${u[2]} ${u[3]} ${u[4]} ${u[5]}`);
+
+            const d = base.demandPath.map((v, i) => v + (tg.demandPath[i] - v) * t);
+            document.getElementById('demand-curve').setAttribute('d', `M ${d[0]} ${d[1]} Q ${d[2]} ${d[3]} ${d[4]} ${d[5]}`);
+            const dx = base.d2Label.x + (tg.d2Label.x - base.d2Label.x) * t;
+            document.getElementById('text-d2').setAttribute('x', dx);
+            
+            const arr = document.getElementById('demand-arrow');
+            if (t === 0) {
+                arr.style.opacity = 0;
+            } else {
+                arr.style.opacity = 1;
+                const ax2 = base.arrow.x2 + (tg.arrow.x2 - base.arrow.x2) * t;
+                arr.setAttribute('x1', 220);
+                arr.setAttribute('x2', ax2);
+            }
+        }
+
+        function setGoodType(type) {
+            currentType = type;
+            
+            document.querySelectorAll('.controls button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + type).classList.add('active');
+
+            document.querySelectorAll('.explanation-block').forEach(block => block.classList.remove('active'));
+            document.getElementById('desc-' + type).classList.add('active');
+
+            const color = type === 'sub' ? '#d35400' : '#27ae60';
+            document.documentElement.style.setProperty('--slider-color', color);
+
+            document.getElementById('curve-u2').setAttribute('stroke', color);
+            document.getElementById('point-e2').setAttribute('fill', color);
+            document.getElementById('text-e2').setAttribute('fill', color);
+            document.getElementById('line-x2').setAttribute('stroke', color);
+            document.getElementById('line-y2').setAttribute('stroke', color);
+            
+            document.getElementById('demand-curve').setAttribute('stroke', color);
+            document.getElementById('text-d2').setAttribute('fill', color);
+            document.getElementById('demand-arrow').setAttribute('stroke', color);
+            document.getElementById('arrow-shift-path').setAttribute('fill', color);
+
+            updateVisuals();
+        }
+
+        slider.addEventListener('input', updateVisuals);
+
+        window.onload = function() {
+            setGoodType('sub');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 1 | Study Guide | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea;--purple:#7c3aed}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#0c1445 0%,#1a3a5c 60%,#2d5986 100%);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+  .hero .week-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);font-size:.8rem;font-weight:600;padding:.35rem 1rem;border-radius:20px;margin-bottom:1.2rem;letter-spacing:.06em}
+  .hero h1{font-size:2.2rem;font-weight:900;margin-bottom:.6rem;line-height:1.2}
+  .hero .subtitle{font-size:1.1rem;opacity:.8;max-width:580px;margin:0 auto 1.5rem}
+  .hero .meta-row{display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:860px;margin:0 auto;padding:3rem 1.5rem 5rem}
+  .professor-card{background:linear-gradient(135deg,#fffbf0,#fff8e8);border:1px solid #f0d080;border-radius:16px;padding:2rem;margin-bottom:2.5rem;position:relative}
+  .professor-card::before{content:'👨‍🏫';position:absolute;top:-1rem;left:1.5rem;font-size:2rem;background:var(--bg);padding:0 .4rem}
+  .professor-card h2{color:#7a5800;font-size:1.1rem;margin-bottom:.8rem}
+  .professor-card p{color:#5a4000;margin-bottom:.7rem;font-size:.95rem}
+  .professor-card p:last-child{margin-bottom:0}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1.2rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:2rem}
+  .tip-card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.4rem;border-top:4px solid var(--primary)}
+  .tip-card.t2{border-top-color:var(--purple)}
+  .tip-card.t3{border-top-color:var(--green)}
+  .tip-card .tip-icon{font-size:1.6rem;margin-bottom:.6rem}
+  .tip-card h3{font-size:.95rem;font-weight:700;color:var(--primary);margin-bottom:.5rem}
+  .tip-card p{font-size:.88rem;color:var(--muted);line-height:1.6}
+  .module-list{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+  .module-item{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;display:flex;gap:1.2rem;align-items:flex-start}
+  .module-num{background:var(--primary);color:#fff;font-weight:900;font-size:1.1rem;width:2.4rem;height:2.4rem;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem}
+  .module-num.m2{background:var(--purple)}
+  .module-num.m3{background:var(--green)}
+  .module-num.m4{background:var(--red)}
+  .module-num.m5{background:#f59e0b}
+  .module-num.m6{background:#06b6d4}
+  .module-content h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:.4rem}
+  .module-content p{font-size:.9rem;color:var(--muted);margin-bottom:.5rem}
+  .module-content .tags{display:flex;gap:.4rem;flex-wrap:wrap}
+  .module-content .tag{background:#eef4ff;color:var(--primary);font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:10px}
+  .module-content .tag.exam{background:#fff0f0;color:var(--red)}
+  .module-content .tag.concept{background:#f0fdf4;color:var(--green)}
+  .checklist{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.5rem;margin-bottom:2rem}
+  .checklist h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:1rem}
+  .check-item{display:flex;align-items:flex-start;gap:.8rem;padding:.6rem 0;border-bottom:1px solid var(--border);font-size:.9rem}
+  .check-item:last-child{border-bottom:none}
+  .check-item .cb{width:1.2rem;height:1.2rem;border:2px solid var(--border);border-radius:4px;flex-shrink:0;margin-top:.15rem}
+  .start-banner{background:linear-gradient(135deg,var(--primary),#2c5282);border-radius:14px;padding:2rem;text-align:center;color:#fff;margin-top:2rem}
+  .start-banner h3{font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+  .start-banner p{opacity:.8;margin-bottom:1.5rem;font-size:.95rem}
+  .start-banner .btn-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.6rem;border-radius:8px;font-weight:700;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-white{background:#fff;color:var(--primary)}
+  .btn-white:hover{background:#f0f4ff}
+  .btn-outline-white{border:2px solid rgba(255,255,255,.5);color:#fff}
+  .btn-outline-white:hover{background:rgba(255,255,255,.1)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_StudyGuide_Kiro.html" class="active">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 1</span>
+</nav>
+<div class="hero">
+  <div class="week-tag">Week 1 · Chapter 1 · Study Guide</div>
+  <h1>Introduction to<br>Business Finance</h1>
+  <div class="subtitle">商业金融导论 — 建立正确的金融思维框架</div>
+  <div class="meta-row">
+    <span>📖 McLaney Ch.1</span>
+    <span>⏱ 预计学习时间 2-3 小时</span>
+    <span>🎯 基础概念章节</span>
+  </div>
+</div>
+<main>
+  <div class="professor-card">
+    <h2>🎯 教授寄语：打好地基，才能盖高楼</h2>
+    <p>欢迎来到商业金融的第一周！这一周看起来"很简单"——都是概念性的东西，没有复杂的公式。但恰恰是这些<strong>基础概念</strong>，决定了你后面能不能真正理解 NPV、WACC、CAPM 这些工具。</p>
+    <p>很多学生第一周不重视，觉得"有限公司是什么"、"股东财富最大化"这些东西"太基础了"。结果到了 Week 7 学 CAPM 时，发现自己连"为什么要用市场价值而不是账面价值"都说不清楚——因为第一周没搞懂<strong>Limited Liability</strong>和<strong>Separation Theorem</strong>的本质。</p>
+    <p><strong>本周核心任务：</strong>理解企业金融的三大支柱——有限责任、风险回报权衡、股东财富最大化。这三个概念会贯穿整个学期。</p>
+  </div>
+
+  <div class="section-label">🧠 高阶学习技巧</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon">🎯</div>
+      <h3>概念理解 > 死记硬背</h3>
+      <p>Week 1 没有计算题，但考试会考概念辨析（MCQ）。不要背定义，要理解"为什么这样设计"。例如：为什么有限责任对现代经济如此重要？</p>
+    </div>
+    <div class="tip-card t2">
+      <div class="tip-icon">🔗</div>
+      <h3>建立知识地图</h3>
+      <p>Week 1 是整门课的"目录"。学完后，画一张思维导图：Limited Company → Shareholders → Agency Problem → Wealth Maximization。后面所有工具都是为了解决这些问题。</p>
+    </div>
+    <div class="tip-card t3">
+      <div class="tip-icon">💡</div>
+      <h3>用真实案例验证</h3>
+      <p>每学一个概念，想一个真实公司的例子。例如：Tesla 的股东和债权人有什么不同？Elon Musk 作为 CEO 有哪些代理问题？</p>
+    </div>
+  </div>
+
+  <div class="section-label">📚 本周知识模块地图</div>
+  <div class="module-list">
+    <div class="module-item">
+      <div class="module-num">1</div>
+      <div class="module-content">
+        <h3>🏢 Limited Company（有限公司）</h3>
+        <p>核心：有限责任（Limited Liability）— 股东只承担出资额内的责任，不会因公司破产而倾家荡产。这是现代经济的基石。</p>
+        <div class="tags">
+          <span class="tag concept">核心概念</span>
+          <span class="tag">Legal Entity</span>
+          <span class="tag">Perpetual Life</span>
+        </div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m2">2</div>
+      <div class="module-content">
+        <h3>📊 Business Types & Securities（企业类型与证券）</h3>
+        <p>理解 Ordinary Shares（普通股）、Preference Shares（优先股）、Loan Stock（债券）的区别。重点：风险和回报的权衡。</p>
+        <div class="tags">
+          <span class="tag">Equity vs Debt</span>
+          <span class="tag">Risk & Return</span>
+          <span class="tag exam">考试高频</span>
+        </div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m3">3</div>
+      <div class="module-content">
+        <h3>⚖️ Risk & Return Relationship（风险与回报）</h3>
+        <p>金融的第一定律：高风险 = 高回报。投资者是风险厌恶的（Risk Averse），所以要求风险溢价（Risk Premium）。</p>
+        <div class="tags">
+          <span class="tag concept">核心原理</span>
+          <span class="tag">Risk Premium</span>
+          <span class="tag">CAPM 基础</span>
+        </div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m4">4</div>
+      <div class="module-content">
+        <h3>🎯 Corporate Objective（企业目标）</h3>
+        <p>企业的唯一目标：股东财富最大化（Shareholder Wealth Maximization）。不是利润最大化，不是销售额最大化，而是股价最大化。</p>
+        <div class="tags">
+          <span class="tag exam">考试必考</span>
+          <span class="tag">NPV 基础</span>
+          <span class="tag">WACC 基础</span>
+        </div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m5">5</div>
+      <div class="module-content">
+        <h3>👔 Agency Problem（代理问题）</h3>
+        <p>股东（Principals）和管理层（Agents）的利益冲突。管理层可能追求自己的利益（高薪、豪华办公室）而非股东利益。</p>
+        <div class="tags">
+          <span class="tag">Agency Costs</span>
+          <span class="tag">Corporate Governance</span>
+          <span class="tag exam">MCQ 高频</span>
+        </div>
+      </div>
+    </div>
+    <div class="module-item">
+      <div class="module-num m6">6</div>
+      <div class="module-content">
+        <h3>🔀 Separation Theorem（分离定理）</h3>
+        <p>Fisher Separation Theorem：投资决策和融资决策可以分开。企业应该接受所有 NPV > 0 的项目，不管股东的个人偏好如何。</p>
+        <div class="tags">
+          <span class="tag concept">高级概念</span>
+          <span class="tag">NPV 理论基础</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">✅ 学习自查清单</div>
+  <div class="checklist">
+    <h3>完成以下检查点，确保你真正掌握了 Week 1</h3>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我能用自己的话解释"有限责任"的含义，并举出一个真实公司的例子</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我能区分 Ordinary Shares、Preference Shares 和 Loan Stock 的风险和回报特征</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我理解为什么"股东财富最大化"比"利润最大化"更合理</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我能举出 3 个代理问题的真实例子（如 CEO 过度扩张、奢侈消费等）</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我理解 Separation Theorem 的含义：投资决策不应受股东个人偏好影响</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我能解释为什么投资者是"风险厌恶"的，以及什么是"风险溢价"</div>
+    </div>
+    <div class="check-item">
+      <div class="cb"></div>
+      <div class="cb-text">我完成了 Week 1 的 Quiz，并理解了所有错题</div>
+    </div>
+  </div>
+
+  <div class="start-banner">
+    <h3>🚀 准备好了吗？开始学习吧！</h3>
+    <p>建议学习顺序：Lecture → Interactive → Quiz → 回顾 Study Guide</p>
+    <div class="btn-row">
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Lecture_Kiro.html" class="btn btn-white">📖 开始 Lecture</a>
+      <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week1_Interactive_Kiro.html" class="btn btn-outline-white">🧪 Interactive Lab</a>
+    </div>
+  </div>
+</main>
+</body>
+</html>

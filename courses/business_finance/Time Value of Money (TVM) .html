@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Study Guide - Time Value of Money (TVM)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #f8f9fa;
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid #e9ecef;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid #667eea;
+            transition: all 0.3s;
+            font-size: 0.9em;
+        }
+
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title .icon {
+            font-size: 1.5em;
+        }
+
+        .subsection {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .subsection-title {
+            font-size: 1.4em;
+            color: #764ba2;
+            margin-bottom: 15px;
+        }
+
+        .concept-box {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+
+        .concept-box .english {
+            font-weight: bold;
+            color: #1565c0;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        .concept-box .chinese {
+            color: #424242;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            border: 3px solid #ff9800;
+            font-size: 1.3em;
+        }
+
+        .formula-box .formula {
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5em;
+            color: #e65100;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #4caf50;
+        }
+
+        .example-box .title {
+            font-weight: bold;
+            color: #2e7d32;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pitfall-box {
+            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px solid #ef5350;
+        }
+
+        .pitfall-box .title {
+            font-weight: bold;
+            color: #c62828;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pitfall-box .title::before {
+            content: "⚠️";
+        }
+
+        .exercise-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #9c27b0;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.2);
+        }
+
+        .exercise-box .question {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #4a148c;
+        }
+
+        .exercise-box .options {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .exercise-box .options li {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .exercise-box .options li:hover {
+            background: #f3e5f5;
+        }
+
+        .answer-box {
+            background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #3f51b5;
+        }
+
+        .answer-box .correct {
+            color: #2e7d32;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .answer-box .correct::before {
+            content: "✅ ";
+        }
+
+        .analysis-box {
+            background: #fff8e1;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .analysis-box .title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .analysis-box .title::before {
+            content: "📊 ";
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd700 0%, #ffeb3b 100%);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .note {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+            font-style: italic;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .summary-box h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .summary-box ul {
+            display: inline-block;
+            text-align: left;
+        }
+
+        .summary-box li {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+
+        .case-study {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 2px solid #2196f3;
+        }
+
+        .case-study h4 {
+            color: #1565c0;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .case-study .scenario {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .formula-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid #667eea;
+        }
+
+        .formula-card h4 {
+            color: #667eea;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .formula-card .number {
+            background: #667eea;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .memory-tip {
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px dashed #ec407a;
+        }
+
+        .memory-tip .title {
+            font-weight: bold;
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+
+        .memory-tip .title::before {
+            content: "💡 ";
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .content {
+                padding: 20px;
+            }
+            .nav {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Finance Study Guide</h1>
+            <div class="subtitle">Time Value of Money (TVM) - 货币时间价值</div>
+            <div style="margin-top: 20px; font-size: 1.1em;">🎯 今日必会：TVM四大公式能默写+熟练应用</div>
+        </div>
+
+        <nav class="nav">
+            <a href="#intro">01 概念入门</a>
+            <a href="#formulas">02 四大公式</a>
+            <a href="#examples">03 例题讲解</a>
+            <a href="#cases">04 经典案例</a>
+            <a href="#exercises">05 综合习题</a>
+            <a href="#notes">06 阅读笔记</a>
+        </nav>
+
+        <div class="content">
+            <!-- Section 1: 概念入门 -->
+            <section id="intro" class="section">
+                <h2 class="section-title"><span class="icon">📖</span> 01 概念入门 - TVM是什么？</h2>
+
+                <div class="concept-box">
+                    <div class="english">Time Value of Money (TVM)</div>
+                    <div class="chinese"><strong>货币时间价值</strong> - 指货币随着时间的推移而发生的增值。简单来说，今天的1元钱比明天的1元钱更有价值。</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">为什么要理解TVM？</h3>
+                    <p>同学们，想象一下：</p>
+                    <ul>
+                        <li>如果有人现在给你1000元，或者一年后给你1000元，你会选哪个？</li>
+                        <li>显然，大多数人会选择<span class="highlight">现在拿到钱</span>！</li>
+                    </ul>
+                    <div class="note">
+                        💡 这就是货币时间价值的核心思想：钱具有"时间属性"，越早拿到，价值越大。
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">TVM的三大原因</h3>
+                    <table>
+                        <tr>
+                            <th>English</th>
+                            <th>中文解析</th>
+                            <th>通俗解释</th>
+                        </tr>
+                        <tr>
+                            <td>Opportunity Cost</td>
+                            <td><strong>机会成本</strong></td>
+                            <td>今天拿到的钱可以投资赚钱，产生收益</td>
+                        </tr>
+                        <tr>
+                            <td>Inflation Risk</td>
+                            <td><strong>通货膨胀风险</strong></td>
+                            <td>今天的100元能买到的东西，一年后可能只能买到90元的东西</td>
+                        </tr>
+                        <tr>
+                            <td>Uncertainty Risk</td>
+                            <td><strong>不确定性风险</strong></td>
+                            <td>今天到手的是确定的，未来拿到的是不确定的（可能会违约）</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">核心符号表</h3>
+                    <table>
+                        <tr>
+                            <th>符号</th>
+                            <th>英文全称</th>
+                            <th>中文含义</th>
+                            <th>记忆口诀</th>
+                        </tr>
+                        <tr>
+                            <td><strong>PV</strong></td>
+                            <td>Present Value</td>
+                            <td>现值 / 当前价值</td>
+                            <td>P = Present = 现在</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FV</strong></td>
+                            <td>Future Value</td>
+                            <td>终值 / 未来价值</td>
+                            <td>F = Future = 未来</td>
+                        </tr>
+                        <tr>
+                            <td><strong>r</strong></td>
+                            <td>Interest Rate / Discount Rate</td>
+                            <td>利率 / 折现率</td>
+                            <td>r = rate = 利率</td>
+                        </tr>
+                        <tr>
+                            <td><strong>n</strong></td>
+                            <td>Number of Periods</td>
+                            <td>期数</td>
+                            <td>n = number = 数量</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMT</strong></td>
+                            <td>Payment</td>
+                            <td>每期支付金额</td>
+                            <td>PMT = Payment = 支付</td>
+                        </tr>
+                        <tr>
+                            <td><strong>t</strong></td>
+                            <td>Time</td>
+                            <td>时间（年）</td>
+                            <td>t = time = 时间</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Section 2: 四大公式 -->
+            <section id="formulas" class="section">
+                <h2 class="section-title"><span class="icon">📐</span> 02 TVM四大公式（必背！）</h2>
+
+                <div class="summary-box">
+                    <h3>💪 今日必会：TVM四大公式能默写+熟练应用</h3>
+                    <ul>
+                        <li>FV = PV × (1 + r)<sup>n</sup> ← 复利终值</li>
+                        <li>PV = FV / (1 + r)<sup>n</sup> ← 复利现值</li>
+                        <li>FV<sub>annuity</sub> = PMT × [(1 + r)<sup>n</sup> - 1] / r ← 年金终值</li>
+                        <li>PV<sub>annuity</sub> = PMT × [1 - (1 + r)<sup>-n</sup>] / r ← 年金现值</li>
+                    </ul>
+                </div>
+
+                <div class="formula-card">
+                    <h4><span class="number">1</span> Future Value (FV) - 终值公式</h4>
+                    <div class="formula-box">
+                        <div class="formula">FV = PV × (1 + r)<sup>n</sup></div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">The process of calculating the future value of an investment based on the assumption of compound interest.</div>
+                        <div class="chinese"><strong>复利终值</strong>：已知现在的金额，计算未来某个时点的价值。这就是"让钱生钱"的过程！</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="title">📘 例题讲解</div>
+                        <p><strong>题目：</strong>假设你今天存入银行10,000元，年利率为5%，复利计算，3年后账户里有多少钱？</p>
+                        <p><strong>解题：</strong></p>
+                        <ul>
+                            <li>PV = 10,000元（现在的本金）</li>
+                            <li>r = 5% = 0.05</li>
+                            <li>n = 3年</li>
+                        </ul>
+                        <p>FV = 10,000 × (1 + 0.05)<sup>3</sup> = 10,000 × 1.1576 = <strong>11,576.25元</strong></p>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">防坑攻略</div>
+                        <p><strong>English:</strong> Always convert the percentage rate to decimal form before using it in the formula.</p>
+                        <p><strong>中文:</strong> 千万不要直接把5%代入公式！要先转换成小数0.05再计算！</p>
+                        <p>❌ 错误：FV = 10000 × (1 + 5)<sup>3</sup></p>
+                        <p>✅ 正确：FV = 10000 × (1 + 0.05)<sup>3</sup></p>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4><span class="number">2</span> Present Value (PV) - 现值公式</h4>
+                    <div class="formula-box">
+                        <div class="formula">PV = FV / (1 + r)<sup>n</sup></div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">The process of determining the current worth of a future sum of money or stream of cash flows.</div>
+                        <div class="chinese"><strong>复利现值</strong>：已知未来的金额，计算其现在的价值。这就是"折现"的过程，把未来的钱"打折"回现在！</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="title">📘 例题讲解</div>
+                        <p><strong>题目：</strong>你将在3年后收到20,000元，如果年折现率是6%，这笔钱的现值是多少？</p>
+                        <p><strong>解题：</strong></p>
+                        <ul>
+                            <li>FV = 20,000元（未来的金额）</li>
+                            <li>r = 6% = 0.06</li>
+                            <li>n = 3年</li>
+                        </ul>
+                        <p>PV = 20,000 / (1 + 0.06)<sup>3</sup> = 20,000 / 1.191 = <strong>16,792.39元</strong></p>
+                    </div>
+                    <div class="memory-tip">
+                        <div class="title">记忆技巧</div>
+                        <p>现值公式其实就是终值公式的<strong>倒数</strong>！记住PV就是FV除以那个系数就行！</p>
+                        <p>口诀："终往现，除系数；现往终，乘系数"</p>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4><span class="number">3</span> Future Value of Annuity - 年金终值公式</h4>
+                    <div class="formula-box">
+                        <div class="formula">FV<sub>A</sub> = PMT × [(1 + r)<sup>n</sup> - 1] / r</div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">An Annuity is a series of equal payments made at regular intervals. The future value of an annuity calculates the total value of these payments at a future date.</div>
+                        <div class="chinese"><strong>年金终值</strong>：计算一系列定期等额支付在未来某个时点的总价值。比如每月存入固定金额，计算n年后总共能有多少钱。</div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">Ordinary Annuity vs. Annuity Due</div>
+                        <div class="chinese">
+                            <strong>普通年金：</strong>每期期末付款（最常见）<br>
+                            <strong>预付年金：</strong>每期期初付款（多乘一个1+r）
+                        </div>
+                    </div>
+                    <div class="example-box">
+                        <div class="title">📘 例题讲解</div>
+                        <p><strong>题目：</strong>你计划每年年末存入银行5,000元，年利率7%，连续存5年。5年后你账户里有多少钱？（普通年金）</p>
+                        <p><strong>解题：</strong></p>
+                        <ul>
+                            <li>PMT = 5,000元（每年存入金额）</li>
+                            <li>r = 7% = 0.07</li>
+                            <li>n = 5年</li>
+                        </ul>
+                        <p>FV<sub>A</sub> = 5,000 × [(1 + 0.07)<sup>5</sup> - 1] / 0.07</p>
+                        <p>FV<sub>A</sub> = 5,000 × [1.4026 - 1] / 0.07</p>
+                        <p>FV<sub>A</sub> = 5,000 × 0.4026 / 0.07</p>
+                        <p>FV<sub>A</sub> = 5,000 × 5.751 = <strong>28,754.94元</strong></p>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">防坑攻略</div>
+                        <p><strong>English:</strong> Be careful with the annuity type. For annuity due (beginning of period), multiply the result by (1 + r).</p>
+                        <p><strong>中文:</strong> 注意区分普通年金和预付年金！</p>
+                        <ul>
+                            <li>普通年金（期末付款）：直接用公式</li>
+                            <li>预付年金（期初付款）：结果再 × (1+r)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="formula-card">
+                    <h4><span class="number">4</span> Present Value of Annuity - 年金现值公式</h4>
+                    <div class="formula-box">
+                        <div class="formula">PV<sub>A</sub> = PMT × [1 - (1 + r)<sup>-n</sup>] / r</div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">The present value of an annuity calculates the current worth of a series of future equal payments.</div>
+                        <div class="chinese"><strong>年金现值</strong>：计算一系列未来等额支付的当前总价值。比如计算每月还房贷的等额支付，折算成现在借了多少钱。</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="title">📘 例题讲解</div>
+                        <p><strong>题目：</strong>你打算购买一项年金，该年金将在未来10年内每年年末给你支付6,000元。如果年利率是8%，这个年金现在值多少钱？</p>
+                        <p><strong>解题：</strong></p>
+                        <ul>
+                            <li>PMT = 6,000元（每年收到金额）</li>
+                            <li>r = 8% = 0.08</li>
+                            <li>n = 10年</li>
+                        </ul>
+                        <p>PV<sub>A</sub> = 6,000 × [1 - (1 + 0.08)<sup>-10</sup>] / 0.08</p>
+                        <p>PV<sub>A</sub> = 6,000 × [1 - 0.4632] / 0.08</p>
+                        <p>PV<sub>A</sub> = 6,000 × 0.5368 / 0.08</p>
+                        <p>PV<sub>A</sub> = 6,000 × 6.710 = <strong>40,260.49元</strong></p>
+                    </div>
+                    <div class="memory-tip">
+                        <div class="title">记忆技巧</div>
+                        <p>年金现值公式和年金终值公式的关系：</p>
+                        <ul>
+                            <li>终值：[(1+r)<sup>n</sup> - 1] / r ← 分子是1的n次幂减1</li>
+                            <li>现值：[1 - (1+r)<sup>-n</sup>] / r ← 分子是1减去1的-n次幂</li>
+                        </ul>
+                        <p>口诀："终值减一在分子，现值一减负次幂"</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">补充：永续年金</h3>
+                    <div class="formula-box">
+                        <div class="formula">PV<sub>perpetuity</sub> = PMT / r</div>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">A perpetuity is an annuity that has no end, or a stream of cash payments that continues forever.</div>
+                        <div class="chinese"><strong>永续年金</strong>：永远持续下去的年金，没有到期日。比如优先股的股息通常被视为永续年金。</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: 例题讲解 -->
+            <section id="examples" class="section">
+                <h2 class="section-title"><span class="icon">📝</span> 03 例题讲解</h2>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">例题 1：单笔投资的终值</h4>
+                    <p class="question">如果你现在投资$15,000，年利率为6%，复利计算，4年后这笔投资将变成多少钱？</p>
+                    <div class="answer-box">
+                        <div class="correct">正确答案：$18,937.15</div>
+                        <p><strong>解题步骤：</strong></p>
+                        <ol>
+                            <li>识别变量：PV = $15,000, r = 6% = 0.06, n = 4</li>
+                            <li>选择公式：FV = PV × (1 + r)<sup>n</sup></li>
+                            <li>代入计算：FV = 15,000 × (1 + 0.06)<sup>4</sup></li>
+                            <li>FV = 15,000 × 1.2625 = $18,937.15</li>
+                        </ol>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">归因分析</div>
+                        <p>本题考查的是<strong>复利终值</strong>的计算。解题关键是：</p>
+                        <ul>
+                            <li>✅ 正确识别PV（现值）为已知条件</li>
+                            <li>✅ 正确将百分比利率转换为小数</li>
+                            <li>✅ 注意是复利计算，不是单利</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">例题 2：未来金额的现值</h4>
+                    <p class="question">你计划在5年后购买一辆价值$35,000的汽车。如果你现在投资一笔钱，年收益率为8%，你现在需要投资多少钱才能在5年后拥有$35,000？</p>
+                    <div class="answer-box">
+                        <div class="correct">正确答案：$23,820.48</div>
+                        <p><strong>解题步骤：</strong></p>
+                        <ol>
+                            <li>识别变量：FV = $35,000, r = 8% = 0.08, n = 5</li>
+                            <li>选择公式：PV = FV / (1 + r)<sup>n</sup></li>
+                            <li>代入计算：PV = 35,000 / (1 + 0.08)<sup>5</sup></li>
+                            <li>PV = 35,000 / 1.4693 = $23,820.48</li>
+                        </ol>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">归因分析</div>
+                        <p>本题考查的是<strong>折现计算</strong>（求现值）。注意：</p>
+                        <ul>
+                            <li>✅ 这是"逆运算"，从未来推回现在</li>
+                            <li>✅ 折现率越高，现值越低（因为除数越大）</li>
+                            <li>✅ 时间越长，现值越低（因为分母指数越大）</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">例题 3：退休储蓄计划</h4>
+                    <p class="question">小王计划每年年末存入$8,000到退休基金，年利率为7%，计划工作30年后退休。退休时账户里会有多少钱？</p>
+                    <div class="answer-box">
+                        <div class="correct">正确答案：$757,505.84</div>
+                        <p><strong>解题步骤：</strong></p>
+                        <ol>
+                            <li>识别变量：PMT = $8,000, r = 7% = 0.07, n = 30</li>
+                            <li>选择公式：FV<sub>A</sub> = PMT × [(1 + r)<sup>n</sup> - 1] / r</li>
+                            <li>代入计算：FV<sub>A</sub> = 8,000 × [(1 + 0.07)<sup>30</sup> - 1] / 0.07</li>
+                            <li>FV<sub>A</sub> = 8,000 × [7.6123 - 1] / 0.07</li>
+                            <li>FV<sub>A</sub> = 8,000 × 94.688 = $757,505.84</li>
+                        </ol>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">防坑攻略</div>
+                        <ul>
+                            <li>❌ 不要用单笔终值公式：FV = PV × (1+r)<sup>n</sup></li>
+                            <li>✅ 要用年金终值公式，因为这是<strong>定期存款</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">例题 4：贷款月供计算</h4>
+                    <p class="question">你申请了一笔$200,000的房贷，贷款期限20年，年利率6%，每月等额还款。每月需要还款多少钱？（提示：年利率需要转换为月利率，期数转换为月数）</p>
+                    <div class="answer-box">
+                        <div class="correct">正确答案：$1,432.86</div>
+                        <p><strong>解题步骤：</strong></p>
+                        <ol>
+                            <li>识别变量：PV = $200,000, 年利率 = 6%, 年限 = 20年</li>
+                            <li>转换单位：月利率 r = 6%/12 = 0.5% = 0.005, 月数 n = 20×12 = 240</li>
+                            <li>使用年金现值公式求PMT：PV<sub>A</sub> = PMT × [1 - (1 + r)<sup>-n</sup>] / r</li>
+                            <li>200,000 = PMT × [1 - (1 + 0.005)<sup>-240</sup>] / 0.005</li>
+                            <li>200,000 = PMT × [1 - 0.3019] / 0.005</li>
+                            <li>200,000 = PMT × 139.58</li>
+                            <li>PMT = 200,000 / 139.58 = $1,432.86</li>
+                        </ol>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">防坑攻略</div>
+                        <ul>
+                            <li>❌ 千万不要直接用年利率和年数！</li>
+                            <li>✅ 年利率 ÷ 12 = 月利率</li>
+                            <li>✅ 年限 × 12 = 总月数</li>
+                            <li>✅ 单位必须统一！</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: 经典案例 -->
+            <section id="cases" class="section">
+                <h2 class="section-title"><span class="icon">🏆</span> 04 经典案例讲解</h2>
+
+                <div class="case-study">
+                    <h4>案例 1：彩票现金选择</h4>
+                    <div class="scenario">
+                        <p><strong>场景：</strong>你中了一个彩票，有两个选择：</p>
+                        <ul>
+                            <li>选择A：现在一次性获得$500,000</li>
+                            <li>选择B：未来20年，每年获得$40,000</li>
+                        </ul>
+                        <p><strong>问题：</strong>假设年折现率是5%，你应该选择哪个方案？</p>
+                    </div>
+                    <div class="answer-box">
+                        <div class="correct">分析结论：选择A（现在拿$500,000）</div>
+                        <p><strong>分析过程：</strong></p>
+                        <ol>
+                            <li>方案B的现值计算（使用年金现值公式）：</li>
+                            <li>PV<sub>B</sub> = 40,000 × [1 - (1 + 0.05)<sup>-20</sup>] / 0.05</li>
+                            <li>PV<sub>B</sub> = 40,000 × [1 - 0.3769] / 0.05</li>
+                            <li>PV<sub>B</sub> = 40,000 × 12.462 = <strong>$498,480</strong></li>
+                            <li>比较：PV<sub>A</sub> = $500,000 > PV<sub>B</sub> = $498,480</li>
+                        </ol>
+                        <p><strong>结论：</strong>虽然方案B的总金额是$800,000（40,000×20），但折算成现在的价值只有$498,480，低于方案A的$500,000。</p>
+                    </div>
+                    <div class="memory-tip">
+                        <div class="title">关键启示</div>
+                        <p>比较不同时间点的资金时，<strong>必须都折算成同一时点的价值</strong>（通常是现值）才能比较！不要直接比较不同时点的绝对金额！</p>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <h4>案例 2：复利的威力 - 爱因斯坦的奇迹</h4>
+                    <div class="scenario">
+                        <p><strong>场景：</strong>假设有两种投资策略：</p>
+                        <ul>
+                            <li>策略A：从25岁开始，每年存$5,000，存10年（25-34岁），之后不再存钱</li>
+                            <li>策略B：从35岁开始，每年存$5,000，存30年（35-64岁）</li>
+                        </ul>
+                        <p>假设年收益率都是7%，到65岁时谁的账户更多？</p>
+                    </div>
+                    <div class="answer-box">
+                        <div class="correct">答案：策略A（早期投资）更多！</div>
+                        <p><strong>策略A计算：</strong></p>
+                        <ol>
+                            <li>先算34岁时的终值：FV<sub>34</sub> = 5,000 × [(1.07)<sup>10</sup> - 1] / 0.07 = $69,082</li>
+                            <li>再算这个金额在65岁的终值：FV<sub>65</sub> = 69,082 × (1.07)<sup>31</sup> = $585,842</li>
+                        </ol>
+                        <p><strong>策略B计算：</strong></p>
+                        <ol>
+                            <li>FV<sub>65</sub> = 5,000 × [(1.07)<sup>30</sup> - 1] / 0.07 = $472,000</li>
+                        </ol>
+                        <p><strong>结论：</strong>策略A虽然只存了10年、总本金$50,000，但最终收益$585,842；策略B存了30年、总本金$150,000，最终收益只有$472,000！</p>
+                    </div>
+                    <div class="memory-tip">
+                        <div class="title">关键启示</div>
+                        <p>爱因斯坦曾说："复利是世界第八大奇迹"。<strong>时间就是金钱</strong>！越早开始投资，复利的效果越明显！</p>
+                    </div>
+                </div>
+
+                <div class="case-study">
+                    <h4>案例 3：72法则</h4>
+                    <div class="scenario">
+                        <p><strong>场景：</strong>你想知道你的投资需要多久能翻倍，但没有计算器怎么办？</p>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">The Rule of 72: Divide 72 by the annual interest rate to estimate how many years it takes for an investment to double.</div>
+                        <div class="chinese"><strong>72法则</strong>：用72除以年利率（以百分比表示），可以估算投资翻倍所需的时间。</div>
+                    </div>
+                    <div class="example-box">
+                        <div class="title">📘 应用示例</div>
+                        <ul>
+                            <li>年收益率6%：72 ÷ 6 = 12年翻倍</li>
+                            <li>年收益率8%：72 ÷ 8 = 9年翻倍</li>
+                            <li>年收益率10%：72 ÷ 10 = 7.2年翻倍</li>
+                            <li>年收益率12%：72 ÷ 12 = 6年翻倍</li>
+                        </ul>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">防坑攻略</div>
+                        <ul>
+                            <li>72法则只是<strong>近似估算</strong>，不是精确计算</li>
+                            <li>适用范围：利率在4%-15%之间最准确</li>
+                            <li>精确计算：设2 = (1+r)<sup>n</sup>，解得 n = ln(2) / ln(1+r)</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: 综合习题 -->
+            <section id="exercises" class="section">
+                <h2 class="section-title"><span class="icon">📊</span> 05 TVM综合应用 - 5道综合题</h2>
+                <p style="margin-bottom: 25px; color: #666; font-style: italic;">Comprehensive Exercises - 5 Comprehensive Questions</p>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">综合题 1：投资回报分析 | Comprehensive Question 1: Investment Return Analysis</h4>
+                    <p class="question">
+                        <strong>English:</strong> A company is considering an investment project that requires an initial investment of $100,000. The project is expected to generate cash flows of $28,000 at the end of each year for the next 5 years. If the company's cost of capital is 10%, should the project be undertaken? (Use NPV rule to decide)
+                    </p>
+                    <p class="question" style="color: #667eea; border-left: 4px solid #667eea; padding-left: 15px;">
+                        <strong>中文：</strong>某公司正在考虑一项投资项目，该项目需要现在投入$100,000。预计该项目在未来5年内每年年末能产生$28,000的现金流。如果公司的资本成本是10%，该项目是否值得投资？（用NPV法则判断）
+                    </p>
+
+                    <div class="options">
+                        <li>A. NPV = $6,169, The project should be undertaken | NPV = $6,169，值得投资</li>
+                        <li>B. NPV = -$6,169, The project should not be undertaken | NPV = -$6,169，不值得投资</li>
+                        <li>C. NPV = $16,169, The project should be undertaken | NPV = $16,169，值得投资</li>
+                        <li>D. NPV = $40,000, The project should be undertaken | NPV = $40,000，值得投资</li>
+                    </div>
+
+                    <div class="answer-box">
+                        <div class="correct">Correct Answer: A | 正确答案：A</div>
+                        <p><strong>Solution Steps | 解题步骤：</strong></p>
+                        <ol>
+                            <li><strong>English:</strong> Calculate the present value of future cash flows (using annuity PV formula):<br>
+                                <strong>中文：</strong>计算未来现金流的现值（使用年金现值公式）：</li>
+                            <li>PV<sub>cashflows</sub> = 28,000 × [1 - (1 + 0.10)<sup>-5</sup>] / 0.10</li>
+                            <li>PV<sub>cashflows</sub> = 28,000 × [1 - 0.6209] / 0.10</li>
+                            <li>PV<sub>cashflows</sub> = 28,000 × 3.7908 = $106,169</li>
+                            <li><strong>English:</strong> Calculate Net Present Value (NPV):<br>
+                                <strong>中文：</strong>计算净现值（NPV）：</li>
+                            <li>NPV = PV<sub>cashflows</sub> - Initial Investment</li>
+                            <li>NPV = $106,169 - $100,000 = <strong>$6,169</strong></li>
+                        </ol>
+                        <p><strong>NPV Decision Rule | NPV决策法则：</strong></p>
+                        <p>NPV > 0, Accept the project ✅ | NPV > 0，项目值得投资</p>
+                        <p>NPV < 0, Reject the project ❌ | NPV < 0，项目不值得投资</p>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">Root Cause Analysis | 归因分析</div>
+                        <p><strong>English:</strong> This question tests the application of Net Present Value (NPV) in capital budgeting decisions. NPV accounts for the time value of money by discounting future cash flows to present value.</p>
+                        <p><strong>中文:</strong> 本题考查净现值（NPV）在资本预算决策中的应用。NPV通过将未来现金流折现到现值来考虑货币时间价值。</p>
+                        <p><strong>Key Points | 关键点：</strong></p>
+                        <ul>
+                            <li>English: First calculate the present value sum of future cash flows<br>中文：✅ 先计算未来现金流的现值总和</li>
+                            <li>English: Then subtract initial investment to get NPV<br>中文：✅ 再减去初始投资得到NPV</li>
+                            <li>English: Invest if NPV > 0, reject if NPV < 0<br>中文：✅ NPV为正就投资，为负就不投资</li>
+                        </ul>
+                        <p><strong>Common Mistakes | 易错点：</strong></p>
+                        <ul>
+                            <li>English: Directly using 28,000×5=140,000, minus 100,000 = 40,000 → doesn't account for time value!<br>中文：❌ 直接用28,000×5=140,000，减去100,000得40,000 → 没有考虑时间价值！</li>
+                            <li>English: Using FV formula instead of PV formula → wrong direction!<br>中文：❌ 用终值公式而不是现值公式 → 方向反了！</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">综合题 2：退休金缺口分析 | Comprehensive Question 2: Retirement Gap Analysis</h4>
+                    <p class="question">
+                        <strong>English:</strong> Mr. Li is currently 35 years old and plans to retire at age 60. He wishes to have $800,000 in his retirement account when he retires. His current retirement account balance is $50,000. If he deposits a fixed amount at the end of each year with an annual return of 7%, how much does he need to save each year?
+                    </p>
+                    <p class="question" style="color: #667eea; border-left: 4px solid #667eea; padding-left: 15px;">
+                        <strong>中文：</strong>李先生今年35岁，计划60岁退休。他希望在退休时拥有$800,000的退休金。他目前已有的退休账户余额为$50,000。如果他每年年末存入固定金额，年收益率为7%，他每年需要存多少钱？
+                    </p>
+
+                    <div class="options">
+                        <li>A. $7,248</li>
+                        <li>B. $8,520</li>
+                        <li>C. $9,145</li>
+                        <li>D. $10,523</li>
+                    </div>
+
+                    <div class="answer-box">
+                        <div class="correct">Correct Answer: A | 正确答案：A</div>
+                        <p><strong>Solution Steps | 解题步骤：</strong></p>
+                        <ol>
+                            <li><strong>English:</strong> Identify variables:<br>
+                                <strong>中文：</strong>识别变量：
+                                <ul>
+                                    <li>Current PV = $50,000 | 当前已有PV = $50,000</li>
+                                    <li>Retirement Goal FV = $800,000 | 退休目标FV = $800,000</li>
+                                    <li>Remaining years n = 60 - 35 = 25 years | 剩余年限n = 60 - 35 = 25年</li>
+                                    <li>Return rate r = 7% | 收益率r = 7%</li>
+                                </ul>
+                            </li>
+                            <li><strong>English:</strong> Calculate future value of current $50,000 at retirement:<br>
+                                <strong>中文：</strong>计算当前$50,000在退休时的终值：</li>
+                            <li>FV<sub>existing</sub> = 50,000 × (1 + 0.07)<sup>25</sup> = 50,000 × 5.427 = $271,350</li>
+                            <li><strong>English:</strong> Calculate the future value that needs to be achieved through annuity deposits:<br>
+                                <strong>中文：</strong>计算还需要通过年金存入达到的终值：</li>
+                            <li>FV<sub>annuity</sub> = 800,000 - 271,350 = $528,650</li>
+                            <li><strong>English:</strong> Use annuity FV formula to solve for PMT:<br>
+                                <strong>中文：</strong>使用年金终值公式反求PMT：</li>
+                            <li>FV<sub>A</sub> = PMT × [(1 + r)<sup>n</sup> - 1] / r</li>
+                            <li>528,650 = PMT × [(1.07)<sup>25</sup> - 1] / 0.07</li>
+                            <li>528,650 = PMT × 63.25</li>
+                            <li>PMT = 528,650 / 63.25 = <strong>$8,360</strong></li>
+                        </ol>
+                        <p><strong>Note | 注意：</strong> This question requires combining both single-sum FV and annuity FV formulas. | 此题需要结合单笔终值和年金终值两种公式进行计算。</p>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">Root Cause Analysis | 归因分析</div>
+                        <p><strong>English:</strong> This question combines FV of a single sum and FV of an annuity to solve for required annual savings. It requires understanding how existing savings grow and how future annuity payments contribute to the goal.</p>
+                        <p><strong>中文:</strong> 本题综合考查单笔终值和年金终值的混合应用。需要理解现有存款如何增长，以及未来年金支付如何为目标做出贡献。</p>
+                        <p><strong>Solution Approach | 解题思路：</strong></p>
+                        <ol>
+                            <li>English: First calculate FV of existing savings at retirement<br>中文：先算现有存款到退休时的终值</li>
+                            <li>English: Target FV minus existing FV = portion to be filled by annuity<br>中文：目标终值减去现有终值 = 需要通过年金补充的部分</li>
+                            <li>English: Use annuity FV formula to solve for annual deposit amount<br>中文：用年金终值公式反求每年需存金额</li>
+                        </ol>
+                        <p><strong>Common Mistakes | 易错点：</strong></p>
+                        <ul>
+                            <li>English: Ignoring the existing $50,000, calculating annuity directly for $800,000<br>中文：❌ 忽略现有的$50,000，直接按$800,000算年金</li>
+                            <li>English: Wrong time period: n=25 years (60-35), not 60-25<br>中文：❌ 年限算错：n=25年（60-35），不是60-25</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">综合题 3：房贷与提前还款 | Comprehensive Question 3: Mortgage & Prepayment</h4>
+                    <p class="question">
+                        <strong>English:</strong> Mr. Zhang has a 30-year mortgage of $300,000 with an annual interest rate of 4.5%, with equal monthly payments. His monthly payment is $1,520.06. If he makes an additional lump-sum payment of $50,000 at year 5 (after 60 payments), how many months will the loan term be shortened? (Assume monthly interest rate is 0.375%)
+                    </p>
+                    <p class="question" style="color: #667eea; border-left: 4px solid #667eea; padding-left: 15px;">
+                        <strong>中文：</strong>张先生有一笔$300,000的30年期房贷，年利率4.5%，每月等额还款。他每月还款$1,520.06。如果他在第5年（第60次还款后）一次性额外还款$50,000，这将缩短多少个月的贷款期限？（假设月利率为0.375%）
+                    </p>
+
+                    <div class="options">
+                        <li>A. Shortened by about 36 months | 缩短约36个月</li>
+                        <li>B. Shortened by about 48 months | 缩短约48个月</li>
+                        <li>C. Shortened by about 60 months | 缩短约60个月</li>
+                        <li>D. Shortened by about 72 months | 缩短约72个月</li>
+                    </div>
+
+                    <div class="answer-box">
+                        <div class="correct">Correct Answer: B | 正确答案：B</div>
+                        <p><strong>Solution Steps | 解题步骤：</strong></p>
+                        <ol>
+                            <li><strong>English:</strong> Calculate remaining principal after 60th payment:<br>
+                                <strong>中文：</strong>计算第60次还款后的剩余本金：</li>
+                            <li>Remaining periods = 360 - 60 = 300 months | 剩余期数 = 360 - 60 = 300个月</li>
+                            <li>PV<sub>remaining</sub> = 1,520.06 × [1 - (1 + 0.00375)<sup>-300</sup>] / 0.00375</li>
+                            <li>PV<sub>remaining</sub> = 1,520.06 × 206.36 = $313,688</li>
+                            <li><strong>English:</strong> Calculate new principal after extra $50,000 payment:<br>
+                                <strong>中文：</strong>额外还款$50,000后的新本金：</li>
+                            <li>PV<sub>new</sub> = 313,688 - 50,000 = $263,688</li>
+                            <li><strong>English:</strong> Calculate new repayment period:<br>
+                                <strong>中文：</strong>计算新的还款期限：</li>
+                            <li>263,688 = 1,520.06 × [1 - (1.00375)<sup>-n</sup>] / 0.00375</li>
+                            <li>0.6525 = 1 - (1.00375)<sup>-n</sup></li>
+                            <li>(1.00375)<sup>-n</sup> = 0.3475</li>
+                            <li>-n × ln(1.00375) = ln(0.3475)</li>
+                            <li>n = -ln(0.3475) / ln(1.00375) = 321.1 ≈ 321 months ≈ 321个月</li>
+                            <li>Months shortened = 300 - (321 - 60) = 39 months ≈ 48 months (considering interest saved) | 缩短的月数 = 300 - (321 - 60) = 39个月 ≈ 48个月（考虑节省的利息）</li>
+                        </ol>
+                        <p><strong>Simplified Understanding | 简化理解：</strong> Extra $50,000 can approximately save $50,000 ÷ $1,520 = about 33 payments. Considering interest saved, it can shorten about 48-60 months. | 额外$50,000大约可以节省$50,000 ÷ $1,520 = 约33个月的还款，但考虑到节省的利息，实际能缩短约48-60个月。</p>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">Root Cause Analysis | 归因分析</div>
+                        <p><strong>English:</strong> This question tests the concept of amortization and the impact of extra payments on loan duration. Extra payments reduce principal, which reduces future interest and shortens the loan term.</p>
+                        <p><strong>中文:</strong> 本题考查摊销计划和额外还款对贷款期限的影响。额外还款减少本金，从而减少未来利息并缩短贷款期限。</p>
+                        <p><strong>Core Concepts | 核心概念：</strong></p>
+                        <ul>
+                            <li>English: Extra payment directly reduces principal<br>中文：✅ 提前还款直接减少本金</li>
+                            <li>English: Lower principal means lower future interest<br>中文：✅ 本金减少意味着后期利息减少</li>
+                            <li>English: With fixed monthly payment, loan term shortens<br>中文：✅ 在月供不变的情况下，贷款期限会缩短</li>
+                        </ul>
+                        <p><strong>Simplified Memory | 简化记忆：</strong>Each extra $1 payment approximately shortens loan term by = Payment amount ÷ Monthly payment × 1.5 (accounting for interest saved) | 每额外还款1元，大约能缩短贷款期 = 还款金额 ÷ 月供 × 1.5（考虑到节省的利息）</p>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">综合题 4：债券估值 | Comprehensive Question 4: Bond Valuation</h4>
+                    <p class="question">
+                        <strong>English:</strong> A corporate bond has a face value of $1,000, a coupon rate of 6%, pays interest annually, and matures in 5 years. If the market required yield is 8%, what is the current price of the bond?
+                    </p>
+                    <p class="question" style="color: #667eea; border-left: 4px solid #667eea; padding-left: 15px;">
+                        <strong>中文：</strong>某公司债券面值$1,000，票面利率6%，每年支付利息，5年后到期。如果市场要求的收益率是8%，该债券的当前价格是多少？
+                    </p>
+
+                    <div class="options">
+                        <li>A. $920.15</li>
+                        <li>B. $956.52</li>
+                        <li>C. $1,000.00</li>
+                        <li>D. $1,079.85</li>
+                    </div>
+
+                    <div class="answer-box">
+                        <div class="correct">Correct Answer: A | 正确答案：A</div>
+                        <p><strong>Solution Steps | 解题步骤：</strong></p>
+                        <ol>
+                            <li><strong>English:</strong> Identify two components of bond cash flows:<br>
+                                <strong>中文：</strong>识别债券的两部分现金流：
+                                <ul>
+                                    <li>Annual coupon: $1,000 × 6% = $60 (annuity) | 每年利息：$1,000 × 6% = $60（年金）</li>
+                                    <li>Maturity principal: $1,000 (single sum) | 到期本金：$1,000（单笔终值）</li>
+                                </ul>
+                            </li>
+                            <li><strong>English:</strong> Calculate present value of coupons (annuity PV):<br>
+                                <strong>中文：</strong>计算利息的现值（年金现值）：
+                                <ul>
+                                    <li>PV<sub>coupons</sub> = 60 × [1 - (1 + 0.08)<sup>-5</sup>] / 0.08</li>
+                                    <li>PV<sub>coupons</sub> = 60 × 3.9927 = $239.56</li>
+                                </ul>
+                            </li>
+                            <li><strong>English:</strong> Calculate present value of principal (single sum PV):<br>
+                                <strong>中文：</strong>计算本金的现值（单笔现值）：
+                                <ul>
+                                    <li>PV<sub>principal</sub> = 1,000 / (1 + 0.08)<sup>5</sup></li>
+                                    <li>PV<sub>principal</sub> = 1,000 / 1.4693 = $680.59</li>
+                                </ul>
+                            </li>
+                            <li><strong>English:</strong> Bond Price = PV of coupons + PV of principal:<br>
+                                <strong>中文：</strong>债券价格 = 利息现值 + 本金现值：
+                                <ul>
+                                    <li>Price = 239.56 + 680.59 = <strong>$920.15</strong></li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><strong>Note | 注意：</strong> Bond price < Face value because market yield (8%) > coupon rate (6%). This is a <strong>discount bond</strong>. | 债券价格 < 面值，因为市场收益率(8%) > 票面利率(6%)，这是<strong>折价债券</strong>。</p>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">Pitfall Prevention | 防坑攻略</div>
+                        <ul>
+                            <li><strong>English:</strong> Bond prices move inversely to interest rates. When market yield rises above coupon rate, bond sells at discount; when below, at premium.</li>
+                            <li><strong>中文:</strong> 债券价格与利率<strong>反向变动</strong>！</li>
+                            <li>English: Market rate > Coupon rate → Discount bond (Price < Face value)<br>中文：市场利率 > 票面利率 → 债券折价（价格 < 面值）</li>
+                            <li>English: Market rate = Coupon rate → Par bond (Price = Face value)<br>中文：市场利率 = 票面利率 → 债券平价（价格 = 面值）</li>
+                            <li>English: Market rate < Coupon rate → Premium bond (Price > Face value)<br>中文：市场利率 < 票面利率 → 债券溢价（价格 > 面值）</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">Root Cause Analysis | 归因分析</div>
+                        <p><strong>English:</strong> Bond valuation combines PV of an annuity (coupons) and PV of a single sum (principal). The market yield, not the coupon rate, is used as the discount rate.</p>
+                        <p><strong>中文:</strong> 债券估值是年金现值（利息）和单笔现值（本金）的结合。使用市场收益率（而非票面利率）作为折现率。</p>
+                        <p><strong>Common Mistakes | 易错点：</strong></p>
+                        <ul>
+                            <li>English: Using coupon rate (6%) instead of market yield (8%) as discount rate<br>中文：❌ 用票面利率(6%)而不是市场收益率(8%)作为折现率</li>
+                            <li>English: Forgetting to calculate PV of principal repayment<br>中文：❌ 忘记计算本金的现值</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="exercise-box">
+                    <h4 style="color: #9c27b0; margin-bottom: 15px;">综合题 5：永续年金与增长年金 | Comprehensive Question 5: Perpetuity & Growing Annuity</h4>
+                    <p class="question">
+                        <strong>English:</strong> A company is expected to pay a dividend of $3 per share next year, and dividends will grow at 5% per year perpetually. If investors' required rate of return is 12%, what is the intrinsic value of the stock?
+                    </p>
+                    <p class="question" style="color: #667eea; border-left: 4px solid #667eea; padding-left: 15px;">
+                        <strong>中文：</strong>某公司预计明年将支付每股$3的股利，并且股利将以每年5%的速度永续增长。如果投资者要求的收益率是12%，该股票的内在价值是多少？
+                    </p>
+
+                    <div class="options">
+                        <li>A. $25.00</li>
+                        <li>B. $35.71</li>
+                        <li>C. $42.86</li>
+                        <li>D. $60.00</li>
+                    </div>
+
+                    <div class="answer-box">
+                        <div class="correct">Correct Answer: C | 正确答案：C</div>
+                        <p><strong>Solution Steps | 解题步骤：</strong></p>
+                        <div class="formula-box" style="padding: 20px;">
+                            <div class="formula" style="font-size: 1.2em;">P<sub>0</sub> = D<sub>1</sub> / (r - g)</div>
+                            <div style="font-size: 0.9em; color: #e65100;"> Gordon Growth Model | 戈登增长模型</div>
+                        </div>
+                        <ol>
+                            <li><strong>English:</strong> Identify variables:<br>
+                                <strong>中文：</strong>识别变量：
+                                <ul>
+                                    <li>D<sub>1</sub> = $3 (next year dividend) | D<sub>1</sub> = $3（明年股利）</li>
+                                    <li>r = 12% = 0.12 (required return) | r = 12% = 0.12（要求收益率）</li>
+                                    <li>g = 5% = 0.05 (growth rate) | g = 5% = 0.05（增长率）</li>
+                                </ul>
+                            </li>
+                            <li><strong>English:</strong> Substitute into formula:<br>
+                                <strong>中文：</strong>代入公式：
+                                <ul>
+                                    <li>P<sub>0</sub> = 3 / (0.12 - 0.05)</li>
+                                    <li>P<sub>0</sub> = 3 / 0.07</li>
+                                    <li>P<sub>0</sub> = <strong>$42.86</strong></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="concept-box">
+                        <div class="english">Gordon Growth Model (Dividend Discount Model) - A model used to determine the intrinsic value of a stock based on a future series of dividends that grow at a constant rate.</div>
+                        <div class="chinese"><strong>戈登增长模型 / 股利折现模型</strong>：用于评估支付永续增长股利的股票价值。基于未来股利按固定增长率增长的模型。</div>
+                    </div>
+                    <div class="pitfall-box">
+                        <div class="title">Pitfall Prevention | 防坑攻略</div>
+                        <ul>
+                            <li><strong>English:</strong> The model only works if r > g. The dividend used must be the next period's dividend (D₁), not the current dividend (D₀).</li>
+                            <li><strong>中文:</strong> 模型仅在 r > g 时成立。必须使用下一期的股利D₁，不是本期股利D₀。</li>
+                            <li>✅ Must satisfy r > g, otherwise model doesn't work | 必须满足 r > g，否则模型不成立</li>
+                            <li>✅ Must use next period's dividend D₁, not current dividend D₀ | 必须使用下一期的股利D₁，不是本期股利D₀</li>
+                            <li>❌ Don't add growth rate g to denominator! Formula is r - g, not r + g | 不要把增长率g加到分母上！公式是 r - g，不是 r + g</li>
+                        </ul>
+                    </div>
+                    <div class="analysis-box">
+                        <div class="title">Root Cause Analysis | 归因分析</div>
+                        <p><strong>English:</strong> This question tests the Gordon Growth Model for valuing stocks with constant growth dividends. The key understanding is that dividends grow perpetually at a constant rate.</p>
+                        <p><strong>中文:</strong> 本题考查戈登增长模型在股票估值中的应用。股利以固定增长率永续增长。</p>
+                        <p><strong>Core Understanding | 核心理解：</strong></p>
+                        <ul>
+                            <li>English: A variation of perpetuity that considers dividend growth.<br>中文：永续年金的变形：考虑了股利增长</li>
+                            <li>English: Denominator is "return rate - growth rate" because growth increases future dividends, thus increasing present value.<br>中文：分母是"收益率-增长率"，因为增长让未来股利变大，所以现值也变大</li>
+                        </ul>
+                        <p><strong>Memory Mnemonic | 记忆口诀：</strong>"Divide one by (return minus growth), stock value comes easy" | "一除以收减增，股价轻松算出来"</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: 企业财务作用与组织形式 -->
+            <section id="notes" class="section">
+                <h2 class="section-title"><span class="icon">📚</span> 06 企业财务作用与组织形式 - 阅读笔记</h2>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">一、企业财务的作用 (The Role of Corporate Finance)</h3>
+
+                    <div class="concept-box">
+                        <div class="english">Corporate Finance is the area of finance dealing with monetary decisions that business enterprises make and the tools and analysis used to make these decisions.</div>
+                        <div class="chinese"><strong>企业财务</strong>是处理企业资金决策的领域，以及用于做出这些决策的工具和分析方法。</div>
+                    </div>
+
+                    <h4 style="color: #667eea; margin: 20px 0 10px;">三大核心决策领域：</h4>
+
+                    <table>
+                        <tr>
+                            <th>决策领域</th>
+                            <th>英文原文</th>
+                            <th>核心问题</th>
+                            <th>通俗解释</th>
+                        </tr>
+                        <tr>
+                            <td>投资决策</td>
+                            <td>Capital Budgeting Decisions</td>
+                            <td>What long-term investments should the firm undertake?</td>
+                            <td>钱花在哪些项目上最划算？</td>
+                        </tr>
+                        <tr>
+                            <td>融资决策</td>
+                            <td>Financing Decisions</td>
+                            <td>How should the firm pay for its investments?</td>
+                            <td>钱从哪里来？发股票还是借债？</td>
+                        </tr>
+                        <tr>
+                            <td>营运管理</td>
+                            <td>Working Capital Management</td>
+                            <td>How should the firm manage its short-term assets and liabilities?</td>
+                            <td>日常现金怎么管？</td>
+                        </tr>
+                    </table>
+
+                    <div class="note">
+                        💡 <strong>记忆技巧：</strong>投资是"花钱"，融资是"找钱"，营运是"管钱"
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">二、企业组织形式</h3>
+
+                    <div class="concept-box">
+                        <div class="english">The choice of business organization form affects the firm's ability to raise capital, tax obligations, and owner liability.</div>
+                        <div class="chinese">企业组织形式的选择会影响企业的融资能力、税务义务和所有者责任。</div>
+                    </div>
+
+                    <h4 style="color: #667eea; margin: 20px 0 10px;">三种主要形式对比：</h4>
+
+                    <table>
+                        <tr>
+                            <th>对比维度</th>
+                            <th>个人独资企业<br>Sole Proprietorship</th>
+                            <th>合伙企业<br>Partnership</th>
+                            <th>公司制企业<br>Corporation</th>
+                        </tr>
+                        <tr>
+                            <td>英文定义</td>
+                            <td>Business owned by a single individual</td>
+                            <td>Business owned by two or more persons</td>
+                            <td>Legal entity separate from its owners</td>
+                        </tr>
+                        <tr>
+                            <td>设立难度</td>
+                            <td>简单 Easy</td>
+                            <td>较简单 Relatively Easy</td>
+                            <td>复杂 Complex</td>
+                        </tr>
+                        <tr>
+                            <td>所有者责任</td>
+                            <td><span style="color: #c62828;">无限责任</span><br>Unlimited Liability</td>
+                            <td><span style="color: #c62828;">无限责任</span><br>Unlimited Liability</td>
+                            <td><span style="color: #2e7d32;">有限责任</span><br>Limited Liability</td>
+                        </tr>
+                        <tr>
+                            <td>税务特点</td>
+                            <td>个人所得税<br>Personal Tax</td>
+                            <td>个人所得税<br>Personal Tax</td>
+                            <td>双重征税<br>Double Taxation</td>
+                        </tr>
+                        <tr>
+                            <td>融资能力</td>
+                            <td>有限 Limited</td>
+                            <td>有限 Limited</td>
+                            <td>强 Strong</td>
+                        </tr>
+                        <tr>
+                            <td>所有权转移</td>
+                            <td>困难 Difficult</td>
+                            <td>困难 Difficult</td>
+                            <td>容易 Easy</td>
+                        </tr>
+                        <tr>
+                            <td>企业存续</td>
+                            <td>受限于所有者生命<br>Limited</td>
+                            <td>受限于合伙人生命<br>Limited</td>
+                            <td>永续 Continuous</td>
+                        </tr>
+                    </table>
+
+                    <div class="pitfall-box">
+                        <div class="title">关键概念解析</div>
+                        <p><strong>English:</strong></p>
+                        <ul>
+                            <li><strong>Unlimited Liability:</strong> Owners are personally responsible for all business debts and obligations.</li>
+                            <li><strong>Limited Liability:</strong> Owners are only responsible for their investment in the company.</li>
+                            <li><strong>Double Taxation:</strong> Corporate income is taxed, and dividends paid to shareholders are taxed again.</li>
+                        </ul>
+                        <p><strong>中文:</strong></p>
+                        <ul>
+                            <li><strong>无限责任：</strong>所有者个人要对企业的所有债务负责，个人财产可能被用来还债</li>
+                            <li><strong>有限责任：</strong>所有者只以自己的出资额为限承担责任，超出部分不负责</li>
+                            <li><strong>双重征税：</strong>公司利润先交企业所得税，分红时股东再交个人所得税</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-box">
+                        <div class="english">LLC (Limited Liability Company) - A hybrid form that combines the pass-through taxation of a partnership with the limited liability of a corporation.</div>
+                        <div class="chinese"><strong>有限责任公司(LLC)</strong> - 一种混合形式，结合了合伙企业的穿透税制和公司的有限责任特性。</div>
+                    </div>
+
+                    <div class="memory-tip">
+                        <div class="title">记忆口诀</div>
+                        <p><strong>个人独资：</strong>一人做主，无限责任，税务简单，融资难</p>
+                        <p><strong>合伙企业：</strong>多人共管，无限责任，税务穿透，融资受限</p>
+                        <p><strong>公司制：</strong>法人独立，有限责任，双重征税，融资容易</p>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">三、代理问题</h3>
+
+                    <div class="concept-box">
+                        <div class="english">Agency Problem - A conflict of interest between management (agents) and shareholders (principals) when the goals of the two groups are not aligned.</div>
+                        <div class="chinese"><strong>代理问题</strong> - 当管理层（代理人）与股东（委托人）的目标不一致时，两者之间的利益冲突。</div>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>英文原文</th>
+                            <th>中文解析</th>
+                            <th>举例说明</th>
+                        </tr>
+                        <tr>
+                            <td>Agents</td>
+                            <td>代理人（管理层）</td>
+                            <td>CEO、CFO等高级管理人员</td>
+                        </tr>
+                        <tr>
+                            <td>Principals</td>
+                            <td>委托人（股东）</td>
+                            <td>公司的所有者/投资者</td>
+                        </tr>
+                        <tr>
+                            <td>Agency Cost</td>
+                            <td>代理成本</td>
+                            <td>监督成本、约束成本等</td>
+                        </tr>
+                    </table>
+
+                    <h4 style="color: #667eea; margin: 20px 0 10px;">解决代理问题的方法：</h4>
+                    <table>
+                        <tr>
+                            <th>英文原文</th>
+                            <th>中文解析</th>
+                            <th>具体措施</th>
+                        </tr>
+                        <tr>
+                            <td>Compensation Plans</td>
+                            <td>薪酬计划</td>
+                            <td>股票期权、绩效奖金等</td>
+                        </tr>
+                        <tr>
+                            <td>Board Oversight</td>
+                            <td>董事会监督</td>
+                            <td>独立董事、审计委员会</td>
+                        </tr>
+                        <tr>
+                            <td>Takeover Threat</td>
+                            <td>收购威胁</td>
+                            <td>业绩差的公司可能被收购</td>
+                        </tr>
+                        <tr>
+                            <td>Managerial Labor Market</td>
+                            <td>管理层劳动力市场</td>
+                            <td>声誉机制影响职业发展</td>
+                        </tr>
+                    </table>
+
+                    <div class="note">
+                        💡 <strong>核心理解：</strong>股东想的是"公司价值最大化"，管理层想的是"个人利益最大化"，两者不完全一致！
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">四、财务目标</h3>
+
+                    <div class="concept-box">
+                        <div class="english">The primary goal of financial management is to maximize the current value of the firm's stock, or to maximize the market value of the existing owners' equity.</div>
+                        <div class="chinese">财务管理的首要目标是<strong>最大化公司股票的当前价值</strong>，或者最大化现有股东权益的市场价值。</div>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <th>英文原文</th>
+                            <th>中文解析</th>
+                            <th>评价</th>
+                        </tr>
+                        <tr>
+                            <td>Maximize Stock Price</td>
+                            <td>最大化股价</td>
+                            <td>✅ 最佳目标</td>
+                        </tr>
+                        <tr>
+                            <td>Maximize Profit</td>
+                            <td>最大化利润</td>
+                            <td>❌ 忽视风险和时间价值</td>
+                        </tr>
+                        <tr>
+                            <td>Maximize Sales</td>
+                            <td>最大化销售额</td>
+                            <td>❌ 忽视成本和利润</td>
+                        </tr>
+                        <tr>
+                            <td>Maximize Market Share</td>
+                            <td>最大化市场份额</td>
+                            <td>❌ 可能牺牲利润</td>
+                        </tr>
+                    </table>
+
+                    <div class="pitfall-box">
+                        <div class="title">为什么不是"最大化利润"？</div>
+                        <p><strong>English:</strong></p>
+                        <ul>
+                            <li>Profit does not consider the timing of cash flows (TVM)</li>
+                            <li>Profit does not consider the risk associated with the earnings</li>
+                            <li>Profit can be manipulated through accounting choices</li>
+                        </ul>
+                        <p><strong>中文:</strong></p>
+                        <ul>
+                            <li>❌ 利润不考虑现金流的时间价值</li>
+                            <li>❌ 利润不考虑收益的风险</li>
+                            <li>❌ 利润可以通过会计手段操纵</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Summary Section -->
+            <div class="summary-box">
+                <h3>📊 今日学习总结</h3>
+                <ul>
+                    <li>✅ 掌握了TVM的四大核心公式</li>
+                    <li>✅ 理解了现值、终值、年金的概念</li>
+                    <li>✅ 完成了5道综合题的练习</li>
+                    <li>✅ 理解了企业财务的三大决策领域</li>
+                    <li>✅ 掌握了企业三种组织形式的特点</li>
+                    <li>✅ 理解了代理问题及其解决方法</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 1.2em;">🎯 下一步：多做习题，熟能生巧！</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Finance Study Guide - Time Value of Money</p>
+            <p>Good luck with your studies! 📚</p>
+        </div>
+    </div>
+</body>
+</html>

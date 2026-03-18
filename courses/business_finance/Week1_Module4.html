@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 4: Strategic Objectives - Wealth vs. Profit</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #dca743;
+            --accent-gold-hover: #c69539;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #5a6b82;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-navy);
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            margin-top: 45px;
+            border-left: 6px solid var(--accent-gold);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+        }
+
+        /* Section Boxes */
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.06);
+        }
+
+       .section-box.concept { border-left: 6px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 6px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 6px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-navy);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.3rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-red); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.15rem; display: block; margin-top: 20px; margin-bottom: 10px;}
+        
+        ul { margin-top: 10px; padding-left: 20px; }
+        li { margin-bottom: 10px; }
+
+        /* Bottom Navigation Area */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: var(--primary-navy);
+            border: 1px solid #cbd5e1;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Language Display Logic */
+        body.lang-en .zh { display: none !important; }
+        body.lang-zh .en { display: none !important; }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (Switch to Chinese)</button>
+
+    <h1 class="en">Week 1 - Module 4: Strategic Objectives</h1>
+    <h1 class="zh">第一周 - 模块 4：战略目标</h1>
+    
+    <div class="subtitle en">Core Business Problem: Why Companies Must Transcend Accounting Profit</div>
+    <div class="subtitle zh">商业核心问题：为什么公司必须超越会计利润，转向风险调整后的财富最大化？</div>
+
+    <div class="en">
+        <p style="font-size: 1.1rem; color: #475569; text-align: justify;">
+            <strong>Professor's Introduction:</strong> Welcome to Module 4, the philosophical core of Nottingham University Business School's BUSI1020 module. Before we calculate the WACC or evaluate the NPV of a project, we must establish the "True North" of corporate finance. In this module, we will systematically dismantle the layman's assumption that businesses exist merely to "make a profit." We will explore the fatal academic and practical flaws of Profit Maximization, establish the rigorous framework of Shareholder Wealth Maximization, and analyze how Stakeholder Theory fits into modern corporate strategy.
+        </p>
+    </div>
+    <div class="zh">
+        <p style="font-size: 1.1rem; color: #475569; text-align: justify;">
+            <strong>教授导言：</strong> 欢迎来到模块 4，这是诺丁汉大学商学院 BUSI1020 课程的哲学核心。在我们计算加权平均资本成本 (WACC) 或评估项目的净现值 (NPV) 之前，我们必须先确立公司金融的“真北（终极目标）”。在本模块中，我们将系统性地打破外行人的固有认知——即企业存在的目的仅仅是为了“赚钱（创造利润）”。我们将探讨“利润最大化”在学术和实践中的致命缺陷，建立“股东财富最大化”的严谨框架，并分析利益相关者理论如何融入现代企业战略。
+        </p>
+    </div>
+
+    <h2>1. The Illusion of Profit Maximization</h2>
+    
+    <div class="section-box concept">
+        <h3 class="en">📚 Concept: Profit Maximization & Its Flaws</h3>
+        <h3 class="zh">📚 核心概念：利润最大化及其致命缺陷</h3>
+        
+        <div class="en">
+            <p><strong>Definition:</strong> Profit maximization is the traditional economic view suggesting a firm should operate to maximize its short-term accounting earnings (Total Revenue minus Total Costs).</p>
+            <p>While this sounds intuitive, modern corporate finance rigorously rejects this as a primary corporate objective due to three fundamental problems:</p>
+            <ul>
+                <li><strong>Quantitative Difficulties (Manipulation):</strong> Accounting profit is highly subjective. It depends on accounting policies (e.g., depreciation methods, inventory valuation). <em>Accounting profit does not equal cash flow.</em></li>
+                <li><strong>Timescale (Short-termism):</strong> Profit maximization usually focuses on the current financial year. Managers may cut vital long-term investments (R&D, staff training) to artificially boost this year's profit, sacrificing the firm's long-term survival.</li>
+                <li><strong>Ignores Risk:</strong> Profit figures make no allowance for the level of risk undertaken. A project with a 50% chance of generating £100,000 is objectively less desirable than a project with a 100% chance of generating the same amount, yet profit maximization treats them equally.</li>
+            </ul>
+        </div>
+        <div class="zh">
+            <p><strong>定义：</strong> 利润最大化是一种传统的经济学观点，认为企业的运营应旨在最大化其短期会计收益（总收入减去总成本）。</p>
+            <p>虽然这听起来很符合直觉，但现代公司金融学严厉拒绝将其作为企业的首要目标，原因在于其存在三个根本性问题：</p>
+            <ul>
+                <li><strong>量化困难 / 易被操纵 (Quantitative Difficulties)：</strong> 会计利润具有极强的主观性。它依赖于会计政策的选择（例如：折旧方法、存货估值）。<span class="highlight">会计利润绝对不等于真实的现金流。</span></li>
+                <li><strong>时间尺度 / 短视主义 (Timescale)：</strong> 利润最大化通常只关注当前的财务年度。管理者可能会削减至关重要的长期投资（如研发、员工培训），以人为地拔高今年的利润，从而牺牲了企业的长期生存能力。</li>
+                <li><strong>无视风险 (Ignores Risk)：</strong> 利润数字完全没有考虑到获取该回报所承担的风险水平。一个有 50% 概率赚取 10 万英镑的项目，客观上不如一个有 100% 概率赚取 10 万英镑的项目，但“利润最大化”目标却将两者视为等同。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-box explanation">
+        <h3 class="en">👨‍🏫 Professor's Explanation & Real-World Application</h3>
+        <h3 class="zh">👨‍🏫 教授深度剖析与真实商业案例</h3>
+        
+        <div class="en">
+            <p>To understand why "profit" is a dangerous compass, you must realize that a company can report record-breaking accounting profits on its income statement while simultaneously going bankrupt because it has run out of cash. Profit is an opinion; cash is a fact.</p>
+            
+            <span class="case-title">Case Study: The Tesco Accounting Scandal (2014)</span>
+            <p>In 2014, Tesco PLC, the UK's largest retailer, faced intense competition and declining market share. To meet aggressive short-term profit targets (driven by the "Profit Maximization" mindset), executives pressured accountants to prematurely recognize commercial income from suppliers. They successfully, yet fraudulently, inflated their accounting profit by a staggering £263 million.</p>
+            <p><strong>The Strategic Insight:</strong> When the manipulation was uncovered, Tesco's share price collapsed by over 50%, destroying billions in actual shareholder wealth. This case perfectly illustrates the <em>"Quantitative Difficulties"</em> flaw: because profit is an accounting construct, it incentivizes executives to manipulate the books rather than create genuine economic value.</p>
+        </div>
+        <div class="zh">
+            <p>要理解为什么“利润”是一个危险的指南针，你必须明白一个残酷的商业现实：一家公司可以在利润表上报告创纪录的会计利润，但同时却因为耗尽了现金而宣告破产。在金融界有一句名言：利润只是会计的意见，而现金才是冰冷的事实 (Profit is an opinion; cash is a fact)。</p>
+            
+            <span class="case-title">经典案例：乐购 (Tesco) 2.63亿英镑财务造假丑闻 (2014)</span>
+            <p>2014年，英国最大的零售商乐购 (Tesco) 面临着激烈的市场竞争。为了达到激进的短期利润目标（深受“利润最大化”思维的毒害），高管们施压会计团队，违规提前确认了尚未真正实现的供应商商业收入。他们成功地在账面上将利润人为虚增了高达 2.63 亿英镑。</p>
+            <p><strong>战略洞察：</strong> 当这种操纵行为被曝光后，乐购的股价暴跌了超过 50%，摧毁了数十亿英镑的真实股东财富。这个案例完美地印证了利润最大化的<strong>“量化困难与易被操纵”</strong>缺陷：因为利润只是一个人为的会计产物，它会诱使高管去“做假账”，而不是去创造真正的经济价值。</p>
+        </div>
+    </div>
+
+    <h2>2. The Modern Paradigm: Shareholder Wealth Maximization</h2>
+    
+    <div class="section-box concept">
+        <h3 class="en">📚 Concept: Wealth Maximization</h3>
+        <h3 class="zh">📚 核心概念：股东财富最大化</h3>
+        
+        <div class="en">
+            <p><strong>Definition:</strong> In corporate finance, the primary, overriding objective is to maximize the wealth of the company's owners (the shareholders). For a publicly-traded company, this is practically achieved by <strong>maximizing the current market price of ordinary shares</strong>.</p>
+            <p>Share price maximization is superior because the financial markets accurately reflect the true value of a firm based on three critical variables that profit ignores:</p>
+            <ul>
+                <li><strong>The Magnitude of expected cash flows:</strong> It tracks real cash, not accounting illusions.</li>
+                <li><strong>The Timing of expected returns:</strong> It acknowledges the Time Value of Money (cash today is worth more than cash tomorrow).</li>
+                <li><strong>The Risk associated with these returns:</strong> Investors discount highly uncertain future cash flows, heavily penalizing reckless managerial behavior.</li>
+            </ul>
+        </div>
+        <div class="zh">
+            <p><strong>定义：</strong> 在现代公司金融中，首要且压倒一切的目标是最大化公司所有者（股东）的财富。对于上市公众公司而言，这在实践中体现为<strong>最大化公司普通股的当前市场价格（股价）</strong>。</p>
+            <p>最大化股价之所以是更优越的目标，是因为金融市场能够准确反映企业的真实价值，它自然地内化了利润所忽略的三个关键变量：</p>
+            <ul>
+                <li><strong>预期现金流的规模 (Magnitude)：</strong> 它追踪的是真实的现金流，而不是会计账面上的数字游戏。</li>
+                <li><strong>预期回报的时间 (Timing)：</strong> 它承认资金的时间价值（今天的现金比明天的现金更有价值）。</li>
+                <li><strong>与回报相关的风险 (Risk)：</strong> 投资者会对高度不确定的未来现金流进行折现（打折扣），从而严厉惩罚管理层不顾后果的冒险行为。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-box explanation">
+        <h3 class="en">👨‍🏫 Professor's Explanation & Real-World Application</h3>
+        <h3 class="zh">👨‍🏫 教授深度剖析与真实商业案例</h3>
+        
+        <div class="en">
+            <p>To maximize wealth, a financial manager must evaluate every single corporate decision (Capital Budgeting, Capital Structure, Working Capital) through the lens of Net Present Value (NPV). If a project has a positive NPV, undertaking it will mathematically increase the share price, thereby increasing shareholder wealth.</p>
+            
+            <span class="case-title">Case Study: Amazon's Decades of "Zero Profit"</span>
+            <p>For its first two decades, Amazon reported virtually zero accounting profit, and sometimes massive losses. If Jeff Bezos had pursued "Profit Maximization," he would have stopped investing in R&D and warehouse infrastructure to make his current-year income statement look appealing. Instead, he pursued Wealth Maximization. He relentlessly reinvested every cent of cash flow into building Amazon Web Services (AWS) and global logistics. The financial markets recognized the massive long-term cash flow potential. Consequently, Amazon's share price skyrocketed, creating unprecedented wealth for shareholders, despite the total absence of short-term accounting profit.</p>
+        </div>
+        <div class="zh">
+            <p>为了实现财富最大化，财务经理必须透过“净现值 (NPV)”的镜头来评估每一项企业决策（无论是资本预算、资本结构还是营运资本）。如果一个项目具有正的 NPV，那么投资该项目在数学上就会推高股价，从而增加股东财富。</p>
+            
+            <span class="case-title">经典案例：亚马逊 (Amazon) 长达二十年的“零利润”神话</span>
+            <p>在成立的最初二十年里，亚马逊报告的会计利润几乎为零，有时甚至是巨额亏损。如果杰夫·贝索斯追求的是“利润最大化”，他早就停止了对研发和仓储基础设施的投资，以让他当年的损益表看起来很漂亮。相反，他追求的是“财富最大化”。他无情地将每一分钱的现金流都重新投入到构建 AWS 云计算和全球物流网络中。金融市场（极其聪明的投资者们）认识到了亚马逊未来产生庞大现金流的潜力。因此，尽管短期内完全没有会计利润，亚马逊的股价仍然一路狂飙，为股东创造了前所未有的巨额财富。</p>
+        </div>
+    </div>
+
+    <h2>3. The Stakeholder Alternative: Satisficing</h2>
+    
+    <div class="section-box concept">
+        <h3 class="en">📚 Concept: Stakeholder Theory & Satisficing</h3>
+        <h3 class="zh">📚 核心概念：利益相关者理论与满意原则</h3>
+        
+        <div class="en">
+            <p><strong>Stakeholder Theory:</strong> Suggests a business should be viewed as a coalition of various interest groups (employees, suppliers, customers, community, government), not just shareholders.</p>
+            <p><strong>Satisficing:</strong> Coined by Herbert Simon due to "Bounded Rationality," satisficing argues that instead of seeking to mathematically <em>maximize</em> returns to one group, managers should aim to provide each stakeholder group with a "satisfactory" or adequate outcome.</p>
+        </div>
+        <div class="zh">
+            <p><strong>利益相关者理论 (Stakeholder Theory)：</strong> 认为企业不应仅仅为股东服务，而应被视为各个利益集团（员工、供应商、客户、社区、政府）的联盟。</p>
+            <p><strong>满意原则 (Satisficing)：</strong> 由诺贝尔经济学奖得主赫伯特·西蒙基于“有限理性 (Bounded Rationality)”提出。该原则认为，与其追求为某一特定群体实现数学上的“绝对最大化”，管理者更应该致力于为每个利益相关者群体提供一个“令人满意”或足够好的结果。</p>
+        </div>
+    </div>
+
+    <div class="section-box explanation">
+        <h3 class="en">👨‍🏫 Professor's Explanation: The Ultimate Synthesis</h3>
+        <h3 class="zh">👨‍🏫 教授深度剖析：两者的终极融合</h3>
+        
+        <div class="en">
+            <p>Is shareholder wealth the <em>only</em> thing that matters? In modern finance, we recognize a critical synthesis: <strong>You cannot maximize long-term shareholder wealth if you systematically abuse your stakeholders.</strong></p>
+            <p>If a company pollutes the environment (ignoring the community) to save money, it will face massive government fines and consumer boycotts, which will ultimately destroy its share price. Therefore, excellent CFOs treat the needs of stakeholders (paying fair wages, implementing ESG policies) as essential <em>constraints</em>. They "satisfice" the stakeholders to ensure smooth operations, which serves as the very foundation required to achieve the primary goal: Maximizing long-term shareholder wealth.</p>
+        </div>
+        <div class="zh">
+            <p>股东财富真的是唯一重要的事情吗？在现代金融学中，我们认识到了一个至关重要的融合逻辑：<strong>如果你系统性地剥削或忽视你的利益相关者，你就绝对不可能实现长期的股东财富最大化。</strong></p>
+            <p>如果一家公司为了省钱而污染环境（忽视社区利益），它必将面临巨额的政府罚款和消费者的联合抵制，这最终会彻底摧毁它的股价。因此，卓越的首席财务官 (CFO) 会将利益相关者的需求（支付合理的工资、实施 ESG 环保政策等）视为企业运营中必不可少的<em>约束条件 (Constraints)</em>。他们通过“满足”利益相关者来确保企业的顺利运转，而这正是实现首要目标——长期股东财富最大化——的绝对基石。</p>
+        </div>
+    </div>
+
+    <h2>4. Exam Anti-Pitfall Guide & Past Papers</h2>
+    
+    <div class="section-box exam">
+        <h3 class="en">📝 NUBS Exam Strategy & Past Paper Solutions</h3>
+        <h3 class="zh">📝 诺丁汉考场防坑秘籍与真题满分解析</h3>
+        
+        <div class="en">
+            <p><strong style="color: var(--primary-navy);">🚫 Anti-Pitfall Strategy:</strong> The most catastrophic error a student can make in a Nottingham Business School exam is stating that a firm's goal is to maximize profit. Examiners will aggressively penalize this. Always state that profit is flawed due to <em>Timing, Risk, and Manipulation</em>.</p>
+            
+            <p><strong style="color: var(--primary-navy);">📚 Classic Exam Essay Question (20 Marks):</strong><br>
+            <em>"Critically evaluate the view that the primary financial objective of a company should be to maximise profit."</em></p>
+            
+            <p><strong style="color: var(--accent-green);">🌟 Distinction (A+) Answer Framework:</strong><br>
+            A standard pass (50%) will simply define profit and wealth. To achieve an A+ (70%+), you must demonstrate <strong>criticality</strong> using the PEEL structure (Point, Evidence, Explanation, Link):</p>
+            <ol>
+                <li><strong>Introduction:</strong> Directly refute the statement. State that modern finance dictates Shareholder Wealth Maximization (share price) as the superior goal.</li>
+                <li><strong>Point 1 (Manipulation):</strong> Argue that profit is an accounting opinion, not a cash fact. <strong>Evidence:</strong> Cite the <em>Tesco £263m scandal</em>. <strong>Explanation:</strong> Show how the pressure to maximize short-term profit led executives to manipulate income recognition, ultimately destroying shareholder wealth when the share price crashed.</li>
+                <li><strong>Point 2 (Short-termism vs Long-term Value):</strong> Argue that profit ignores timing and risk. <strong>Evidence:</strong> Cite <em>Amazon's strategy</em>. <strong>Explanation:</strong> Amazon sacrificed short-term profit for decades to fund risky, long-term capital budgets (AWS). This maximized wealth (share price) despite zero profits.</li>
+                <li><strong>Conclusion/Synthesis:</strong> Conclude that while profit targets are useful as secondary, short-term operational benchmarks, they are disastrous as strategic corporate goals. Share price maximization is the only metric that internalizes magnitude, timing, and risk of cash flows.</li>
+            </ol>
+
+            <p><strong style="color: var(--primary-navy);">📚 Classic Exam MCQ:</strong><br>
+            <em>Which of the following variables is explicitly ignored by the concept of Profit Maximization, but accounted for in Wealth Maximization?</em><br>
+            A) Total sales revenue.<br>
+            B) Operational efficiency.<br>
+            C) The time value of money and associated risk.<br>
+            D) Tax liabilities.<br>
+            <strong>Correct Answer: C.</strong> Profit simply subtracts costs from revenue for a single period. Wealth maximization discounts all future cash flows, inherently accounting for both time and risk.</p>
+        </div>
+        <div class="zh">
+            <p><strong style="color: var(--primary-navy);">🚫 防坑策略 (致命雷区)：</strong> 在诺丁汉大学商学院的考试中，学生能犯的最具毁灭性的错误就是写下“企业的目标是利润最大化”。考官会毫不留情地扣分。永远要记住指出利润的三大缺陷：<em>时间短视、无视风险、易被操纵</em>。</p>
+            
+            <p><strong style="color: var(--primary-navy);">📚 经典期末论述题 (Essay - 20分)：</strong><br>
+            <em>"Critically evaluate the view that the primary financial objective of a company should be to maximise profit." （批判性地评估“公司的首要财务目标应该是利润最大化”这一观点。）</em></p>
+            
+            <p><strong style="color: var(--accent-green);">🌟 A+ 级别 (Distinction) 满分答题框架：</strong><br>
+            仅仅及格（50%）的学生只会背诵定义。要斩获 A+（70%以上），你必须使用 PEEL 结构（论点、证据/案例、解释、扣题）来展现<strong>强大的批判性思维 (Criticality)</strong>：</p>
+            <ol>
+                <li><strong>开篇破题：</strong> 直接反驳题目观点。明确指出，现代金融学确立的唯一卓越目标是“股东财富最大化（即推高股价）”。</li>
+                <li><strong>论点 1 (易被操纵性)：</strong> 论述利润只是会计意见，而非真实的现金流。<strong>证据引入：</strong> 直接引用 <em>乐购 (Tesco) 2.63亿英镑财务造假丑闻</em>。<strong>深度解释：</strong> 解释追求短期“利润最大化”的压力如何迫使高管操纵收入入账时间，当丑闻败露股价暴跌时，反而彻底摧毁了股东财富。</li>
+                <li><strong>论点 2 (短视主义 vs 长期价值)：</strong> 论述利润无视了资金的时间价值和风险。<strong>证据引入：</strong> 引用 <em>亚马逊 (Amazon) 的战略</em>。<strong>深度解释：</strong> 亚马逊数十年来牺牲短期利润，将资金投入到高风险的长期资本预算（如 AWS）中。尽管没有利润，但它实现了财富（股价）的绝对最大化。</li>
+                <li><strong>结论升华：</strong> 总结指出，虽然利润目标可以作为次要的、短期的“日常运营考核基准”，但将其作为企业的“核心战略目标”是灾难性的。只有股价最大化，才真正内化了现金流的规模、时间和风险。</li>
+            </ol>
+
+            <p><strong style="color: var(--primary-navy);">📚 经典期末选择题 (MCQ)：</strong><br>
+            <em>以下哪个变量被“利润最大化”概念明确忽略，但却被“财富最大化”概念所包含？</em><br>
+            A) 总销售收入。<br>
+            B) 运营效率。<br>
+            C) 货币的时间价值和相关风险。<br>
+            D) 税收负债。<br>
+            <strong>正确答案：C。</strong> 利润仅仅是单期的收入减去成本。而财富最大化会对所有未来的现金流进行折现计算，天然地将时间和风险因素囊括其中。</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    function toggleLanguage() {
+        const body = document.body;
+        const btn = document.getElementById('langToggleBtn');
+        
+        if (body.classList.contains('lang-en')) {
+            body.classList.remove('lang-en');
+            body.classList.add('lang-zh');
+            btn.innerText = 'Switch to English (切换至英文)';
+        } else {
+            body.classList.remove('lang-zh');
+            body.classList.add('lang-en');
+            btn.innerText = '点击切换至全中文 (Switch to Chinese)';
+        }
+    }
+</script>
+
+</body>
+</html>

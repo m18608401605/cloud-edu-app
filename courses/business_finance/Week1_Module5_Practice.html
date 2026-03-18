@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 5: Fisher Separation Theorem (Mock Exam)</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #dca743;
+            --accent-gold-hover: #c69539;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #5a6b82;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-navy);
+        }
+
+        /* Intro Box */
+       .quiz-intro {
+            background-color: #f1f5f9;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+            border-left: 6px solid var(--primary-navy);
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+       .quiz-intro strong {
+            color: var(--primary-navy);
+        }
+
+        /* Quiz Styles */
+       .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius);
+            transition: box-shadow 0.2s ease;
+        }
+
+       .question-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+       .question-text {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+       .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+       .options-list li {
+            margin-bottom: 12px;
+        }
+
+       .options-list label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            background-color: #f8fafc;
+        }
+
+       .options-list label:hover {
+            background-color: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+       .options-list input[type="radio"] {
+            margin-top: 6px;
+            margin-right: 12px;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        /* Submit Button */
+       .submit-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-navy);
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            display: block;
+            width: 100%;
+            margin: 40px 0;
+            transition: background-color 0.3s ease;
+        }
+
+       .submit-btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+       .submit-btn:disabled {
+            background-color: #cbd5e1;
+            cursor: not-allowed;
+            color: #64748b;
+        }
+
+        /* Results & Mistake Book */
+        #results-container {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+       .score-display {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #fdfaf2;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--accent-gold);
+        }
+
+       .mistake-book {
+            background-color: #fff5f5;
+            border: 1px solid #f5cccc;
+            border-left: 6px solid var(--accent-red);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+
+       .mistake-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+       .correct-ans-highlight { color: var(--accent-green); font-weight: bold; background-color: #e8f8f5; padding: 2px 6px; border-radius: 4px;}
+       .wrong-ans-highlight { color: var(--accent-red); font-weight: bold; text-decoration: line-through; background-color: #fdedec; padding: 2px 6px; border-radius: 4px;}
+        
+       .explanation-box {
+            background-color: #eff6ff;
+            padding: 18px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary-blue);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+       .attribution-box {
+            background-color: #fef2f2;
+            padding: 18px;
+            margin-top: 12px;
+            border-left: 4px solid var(--accent-red);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Bottom Navigation Area */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 1.5px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: var(--primary-navy);
+            border: 1px solid #cbd5e1;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* CSS based Language Display Logic */
+        body.lang-en .zh { display: none!important; }
+        body.lang-zh .en { display: none!important; }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (切换至中文)</button>
+
+    <h1 class="en">Week 1 - Module 5: Fisher Separation Theorem</h1>
+    <h1 class="zh">第一周 - 模块 5: 费雪分离定理</h1>
+    
+    <div class="subtitle en">Mock Exam & Error Attribution Framework</div>
+    <div class="subtitle zh">模拟考试及错误归因框架</div>
+
+    <div class="quiz-intro en">
+        <p><strong>Professor's Instructions:</strong> Welcome to your Module 5 rigorous assessment. To achieve a Distinction (A+) in the BUSI1020 final exam, you must demonstrate a profound understanding of the Fisher Separation Theorem. You must be able to evaluate the assumptions of perfect capital markets and understand how managers can objectively maximize shareholder wealth without consulting individual subjective consumption preferences. Complete the 10 questions below to generate your <em>Error Attribution Analysis</em>.</p>
+    </div>
+    <div class="quiz-intro zh">
+        <p><strong>教授指示:</strong> 欢迎来到模块 5 的严格考核。要想在 BUSI1020 期末考试中获得优异成绩（A+），您必须展现出对“费雪分离定理”的深刻理解。您必须能够评估完美资本市场的假设，并理解管理者为何能够在不咨询个人主观消费偏好的情况下，客观地最大化股东财富。请完成以下10道题以生成您的<em>错误归因分析</em>。</p>
+    </div>
+
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+        
+        <button type="button" id="submitBtn" class="submit-btn en" onclick="submitQuiz()">Submit Answers & Generate Analysis</button>
+        <button type="button" id="submitBtnZh" class="submit-btn zh" onclick="submitQuiz()">提交答案并生成分析</button>
+    </form>
+
+    <div id="results-container">
+        <div class="score-display">
+            <span class="en">Your Score: <span id="score-val-en"></span> / 10</span>
+            <span class="zh">您的得分：<span id="score-val-zh"></span> / 10</span>
+        </div>
+        
+        <div id="mistake-book-section" class="mistake-book">
+            <h2 class="en" style="color: var(--accent-red); margin-top:0;">📖 Personal Mistake Book</h2>
+            <h2 class="zh" style="color: var(--accent-red); margin-top:0;">📖 个人错误簿与归因分析</h2>
+            <p class="en">Review the questions you answered incorrectly below. The attribution framework explains the root cause of your error to prevent it in the final exam.</p>
+            <p class="zh">请仔细回顾下方您做错的题目。归因分析框架将帮您彻底挖出错误的底层逻辑根源，确保在期末考场上绝不重犯。</p>
+            <div id="mistakes-container"></div>
+        </div>
+
+        <div id="perfect-score-section" style="display:none; text-align:center; padding: 20px;">
+            <h2 class="en" style="color: var(--accent-green);">🌟 Exceptional! Class I Quality!</h2>
+            <p class="en">You achieved a perfect score. You have demonstrated a Distinction-level understanding of the Fisher Separation Theorem.</p>
+            <h2 class="zh" style="color: var(--accent-green);">🌟 满分卓越表现！(Distinction)</h2>
+            <p class="zh">您获得了满分。您已经展现出了达到 A+ (Distinction) 级别的对费雪定理的扎实理解！请继续保持！</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    // Robust 10-question array with A+ level difficulty covering Fisher Separation Theorem
+    const quizData = [
+        {
+            id: 1,
+            qEn: "What is the core insight of the Fisher Separation Theorem?",
+            qZh: "费雪分离定理的核心洞见是什么？",
+            optionsEn: [
+                "Managers must survey to determine shareholders' time preference for consumption.",
+                "The firm's investment decision is completely independent of its shareholders' consumption preferences.",
+                "The firm should separate its debt holders from its equity holders.",
+                "Managers must only invest in short-term projects to meet immediate consumption needs."
+            ],
+            optionsZh: [
+                "管理者必须进行调查以确定股东对消费的时间偏好。",
+                "企业的投资决策完全独立于其股东的消费偏好。",
+                "企业应该将其债务持有人与股权持有人分离开来。",
+                "管理者必须只投资于短期项目，以满足即时的消费需求。"
+            ],
+            correct: 1,
+            expEn: "The Fisher Separation Theorem proves that in perfect capital markets, the firm's optimal production/investment decision is made solely to maximize Net Present Value (NPV), completely separating it from the subjective consumption preferences of the owners.",
+            expZh: "费雪分离定理证明，在完美的资本市场中，企业最优的生产/投资决策仅仅是为了最大化净现值（NPV），这与其所有者主观的消费偏好完全分离。",
+            attrEn: "Definitional Error. You failed to grasp the core of the theorem: the absolute separation of objective firm investment from subjective shareholder consumption.",
+            attrZh: "理论定义错误。您未能掌握该定理的核心：客观的企业投资与主观的股东消费之间的绝对分离。"
+        },
+        {
+            id: 2,
+            qEn: "Which of the following is a strict ASSUMPTION required for the Fisher Separation Theorem to hold true?",
+            qZh: "以下哪一项是使费雪分离定理成立的严格【前提假设】？",
+            optionsEn: [
+                "Information asymmetry exists between managers and shareholders.",
+                "Corporate tax rate must be higher than individual tax rate.",
+                "Perfect capital markets where borrowing rate equals lending rate.",
+                "Investors must be irrational and prone to behavioral biases."
+            ],
+            optionsZh: [
+                "管理者和股东之间存在信息不对称。",
+                "企业税率必须高于个人税率。",
+                "完美的资本市场，且借款利率等于贷款利率。",
+                "投资者必须是非理性的，且容易产生行为偏差。"
+            ],
+            correct: 2,
+            expEn: "The theorem relies on 'perfect capital markets'. A key component of this is that individuals and firms can borrow and lend unlimited amounts at the exact same risk-free interest rate, with no transaction costs or taxes.",
+            expZh: "该定理依赖于「完美的资本市场」。其中的一个关键组成部分是：个人和企业可以以完全相同且无风险的利率无限制地借贷，且没有交易成本或税收。",
+            attrEn: "Condition/Assumption Error. Theorems in finance are bound by their assumptions. A difference in borrowing and lending rates (market friction) destroys the separation principle.",
+            attrZh: "前提假设类错误。金融学中的定理受其假设条件的约束。借贷利率差异（市场摩擦）会直接破坏分离原则。"
+        },
+        {
+            id: 3,
+            qEn: "Shareholder A wants immediate cash. Shareholder B wants to delay consumption for 10 years. The CEO identifies a project with a positive NPV (+£5m). According to Fisher's theorem, what should the CEO do?",
+            qZh: "股东A想要即时现金。股东B想把消费推迟10年。CEO发现了一个正净现值 (+500万英镑) 的项目。根据费雪定理，CEO应该怎么做？",
+            optionsEn: [
+                "Reject the project because shareholders have different preferences.",
+                "Accept the project (maximize NPV). The capital market allows shareholders to adjust consumption timing independently.",
+                "Ask shareholders to vote on which projects to undertake.",
+                "Conduct a survey to determine the majority preference and decide accordingly."
+            ],
+            optionsZh: [
+                "拒绝该项目，因为股东有不同的偏好。",
+                "接受该项目（最大化 NPV）。资本市场允许股东独立地调整消费时间。",
+                "要求股东投票决定进行哪些项目。",
+                "进行调查以确定大多数股东的偏好，然后据此决定。"
+            ],
+            correct: 1,
+            expEn: "Because NPV is positive, the firm's value increases. The CEO accepts the project. Shareholder A can sell shares or borrow against their increased wealth in the capital market for immediate cash. Shareholder B enjoys the deferred capital gain. The market acts as the shock absorber.",
+            expZh: "因为 NPV 为正，公司价值增加。CEO应接受该项目。股东A可以在资本市场上卖出股票或抵押其增加的财富借款以获取即时现金。股东B则享受延迟的资本利得。市场充当了减震器。",
+            attrEn: "Application Error. You missed how the capital market provides the mechanism for individuals to adjust their consumption timing, freeing the CEO to solely focus on maximizing firm value.",
+            attrZh: "应用类错误。您忽略了资本市场是如何为个人提供调整消费时间机制的，从而将 CEO 解放出来，使其只需专注于最大化公司价值。"
+        },
+        {
+            id: 4,
+            qEn: "In the context of the Fisher Separation Theorem, how is the 'optimal investment decision' graphically determined?",
+            qZh: "在费雪分离定理的背景下，「最优投资决策」在图形上是如何确定的？",
+            optionsEn: [
+                "Where the shareholder's highest indifference curve meets the y-axis.",
+                "Where the firm's Production Possibility Frontier (PPF) meets the x-axis.",
+                "Where the PPF is tangent to the Capital Market Line (borrow/lend rate line).",
+                "Where the PPF is tangent to the shareholder's indifference curve."
+            ],
+            optionsZh: [
+                "在股东最高无差异曲线与 y 轴相交的地方。",
+                "在企业生产可能性边界 (PPF) 与 x 轴相交的地方。",
+                "在生产可能性边界 (PPF) 与资本市场线（借/贷利率线）相切的点。",
+                "在 PPF 与股东的无差异曲线相切的点。"
+            ],
+            correct: 2,
+            expEn: "Optimal investment occurs where the marginal rate of return on investment (slope of PPF) exactly equals the market interest rate (slope of the Capital Market Line). Tangency with the indifference curve happens LATER, during the individual's consumption decision.",
+            expZh: "最优投资发生在投资的边际回报率（PPF 的斜率）完全等于市场利率（资本市场线的斜率）的地方。与无差异曲线相切发生在【之后】个人的消费决策阶段。",
+            attrEn: "Graphical/Theoretical Error. You confused the firm's objective decision (PPF tangent to Market Line) with the shareholder's subjective decision (Market Line tangent to Indifference Curve).",
+            attrZh: "图形/理论混淆错误。您将企业的客观决策（PPF 与市场线相切）与股东的主观决策（市场线与无差异曲线相切）混淆了。"
+        },
+        {
+            id: 5,
+            qEn: "What happens to the Fisher Separation Theorem if Capital Markets are highly IMPERFECT (e.g., borrowing rates are much higher than lending rates)?",
+            qZh: "如果资本市场高度不完美（例如，借款利率远高于贷款利率），费雪分离定理会怎样？",
+            optionsEn: [
+                "The theorem becomes even more accurate.",
+                "The theorem collapses; managers now must understand shareholders' specific utility curves and time preferences to make optimal decisions.",
+                "The firm should change its objective from wealth maximization to profit maximization.",
+                "Shareholders will immediately launch a hostile takeover."
+            ],
+            optionsZh: [
+                "定理会变得更加准确。",
+                "定理崩溃；管理者现在必须了解其股东具体的效用曲线和时间偏好，才能做出最优决策。",
+                "企业应将其目标从财富最大化转变为利润最大化。",
+                "股东将立即发起敌意收购。"
+            ],
+            correct: 1,
+            expEn: "When market frictions exist (like different borrow/lend rates), the Capital Market Line is 'kinked'. The firm can no longer blindly maximize NPV. The optimal investment point will now depend on the specific shape of the shareholders' indifference curves.",
+            expZh: "当市场摩擦存在时（如借贷利率不同），资本市场线会「弯折」。企业不再能盲目最大化 NPV。此时的最优投资点将取决于股东无差异曲线的具体形状。",
+            attrEn: "Critical Limitations Error. An A+ student must know when theories fail. Imperfect markets destroy the separation, re-linking investment decisions back to owner preferences.",
+            attrZh: "定理局限性认知错误。A+ 学生必须知道理论何时会失效。不完美的市场破坏了分离原则，将投资决策重新与所有者偏好挂钩。"
+        },
+        {
+            id: 6,
+            qEn: "From a corporate governance perspective, why is the Fisher Separation Theorem fundamentally important to modern public corporations?",
+            qZh: "从公司治理的角度来看，为什么费雪分离定理对现代上市公众公司具有根本性的重要意义？",
+            optionsEn: [
+                "It proves that managers can never be trusted.",
+                "It legally forbids shareholders from voting at the AGM.",
+                "It provides the theoretical justification for delegating decision-making to professional managers, as they share a single objective rule (Max NPV) that benefits all shareholders.",
+                "It eliminates the need for external auditors."
+            ],
+            optionsZh: [
+                "它证明了管理者永远不可信。",
+                "它在法律上禁止股东在年度股东大会上投票。",
+                "它为“将决策权委托给职业经理人”提供了理论上的合法性，因为他们遵循一个能使所有股东受益的单一客观法则（最大化 NPV）。",
+                "它消除了对外部审计师的需求。"
+            ],
+            correct: 2,
+            expEn: "Because the investment decision is separated from diverse consumption desires, managers have a clear, objective mandate: maximize market value. This justifies the entire structure of separating ownership from daily management.",
+            expZh: "因为投资决策与多样化的消费欲望分离开了，管理者有了一个明确、客观的使命：最大化市场价值。这就为“所有权与日常经营权分离”的整个企业结构提供了合理性。",
+            attrEn: "Synthesis Error. You failed to connect microeconomic theory (Fisher) to the broader macro-structure of corporate governance (Separation of Ownership and Control).",
+            attrZh: "知识综合错误。您未能将微观经济理论（费雪）与公司治理的宏观结构（所有权与控制权分离）联系起来。"
+        },
+        {
+            id: 7,
+            qEn: "Which investment appraisal technique is mathematically justified and underpinned by the Fisher Separation Theorem?",
+            qZh: "哪一种投资评估技术在数学上得到了费雪分离定理的支持和证明？",
+            optionsEn: [
+                "Payback Period Method.",
+                "Internal Rate of Return (IRR) method.",
+                "Net Present Value (NPV) method.",
+                "Accounting Rate of Return (ARR)."
+            ],
+            optionsZh: [
+                "回收期法。",
+                "内部收益率 (IRR) 法。",
+                "净现值 (NPV) 法。",
+                "会计收益率 (ARR) 法。"
+            ],
+            correct: 2,
+            expEn: "Fisher's theorem mathematically proves that maximizing the present value of the firm's production opportunities (which is exactly what the NPV rule does) is the universally optimal strategy for wealth maximization.",
+            expZh: "费雪定理在数学上证明了，最大化企业生产机会的现值（这正是 NPV 法则所做的）是实现财富最大化的普遍最优策略。",
+            attrEn: "Linkage Error. Fisher = NPV. The theorem proves why discounting cash flows at the market opportunity rate yields the objectively 'best' decision.",
+            attrZh: "考点关联错误。费雪定理 = NPV 法则。该定理证明了为什么以市场机会成本对现金流进行折现，能得出客观上「最好」的决策。"
+        },
+        {
+            id: 8,
+            qEn: "According to Fisher, the value of an investment project is completely independent of:",
+            qZh: "根据费雪的理论，一个投资项目的价值完全独立于：",
+            optionsEn: [
+                "When its cash flows occur.",
+                "The magnitude of its cash flows.",
+                "How it is financed (the mix of debt, equity, or retained earnings used).",
+                "The market interest rate."
+            ],
+            optionsZh: [
+                "其现金流发生的时间。",
+                "其现金流的规模。",
+                "用于为其融资的方式（债务、股权或留存收益的混合比例）。",
+                "市场利率。"
+            ],
+            correct: 2,
+            expEn: "Fisher established that the investment decision is separate from the financing decision. The value of the project is based solely on its own cash flows discounted at the market rate, regardless of how the firm raises the money.",
+            expZh: "费雪确立了「投资决策独立于融资决策」的原则。项目的价值仅仅基于其自身的现金流按市场利率折现，而与企业如何筹集这笔资金无关。",
+            attrEn: "Conceptual Error. A core tenet of separation is that Investment Policy is independent of Financing Policy in perfect markets.",
+            attrZh: "核心概念错误。分离定理的一个核心原则是：在完美的市场中，投资政策独立于融资政策。"
+        },
+        {
+            id: 9,
+            qEn: "Consider a 2-period Fisher model graph. A shareholder's 'Initial Endowment' (wealth before any investment) is located on the x-axis. After the firm invests optimally, the new 'Present Value of Wealth' point on the x-axis will be:",
+            qZh: "考虑一个2期的费雪模型图。股东的「初始禀赋」（投资前的财富）位于x轴上。在企业进行最优投资后，x轴上新的「财富现值」点将：",
+            optionsEn: [
+                "Shift left (closer to zero).",
+                "Be exactly the same as the initial endowment.",
+                "Shift right (higher value).",
+                "Move onto the y-axis."
+            ],
+            optionsZh: [
+                "向左移动（更接近零）。",
+                "与初始禀赋完全相同。",
+                "向右移动（价值更高）。",
+                "移动到y轴上。"
+            ],
+            correct: 2,
+            expEn: "By investing in positive NPV projects, the firm pushes its wealth line outward. The x-intercept of the Capital Market Line (which represents the Present Value of maximum wealth) shifts to the right, indicating an absolute increase in shareholder wealth.",
+            expZh: "通过投资于正 NPV 项目，企业将其财富线向外推移。资本市场线在x轴上的截距（代表最大财富的现值）向右移动，表明股东财富实现了绝对增加。",
+            attrEn: "Graphical Interpretation Error. The x-intercept of the market line represents total Present Value. Optimal investment shifts this intercept to the right (wealth creation).",
+            attrZh: "图表解读错误。市场线在x轴的截距代表总现值。最优投资将此截距向右推移（即财富创造）。"
+        },
+        {
+            id: 10,
+            qEn: "Why is the Capital Market Line represented as a straight line in the Fisher Separation model?",
+            qZh: "在费雪分离模型中，为什么资本市场线被表示为一条直线？",
+            optionsEn: [
+                "Because firm production exhibits constant returns to scale.",
+                "Because perfect market assumption implies borrowing and lending use a single, constant rate regardless of amount.",
+                "Because shareholders' indifference curves are linear.",
+                "Because inflation is assumed to be zero."
+            ],
+            optionsZh: [
+                "因为企业生产具有规模报酬不变的特征。",
+                "因为完美市场的假设意味着：无论金额大小，借款和贷款都使用单一且恒定的利率。",
+                "因为股东的无差异曲线是线性的。",
+                "因为假设通货膨胀为零。"
+            ],
+            correct: 1,
+            expEn: "The slope of the Capital Market Line is -(1+r). Because 'r' (the market interest rate) is constant for both borrowing and lending any amount in a perfect market, the line has a constant slope, making it perfectly straight.",
+            expZh: "资本市场线的斜率为 -(1+r)。因为在完美市场中，无论借贷金额多大，'r'（市场利率）都是恒定的，因此该线具有恒定的斜率，呈现为一条完美的直线。",
+            attrEn: "Mathematical/Graphical Error. The straightness of the line is the geometric representation of the 'constant borrowing/lending rate' assumption.",
+            attrZh: "数理图形错误。线条的笔直，正是「借贷利率恒定」这一理论假设在几何上的表现。"
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('questions-container');
+        quizData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+            
+            const qEn = `<div class="question-text en">${index + 1}. ${q.qEn}</div>`;
+            const qZh = `<div class="question-text zh">${index + 1}. ${q.qZh}</div>`;
+            
+            let optionsHTML = '<ul class="options-list">';
+            for(let i=0; i<4; i++) {
+                optionsHTML += `
+                    <li>
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            <span class="en">${q.optionsEn[i]}</span>
+                            <span class="zh">${q.optionsZh[i]}</span>
+                        </label>
+                    </li>
+                `;
+            }
+            optionsHTML += '</ul>';
+
+            card.innerHTML = qEn + qZh + optionsHTML;
+            container.appendChild(card);
+        });
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        let mistakeHTML = '';
+        let allAnswered = true;
+
+        for(let i = 0; i < quizData.length; i++) {
+            if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                allAnswered = false;
+                break;
+            }
+        }
+
+        if (!allAnswered) {
+            const isEng = document.body.classList.contains('lang-en');
+            alert(isEng? "Please answer all questions before submitting." : "请回答所有问题后再提交。");
+            return;
+        }
+        
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+            
+            if (selected && parseInt(selected.value) === q.correct) {
+                score++;
+            } else {
+                let userChoiceTextEn = selected? q.optionsEn[selected.value] : "None";
+                let userChoiceTextZh = selected? q.optionsZh[selected.value] : "未选择";
+                let correctTextEn = q.optionsEn[q.correct];
+                let correctTextZh = q.optionsZh[q.correct];
+
+                mistakeHTML += `
+                    <div class="mistake-card">
+                        <div class="question-text en">Q${index + 1}: ${q.qEn}</div>
+                        <div class="question-text zh">Q${index + 1}: ${q.qZh}</div>
+                        
+                        <div style="margin-bottom: 12px; margin-top: 15px;">
+                            <span class="en">❌ <strong>Your Answer:</strong> <span class="wrong-ans-highlight">${userChoiceTextEn}</span></span>
+                            <span class="zh">❌ <strong>您的答案：</strong> <span class="wrong-ans-highlight">${userChoiceTextZh}</span></span>
+                        </div>
+                        <div>
+                            <span class="en">✅ <strong>Correct Answer:</strong> <span class="correct-ans-highlight">${correctTextEn}</span></span>
+                            <span class="zh">✅ <strong>正确答案：</strong> <span class="correct-ans-highlight">${correctTextZh}</span></span>
+                        </div>
+
+                        <div class="explanation-box">
+                            <strong class="en">👨‍🏫 Professor's Explanation:</strong> <span class="en">${q.expEn}</span>
+                            <strong class="zh">👨‍🏫 教授精讲：</strong> <span class="zh">${q.expZh}</span>
+                        </div>
+
+                        <div class="attribution-box">
+                            <strong class="en">🔍 Error Attribution Analysis:</strong> <span class="en">${q.attrEn}</span>
+                            <strong class="zh">🔍 深度归因分析：</strong> <span class="zh">${q.attrZh}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('submitBtnZh').style.display = 'none';
+
+        document.getElementById('score-val-en').innerText = score;
+        document.getElementById('score-val-zh').innerText = score;
+        document.getElementById('results-container').style.display = 'block';
+
+        if (score === 10) {
+            document.getElementById('mistake-book-section').style.display = 'none';
+            document.getElementById('perfect-score-section').style.display = 'block';
+        } else {
+            document.getElementById('mistake-book-section').style.display = 'block';
+            document.getElementById('perfect-score-section').style.display = 'none';
+            document.getElementById('mistakes-container').innerHTML = mistakeHTML;
+        }
+
+        setTimeout(() => {
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function toggleLanguage() {
+        const body = document.body;
+        const btn = document.getElementById('langToggleBtn');
+        
+        if (body.classList.contains('lang-en')) {
+            body.classList.remove('lang-en');
+            body.classList.add('lang-zh');
+            btn.innerText = 'Switch to English (切换至英文)';
+        } else {
+            body.classList.remove('lang-zh');
+            body.classList.add('lang-en');
+            btn.innerText = '点击切换至全中文 (切换至中文)';
+        }
+    }
+
+    window.onload = renderQuiz;
+</script>
+
+</body>
+</html>

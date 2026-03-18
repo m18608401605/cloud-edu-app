@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 4: Strategic Objectives (Mock Exam)</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #dca743;
+            --accent-gold-hover: #c69539;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-top: 0;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+       .subtitle {
+            text-align: center;
+            color: #5a6b82;
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            font-weight: 600;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-navy);
+        }
+
+        /* Intro Box */
+       .quiz-intro {
+            background-color: #f1f5f9;
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+            border-left: 6px solid var(--primary-navy);
+            color: #334155;
+            font-size: 1.05rem;
+        }
+
+       .quiz-intro strong {
+            color: var(--primary-navy);
+        }
+
+        /* Quiz Styles */
+       .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: var(--border-radius);
+            transition: box-shadow 0.2s ease;
+        }
+
+       .question-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+       .question-text {
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+       .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+       .options-list li {
+            margin-bottom: 12px;
+        }
+
+       .options-list label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 12px 15px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+            background-color: #f8fafc;
+        }
+
+       .options-list label:hover {
+            background-color: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+       .options-list input[type="radio"] {
+            margin-top: 6px;
+            margin-right: 12px;
+            cursor: pointer;
+            transform: scale(1.2);
+        }
+
+        /* Submit Button */
+       .submit-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-navy);
+            border: none;
+            padding: 18px 30px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 6px;
+            display: block;
+            width: 100%;
+            margin: 40px 0;
+            transition: background-color 0.3s ease;
+        }
+
+       .submit-btn:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Results & Mistake Book */
+        #results-container {
+            display: none;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+       .score-display {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            padding: 25px;
+            background-color: #fdfaf2;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--accent-gold);
+        }
+
+       .mistake-book {
+            background-color: #fff5f5;
+            border: 1px solid #f5cccc;
+            border-left: 6px solid var(--accent-red);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+
+       .mistake-card {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+       .correct-ans-highlight { color: var(--accent-green); font-weight: bold; background-color: #e8f8f5; padding: 2px 6px; border-radius: 4px;}
+       .wrong-ans-highlight { color: var(--accent-red); font-weight: bold; text-decoration: line-through; background-color: #fdedec; padding: 2px 6px; border-radius: 4px;}
+
+       .explanation-box {
+            background-color: #eff6ff;
+            padding: 18px;
+            margin-top: 20px;
+            border-left: 4px solid var(--secondary-blue);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+       .attribution-box {
+            background-color: #fef2f2;
+            padding: 18px;
+            margin-top: 12px;
+            border-left: 4px solid var(--accent-red);
+            font-size: 0.95rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        /* Bottom Navigation Area - Strictly matching your specifications */
+       .bottom-nav-container {
+            margin-top: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       .dashed-divider {
+            border-top: 1.5px dashed #cbd5e1;
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+       .back-to-top {
+            background-color: #f0f2f5;
+            color: #0b2447;
+            border: 1px solid #cbd5e1;
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+       .back-to-top:hover {
+            background-color: #e2e8f0;
+        }
+
+        /* Language Display Logic */
+        body.lang-en .zh { display: none; }
+        body.lang-zh .en { display: none; }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (切换至中文)</button>
+
+    <h1 class="en">Week 1 - Module 4: Strategic Objectives</h1>
+    <h1 class="zh">第一周 - 模块 4：战略目标</h1>
+
+    <div class="subtitle en">The Core Business Dilemma: Why must companies go beyond accounting profit and shift to risk-adjusted shareholder wealth maximization?</div>
+    <div class="subtitle zh">商业核心问题：为什么公司必须超越会计利润，转向风险调整后的股东财富最大化？</div>
+
+    <div class="quiz-intro en">
+        <p><strong>Professor's Instructions:</strong> Welcome to the rigorous assessment for Module 4. In corporate finance, establishing the correct objective function is paramount. You must be able to critically evaluate why "Profit Maximization" is dangerously flawed and why "Wealth Maximization" serves as the superior compass for decision-making. Complete the 10 questions below to trigger the <em>Error Attribution Analysis Framework</em>.</p>
+    </div>
+    <div class="quiz-intro zh">
+        <p><strong>教授指示:</strong> 欢迎来到模块四的严格考核。在公司金融中，确立正确的目标函数是至关重要的。您必须能够批判性地评估为什么"利润最大化"存在极其危险的缺陷，以及为什么"财富最大化"才是决策的最佳指南针。请完成以下10道真题，系统将为您生成深度的<em>错误归因分析</em>。</p>
+    </div>
+
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+
+        <button type="button" id="submitBtn" class="submit-btn en" onclick="submitQuiz()">Submit Answers & Generate Analysis</button>
+        <button type="button" id="submitBtnZh" class="submit-btn zh" onclick="submitQuiz()">提交答案并生成分析</button>
+    </form>
+
+    <div id="results-container">
+        <div class="score-display">
+            <span class="en">Your Score: <span id="score-val-en"></span> / 10</span>
+            <span class="zh">您的得分：<span id="score-val-zh"></span> / 10</span>
+        </div>
+
+        <div id="mistake-book-section" class="mistake-book">
+            <h2 class="en" style="color: var(--accent-red); margin-top:0;">📖 Personal Mistake Book & Error Attribution</h2>
+            <h2 class="zh" style="color: var(--accent-red); margin-top:0;">📖 个人错误簿与归因分析</h2>
+            <p class="en">Review the questions you answered incorrectly below. The attribution framework explains the root cause of your conceptual error to prevent it in the final exam.</p>
+            <p class="zh">请仔细回顾下方您做错的题目。归因分析框架将帮您彻底挖出错误的底层逻辑根源，确保在期末考场上绝不重犯。</p>
+            <div id="mistakes-container"></div>
+        </div>
+
+        <div id="perfect-score-section" style="display:none; text-align:center; padding: 20px;">
+            <h2 class="en" style="color: var(--accent-green);">🌟 Exceptional! Class I Quality!</h2>
+            <p class="en">You achieved a perfect score. You have demonstrated a Distinction-level understanding of corporate strategic objectives.</p>
+            <h2 class="zh" style="color: var(--accent-green);">🌟 满分卓越表现！(Distinction)</h2>
+            <p class="zh">您获得了满分。您已经展现出了对"企业战略目标"达到 A+ (Distinction) 级别的深刻理解！</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        {
+            id: 1,
+            qEn: "Why is 'Profit Maximization' generally rejected in favor of 'Wealth Maximization' as a corporate objective?",
+            qZh: "为什么'利润最大化'通常被拒绝，而选择'财富最大化'作为企业目标？",
+            optionsEn: [
+                "It violates government tax regulations.",
+                "It ignores the time value of money, risk, and relies on easily manipulated accounting data.",
+                "It leads to excessively low executive bonuses.",
+                "It mathematically prevents companies from increasing market share."
+            ],
+            optionsZh: [
+                "它违反了政府的税收法规。",
+                "它忽略了资金的时间价值，未考虑风险，并且依赖于极易被操纵的会计数据。",
+                "它会导致高管奖金过低。",
+                "它在数学上阻止了公司扩大市场份额。"
+            ],
+            correct: 1,
+            expEn: "Profit maximization is fundamentally flawed in modern finance due to three main reasons: 'Timescale' (it ignores when the cash is received), 'Risk' (it ignores the uncertainty of returns), and 'Quantitative Difficulties' (accounting profit is subjective and prone to manipulation).",
+            expZh: "在现代金融学中，利润最大化存在三个根本缺陷：'时间尺度'（忽略了现金收到的时间）、'风险'（忽略了回报的不确定性）以及'量化困难'（会计利润具有主观性，极易被操纵）。",
+            attrEn: "Conceptual Framework Error. You must memorize the 'Unholy Trinity' of profit flaws: Timing, Risk, and Manipulation. Any exam essay on corporate goals must critique profit using these three dimensions.",
+            attrZh: "概念框架错误。您必须牢记利润缺陷的'不可能三角'：时间、风险和可操纵性。任何关于企业目标的考题都必须从这三个维度对'利润'进行严格批判。"
+        },
+        {
+            id: 2,
+            qEn: "In the 2014 Tesco PLC scandal, executives pressured accountants to prematurely recognize commercial income from suppliers, artificially inflating earnings by £263 million. This real-world case is best used in an exam essay to demonstrate which flaw of Profit Maximization?",
+            qZh: "在 2014 年的乐购 (Tesco) 丑闻中，高管施压会计人员违规提前确认供应商收入，人为虚增 2.63 亿英镑盈利。在论述题中，这个真实案例最适合用来证明'利润最大化'的哪个缺陷？",
+            optionsEn: [
+                "Profit cannot measure market share.",
+                "The disregard for time value of money.",
+                "Quantitative difficulties and subjectivity of accounting profit (manipulation).",
+                "Conflict between creditors and shareholders."
+            ],
+            optionsZh: [
+                "利润无法衡量市场份额。",
+                "对资金时间价值的无视。",
+                "会计利润的量化困难与主观性（易被操纵）。",
+                "债权人与股权人之间的冲突。"
+            ],
+            correct: 2,
+            expEn: "Tesco's ability to legally (or illegally) alter when income is recorded proves that accounting profit is a subjective opinion. It perfectly highlights the 'Quantitative Difficulties' (manipulation) flaw.",
+            expZh: "乐购能够改变收入入账时间的行为证明了：会计利润仅仅是一种主观意见。它完美地凸显了以利润为目标时'量化困难（易被操纵）'的致命缺陷。",
+            attrEn: "Application Error. To achieve a Distinction, you must link theoretical flaws (like manipulation) to empirical evidence (like the Tesco accounting scandal).",
+            attrZh: "实战应用类错误。要获得 A+ (Distinction)，您必须将理论缺陷（如可操纵性）与实证证据（如乐购财务造假案）紧密相连。"
+        },
+        {
+            id: 3,
+            qEn: "Shareholder Wealth Maximization is universally accepted as the superior objective. In practical, observable terms for a publicly traded company, this is achieved by maximizing:",
+            qZh: "'股东财富最大化'被公认为更优越的目标。对于一家上市公众公司而言，在实际可观察的层面上，这是通过最大化什么来实现的？",
+            optionsEn: [
+                "The current market price of the company's common stock (share price).",
+                "Total assets listed on the balance sheet.",
+                "Net profit on the annual income statement.",
+                "Total number of employees hired."
+            ],
+            optionsZh: [
+                "公司普通股的当前市场价格（股价）。",
+                "资产负债表上列出的总资产。",
+                "年度损益表上的净利润。",
+                "雇佣的员工总数。"
+            ],
+            correct: 0,
+            expEn: "Wealth maximization translates practically to maximizing the current share price. The share price is the ultimate surrogate for wealth because the market automatically discounts the magnitude, timing, and risk of all future expected cash flows into that single price.",
+            expZh: "财富最大化在实践中转化为最大化当前的股票价格。股价是财富的终极替代指标，因为资本市场会自动将所有未来预期现金流的规模、时间价值和风险折算到这一个价格中。",
+            attrEn: "Definitional Error. You must equate 'Shareholder Wealth' directly with 'Share Price' in public companies. They are synonymous in academic finance.",
+            attrZh: "定义类错误。您必须将'股东财富'与上市公司的'股票价格'直接画等号。在学术金融中，它们是同义词。"
+        },
+        {
+            id: 4,
+            qEn: "A CEO decides to cut all employee training programs and halt a vital R&D project to artificially boost the current year's earnings report. This action is a direct manifestation of:",
+            qZh: "一位 CEO 决定削减所有员工培训项目，并叫停一项至关重要的研发项目，以人为地拔高今年的盈利报告。这一行为直接体现了：",
+            optionsEn: [
+                "Shareholder Wealth Maximization.",
+                "Corporate Social Responsibility.",
+                "The 'Timescale' (short-termism) flaw of Profit Maximization objective.",
+                "Efficient working capital management."
+            ],
+            optionsZh: [
+                "股东财富最大化。",
+                "企业社会责任。",
+                "利润最大化目标的'短视主义（时间尺度）'缺陷。",
+                "高效的营运资本管理。"
+            ],
+            correct: 2,
+            expEn: "Cutting long-term investments to boost short-term numbers perfectly describes the 'Timescale' (short-termism) flaw inherent in trying to maximize accounting profit for a single financial year.",
+            expZh: "削减长期投资以拔高短期数据的行为，完美地描述了试图最大化单一财年会计利润时所固有的'时间尺度（短视主义）'缺陷。",
+            attrEn: "Behavioral Analysis Error. You must recognize how a flawed corporate objective incentivizes destructive managerial behavior.",
+            attrZh: "行为分析错误。您必须能够识别出：一个有缺陷的企业目标（利润）是如何激励管理层做出破坏性行为的。"
+        },
+        {
+            id: 5,
+            qEn: "For its first two decades, Amazon reported virtually zero accounting profit, yet its share price skyrocketed, making its shareholders incredibly wealthy. What financial principle does this validate?",
+            qZh: "在成立的最初二十年里，亚马逊报告的会计利润几乎为零，但其股价却一路飙升，让股东变得极其富有。这验证了哪项金融学原理？",
+            optionsEn: [
+                "The stock market is completely inefficient.",
+                "Investors value expected future cash flows and long-term wealth creation, not short-term accounting profit.",
+                "Amazon manipulated its financial statements.",
+                "Debt financing is always superior to equity financing."
+            ],
+            optionsZh: [
+                "股票市场是完全无效的。",
+                "投资者看重的是预期的未来现金流和长期的财富创造，而不是短期的会计利润。",
+                "亚马逊操纵了其财务报表。",
+                "债务融资总是优于股权融资。"
+            ],
+            correct: 1,
+            expEn: "Amazon constantly reinvested its cash into AWS and logistics (generating future cash flows). The market recognized this long-term value creation. It proves that Wealth Maximization (share price) transcends short-term Profit Maximization.",
+            expZh: "亚马逊不断将其现金重新投入到 AWS 和物流网络中（产生未来的现金流）。资本市场认可了这种长期的价值创造。这证明了财富最大化（股价）远远超越了短期的利润最大化。",
+            attrEn: "Case Study Integration Error. Amazon is the ultimate empirical proof that cash flow and long-term wealth trump accounting profit. Use this in your essays.",
+            attrZh: "案例结合错误。亚马逊是证明'现金流和长期财富胜过账面利润'的终极实证案例。请务必在论述题中使用此案例。"
+        },
+        {
+            id: 6,
+            qEn: "According to the 'Stakeholder Theory', how should a company operate?",
+            qZh: "根据'利益相关者理论 (Stakeholder Theory)'，一家公司应该如何运营？",
+            optionsEn: [
+                "It should focus only on maximizing share price, ignoring all other parties.",
+                "It should be viewed as a coalition of interest groups (employees, suppliers, community) and strive to satisfy all these groups.",
+                "It must give 100% of its profits as tax to the government.",
+                "It should allow customers to vote for the board of directors."
+            ],
+            optionsZh: [
+                "它应该仅仅关注最大化股价，无视所有其他各方。",
+                "它应该被视为利益集团（员工、供应商、社区）的联盟，并致力于满足所有这些群体的需求。",
+                "它必须将其 100% 的利润作为税收交给政府。",
+                "它应该允许客户投票选举董事会。"
+            ],
+            correct: 1,
+            expEn: "Stakeholder theory broadens the corporate objective. It argues that a firm cannot survive by solely focusing on shareholders; it must act responsibly towards employees, customers, suppliers, and the community to ensure long-term viability.",
+            expZh: "利益相关者理论拓宽了企业的目标。它认为，企业不能仅仅依靠关注股东来生存；它必须对员工、客户、供应商和社区负责，以确保长期的生存能力。",
+            attrEn: "Theoretical Error. You confused the traditional 'Shareholder Theory' (Friedman) with the broader 'Stakeholder Theory'.",
+            attrZh: "理论流派混淆。您将传统的'股东理论'（仅对股东负责）与更宽泛的'利益相关者理论'混淆了。"
+        },
+        {
+            id: 7,
+            qEn: "What is the concept of 'Satisficing' in the context of corporate objectives?",
+            qZh: "在企业目标的语境中，'满意原则 (Satisficing)'的概念是什么？",
+            optionsEn: [
+                "Achieving an absolute mathematical maximum of wealth.",
+                "A behavioral theory where managers aim to reach 'good enough' or 'satisfactory' performance levels for multiple stakeholders, not absolute maximization.",
+                "Paying excess corporate tax to satisfy the tax authority.",
+                "Strictly paying 50% of earnings as dividends."
+            ],
+            optionsZh: [
+                "实现财富的绝对数学最大值。",
+                "一种行为理论，即管理者致力于为多个利益相关者达到'足够好'或'令人满意'的绩效水平，而不是追求绝对的最大化。",
+                "通过超额缴纳企业税来让税务局满意。",
+                "严格支付 50% 的收益作为股息。"
+            ],
+            correct: 1,
+            expEn: "Due to 'Bounded Rationality' (human cognitive limits), managers often cannot find the perfect maximizing decision. Instead, they 'satisfice'—finding a solution that is good enough to keep shareholders, employees, and suppliers relatively happy.",
+            expZh: "由于'有限理性'（人类认知能力的局限），管理者往往无法找到完美的'最大化'决策。相反，他们会采取'满意原则'——寻找一个足够好的解决方案，让股东、员工和供应商都相对满意。",
+            attrEn: "Terminology Error. 'Satisficing' (Satisfy + Suffice) is a crucial counter-argument to classical wealth maximization. It reflects real-world behavioral economics.",
+            attrZh: "专业术语错误。'满意原则'是对古典财富最大化理论的重要反驳。它反映了现实世界中的行为经济学规律。"
+        },
+        {
+            id: 8,
+            qEn: "How does engaging in Corporate Social Responsibility (CSR) theoretically support the objective of Shareholder Wealth Maximization?",
+            qZh: "从理论上讲，参与企业社会责任 (CSR) 是如何支撑'股东财富最大化'这一目标的？",
+            optionsEn: [
+                "It reduces tax liability immediately.",
+                "It increases short-term accounting profit by allowing cost cutting elsewhere.",
+                "By reducing reputation risk, avoiding boycotts/fines, and ensuring sustainable long-term cash flows, which increases firm value (share price).",
+                "CSR directly increases sales revenue in the current quarter."
+            ],
+            optionsZh: [
+                "它立即减少税收负担。",
+                "它通过允许在其他地方削减成本来增加短期会计利润。",
+                "通过降低声誉风险，避免抵制和罚款，确保可持续的长期现金流，从而增加公司价值（股价）。",
+                "CSR 直接增加本季度的销售收入。"
+            ],
+            correct: 2,
+            expEn: "While CSR costs money today, it acts as risk management. By treating the environment and society well, the firm avoids boycotts and fines, ensuring sustainable long-term cash flows, which pushes the share price (wealth) up.",
+            expZh: "虽然CSR今天会花钱，但它充当了风险管理的角色。通过善待环境和社会，企业避免了抵制和罚款，确保了可持续的长期现金流，这最终推高了股价（财富）。",
+            attrEn: "Critical Linkage Error. You failed to connect non-financial actions (CSR) to ultimate financial outcomes (Risk reduction & NPV). Modern finance views CSR as an investment, not a sunk cost.",
+            attrZh: "批判性联系错误。您未能将非财务行为 (CSR) 与最终的财务结果（降低风险和提升NPV）联系起来。现代金融学将 CSR 视为一项投资，而非沉没成本。"
+        },
+        {
+            id: 9,
+            qEn: "If a manager strictly follows a 'Profit Maximization' objective without considering risk, which of the following disastrous actions might they take?",
+            qZh: "如果管理者严格遵循'利润最大化'目标而不考虑风险，他们可能会采取以下哪种灾难性的行动？",
+            optionsEn: [
+                "Only invest in risk-free government Treasury bills.",
+                "Pay zero dividends to shareholders.",
+                "Bet all the company's cash reserves on one extremely volatile speculative project that might generate huge short-term profit but faces bankruptcy risk.",
+                "Hire independent external auditors."
+            ],
+            optionsZh: [
+                "只投资于无风险的政府短期国库券。",
+                "向股东支付零股息。",
+                "将公司所有的现金储备押注在一个极具波动性的投机项目上，该项目可能产生巨大的短期利润，但也面临破产风险。",
+                "聘请独立的外部审计师。"
+            ],
+            correct: 2,
+            expEn: "Because profit maximization ignores risk, it incentivizes managers to take reckless gambles. If it pays off, the accounting profit is huge. If it fails, the firm dies. Wealth maximization prevents this by applying a higher discount rate to riskier cash flows.",
+            expZh: "因为利润最大化无视风险，它会刺激管理者进行鲁莽的赌博。如果赌赢了，账面利润巨大。如果失败了，企业倒闭。财富最大化通过对高风险现金流应用更高的折现率来防止这种情况。",
+            attrEn: "Risk Assessment Error. You must understand that pure profit metrics have no mechanism to penalize volatility or the threat of bankruptcy.",
+            attrZh: "风险评估错误。您必须明白：纯粹的利润指标没有任何机制去惩罚波动性或破产威胁。"
+        },
+        {
+            id: 10,
+            qEn: "When evaluating an investment project in BUSI1020, the Net Present Value (NPV) tool is considered the gold standard. This is because NPV directly aligns with which corporate objective?",
+            qZh: "在 BUSI1020 课程评估投资项目时，净现值 (NPV) 工具被视为黄金标准。这是因为 NPV 直接与哪个企业目标相一致？",
+            optionsEn: [
+                "Profit Maximization.",
+                "Shareholder Wealth Maximization.",
+                "Market Share Maximization.",
+                "Agency Cost Maximization."
+            ],
+            optionsZh: [
+                "利润最大化。",
+                "股东财富最大化。",
+                "市场份额最大化。",
+                "代理成本最大化。"
+            ],
+            correct: 1,
+            expEn: "NPV calculates the present value of future cash flows, discounted for time and risk. A positive NPV mathematically equates to an absolute increase in Shareholder Wealth. Therefore, the NPV rule and Wealth Maximization are inherently identical.",
+            expZh: "NPV 计算的是未来现金流的现值，并已对时间和风险进行了折现。正的 NPV 在数学上等同于股东财富的绝对增加。因此，NPV 法则和财富最大化在本质上是一致的。",
+            attrEn: "Core Tool Linkage Error. The entire rationale for using NPV over other methods (like ARR) is that NPV is the mathematical embodiment of Shareholder Wealth Maximization.",
+            attrZh: "核心工具链接错误。使用 NPV 而不是其他方法（如会计收益率 ARR）的全部理论基础在于：NPV 是'股东财富最大化'的数学化身。"
+        }
+    ];
+
+    function renderQuiz() {
+        const container = document.getElementById('questions-container');
+        quizData.forEach((q, index) => {
+            const card = document.createElement('div');
+            card.className = 'question-card';
+
+            const qEn = `<div class="question-text en">${index + 1}. ${q.qEn}</div>`;
+            const qZh = `<div class="question-text zh">${index + 1}. ${q.qZh}</div>`;
+
+            let optionsHTML = '<ul class="options-list">';
+            for(let i=0; i<4; i++) {
+                optionsHTML += `
+                    <li>
+                        <label>
+                            <input type="radio" name="q${index}" value="${i}">
+                            <span class="en">${q.optionsEn[i]}</span>
+                            <span class="zh">${q.optionsZh[i]}</span>
+                        </label>
+                    </li>
+                `;
+            }
+            optionsHTML += '</ul>';
+
+            card.innerHTML = qEn + qZh + optionsHTML;
+            container.appendChild(card);
+        });
+    }
+
+    function submitQuiz() {
+        let score = 0;
+        let mistakeHTML = '';
+        let allAnswered = true;
+
+        for(let i = 0; i < quizData.length; i++) {
+            if (!document.querySelector(`input[name="q${i}"]:checked`)) {
+                allAnswered = false;
+                break;
+            }
+        }
+
+        if (!allAnswered) {
+            const isEng = document.body.classList.contains('lang-en');
+            alert(isEng ? "Please answer all questions before submitting." : "请回答所有问题后再提交。");
+            return;
+        }
+
+        quizData.forEach((q, index) => {
+            const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+            if (selected && parseInt(selected.value) === q.correct) {
+                score++;
+            } else {
+                let userChoiceTextEn = selected ? q.optionsEn[selected.value] : "None";
+                let userChoiceTextZh = selected ? q.optionsZh[selected.value] : "未选择";
+                let correctTextEn = q.optionsEn[q.correct];
+                let correctTextZh = q.optionsZh[q.correct];
+
+                mistakeHTML += `
+                    <div class="mistake-card">
+                        <div class="question-text en">Q${index + 1}: ${q.qEn}</div>
+                        <div class="question-text zh">Q${index + 1}: ${q.qZh}</div>
+
+                        <div style="margin-bottom: 12px; margin-top: 15px;">
+                            <span class="en">❌ <strong>Your Answer:</strong> <span class="wrong-ans-highlight">${userChoiceTextEn}</span></span>
+                            <span class="zh">❌ <strong>您的答案：</strong> <span class="wrong-ans-highlight">${userChoiceTextZh}</span></span>
+                        </div>
+                        <div>
+                            <span class="en">✅ <strong>Correct Answer:</strong> <span class="correct-ans-highlight">${correctTextEn}</span></span>
+                            <span class="zh">✅ <strong>正确答案：</strong> <span class="correct-ans-highlight">${correctTextZh}</span></span>
+                        </div>
+
+                        <div class="explanation-box">
+                            <strong class="en">👨‍🏫 Professor's Explanation:</strong> <span class="en">${q.expEn}</span>
+                            <strong class="zh">👨‍🏫 教授精讲：</strong> <span class="zh">${q.expZh}</span>
+                        </div>
+
+                        <div class="attribution-box">
+                            <strong class="en">🔍 Error Attribution Analysis:</strong> <span class="en">${q.attrEn}</span>
+                            <strong class="zh">🔍 深度归因分析：</strong> <span class="zh">${q.attrZh}</span>
+                        </div>
+                    </div>
+                `;
+            }
+        });
+
+        document.getElementById('submitBtn').style.display = 'none';
+        document.getElementById('submitBtnZh').style.display = 'none';
+
+        document.getElementById('score-val-en').innerText = score;
+        document.getElementById('score-val-zh').innerText = score;
+        document.getElementById('results-container').style.display = 'block';
+
+        if (score === 10) {
+            document.getElementById('mistake-book-section').style.display = 'none';
+            document.getElementById('perfect-score-section').style.display = 'block';
+        } else {
+            document.getElementById('mistake-book-section').style.display = 'block';
+            document.getElementById('perfect-score-section').style.display = 'none';
+            document.getElementById('mistakes-container').innerHTML = mistakeHTML;
+        }
+
+        setTimeout(() => {
+            document.getElementById('results-container').scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+    }
+
+    function toggleLanguage() {
+        const body = document.body;
+        const btn = document.getElementById('langToggleBtn');
+
+        if (body.classList.contains('lang-en')) {
+            body.classList.remove('lang-en');
+            body.classList.add('lang-zh');
+            btn.innerText = 'Switch to English (切换至英文)';
+        } else {
+            body.classList.remove('lang-zh');
+            body.classList.add('lang-en');
+            btn.innerText = '点击切换至全中文 (切换至中文)';
+        }
+    }
+
+    window.onload = renderQuiz;
+</script>
+
+</body>
+</html>

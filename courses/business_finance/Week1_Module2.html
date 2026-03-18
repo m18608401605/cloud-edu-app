@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 2: Corporate Objectives & Agency Theory</title>
+    <style>
+        :root {
+            --primary-color: #0b2447;
+            --secondary-color: #19376d;
+            --accent-color: #c84b31;
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+       .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        /* Responsive Title */
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.8rem, 4vw, 2.8rem); /* Adaptive font size */
+            margin-top: 0;
+            line-height: 1.3;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 45px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+        }
+
+       .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+       .section-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+       .section-box.concept { border-left: 5px solid #2980b9; background-color: #ebf5fb; }
+       .section-box.explanation { border-left: 5px solid #8e44ad; background-color: #f4ecf8; }
+       .section-box.exam { border-left: 5px solid #c0392b; background-color: #fdedec; }
+
+       .section-box h3 { 
+            margin-top: 0; 
+            color: var(--primary-color);
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            font-size: 1.25rem;
+        }
+
+       .highlight { font-weight: bold; color: var(--accent-color); }
+       .case-title { font-weight: bold; color: #2c3e50; text-decoration: underline; font-size: 1.1rem;}
+
+        /* Top Language Toggle Button */
+       .toggle-btn {
+            display: block;
+            margin: 0 auto 40px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+       .toggle-btn:hover { background-color: var(--secondary-color); transform: translateY(-2px); }
+
+        /* Language content toggling */
+       .lang-content { display: none; }
+       .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bottom Navigation Area matching the image */
+       .bottom-nav-container {
+            margin-top: 60px;
+            text-align: center; /* Center the button */
+        }
+
+       .dashed-divider {
+            border-top: 2px dashed #d1d5db; /* Light gray dashed line */
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        /* Specific styles matching the user's provided image for "Back to Top" */
+       .back-to-top {
+            background-color: #f3f4f6; /* Light gray background */
+            color: #112a46; /* Dark navy text */
+            border: 1px solid #d1d5db; /* Subtle border */
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .back-to-top:hover {
+            background-color: #e5e7eb;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">Switch to Chinese (点击切换至全中文)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 1 - Module 2: Corporate Objectives & Agency Theory</h1>
+        
+        <p>Welcome to Module 2. After defining the fundamental decisions of financial management in Module 1, we must now establish the ultimate compass guiding those decisions. What is the true goal of a corporation? In this module, we will dispel the dangerous myth of "profit maximization," define the rigorous standard of "wealth maximization," and explore the inherent conflicts of interest known as the Agency Problem.</p>
+
+        <h2>1. The Fallacy of Profit Maximization</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Profit Maximization</h3>
+            <p><strong>Definition:</strong> Profit maximization is the traditional economic view that a firm should operate in a manner that increases its short-term accounting earnings (revenue minus costs).</p>
+            <p>While intuitive to laypeople, modern finance completely rejects this as a primary corporate objective due to three fatal flaws:</p>
+            <ul>
+                <li><strong>Quantitative Difficulties (Manipulation):</strong> Accounting profit is highly subjective. It is easily manipulated by altering depreciation methods or inventory valuation. Profit does not equal actual cash flow.</li>
+                <li><strong>Timescale (Short-termism):</strong> Maximizing profit focuses heavily on the current financial year. Managers might cut R&D or employee training to artificially boost this year's profit, sacrificing long-term survival.</li>
+                <li><strong>Ignores Risk:</strong> Profit figures make no allowance for the level of risk undertaken. A CEO gambling company funds in a highly risky venture might generate a massive short-term profit, but stockholders detest such uncompensated risk.</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>To truly understand why "profit" is a deceptive metric, let us examine how easily executives can manipulate it to trigger their bonuses, simultaneously destroying the firm's true value.</p>
+            
+            <p><span class="case-title">Real-World Case Study: The Tesco Accounting Scandal (2014)</span><br>
+            In 2014, Tesco PLC, the UK's largest retailer, was under immense pressure from discount chains. To meet aggressive short-term profit targets, Tesco executives actively encouraged the premature booking of commercial income from suppliers, effectively falsifying the timing of their revenues. They artificially inflated their accounting profit by an estimated £263 million.<br><br>
+            <strong>The Result:</strong> When the "profit maximization" illusion collapsed, Tesco's share price plummeted by over 50%. Billions of pounds of shareholder wealth were wiped out, and senior management faced criminal charges from the Serious Fraud Office. This vividly proves that accounting profit is merely an opinion; cash flow is a fact.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> The most catastrophic error a student can make in a Nottingham Business School exam is stating that a firm's goal is to maximize profit. Examiners will aggressively penalize this. Always state that profit is flawed due to <em>Timing, Risk, and Manipulation</em>.</p>
+            
+            <p><strong>Classic Essay Question:</strong> <em>"Critically evaluate the view that the primary financial objective of a company should be to maximise profit."</em></p>
+            
+            <p><strong>Distinction (A+) Answer Strategy:</strong> A standard answer lists the definitions. An A+ answer demonstrates <em>criticality</em>. Use the PEEL structure (Point, Evidence, Explanation, Link). Argue that while profit targets are acceptable as secondary, short-term operational benchmarks, they are disastrous as strategic goals. Cite the Tesco £263m scandal as empirical evidence of the "manipulation" flaw, proving that profit-chasing can destroy real corporate value.</p>
+        </div>
+
+        <h2>2. The True Goal: Shareholder Wealth Maximization</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: Shareholder Wealth Maximization</h3>
+            <p><strong>Definition:</strong> The primary, overriding objective of corporate finance is to maximize the wealth of the company's owners (the shareholders). In publicly traded companies, this is practically achieved by <strong>maximizing the current market price of ordinary shares</strong>.</p>
+            <p>Share price is the ultimate surrogate for wealth because it naturally internalizes the three variables that profit ignores:</p>
+            <ul>
+                <li><strong>Magnitude of Cash Flows:</strong> It tracks real cash, not accounting illusions.</li>
+                <li><strong>Timing of Cash Flows:</strong> It acknowledges the Time Value of Money (TVM).</li>
+                <li><strong>Risk of Cash Flows:</strong> Investors discount expected future cash flows based on uncertainty.</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>Unlike short-sighted profit, a company's stock price reflects the market's collective evaluation of all future cash flows the firm will ever generate. It forces managers to act sustainably.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Amazon's Decades of Zero Profit</span><br>
+            For its first two decades, Amazon reported virtually zero accounting profit. If Jeff Bezos were pursuing "profit maximization," he would have ceased investing in infrastructure to make his income statement look appealing. Instead, he pursued Wealth Maximization. He relentlessly reinvested cash into building AWS and global logistics. The financial markets recognized the massive long-term cash flow potential. Consequently, Amazon's share price skyrocketed, creating unprecedented wealth for shareholders, despite the absence of accounting profit.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> In Multiple Choice Questions (MCQs), examiners will try to trick you by mixing the terminology.</p>
+            
+            <p><strong>Classic Exam MCQ:</strong><br>
+            <em>Which of the following best describes the fundamental objective of financial management?</em><br>
+            A) To maximize the accounting profit of the firm.<br>
+            B) To maximize the magnitude of short-term cash flows.<br>
+            C) To maximize the current value per share of the existing stock.<br>
+            D) To maximize the firm's market share against competitors.</p>
+            
+            <p><strong>Answer & Rationale:</strong> <strong>C</strong>. Maximizing current share value perfectly encapsulates the magnitude, timing, and risk of long-term wealth. Option A is the classic distractor. Option D is an operational goal, not the primary financial objective.</p>
+        </div>
+
+        <h2>3. Agency Theory and Corporate Governance</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept: The Agency Problem</h3>
+            <p><strong>Definition:</strong> An agency relationship exists when principals (shareholders) hire agents (managers) to run the company on their behalf. The <strong>Agency Problem</strong> arises when conflicts of interest occur—specifically, when managers prioritize their own welfare (e.g., job security, luxury perks, empire building) over the shareholders' goal of wealth maximization.</p>
+            <p><strong>Corporate Governance</strong> refers to the system of rules, practices, and incentives used to align the interests of managers with those of the shareholders, thereby reducing "Agency Costs."</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>If you own a company but hire someone else to run it, how do you stop them from buying a corporate jet with your money? Because of <em>Information Asymmetry</em> (managers know the daily data; shareholders only see the annual report), monitoring is difficult. The most effective solution is incentive alignment.</p>
+            
+            <p><span class="case-title">Real-World Case Study: Disney's Executive Compensation</span><br>
+            The Walt Disney Company has millions of dispersed shareholders, making the agency problem highly potent. To prevent CEO Bob Iger from coasting, the Board of Directors utilized an aggressive incentive mechanism. Iger's base salary was set at a relatively modest $1 million, but he was offered stock awards and performance-based bonuses valued at over $25 million. By making his personal wealth entirely dependent on Disney's stock performance, they mathematically aligned the agent's interests with the principals'.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Distinction (A+) Tip:</strong> When discussing how to solve the agency problem using stock options, you must show <em>Critical Thinking</em>. An A+ student will point out the flaw in stock options: During a macro-economic boom (a bull market), stock prices rise universally. Therefore, a CEO might see their stock options become worth millions purely due to market momentum, not because of their actual managerial skill. This is a critical limitation of incentive schemes.</p>
+        </div>
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第1周 - 模块二：企业目标与代理理论</h1>
+        
+        <p>欢迎来到模块二。在模块一中我们定义了财务管理的核心决策，现在我们必须确立指导这些决策的终极指南针。一家公司的真正目标究竟是什么？在本模块中，我们将打破“利润最大化”的危险神话，确立“财富最大化”的严谨标准，并深入探讨被称为“代理问题”的内在利益冲突。</p>
+
+        <h2>1. 利润最大化的谬误 (The Fallacy of Profit Maximization)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：利润最大化</h3>
+            <p><strong>定义：</strong> 利润最大化是一种传统的经济学观点，认为企业的运营方式应旨在增加其短期会计收益（收入减去成本）。</p>
+            <p>虽然这在普通人看来很直观，但现代金融学完全拒绝将其作为企业的首要目标，原因在于其存在三个致命缺陷：</p>
+            <ul>
+                <li><strong>量化困难/易被操纵 (Quantitative Difficulties)：</strong> 会计利润具有极强的主观性。通过改变折旧方法或存货估值，利润极易被操纵。利润并不等于实际的现金流。</li>
+                <li><strong>短视主义 (Timescale)：</strong> 利润最大化严重聚焦于当前的财务年度。管理者可能会削减研发（R&D）或员工培训费用来人为拔高今年的利润，从而牺牲了企业的长期生存能力。</li>
+                <li><strong>无视风险 (Ignores Risk)：</strong> 利润数字完全没有考虑到所承担的风险水平。如果CEO将公司资金投入高风险的赌博性项目中，可能会产生巨大的短期利润，但股东极其反感这种没有获得相应补偿的风险。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>为了真正理解为什么“利润”是一个具有欺骗性的指标，让我们看看高管们是如何轻易地操纵它来触发自己的奖金，同时却摧毁了公司的真实价值的。</p>
+            
+            <p><span class="case-title">实战案例：乐购 (Tesco) 财务造假丑闻 (2014)</span><br>
+            2014年，英国最大的零售商乐购 (Tesco) 面临来自折扣连锁店的巨大压力。为了达到激进的短期利润目标，乐购高管积极鼓励提前确认来自供应商的商业收入，实际上伪造了收入发生的时间。他们将账面利润人为地夸大了约 2.63 亿英镑。<br><br>
+            <strong>结果：</strong> 当“利润最大化”的幻觉破灭时，乐购的股价暴跌了超过 50%。数十亿英镑的股东财富灰飞烟灭，高管们也面临英国严重欺诈办公室的刑事指控。这生动地证明了：会计利润只是一种观点，而现金流才是事实。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 在诺丁汉大学商学院的考试中，学生能犯的最灾难性的错误就是声称企业的目标是利润最大化。考官会对此严厉扣分。永远要记住指出利润的缺陷：<em>时间、风险和易被操纵</em>。</p>
+            
+            <p><strong>经典论述题：</strong> <em>“批判性地评估‘公司的首要财务目标应该是利润最大化’这一观点。”</em></p>
+            
+            <p><strong>Distinction (A+) 答题策略：</strong> 普通答案只会罗列定义。而 A+ 的答案会展现出<em>批判性思维 (Criticality)</em>。使用 PEEL 结构（论点、证据、解释、联系）。你可以论述：虽然利润目标作为次要的、短期的运营基准是可以接受的，但作为战略目标却是灾难性的。引用乐购 2.63 亿英镑丑闻作为“易被操纵”缺陷的经验证据，证明追逐利润会摧毁企业真正的价值。</p>
+        </div>
+
+        <h2>2. 真正的目标：股东财富最大化 (Shareholder Wealth Maximization)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：股东财富最大化</h3>
+            <p><strong>定义：</strong> 公司金融首要的、压倒一切的目标是最大化公司所有者（股东）的财富。在上市公众公司中，这在实践中体现为<strong>最大化公司普通股的当前市场价格</strong>。</p>
+            <p>股价之所以是财富的终极替代指标，是因为它自然地内化了利润所忽略的三个变量：</p>
+            <ul>
+                <li><strong>现金流的规模 (Magnitude)：</strong> 它追踪的是真实的现金，而非会计幻觉。</li>
+                <li><strong>现金流的时间 (Timing)：</strong> 它承认资金的时间价值 (TVM)。</li>
+                <li><strong>现金流的风险 (Risk)：</strong> 投资者会根据不确定性对预期的未来现金流进行折现。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>与目光短浅的利润不同，公司的股票价格反映了市场对该公司未来将产生的所有现金流的集体预估。它迫使管理者必须采取可持续的行动。</p>
+            
+            <p><span class="case-title">实战案例：亚马逊 (Amazon) 长达二十年的零利润</span><br>
+            在成立的最初二十年里，亚马逊报告的会计利润几乎为零。如果杰夫·贝索斯追求的是“利润最大化”，他早就停止了对基础设施的投资，以让他的损益表看起来很漂亮。相反，他追求的是财富最大化。他无情地将现金重新投入到构建 AWS 云计算和全球物流中。金融市场认识到了其庞大的长期现金流潜力。因此，尽管没有会计利润，亚马逊的股价仍然一路飙升，为股东创造了前所未有的财富。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 在选择题 (MCQ) 中，考官会试图通过混合专业术语来误导你。</p>
+            
+            <p><strong>经典选择题：</strong><br>
+            <em>以下哪项最能准确描述财务管理的根本目标？</em><br>
+            A) 最大化公司的会计利润。<br>
+            B) 最大化短期现金流的规模。<br>
+            C) 最大化现有股票的当前每股价值。<br>
+            D) 最大化公司对抗竞争对手的市场份额。</p>
+            
+            <p><strong>答案与解析：</strong> <strong>C</strong>。最大化当前每股价值完美地包含了长期财富的规模、时间和风险。选项 A 是最经典的干扰项。选项 D 只是一个运营目标，而不是首要的财务目标。</p>
+        </div>
+
+        <h2>3. 代理理论与公司治理 (Agency Theory and Corporate Governance)</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念：代理问题</h3>
+            <p><strong>定义：</strong> 当委托人（股东）雇佣代理人（管理者）代为管理公司时，代理关系就产生了。当利益冲突发生时，特别是当管理者将自身的利益（例如工作保障、奢侈的在职消费、建立商业帝国）置于股东财富最大化的目标之上时，就会产生<strong>代理问题 (The Agency Problem)</strong>。</p>
+            <p><strong>公司治理 (Corporate Governance)</strong> 是指用于使管理者利益与股东利益保持一致，从而降低“代理成本”的规则、实践和激励系统的总和。</p>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>如果你拥有一家公司，但雇佣了别人来管理，你如何阻止他们用你的钱买私人飞机？因为存在<em>信息不对称</em>（管理者掌握日常数据；股东只看得到年报），监督是非常困难的。最有效的解决方案是激励机制对齐。</p>
+            
+            <p><span class="case-title">实战案例：迪士尼 (Disney) 的高管薪酬</span><br>
+            华特迪士尼公司拥有数以百万计的分散股东，这使得其代理问题极为突出。为了防止前任传奇 CEO 罗伯特·艾格 (Bob Iger) 懈怠，董事会采用了激进的激励机制。艾格的底薪被设定在相对温和的 100 万美元，但他获得了价值超过 2500 万美元的股票奖励和绩效奖金。通过使他的个人财富完全取决于迪士尼股票的表现，他们在数学上将代理人的利益与委托人的利益完美地绑定在了一起。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>Distinction (A+) 答题策略：</strong> 当你在论述如何使用股票期权来解决代理问题时，你必须展现出<em>批判性思维</em>。一个 A+ 的学生会指出股票期权的致命缺陷：在宏观经济繁荣（牛市）期间，所有股票的价格都会普遍上涨。因此，一位 CEO 手中的股票期权可能纯粹因为市场整体走势而变得价值千万，这根本不是因为他出色的管理能力。这是激励机制一个不容忽视的局限性。</p>
+        </div>
+    </div>
+
+    <div class="bottom-nav-container">
+        <div class="dashed-divider"></div>
+        <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+    let isEnglish = true;
+    
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        
+        if (isEnglish) {
+            enContent.classList.remove('active');
+            zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active');
+            enContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to Chinese (点击切换至全中文)';
+            isEnglish = true;
+        }
+    }
+</script>
+
+</body>
+</html>

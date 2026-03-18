@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 | Lecture | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,var(--primary) 0%,#2c5282 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:640px;margin:0 auto}
+  .hero .meta{margin-top:1.2rem;display:flex;justify-content:center;gap:2rem;font-size:.85rem;opacity:.7;flex-wrap:wrap}
+  main{max-width:900px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .card{background:var(--card);border-radius:12px;border:1px solid var(--border);padding:1.8rem;margin-bottom:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .card h2{font-size:1.2rem;color:var(--primary);margin-bottom:1rem}
+  .card h3{font-size:1rem;color:var(--primary);margin:1.2rem 0 .6rem}
+  .card p{margin-bottom:.8rem}
+  .card ul,.card ol{padding-left:1.4rem;margin-bottom:.8rem}
+  .card li{margin-bottom:.4rem}
+  .concept-box{background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem 1.5rem;margin:1rem 0}
+  .concept-box .label{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--primary);letter-spacing:.06em;margin-bottom:.5rem}
+  .case{background:#fffbf0;border:1px solid #f0d080;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .case .case-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:#b7860b;letter-spacing:.06em;margin-bottom:.6rem}
+  .case h4{font-size:1rem;color:#7a5800;margin-bottom:.6rem}
+  .pitfall{background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:1.4rem;margin:1rem 0}
+  .pitfall .pitfall-tag{font-size:.75rem;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.06em;margin-bottom:.6rem}
+  .pitfall .rule{background:#fee2e2;border-radius:6px;padding:.8rem 1rem;margin-top:.8rem;font-weight:600;color:#991b1b}
+  .formula-box{background:#0f172a;color:#e2e8f0;border-radius:10px;padding:1.4rem;margin:1rem 0;font-family:monospace}
+  .formula-box .f-title{color:#94a3b8;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.8rem}
+  .formula-box .f-main{font-size:1.1rem;color:#fbbf24;margin-bottom:.4rem}
+  .formula-box .f-note{font-size:.82rem;color:#64748b}
+  table.data{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.9rem}
+  table.data th{background:var(--primary);color:#fff;padding:.7rem 1rem;text-align:left}
+  table.data td{padding:.65rem 1rem;border-bottom:1px solid var(--border)}
+  table.data tr:nth-child(even) td{background:#f8fafc}
+  table.data .check{color:var(--green);font-weight:700}
+  table.data .cross{color:var(--red);font-weight:700}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  .toc-sidebar a.active{background:var(--primary);color:#fff;font-weight:600}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  @media(min-width:1201px){main{margin-left:260px!important;margin-right:20px!important}}
+  .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
+  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
+  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
+  .mobile-toc-toggle.open{transform:rotate(180deg)}
+  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+  .mobile-toc-content.open{max-height:500px;border-top:1px solid var(--border)}
+  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--bg);transition:all .2s}
+  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
+  .mobile-toc-content a:last-child{border-bottom:none}
+  @media(max-width:1200px){.mobile-toc{display:block}}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 4</span>
+</nav>
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">📊 Sensitivity Analysis</a>
+    <a href="#part2">📊 Probability & Expected Value</a>
+    <a href="#part3">📈 Portfolio Theory</a>
+    <a href="#part4">⚠️ Pitfalls</a>
+  </div>
+</div>
+<div class="hero">
+  <div class="tag">Week 4 · Chapter 6</div>
+  <h1>Risk in Investment Appraisal</h1>
+  <p>投资评估中的风险 — Sensitivity Analysis, Expected NPV &amp; Systematic Risk</p>
+  <div class="meta">
+    <span>📖 McLaney Ch.6</span>
+    <span>⏱ ~50 min read</span>
+    <span>🎯 Exam Weight: High</span>
+  </div>
+</div>
+<main>
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">📊 Sensitivity Analysis</a>
+  <a href="#part2">🎲 Expected NPV</a>
+  <a href="#part3">📈 Systematic vs Specific Risk</a>
+  <a href="#pitfalls">⚠️ Pitfalls</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+</div>
+<script>
+window.addEventListener('scroll', function() {
+  const backToTop = document.querySelector('.back-to-top');
+  if (window.scrollY > 300) { backToTop.classList.add('show'); }
+  else { backToTop.classList.remove('show'); }
+});
+</script>
+
+
+  <div class="section-label" id="part1">📊 Part 1 — Sensitivity Analysis</div>
+  <div class="card">
+    <h2>📚 What is Sensitivity Analysis?</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比</div>
+      <p>你开车去机场，导航说还有30分钟。敏感性分析就是问："路上堵多久我还能赶上飞机？"——找到让你"错过飞机"（NPV变负）的临界点。</p>
+    </div>
+    <div class="formula-box">
+      <div class="f-title">Sensitivity Formula</div>
+      <div class="f-main">Sensitivity % = NPV ÷ PV of the variable × 100%</div>
+      <div class="f-note">= 该变量需要变化多少百分比才能使 NPV = 0</div>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Example 6.1 — Greene plc</div>
+      <h4>Sensitivity Analysis on a 5-year project</h4>
+      <p>Initial investment: £50,000. Annual cash inflow: £5 × (price−variable cost) × volume. Cost of capital: 10%. AF(10%,5) = 3.791. NPV = +£6,865.</p>
+      <p style="margin-top:.6rem"><strong>Sensitivity of sales volume:</strong> NPV/PV of contribution = £6,865 / (£15 × 3.791) = £6,865/£56,865 = <strong>12.1%</strong></p>
+      <p style="font-size:.88rem;color:var(--muted)">Sales volume can fall by 12.1% before the project becomes unprofitable.</p>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 陷阱 — 敏感性不可直接比较</div>
+      <p>项目寿命的敏感性是14.8%，初始投资的敏感性是13.7%。不能说"寿命比投资更不敏感"——因为初始投资在第0年就确定了，而寿命预测更不确定。</p>
+      <div class="rule">✅ 敏感性分析只告诉你临界点，不告诉你哪个变量更可能出错。</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="part2">🎲 Part 2 — Expected NPV</div>
+  <div class="card">
+    <h2>📚 Using Probabilities in NPV</h2>
+    <div class="concept-box">
+      <div class="label">核心公式</div>
+      <p><strong>E(NPV) = Σ [NPV_i × P_i]</strong></p>
+      <p style="margin-top:.4rem;font-size:.9rem;color:var(--muted)">对每种可能结果的 NPV 乘以其概率，然后求和。</p>
+    </div>
+    <div class="case">
+      <div class="case-tag">🔢 Example 6.2 — Greene plc (Probability)</div>
+      <h4>Three possible demand scenarios</h4>
+      <table class="data">
+        <thead><tr><th>Annual Demand</th><th>Probability</th><th>NPV</th><th>NPV × P</th></tr></thead>
+        <tbody>
+          <tr><td>4,000 units</td><td>0.2</td><td>−£4,508</td><td>−£902</td></tr>
+          <tr><td>4,500 units</td><td>0.5</td><td>+£1,179</td><td>+£590</td></tr>
+          <tr><td>5,000 units</td><td>0.3</td><td>+£6,865</td><td>+£2,060</td></tr>
+          <tr><td><strong>E(NPV)</strong></td><td><strong>1.0</strong></td><td></td><td><strong>+£1,748</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ 期望 NPV 的局限性</div>
+      <p>E(NPV) = +£1,748 看起来不错，但有20%的概率 NPV = −£4,508（亏损）。期望值隐藏了风险信息。</p>
+      <div class="rule">✅ 永远要同时报告期望 NPV 和最坏情况的 NPV 及其概率。</div>
+    </div>
+  </div>
+
+  <div class="section-label" id="part3">📈 Part 3 — Systematic vs Specific Risk</div>
+  <div class="card">
+    <h2>📚 Two Types of Risk 两种风险</h2>
+    <div class="concept-box">
+      <div class="label">费曼类比</div>
+      <p><strong>系统性风险</strong>（Systematic）= 地震——所有建筑都受影响，无法通过"多买几栋楼"来分散。<br>
+      <strong>非系统性风险</strong>（Specific）= 某栋楼的管道漏水——只影响这栋楼，买多栋楼就能分散。</p>
+    </div>
+    <table class="data">
+      <thead><tr><th>类型</th><th>来源</th><th>可分散？</th><th>市场定价？</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Systematic Risk (β)</strong></td><td>宏观经济、利率、市场整体</td><td class="cross">❌ 不可分散</td><td class="check">✅ 有风险溢价</td></tr>
+        <tr><td><strong>Specific Risk</strong></td><td>公司管理、行业竞争、产品失败</td><td class="check">✅ 可通过分散消除</td><td class="cross">❌ 无额外补偿</td></tr>
+      </tbody>
+    </table>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q3 陷阱 — 坏消息与股价</div>
+      <p>"根据投资组合理论，只影响某公司的坏消息不会影响该公司股价。"</p>
+      <div class="rule">✅ 错误！非系统性风险虽然不影响要求回报率，但坏消息会降低预期现金流，从而降低股价。</div>
+    </div>
+    <div class="pitfall">
+      <div class="pitfall-tag">⚠️ Q5 陷阱 — β=2 的回报率</div>
+      <p>"β=2 的股票回报率是 β=1 股票的两倍。"</p>
+      <div class="rule">✅ 错误！CAPM: r = Rf + β(Rm−Rf)。β=2 时 r = Rf + 2(Rm−Rf)，不是 2×(Rf + (Rm−Rf))。风险溢价翻倍，但总回报率不翻倍（因为 Rf 是共享的）。</div>
+    </div>
+  </div>
+
+  <div class="case">
+    <div class="case-tag">🔢 Example 6.3 — Multiple Independent Factors</div>
+    <h4>Joint Probability with Independent Variables</h4>
+    <p>When two factors are independent (e.g., sales volume AND labour cost), use <strong>multiplication</strong> for joint probability.</p>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Probability</th><th>Calculation</th></tr></thead>
+      <tbody>
+        <tr><td>High Sales (0.6) × Low Labour (0.3)</td><td>0.18</td><td>0.6 × 0.3 = 0.18</td></tr>
+        <tr><td>High Sales (0.6) × High Labour (0.7)</td><td>0.42</td><td>0.6 × 0.7 = 0.42</td></tr>
+        <tr><td>Low Sales (0.4) × Low Labour (0.3)</td><td>0.12</td><td>0.4 × 0.3 = 0.12</td></tr>
+        <tr><td>Low Sales (0.4) × High Labour (0.7)</td><td>0.28</td><td>0.4 × 0.7 = 0.28</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>1.00</strong></td><td>✅ Sum = 1.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="case">
+    <div class="case-tag">🔢 Example 6.4 — Diversification Effect</div>
+    <h4>How Diversification Reduces Risk</h4>
+    <p>Adding negatively correlated assets reduces portfolio risk more than adding positively correlated assets.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">
+      <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1rem">
+        <div style="font-weight:700;color:var(--red);margin-bottom:.5rem">❌ Positive Correlation</div>
+        <p style="font-size:.85rem">Both assets rise/fall together. Adding more of the same risk = <strong>no reduction</strong> in overall risk.</p>
+      </div>
+      <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1rem">
+        <div style="font-weight:700;color:var(--green);margin-bottom:.5rem">✅ Negative Correlation</div>
+        <p style="font-size:.85rem">When one falls, the other rises. Adding them = <strong>risk reduction</strong> through hedging.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="part4">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="card">
+    <h2>🎯 Week 4 Quick-Reference</h2>
+    <table class="data">
+      <thead><tr><th>考点</th><th>正确答案</th><th>常见错误</th></tr></thead>
+      <tbody>
+        <tr><td>敏感性公式</td><td class="check">NPV ÷ PV of variable × 100%</td><td class="cross">不是 NPV ÷ 变量本身</td></tr>
+        <tr><td>敏感性越小意味着</td><td class="check">该变量越关键（更敏感）</td><td class="cross">不是"越不重要"</td></tr>
+        <tr><td>期望 NPV > 0</td><td class="check">平均来看值得做，但有亏损风险</td><td class="cross">不代表一定盈利</td></tr>
+        <tr><td>非系统性风险</td><td class="check">可分散，市场不补偿</td><td class="cross">不是"不重要"，只是不影响要求回报率</td></tr>
+        <tr><td>β=2 的要求回报率</td><td class="check">Rf + 2(Rm−Rf)，不是 2×总回报率</td><td class="cross">β翻倍 ≠ 总回报率翻倍</td></tr>
+        <tr><td>坏消息 vs 股价</td><td class="check">公司特有坏消息仍会影响股价（降低预期现金流）</td><td class="cross">不是"不影响"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label" id="pitfalls">⚠️ Common Pitfalls & Exam Traps</div>
+
+  <div class="card">
+    <h2>⚠️ Pitfall Summary Table — Risk Analysis Mistakes</h2>
+    <p style="margin-bottom:1.2rem;color:var(--muted)">Ch.6 的陷阱主要集中在概率计算、Expected Value 的误解和多元化的局限性。</p>
+    <table class="data">
+      <thead>
+        <tr>
+          <th style="width:25%">Scenario</th>
+          <th style="width:35%">Common Mistake</th>
+          <th style="width:40%">Correct Approach</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Sensitivity Analysis</strong></td>
+          <td>Changing multiple variables simultaneously</td>
+          <td>✅ Change ONE variable at a time, holding others constant. This isolates each variable's impact</td>
+        </tr>
+        <tr>
+          <td><strong>Probability Calculation</strong></td>
+          <td>Forgetting to check if probabilities sum to 1.0</td>
+          <td>✅ Always verify: Σp = 1.0. If not, probabilities are incomplete or incorrect</td>
+        </tr>
+        <tr>
+          <td><strong>Expected Value</strong></td>
+          <td>Treating EV as a guaranteed outcome</td>
+          <td>✅ EV is a weighted average — it may not even be a possible outcome. Use for large portfolios only</td>
+        </tr>
+        <tr>
+          <td><strong>Joint Probability</strong></td>
+          <td>Adding probabilities instead of multiplying (for independent events)</td>
+          <td>✅ For independent events: P(A and B) = P(A) × P(B). Only add for mutually exclusive events</td>
+        </tr>
+        <tr>
+          <td><strong>Diversification</strong></td>
+          <td>Believing diversification eliminates all risk</td>
+          <td>✅ Diversification only eliminates Specific Risk. Systematic Risk remains (cannot be diversified away)</td>
+        </tr>
+        <tr>
+          <td><strong>Beta Interpretation</strong></td>
+          <td>Thinking β=2 means returns are twice as high as β=1</td>
+          <td>✅ Beta measures risk (volatility), not return. β=2 means twice as volatile as the market, not twice the return</td>
+        </tr>
+        <tr>
+          <td><strong>Portfolio Effect</strong></td>
+          <td>Expecting diversification to increase expected return</td>
+          <td>✅ Diversification does NOT change expected return — it only reduces the probability of extreme outcomes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-label" id="answer-templates">📝 Standard Answer Templates</div>
+
+  <div class="card">
+    <h2>📝 Answer Template: Sensitivity Analysis Questions</h2>
+    <p style="margin-bottom:1rem;color:var(--muted)">Sensitivity analysis questions require a systematic approach. Follow this template to earn full marks.</p>
+    
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: Calculate Base-Case NPV</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
+        <div style="color:#94a3b8;margin-bottom:.8rem">Using best estimates for all variables:</div>
+        <div style="color:#fbbf24">NPV = Σ [CF / (1+r)ⁿ] − I₀</div>
+        <div style="color:#64748b;margin-top:.6rem;font-size:.85rem">Example: NPV = £6,865 (Greene plc, Example 6.1)</div>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Find Break-Even Value for Each Variable</h3>
+      <p style="margin-bottom:.8rem">For each variable, find the value that makes NPV = 0, holding all other variables at their best estimates.</p>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
+        <div style="color:#fbbf24">Set NPV equation = 0</div>
+        <div style="color:#fbbf24;margin-top:.4rem">Solve for the variable of interest</div>
+        <div style="color:#64748b;margin-top:.8rem;font-size:.85rem">Example: For sales volume V:</div>
+        <div style="color:#64748b">−50,000 + {V × [10−7] × 3.791} = 0</div>
+        <div style="color:#64748b">V = 50,000 / (3 × 3.791) = 4,396 units</div>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Calculate Sensitivity Percentage</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
+        <div style="color:#fbbf24">Sensitivity % = [(Break-Even Value − Original Estimate) / Original Estimate] × 100%</div>
+        <div style="color:#64748b;margin-top:.8rem;font-size:.85rem">Example: Sales volume</div>
+        <div style="color:#64748b">= [(4,396 − 5,000) / 5,000] × 100% = −12.1%</div>
+        <div style="color:#64748b;margin-top:.4rem">Interpretation: Sales can fall by 12.1% before NPV becomes negative</div>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 4: Interpret & Rank Sensitivities</h3>
+      <div style="background:#dcfce7;border:2px solid #86efac;border-radius:8px;padding:1rem">
+        <p style="font-weight:600;color:#166534;margin-bottom:.6rem">Interpretation Rules:</p>
+        <ul style="margin-left:1.5rem;line-height:1.8;color:#166534">
+          <li><strong>Lower sensitivity %</strong> = Higher risk (variable can change less before project fails)</li>
+          <li><strong>Higher sensitivity %</strong> = Lower risk (more cushion for error)</li>
+          <li>Focus management attention on the MOST sensitive variables (lowest %)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="background:#fffbf0;border:2px solid #fbbf24;border-radius:10px;padding:1.2rem;margin-top:1rem">
+      <p style="font-weight:600;color:#7a5800;margin-bottom:.6rem">💡 Exam Tip — Sensitivity vs Scenario Analysis</p>
+      <ul style="margin-left:1.5rem;margin-top:.6rem;line-height:1.8;color:#7a5800">
+        <li><strong>Sensitivity Analysis</strong>: Change ONE variable at a time (isolates individual impact)</li>
+        <li><strong>Scenario Analysis</strong>: Change MULTIPLE variables together (e.g., "pessimistic scenario" with low sales + high costs)</li>
+        <li>Examiners often ask for sensitivity first, then scenario. Don't confuse them!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📝 Answer Template: Expected Value & Probability Questions</h2>
+    
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: List All Possible Outcomes</h3>
+      <p style="margin-bottom:.8rem">For each uncertain variable, list all possible values and their probabilities.</p>
+      <div style="background:#fff;border-radius:8px;padding:1rem;border:1px solid var(--border)">
+        <p style="font-weight:600;margin-bottom:.6rem">Example: Sales Volume</p>
+        <ul style="margin-left:1.5rem;line-height:1.8">
+          <li>4,000 units (p = 0.2)</li>
+          <li>4,500 units (p = 0.5)</li>
+          <li>5,000 units (p = 0.3)</li>
+        </ul>
+        <p style="margin-top:.6rem;font-size:.9rem;color:var(--muted)">✅ Check: 0.2 + 0.5 + 0.3 = 1.0</p>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Calculate NPV for Each Outcome</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
+        <div style="color:#64748b">At 4,000 units:</div>
+        <div style="color:#fbbf24">NPV = −50,000 + [4,000 × 3 × 3.791] = −£4,508</div>
+        <div style="color:#64748b;margin-top:.6rem">At 4,500 units:</div>
+        <div style="color:#fbbf24">NPV = −50,000 + [4,500 × 3 × 3.791] = +£1,179</div>
+        <div style="color:#64748b;margin-top:.6rem">At 5,000 units:</div>
+        <div style="color:#fbbf24">NPV = −50,000 + [5,000 × 3 × 3.791] = +£6,865</div>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Calculate Expected NPV</h3>
+      <div style="background:#0f172a;color:#e2e8f0;border-radius:8px;padding:1.2rem;font-family:monospace;font-size:.9rem">
+        <div style="color:#fbbf24">ENPV = Σ (NPV × Probability)</div>
+        <div style="color:#64748b;margin-top:.8rem">= (−£4,508 × 0.2) + (+£1,179 × 0.5) + (+£6,865 × 0.3)</div>
+        <div style="color:#4ade80;margin-top:.4rem">= −£902 + £590 + £2,060 = +£1,748</div>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:10px;padding:1.5rem;margin:1rem 0">
+      <h3 style="color:var(--primary);margin-bottom:1rem">Step 4: Interpret & Make Decision</h3>
+      <div style="background:#dcfce7;border:2px solid #86efac;border-radius:8px;padding:1rem">
+        <p style="font-weight:600;color:#166534;margin-bottom:.6rem">Decision Rule:</p>
+        <ul style="margin-left:1.5rem;line-height:1.8;color:#166534">
+          <li><strong>ENPV > 0</strong> → Accept project (on average, it adds value)</li>
+          <li><strong>ENPV < 0</strong> → Reject project</li>
+          <li><strong>But also consider</strong>: Range of outcomes, probability of loss, risk tolerance</li>
+        </ul>
+      </div>
+      <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:8px;padding:1rem;margin-top:.8rem">
+        <p style="font-weight:600;color:var(--red);margin-bottom:.6rem">⚠️ Warning</p>
+        <p style="color:var(--red);font-size:.9rem">ENPV of +£1,748 does NOT mean you will definitely get £1,748. There's a 20% chance of losing £4,508! Always report the full probability distribution, not just the ENPV.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label" id="concept-map">🗺️ Concept Relationship Map</div>
+
+  <div class="card">
+    <h2>🗺️ Ch.6 Risk Analysis Framework</h2>
+    <p style="margin-bottom:1.2rem;color:var(--muted)">这张图展示了从简单的敏感性分析到复杂的组合理论的完整风险分析框架。</p>
+    
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:2rem;margin:1rem 0">
+      <svg viewBox="0 0 800 650" style="width:100%;height:auto">
+        <!-- Title -->
+        <text x="400" y="30" text-anchor="middle" fill="#1a3a5c" font-size="18" font-weight="700">Risk Analysis Hierarchy</text>
+        
+        <!-- Level 1: Sensitivity Analysis -->
+        <rect x="50" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
+        <text x="150" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 1</text>
+        <text x="150" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Sensitivity Analysis</text>
+        <text x="150" y="148" text-anchor="middle" fill="#fff" font-size="10">"What if one variable changes?"</text>
+        
+        <!-- Level 2: Probability Analysis -->
+        <rect x="300" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
+        <text x="400" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 2</text>
+        <text x="400" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Probability Analysis</text>
+        <text x="400" y="148" text-anchor="middle" fill="#fff" font-size="10">"How likely is each outcome?"</text>
+        
+        <!-- Level 3: Expected Value -->
+        <rect x="550" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
+        <text x="650" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 3</text>
+        <text x="650" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Expected Value</text>
+        <text x="650" y="148" text-anchor="middle" fill="#fff" font-size="10">"What's the average outcome?"</text>
+        
+        <!-- Arrows down -->
+        <line x1="150" y1="160" x2="150" y2="200" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="400" y1="160" x2="400" y2="200" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="650" y1="160" x2="650" y2="200" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Details for each level -->
+        <!-- Sensitivity -->
+        <rect x="50" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
+        <text x="150" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
+        <text x="150" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">Change ONE variable</text>
+        <text x="150" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Find break-even value</text>
+        <text x="150" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Calculate % change</text>
+        <text x="150" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Identifies key risks</text>
+        
+        <!-- Probability -->
+        <rect x="300" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
+        <text x="400" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
+        <text x="400" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">Assign probabilities</text>
+        <text x="400" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Calculate NPV for each</text>
+        <text x="400" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Build distribution</text>
+        <text x="400" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Quantifies uncertainty</text>
+        
+        <!-- Expected Value -->
+        <rect x="550" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
+        <text x="650" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
+        <text x="650" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">ENPV = Σ(NPV × p)</text>
+        <text x="650" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Weighted average</text>
+        <text x="650" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Single decision metric</text>
+        <text x="650" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Simplifies decision</text>
+        
+        <!-- Level 4: Portfolio & Diversification -->
+        <rect x="250" y="350" width="300" height="80" rx="8" fill="#27ae60" stroke="#1a3a5c" stroke-width="3"/>
+        <text x="400" y="380" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 4: Portfolio Theory</text>
+        <text x="400" y="400" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Diversification</text>
+        <text x="400" y="418" text-anchor="middle" fill="#fff" font-size="10">"How can we reduce risk through multiple projects?"</text>
+        
+        <!-- Arrows to Level 4 -->
+        <line x1="150" y1="300" x2="350" y2="350" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="400" y1="300" x2="400" y2="350" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="650" y1="300" x2="450" y2="350" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Two types of risk -->
+        <rect x="100" y="480" width="250" height="120" rx="6" fill="#dcfce7" stroke="#27ae60" stroke-width="2"/>
+        <text x="225" y="505" text-anchor="middle" fill="#166534" font-size="12" font-weight="700">Specific Risk</text>
+        <text x="225" y="525" text-anchor="middle" fill="#166534" font-size="10">Project-specific factors</text>
+        <text x="225" y="540" text-anchor="middle" fill="#166534" font-size="10">(e.g., competitor actions,</text>
+        <text x="225" y="555" text-anchor="middle" fill="#166534" font-size="10">technology changes)</text>
+        <text x="225" y="575" text-anchor="middle" fill="#166534" font-size="11" font-weight="600">✅ CAN be diversified away</text>
+        <text x="225" y="593" text-anchor="middle" fill="#166534" font-size="10">by holding multiple projects</text>
+        
+        <rect x="450" y="480" width="250" height="120" rx="6" fill="#fee2e2" stroke="#e74c3c" stroke-width="2"/>
+        <text x="575" y="505" text-anchor="middle" fill="#991b1b" font-size="12" font-weight="700">Systematic Risk</text>
+        <text x="575" y="525" text-anchor="middle" fill="#991b1b" font-size="10">Market-wide factors</text>
+        <text x="575" y="540" text-anchor="middle" fill="#991b1b" font-size="10">(e.g., interest rates,</text>
+        <text x="575" y="555" text-anchor="middle" fill="#991b1b" font-size="10">economic recession)</text>
+        <text x="575" y="575" text-anchor="middle" fill="#991b1b" font-size="11" font-weight="600">❌ CANNOT be diversified</text>
+        <text x="575" y="593" text-anchor="middle" fill="#991b1b" font-size="10">affects all projects</text>
+        
+        <!-- Arrows from Level 4 to risk types -->
+        <line x1="350" y1="430" x2="225" y2="480" stroke="#27ae60" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <line x1="450" y1="430" x2="575" y2="480" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrowhead)"/>
+        
+        <!-- Arrow marker definition -->
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <polygon points="0 0, 10 3, 0 6" fill="#1a3a5c"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+    
+    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem;margin-top:1.5rem">
+      <h4 style="color:var(--primary);margin-bottom:.6rem">🧠 Key Insights from This Framework</h4>
+      <ul style="margin-left:1.2rem;font-size:.9rem;line-height:1.8">
+        <li><strong>Progression</strong>: Each level builds on the previous one, adding more sophistication</li>
+        <li><strong>Sensitivity → Probability → EV</strong>: Moving from "what if" to "how likely" to "on average"</li>
+        <li><strong>Portfolio theory</strong>: The ultimate risk management tool — but only works for Specific Risk</li>
+        <li><strong>Systematic Risk</strong>: Cannot be eliminated, so it determines the required return (CAPM in Ch.7)</li>
+        <li><strong>Exam strategy</strong>: Know which level the question asks for — don't jump to EV if they want sensitivity!</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Lecture_Kiro.html" class="btn btn-outline">← Week 3</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 1 of 3</span>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html" class="btn btn-primary">Interactive Lab →</a>
+  </div>
+
+</main>
+</body>
+</html>

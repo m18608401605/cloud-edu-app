@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 1: The Financial Manager</title>
+    <style>
+        :root {
+            --primary-navy: #0b2447;
+            --secondary-blue: #19376d;
+            --accent-gold: #d4af37;
+            --accent-red: #c0392b;
+            --accent-green: #27ae60;
+            --bg-light: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-dark: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px 50px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            color: var(--primary-navy);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-blue);
+            padding-bottom: 15px;
+            font-size: 2rem;
+            margin-top: 0;
+        }
+
+        h2 {
+            color: var(--secondary-blue);
+            margin-top: 30px;
+            border-left: 5px solid var(--accent-gold);
+            padding-left: 15px;
+        }
+
+        .toggle-btn {
+            display: block;
+            margin: 0 auto 30px auto;
+            background-color: var(--primary-navy);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        .quiz-intro {
+            background-color: #eef2f5;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--secondary-blue);
+        }
+
+        .question-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius);
+        }
+
+        .question-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-navy);
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .options-list label {
+            display: flex;
+            align-items: flex-start;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .options-list label:hover {
+            background-color: #f8fafc;
+        }
+
+        .options-list input[type="radio"] {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        .submit-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-navy);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: var(--border-radius);
+            display: block;
+            width: 100%;
+            margin: 40px 0;
+        }
+
+        .submit-btn:hover {
+            background-color: #e5c354;
+        }
+
+        #results-container {
+            display: none;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px dashed #cbd5e1;
+        }
+
+        .score-display {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-navy);
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #fdfaf2;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--accent-gold);
+        }
+
+        .mistake-book {
+            background-color: #fff5f5;
+            border: 1px solid #f5cccc;
+            border-left: 5px solid var(--accent-red);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-top: 30px;
+        }
+
+        .mistake-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+
+        .correct-ans-highlight { color: var(--accent-green); font-weight: bold; }
+        .wrong-ans-highlight { color: var(--accent-red); font-weight: bold; text-decoration: line-through; }
+
+        .explanation-box {
+            background-color: #f8fafc;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 4px solid var(--secondary-blue);
+        }
+
+        .attribution-box {
+            background-color: #fdf4f4;
+            padding: 15px;
+            margin-top: 10px;
+            border-left: 4px solid var(--accent-red);
+        }
+
+        /* Language display */
+        [data-lang="en"] { display: none; }
+        [data-lang="zh"] { display: none; }
+
+        body.lang-en [data-lang="en"] { display: block; }
+        body.lang-en [data-lang="en"].inline { display: inline; }
+        body.lang-zh [data-lang="zh"] { display: block; }
+        body.lang-zh [data-lang="zh"].inline { display: inline; }
+    </style>
+</head>
+<body class="lang-en">
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文</button>
+
+    <h1 data-lang="en">Week 1 - Module 1: The Financial Manager<br><small style="color:#64748b">Mock Exam & Error Attribution Framework</small></h1>
+    <h1 data-lang="zh">第一周 - 模块一：财务经理的角色<br><small style="color:#64748b">高强度真题演练与错题归因分析</small></h1>
+
+    <div class="quiz-intro" data-lang="en">
+        <p><strong>Professor's Instructions:</strong> Welcome to your first rigorous academic checkpoint. To achieve a Distinction (A+) in BUSI1020, mere memorization is insufficient. You must demonstrate high-level application of financial concepts.</p>
+    </div>
+    <div class="quiz-intro" data-lang="zh">
+        <p><strong>教授导学：</strong> 欢迎来到你的第一次高强度学术检验。在诺丁汉大学 BUSI1020 模块中想要取得 A+ (Distinction)，仅靠死记硬背是远远不够的，你必须展现出对金融概念的顶级应用能力。</p>
+    </div>
+
+    <form id="quiz-form">
+        <div id="questions-container"></div>
+
+        <button type="button" class="submit-btn" onclick="submitQuiz()">
+            <span data-lang="en">Submit Answers & Generate Analysis</span>
+            <span data-lang="zh">提交答案并生成归因分析报告</span>
+        </button>
+    </form>
+
+    <div id="results-container">
+        <div class="score-display">
+            <span data-lang="en">Your Score: <span id="score-val-en"></span> / 10</span>
+            <span data-lang="zh">你的得分：<span id="score-val-zh"></span> / 10</span>
+        </div>
+
+        <div id="mistake-book-section" class="mistake-book">
+            <h2 data-lang="en" style="color:var(--accent-red);margin-top:0;">📖 Personal Mistake Book & Error Attribution</h2>
+            <h2 data-lang="zh" style="color:var(--accent-red);margin-top:0;">📖 专属错题本与深度归因分析</h2>
+            <p data-lang="en">Review the questions you answered incorrectly below.</p>
+            <p data-lang="zh">请仔细回顾下方你做错的题目。</p>
+            <div id="mistakes-container"></div>
+        </div>
+
+        <div id="perfect-score-section" style="display:none;text-align:center;padding:20px;">
+            <h2 data-lang="en" style="color:var(--accent-green);">🌟 Exceptional! Class I Quality!</h2>
+            <p data-lang="en">You achieved a perfect score. You have demonstrated a Distinction-level understanding.</p>
+            <h2 data-lang="zh" style="color:var(--accent-green);">🌟 满分卓越表现！</h2>
+            <p data-lang="zh">你获得了满分。你已经展现出了达到 A+ 级别的扎实基础！</p>
+        </div>
+    </div>
+
+    <div style="margin-top:60px;text-align:center;">
+        <div style="border-top:2px dashed #cbd5e1;margin-bottom:25px;"></div>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" style="background:#f0f2f5;color:#0b2447;border:1px solid #cbd5e1;padding:8px 18px;border-radius:4px;font-weight:700;cursor:pointer;">↑ Back to Top</button>
+    </div>
+</div>
+
+<script>
+const quizData = [
+{
+id:1,
+qEn:"Which of the following decisions is most closely associated with 'Capital Budgeting'?",
+qZh:"以下哪项决策最密切地与'资本预算'相关？",
+optionsEn:["Deciding whether to offer 30-day credit terms to customers","Evaluating whether to invest £50 million in a new manufacturing facility","Deciding how much dividend to pay shareholders this year","Choosing between debt and equity financing for a new project"],
+optionsZh:["决定是否为客户提供30天信用条款","评估是否投资5000万英镑建设新工厂","决定今年向股东支付多少股息","为新项目选择债务融资还是股权融资"],
+correct:1,
+expEn:"Capital Budgeting involves planning and managing a firm's long-term investments (typically greater than one year). Evaluating a £50M new facility is a long-term investment.",
+expZh:"资本预算涉及规划和管理企业的长期投资（通常期限超过一年）。评估 5000 万英镑的新工厂建设正是典型的长期投资决策。",
+attrEn:"Conceptual Error. You likely confused Capital Budgeting with Working Capital Management (short-term) or Capital Structure.",
+attrZh:"概念混淆类错误。你很可能将资本预算与营运资本管理（短期）或资本结构混淆了。"
+},
+{
+id:2,
+qEn:"In the real-world case of Bed Bath & Beyond, the company spent approximately $11.8 billion buying back its own shares. This action primarily altered the company's:",
+qZh:"在 3B家居的真实案例中，该公司花费了约 118 亿美元回购自己的股票。这一举动主要改变了公司的什么？",
+optionsEn:["Working Capital","Capital Structure","Operating Expenses","Revenue Growth Rate"],
+optionsZh:["营运资本","资本结构","运营费用","收入增长率"],
+correct:1,
+expEn:"Share buybacks involve using cash to reduce equity. This changes the mixture of debt and equity used to finance operations, which is Capital Structure.",
+expZh:"股票回购涉及使用现金来减少股权数量。这直接改变了企业用于融资的债务与股权的混合比例，即资本结构。",
+attrEn:"Application Error. You failed to link a real-world equity reduction to Capital Structure theory.",
+attrZh:"实战应用类错误。你未能将现实世界中的减少股权动作与资本结构理论联系起来。"
+},
+{
+id:3,
+qEn:"Dell used a 'Build-to-Order' model, collecting cash from customers in 30 days while paying suppliers in 59 days. This strategy is a masterclass in:",
+qZh:"戴尔通过采用'按单生产'模式，在30天内向客户收取现金，却在59天后向供应商付款。这一战略是哪方面的操作？",
+optionsEn:["Working Capital Management","Capital Structure Optimization","Long-term Investment Planning","Dividend Policy Execution"],
+optionsZh:["营运资本管理","资本结构优化","长期投资规划","股息政策执行"],
+correct:0,
+expEn:"Managing short-term assets and liabilities to ensure daily operational liquidity is the core of Working Capital Management.",
+expZh:"管理短期资产和短期负债以确保日常运营流动性，是营运资本管理的核心。",
+attrEn:"Interpretative Error. Keywords '30 days' and '59 days' indicate short-term (Working Capital).",
+attrZh:"审题解释类错误。30天和59天是短期，属于营运资本管理。"
+},
+{
+id:4,
+qEn:"A financial manager is hired to represent the interests of the business owners. According to modern corporate finance, what should be the PRIMARY objective?",
+qZh:"财务经理受雇代表企业所有者的利益。根据现代公司金融学，这位经理的首要目标应该是什么？",
+optionsEn:["Profit Maximization","Shareholder Wealth Maximization","Stakeholder Satisfaction","Employee Welfare Maximization"],
+optionsZh:["利润最大化","股东财富最大化","利益相关者满意度","员工福利最大化"],
+correct:1,
+expEn:"The fundamental goal is Shareholder Wealth Maximization, represented by maximizing the current market price of ordinary shares.",
+expZh:"公司金融的根本目标是股东财富最大化，其实际表现为最大化普通股的当前市场价格。",
+attrEn:"Fundamental Conceptual Error. Profit maximization is NEVER correct in academic finance due to ignoring risk and time value.",
+attrZh:"根本概念性错误。利润最大化忽略了风险和时间价值，不是学术上的正确目标。"
+},
+{
+id:5,
+qEn:"Which describes the difference between direct and indirect transfer of funds in financial markets?",
+qZh:"以下哪一项最准确地描述了金融市场中资金直接转移与间接转移的区别？",
+optionsEn:["Direct transfer involves stocks; indirect involves bonds","Direct transfer is when savers lend directly to borrowers; indirect uses financial intermediaries","Direct transfer only happens in primary markets","Indirect transfer is more expensive"],
+optionsZh:["直接转移涉及股票；间接转移涉及债券","直接转移是储户直接借钱给借款人；间接转移使用金融中介","直接转移只在一级市场发生","间接转移更昂贵"],
+correct:1,
+expEn:"Direct transfers happen when users interact directly with suppliers. Indirect transfers rely on financial intermediaries like banks.",
+expZh:"直接转移是资金使用者直接与提供者互动。间接转移则依赖于金融中介（如银行）。",
+attrEn:"Definitional Error. You misunderstood the role of financial intermediation.",
+attrZh:"定义类错误。你没有理解金融中介的作用。"
+},
+{
+id:6,
+qEn:"The 'Agency Problem' in modern corporations is primarily caused by:",
+qZh:"现代企业中产生代理问题的主要原因是：",
+optionsEn:["Too much government regulation","Conflict of interest between managers and shareholders","High inflation rates","Competition in the market"],
+optionsZh:["政府监管过多","管理者与股东之间的利益冲突","高通胀率","市场竞争"],
+correct:1,
+expEn:"The Agency Problem arises because shareholders hire managers to run the firm, but managers may prioritize their own interests.",
+expZh:"代理问题之所以产生，是因为股东雇佣了管理者来经营企业，但管理者可能将自身利益置于股东之上。",
+attrEn:"Conceptual Error. It is an internal governance issue stemming from who owns vs who spends the money.",
+attrZh:"概念类错误。它是内部公司治理问题，源于谁出的钱与谁在花钱之间的矛盾。"
+},
+{
+id:7,
+qEn:"Which is considered a 'Money Market' instrument rather than a 'Capital Market' instrument?",
+qZh:"以下哪一项被视为货币市场工具，而不是资本市场工具？",
+optionsEn:["Corporate Bonds (10-year)","Ordinary Shares","Treasury Bills (90-day)","Mortgage-backed Securities"],
+optionsZh:["公司债券（10年期）","普通股","短期国库券（90天期）","住房抵押贷款证券"],
+correct:2,
+expEn:"The Money Market deals with short-term debt securities (maturity of one year or less). Treasury Bills are short-term.",
+expZh:"货币市场专门交易短期债务证券（期限为一年或以内）。短期国库券是典型的货币市场工具。",
+attrEn:"Classification Error. Money Market = Short-term (≤1 year); Capital Market = Long-term (>1 year).",
+attrZh:"分类记忆错误。货币市场=短期（≤1年）；资本市场=长期（>1年）。"
+},
+{
+id:8,
+qEn:"If a company sells its securities to the public for the first time to raise new capital, this transaction takes place in the:",
+qZh:"如果一家公司首次向公众出售证券以筹集新资本（如IPO），该交易发生在哪个市场？",
+optionsEn:["Secondary Market","Money Market","Over-the-Counter Market","Primary Market"],
+optionsZh:["二级市场","货币市场","场外交易市场","一级市场"],
+correct:3,
+expEn:"The Primary Market refers to the original sale of securities. The Secondary Market is where existing securities are traded.",
+expZh:"一级市场是政府和企业首次发售证券的市场。二级市场则是投资者之间交易已发行证券的市场。",
+attrEn:"Interpretative Error. You confused 'issuing new shares' (Primary) with 'trading existing shares' (Secondary).",
+attrZh:"解释类错误。你混淆了发行新股（一级市场）与交易旧股票（二级市场）。"
+},
+{
+id:9,
+qEn:"A CEO cancels all employee training and R&D projects to boost annual earnings and secure a personal bonus. This is a classic example of:",
+qZh:"一位CEO取消所有员工培训和研发项目来拔高年度盈利报告并确保拿到绩效奖金。这是什么的经典例子？",
+optionsEn:["Efficient Market Hypothesis","Timescale Problem with Profit Maximization","Capital Structure Optimization","Working Capital Efficiency"],
+optionsZh:["有效市场假说","利润最大化的时间范围问题","资本结构优化","营运资本效率"],
+correct:1,
+expEn:"By cutting vital long-term investments to inflate short-term profit, the CEO demonstrates the 'Timescale' flaw of profit maximization.",
+expZh:"通过削减长期投资来抬高短期利润，CEO展示了利润最大化的短视缺陷。",
+attrEn:"Application Error. You must recognize academic flaws when presented in real-world scenarios.",
+attrZh:"应用类错误。你必须在真实商业情境中识别学术缺陷。"
+},
+{
+id:10,
+qEn:"To mitigate the Agency Problem, Disney gave CEO Bob Iger $25 million in stock options. What is a potential DRAWBACK?",
+qZh:"迪士尼给予CEO股票期权来缓解代理问题。这种激励机制存在什么潜在的缺点？",
+optionsEn:["It increases agency costs","CEOs may get rewarded for market-wide gains rather than personal performance","It reduces shareholder wealth","It violates corporate governance rules"],
+optionsZh:["它增加代理成本","CEO可能因为整体市场上涨而获得奖励，而非个人表现","它减少股东财富","它违反公司治理规则"],
+correct:1,
+expEn:"Stock options reward CEOs when share prices rise. If the market rises due to macro factors, CEOs get rich through luck, not skill.",
+expZh:"股票期权在股价上涨时奖励CEO。但如果整个市场因宏观因素上涨，CEO是靠运气而非能力赚钱。",
+attrEn:"Critical Thinking Error. An A+ student must critique solutions to financial problems.",
+attrZh:"批判性思维缺失。A+学生必须学会批判解决问题的方法本身。"
+}
+];
+
+let currentLang = 'en';
+
+function renderQuiz() {
+const container = document.getElementById('questions-container');
+container.innerHTML = '';
+
+quizData.forEach((q, index) => {
+const qText = currentLang === 'en' ? q.qEn : q.qZh;
+const options = currentLang === 'en' ? q.optionsEn : q.optionsZh;
+
+let optionsHTML = '<ul class="options-list">';
+for(let i = 0; i < 4; i++) {
+optionsHTML += `<li><label><input type="radio" name="q${index}" value="${i}"><span>${options[i]}</span></label></li>`;
+}
+optionsHTML += '</ul>';
+
+container.innerHTML += `<div class="question-card"><div class="question-text">${index + 1}. ${qText}</div>${optionsHTML}</div>`;
+});
+}
+
+function submitQuiz() {
+let score = 0;
+let mistakeHTML = '';
+
+quizData.forEach((q, index) => {
+const selected = document.querySelector(`input[name="q${index}"]:checked`);
+
+if (selected && parseInt(selected.value) === q.correct) {
+score++;
+} else {
+const optionsEn = q.optionsEn;
+const optionsZh = q.optionsZh;
+const userAns = selected ? (currentLang === 'en' ? optionsEn[selected.value] : optionsZh[selected.value]) : (currentLang === 'en' ? 'No answer' : '未作答');
+const correctAns = currentLang === 'en' ? optionsEn[q.correct] : optionsZh[q.correct];
+const qText = currentLang === 'en' ? q.qEn : q.qZh;
+
+mistakeHTML += `<div class="mistake-card">
+<div class="question-text">Q${index + 1}: ${qText}</div>
+<div style="margin-bottom:10px;"><span data-lang="en">❌ <strong>Your Answer:</strong> <span class="wrong-ans-highlight">${userAns}</span></span><span data-lang="zh">❌ <strong>你的答案：</strong> <span class="wrong-ans-highlight">${userAns}</span></span></div>
+<div><span data-lang="en">✅ <strong>Correct Answer:</strong> <span class="correct-ans-highlight">${correctAns}</span></span><span data-lang="zh">✅ <strong>正确答案：</strong> <span class="correct-ans-highlight">${correctAns}</span></span></div>
+<div class="explanation-box"><strong data-lang="en">Explanation:</strong><strong data-lang="zh">解析：</strong> ${currentLang === 'en' ? q.expEn : q.expZh}</div>
+<div class="attribution-box"><strong data-lang="en">Error Attribution:</strong><strong data-lang="zh">归因分析：</strong> ${currentLang === 'en' ? q.attrEn : q.attrZh}</div>
+</div>`;
+}
+});
+
+document.getElementById('score-val-en').innerText = score;
+document.getElementById('score-val-zh').innerText = score;
+document.getElementById('results-container').style.display = 'block';
+
+if (score === 10) {
+document.getElementById('mistake-book-section').style.display = 'none';
+document.getElementById('perfect-score-section').style.display = 'block';
+} else {
+document.getElementById('mistake-book-section').style.display = 'block';
+document.getElementById('perfect-score-section').style.display = 'none';
+document.getElementById('mistakes-container').innerHTML = mistakeHTML;
+}
+
+document.getElementById('results-container').scrollIntoView({behavior:'smooth'});
+}
+
+function toggleLanguage() {
+const body = document.body;
+const btn = document.getElementById('langToggleBtn');
+
+if (currentLang === 'en') {
+currentLang = 'zh';
+body.className = 'lang-zh';
+btn.innerText = 'Switch to English';
+} else {
+currentLang = 'en';
+body.className = 'lang-en';
+btn.innerText = '点击切换至全中文';
+}
+
+renderQuiz();
+}
+
+window.onload = renderQuiz;
+</script>
+
+</body>
+</html>

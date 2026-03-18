@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L1 - Consumer choice BUSI1118 pdf-notes 2526</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .page:last-child {
+            border-bottom: none;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #999;
+            font-size: 12px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        h4 {
+            color: #666;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.15em;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 12px 0 12px 30px;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .math-block {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 12px 15px;
+            margin: 15px 0;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-size: 1.05em;
+            overflow-x: auto;
+        }
+
+        .inline-math {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            font-style: italic;
+        }
+
+        .definition {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .definition strong {
+            color: #856404;
+        }
+
+        .theorem {
+            background: #e1f5fe;
+            border-left: 4px solid #03a9f4;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .theorem strong {
+            color: #0277bd;
+        }
+
+        .example {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .example strong {
+            color: #2e7d32;
+        }
+
+        .exercise {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .exercise strong {
+            color: #c62828;
+        }
+
+        .remark {
+            background: #eceff1;
+            border-left: 4px solid #607d8b;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .note {
+            background: #f3e5f5;
+            border-left: 4px solid #9c27b0;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .note strong {
+            color: #6a1b9a;
+        }
+
+        .graph-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+        }
+
+        .graph-caption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .graph svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 20px 0;
+        }
+
+        sup {
+            font-size: 0.7em;
+            vertical-align: super;
+        }
+
+        sub {
+            font-size: 0.7em;
+            vertical-align: sub;
+        }
+
+        .fraction {
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+        }
+
+        .fraction > span {
+            display: block;
+            padding: 0.1em;
+        }
+
+        .fraction span.numerator {
+            border-bottom: 1px solid #000;
+        }
+
+        .fraction span.denominator {
+            display: block;
+            border-bottom: none;
+        }
+
+        .key-point {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .key-point strong {
+            color: #e65100;
+        }
+
+        .formula {
+            font-family: 'Cambria Math', 'Times New Roman', serif;
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            text-align: center;
+        }
+
+        .proof {
+            background: #fff3e0;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .proof-title {
+            font-weight: bold;
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .boxed {
+            border: 2px solid #3498db;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            background: #f8f9fa;
+        }
+
+        .highlight {
+            background-color: #fff9c4;
+            padding: 2px 4px;
+        }
+
+        .warning {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+            padding: 12px 15px;
+            margin: 15px 0;
+        }
+
+        .warning strong {
+            color: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>L1 - Consumer choice BUSI1118 pdf-notes 2526</h1>
+
+        <!-- Page 1 -->
+        <div class="page">
+            <h2>Lecture 1: Consumer Choice Theory</h2>
+
+            <p>Consumer choice theory is a fundamental concept in microeconomics that explains how individuals allocate their limited income across various goods and services to maximize their satisfaction or utility.</p>
+
+            <h3>Overview</h3>
+
+            <ul>
+                <li>Consumers make choices subject to <strong>budget constraints</strong></li>
+                <li>Choices are guided by <strong>preferences</strong> over different bundles of goods</li>
+                <li>The goal is to maximize <strong>utility</strong> (satisfaction)</li>
+                <li>We use <strong>indifference curves</strong> to represent preferences</li>
+                <li>We use <strong>budget lines</strong> to represent constraints</li>
+            </ul>
+
+            <h3>Key Assumptions of Consumer Theory</h3>
+
+            <ol>
+                <li><strong>Rationality:</strong> Consumers prefer more to less and can consistently rank bundles</li>
+                <li><strong>Completeness:</strong> Consumers can compare any two bundles</li>
+                <li><strong>Transitivity:</strong> If A > B and B > C, then A > C</li>
+                <li><strong>Non-satiation:</strong> More is always better (at least never worse)</li>
+                <li><strong>Convexity:</strong> Consumers prefer averages to extremes</li>
+            </ol>
+
+            <div class="page-number">Page 1</div>
+        </div>
+
+        <!-- Page 2 -->
+        <div class="page">
+            <h2>Utility Functions</h2>
+
+            <div class="definition">
+                <strong>Utility Function</strong> - A mathematical representation that assigns a numerical value to each possible consumption bundle, representing the level of satisfaction derived from that bundle.
+            </div>
+
+            <div class="formula">
+                U = f(X, Y, Z, ...)
+            </div>
+
+            <p>where X, Y, Z represent quantities of different goods.</p>
+
+            <h3>Types of Utility</h3>
+
+            <h4>Cardinal Utility</h4>
+            <p>Utility can be measured in absolute units (utils). This approach is less commonly used in modern economics.</p>
+            <div class="note">
+                <strong>Problem:</strong> Utility is subjective and cannot be objectively measured. Saying one bundle gives "10 utils" and another gives "20 utils" implies meaningful differences that may not exist.
+            </div>
+
+            <h4>Ordinal Utility</h4>
+            <p>Utility can only be ranked (preferences can be ordered, but not measured). This is the approach used in indifference curve analysis.</p>
+            <div class="key-point">
+                <strong>Key Point:</strong> With ordinal utility, we only need to know if one bundle is preferred to another, not "how much more."
+            </div>
+
+            <div class="page-number">Page 2</div>
+        </div>
+
+        <!-- Page 3 -->
+        <div class="page">
+            <h3>Properties of Utility Functions</h3>
+
+            <div class="theorem">
+                <strong>1. Completeness</strong>
+            </div>
+            <p>Consumers can compare any two bundles (X₁, Y₁) and (X₂, Y₂) and determine which is preferred or if they are indifferent.</p>
+            <p>For any two bundles A and B, exactly one is true:</p>
+            <ul>
+                <li>A is preferred to B (A > B)</li>
+                <li>B is preferred to A (B > A)</li>
+                <li>Consumer is indifferent between A and B (A ~ B)</li>
+            </ul>
+
+            <div class="theorem">
+                <strong>2. Transitivity</strong>
+            </div>
+            <p>If bundle A is preferred to B, and B is preferred to C, then A must be preferred to C.</p>
+            <p>Formally: If A > B and B > C, then A > C</p>
+            <div class="remark">
+                <strong>Importance:</strong> Without transitivity, we could have circular preferences (A > B > C > A), which makes choice impossible.
+            </div>
+
+            <div class="page-number">Page 3</div>
+        </div>
+
+        <!-- Page 4 -->
+        <div class="page">
+            <div class="theorem">
+                <strong>3. Non-satiation (Monotonicity)</strong>
+            </div>
+            <p>Consumers prefer more of any good to less, ceteris paribus.</p>
+            <div class="math-block">
+                If (X₁, Y₁) > (X₂, Y₂) whenever X₁ > X₂ and Y₁ > Y₂
+            </div>
+
+            <p>This implies:</p>
+            <ul>
+                <li>Indifference curves are negatively sloped</li>
+                <li>Higher indifference curves represent higher utility</li>
+                <li>Consumers always want to reach higher curves</li>
+            </ul>
+
+            <div class="theorem">
+                <strong>4. Convexity</strong>
+            </div>
+            <p>Consumers prefer average bundles to extreme ones (diminishing marginal rate of substitution).</p>
+            <p>If (X₁, Y₁) ~ (X₂, Y₂), then the average bundle ((X₁+X₂)/2, (Y₁+Y₂)/2) is preferred to either original bundle.</p>
+            <div class="key-point">
+                <strong>Economic Interpretation:</strong> This reflects the idea of diminishing marginal utility and variety preference. A mix of goods often provides more satisfaction than extremes.
+            </div>
+
+            <div class="page-number">Page 4</div>
+        </div>
+
+        <!-- Page 5 -->
+        <div class="page">
+            <h2>Marginal Utility</h2>
+
+            <div class="definition">
+                <strong>Marginal Utility (MU)</strong> - The additional utility from consuming one more unit of a good.
+            </div>
+
+            <div class="math-block">
+                MU<sub>X</sub> = ∂U/∂X
+            </div>
+
+            <p>where ∂ is the partial derivative symbol, indicating change in utility with respect to one good holding others constant.</p>
+
+            <h3>Law of Diminishing Marginal Utility</h3>
+
+            <div class="theorem">
+                <strong>Law of Diminishing Marginal Utility</strong>
+            </div>
+            <p>As consumption of a good increases, the marginal utility from each additional unit decreases, holding consumption of other goods constant.</p>
+
+            <div class="math-block">
+                ∂²U/∂X² < 0
+            </div>
+
+            <div class="example">
+                <strong>Numerical Example:</strong>
+                <table>
+                    <tr>
+                        <th>Units Consumed</th>
+                        <th>Total Utility</th>
+                        <th>Marginal Utility</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>18</td>
+                        <td>8</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>24</td>
+                        <td>6</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>28</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>30</td>
+                        <td>2</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="page-number">Page 5</div>
+        </div>
+
+        <!-- Page 6 -->
+        <div class="page">
+            <h2>Indifference Curves</h2>
+
+            <div class="definition">
+                <strong>Indifference Curve</strong> - A curve showing all combinations of two goods that yield the same level of utility.
+            </div>
+
+            <div class="math-block">
+                U(X, Y) = U₀
+            </div>
+
+            <p>where U₀ is a constant level of utility.</p>
+
+            <h3>Properties of Indifference Curves</h3>
+
+            <ol>
+                <li><strong>Negative Slope:</strong> To maintain constant utility, increasing X requires decreasing Y.</li>
+                <li><strong>Convex to Origin:</strong> MRS decreases as X increases (diminishing MRS).</li>
+                <li><strong>No Intersection:</strong> Indifference curves cannot cross (transitivity).</li>
+                <li><strong>Higher = Better:</strong> Curves further from origin represent higher utility.</li>
+            </ol>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow1" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow1)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow1)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Indifference Curve -->
+                    <path d="M70,130 Q140,240 260,270" stroke="#3498db" stroke-width="2.5" fill="none"/>
+                    <text x="130" y="190" font-size="12" fill="#3498db" font-family="Arial">U = U₀</text>
+                    <!-- Point on curve -->
+                    <circle cx="150" cy="200" r="5" fill="#e74c3c"/>
+                    <text x="130" y="190" font-size="10" font-family="Arial">Point A</text>
+                    <!-- Tangent line -->
+                    <line x1="80" y1="240" x2="220" y2="160" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="8,4"/>
+                    <text x="230" y="170" font-size="9" font-family="Arial">Slope = -MRS</text>
+                </svg>
+                <div class="graph-caption">Figure 1: Indifference Curve</div>
+            </div>
+
+            <div class="page-number">Page 6</div>
+        </div>
+
+        <!-- Page 7 -->
+        <div class="page">
+            <h3>Marginal Rate of Substitution (MRS)</h3>
+
+            <div class="definition">
+                <strong>Marginal Rate of Substitution (MRS<sub>XY</sub>)</strong> - The rate at which a consumer is willing to trade Y for X while staying on the same indifference curve.
+            </div>
+
+            <div class="math-block">
+                MRS<sub>XY</sub> = -dY/dX = MU<sub>X</sub>/MU<sub>Y</sub>
+            </div>
+
+            <p>The MRS is the absolute value of the slope of the indifference curve at any point.</p>
+
+            <h3>Understanding MRS</h3>
+
+            <div class="example">
+                <strong>Interpretation:</strong>
+                <p>If MRS<sub>XY</sub> = 3:</p>
+                <ul>
+                    <li>Consumer is willing to give up 3 units of Y</li>
+                    <li>In exchange for 1 additional unit of X</li>
+                    <li>While maintaining the same level of utility</li>
+                </ul>
+            </div>
+
+            <div class="theorem">
+                <strong>Diminishing MRS</strong>
+            </div>
+            <p>As a consumer consumes more of good X and less of good Y, the marginal rate of substitution of X for Y decreases.</p>
+            <div class="math-block">
+                dMRS<sub>XY</sub>/dX < 0
+            </div>
+
+            <div class="remark">
+                <strong>Why?</strong> As you have more X, its marginal utility decreases (law of diminishing MU). As you have less Y, its marginal utility increases. Therefore, you're less willing to trade Y for X.
+            </div>
+
+            <div class="page-number">Page 7</div>
+        </div>
+
+        <!-- Page 8 -->
+        <div class="page">
+            <h2>Budget Constraint</h2>
+
+            <div class="definition">
+                <strong>Budget Constraint</strong> - All combinations of goods a consumer can purchase given income and prices.
+            </div>
+
+            <div class="math-block">
+                I = P<sub>X</sub>X + P<sub>Y</sub>Y
+            </div>
+
+            <p>where:</p>
+            <ul>
+                <li>I = Consumer's income</li>
+                <li>P<sub>X</sub>, P<sub>Y</sub> = Prices of goods X and Y</li>
+                <li>X, Y = Quantities of goods X and Y</li>
+            </ul>
+
+            <h3>Budget Line Characteristics</h3>
+
+            <table>
+                <tr>
+                    <th>Characteristic</th>
+                    <th>Formula</th>
+                    <th>Interpretation</th>
+                </tr>
+                <tr>
+                    <td>Y-intercept</td>
+                    <td>I/P<sub>Y</sub></td>
+                    <td>Maximum Y when X = 0</td>
+                </tr>
+                <tr>
+                    <td>X-intercept</td>
+                    <td>I/P<sub>X</sub></td>
+                    <td>Maximum X when Y = 0</td>
+                </tr>
+                <tr>
+                    <td>Slope</td>
+                    <td>-P<sub>X</sub>/P<sub>Y</sub></td>
+                    <td>Opportunity cost of X in terms of Y</td>
+                </tr>
+            </table>
+
+            <div class="math-block">
+                Slope = -P<sub>X</sub>/P<sub>Y</sub>
+            </div>
+
+            <div class="key-point">
+                <strong>Key Insight:</strong> The slope of the budget line represents the rate at which the market allows trading Y for X. The MRS represents the rate at which the consumer is willing to trade. At optimum, these two rates must be equal.
+            </div>
+
+            <div class="page-number">Page 8</div>
+        </div>
+
+        <!-- Page 9 -->
+        <div class="page">
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow2)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Budget Line -->
+                    <line x1="70" y1="280" x2="350" y2="0" stroke="#333" stroke-width="2.5"/>
+                    <text x="200" y="130" font-size="11" font-style="italic" font-family="Arial">Budget Line</text>
+                    <!-- Intercepts -->
+                    <circle cx="70" cy="280" r="5" fill="#e74c3c"/>
+                    <text x="50" y="305" font-size="10" font-family="Arial">I/P<sub>Y</sub></text>
+                    <circle cx="350" cy="0" r="5" fill="#e74c3c"/>
+                    <text x="330" y="-5" font-size="10" font-family="Arial">I/P<sub>X</sub></text>
+                    <!-- Affordable region -->
+                    <polygon points="70,280 350,0 50,0 50,280" fill="#3498db" opacity="0.1"/>
+                    <text x="120" y="250" font-size="10" font-family="Arial">Affordable Region</text>
+                    <!-- Slope indication -->
+                    <text x="200" y="80" font-size="10" font-family="Arial">Slope = -P<sub>X</sub>/P<sub>Y</sub></text>
+                </svg>
+                <div class="graph-caption">Figure 2: Budget Line with Affordable Region</div>
+            </div>
+
+            <h3>Budget Set</h3>
+
+            <div class="definition">
+                <strong>Budget Set</strong> - The set of all affordable bundles given income and prices.
+            </div>
+
+            <div class="math-block">
+                B = {(X, Y) | P<sub>X</sub>X + P<sub>Y</sub>Y ≤ I, X ≥ 0, Y ≥ 0}
+            </div>
+
+            <p>The budget set is the triangle (or higher-dimensional simplex) bounded by:</p>
+            <ul>
+                <li>The budget line</li>
+                <li>The axes (X ≥ 0 and Y ≥ 0)</li>
+            </ul>
+
+            <div class="page-number">Page 9</div>
+        </div>
+
+        <!-- Page 10 -->
+        <div class="page">
+            <h2>Consumer Optimization</h2>
+
+            <p>The consumer's problem is to maximize utility subject to the budget constraint.</p>
+
+            <div class="boxed">
+                <strong>The Consumer's Optimization Problem:</strong>
+                <div class="math-block">
+                    Max U(X, Y) subject to I = P<sub>X</sub>X + P<sub>Y</sub>Y
+                </div>
+            </div>
+
+            <h3>Graphical Solution: Tangency Condition</h3>
+
+            <div class="theorem">
+                <strong>Optimality Condition:</strong>
+            </div>
+
+            <div class="formula">
+                MRS<sub>XY</sub> = P<sub>X</sub>/P<sub>Y</sub>
+            </div>
+
+            <p>At the optimal bundle:</p>
+            <ul>
+                <li>The indifference curve is tangent to the budget line</li>
+                <li>Consumer reaches the highest possible indifference curve within the budget constraint</li>
+            </ul>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow3" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow3)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Budget Line -->
+                    <line x1="70" y1="280" x2="350" y2="0" stroke="#333" stroke-width="2"/>
+                    <!-- Indifference Curves -->
+                    <path d="M90,150 Q180,280 300,280" stroke="#3498db" stroke-width="2" fill="none"/>
+                    <path d="M90,110 Q160,250 260,280" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                    <path d="M90,70 Q140,220 220,250" stroke="#2ecc71" stroke-width="2" fill="none"/>
+                    <!-- Labels -->
+                    <text x="140" y="270" font-size="10" fill="#3498db" font-family="Arial">U<sub>1</sub></text>
+                    <text x="120" y="240" font-size="10" fill="#e74c3c" font-family="Arial">U<sub>2</sub></text>
+                    <text x="100" y="210" font-size="10" fill="#2ecc71" font-family="Arial">U<sub>3</sub></text>
+                    <!-- Optimum point -->
+                    <circle cx="210" cy="165" r="6" fill="#9b59b6" stroke="#fff" stroke-width="2"/>
+                    <text x="220" y="160" font-size="12" font-weight="bold" fill="#9b59b6" font-family="Arial">E* (optimum)</text>
+                    <!-- Tangent line at optimum -->
+                    <line x1="140" y1="235" x2="280" y2="95" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="8,4"/>
+                </svg>
+                <div class="graph-caption">Figure 3: Consumer Optimum (Tangency Point)</div>
+            </div>
+
+            <div class="page-number">Page 10</div>
+        </div>
+
+        <!-- Page 11 -->
+        <div class="page">
+            <h3>Algebraic Interpretation of Optimality</h3>
+
+            <p>The tangency condition MRS = P<sub>X</sub>/P<sub>Y</sub> can also be expressed as:</p>
+
+            <div class="formula">
+                MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub>
+            </div>
+
+            <p><strong>Interpretation:</strong></p>
+            <ul>
+                <li>MU<sub>X</sub>/P<sub>X</sub> = Marginal utility per dollar spent on X</li>
+                <li>MU<sub>Y</sub>/P<sub>Y</sub> = Marginal utility per dollar spent on Y</li>
+            </ul>
+
+            <p>At optimum, marginal utility per dollar spent must be equal across all goods.</p>
+
+            <div class="example">
+                <strong>Example:</strong>
+                <p>If MU<sub>X</sub>/P<sub>X</sub> > MU<sub>Y</sub>/P<sub>Y</sub>:</p>
+                <ul>
+                    <li>Consumer gets more utility from last dollar spent on X than Y</li>
+                    <li>Should buy more X, less Y to increase utility</li>
+                </ul>
+                <p>This continues until MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></p>
+            </div>
+
+            <div class="proof">
+                <div class="proof-title">Proof of Optimality Condition:</div>
+                <p>At the optimal bundle (X*, Y*):</p>
+                <ol>
+                    <li>The bundle lies on the budget line: P<sub>X</sub>X* + P<sub>Y</sub>Y* = I</li>
+                    <li>The indifference curve is tangent to budget line: |slope of IC| = |slope of BL|</li>
+                    <li>MRS = |dY/dX| = |-P<sub>X</sub>/P<sub>Y</sub>| = P<sub>X</sub>/P<sub>Y</sub></li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 11</div>
+        </div>
+
+        <!-- Page 12 -->
+        <div class="page">
+            <h2>Lagrangian Method</h2>
+
+            <p>The constrained optimization problem can be solved algebraically using the Lagrangian method.</p>
+
+            <h3>Setting up the Lagrangian</h3>
+
+            <div class="math-block">
+                ℒ(X, Y, λ) = U(X, Y) + λ(I - P<sub>X</sub>X - P<sub>Y</sub>Y)
+            </div>
+
+            <p>where λ (lambda) is the Lagrange multiplier, representing the marginal utility of income.</p>
+
+            <h3>First-Order Conditions (FOCs)</h3>
+
+            <div class="math-block">
+                ∂ℒ/∂X = MU<sub>X</sub> - λP<sub>X</sub> = 0
+            </div>
+            <div class="math-block">
+                ∂ℒ/∂Y = MU<sub>Y</sub> - λP<sub>Y</sub> = 0
+            </div>
+            <div class="math-block">
+                ∂ℒ/∂λ = I - P<sub>X</sub>X - P<sub>Y</sub>Y = 0
+            </div>
+
+            <p>The third condition is simply the budget constraint.</p>
+
+            <h3>Solving the System</h3>
+
+            <p>From the first two conditions:</p>
+
+            <div class="math-block">
+                MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub> = λ
+            </div>
+
+            <p>This gives us the optimal ratio of goods. Combined with the budget constraint, we can solve for X and Y.</p>
+
+            <div class="page-number">Page 12</div>
+        </div>
+
+        <!-- Page 13 -->
+        <div class="page">
+            <h3>Interpretation of the Lagrange Multiplier (λ)</h3>
+
+            <div class="definition">
+                <strong>Lagrange Multiplier (λ)</strong> - The shadow price of the budget constraint. It represents the marginal utility of income.
+            </div>
+
+            <div class="math-block">
+                λ = ∂U<sup>*</sup>/∂I
+            </div>
+
+            <p>where U<sup>*</sup> is the maximum utility at the optimal bundle.</p>
+
+            <div class="example">
+                <strong>Interpretation:</strong>
+                <p>If λ = 2 at the optimum:</p>
+                <ul>
+                    <li>An additional $1 of income would increase maximum utility by approximately 2 utils</li>
+                    <li>The consumer values an extra dollar of income at 2 utils</li>
+                </ul>
+            </div>
+
+            <h3>Properties of λ</h3>
+
+            <ul>
+                <li>λ > 0 for standard problems with non-satiation</li>
+                <li>λ decreases as income increases (diminishing marginal utility of income)</li>
+                <li>λ is the same for all goods (by the optimality condition)</li>
+                <li>λ is also called the "marginal utility of money"</li>
+            </ul>
+
+            <div class="key-point">
+                <strong>Important:</strong> The Lagrange multiplier has a clear economic interpretation—it tells us how much utility would increase if we relaxed the budget constraint by one unit (gave the consumer one more dollar).
+            </div>
+
+            <div class="page-number">Page 13</div>
+        </div>
+
+        <!-- Page 14 -->
+        <div class="page">
+            <h2>Income and Price Effects</h2>
+
+            <h3>Income Effect</h3>
+
+            <p>A change in income shifts the budget line parallel to itself:</p>
+            <ul>
+                <li><strong>Increase in income:</strong> Budget line shifts outward (consumer can afford more)</li>
+                <li><strong>Decrease in income:</strong> Budget line shifts inward (consumer can afford less)</li>
+            </ul>
+
+            <p>The slope remains unchanged because prices (and therefore the price ratio) are constant.</p>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow4" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow4)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow4)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Budget Lines (parallel) -->
+                    <line x1="90" y1="280" x2="290" y2="80" stroke="#95a5a6" stroke-width="1.5"/>
+                    <text x="200" y="175" font-size="10" font-family="Arial">I₁</text>
+                    <line x1="70" y1="280" x2="330" y2="20" stroke="#3498db" stroke-width="2.5"/>
+                    <text x="200" y="145" font-size="11" font-weight="bold" font-family="Arial">I₂</text>
+                    <line x1="110" y1="280" x2="250" y2="140" stroke="#e74c3c" stroke-width="1.5"/>
+                    <text x="200" y="205" font-size="10" font-family="Arial">I₀</text>
+                    <!-- Arrow indicating shift -->
+                    <path d="M180,180 L200,150" stroke="#333" stroke-width="1.5" marker-end="url(#arrow4)"/>
+                    <text x="220" y="110" font-size="10" font-family="Arial">Income increase</text>
+                </svg>
+                <div class="graph-caption">Figure 4: Income Effect on Budget Line</div>
+            </div>
+
+            <div class="page-number">Page 14</div>
+        </div>
+
+        <!-- Page 15 -->
+        <div class="page">
+            <h3>Price Effect</h3>
+
+            <p>A change in the price of one good rotates the budget line around the intercept of the other good:</p>
+            <ul>
+                <li><strong>Decrease in P<sub>X</sub>:</strong> Budget line rotates outward around the Y-intercept</li>
+                <li><strong>Increase in P<sub>X</sub>:</strong> Budget line rotates inward around the Y-intercept</li>
+                <li><strong>Decrease in P<sub>Y</sub>:</strong> Budget line rotates outward around the X-intercept</li>
+                <li><strong>Increase in P<sub>Y</sub>:</strong> Budget line rotates inward around the X-intercept</li>
+            </ul>
+
+            <p>The intercept of the good whose price hasn't changed remains the same.</p>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow5" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow5)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow5)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Budget Lines (same Y-intercept) -->
+                    <line x1="70" y1="280" x2="180" y2="170" stroke="#95a5a6" stroke-width="1.5"/>
+                    <text x="130" y="225" font-size="10" font-family="Arial">High P<sub>X</sub></text>
+                    <line x1="70" y1="280" x2="240" y2="110" stroke="#3498db" stroke-width="2.5"/>
+                    <text x="160" y="190" font-size="11" font-weight="bold" font-family="Arial">Medium P<sub>X</sub></text>
+                    <line x1="70" y1="280" x2="300" y2="50" stroke="#e74c3c" stroke-width="1.5"/>
+                    <text x="190" y="155" font-size="10" font-family="Arial">Low P<sub>X</sub></text>
+                    <!-- Y-intercept point (unchanged) -->
+                    <circle cx="70" cy="280" r="4" fill="#333"/>
+                </svg>
+                <div class="graph-caption">Figure 5: Price Effect (Decrease in P<sub>X</sub>)</div>
+            </div>
+
+            <div class="page-number">Page 15</div>
+        </div>
+
+        <!-- Page 16 -->
+        <div class="page">
+            <h2>Decomposition of Price Effect</h2>
+
+            <p>The total effect of a price change can be decomposed into two effects:</p>
+
+            <div class="formula">
+                Price Effect = Substitution Effect + Income Effect
+            </div>
+
+            <h3>Substitution Effect (SE)</h3>
+
+            <p>The change in consumption due to the change in relative prices, holding utility constant.</p>
+            <ul>
+                <li>The consumer substitutes toward the now cheaper good</li>
+                <li>Always moves in the opposite direction of the price change</li>
+                <li>If P<sub>X</sub> falls: SE increases consumption of X</li>
+                <li>If P<sub>X</sub> rises: SE decreases consumption of X</li>
+            </ul>
+
+            <h3>Income Effect (IE)</h3>
+
+            <p>The change in consumption due to the change in purchasing power.</p>
+
+            <table>
+                <tr>
+                    <th>Good Type</th>
+                    <th>Direction of IE</th>
+                    <th>Relationship to SE</th>
+                </tr>
+                <tr>
+                    <td>Normal Good</td>
+                    <td>Positive (more income, more consumption)</td>
+                    <td>Reinforces SE</td>
+                </tr>
+                <tr>
+                    <td>Inferior Good</td>
+                    <td>Negative (more income, less consumption)</td>
+                    <td>Opposes SE</td>
+                </tr>
+            </table>
+
+            <div class="page-number">Page 16</div>
+        </div>
+
+        <!-- Page 17 -->
+        <div class="page">
+            <h2>Normal vs. Inferior Goods</h2>
+
+            <h3>Normal Goods</h3>
+
+            <div class="definition">
+                <strong>Normal Good</strong> - A good for which demand increases when income increases (and decreases when income decreases).
+            </div>
+
+            <ul>
+                <li>Income elasticity of demand is positive: E<sub>I</sub> > 0</li>
+                <li>Income effect reinforces substitution effect</li>
+                <li>When P<sub>X</sub> falls: SE increases X, IE increases X → Total effect = increase in X</li>
+            </ul>
+
+            <h3>Inferior Goods</h3>
+
+            <div class="definition">
+                <strong>Inferior Good</strong> - A good for which demand decreases when income increases (and increases when income decreases).
+            </div>
+
+            <ul>
+                <li>Income elasticity of demand is negative: E<sub>I</sub> < 0</li>
+                <li>Income effect works against substitution effect</li>
+                <li>When P<sub>X</sub> falls: SE increases X, IE decreases X → Total effect depends on relative magnitudes</li>
+            </ul>
+
+            <div class="example">
+                <strong>Examples:</strong>
+                <table>
+                    <tr>
+                        <th>Normal Goods</th>
+                        <th>Inferior Goods</th>
+                    </tr>
+                    <tr>
+                        <td>Restaurant meals</td>
+                        <td>Instant noodles</td>
+                    </tr>
+                    <tr>
+                        <td>New cars</td>
+                        <td>Used clothing</td>
+                    </tr>
+                    <tr>
+                        <td>Electronics</td>
+                        <td>Public transportation</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="page-number">Page 17</div>
+        </div>
+
+        <!-- Page 18 -->
+        <div class="page">
+            <h2>Giffen Goods</h2>
+
+            <div class="remark">
+                <strong>Giffen Good</strong> - A special type of inferior good where the negative income effect is so strong that it outweighs the substitution effect, resulting in a positive relationship between price and quantity demanded (violating the law of demand).
+            </div>
+
+            <h3>Characteristics of Giffen Goods</h3>
+
+            <ul>
+                <li>Must be an inferior good</li>
+                <li>Must take a large portion of consumer's budget</li>
+                <li>Must have few close substitutes</li>
+                <li>Creates an upward-sloping demand curve</li>
+            </ul>
+
+            <h3>Price Effect for Giffen Goods</h3>
+
+            <p>When P<sub>X</sub> rises:</p>
+            <ul>
+                <li>SE: Decreases X (negative)</li>
+                <li>IE: Increases X (positive, because real income falls)</li>
+                <li>If |IE| > |SE|: Net effect = Increase in X</li>
+            </ul>
+
+            <p>This violates the law of demand (price up, quantity down).</p>
+
+            <div class="note">
+                <strong>Classic Example:</strong> The Irish potato famine. When potato prices rose, poor people could afford less meat and had to buy more potatoes to survive. Potatoes were an inferior good taking a large portion of their budget with few substitutes.
+            </div>
+
+            <div class="warning">
+                <strong>Important Note:</strong> Giffen goods are primarily theoretical. They have been observed in rare historical cases but are not commonly found in modern markets.
+            </div>
+
+            <div class="page-number">Page 18</div>
+        </div>
+
+        <!-- Page 19 -->
+        <div class="page">
+            <h2>Special Cases of Preferences</h2>
+
+            <h3>1. Perfect Substitutes</h3>
+
+            <div class="definition">
+                <strong>Perfect Substitutes</strong> - Goods that can replace each other at a constant rate. The consumer is always willing to substitute one good for another at a fixed ratio.
+            </div>
+
+            <div class="formula">
+                U(X, Y) = aX + bY
+            </div>
+
+            <div class="formula">
+                MRS<sub>XY</sub> = a/b (constant)
+            </div>
+
+            <p><strong>Characteristics:</strong></p>
+            <ul>
+                <li>Indifference curves are straight, parallel lines</li>
+                <li>MRS is constant along each indifference curve</li>
+                <li>Corner solution: Consumer buys only the good with lower marginal utility per dollar</li>
+            </ul>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow6" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow6)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow6)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Indifference Curves (parallel lines) -->
+                    <line x1="70" y1="280" x2="190" y2="160" stroke="#3498db" stroke-width="2"/>
+                    <line x1="90" y1="280" x2="210" y2="160" stroke="#e74c3c" stroke-width="2"/>
+                    <line x1="110" y1="280" x2="230" y2="160" stroke="#2ecc71" stroke-width="2"/>
+                    <text x="200" y="140" font-size="10" font-family="Arial">U<sub>1</sub></text>
+                    <text x="220" y="140" font-size="10" font-family="Arial">U<sub>2</sub></text>
+                    <text x="240" y="140" font-size="10" font-family="Arial">U<sub>3</sub></text>
+                    <!-- Budget line -->
+                    <line x1="70" y1="280" x2="300" y2="50" stroke="#333" stroke-width="2"/>
+                    <!-- Corner solution -->
+                    <circle cx="300" cy="50" r="6" fill="#9b59b6" stroke="#fff" stroke-width="2"/>
+                    <text x="270" y="40" font-size="10" font-family="Arial">Corner solution</text>
+                </svg>
+                <div class="graph-caption">Figure 6: Perfect Substitutes</div>
+            </div>
+
+            <div class="page-number">Page 19</div>
+        </div>
+
+        <!-- Page 20 -->
+        <div class="page">
+            <h3>2. Perfect Complements</h3>
+
+            <div class="definition">
+                <strong>Perfect Complements</strong> - Goods that are consumed together in fixed proportions. The consumer gains no additional utility from having more of one good without having a proportional increase in the other.
+            </div>
+
+            <div class="formula">
+                U(X, Y) = min{aX, bY}
+            </div>
+
+            <p><strong>Characteristics:</strong></p>
+            <ul>
+                <li>Indifference curves are L-shaped</li>
+                <li>The corner of each L is at the fixed ratio a:b</li>
+                <li>MRS is undefined at the corner and 0 or ∞ elsewhere</li>
+                <li>Corner solution: Consumer always consumes at the kink (fixed ratio)</li>
+            </ul>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow7" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow7)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow7)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Indifference Curves (L-shaped) -->
+                    <path d="M70,250 L110,250 L110,210" stroke="#3498db" stroke-width="2" fill="none"/>
+                    <path d="M90,230 L150,230 L150,170" stroke="#e74c3c" stroke-width="2" fill="none"/>
+                    <path d="M110,210 L190,210 L190,130" stroke="#2ecc71" stroke-width="2" fill="none"/>
+                    <!-- Kink points -->
+                    <circle cx="110" cy="250" r="3" fill="#3498db"/>
+                    <circle cx="150" cy="230" r="3" fill="#e74c3c"/>
+                    <circle cx="190" cy="210" r="3" fill="#2ecc71"/>
+                    <!-- Expansion path -->
+                    <line x1="50" y1="280" x2="230" y2="100" stroke="#9b59b6" stroke-width="2" stroke-dasharray="8,4"/>
+                    <text x="200" y="90" font-size="10" font-family="Arial">Expansion path</text>
+                </svg>
+                <div class="graph-caption">Figure 7: Perfect Complements</div>
+            </div>
+
+            <div class="page-number">Page 20</div>
+        </div>
+
+        <!-- Page 21 -->
+        <div class="page">
+            <h3>3. Cobb-Douglas Preferences</h3>
+
+            <div class="definition">
+                <strong>Cobb-Douglas Utility Function</strong> - A widely used form of utility function with well-behaved properties (convex, smooth indifference curves).
+            </div>
+
+            <div class="formula">
+                U(X, Y) = X<sup>α</sup>Y<sup>β</sup>
+            </div>
+
+            <p>where α, β > 0. Often we normalize so that α + β = 1.</p>
+
+            <h3>Marginal Utilities for Cobb-Douglas</h3>
+
+            <div class="math-block">
+                MU<sub>X</sub> = ∂U/∂X = αX<sup>α-1</sup>Y<sup>β</sup> = α(Y/X)
+            </div>
+            <div class="math-block">
+                MU<sub>Y</sub> = ∂U/∂Y = βX<sup>α</sup>Y<sup>β-1</sup> = β(X/Y)
+            </div>
+
+            <h3>MRS for Cobb-Douglas</h3>
+
+            <div class="math-block">
+                MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub> = (α/β)(Y/X)
+            </div>
+
+            <h3>Demand Functions for Cobb-Douglas</h3>
+
+            <div class="math-block">
+                X = (α/(α + β)) × (I/P<sub>X</sub>)
+            </div>
+            <div class="math-block">
+                Y = (β/(α + β)) × (I/P<sub>Y</sub>)
+            </div>
+
+            <div class="key-point">
+                <strong>Key Property:</strong> For Cobb-Douglas utility, the consumer spends a constant share of income on each good. Share on X = α/(α + β), share on Y = β/(α + β).
+            </div>
+
+            <div class="example">
+                <strong>Example:</strong> For U = X<sup>0.3</sup>Y<sup>0.7</sup>:
+                <br>Consumer spends 30% of income on X and 70% on Y, regardless of prices.
+            </div>
+
+            <div class="page-number">Page 21</div>
+        </div>
+
+        <!-- Page 22 -->
+        <div class="page">
+            <h2>Corner vs. Interior Solutions</h2>
+
+            <h3>Interior Solutions</h3>
+
+            <div class="definition">
+                <strong>Interior Solution</strong> - Optimal bundle contains positive quantities of all goods. Occurs when MRS can equal the price ratio within the budget set. Typical for well-behaved preferences like Cobb-Douglas.
+            </div>
+
+            <p>At an interior solution:</p>
+            <ul>
+                <li>X* > 0, Y* > 0</li>
+                <li>MRS<sub>XY</sub> = P<sub>X</sub>/P<sub>Y</sub></li>
+                <li>MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></li>
+            </ul>
+
+            <h3>Corner Solutions</h3>
+
+            <div class="definition">
+                <strong>Corner Solution</strong> - Optimal bundle contains zero quantity of at least one good. Occurs when MRS cannot equal the price ratio within the budget set.
+            </div>
+
+            <p>At a corner solution:</p>
+            <ul>
+                <li>Either X* = 0 or Y* = 0 (or both)</li>
+                <li>MRS does not equal P<sub>X</sub>/P<sub>Y</sub></li>
+                <li>Typical for perfect substitutes or when one good is dominated</li>
+            </ul>
+
+            <div class="example">
+                <strong>Corner Solution Example:</strong>
+                <br>U = 2X + Y, P<sub>X</sub> = 3, P<sub>Y</sub> = 2
+                <br>MU<sub>X</sub>/P<sub>X</sub> = 2/3 ≈ 0.67
+                <br>MU<sub>Y</sub>/P<sub>Y</sub> = 1/2 = 0.5
+                <br>Since MU<sub>X</sub>/P<sub>X</sub> > MU<sub>Y</sub>/P<sub>Y</sub>, consumer buys only X (corner solution).
+            </div>
+
+            <div class="page-number">Page 22</div>
+        </div>
+
+        <!-- Page 23 -->
+        <div class="page">
+            <h2>Summary of Key Formulas</h2>
+
+            <table>
+                <tr>
+                    <th>Concept</th>
+                    <th>Formula</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Marginal Utility</td>
+                    <td>MU<sub>X</sub> = ∂U/∂X</td>
+                    <td>Additional utility from one more unit</td>
+                </tr>
+                <tr>
+                    <td>MRS</td>
+                    <td>MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub></td>
+                    <td>Rate willing to trade Y for X</td>
+                </tr>
+                <tr>
+                    <td>Budget Constraint</td>
+                    <td>I = P<sub>X</sub>X + P<sub>Y</sub>Y</td>
+                    <td>All affordable bundles</td>
+                </tr>
+                <tr>
+                    <td>Budget Slope</td>
+                    <td>-P<sub>X</sub>/P<sub>Y</sub></td>
+                    <td>Opportunity cost of X</td>
+                </tr>
+                <tr>
+                    <td>Optimality Condition</td>
+                    <td>MRS<sub>XY</sub> = P<sub>X</sub>/P<sub>Y</sub></td>
+                    <td>Tangency condition</td>
+                </tr>
+                <tr>
+                    <td>Optimality (alt.)</td>
+                    <td>MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></td>
+                    <td>MU per dollar equal</td>
+                </tr>
+                <tr>
+                    <td>Lagrangian</td>
+                    <td>ℒ = U + λ(I - P<sub>X</sub>X - P<sub>Y</sub>Y)</td>
+                    <td>Constrained optimization</td>
+                </tr>
+                <tr>
+                    <td>Price Effect</td>
+                    <td>PE = SE + IE</td>
+                    <td>Total effect decomposition</td>
+                </tr>
+                <tr>
+                    <td>Cobb-Douglas Demand</td>
+                    <td>X = (α/(α+β))(I/P<sub>X</sub>)</td>
+                    <td>Constant expenditure share</td>
+                </tr>
+            </table>
+
+            <div class="page-number">Page 23</div>
+        </div>
+
+        <!-- Page 24 -->
+        <div class="page">
+            <h2>Practice Problems</h2>
+
+            <div class="exercise">
+                <strong>Problem 1:</strong> Given the utility function U(X, Y) = 3X + 2Y, find:
+                <br>a) MU<sub>X</sub> and MU<sub>Y</sub>
+                <br>b) MRS<sub>XY</sub>
+                <br>c) Is this a case of perfect substitutes?
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <br>a) MU<sub>X</sub> = ∂U/∂X = 3
+                <br>MU<sub>Y</sub> = ∂U/∂Y = 2
+                <br>b) MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub> = 3/2 = 1.5 (constant)
+                <br>c) Yes, this is a perfect substitutes utility function (linear form with constant MRS).
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 2:</strong> Given the utility function U(X, Y) = min{2X, 4Y}, find:
+                <br>a) What type of preferences does this represent?
+                <br>b) If consumer has 10 units of X and 3 units of Y, what is utility?
+                <br>c) What is the optimal consumption ratio?
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <br>a) Perfect complements (Leontief preferences).
+                <br>b) Utility = min{2(10), 4(3)} = min{20, 12} = 12
+                <br>c) At optimum: 2X = 4Y, so X = 2Y (consume in ratio 2:1).
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 3:</strong> For U(X, Y) = X<sup>0.5</sup>Y<sup>0.5</sup> with I = 100, P<sub>X</sub> = 4, P<sub>Y</sub> = 5:
+                <br>a) Find MU<sub>X</sub>, MU<sub>Y</sub>, and MRS<sub>XY</sub>
+                <br>b) Find the optimal quantities of X and Y.
+            </div>
+
+            <div class="page-number">Page 24</div>
+        </div>
+
+        <!-- Page 25 -->
+        <div class="page">
+            <div class="answer">
+                <strong>Solution to Problem 3 (continued):</strong>
+                <br>a) For Cobb-Douglas with α = β = 0.5:
+                <br>MU<sub>X</sub> = 0.5X<sup>-0.5</sup>Y<sup>0.5</sup> = 0.5(Y/X)<sup>0.5</sup>
+                <br>MU<sub>Y</sub> = 0.5X<sup>0.5</sup>Y<sup>-0.5</sup> = 0.5(X/Y)<sup>0.5</sup>
+                <br>MRS<sub>XY</sub> = (0.5/0.5)(Y/X) = Y/X
+                <br>b) For Cobb-Douglas with α = β:
+                <br>X = (0.5/1) × (100/4) = 0.5 × 25 = 12.5
+                <br>Y = (0.5/1) × (100/5) = 0.5 × 20 = 10
+                <br>Optimal bundle: (12.5, 10)
+                <br>Verify budget: 4(12.5) + 5(10) = 50 + 50 = 100 ✓
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 4:</strong> A consumer's budget line is given by 100 = 5X + 10Y.
+                <br>a) What is the maximum quantity of X the consumer can buy?
+                <br>b) What is the maximum quantity of Y the consumer can buy?
+                <br>c) What is the slope of the budget line?
+                <br>d) If the consumer buys 6 units of X, how many units of Y can they buy?
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <br>a) Maximum X (when Y = 0): 100 = 5X → X = 20
+                <br>b) Maximum Y (when X = 0): 100 = 10Y → Y = 10
+                <br>c) Slope = -P<sub>X</sub>/P<sub>Y</sub> = -5/10 = -0.5
+                <br>d) If X = 6: 100 = 5(6) + 10Y = 30 + 10Y → 10Y = 70 → Y = 7
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 5:</strong> Explain the economic meaning of the Lagrange multiplier λ in consumer optimization.
+            </div>
+
+            <div class="page-number">Page 25</div>
+        </div>
+
+        <!-- Page 26 -->
+        <div class="page">
+            <div class="answer">
+                <strong>Solution to Problem 5:</strong>
+                <p>The Lagrange multiplier λ represents the marginal utility of income. It measures how much additional utility a consumer would gain from an additional unit of income, assuming optimal consumption.</p>
+                <p><strong>Interpretation:</strong></p>
+                <ul>
+                    <li>λ = ∂U<sup>*</sup>/∂I: The derivative of maximum utility with respect to income</li>
+                    <li>If λ = 3, gaining $1 more would increase maximum utility by approximately 3 utils</li>
+                    <li>λ is higher for poorer consumers (diminishing marginal utility of income)</li>
+                    <li>λ is also called the "shadow price" of the budget constraint</li>
+                </ul>
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 6:</strong> For a consumer with U(X, Y) = XY, income I = 80, and prices P<sub>X</sub> = 4, P<sub>Y</sub> = 8:
+                <br>a) Set up the Lagrangian.
+                <br>b) Write down the first-order conditions.
+                <br>c) Solve for the optimal bundle.
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <br>a) ℒ = XY + λ(80 - 4X - 8Y)
+                <br>b) First-order conditions:
+                <br>∂ℒ/∂X = Y - 4λ = 0
+                <br>∂ℒ/∂Y = X - 8λ = 0
+                <br>∂ℒ/∂λ = 80 - 4X - 8Y = 0
+                <br>c) From first two: Y = 4λ and X = 8λ, so X = 2Y
+                <br>From budget: 80 = 4(2Y) + 8Y = 16Y → Y = 5, X = 10
+                <br>Optimal bundle: (10, 5)
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 7:</strong> Classify the following goods as normal or inferior based on their income elasticity:
+                <br>a) Restaurant meals: E<sub>I</sub> = 1.5
+                <br>b) Instant noodles: E<sub>I</sub> = -0.3
+                <br>c) Electricity: E<sub>I</sub> = 0.6
+                <br>d) Bus tickets: E<sub>I</sub> = -0.8
+            </div>
+
+            <div class="page-number">Page 26</div>
+        </div>
+
+        <!-- Page 27 -->
+        <div class="page">
+            <div class="answer">
+                <strong>Solution to Problem 7:</strong>
+                <table>
+                    <tr>
+                        <th>Good</th>
+                        <th>E<sub>I</sub></th>
+                        <th>Classification</th>
+                    </tr>
+                    <tr>
+                        <td>Restaurant meals</td>
+                        <td>1.5</td>
+                        <td>Normal (luxury, since E<sub>I</sub> > 1)</td>
+                    </tr>
+                    <tr>
+                        <td>Instant noodles</td>
+                        <td>-0.3</td>
+                        <td>Inferior (since E<sub>I</sub> < 0)</td>
+                    </tr>
+                    <tr>
+                        <td>Electricity</td>
+                        <td>0.6</td>
+                        <td>Normal (necessity, since 0 < E<sub>I</sub> < 1)</td>
+                    </tr>
+                    <tr>
+                        <td>Bus tickets</td>
+                        <td>-0.8</td>
+                        <td>Inferior (since E<sub>I</sub> < 0)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 8:</strong> A consumer spends exactly half her income on good X and half on good Y. What does this imply about her utility function? Assuming P<sub>X</sub> = P<sub>Y</sub>.
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <p>If P<sub>X</sub> = P<sub>Y</sub> = P, and consumer spends equal amounts on both goods:</p>
+                <p>Expenditure on X: PX = 0.5I → X = 0.5I/P</p>
+                <p>Expenditure on Y: PY = 0.5I → Y = 0.5I/P</p>
+                <p>This implies a Cobb-Douglas utility function with equal exponents: U = X<sup>0.5</sup>Y<sup>0.5</sup></p>
+                <p>For Cobb-Douglas, the expenditure share on each good equals the exponent share. Since shares are equal (0.5 each), exponents are equal (0.5 each).</p>
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 9:</strong> Explain why the substitution effect always moves in the opposite direction of the price change.
+            </div>
+
+            <div class="page-number">Page 27</div>
+        </div>
+
+        <!-- Page 28 -->
+        <div class="page">
+            <div class="answer">
+                <strong>Solution to Problem 9:</strong>
+                <p>The substitution effect always moves in the opposite direction of the price change because:</p>
+                <ol>
+                    <li><strong>Relative price change:</strong> When the price of good X falls, good X becomes relatively cheaper compared to good Y.</li>
+                    <li><strong>Substitution behavior:</strong> The rational consumer substitutes toward the now cheaper good (X) and away from the relatively more expensive good (Y).</li>
+                    <li><strong>Utility maintenance:</strong> The substitution effect is defined as the change in consumption while holding utility constant, isolating the pure substitution behavior.</li>
+                </ol>
+                <div class="key-point">
+                    <strong>Key Insight:</strong> The substitution effect is purely about changing consumption patterns due to changed relative prices, without any consideration of changed purchasing power. Therefore, it always responds negatively to a price increase (buy less) and positively to a price decrease (buy more).
+                </div>
+            </div>
+
+            <div class="exercise">
+                <strong>Problem 10:</strong> For U(X, Y) = X<sup>0.4</sup>Y<sup>0.6</sup> with I = 120, P<sub>X</sub> = 6, P<sub>Y</sub> = 4:
+                <br>a) What percentage of income is spent on X?
+                <br>b) What percentage of income is spent on Y?
+                <br>c) Find the optimal bundle.
+            </div>
+
+            <div class="answer">
+                <strong>Solution:</strong>
+                <p>For Cobb-Douglas with α = 0.4, β = 0.6:</p>
+                <p>a) Share on X = α/(α+β) = 0.4/1 = 40%</p>
+                <p>b) Share on Y = β/(α+β) = 0.6/1 = 60%</p>
+                <p>c) X = 0.4 × (120/6) = 0.4 × 20 = 8</p>
+                <p>Y = 0.6 × (120/4) = 0.6 × 30 = 18</p>
+                <p>Optimal bundle: (8, 18)</p>
+                <p>Verify: 6(8) + 4(18) = 48 + 72 = 120 ✓</p>
+            </div>
+
+            <div class="page-number">Page 28</div>
+        </div>
+
+        <!-- Page 29 -->
+        <div class="page">
+            <h2>Key Concepts Summary</h2>
+
+            <div class="boxed">
+                <strong>Consumer Choice Theory Core Concepts:</strong>
+                <ul>
+                    <li><strong>Utility:</strong> Measure of satisfaction from consumption</li>
+                    <li><strong>Marginal Utility:</strong> Additional utility from one more unit</li>
+                    <li><strong>Law of Diminishing MU:</strong> MU decreases as consumption increases</li>
+                    <li><strong>Indifference Curves:</strong> Bundles giving same utility</li>
+                    <li><strong>MRS:</strong> Rate willing to trade Y for X</li>
+                    <li><strong>Budget Constraint:</strong> All affordable bundles</li>
+                    <li><strong>Consumer Optimum:</strong> MRS = P<sub>X</sub>/P<sub>Y</sub></li>
+                    <li><strong>Income Effect:</strong> Change due to purchasing power</li>
+                    <li><strong>Substitution Effect:</strong> Change due to relative prices</li>
+                    <li><strong>Price Effect:</strong> SE + IE</li>
+                    <li><strong>Normal Good:</strong> Demand increases with income</li>
+                    <li><strong>Inferior Good:</strong> Demand decreases with income</li>
+                    <li><strong>Giffen Good:</strong> Inferior good where IE overcomes SE</li>
+                    <li><strong>Perfect Substitutes:</strong> Constant MRS (linear preferences)</li>
+                    <li><strong>Perfect Complements:</strong> L-shaped ICs (fixed ratios)</li>
+                    <li><strong>Cobb-Douglas:</strong> Well-behaved convex preferences</li>
+                </ul>
+            </div>
+
+            <div class="key-point">
+                <strong>Remember:</strong>
+                <ul>
+                    <li>Substitution effect always opposes the price change</li>
+                    <li>Income effect direction depends on normal/inferior classification</li>
+                    <li>For normal goods: SE and IE work together</li>
+                    <li>For inferior goods: SE and IE oppose each other</li>
+                    <li>Giffen goods are primarily theoretical</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Page 29</div>
+        </div>
+
+        <!-- Page 30 -->
+        <div class="page">
+            <h2>Exam Review Topics</h2>
+
+            <table>
+                <tr>
+                    <th>Topic</th>
+                    <th>Key Points</th>
+                    <th>Typical Question Types</th>
+                </tr>
+                <tr>
+                    <td>Utility Functions</td>
+                    <td>Types, properties, MU calculation</td>
+                    <td>Find MU given U(X,Y)</td>
+                </tr>
+                <tr>
+                    <td>Indifference Curves</td>
+                    <td>Properties, MRS interpretation</td>
+                    <td>Draw IC, calculate MRS</td>
+                </tr>
+                <tr>
+                    <td>Budget Constraint</td>
+                    <td>I = PX + PY, slope, intercepts</td>
+                    <td>Find max quantities, draw BL</td>
+                </tr>
+                <tr>
+                    <td>Consumer Optimum</td>
+                    <td>MRS = PX/PY, tangency</td>
+                    <td>Find optimal bundle</td>
+                </tr>
+                <tr>
+                    <td>Lagrangian Method</td>
+                    <td>Set up, FOCs, solve</td>
+                    <td>Algebraic solution</td>
+                </tr>
+                <tr>
+                    <td>Income Effects</td>
+                    <td>Parallel shifts of BL</td>
+                    <td>Predict quantity changes</td>
+                </tr>
+                <tr>
+                    <td>Price Effects</td>
+                    <td>Rotation of BL, SE + IE</td>
+                    <td>Decompose price changes</td>
+                </tr>
+                <tr>
+                    <td>Normal/Inferior</td>
+                    <td>Income elasticity sign</td>
+                    <td>Classify goods</td>
+                </tr>
+                <tr>
+                    <td>Special Cases</td>
+                    <td>Substitutes, complements, Cobb-Douglas</td>
+                    <td>Identify preference type</td>
+                </tr>
+            </table>
+
+            <div class="note">
+                <strong>Exam Tips:</strong>
+                <ol>
+                    <li>Always write down the budget constraint first</li>
+                    <li>Identify the type of utility function</li>
+                    <li>Use the appropriate method (graphical or algebraic)</li>
+                    <li>Check for corner solutions when appropriate</li>
+                    <li>Verify your answer satisfies both optimality and budget</li>
+                </ol>
+            </div>
+
+            <div class="page-number">Page 30</div>
+        </div>
+
+        <!-- Page 31 -->
+        <div class="page">
+            <h2>Important Relationships</h2>
+
+            <div class="boxed">
+                <strong>Decision Rules:</strong>
+                <table>
+                    <tr>
+                        <th>Condition</th>
+                        <th>Action</th>
+                        <th>Reason</th>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>X</sub>/P<sub>X</sub> > MU<sub>Y</sub>/P<sub>Y</sub></td>
+                        <td>Buy more X, less Y</td>
+                        <td>Higher MU per dollar on X</td>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>X</sub>/P<sub>X</sub> < MU<sub>Y</sub>/P<sub>Y</sub></td>
+                        <td>Buy less X, more Y</td>
+                        <td>Higher MU per dollar on Y</td>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></td>
+                        <td>At optimum</td>
+                        <td>Maximizing utility</td>
+                    </tr>
+                    <tr>
+                        <td>MRS > P<sub>X</sub>/P<sub>Y</sub></td>
+                        <td>Not at optimum</td>
+                        <td>Values X more than market does</td>
+                    </tr>
+                    <tr>
+                        <td>MRS < P<sub>X</sub>/P<sub>Y</sub></td>
+                        <td>Not at optimum</td>
+                        <td>Values Y more than market does</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="graph-container">
+                <svg width="450" height="320" viewBox="0 0 450 320">
+                    <defs>
+                        <marker id="arrow8" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                            <path d="M0,0 L0,6 L9,3 z" fill="#333"/>
+                        </marker>
+                    </defs>
+                    <!-- Axes -->
+                    <line x1="50" y1="280" x2="420" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow8)"/>
+                    <line x1="50" y1="280" x2="50" y2="30" stroke="#333" stroke-width="2" marker-end="url(#arrow8)"/>
+                    <!-- Labels -->
+                    <text x="400" y="300" font-size="12" font-family="Arial">Good X</text>
+                    <text x="15" y="20" font-size="12" font-family="Arial">Good Y</text>
+                    <!-- Indifference Curve -->
+                    <path d="M90,150 Q170,270 300,280" stroke="#3498db" stroke-width="2" fill="none"/>
+                    <!-- Budget Line -->
+                    <line x1="70" y1="280" x2="350" y2="0" stroke="#333" stroke-width="2"/>
+                    <!-- Points showing different conditions -->
+                    <circle cx="150" cy="200" r="4" fill="#e74c3c"/>
+                    <text x="135" y="190" font-size="10" font-family="Arial">A: MRS > slope</text>
+                    <circle cx="250" cy="130" r="5" fill="#9b59b6" stroke="#fff" stroke-width="2"/>
+                    <text x="260" y="125" font-size="10" font-family="Arial">E*: Optimum</text>
+                    <circle cx="320" cy="80" r="4" fill="#2ecc71"/>
+                    <text x="290" y="75" font-size="10" font-family="Arial">B: MRS < slope</text>
+                </svg>
+                <div class="graph-caption">Figure 8: Different Consumption Points</div>
+            </div>
+
+            <div class="page-number">Page 31</div>
+        </div>
+
+        <!-- Page 32 -->
+        <div class="page">
+            <h2>Formula Reference Sheet</h2>
+
+            <div class="boxed">
+                <strong>Essential Formulas for Consumer Choice:</strong>
+                <table>
+                    <tr>
+                        <th>Formula</th>
+                        <th>What it means</th>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>X</sub> = ∂U/∂X</td>
+                        <td>Marginal utility of good X</td>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>Y</sub> = ∂U/∂Y</td>
+                        <td>Marginal utility of good Y</td>
+                    </tr>
+                    <tr>
+                        <td>MRS<sub>XY</sub> = MU<sub>X</sub>/MU<sub>Y</sub></td>
+                        <td>Marginal rate of substitution</td>
+                    </tr>
+                    <tr>
+                        <td>I = P<sub>X</sub>X + P<sub>Y</sub>Y</td>
+                        <td>Budget constraint</td>
+                    </tr>
+                    <tr>
+                        <td>Slope = -P<sub>X</sub>/P<sub>Y</sub></td>
+                        <td>Budget line slope</td>
+                    </tr>
+                    <tr>
+                        <td>MRS<sub>XY</sub> = P<sub>X</sub>/P<sub>Y</sub></td>
+                        <td>Optimality condition</td>
+                    </tr>
+                    <tr>
+                        <td>MU<sub>X</sub>/P<sub>X</sub> = MU<sub>Y</sub>/P<sub>Y</sub></td>
+                        <td>Equal MU per dollar condition</td>
+                    </tr>
+                    <tr>
+                        <td>ℒ = U + λ(I - P<sub>X</sub>X - P<sub>Y</sub>Y)</td>
+                        <td>Lagrangian function</td>
+                    </tr>
+                    <tr>
+                        <td>PE = SE + IE</td>
+                        <td>Price effect decomposition</td>
+                    </tr>
+                    <tr>
+                        <td>X = (α/(α+β))(I/P<sub>X</sub>)</td>
+                        <td>Cobb-Douglas demand for X</td>
+                    </tr>
+                    <tr>
+                        <td>Y = (β/(α+β))(I/P<sub>Y</sub>)</td>
+                        <td>Cobb-Douglas demand for Y</td>
+                    </tr>
+                    <tr>
+                        <td>E<sub>I</sub> = (%ΔQ)/(%ΔI)</td>
+                        <td>Income elasticity of demand</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="note">
+                <strong>Good luck on your exam!</strong>
+                <p>Remember to:</p>
+                <ul>
+                    <li>Show all your work clearly</li>
+                    <li>Interpret your results economically</li>
+                    <li>Use graphs when helpful</li>
+                    <li>Check your answers</li>
+                </ul>
+            </div>
+
+            <div class="page-number">Page 32</div>
+        </div>
+    </div>
+</body>
+</html>

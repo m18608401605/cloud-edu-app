@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第1讲：商业金融导论 (Lecture 1: Introduction to Business Finance)</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 商务深蓝 */
+            --secondary-color: #005b96;
+            --accent-color: #f0f4f8;
+            --text-color: #333;
+            --border-color: #ddd;
+            --highlight-bg: #fffbf0; /* 案例背景色 */
+            --highlight-border: #f5c6cb;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 8px;
+        }
+
+        /* 标题样式 */
+        h1 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 12px;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+
+        h4 {
+            font-weight: bold;
+            color: #555;
+            margin-top: 20px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin-bottom: 15px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #000;
+            font-weight: 700;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.95em;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #fdfdfd;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* 案例分析框 */
+        .case-study {
+            background-color: var(--highlight-bg);
+            border: 1px solid #ffeeba;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 25px 0;
+        }
+
+        .case-title {
+            display: block;
+            font-weight: bold;
+            color: #856404;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #d39e00;
+            padding-bottom: 5px;
+        }
+
+        /* 数学公式样式 */
+        .math-block {
+            font-family: Consolas, Monaco, "Courier New", monospace;
+            background-color: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+            color: #c7254e;
+        }
+
+        /* 引用/来源 */
+        .source-cite {
+            font-size: 0.85em;
+            color: #666;
+            font-style: italic;
+            text-align: right;
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>第1讲：商业金融导论<br><small style="font-size: 0.6em; color: #666; font-weight: normal;">(阅读材料：McLaney 第1、2章)</small></h1>
+
+    <h2>1) 什么是商业金融</h2>
+    
+    <h3>一般金融概念</h3>
+    <ul>
+        <li><strong>什么是金融？</strong> 经济学是研究如何分配稀缺资源（自然资源、土地、劳动力、资本）的科学。金融则是专注于<strong>资本分配</strong>的分支领域。</li>
+        <li>它将资本（资金）从资金过剩、缺乏想法的人手中，漏斗式地转移给资金短缺、充满想法的人手中。</li>
+    </ul>
+
+    <h3>商业与商业金融</h3>
+    <ul>
+        <li>商业的本质就是赚钱。</li>
+        <li><strong>商业金融主要回答两个问题：</strong>
+            <ol>
+                <li><strong>如何投资资金（投资决策）</strong>：是否决定投资（如新技术、生产线、新产品）？以及选择哪一个进行投资？</li>
+                <li><strong>如何筹集资金（融资决策）</strong>：发行债务还是股权（以及如何发行）？多少债务搭配多少股权？如何分配利润？</li>
+            </ol>
+        </li>
+        <li><strong>什么是商业金融？</strong> 它是经济学、会计学、法律、定量方法和行为科学的混合体，但现在它已作为一门独立的学科进行教学。</li>
+    </ul>
+
+    <h2>2) 企业的组织形式</h2>
+    <p><strong>什么是企业？</strong> 企业可以是独资企业、合伙企业或有限公司/公司。本课程重点关注有限公司，尽管我们将学习的方法和理论可用于所有企业。</p>
+
+    <h3>典型的企业法律结构</h3>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">类型</th>
+                <th>特点与描述</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>独资企业</strong><br>(Sole Proprietorship)</td>
+                <td>
+                    <ul>
+                        <li>默认的法律结构，只有1个所有者/管理者。</li>
+                        <li>企业寿命受限于所有者的寿命。</li>
+                        <li>承担<strong>无限责任</strong>。</li>
+                        <li>在个人层面征税。</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>合伙企业</strong><br>(Partnership)</td>
+                <td>
+                    <ul>
+                        <li>多个所有者/管理者，变动易导致解散，所有权难转移，个人层面征税。</li>
+                        <li><strong>普通合伙：</strong> 每个合伙人承担完全责任（无限责任）。</li>
+                        <li><strong>有限合伙：</strong> 有限合伙人承担有限责任（仅限投资额），无管理权，权益可转移。</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>有限公司/公司</strong><br>(Limited Company)</td>
+                <td>
+                    <ul>
+                        <li><strong>优势：</strong> 筹资能力强；股东承担有限责任；无限寿命；无需特殊技能；所有权可分割（多元化投资）且易转让。</li>
+                        <li><strong>成本：</strong> 所有权与控制权分离（委托-代理冲突）；信息不对称（需披露）；<strong>双重征税</strong>（企业所得税+股息税）。</li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3) 代理问题</h2>
+    
+    <h3>所有权与控制权的分离</h3>
+    <ul>
+        <li><strong>谁拥有并运营：</strong> 理论上股东控制。实际上股东委托董事，管理者处理日常。</li>
+        <li><strong>选举：</strong> 股东选举董事，通常每年1/3轮换。</li>
+        <li><strong>角色混合：</strong> 董事可是股东；家族企业中股东、董事、高管常为同一人。</li>
+    </ul>
+
+    <h3>代理冲突的核心</h3>
+    <div class="case-study" style="border-left-color: #d9534f; background-color: #fff5f5; border: 1px solid #f5c6cb;">
+        <span class="case-title" style="color: #d9534f; border-bottom-color: #d9534f;">利益冲突</span>
+        <ul>
+            <li><strong>股东利益：</strong> 长期盈利能力。</li>
+            <li><strong>管理者利益：</strong> 可能偏向<strong>短期主义</strong>（任期声誉、薪酬），或认为投资者只看重短期。</li>
+            <li><strong>管理者自利行为：</strong> 增加薪酬/津贴、建立商业帝国（盲目扩张）、通过多元化降低风险。</li>
+        </ul>
+    </div>
+
+    <p>股东所有权过于分散，导致无法有效管理。<strong>2021年普通股东数量示例：</strong></p>
+    <ul>
+        <li>微软：89,291 名</li>
+        <li>通用电气：294,000 名</li>
+        <li>IBM：362,482 名</li>
+        <li>英特尔：102,962 名</li>
+    </ul>
+
+    <h3>代理成本</h3>
+    <p>代理问题给企业带来的额外成本。类型包括：</p>
+    <ol>
+        <li>管理者做出不符合股东最佳利益的决策而给股东带来的成本。</li>
+        <li>股东因需要监督管理者而产生的成本。</li>
+    </ol>
+
+    <h3>公司治理</h3>
+    <h4>董事的角色</h4>
+    <p>遵循<strong>注意义务 (Duty of Care)</strong> 和 <strong>忠诚义务 (Duty of Loyalty)</strong>，基于三个原则：</p>
+    <ol>
+        <li><strong>披露：</strong> 提供充分、及时的业绩信息。</li>
+        <li><strong>问责：</strong> 财报由独立机构审计。</li>
+        <li><strong>公平：</strong> 禁止利用内幕知识获利。</li>
+    </ol>
+
+    <h4>股东的角色</h4>
+    <p>股东（特别是机构股东）若不够积极可能导致企业失败。股东应发挥积极监督作用。</p>
+
+    <h3>近期研究：股权结构差异</h3>
+    <p>传统观点（Berle & Means, 1932）认为美英公司股权高度分散。但近期研究表明，<strong>东亚和欧洲大陆公司往往是集中持股的</strong>。</p>
+    
+    <div class="case-study">
+        <span class="case-title">数据：控股股东与少数股东的利益冲突</span>
+        <p>以下数据展示了东亚企业的所有权与控制权分离情况：</p>
+        <table style="background: white; width: auto; min-width: 60%;">
+            <thead>
+                <tr>
+                    <th>/District</th>
+                    <th>Total 2980</th>
+                    <th>Col 1</th>
+                    <th>Col 2</th>
+                    <th>Col 3</th>
+                    <th>Col 4</th>
+                    <th>Col 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="font-weight:bold;">统计数值</td>
+                    <td>-</td>
+                    <td>7.4</td>
+                    <td>54.2</td>
+                    <td>8.4</td>
+                    <td>12.9</td>
+                    <td>17.1</td>
+                </tr>
+            </tbody>
+        </table>
+        <span class="source-cite">Source: Claessens, et al. 2000, The separation of ownership and control in East Asian Corporations, JFE, Table 6</span>
+    </div>
+
+    <h2>4) 商业目标 • 最大化什么？</h2>
+    
+    <h3>利润 vs 股东回报</h3>
+    <p><strong>利润增加 &ne; 股东回报增加</strong></p>
+    <div style="background-color: #fff; padding: 15px; border: 1px solid #ddd; border-left: 4px solid #005b96;">
+        <p><strong>计算示例 (A公司)：</strong></p>
+        <ul>
+            <li><strong>场景1：</strong> 10,000股，利润 £1,000。<br>
+                股东回报率 = <span class="math-block">£1,000 / 10,000 = £0.1</span> &rarr; <span class="math-block">£0.1 / £1 = 10%</span>
+            </li>
+            <li><strong>场景2 (扩大规模)：</strong> 20,000股，利润 £1,600。<br>
+                股东回报率 = <span class="math-block">£1,600 / 20,000 = £0.08</span> &rarr; <span class="math-block">£0.08 / £1 = 8%</span> <strong>(下降!)</strong>
+            </li>
+        </ul>
+    </div>
+    <p>此外，短期利润可能损害长期盈利，且可能通过承担额外风险获得。</p>
+
+    <h3>理论对比</h3>
+    <ul>
+        <li><strong>股东理论 (Shareholder Theory)：</strong> 最大化股东财富（公司价值）。
+            <ul>
+                <li>考虑了回报和风险，是理性投资者的标准。</li>
+                <li>Milton Friedman (1970): “企业的社会责任就是增加其（经过风险调整后的）利润”。</li>
+            </ul>
+        </li>
+        <li><strong>利益相关者理论 (Stakeholder Theory)：</strong> 扩展到所有利益相关者（员工、债权人、社会等）。
+            <ul>
+                <li>Hart & Zingales (2017): 最大化股东福利（含道德考量）而非仅仅是市场价值。</li>
+                <li>Alex Edmans ("做大蛋糕"): CSR活动能增加支持并降低风险，最终对股东财富有积极影响。</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>5) 风险与回报</h2>
+    <ul>
+        <li>核心原则：<strong>风险越高，要求的收益率越高</strong>。</li>
+        <li>回报构成：无风险利率 + 风险溢价。</li>
+    </ul>
+
+    <h3>长期融资来源对比</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>类型</th>
+                <th>风险与回报</th>
+                <th>特点与权利</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>普通股</strong><br>(Ordinary Shares)</td>
+                <td>
+                    <strong>高风险 / 高回报</strong><br>
+                    享有所有剩余利润，清算优先级最低。
+                </td>
+                <td>无到期日；非强制股息；<strong>有投票权</strong>；可交易。</td>
+            </tr>
+            <tr>
+                <td><strong>优先股</strong><br>(Preference Shares)</td>
+                <td>
+                    <strong>低风险 / 回报有上限</strong><br>
+                    优先级次于债务优于普通股。
+                </td>
+                <td>定期固定股息；通常无投票权；可交易。</td>
+            </tr>
+            <tr>
+                <td><strong>债务</strong><br>(Debt)</td>
+                <td>
+                    <strong>低风险 / 低回报</strong><br>
+                    清算优先级最高，付款是法定义务。
+                </td>
+                <td>有到期日；可能有担保；无投票权；债券可交易。</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="case-study">
+        <span class="case-title">清算优先级案例：Sky Plc</span>
+        <p>Sky承诺一年后付给Cloud保险公司 £100 (债务)。</p>
+        <ul>
+            <li><strong>情况A (公司价值 £100)：</strong> 债权人得 £100，股东得 £0。</li>
+            <li><strong>情况B (公司价值 £200)：</strong> 债权人得 £100，股东得 £100。</li>
+            <li><strong>情况C (公司价值 £75)：</strong> 债权人得 £75，股东得 £0。</li>
+        </ul>
+    </div>
+
+    <h2>分离定理 (The Separation Theorem)</h2>
+    
+    <div class="case-study">
+        <span class="case-title">案例：Industries Ltd 的投资决策</span>
+        <p><strong>抉择：</strong> 现在分 £10,000 <strong>OR</strong> 投资项目X（1年后分 £12,000）。利率 10%。</p>
+        <p><strong>股东分歧：</strong></p>
+        <ul>
+            <li><strong>急躁型 (Eager)：</strong> 想要现在消费。</li>
+            <li><strong>耐心型 (Patient)：</strong> 想要更多钱，愿意等。</li>
+            <li><strong>稳健型 (Steady)：</strong> 6个月后需要钱付房贷。</li>
+        </ul>
+        <hr style="border:0; border-top:1px dashed #ccc; margin:15px 0;">
+        <p><strong>解决方案 —— 借贷市场：</strong></p>
+        <ul>
+            <li><strong>对急躁型：</strong> 公司投资。她现在借 £10,909 消费。1年后用 £12,000 还清本息。比不投资（只拿£10,000）更划算。</li>
+            <li><strong>对耐心型：</strong> 公司投资。1年后得 £12,000。若不投资，存 £10,000 一年后只有 £11,000。</li>
+            <li><strong>对稳健型：</strong> 公司投资。6个月后借款，1年后还款。同样比不投资更划算。</li>
+        </ul>
+        <p><strong>如果由企业借款：</strong> 计算表明，结果与上述个人借贷完全一致。</p>
+    </div>
+
+    <h3>核心结论</h3>
+    <ul>
+        <li><strong>投资原则：</strong> 企业应投资于能增加财富的项目。</li>
+        <li><strong>分离原则：</strong> 股东的个人消费偏好与企业的派息决策<strong>无关</strong>。</li>
+        <li><strong>融资无关性：</strong> 融资方式不影响股东财富。</li>
+    </ul>
+    <p style="font-size: 0.9em; color: #666;"><strong>假设条件：</strong> 投资仅1年；无风险；追求财富最大化；借贷利率相同。</p>
+
+    <h2>下周预告及联系方式</h2>
+    <p><strong>讲座内容：</strong> 货币的时间价值、利率基础和投资评估。 (阅读：McLaney 第4章)</p>
+
+    <h3>教职工联系方式</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>角色</th>
+                <th>办公室</th>
+                <th>邮箱</th>
+                <th>办公时间</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Xiaolan Zheng</td>
+                <td>讲师</td>
+                <td>IEB 522</td>
+                <td>xiaolan.zheng@nottingham.edu.cn</td>
+                <td>周二 15:00-17:00</td>
+            </tr>
+            <tr>
+                <td>Qing Xia</td>
+                <td>-</td>
+                <td>IEB 406</td>
+                <td>qing.xia@nottingham.edu.cn</td>
+                <td>周二 11:00-13:00</td>
+            </tr>
+            <tr>
+                <td>Cass Lai</td>
+                <td>-</td>
+                <td>IEB 405</td>
+                <td>cass.lai@nottingham.edu.cn</td>
+                <td>周四 15:00-16:00</td>
+            </tr>
+            <tr>
+                <td>Tingting Ying</td>
+                <td>研讨会导师</td>
+                <td>IEB 407</td>
+                <td>Tingting.Ying@nottingham.edu.cn</td>
+                <td>周五 11:00–13:00 (第24-28周)<br>周二 13:00–15:00</td>
+            </tr>
+            <tr>
+                <td>Congjia He</td>
+                <td>-</td>
+                <td>Trent 453-33</td>
+                <td>Congjia.HE@nottingham.edu.cn</td>
+                <td>周四</td>
+            </tr>
+            <tr>
+                <td>Liqing Yin</td>
+                <td>研讨会导师</td>
+                <td>Trent 453-36</td>
+                <td>liqing.yin@nottingham.edu.cn</td>
+                <td>周三 15:00-17:00</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

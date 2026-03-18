@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 9 | Quiz | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--green:#064e3b;--bg:#f0fdf4;--text:#1e293b}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  nav{position:sticky;top:0;z-index:100;background:var(--primary);display:flex;align-items:center;gap:12px;padding:0 24px;height:56px;flex-wrap:wrap}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;margin-right:8px}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:.875rem;padding:6px 10px;border-radius:6px;transition:background .2s}
+  nav a:hover{background:rgba(255,255,255,.15);color:#fff}
+  nav a.active{background:var(--accent);color:#fff;font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:rgba(255,255,255,.15);color:#fff;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600}
+  .hero{background:linear-gradient(135deg,var(--green) 0%,#065f46 100%);color:#fff;padding:56px 24px 40px;text-align:center}
+  .hero .eyebrow{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#6ee7b7;margin-bottom:10px}
+  .hero h1{font-size:2.2rem;font-weight:800;margin-bottom:10px}
+  .hero p{font-size:.95rem;color:#a7f3d0;max-width:520px;margin:0 auto 20px}
+  .progress-bar{background:rgba(255,255,255,.2);border-radius:20px;height:8px;max-width:400px;margin:0 auto}
+  .progress-fill{background:#6ee7b7;height:8px;border-radius:20px;transition:width .4s;width:0%}
+  .progress-text{font-size:.8rem;color:#a7f3d0;margin-top:6px}
+  .container{max-width:800px;margin:0 auto;padding:40px 24px}
+  .section-title{font-size:1.3rem;font-weight:700;color:var(--green);margin-bottom:20px;padding-bottom:8px;border-bottom:2px solid #bbf7d0}
+  .question-card{background:#fff;border-radius:12px;padding:24px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .q-num{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin-bottom:8px}
+  .q-text{font-size:1rem;font-weight:600;color:var(--text);margin-bottom:16px}
+  .options{display:flex;flex-direction:column;gap:8px}
+  .option{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:8px;border:2px solid #e2e8f0;cursor:pointer;transition:all .2s;font-size:.9rem;background:#fff}
+  .option:hover{border-color:#86efac;background:#f0fdf4}
+  .option.correct{border-color:#22c55e;background:#f0fdf4;color:#166534}
+  .option.wrong{border-color:#ef4444;background:#fef2f2;color:#991b1b}
+  .option .opt-key{font-weight:700;min-width:20px;color:#64748b}
+  .option.correct .opt-key{color:#166534}
+  .option.wrong .opt-key{color:#991b1b}
+  .feedback{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.875rem;display:none}
+  .feedback.show{display:block}
+  .feedback.correct{background:#dcfce7;color:#166534;border-left:4px solid #22c55e}
+  .feedback.wrong{background:#fef2f2;color:#991b1b;border-left:4px solid #ef4444}
+  .calc-section{background:#fff;border-radius:12px;padding:28px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  .calc-section h3{font-size:1rem;font-weight:700;color:var(--primary);margin-bottom:12px}
+  .calc-section p{font-size:.9rem;color:#374151;margin-bottom:8px}
+  .calc-section ol{padding-left:20px;font-size:.9rem;color:#374151}
+  .calc-section ol li{margin-bottom:6px}
+  details{margin-top:16px}
+  summary{cursor:pointer;background:var(--green);color:#fff;padding:10px 16px;border-radius:8px;font-size:.875rem;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:'▶';font-size:.7rem;transition:transform .2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  .answer-content{background:#f0fdf4;border-radius:0 0 8px 8px;padding:16px;font-size:.875rem;color:#374151;border:1px solid #bbf7d0;border-top:none}
+  .answer-content p{margin-bottom:6px}
+  .answer-content strong{color:var(--green)}
+  .score-panel{background:var(--green);color:#fff;border-radius:12px;padding:24px;text-align:center;margin-bottom:32px;display:none}
+  .score-panel h3{font-size:1.5rem;margin-bottom:8px}
+  .score-panel p{color:#a7f3d0;font-size:.9rem}
+  .bottom-nav{display:flex;justify-content:space-between;padding:24px 0 48px}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s}
+  .btn:hover{background:#2d5986}
+  .btn.accent{background:var(--accent)}
+  .btn.accent:hover{background:#c8880e}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Quiz_Kiro.html" class="active">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 9</span>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Week 9 · Chapter 12 · Quiz</div>
+  <h1>✏️ Payout Policy Quiz</h1>
+  <p>10道选择题 + 计算题，测试你对股利政策的掌握程度</p>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-text" id="progress-text">0 / 10 answered</div>
+</div>
+
+<div class="container">
+  <div class="score-panel" id="score-panel">
+    <h3 id="score-text">🎉 完成！</h3>
+    <p id="score-sub"></p>
+  </div>
+
+  <div class="section-title">Section A — Multiple Choice Questions</div>
+
+  <div id="quiz-container"></div>
+
+  <div class="section-title" style="margin-top:32px">Section B — 计算题</div>
+  <div class="calc-section">
+    <h3>📝 题目</h3>
+    <p>DEF公司当前股价 <strong>£5</strong>，共 <strong>1000万股</strong>，计划分配 <strong>£500万</strong>（可选择股利或回购）。</p>
+    <ol>
+      <li>(a) 若选择现金股利，每股股利是多少？发放后股价是多少？</li>
+      <li>(b) 若选择回购，能回购多少股？回购后每股价值是多少？</li>
+      <li>(c) 两种方式下，持有100股的股东财富有何不同？</li>
+    </ol>
+    <details>
+      <summary>📖 点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) 现金股利方式：</strong></p>
+        <p>每股股利 = £500万 ÷ 1000万股 = <strong>£0.50/股</strong></p>
+        <p>发放后股价 = £5 − £0.50 = <strong>£4.50</strong>（除息效应）</p>
+        <br>
+        <p><strong>(b) 股票回购方式：</strong></p>
+        <p>回购股数 = £500万 ÷ £5 = <strong>100万股</strong></p>
+        <p>剩余股数 = 1000万 − 100万 = <strong>900万股</strong></p>
+        <p>公司剩余价值 = £5000万 − £500万 = £4500万</p>
+        <p>回购后每股价值 = £4500万 ÷ 900万 = <strong>£5.00</strong>（不变）</p>
+        <br>
+        <p><strong>(c) 持有100股的股东财富对比：</strong></p>
+        <p>股利方式：100股 × £4.50 + £50现金 = £450 + £50 = <strong>£500</strong></p>
+        <p>回购方式：100股 × £5.00 = <strong>£500</strong></p>
+        <p>✅ <strong>两种方式财富完全相同</strong>，验证了 MM 股利无关定理。</p>
+      </div>
+    </details>
+  </div>
+
+
+  <div class="calc-section">
+    <h3>📝 题目二</h3>
+    <p>GHI公司股票当前股价 <strong>£2.50</strong>，即将发放 <strong>£0.25</strong> 股利，预期股利增长率 <strong>5%</strong>。</p>
+    <ol>
+      <li>(a) 计算除息后（ex-dividend）股价。</li>
+      <li>(b) 用 Gordon Growth Model 计算股权成本（Ke），注意应使用除息后股价作为 P₀。</li>
+      <li>(c) 若股利改为 <strong>£0.40</strong>（其他条件不变），Ke 会如何变化？说明原因。</li>
+    </ol>
+    <details>
+      <summary>📖 点击查看答案与解析</summary>
+      <div class="answer-content">
+        <p><strong>(a) 除息后股价：</strong></p>
+        <p>Ex-dividend price = £2.50 − £0.25 = <strong>£2.25</strong></p>
+        <br>
+        <p><strong>(b) 股权成本 Ke（Gordon Growth Model）：</strong></p>
+        <p>公式：Ke = D₁ / P₀ + g</p>
+        <p>D₁ = £0.25 × (1 + 5%) = <strong>£0.2625</strong>（下一期股利）</p>
+        <p>P₀ = 除息后股价 = <strong>£2.25</strong></p>
+        <p>Ke = £0.2625 / £2.25 + 5% = 11.67% + 5% = <strong>16.67%</strong></p>
+        <p style="color:#b45309;margin-top:6px">⚠️ 陷阱：必须用<strong>除息后股价</strong>作为 P₀，而非含息股价 £2.50。用 £2.50 会得到错误的 Ke = 10.5% + 5% = 15.5%。</p>
+        <br>
+        <p><strong>(c) 股利增至 £0.40 时：</strong></p>
+        <p>Ex-dividend price = £2.50 − £0.40 = <strong>£2.10</strong></p>
+        <p>D₁ = £0.40 × 1.05 = <strong>£0.42</strong></p>
+        <p>Ke = £0.42 / £2.10 + 5% = 20% + 5% = <strong>25%</strong></p>
+        <p>✅ Ke <strong>上升</strong>。原因：更高的股利导致除息后股价更低，分子（D₁）增大而分母（P₀）减小，Ke 显著上升。这体现了股利政策与股权成本之间的权衡。</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week9_Interactive_Kiro.html" class="btn">← Interactive</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week10_StudyGuide_Kiro.html" class="btn accent">Week 10 →</a>
+  </div>
+</div>
+
+<script>
+const questions = [
+  {q:"Q1. MM dividend irrelevance theorem does <strong>NOT</strong> assume:",opts:["No taxes","No transaction costs","Information asymmetry exists","Perfect capital markets"],correct:2,exp:"MM irrelevance assumes <strong>perfect information</strong> (symmetric information), not information asymmetry. Information asymmetry is a real-world friction that makes dividend policy matter via signalling effects."},
+  {q:"Q2. "Homemade dividend" refers to:",opts:["The company decides dividend amount itself","Shareholders create cash flow by selling some shares","Dividend reinvestment plan","Special dividend"],correct:1,exp:"Homemade dividend means shareholders can <strong>sell some shares</strong> to create cash flow without relying on company dividends. This is the core mechanism of MM irrelevance."},
+  {q:"Q3. Dividend signalling theory suggests that increasing dividends usually means:",opts:["The company lacks good investment opportunities","Management is confident about future earnings","The stock price is overvalued","The company has excessive debt"],correct:1,exp:"Increasing dividends is a <strong>positive signal</strong>, indicating management's confidence in future earnings and willingness to commit to higher cash payouts. Note: Some argue it means lack of investment opportunities, but signalling theory emphasizes management confidence."},
+  {q:"Q4. Clientele Effect refers to:",opts:["Customers prefer buying products from high-dividend companies","Different investors prefer companies with different dividend policies due to tax and preferences","Institutional investors control dividend policy","Dividend policy affects customer loyalty"],correct:1,exp:"Clientele effect means <strong>different types of investors</strong> (e.g., high-tax individuals vs pension funds) prefer companies with different dividend policies due to varying tax situations and cash flow needs."},
+  {q:"Q5. Compared to cash dividends, the advantage of share buybacks is:",opts:["Stronger signalling effect","More flexible and tax-efficient","More stable, investors prefer it","Simpler accounting treatment"],correct:1,exp:"Main advantages of buybacks: ① <strong>Flexibility</strong> (no ongoing commitment); ② <strong>Tax efficiency</strong> (capital gains tax rate usually lower than dividend tax rate). Dividends' advantage lies in stability and signalling."},
+  {q:"Q6. After 2013, Apple mainly adopted which shareholder return method?",opts:["High cash dividends","Massive share buybacks","Stock dividends","Special dividends"],correct:1,exp:"Apple started <strong>massive share buybacks</strong> from 2013, totaling over $600B, with $90B in 2023 alone, becoming the largest buyback program in history."},
+  {q:"Q7. Dividend "stickiness" refers to:",opts:["Dividend amount is fixed","Companies are reluctant to cut dividends due to strong market reaction","Dividends must be paid annually","Dividends are fully linked to profits"],correct:1,exp:"Dividend stickiness means companies are <strong>reluctant to cut dividends</strong> because reducing dividends is interpreted as a strong negative signal, causing sharp stock price declines. This makes dividends hard to reduce once established."},
+  {q:"Q8. According to MM dividend irrelevance, firm value depends on:",opts:["Dividend policy","Investment decisions and profitability","Financing method","Dividend payment frequency"],correct:1,exp:"MM theory argues firm value is determined by <strong>investment decisions and profitability</strong>, not dividend policy. Dividends only change the form of wealth, not create or destroy value."},
+  {q:"Q9. If stock price is £10 and £1 dividend is paid, according to MM theory, the price becomes:",opts:["£10","£9","£11","£8"],correct:1,exp:"According to MM theory, after paying £1 dividend, stock price drops by the same amount: £10 − £1 = <strong>£9</strong> (ex-dividend effect). Total shareholder wealth unchanged: £9 (stock) + £1 (cash) = £10."},
+  {q:"Q10. Reducing dividends usually leads to:",opts:["Stock price rise (saving cash)","Sharp stock price decline (negative signal)","No price change (MM theory)","Depends on industry"],correct:1,exp:"Reducing dividends usually causes <strong>sharp stock price decline</strong> because the market interprets it as a strong negative signal of deteriorating earnings prospects. This reflects the asymmetry of dividend signalling effects."}
+];
+
+let answered = 0;
+const container = document.getElementById('quiz-container');
+
+questions.forEach((q, i) => {
+  const card = document.createElement('div');
+  card.className = 'question-card';
+  card.innerHTML = `<div class="q-num">Question ${i+1} of ${questions.length}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="options" id="opts-${i}">
+      ${q.opts.map((o,j)=>`<div class="option" onclick="answer(${i},${j})" id="opt-${i}-${j}"><span class="opt-key">${String.fromCharCode(65+j)})</span><span>${o}</span></div>`).join('')}
+    </div>
+    <div class="feedback" id="fb-${i}"></div>`;
+  container.appendChild(card);
+});
+
+function answer(qi, oi){
+  const opts = document.getElementById('opts-'+qi);
+  if(opts.dataset.done) return;
+  opts.dataset.done = '1';
+  answered++;
+  const q = questions[qi];
+  for(let j=0;j<q.opts.length;j++){
+    const el = document.getElementById('opt-'+qi+'-'+j);
+    el.style.cursor='default';
+    if(j===q.correct) el.classList.add('correct');
+    else if(j===oi) el.classList.add('wrong');
+  }
+  const fb = document.getElementById('fb-'+qi);
+  fb.className = 'feedback show ' + (oi===q.correct?'correct':'wrong');
+  fb.innerHTML = (oi===q.correct?'✅ Correct!':'❌ Wrong.') + ' ' + q.exp;
+  const pct = (answered/questions.length*100).toFixed(0);
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-text').textContent = answered+' / '+questions.length+' answered';
+  if(answered===questions.length){
+    const panel = document.getElementById('score-panel');
+    panel.style.display='block';
+    document.getElementById('score-text').textContent='🎉 All done!';
+    document.getElementById('score-sub').textContent='Continue with Section B calculation questions to consolidate your understanding.';
+    panel.scrollIntoView({behavior:'smooth'});
+  }
+}
+</script>
+</body>
+</html>

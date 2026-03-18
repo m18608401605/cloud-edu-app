@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 4 | Interactive | Business Finance</title>
+<style>
+  :root{--primary:#1a3a5c;--accent:#e8a020;--bg:#f5f7fa;--card:#fff;--text:#2c3e50;--muted:#7f8c8d;--green:#27ae60;--red:#e74c3c;--border:#dde3ea}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+  nav{background:var(--primary);padding:0 2rem;display:flex;align-items:center;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+  nav .brand{color:#fff;font-weight:700;font-size:1rem;padding:1rem 1.5rem 1rem 0;border-right:1px solid rgba(255,255,255,.2);margin-right:1rem;white-space:nowrap}
+  nav a{color:rgba(255,255,255,.75);text-decoration:none;padding:1rem .9rem;font-size:.9rem;transition:all .2s;border-bottom:3px solid transparent}
+  nav a:hover{color:#fff}
+  nav a.active{color:#fff;border-bottom-color:var(--accent);font-weight:600}
+  nav .spacer{flex:1}
+  nav .week-badge{background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:20px}
+  .hero{background:linear-gradient(135deg,#2d1b69 0%,#7c3aed 100%);color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .tag{display:inline-block;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;padding:.3rem .8rem;border-radius:20px;margin-bottom:1rem;letter-spacing:.05em;text-transform:uppercase}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+  .hero p{font-size:1.05rem;opacity:.85;max-width:600px;margin:0 auto}
+  main{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+  .section-label{display:flex;align-items:center;gap:.6rem;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:2.5rem 0 1rem}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .lab{background:#0f172a;border-radius:14px;padding:2rem;color:#e2e8f0;margin-bottom:1.5rem}
+  .lab h2{color:#f8fafc;font-size:1.2rem;margin-bottom:.4rem}
+  .lab .subtitle{color:#94a3b8;font-size:.9rem;margin-bottom:1.5rem}
+  .lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media(max-width:700px){.lab-grid{grid-template-columns:1fr}}
+  .control-group{margin-bottom:1.2rem}
+  .control-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;font-size:.88rem;color:#cbd5e1}
+  .control-label .val{font-weight:700;color:#f8fafc;font-size:1rem;font-family:monospace}
+  input[type=range]{width:100%;-webkit-appearance:none;height:6px;border-radius:3px;background:#334155;outline:none}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 0 3px rgba(232,160,32,.3)}
+  .result-panel{background:#1e293b;border-radius:10px;padding:1.4rem}
+  .result-panel h3{color:#94a3b8;font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:1rem}
+  .metric{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid #334155}
+  .metric:last-child{border-bottom:none}
+  .metric .label{color:#94a3b8;font-size:.88rem}
+  .metric .value{font-weight:700;font-family:monospace;font-size:1.05rem}
+  .metric .value.positive{color:#4ade80}
+  .metric .value.negative{color:#f87171}
+  .metric .value.neutral{color:#fbbf24}
+  .insight{background:#1e3a5f;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-top:1.2rem;font-size:.9rem;color:#bfdbfe}
+  .insight strong{color:#fff}
+  .step{background:#1e293b;border-radius:8px;padding:.8rem 1rem;margin-bottom:.6rem;font-size:.88rem}
+  .step .step-num{color:var(--accent);font-weight:700;font-size:.75rem;text-transform:uppercase;margin-bottom:.2rem}
+  .step .step-eq{font-family:monospace;color:#e2e8f0;font-size:.95rem}
+  .prob-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.6rem;font-size:.88rem}
+  .prob-bar{flex:1;height:20px;background:#334155;border-radius:4px;overflow:hidden}
+  .prob-fill{height:100%;border-radius:4px;transition:width .3s}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s}
+  .btn-primary{background:var(--primary);color:#fff}
+  .btn-primary:hover{background:#2c5282}
+  .btn-outline{border:2px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
+</style>
+</head>
+<body>
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Lecture_Kiro.html">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html" class="active">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 4</span>
+</nav>
+<div class="hero">
+  <div class="tag">🧪 Interactive Lab · Week 4</div>
+  <h1>Risk Analysis Lab 风险分析实验室</h1>
+  <p>Sensitivity analysis, expected NPV, and systematic risk — all interactive.</p>
+</div>
+<main>
+
+  <div class="section-label">🔬 Lab 1 — Sensitivity Analysis Calculator</div>
+  <div class="lab">
+    <h2>📊 Sensitivity Explorer 敏感性探索器</h2>
+    <div class="subtitle">调整项目参数，实时看到每个变量的敏感性百分比。数字越小 = 该变量越关键。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Initial Investment (£)</span><span class="val" id="sa-inv-val">£50,000</span></div>
+          <input type="range" id="sa-inv" min="10000" max="200000" step="5000" value="50000" oninput="updateSA()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Annual Contribution (£)</span><span class="val" id="sa-cont-val">£15,000</span></div>
+          <input type="range" id="sa-cont" min="1000" max="50000" step="500" value="15000" oninput="updateSA()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Project Life (years)</span><span class="val" id="sa-life-val">5</span></div>
+          <input type="range" id="sa-life" min="1" max="15" step="1" value="5" oninput="updateSA()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Discount Rate (%)</span><span class="val" id="sa-dr-val">10%</span></div>
+          <input type="range" id="sa-dr" min="1" max="25" step="0.5" value="10" oninput="updateSA()">
+        </div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>📊 Sensitivity Results</h3>
+          <div class="metric"><span class="label">NPV</span><span class="value" id="sa-npv">+£6,865</span></div>
+          <div class="metric"><span class="label">Sensitivity — Initial Investment</span><span class="value neutral" id="sa-s-inv">13.7%</span></div>
+          <div class="metric"><span class="label">Sensitivity — Annual Contribution</span><span class="value neutral" id="sa-s-cont">12.1%</span></div>
+          <div class="metric"><span class="label">Most Critical Variable</span><span class="value negative" id="sa-critical">Contribution</span></div>
+        </div>
+        <div class="insight" id="sa-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">🎲 Lab 2 — Expected NPV Calculator</div>
+  <div class="lab">
+    <h2>🎯 Expected NPV Simulator 期望 NPV 模拟器</h2>
+    <div class="subtitle">为三种情景设置概率，计算期望 NPV。感受"平均值"背后隐藏的风险。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Best Case NPV (£)</span><span class="val" id="npv-best-val">+£6,865</span></div>
+          <input type="range" id="npv-best" min="-20000" max="50000" step="500" value="6865" oninput="updateENPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Best Case Probability (%)</span><span class="val" id="p-best-val">30%</span></div>
+          <input type="range" id="p-best" min="5" max="90" step="5" value="30" oninput="updateENPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Base Case NPV (£)</span><span class="val" id="npv-base-val">+£1,179</span></div>
+          <input type="range" id="npv-base" min="-20000" max="30000" step="500" value="1179" oninput="updateENPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Base Case Probability (%)</span><span class="val" id="p-base-val">50%</span></div>
+          <input type="range" id="p-base" min="5" max="90" step="5" value="50" oninput="updateENPV()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Worst Case NPV (£)</span><span class="val" id="npv-worst-val">-£4,508</span></div>
+          <input type="range" id="npv-worst" min="-50000" max="0" step="500" value="-4508" oninput="updateENPV()">
+        </div>
+        <div style="font-size:.82rem;color:#94a3b8;margin-top:.4rem">Worst case probability = 100% − Best% − Base%</div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>📊 Expected NPV Analysis</h3>
+          <div class="metric"><span class="label">Best Case contribution</span><span class="value positive" id="e-best">+£2,060</span></div>
+          <div class="metric"><span class="label">Base Case contribution</span><span class="value positive" id="e-base">+£590</span></div>
+          <div class="metric"><span class="label">Worst Case contribution</span><span class="value negative" id="e-worst">−£902</span></div>
+          <div class="metric"><span class="label">Worst Case probability</span><span class="value neutral" id="p-worst-disp">20%</span></div>
+          <div class="metric"><span class="label">E(NPV)</span><span class="value" id="e-npv">+£1,748</span></div>
+          <div class="metric"><span class="label">Decision</span><span class="value" id="e-dec">✅ ACCEPT (on average)</span></div>
+        </div>
+        <div class="insight" id="enpv-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">📈 Lab 3 — CAPM &amp; Beta Explorer</div>
+  <div class="lab">
+    <h2>⚡ CAPM Required Return Calculator</h2>
+    <div class="subtitle">调整 β 系数，看系统性风险如何影响要求回报率。验证"β翻倍 ≠ 回报率翻倍"。</div>
+    <div class="lab-grid">
+      <div>
+        <div class="control-group">
+          <div class="control-label"><span>Risk-Free Rate Rf (%)</span><span class="val" id="rf-val">4%</span></div>
+          <input type="range" id="rf" min="0" max="10" step="0.5" value="4" oninput="updateCAPM()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Market Return Rm (%)</span><span class="val" id="rm-val">10%</span></div>
+          <input type="range" id="rm" min="5" max="20" step="0.5" value="10" oninput="updateCAPM()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Beta of Asset Y (β_Y)</span><span class="val" id="by-val">1.0</span></div>
+          <input type="range" id="by" min="0" max="3" step="0.1" value="1.0" oninput="updateCAPM()">
+        </div>
+        <div class="control-group">
+          <div class="control-label"><span>Beta of Asset X (β_X = 2 × β_Y)</span><span class="val" id="bx-val">2.0</span></div>
+          <input type="range" id="bx" min="0" max="6" step="0.1" value="2.0" disabled style="opacity:.5">
+        </div>
+        <div id="capm-steps"></div>
+      </div>
+      <div>
+        <div class="result-panel">
+          <h3>📊 CAPM Results</h3>
+          <div class="metric"><span class="label">Risk-Free Rate (Rf)</span><span class="value neutral" id="c-rf">4%</span></div>
+          <div class="metric"><span class="label">Market Risk Premium (Rm−Rf)</span><span class="value neutral" id="c-mrp">6%</span></div>
+          <div class="metric"><span class="label">Required Return — Y (β=1)</span><span class="value positive" id="c-ry">10%</span></div>
+          <div class="metric"><span class="label">Required Return — X (β=2)</span><span class="value positive" id="c-rx">16%</span></div>
+          <div class="metric"><span class="label">X/Y ratio</span><span class="value neutral" id="c-ratio">1.60×</span></div>
+          <div class="metric"><span class="label">Would 2× β = 2× return?</span><span class="value negative" id="c-2x">20% (NO)</span></div>
+        </div>
+        <div class="insight" id="capm-insight"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Lecture_Kiro.html" class="btn btn-outline">← Lecture</a>
+    <span style="font-size:.85rem;color:var(--muted)">Page 2 of 3</span>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Quiz_Kiro.html" class="btn btn-primary">Quiz →</a>
+  </div>
+</main>
+
+<script>
+const fmt = n => (n>=0?'+':'') + '£' + Math.abs(n).toLocaleString('en-GB',{maximumFractionDigits:0});
+
+function updateSA(){
+  const inv=+document.getElementById('sa-inv').value;
+  const cont=+document.getElementById('sa-cont').value;
+  const life=+document.getElementById('sa-life').value;
+  const dr=+document.getElementById('sa-dr').value/100;
+  document.getElementById('sa-inv-val').textContent='£'+inv.toLocaleString();
+  document.getElementById('sa-cont-val').textContent='£'+cont.toLocaleString();
+  document.getElementById('sa-life-val').textContent=life;
+  document.getElementById('sa-dr-val').textContent=(dr*100).toFixed(1)+'%';
+  const af=(1-1/Math.pow(1+dr,life))/dr;
+  const pvcont=cont*af;
+  const npv=pvcont-inv;
+  const sInv=(npv/inv)*100;
+  const sCont=(npv/pvcont)*100;
+  document.getElementById('sa-npv').textContent=fmt(npv);
+  document.getElementById('sa-npv').className='value '+(npv>=0?'positive':'negative');
+  document.getElementById('sa-s-inv').textContent=Math.abs(sInv).toFixed(1)+'%';
+  document.getElementById('sa-s-cont').textContent=Math.abs(sCont).toFixed(1)+'%';
+  const critical = Math.abs(sCont) < Math.abs(sInv) ? 'Contribution (more sensitive)' : 'Initial Investment (more sensitive)';
+  document.getElementById('sa-critical').textContent=critical;
+  document.getElementById('sa-insight').innerHTML=`<strong>NPV = ${fmt(npv)}</strong>. Investment sensitivity: ${Math.abs(sInv).toFixed(1)}% — it can increase by this % before NPV turns negative. Contribution sensitivity: ${Math.abs(sCont).toFixed(1)}%. The <strong>lower</strong> number is the more critical variable.`;
+}
+
+function updateENPV(){
+  const bestNPV=+document.getElementById('npv-best').value;
+  const baseNPV=+document.getElementById('npv-base').value;
+  const worstNPV=+document.getElementById('npv-worst').value;
+  const pBest=+document.getElementById('p-best').value/100;
+  const pBase=+document.getElementById('p-base').value/100;
+  const pWorst=Math.max(0,1-pBest-pBase);
+  document.getElementById('npv-best-val').textContent=fmt(bestNPV);
+  document.getElementById('npv-base-val').textContent=fmt(baseNPV);
+  document.getElementById('npv-worst-val').textContent=fmt(worstNPV);
+  document.getElementById('p-best-val').textContent=(pBest*100).toFixed(0)+'%';
+  document.getElementById('p-base-val').textContent=(pBase*100).toFixed(0)+'%';
+  document.getElementById('p-worst-disp').textContent=(pWorst*100).toFixed(0)+'%';
+  const eBest=bestNPV*pBest, eBase=baseNPV*pBase, eWorst=worstNPV*pWorst;
+  const eNPV=eBest+eBase+eWorst;
+  document.getElementById('e-best').textContent=fmt(eBest);
+  document.getElementById('e-base').textContent=fmt(eBase);
+  document.getElementById('e-worst').textContent=fmt(eWorst);
+  const npvEl=document.getElementById('e-npv');
+  npvEl.textContent=fmt(eNPV);
+  npvEl.className='value '+(eNPV>=0?'positive':'negative');
+  const decEl=document.getElementById('e-dec');
+  decEl.textContent=eNPV>0?'✅ ACCEPT (on average)':'❌ REJECT (on average)';
+  decEl.className='value '+(eNPV>0?'positive':'negative');
+  document.getElementById('enpv-insight').innerHTML=`<strong>E(NPV) = ${fmt(eNPV)}</strong>. But there's a <strong>${(pWorst*100).toFixed(0)}% chance of losing ${fmt(Math.abs(worstNPV))}</strong>. Expected value hides this downside risk — always report both E(NPV) and the worst-case scenario.`;
+}
+
+function updateCAPM(){
+  const rf=+document.getElementById('rf').value;
+  const rm=+document.getElementById('rm').value;
+  const by=+document.getElementById('by').value;
+  const bx=by*2;
+  document.getElementById('rf-val').textContent=rf+'%';
+  document.getElementById('rm-val').textContent=rm+'%';
+  document.getElementById('by-val').textContent=by.toFixed(1);
+  document.getElementById('bx-val').textContent=bx.toFixed(1);
+  document.getElementById('bx').value=bx;
+  const mrp=rm-rf;
+  const ry=rf+by*mrp;
+  const rx=rf+bx*mrp;
+  const ratio=rx/ry;
+  const hypothetical=ry*2;
+  document.getElementById('c-rf').textContent=rf+'%';
+  document.getElementById('c-mrp').textContent=mrp.toFixed(1)+'%';
+  document.getElementById('c-ry').textContent=ry.toFixed(1)+'%';
+  document.getElementById('c-rx').textContent=rx.toFixed(1)+'%';
+  document.getElementById('c-ratio').textContent=ratio.toFixed(2)+'×';
+  document.getElementById('c-2x').textContent=hypothetical.toFixed(1)+'% (NO)';
+  document.getElementById('capm-steps').innerHTML=`
+    <div class="step"><div class="step-num">Required Return Y (β=${by.toFixed(1)})</div><div class="step-eq">r_Y = ${rf}% + ${by.toFixed(1)} × ${mrp.toFixed(1)}% = ${ry.toFixed(1)}%</div></div>
+    <div class="step"><div class="step-num">Required Return X (β=${bx.toFixed(1)} = 2×β_Y)</div><div class="step-eq">r_X = ${rf}% + ${bx.toFixed(1)} × ${mrp.toFixed(1)}% = ${rx.toFixed(1)}%</div></div>
+    <div class="step"><div class="step-num">If β doubles, does return double?</div><div class="step-eq">${rx.toFixed(1)}% vs ${hypothetical.toFixed(1)}% → NO (only risk premium doubles)</div></div>
+  `;
+  document.getElementById('capm-insight').innerHTML=`<strong>β doubled from ${by.toFixed(1)} to ${bx.toFixed(1)}</strong>, but required return only went from ${ry.toFixed(1)}% to ${rx.toFixed(1)}% (${ratio.toFixed(2)}×, not 2×). The risk-free rate ${rf}% is shared — only the risk premium (${by.toFixed(1)}×${mrp.toFixed(1)}% = ${(by*mrp).toFixed(1)}%) doubles.`;
+}
+
+updateSA(); updateENPV(); updateCAPM();
+</script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 1 - Module 1: The Financial Manager</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --secondary-color: #00509e;
+            --accent-color: #d35400;
+            --bg-color: #f4f7f6;
+            --box-bg: #ffffff;
+            --text-color: #333333;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--box-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-top: 0;
+        }
+
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 40px;
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        }
+
+        .section-box {
+            background-color: #fdfefe;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid #28b463;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+        }
+
+        .section-box.concept { border-left-color: #2980b9; background-color: #ebf5fb; }
+        .section-box.explanation { border-left-color: #8e44ad; background-color: #f4ecf8; }
+        .section-box.exam { border-left-color: #c0392b; background-color: #fdedec; }
+
+        .section-box h3 { margin-top: 0; display: flex; align-items: center; gap: 10px;}
+        .highlight { font-weight: bold; color: var(--accent-color); }
+
+        .toggle-btn {
+            display: block;
+            margin: 0 auto 30px auto;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center; /* 改为居中，因为现在只有一个按钮了 */
+            align-items: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px dashed #e0e0e0;
+        }
+
+        .nav-btn {
+            background-color: #ecf0f1;
+            color: var(--primary-color);
+            border: 1px solid #bdc3c7;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .lang-content { display: none; }
+        .lang-content.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <button id="langToggleBtn" class="toggle-btn" onclick="toggleLanguage()">点击切换至全中文 (Switch to Chinese)</button>
+
+    <div id="content-en" class="lang-content active">
+        <h1>Week 1 - Module 1: The Role of the Financial Manager and Corporate Investment Decisions</h1>
+        
+        <p>Welcome to Module 1. In this module, we establish the foundation of corporate finance by examining the fundamental decisions made by financial managers. We will move beyond abstract definitions and analyze how these decisions determine the survival and growth of global corporations.</p>
+
+        <h2>1. The Three Pillars of Financial Management</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 Concept</h3>
+            <p>The financial manager of a firm is responsible for answering three fundamental questions, which correspond to the three main areas of corporate finance:</p>
+            <ul>
+                <li><strong>Capital Budgeting:</strong> The process of planning and managing a firm's long-term investments. The manager attempts to identify investment opportunities where the value of the cash flow generated by an asset exceeds the cost of acquiring it.</li>
+                <li><strong>Capital Structure:</strong> The specific mixture of long-term debt and equity the firm uses to finance its operations. It determines how the pie is sliced between lenders and shareholders.</li>
+                <li><strong>Working Capital Management:</strong> Managing the firm's short-term assets (e.g., inventory) and short-term liabilities (e.g., money owed to suppliers) to ensure the firm has sufficient resources to continue its day-to-day operations.</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 Professor's Explanation & Application</h3>
+            <p>If you step into the shoes of a Chief Financial Officer (CFO) at a multinational corporation, your entire career revolves around allocating scarce resources efficiently. Let us examine how these three concepts dictate real-world corporate strategy:</p>
+            
+            <p><span class="highlight">Application 1: Capital Budgeting (Amazon AWS).</span> Capital budgeting is about committing massive amounts of capital today for uncertain future returns. For example, Amazon Web Services (AWS) recently invested heavily in building an automated contract-processing platform using AI (Amazon Textract). This required a massive initial cash outflow (Capital Budgeting). However, the financial managers approved it because their NPV (Net Present Value) analysis proved that reducing manual processing time by 80% would generate future cash inflows that far exceeded the initial costs.</p>
+            
+            <p><span class="highlight">Application 2: Capital Structure (Bed Bath & Beyond).</span> How do you fund your investments? Debt (borrowing) or Equity (selling shares)? Retail giant Bed Bath & Beyond engaged in aggressive stock buybacks, spending approximately $11.8 billion since 2004. By depleting their cash reserves to buy back equity, they severely altered their capital structure. When the macro-environment deteriorated, they lacked the liquidity to service their debts, ultimately leading to bankruptcy. This highlights the fatal risk of mismanaging the debt-to-equity ratio.</p>
+
+            <p><span class="highlight">Application 3: Working Capital Management (Dell).</span> This is the daily lifeblood of the company. Dell revolutionized the PC industry not just through hardware, but through supreme working capital management. By pioneering a "build-to-order" model, Dell achieved a negative cash conversion cycle. They held inventory for only 5 days, collected receivables from customers in 30 days, but delayed paying suppliers for 59 days. Effectively, Dell used its suppliers' money to fund its own daily operations—a masterclass in working capital management.</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 Exam Anti-Pitfall Guide & Past Papers</h3>
+            <p><strong>Anti-Pitfall Strategy:</strong> The most common error students make is confusing Capital Budgeting with Working Capital Management. <em>Rule of Thumb:</em> If the scenario mentions a timeline of <strong>more than one year</strong> (e.g., building a factory, buying machinery, launching a new product line), it is Capital Budgeting. If it involves a timeline of <strong>less than one year</strong> (e.g., inventory, 30-day credit to customers, paying daily wages), it is Working Capital Management.</p>
+            
+            <p><strong>Classic Exam Question:</strong></p>
+            <p><em>Question:</em> Which of the following is an example of a capital structure decision?</p>
+            <ol type="A">
+                <li>Determining how much inventory to hold on a daily basis.</li>
+                <li>Deciding whether to purchase a new manufacturing machine.</li>
+                <li>Determining the optimum ratio of long-term debt to equity to fund an expansion.</li>
+                <li>Deciding to extend 60-day credit to a new customer.</li>
+            </ol>
+            <p><strong>Answer & Rationale:</strong> <strong>C.</strong> Determining the ratio of debt to equity is the core definition of Capital Structure. Option A and D involve short-term assets/liabilities, making them Working Capital decisions. Option B involves long-term asset acquisition, which is a Capital Budgeting decision.</p>
+        </div>
+    </div>
+
+    <div id="content-zh" class="lang-content">
+        <h1>第1周 - 模块一：财务经理的角色与企业投资决策</h1>
+        <p>欢迎来到模块一。在本模块中，我们将通过研究财务经理所做出的核心决策，来建立商业金融的基础。我们将跳出抽象的定义，分析这些决策是如何决定全球大型企业生死存亡的。</p>
+
+        <h2>1. 财务管理的三大支柱</h2>
+        
+        <div class="section-box concept">
+            <h3>📚 核心概念</h3>
+            <p>企业的财务经理负责回答三个根本问题，这对应了公司金融的三个主要领域：</p>
+            <ul>
+                <li><strong>资本预算 (Capital Budgeting):</strong> 规划和管理企业长期投资的过程。财务经理试图寻找那些“未来产生的现金流价值超过其获取成本”的投资机会。</li>
+                <li><strong>资本结构 (Capital Structure):</strong> 企业用于为其运营融资的“长期债务”与“股权”的特定混合比例。它决定了企业的蛋糕如何在债权人和股东之间划分。</li>
+                <li><strong>营运资本管理 (Working Capital Management):</strong> 管理企业的短期资产（如存货）和短期负债（如欠供应商的钱），以确保企业有足够的资源维持日常运营。</li>
+            </ul>
+        </div>
+
+        <div class="section-box explanation">
+            <h3>👨‍🏫 教授精讲与实战应用</h3>
+            <p>如果你站在一家跨国公司首席财务官 (CFO) 的角度，你的整个职业生涯其实都在围绕如何高效分配稀缺资源。让我们来看看这三个概念是如何主导真实商业世界的战略的：</p>
+            
+            <p><span class="highlight">实战应用 1：资本预算（亚马逊 AWS 案例）。</span> 资本预算是指在今天投入巨额资金，以期获得不确定的未来回报。例如，亚马逊AWS曾斥巨资利用AI技术开发了一个自动化的合同处理平台。这在前期需要庞大的现金流出（这就是资本预算）。然而，财务经理批准了这个项目，因为他们的净现值 (NPV) 分析证明，减少80%的人工处理时间在未来所产生的现金流入，将远远超过初始成本。</p>
+            
+            <p><span class="highlight">实战应用 2：资本结构（3B家居 Bed Bath & Beyond 破产案）。</span> 你用什么来为投资筹钱？借债 (Debt) 还是 发行股票 (Equity)？曾经的零售巨头 3B家居 进行了激进的股票回购，自2004年以来花费了约118亿美元。由于耗尽了现金储备去回购股权，他们严重改变了自己的资本结构。当宏观零售环境恶化时，他们缺乏流动资金来偿还债务，最终导致破产。这凸显了错判“资产负债率”的致命风险。</p>
+
+            <p><span class="highlight">实战应用 3：营运资本管理（戴尔电脑案例）。</span> 这是企业每天的血液循环。戴尔电脑颠覆PC行业不仅靠硬件，更靠极致的营运资本管理。通过首创“按单生产”模式，戴尔实现了负数的现金转换周期。他们的存货只保留5天，向客户收款只需30天，但却强行拖延59天才付钱给供应商。实际上，戴尔是在用供应商的钱来为自己的日常运营垫资——这是营运资本管理的教科书级操作。</p>
+        </div>
+
+        <div class="section-box exam">
+            <h3>📝 考试防坑秘籍 & 历年真题解析</h3>
+            <p><strong>防坑策略：</strong> 学生最常犯的错误是混淆“资本预算”和“营运资本管理”。<em>黄金法则：</em> 如果题目描述的决策时间跨度<strong>超过一年</strong>（例如建厂、买机器、研发新产品），那就是资本预算 (Capital Budgeting)。如果时间跨度<strong>短于一年</strong>（例如囤积存货、给客户30天账期、发日薪），那就是营运资本管理 (Working Capital Management)。</p>
+            
+            <p><strong>经典真题：</strong></p>
+            <p><em>问题：</em> 以下哪一项属于资本结构 (Capital Structure) 决策？</p>
+            <ol type="A">
+                <li>决定每天需要保持多少存货。</li>
+                <li>决定是否应该购买一台新的制造机器。</li>
+                <li>决定为了支持扩张，应该承担多少长期债务与股权的比例。</li>
+                <li>决定是否给一位新客户提供60天的信用期。</li>
+            </ol>
+            <p><strong>答案与解析：</strong> <strong>C</strong>。决定债务与股权的比例是资本结构的绝对定义。选项 A 和 D 涉及短期资产/负债，属于营运资本管理决策。选项 B 涉及长期资产购置，属于资本预算决策。</p>
+        </div>
+    </div>
+
+    <div class="nav-buttons">
+        <button class="nav-btn" onclick="scrollToTop()">&#8593; Back to Top</button>
+    </div>
+</div>
+
+<script>
+    let isEnglish = true;
+    function toggleLanguage() {
+        const enContent = document.getElementById('content-en');
+        const zhContent = document.getElementById('content-zh');
+        const toggleBtn = document.getElementById('langToggleBtn');
+        if (isEnglish) {
+            enContent.classList.remove('active'); zhContent.classList.add('active');
+            toggleBtn.innerHTML = 'Switch to English (切换至英文)';
+            isEnglish = false;
+        } else {
+            zhContent.classList.remove('active'); enContent.classList.add('active');
+            toggleBtn.innerHTML = '点击切换至全中文 (Switch to Chinese)';
+            isEnglish = true;
+        }
+    }
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+</script>
+
+</body>
+</html>

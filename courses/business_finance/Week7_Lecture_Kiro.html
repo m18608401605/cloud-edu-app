@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 7 | Lecture | Business Finance</title>
+<style>
+  :root { --primary:#1a3a5c; --accent:#e8a020; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',sans-serif; background:#f5f7fa; color:#222; }
+
+  nav { position:sticky; top:0; z-index:100; background:var(--primary); display:flex; align-items:center; gap:12px; padding:0 24px; height:52px; }
+  nav .brand { color:#fff; font-weight:700; font-size:1rem; margin-right:8px; }
+  nav a { color:rgba(255,255,255,.75); text-decoration:none; font-size:.88rem; padding:6px 10px; border-radius:6px; transition:.2s; }
+  nav a:hover { color:#fff; background:rgba(255,255,255,.12); }
+  nav a.active { color:#fff; background:var(--accent); }
+  nav .spacer { flex:1; }
+  nav .week-badge { background:var(--accent); color:#fff; font-weight:700; font-size:.8rem; padding:4px 12px; border-radius:20px; }
+
+  .hero { background:linear-gradient(135deg,var(--primary) 0%,#2d5f8a 100%); color:#fff; padding:48px 24px 40px; text-align:center; }
+  .hero .eyebrow { font-size:.85rem; letter-spacing:2px; text-transform:uppercase; opacity:.75; margin-bottom:10px; }
+  .hero h1 { font-size:2rem; font-weight:800; }
+
+  .container { max-width:860px; margin:0 auto; padding:40px 24px 80px; }
+
+  .section { background:#fff; border-radius:12px; padding:32px; margin-bottom:28px; box-shadow:0 2px 12px rgba(0,0,0,.06); }
+  .section h2 { color:var(--primary); font-size:1.2rem; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid #eef4ff; }
+  .section h3 { color:var(--primary); font-size:1rem; margin:20px 0 10px; }
+  .section p { color:#444; line-height:1.75; margin-bottom:12px; font-size:.95rem; }
+
+  .concept-box { background:#eef4ff; border-left:4px solid var(--primary); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .concept-box .formula { font-size:1.3rem; font-weight:700; color:var(--primary); text-align:center; padding:12px 0; letter-spacing:.5px; }
+  .concept-box p { margin-bottom:6px; font-size:.92rem; }
+
+  .case { background:#fffbf0; border-left:4px solid var(--accent); border-radius:8px; padding:20px 24px; margin:16px 0; }
+  .case h4 { color:#b07010; font-size:.95rem; margin-bottom:10px; }
+  .case p, .case li { color:#555; font-size:.92rem; line-height:1.7; }
+  .case ul { padding-left:20px; }
+  .case .calc-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f0e0b0; font-size:.9rem; }
+  .case .calc-row:last-child { border-bottom:none; font-weight:700; color:var(--primary); }
+
+  .pitfall { background:#fff5f5; border-left:4px solid #e53e3e; border-radius:8px; padding:18px 22px; margin:12px 0; }
+  .pitfall h4 { color:#c53030; font-size:.92rem; margin-bottom:6px; }
+  .pitfall p { color:#666; font-size:.88rem; line-height:1.6; }
+
+  .two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:600px){ .two-col { grid-template-columns:1fr; } }
+
+  table { width:100%; border-collapse:collapse; margin-top:12px; font-size:.9rem; }
+  th { background:var(--primary); color:#fff; padding:10px 14px; text-align:left; }
+  td { padding:10px 14px; border-bottom:1px solid #eee; }
+  tr:last-child td { border-bottom:none; }
+  tr:nth-child(even) td { background:#f8f9fa; }
+
+  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:#fff;border:1px solid #dde3ea;border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
+  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
+  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:#2c3e50;text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
+  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
+  @media(max-width:1200px){.toc-sidebar{display:none}}
+  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
+  .back-to-top.show{opacity:1;visibility:visible}
+  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
+  @media(min-width:1201px){.container{margin-left:260px;margin-right:20px}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="brand">📚 Business Finance</span>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_StudyGuide_Kiro.html">🗺️ Guide</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Lecture_Kiro.html" class="active">📖 Lecture</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Interactive_Kiro.html">🧪 Interactive</a>
+  <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week7_Quiz_Kiro.html">✏️ Quiz</a>
+  <span class="spacer"></span>
+  <span class="week-badge">Week 7</span>
+</nav>
+
+<div class="mobile-toc">
+  <div class="mobile-toc-header" onclick="this.parentElement.querySelector('.mobile-toc-content').classList.toggle('open');this.querySelector('.mobile-toc-toggle').classList.toggle('open')">
+    <h4>📑 目录导航</h4>
+    <span class="mobile-toc-toggle">▼</span>
+  </div>
+  <div class="mobile-toc-content">
+    <a href="#part1">📚 WACC Formula</a>
+    <a href="#part2">💰 Cost of Equity</a>
+    <a href="#part3">🏦 Cost of Debt</a>
+    <a href="#part4">⚠️ Pitfalls</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+  </div>
+</div>
+<div class="hero">
+  <div class="eyebrow">Week 7 · Chapter 10 · Lecture</div>
+  <h1>Cost of Capital &amp; WACC</h1>
+</div>
+
+<div class="toc-sidebar">
+  <h4>📑 目录</h4>
+  <a href="#part1">📚 WACC Formula</a>
+  <a href="#part2">💰 Cost of Equity</a>
+  <a href="#part3">🏦 Cost of Debt</a>
+  <a href="#part4">⚠️ Pitfalls</a>
+  <a href="#answer-templates">📝 Answer Templates</a>
+  <a href="#part5">🍎 Apple Case</a>
+</div>
+<div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+<script>
+window.addEventListener('scroll',function(){
+  const b=document.querySelector('.back-to-top');
+  b.classList.toggle('show',window.scrollY>300);
+});
+</script>
+
+<div class="container">
+
+  <!-- Section 1: WACC Formula -->
+  <div class="section" id="part1">
+    <h2>📚 WACC Formula</h2>
+    <p>WACC（Weighted Average Cost of Capital，加权平均资本成本）是企业所有资金来源成本的加权平均值，以<strong>市场价值权重</strong>计算。</p>
+    <div class="concept-box">
+      <div class="formula">WACC = W<sub>d</sub> × K<sub>d</sub>(1−t) + W<sub>e</sub> × K<sub>e</sub></div>
+      <p>• <strong>W<sub>d</sub></strong>: Market value weight of debt</p>
+      <p>• <strong>K<sub>d</sub></strong>: Pre-tax cost of debt (usually YTM)</p>
+      <p>• <strong>t</strong>: Corporate tax rate (interest is tax-deductible)</p>
+      <p>• <strong>W<sub>e</sub></strong>: Market value weight of equity (= 1 − W<sub>d</sub>)</p>
+      <p>• <strong>K<sub>e</sub></strong>: Cost of equity (CAPM or dividend growth model)</p>
+    </div>
+    <p>⚠️ 权重必须使用<strong>市场价值</strong>，而非账面价值。市场价值反映投资者当前对资产的定价，更能代表真实的资本成本。</p>
+
+    <!-- 费曼类比 -->
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：WACC 就像"混合果汁的平均甜度"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">想象你用 70% 的苹果汁（甜度 12%）和 30% 的柠檬汁（甜度 3%，但政府补贴了 25%，实际只有 2.25%）混合。混合后的平均甜度 = 0.7×12% + 0.3×2.25% = 9.075%。这就是 WACC——企业所有资金来源的"加权平均价格"，也是新项目必须超越的最低回报门槛。</p>
+    </div>
+
+    <!-- 可视化：WACC 决策树 -->
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:20px 0;">
+      <h4 style="color:var(--primary);margin-bottom:12px;">🌳 决策树：WACC 包含哪些要素？</h4>
+      <div style="display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;">
+        <div style="background:#eef4ff;padding:12px 16px;border-radius:8px;flex:1;min-width:200px;">
+          <div style="font-weight:700;color:#1e40af;margin-bottom:8px;">📊 权重</div>
+          <div style="font-size:.9rem;color:#334155;">• 债务权重：D/(D+E)</div>
+          <div style="font-size:.9rem;color:#334155;">• 权益权重：E/(D+E)</div>
+          <div style="font-size:.85rem;color:#64748b;margin-top:8px;">必须用市场价值！</div>
+        </div>
+        <div style="background:#fef3c7;padding:12px 16px;border-radius:8px;flex:1;min-width:200px;">
+          <div style="font-weight:700;color:#b45309;margin-bottom:8px;">💰 成本</div>
+          <div style="font-size:.9rem;color:#334155;">• 债务成本：YTM×(1-t)</div>
+          <div style="font-size:.9rem;color:#334155;">• 权益成本：CAPM</div>
+          <div style="font-size:.85rem;color:#64748b;margin-top:8px;">税后债务成本！</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: Cost of Equity -->
+  <div class="section" id="part2">
+    <h2>📚 Cost of Equity (K<sub>e</sub>)</h2>
+    <p>权益成本是股东要求的最低回报率。有两种主要计算方法：</p>
+
+    <div class="two-col">
+      <div class="concept-box">
+        <h3 style="color:var(--primary);margin-bottom:10px;">方法一：CAPM</h3>
+        <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> − R<sub>f</sub>)</div>
+        <p>• <strong>R<sub>f</sub></strong>: Risk-free rate (government bond yield)</p>
+        <p>• <strong>β</strong>: Systematic risk coefficient (market sensitivity)</p>
+        <p>• <strong>(R<sub>m</sub>−R<sub>f</sub>)</strong>: Market risk premium</p>
+        <p style="margin-top:8px;color:#666;font-size:.85rem;">β=1 表示与市场同步；β&gt;1 波动更大；β&lt;1 更稳定</p>
+      </div>
+      <div class="concept-box">
+        <h3 style="color:var(--primary);margin-bottom:10px;">方法二：股利增长模型</h3>
+        <div class="formula" style="font-size:1.1rem;">K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</div>
+        <p>• <strong>D<sub>1</sub></strong>: Next period <em>expected</em> dividend (not historical!)</p>
+        <p>• <strong>P<sub>0</sub></strong>: Current stock market price</p>
+        <p>• <strong>g</strong>: Perpetual dividend growth rate</p>
+        <p style="margin-top:8px;color:#666;font-size:.85rem;">仅适用于稳定支付且增长的股利公司</p>
+      </div>
+    </div>
+
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：K<sub>e</sub> 就像"房东要求的租金回报率"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你花 £100 买了一套房（股票），房客（公司）每年付租金（股利）。你要求的最低年化回报率就是 K<sub>e</sub>。CAPM 告诉你：这套房的"风险溢价"取决于它跟整个房市的联动程度（β）。股利增长模型则说：只要知道明年租金和预期涨租速度，就能算出你的要求回报。两种方法殊途同归，都是在问"我投这笔钱，最低要赚多少才值得？"</p>
+    </div>
+  </div>
+
+  <!-- Section 3: Cost of Debt -->
+  <div class="section" id="part3">
+    <h2>📚 Cost of Debt (K<sub>d</sub>)</h2>
+    <p>债务成本是企业向债权人支付的利率。最准确的估算方法是使用现有债券的<strong>到期收益率（YTM）</strong>，即债券的内部收益率（IRR）。</p>
+    <div class="concept-box">
+      <p><strong>YTM 的含义：</strong>使债券未来所有现金流（利息+本金）的现值等于当前市价的折现率。</p>
+      <p style="margin-top:8px;"><strong>税后债务成本 = K<sub>d</sub> × (1 − t)</strong></p>
+      <p style="margin-top:6px;color:#555;font-size:.9rem;">因为利息支出可以在税前扣除，政府实际上补贴了部分债务成本。税率越高，税盾效益越大。</p>
+    </div>
+    <table>
+      <tr><th>债务类型</th><th>成本估算方法</th><th>备注</th></tr>
+      <tr><td>上市债券</td><td>市场 YTM</td><td>最准确</td></tr>
+      <tr><td>银行贷款</td><td>贷款利率</td><td>直接使用合同利率</td></tr>
+      <tr><td>新发债券</td><td>当前市场利率</td><td>用类似评级债券的 YTM</td></tr>
+    </table>
+
+    <!-- 费曼类比 -->
+    <div style="background:#f0fdf4;border-left:4px solid #22c55e;border-radius:8px;padding:18px 22px;margin-top:16px;">
+      <h4 style="color:#15803d;margin-bottom:8px;">🧠 费曼类比：税盾就像"政府帮你还利息"</h4>
+      <p style="color:#444;font-size:.93rem;line-height:1.7;">你向银行借钱，年利率 8%，税率 25%。每付 £8 利息，政府通过少收 £2 税来"报销"你。实际净成本只有 £6，即 6%。这就是税盾——债务的真实成本 = 名义利率 × (1 − 税率)。税率越高，政府"补贴"越多，债务越便宜。这也是为什么高税率国家的企业更倾向于用债务融资。</p>
+    </div>
+
+    <!-- 可视化：Tax Shield 流程图 -->
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:20px 0;">
+      <h4 style="color:var(--primary);margin-bottom:12px;">🔄 流程图：税盾如何运作？</h4>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;font-size:.9rem;">
+        <div style="background:#fee2e2;padding:10px 16px;border-radius:6px;">📝 利息支出 £8</div>
+        <div style="color:#64748b;">→</div>
+        <div style="background:#fef3c7;padding:10px 16px;border-radius:6px;">💰 少交税 £2</div>
+        <div style="color:#64748b;">→</div>
+        <div style="background:#dcfce7;padding:10px 16px;border-radius:6px;">✅ 实际成本 £6</div>
+      </div>
+      <p style="text-align:center;margin-top:12px;font-size:.85rem;color:#64748b;">税后成本 = £8 × (1 - 25%) = £6</p>
+    </div>
+  </div>
+
+  <!-- Section 4: Pitfalls -->
+  <div class="section" id="part4">
+    <h2>📚 Common Pitfalls</h2>
+
+    <div class="pitfall">
+      <h4>❌ Pitfall 1: Using Book Value Weights</h4>
+      <p>账面价值是历史成本，不反映当前市场对资产的定价。WACC 必须使用<strong>市场价值权重</strong>。例如，一家公司账面债务比率 30%，但市场价值债务比率可能只有 15%——两者差距巨大。</p>
+    </div>
+
+    <div class="pitfall">
+      <h4>❌ Pitfall 2: Forgetting Tax Shield (1−t)</h4>
+      <p>债务成本必须乘以 (1−t) 得到税后成本。如果直接用 K<sub>d</sub> 而不调整税率，会高估 WACC，导致拒绝本应接受的好项目。</p>
+    </div>
+
+    <div class="pitfall">
+      <h4>❌ Pitfall 3: Using Historical Dividend Instead of Expected</h4>
+      <p>股利增长模型中的 D<sub>1</sub> 是<strong>下一期预期股利</strong>，不是上一期已支付的股利 D<sub>0</sub>。正确做法：D<sub>1</sub> = D<sub>0</sub> × (1+g)。混淆两者会低估权益成本。</p>
+    </div>
+
+    <h3 style="margin-top:24px;margin-bottom:12px;">📋 Pitfall 汇总表</h3>
+    <table>
+      <tr><th>场景</th><th>常见错误</th><th>正确做法</th></tr>
+      <tr><td>计算 WACC 权重</td><td>用账面价值（资产负债表数字）</td><td>必须用市场价值（股价×股数，债券市价×数量）</td></tr>
+      <tr><td>债务成本</td><td>直接用票面利率（coupon rate）</td><td>用 YTM（市场定价的实际回报率）</td></tr>
+      <tr><td>税盾处理</td><td>忘记乘以 (1−t)</td><td>税后 K<sub>d</sub> = YTM × (1−t)</td></tr>
+      <tr><td>股利增长模型</td><td>用 D<sub>0</sub>（刚支付的股利）</td><td>用 D<sub>1</sub> = D<sub>0</sub> × (1+g)（下期预期股利）</td></tr>
+      <tr><td>永续债成本</td><td>用票面利率/面值</td><td>用票面利率/市价，再乘以 (1−t)</td></tr>
+      <tr><td>WACC 适用范围</td><td>用于风险不同的新项目</td><td>WACC 只适用于与现有业务风险相似的项目</td></tr>
+      <tr><td>股利增长率 g</td><td>直接用历史增长率</td><td>用 g = (1−派息率) × 投资回报率，或分析师预测</td></tr>
+    </table>
+  </div>
+
+  <!-- Section 5: Examples 10.1-10.4 -->
+  <div class="section" id="part5">
+    <h2>📚 Examples — WACC Calculations</h2>
+
+    <div class="case">
+      <h4>🔢 Example 10.1: Loan Notes Cost</h4>
+      <p>公司发行票面利率 10% 的债券，面值 £100。债券售价 £95，期限 5 年。税率 30%。</p>
+      <p><strong>计算 YTM：</strong> 需要使 £95 = Σ(£10/(1+r)ⁿ) + £100/(1+r)⁵，r ≈ 10.9%</p>
+      <p><strong>税后成本：</strong> K<sub>d</sub> = 10.9% × (1-0.30) = <strong>7.63%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.2: Cost of Equity — Gordon Model</h4>
+      <p>公司当前股价 £4.00，刚支付股利 D<sub>0</sub> = £0.20。预期增长 g = 5%。</p>
+      <p><strong>预期下期股利：</strong> D<sub>1</sub> = £0.20 × 1.05 = £0.21</p>
+      <p><strong>权益成本：</strong> K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g = £0.21/£4.00 + 0.05 = <strong>10.25%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.3: Convertible Loan Notes</h4>
+      <p>可转换债券：票面利率 5%，售价 £100，转换为股价 £5。税率 30%。</p>
+      <p><strong>纯债券价值：</strong> 假设 YTM = 8%，PV = £88</p>
+      <p><strong>转换期权价值：</strong> £100 - £88 = £12</p>
+      <p><strong>税后成本：</strong> K<sub>d</sub> = 5% × (1-0.30) = <strong>3.5%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.4: WACC Calculation</h4>
+      <p>公司数据：债务市值 £200万，权益市值 £800万。K<sub>d</sub> = 6%，K<sub>e</sub> = 12%，t = 30%。</p>
+      <p><strong>债务权重：</strong> D/(D+E) = £200/£1000 = 20%</p>
+      <p><strong>权益权重：</strong> E/(D+E) = £800/£1000 = 80%</p>
+      <p><strong>税后债务成本：</strong> K<sub>d</sub>(1-t) = 6% × 0.70 = 4.2%</p>
+      <p><strong>WACC =</strong> 0.20 × 4.2% + 0.80 × 12% = <strong>10.44%</strong></p>
+    </div>
+  </div>
+
+  <!-- Section 6: Apple Case -->
+  <div class="section" id="part6">
+    <h2>📚 Real Case: Apple WACC Calculation</h2>
+    <p>以下是基于简化假设的 Apple WACC 估算示例：</p>
+
+    <div class="case">
+      <h4>Step 1：计算权益成本 K<sub>e</sub>（CAPM）</h4>
+      <div class="calc-row"><span>无风险利率 R<sub>f</sub></span><span>4.0%</span></div>
+      <div class="calc-row"><span>Beta (β)</span><span>1.2</span></div>
+      <div class="calc-row"><span>市场风险溢价 (R<sub>m</sub>−R<sub>f</sub>)</span><span>6.0%</span></div>
+      <div class="calc-row"><span><strong>K<sub>e</sub> = 4% + 1.2 × 6%</strong></span><span><strong>= 11.2%</strong></span></div>
+    </div>
+
+    <div class="case">
+      <h4>Step 2：计算税后债务成本</h4>
+      <div class="calc-row"><span>税前债务成本 K<sub>d</sub></span><span>3.0%</span></div>
+      <div class="calc-row"><span>企业税率 t</span><span>21%</span></div>
+      <div class="calc-row"><span><strong>税后 K<sub>d</sub> = 3% × (1−21%)</strong></span><span><strong>= 2.37%</strong></span></div>
+    </div>
+
+    <div class="case">
+      <h4>Step 3：计算 WACC</h4>
+      <div class="calc-row"><span>股权权重 W<sub>e</sub></span><span>85%</span></div>
+      <div class="calc-row"><span>债务权重 W<sub>d</sub></span><span>15%</span></div>
+      <div class="calc-row"><span>债务贡献：0.15 × 2.37%</span><span>0.36%</span></div>
+      <div class="calc-row"><span>股权贡献：0.85 × 11.2%</span><span>9.52%</span></div>
+      <div class="calc-row"><span>🎯 WACC</span><span>≈ 9.88%</span></div>
+    </div>
+
+    <p style="margin-top:16px;color:#666;font-size:.88rem;">💡 这意味着 Apple 的任何新投资项目，回报率必须超过 9.88% 才能为股东创造价值。</p>
+  </div>
+
+  <!-- Answer Templates -->
+  <div class="section" id="answer-templates">
+    <h2>📝 Standard Answer Templates — WACC Questions</h2>
+
+    <div class="case">
+      <h4>📝 Template 1: Calculate Cost of Equity (CAPM)</h4>
+      <p><strong>Formula:</strong> K<sub>e</sub> = R<sub>f</sub> + β(R<sub>m</sub> - R<sub>f</sub>)</p>
+      <p><strong>Step 1:</strong> Identify R<sub>f</sub> (risk-free rate) from question</p>
+      <p><strong>Step 2:</strong> Identify β (beta) from question</p>
+      <p><strong>Step 3:</strong> Calculate market risk premium (R<sub>m</sub> - R<sub>f</sub>)</p>
+      <p><strong>Step 4:</strong> Apply formula: K<sub>e</sub> = R<sub>f</sub> + β × (R<sub>m</sub> - R<sub>f</sub>)</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 2: Calculate Cost of Equity (Gordon Model)</h4>
+      <p><strong>Formula:</strong> K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g</p>
+      <p><strong>Step 1:</strong> Calculate D<sub>1</sub> = D<sub>0</sub> × (1 + g)</p>
+      <p><strong>Step 2:</strong> Calculate D<sub>1</sub>/P<sub>0</sub></p>
+      <p><strong>Step 3:</strong> Add growth rate g</p>
+      <p><strong>Note:</strong> Remember to use D<sub>1</sub> (expected), not D<sub>0</sub> (historical)!</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 3: Calculate WACC</h4>
+      <p><strong>Formula:</strong> WACC = [E/(D+E)] × K<sub>e</sub> + [D/(D+E)] × K<sub>d</sub> × (1-t)</p>
+      <p><strong>Step 1:</strong> Calculate market value weights: E/(D+E) and D/(D+E)</p>
+      <p><strong>Step 2:</strong> Calculate after-tax cost of debt: K<sub>d</sub> × (1-t)</p>
+      <p><strong>Step 3:</strong> Apply WACC formula</p>
+      <p><strong>Key Point:</strong> Use market values, not book values!</p>
+    </div>
+  </div>
+
+  <!-- Concept Relationship Map -->
+  <div class="section" id="concept-map">
+    <h2>🗺️ Ch.10 Cost of Capital — Concept Map</h2>
+    <p style="margin-bottom:16px;color:#666;">This diagram shows the relationship between all key concepts in Chapter 10.</p>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:24px;margin:16px 0;text-align:center;">
+      <svg viewBox="0 0 800 400" style="width:100%;max-width:700px;height:auto">
+        <!-- Central node: WACC -->
+        <rect x="300" y="150" width="200" height="60" rx="8" fill="#1a3a5c" stroke="#1a3a5c" stroke-width="2"/>
+        <text x="400" y="185" text-anchor="middle" fill="#fff" font-size="16" font-weight="700">WACC</text>
+        <text x="400" y="202" text-anchor="middle" fill="#fff" font-size="12">加权平均资本成本</text>
+
+        <!-- Cost of Equity -->
+        <rect x="50" y="50" width="150" height="50" rx="6" fill="#27ae60" stroke="#1e8449" stroke-width="2"/>
+        <text x="125" y="80" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Cost of Equity (Ke)</text>
+
+        <!-- Cost of Debt -->
+        <rect x="600" y="50" width="150" height="50" rx="6" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+        <text x="675" y="80" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Cost of Debt (Kd)</text>
+
+        <!-- CAPM -->
+        <rect x="30" y="180" width="120" height="40" rx="4" fill="#82e0aa" stroke="#27ae60" stroke-width="1"/>
+        <text x="90" y="205" text-anchor="middle" fill="#1e8449" font-size="11">CAPM</text>
+
+        <!-- Gordon Model -->
+        <rect x="30" y="240" width="120" height="40" rx="4" fill="#82e0aa" stroke="#27ae60" stroke-width="1"/>
+        <text x="90" y="265" text-anchor="middle" fill="#1e8449" font-size="11">Gordon Model</text>
+
+        <!-- Tax Shield -->
+        <rect x="620" y="180" width="120" height="40" rx="4" fill="#f5b7b1" stroke="#e74c3c" stroke-width="1"/>
+        <text x="680" y="205" text-anchor="middle" fill="#c0392b" font-size="11">Tax Shield (1-t)</text>
+
+        <!-- Market Values -->
+        <rect x="620" y="240" width="120" height="40" rx="4" fill="#f5b7b1" stroke="#e74c3c" stroke-width="1"/>
+        <text x="680" y="265" text-anchor="middle" fill="#c0392b" font-size="11">Market Values</text>
+
+        <!-- Weights -->
+        <rect x="300" y="320" width="200" height="40" rx="4" fill="#f39c12" stroke="#d68910" stroke-width="1"/>
+        <text x="400" y="345" text-anchor="middle" fill="#fff" font-size="12">Weights: E/(D+E), D/(D+E)</text>
+
+        <!-- Arrows -->
+        <line x1="125" y1="100" x2="300" y2="150" stroke="#27ae60" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="675" y1="100" x2="500" y2="150" stroke="#e74c3c" stroke-width="2" marker-end="url(#arrow)"/>
+        <line x1="90" y1="220" x2="90" y2="150" stroke="#27ae60" stroke-width="1"/>
+        <line x1="90" y1="280" x2="90" y2="150" stroke="#27ae60" stroke-width="1"/>
+        <line x1="680" y1="220" x2="680" y2="150" stroke="#e74c3c" stroke-width="1"/>
+        <line x1="680" y1="280" x2="680" y2="150" stroke="#e74c3c" stroke-width="1"/>
+        <line x1="400" y1="210" x2="400" y2="320" stroke="#f39c12" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Definitions -->
+        <rect x="30" y="350" width="740" height="30" rx="4" fill="#ecf0f1" stroke="#bdc3c7"/>
+        <text x="400" y="370" text-anchor="middle" fill="#7f8c8d" font-size="10">WACC = [E/(D+E)]×Ke + [D/(D+E)]×Kd×(1-t) | Ke = Rf + β(Rm-Rf) | Kd(after-tax) = YTM × (1-t)</text>
+      </svg>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
