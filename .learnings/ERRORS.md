@@ -207,3 +207,36 @@ git commit -m "style: Convert Week 3 Lecture to fluid reading layout"
 
 *错误案例库 v1.0 - 2026-03-18 创建*
 *持续更新中...*
+
+---
+
+### 错误 10: 重复的 Pitfall 表格和 Answer Templates
+**日期：** 2026-03-18  
+**文件：** Week3_Lecture_Kiro.html  
+**问题：**
+- 文件中有两个完全相同的 Pitfall 表格
+- 文件中有两个完全相同的 Answer Templates
+- 文件中有两个 bottom-nav
+- section-label 的 id 重复（part1, part2 被重复使用）
+- 总共有 251 行重复内容
+
+**原因：** 多次编辑时内容叠加，没有删除旧版本  
+**影响：** 
+- 页面排版混乱
+- 导航链接跳转错误
+- 文件体积增大（949 行 → 706 行）
+
+**解决：**
+1. 删除重复的 Pitfall 表格和 Answer Templates
+2. 修复 section-label 的 id：
+   - `id="part1"` → `id="answer-templates"`（第二个）
+   - `id="part2"` → `id="concept-map"`（第二个）
+3. 更新导航链接指向正确的 id
+4. 删除多余的 bottom-nav
+
+**预防：**
+- 编辑前先检查文件结构：`grep -n "section-label.*id=" file.html`
+- 避免复制粘贴大段内容，容易造成重复
+- 使用版本控制，定期 commit，方便回滚
+
+---
