@@ -105,7 +105,7 @@ window.addEventListener('scroll', function() {
 </script>
 
 
-  <div class="section-label"><div class="section-label" id="part1">📊 Part 1 — Sensitivity Analysis 敏感性分析</div>
+  <div class="section-label" id="part1">📊 Part 1 — Sensitivity Analysis 敏感性分析</div>
   <div class="card">
     <h2>📚 What is Sensitivity Analysis?</h2>
     <div class="concept-box">
@@ -131,7 +131,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part2">🎲 Part 2 — Expected NPV 期望净现值</div>
+  <div class="section-label" id="part2">🎲 Part 2 — Expected NPV 期望净现值</div>
   <div class="card">
     <h2>📚 Using Probabilities in NPV</h2>
     <div class="concept-box">
@@ -159,7 +159,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part3">📈 Part 3 — Systematic vs Specific Risk</div>
+  <div class="section-label" id="part3">📈 Part 3 — Systematic vs Specific Risk</div>
   <div class="card">
     <h2>📚 Two Types of Risk 两种风险</h2>
     <div class="concept-box">
@@ -186,7 +186,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part4">🎯 Exam Anti-Pitfall Summary</div>
+  <div class="section-label" id="part4">🎯 Exam Anti-Pitfall Summary</div>
   <div class="card">
     <h2>🎯 Week 4 Quick-Reference</h2>
     <table class="data">
@@ -202,7 +202,7 @@ window.addEventListener('scroll', function() {
     </table>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part1">⚠️ Common Pitfalls & Exam Traps</div>
+  <div class="section-label" id="pitfalls">⚠️ Common Pitfalls & Exam Traps</div>
 
   <div class="card">
     <h2>⚠️ Pitfall Summary Table — Risk Analysis Mistakes</h2>
@@ -255,7 +255,7 @@ window.addEventListener('scroll', function() {
     </table>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part2">📝 Standard Answer Templates</div>
+  <div class="section-label" id="answer-templates">📝 Standard Answer Templates</div>
 
   <div class="card">
     <h2>📝 Answer Template: Sensitivity Analysis Questions</h2>
@@ -369,7 +369,7 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="section-label"><div class="section-label" id="part3">🗺️ Concept Relationship Map</div>
+  <div class="section-label" id="concept-map">🗺️ Concept Relationship Map</div>
 
   <div class="card">
     <h2>🗺️ Ch.6 Risk Analysis Framework</h2>
@@ -481,356 +481,13 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
+
   <div class="bottom-nav">
-
-  <div class="section-label"><div class="section-label" id="part4">⚠️ Common Pitfalls & Exam Traps</div>
-
-  <div class="card">
-    <h2>📋 Pitfall Summary Table — Ch.6 Risk in Investment Appraisal</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这张表总结了 Ch.6 风险分析中最容易在考试中出错的场景。</p>
-    <table class="data">
-      <thead>
-        <tr>
-          <th style="width:25%">Scenario</th>
-          <th style="width:35%">Common Mistake</th>
-          <th style="width:40%">Correct Approach</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Sensitivity Analysis</strong></td>
-          <td>Changing multiple variables simultaneously</td>
-          <td>✅ <strong>Change ONE variable at a time</strong>, holding all others constant at their base-case values</td>
-        </tr>
-        <tr>
-          <td><strong>Probability Calculation</strong></td>
-          <td>Forgetting to check that probabilities sum to 1.0</td>
-          <td>✅ <strong>Always verify Σp = 1.0</strong> before proceeding with expected value calculations</td>
-        </tr>
-        <tr>
-          <td><strong>Expected Value</strong></td>
-          <td>Treating EV as a guaranteed outcome that will definitely occur</td>
-          <td>✅ <strong>EV is a weighted average</strong> — it may not exist as an actual outcome (e.g., EV = £24 when only £0 or £50 are possible)</td>
-        </tr>
-        <tr>
-          <td><strong>Joint Probability</strong></td>
-          <td>Adding probabilities instead of multiplying for independent events</td>
-          <td>✅ <strong>P(A and B) = P(A) × P(B)</strong> for independent events (e.g., sales volume and labour cost)</td>
-        </tr>
-        <tr>
-          <td><strong>Diversification</strong></td>
-          <td>Believing diversification eliminates all risk</td>
-          <td>✅ <strong>Diversification only eliminates specific risk</strong>, not systematic risk (market-wide factors)</td>
-        </tr>
-        <tr>
-          <td><strong>Systematic vs Specific Risk</strong></td>
-          <td>Confusing which risks can be diversified away</td>
-          <td>✅ <strong>Specific risk → diversifiable; Systematic risk → non-diversifiable</strong> (e.g., interest rates, inflation)</td>
-        </tr>
-        <tr>
-          <td><strong>Beta Interpretation</strong></td>
-          <td>Thinking β = 2 means returns are twice as high as β = 1</td>
-          <td>✅ <strong>Beta measures risk (volatility), not return level</strong> — β = 2 means twice as volatile as the market</td>
-        </tr>
-        <tr>
-          <td><strong>Sensitivity %</strong></td>
-          <td>Comparing sensitivity percentages across different variables without context</td>
-          <td>✅ <strong>Consider certainty of estimates</strong> — a 10% sensitivity on initial investment (known now) is less risky than 10% on Year 5 sales (uncertain)</td>
-        </tr>
-        <tr>
-          <td><strong>Expected NPV Decision</strong></td>
-          <td>Accepting all projects with positive ENPV without considering risk dispersion</td>
-          <td>✅ <strong>Also consider standard deviation or range</strong> — two projects with same ENPV may have very different risk profiles</td>
-        </tr>
-        <tr>
-          <td><strong>Portfolio Effect</strong></td>
-          <td>Expecting diversification to increase expected returns</td>
-          <td>✅ <strong>Diversification does NOT change expected value</strong> — it only reduces the probability of extreme outcomes</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-label">📝 Standard Answer Templates</div>
-
-  <div class="card">
-    <h2>✍️ How to Structure Your Sensitivity Analysis Answer</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">敏感性分析题需要系统化的计算和清晰的表述。</p>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: Calculate Base-Case NPV</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        <strong>Given:</strong><br>
-        &nbsp;&nbsp;Initial investment = £X<br>
-        &nbsp;&nbsp;Annual sales volume = Y units<br>
-        &nbsp;&nbsp;Selling price = £P per unit<br>
-        &nbsp;&nbsp;Variable cost = £C per unit<br>
-        &nbsp;&nbsp;Discount rate = r%<br>
-        &nbsp;&nbsp;Project life = n years<br><br>
-        
-        <strong>Base-Case NPV:</strong><br>
-        &nbsp;&nbsp;Annual CF = Y × (P − C)<br>
-        &nbsp;&nbsp;PV of CFs = Annual CF × AF(r, n)<br>
-        &nbsp;&nbsp;NPV = PV − Initial Investment<br>
-        &nbsp;&nbsp;<strong>Base NPV = £Z</strong>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Calculate Break-Even Values</h3>
-      <p style="margin-bottom:.8rem"><strong>Template for Each Variable:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        <strong>For Sales Volume (V):</strong><br>
-        &nbsp;&nbsp;Set NPV = 0<br>
-        &nbsp;&nbsp;−X + [V × (P − C) × AF(r, n)] = 0<br>
-        &nbsp;&nbsp;V = X / [(P − C) × AF(r, n)]<br>
-        &nbsp;&nbsp;<strong>Break-even volume = V* units</strong><br><br>
-        
-        <strong>Sensitivity %:</strong><br>
-        &nbsp;&nbsp;= (V* − Y) / Y × 100%<br>
-        &nbsp;&nbsp;= "Sales can fall by X% before NPV becomes negative"
-      </div>
-      <div style="background:#fff5f5;border:1px solid #fca5a5;border-radius:6px;padding:.8rem;margin-top:.8rem;font-size:.88rem">
-        <strong>⚠️ Key Point:</strong> Repeat this process for each variable (price, cost, discount rate, project life), always holding other variables at their base-case values.
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Present Results in a Table</h3>
-      <p style="margin-bottom:.8rem"><strong>Standard Format:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-size:.88rem">
-        <table style="width:100%;border-collapse:collapse">
-          <thead>
-            <tr style="background:#1a3a5c;color:#fff">
-              <th style="padding:.5rem;text-align:left">Variable</th>
-              <th style="padding:.5rem;text-align:right">Base Value</th>
-              <th style="padding:.5rem;text-align:right">Break-Even Value</th>
-              <th style="padding:.5rem;text-align:right">Sensitivity %</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background:#f8fafc">
-              <td style="padding:.5rem">Sales Volume</td>
-              <td style="padding:.5rem;text-align:right">5,000 units</td>
-              <td style="padding:.5rem;text-align:right">4,396 units</td>
-              <td style="padding:.5rem;text-align:right;color:#e74c3c;font-weight:bold">−12.1%</td>
-            </tr>
-            <tr>
-              <td style="padding:.5rem">Selling Price</td>
-              <td style="padding:.5rem;text-align:right">£10.00</td>
-              <td style="padding:.5rem;text-align:right">£9.64</td>
-              <td style="padding:.5rem;text-align:right;color:#e74c3c;font-weight:bold">−3.6%</td>
-            </tr>
-            <tr style="background:#f8fafc">
-              <td style="padding:.5rem">Discount Rate</td>
-              <td style="padding:.5rem;text-align:right">10%</td>
-              <td style="padding:.5rem;text-align:right">15.24%</td>
-              <td style="padding:.5rem;text-align:right;color:#27ae60;font-weight:bold">+52.4%</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 4: Interpret & Conclude</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-size:.9rem;line-height:1.8">
-        <strong>Example Conclusion:</strong><br>
-        <em>"The project is <strong>most sensitive to selling price</strong> (−3.6%), meaning even a small price reduction could make the project unviable. The project is <strong>least sensitive to the discount rate</strong> (+52.4%), indicating that cost of capital changes are unlikely to affect the decision. Management should focus on securing stable pricing through contracts or market positioning to mitigate the key risk."</em>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>✍️ How to Structure Your Expected Value Answer</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">期望值计算题需要清晰的概率表和系统化的计算。</p>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 1: List All Possible Outcomes</h3>
-      <p style="margin-bottom:.8rem"><strong>Template:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-size:.88rem">
-        <strong>For Single Uncertain Variable:</strong><br>
-        <table style="width:100%;border-collapse:collapse;margin-top:.5rem">
-          <thead>
-            <tr style="background:#1a3a5c;color:#fff">
-              <th style="padding:.5rem;text-align:left">Outcome</th>
-              <th style="padding:.5rem;text-align:right">NPV</th>
-              <th style="padding:.5rem;text-align:right">Probability</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background:#f8fafc">
-              <td style="padding:.5rem">Optimistic</td>
-              <td style="padding:.5rem;text-align:right">£X</td>
-              <td style="padding:.5rem;text-align:right">p₁</td>
-            </tr>
-            <tr>
-              <td style="padding:.5rem">Most Likely</td>
-              <td style="padding:.5rem;text-align:right">£Y</td>
-              <td style="padding:.5rem;text-align:right">p₂</td>
-            </tr>
-            <tr style="background:#f8fafc">
-              <td style="padding:.5rem">Pessimistic</td>
-              <td style="padding:.5rem;text-align:right">£Z</td>
-              <td style="padding:.5rem;text-align:right">p₃</td>
-            </tr>
-            <tr style="font-weight:bold">
-              <td style="padding:.5rem" colspan="2">Total</td>
-              <td style="padding:.5rem;text-align:right">1.00</td>
-            </tr>
-          </tbody>
-        </table>
-        <p style="margin-top:.8rem;color:#e74c3c;font-size:.85rem"><strong>⚠️ Always verify:</strong> p₁ + p₂ + p₃ = 1.0</p>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 2: Calculate Expected NPV</h3>
-      <p style="margin-bottom:.8rem"><strong>Formula:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        ENPV = Σ (NPV<sub>i</sub> × p<sub>i</sub>)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= (X × p₁) + (Y × p₂) + (Z × p₃)<br><br>
-        
-        <strong>Example:</strong><br>
-        ENPV = (£10,000 × 0.3) + (£5,000 × 0.5) + (−£2,000 × 0.2)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= £3,000 + £2,500 − £400<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <strong>£5,100</strong>
-      </div>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.5rem;margin:1rem 0">
-      <h3 style="color:var(--primary);margin-bottom:1rem">Step 3: Assess Risk (Standard Deviation)</h3>
-      <p style="margin-bottom:.8rem"><strong>Formula:</strong></p>
-      <div style="background:#fff;border-radius:6px;padding:1rem;font-family:monospace;font-size:.88rem;line-height:1.8">
-        Variance (σ²) = Σ [(NPV<sub>i</sub> − ENPV)² × p<sub>i</sub>]<br>
-        Standard Deviation (σ) = √Variance<br><br>
-        
-        <strong>Interpretation:</strong><br>
-        • Higher σ = Higher risk (more dispersion)<br>
-        • Lower σ = Lower risk (outcomes clustered near ENPV)
-      </div>
-    </div>
-
-    <div style="background:#dcfce7;border:1px solid #86efac;border-radius:10px;padding:1.2rem;margin-top:1.5rem">
-      <h4 style="color:#166534;margin-bottom:.6rem">✅ Decision Rule</h4>
-      <p style="font-size:.9rem;color:#166534">
-        <strong>If ENPV > 0:</strong> Accept the project (on average, it adds value)<br>
-        <strong>But also consider:</strong> The range of outcomes and standard deviation. A project with ENPV = £5,000 but σ = £20,000 is much riskier than one with ENPV = £5,000 and σ = £2,000.
-      </p>
-    </div>
-  </div>
-
-  <div class="section-label">🗺️ Concept Relationship Map</div>
-
-  <div class="card">
-    <h2>📊 Ch.6 Risk Analysis — Decision Framework</h2>
-    <p style="margin-bottom:1.2rem;color:var(--muted)">这张图展示了风险分析的完整流程和各种方法之间的关系。</p>
-    
-    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:2rem;margin:1rem 0">
-      <svg viewBox="0 0 800 700" style="width:100%;height:auto">
-        <!-- Title -->
-        <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#1a3a5c">Risk Analysis in Investment Appraisal</text>
-        
-        <!-- Level 1: Investment with Uncertainty -->
-        <rect x="300" y="60" width="200" height="50" rx="8" fill="#1a3a5c" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="400" y="90" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Investment with Uncertainty</text>
-        
-        <!-- Arrow down -->
-        <line x1="400" y1="110" x2="400" y2="140" stroke="#1a3a5c" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        
-        <!-- Level 2: Three Approaches -->
-        <rect x="250" y="140" width="300" height="50" rx="8" fill="#e8a020" stroke="#e8a020" stroke-width="2"/>
-        <text x="400" y="170" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Choose Risk Analysis Method</text>
-        
-        <!-- Three branches -->
-        <line x1="300" y1="190" x2="150" y2="250" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="400" y1="190" x2="400" y2="250" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="500" y1="190" x2="650" y2="250" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        
-        <!-- Method 1: Sensitivity Analysis -->
-        <rect x="50" y="250" width="200" height="100" rx="8" fill="#dcfce7" stroke="#27ae60" stroke-width="2"/>
-        <text x="150" y="275" text-anchor="middle" font-size="13" font-weight="bold" fill="#166534">Method 1</text>
-        <text x="150" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">Sensitivity Analysis</text>
-        <text x="150" y="315" text-anchor="middle" font-size="10" fill="#166534">• Change one variable at a time</text>
-        <text x="150" y="332" text-anchor="middle" font-size="10" fill="#166534">• Find break-even values</text>
-        <text x="150" y="349" text-anchor="middle" font-size="10" fill="#166534">• Identify key risk factors</text>
-        
-        <!-- Method 2: Probability Analysis -->
-        <rect x="300" y="250" width="200" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
-        <text x="400" y="275" text-anchor="middle" font-size="13" font-weight="bold" fill="#92400e">Method 2</text>
-        <text x="400" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#92400e">Probability Analysis</text>
-        <text x="400" y="315" text-anchor="middle" font-size="10" fill="#92400e">• Assign probabilities to outcomes</text>
-        <text x="400" y="332" text-anchor="middle" font-size="10" fill="#92400e">• Calculate Expected NPV</text>
-        <text x="400" y="349" text-anchor="middle" font-size="10" fill="#92400e">• Measure dispersion (σ)</text>
-        
-        <!-- Method 3: Diversification -->
-        <rect x="550" y="250" width="200" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
-        <text x="650" y="275" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">Method 3</text>
-        <text x="650" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e40af">Diversification</text>
-        <text x="650" y="315" text-anchor="middle" font-size="10" fill="#1e40af">• Hold portfolio of projects</text>
-        <text x="650" y="332" text-anchor="middle" font-size="10" fill="#1e40af">• Eliminate specific risk</text>
-        <text x="650" y="349" text-anchor="middle" font-size="10" fill="#1e40af">• Systematic risk remains</text>
-        
-        <!-- Converge to Risk Types -->
-        <line x1="150" y1="350" x2="400" y2="420" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="400" y1="350" x2="400" y2="420" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="650" y1="350" x2="400" y2="420" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        
-        <!-- Level 3: Risk Types -->
-        <rect x="250" y="420" width="300" height="50" rx="8" fill="#e8a020" stroke="#e8a020" stroke-width="2"/>
-        <text x="400" y="450" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Understand Risk Types</text>
-        
-        <!-- Two branches -->
-        <line x1="350" y1="470" x2="250" y2="520" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="450" y1="470" x2="550" y2="520" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        
-        <!-- Specific Risk -->
-        <rect x="100" y="520" width="250" height="80" rx="8" fill="#dcfce7" stroke="#27ae60" stroke-width="2"/>
-        <text x="225" y="545" text-anchor="middle" font-size="12" font-weight="bold" fill="#166534">Specific Risk (Diversifiable)</text>
-        <text x="225" y="565" text-anchor="middle" font-size="10" fill="#166534">• Project-specific factors</text>
-        <text x="225" y="582" text-anchor="middle" font-size="10" fill="#166534">• Can be eliminated by diversification</text>
-        <text x="225" y="599" text-anchor="middle" font-size="10" fill="#166534">• Example: competitor innovation, supply shortage</text>
-        
-        <!-- Systematic Risk -->
-        <rect x="450" y="520" width="250" height="80" rx="8" fill="#fff5f5" stroke="#e74c3c" stroke-width="2"/>
-        <text x="575" y="545" text-anchor="middle" font-size="12" font-weight="bold" fill="#991b1b">Systematic Risk (Non-Diversifiable)</text>
-        <text x="575" y="565" text-anchor="middle" font-size="10" fill="#991b1b">• Market-wide factors</text>
-        <text x="575" y="582" text-anchor="middle" font-size="10" fill="#991b1b">• Cannot be eliminated</text>
-        <text x="575" y="599" text-anchor="middle" font-size="10" fill="#991b1b">• Example: interest rates, inflation, recession</text>
-        
-        <!-- Converge to Decision -->
-        <line x1="225" y1="600" x2="400" y2="640" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        <line x1="575" y1="600" x2="400" y2="640" stroke="#7f8c8d" stroke-width="2" marker-end="url(#arrowhead2)"/>
-        
-        <!-- Final Decision -->
-        <rect x="250" y="640" width="300" height="50" rx="8" fill="#27ae60" stroke="#27ae60" stroke-width="2"/>
-        <text x="400" y="670" text-anchor="middle" font-size="14" font-weight="bold" fill="#fff">Make Risk-Adjusted Decision</text>
-        
-        <!-- Arrow marker definition -->
-        <defs>
-          <marker id="arrowhead2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#1a3a5c" />
-          </marker>
-        </defs>
-      </svg>
-    </div>
-
-    <div style="background:#eef4ff;border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:1.2rem;margin-top:1.5rem">
-      <h4 style="color:var(--primary);margin-bottom:.6rem">🧠 核心要点</h4>
-      <ul style="margin-left:1.2rem;font-size:.9rem;line-height:1.8">
-        <li><strong>敏感性分析</strong>：识别哪些变量对 NPV 影响最大，但不告诉你这些变量变化的可能性</li>
-        <li><strong>概率分析</strong>：量化不确定性，计算期望值，但期望值可能不是实际结果</li>
-        <li><strong>多元化</strong>：通过持有多个项目降低风险，但只能消除特定风险，无法消除系统性风险</li>
-        <li><strong>关键洞察</strong>：只有系统性风险需要风险溢价（Risk Premium），因为特定风险可以通过多元化消除</li>
-      </ul>
-    </div>
-  </div>
-    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_StudyGuide_Kiro.html" class="btn btn-outline">← Study Guide</a>
+    <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week3_Lecture_Kiro.html" class="btn btn-outline">← Week 3</a>
     <span style="font-size:.85rem;color:var(--muted)">Page 1 of 3</span>
     <a href="https://m18608401605.github.io/cloud-edu-app/courses/business_finance/Week4_Interactive_Kiro.html" class="btn btn-primary">Interactive Lab →</a>
   </div>
+
 </main>
 </body>
 </html>
