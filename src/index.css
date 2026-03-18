@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { font-family: 'Nunito', system-ui, sans-serif; box-sizing: border-box; }
+
+body { margin: 0; background: #0a0520; min-height: 100vh; overflow-x: hidden; }
+
+#root { min-height: 100vh; }
+
+.glass-card {
+  background: rgba(45, 27, 105, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 20px;
+}
+
+.neon-blue { box-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff44; }
+.neon-gold { box-shadow: 0 0 10px #FFD700, 0 0 20px #FFD70044; }
+.neon-purple { box-shadow: 0 0 10px #b44fff, 0 0 20px #b44fff44; }
+.neon-green { box-shadow: 0 0 10px #00ff88, 0 0 20px #00ff8844; }
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.text-blue-gradient {
+  background: linear-gradient(135deg, #00d4ff, #0066ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes pointsFly {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-80px) scale(1.5); opacity: 0; }
+}
+.points-fly { animation: pointsFly 0.8s ease-out forwards; }
+
+@keyframes energyFill { from { width: 0%; } }
+.energy-bar { animation: energyFill 1s ease-out; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #1a0a3e; }
+::-webkit-scrollbar-thumb { background: #00d4ff44; border-radius: 3px; }
