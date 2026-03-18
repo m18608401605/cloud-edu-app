@@ -111,9 +111,11 @@
     <span class="mobile-toc-toggle">▼</span>
   </div>
   <div class="mobile-toc-content">
-    <a href="#part1">💰 Cost of Capital</a>
-    <a href="#part2">📈 WACC</a>
-    <a href="#part3">⚠️ Pitfalls</a>
+    <a href="#part1">📊 Weak Form EMH</a>
+    <a href="#part2">📊 Semi-Strong Form</a>
+    <a href="#part3">📊 Strong Form</a>
+    <a href="#answer-templates">📝 Answer Templates</a>
+    <a href="#concept-map">🗺️ Concept Map</a>
   </div>
 </div>
 <div class="hero">
@@ -125,9 +127,11 @@
 <div class="container">
 <div class="toc-sidebar">
   <h4>📑 目录</h4>
-  <a href="#part1">💰 Cost of Capital</a>
-  <a href="#part2">📈 WACC</a>
-  <a href="#part3">⚠️ Pitfalls</a>
+  <a href="#part1">📊 Weak Form EMH</a>
+  <a href="#part2">📊 Semi-Strong Form</a>
+  <a href="#part3">📊 Strong Form</a>
+    <a href="#answer-templates">📝 Answer Templates</a>
+    <a href="#concept-map">🗺️ Concept Map</a>
 </div>
 <div class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
 <script>
@@ -327,6 +331,72 @@ window.addEventListener('scroll',function(){
     <div class="concept-box" style="margin-top:16px">
       <h4>💡 学术界共识</h4>
       <p>市场<strong>大部分时间</strong>是有效的，但存在系统性异常（如价值溢价、动量效应）。完全有效和完全无效都是极端情况，现实介于两者之间。</p>
+    </div>
+  </div>
+
+  <!-- Answer Templates -->
+  <div class="section" id="answer-templates">
+    <div class="section-header">
+      <div class="section-num">7</div>
+      <div>
+        <h2>📝 Standard Answer Templates — Market Efficiency</h2>
+      </div>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 1: 判断 EMH 形式</h4>
+      <p><strong>Step 1:</strong> 识别给出的信息类型（历史价格/公开信息/所有信息）</p>
+      <p><strong>Step 2:</strong> 匹配对应形式</p>
+      <p>• 历史价格 → Weak Form</p>
+      <p>• 公开信息（财务报表、新闻）→ Semi-Strong Form</p>
+      <p>• 所有信息（包括内部）→ Strong Form</p>
+      <p><strong>Step 3:</strong> 检验方法匹配</p>
+      <p>• 弱式：随机游走、序列相关检验</p>
+      <p>• 半强式：事件研究（CAR）</p>
+      <p>• 强式：内部交易检验</p>
+    </div>
+
+    <div class="case">
+      <h4>📝 Template 2: 分析 Buffett 案例</h4>
+      <p><strong>支持有效市场：</strong> 长期跑赢者极少，幸存者偏差，规模效应</p>
+      <p><strong>反对有效市场：</strong> 价值投资策略长期有效，信息优势</p>
+      <p><strong>结论：</strong> 市场大部分时间有效，但存在系统性异常</p>
+    </div>
+  </div>
+
+  <!-- Concept Map -->
+  <div class="section" id="concept-map">
+    <div class="section-header">
+      <div class="section-num">8</div>
+      <div>
+        <h2>🗺️ Ch.13 Market Efficiency — Concept Map</h2>
+      </div>
+    </div>
+
+    <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:20px;margin:16px 0;text-align:center;">
+      <svg viewBox="0 0 700 280" style="width:100%;max-width:650px;height:auto">
+        <rect x="250" y="80" width="200" height="50" rx="6" fill="#1a3a5c"/>
+        <text x="350" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Market Efficiency</text>
+
+        <rect x="50" y="30" width="150" height="40" rx="4" fill="#27ae60"/>
+        <text x="125" y="55" text-anchor="middle" fill="#fff" font-size="11">Weak Form</text>
+
+        <rect x="50" y="90" width="150" height="40" rx="4" fill="#27ae60"/>
+        <text x="125" y="115" text-anchor="middle" fill="#fff" font-size="11">Semi-Strong</text>
+
+        <rect x="50" y="150" width="150" height="40" rx="4" fill="#27ae60"/>
+        <text x="125" y="175" text-anchor="middle" fill="#fff" font-size="11">Strong Form</text>
+
+        <rect x="500" y="30" width="150" height="40" rx="4" fill="#e8a020"/>
+        <text x="575" y="55" text-anchor="middle" fill="#fff" font-size="11">Behavioural Fin</text>
+
+        <rect x="500" y="90" width="150" height="40" rx="4" fill="#e8a020"/>
+        <text x="575" y="115" text-anchor="middle" fill="#fff" font-size="11">Anomalies</text>
+
+        <line x1="175" y1="70" x2="350" y2="80" stroke="#27ae60" stroke-width="2"/>
+        <line x1="175" y1="130" x2="350" y2="80" stroke="#27ae60" stroke-width="2"/>
+        <line x1="575" y1="70" x2="350" y2="80" stroke="#e8a020" stroke-width="2"/>
+      </svg>
     </div>
   </div>
 
