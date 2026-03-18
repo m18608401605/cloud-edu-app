@@ -181,6 +181,38 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
+  <div class="case">
+    <div class="case-tag">🔢 Example 6.3 — Multiple Independent Factors</div>
+    <h4>Joint Probability with Independent Variables</h4>
+    <p>When two factors are independent (e.g., sales volume AND labour cost), use <strong>multiplication</strong> for joint probability.</p>
+    <table class="data">
+      <thead><tr><th>Scenario</th><th>Probability</th><th>Calculation</th></tr></thead>
+      <tbody>
+        <tr><td>High Sales (0.6) × Low Labour (0.3)</td><td>0.18</td><td>0.6 × 0.3 = 0.18</td></tr>
+        <tr><td>High Sales (0.6) × High Labour (0.7)</td><td>0.42</td><td>0.6 × 0.7 = 0.42</td></tr>
+        <tr><td>Low Sales (0.4) × Low Labour (0.3)</td><td>0.12</td><td>0.4 × 0.3 = 0.12</td></tr>
+        <tr><td>Low Sales (0.4) × High Labour (0.7)</td><td>0.28</td><td>0.4 × 0.7 = 0.28</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>1.00</strong></td><td>✅ Sum = 1.0</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="case">
+    <div class="case-tag">🔢 Example 6.4 — Diversification Effect</div>
+    <h4>How Diversification Reduces Risk</h4>
+    <p>Adding negatively correlated assets reduces portfolio risk more than adding positively correlated assets.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">
+      <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1rem">
+        <div style="font-weight:700;color:var(--red);margin-bottom:.5rem">❌ Positive Correlation</div>
+        <p style="font-size:.85rem">Both assets rise/fall together. Adding more of the same risk = <strong>no reduction</strong> in overall risk.</p>
+      </div>
+      <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1rem">
+        <div style="font-weight:700;color:var(--green);margin-bottom:.5rem">✅ Negative Correlation</div>
+        <p style="font-size:.85rem">When one falls, the other rises. Adding them = <strong>risk reduction</strong> through hedging.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="section-label" id="part3">📈 Part 3 — Systematic vs Specific Risk</div>
   <div class="card">
     <h2>📚 Two Types of Risk 两种风险</h2>
