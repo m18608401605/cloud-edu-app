@@ -53,27 +53,6 @@
   .btn-primary:hover{background:#2c5282}
   .btn-outline{border:2px solid var(--border);color:var(--text)}
   .btn-outline:hover{border-color:var(--primary);color:var(--primary)}
-  .toc-sidebar{position:fixed;left:20px;top:120px;width:220px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.2rem;box-shadow:0 2px 8px rgba(0,0,0,.08);max-height:calc(100vh - 160px);overflow-y:auto;z-index:50}
-  .toc-sidebar h4{font-size:.85rem;font-weight:700;color:var(--primary);margin-bottom:.8rem;text-transform:uppercase;letter-spacing:.06em}
-  .toc-sidebar a{display:block;padding:.4rem .6rem;font-size:.85rem;color:var(--text);text-decoration:none;border-radius:6px;margin-bottom:.2rem;transition:all .2s}
-  .toc-sidebar a:hover{background:#f0f4ff;color:var(--primary)}
-  .toc-sidebar a.active{background:var(--primary);color:#fff;font-weight:600}
-  @media(max-width:1200px){.toc-sidebar{display:none}}
-  .back-to-top{position:fixed;right:30px;bottom:30px;width:50px;height:50px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15);opacity:0;visibility:hidden;transition:all .3s;z-index:100}
-  .back-to-top.show{opacity:1;visibility:visible}
-  .back-to-top:hover{background:var(--accent);transform:translateY(-3px)}
-  @media(min-width:1201px){main{margin-left:260px!important;margin-right:20px!important}}
-  .mobile-toc{display:none;background:var(--card);border-bottom:1px solid var(--border);position:sticky;top:60px;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-  .mobile-toc-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;cursor:pointer;user-select:none}
-  .mobile-toc-header h4{font-size:.9rem;font-weight:700;color:var(--primary);margin:0}
-  .mobile-toc-toggle{font-size:1.2rem;color:var(--primary);transition:transform .3s}
-  .mobile-toc-toggle.open{transform:rotate(180deg)}
-  .mobile-toc-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  .mobile-toc-content.open{max-height:500px;border-top:1px solid var(--border)}
-  .mobile-toc-content a{display:block;padding:.7rem 1.5rem;font-size:.9rem;color:var(--text);text-decoration:none;border-bottom:1px solid var(--bg);transition:all .2s}
-  .mobile-toc-content a:hover{background:#f0f4ff;color:var(--primary)}
-  .mobile-toc-content a:last-child{border-bottom:none}
-  @media(max-width:1200px){.mobile-toc{display:block}}
 </style>
 </head>
 <body>
@@ -181,38 +160,6 @@ window.addEventListener('scroll', function() {
     </div>
   </div>
 
-  <div class="case">
-    <div class="case-tag">🔢 Example 6.3 — Multiple Independent Factors</div>
-    <h4>Joint Probability with Independent Variables</h4>
-    <p>When two factors are independent (e.g., sales volume AND labour cost), use <strong>multiplication</strong> for joint probability.</p>
-    <table class="data">
-      <thead><tr><th>Scenario</th><th>Probability</th><th>Calculation</th></tr></thead>
-      <tbody>
-        <tr><td>High Sales (0.6) × Low Labour (0.3)</td><td>0.18</td><td>0.6 × 0.3 = 0.18</td></tr>
-        <tr><td>High Sales (0.6) × High Labour (0.7)</td><td>0.42</td><td>0.6 × 0.7 = 0.42</td></tr>
-        <tr><td>Low Sales (0.4) × Low Labour (0.3)</td><td>0.12</td><td>0.4 × 0.3 = 0.12</td></tr>
-        <tr><td>Low Sales (0.4) × High Labour (0.7)</td><td>0.28</td><td>0.4 × 0.7 = 0.28</td></tr>
-        <tr><td><strong>Total</strong></td><td><strong>1.00</strong></td><td>✅ Sum = 1.0</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="case">
-    <div class="case-tag">🔢 Example 6.4 — Diversification Effect</div>
-    <h4>How Diversification Reduces Risk</h4>
-    <p>Adding negatively correlated assets reduces portfolio risk more than adding positively correlated assets.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0">
-      <div style="background:#fee2e2;border:2px solid var(--red);border-radius:10px;padding:1rem">
-        <div style="font-weight:700;color:var(--red);margin-bottom:.5rem">❌ Positive Correlation</div>
-        <p style="font-size:.85rem">Both assets rise/fall together. Adding more of the same risk = <strong>no reduction</strong> in overall risk.</p>
-      </div>
-      <div style="background:#dcfce7;border:2px solid var(--green);border-radius:10px;padding:1rem">
-        <div style="font-weight:700;color:var(--green);margin-bottom:.5rem">✅ Negative Correlation</div>
-        <p style="font-size:.85rem">When one falls, the other rises. Adding them = <strong>risk reduction</strong> through hedging.</p>
-      </div>
-    </div>
-  </div>
-
   <div class="section-label" id="part3">📈 Part 3 — Systematic vs Specific Risk</div>
   <div class="card">
     <h2>📚 Two Types of Risk 两种风险</h2>
@@ -271,7 +218,7 @@ window.addEventListener('scroll', function() {
       </thead>
       <tbody>
         <tr>
-          <td><strong敏感性分析<br></strong></td>
+          <td><strong>Sensitivity Analysis</strong></td>
           <td>Changing multiple variables simultaneously</td>
           <td>✅ Change ONE variable at a time, holding others constant. This isolates each variable's impact</td>
         </tr>
@@ -281,7 +228,7 @@ window.addEventListener('scroll', function() {
           <td>✅ Always verify: Σp = 1.0. If not, probabilities are incomplete or incorrect</td>
         </tr>
         <tr>
-          <td><strong期望值<br></strong></td>
+          <td><strong>Expected Value</strong></td>
           <td>Treating EV as a guaranteed outcome</td>
           <td>✅ EV is a weighted average — it may not even be a possible outcome. Use for large portfolios only</td>
         </tr>
@@ -361,7 +308,7 @@ window.addEventListener('scroll', function() {
     <div style="background:#fffbf0;border:2px solid #fbbf24;border-radius:10px;padding:1.2rem;margin-top:1rem">
       <p style="font-weight:600;color:#7a5800;margin-bottom:.6rem">💡 Exam Tip — Sensitivity vs Scenario Analysis</p>
       <ul style="margin-left:1.5rem;margin-top:.6rem;line-height:1.8;color:#7a5800">
-        <li><strong敏感性分析<br></strong>: Change ONE variable at a time (isolates individual impact)</li>
+        <li><strong>Sensitivity Analysis</strong>: Change ONE variable at a time (isolates individual impact)</li>
         <li><strong>Scenario Analysis</strong>: Change MULTIPLE variables together (e.g., "pessimistic scenario" with low sales + high costs)</li>
         <li>Examiners often ask for sensitivity first, then scenario. Don't confuse them!</li>
       </ul>
@@ -426,7 +373,7 @@ window.addEventListener('scroll', function() {
   <div class="section-label" id="concept-map">🗺️ Concept Relationship Map</div>
 
   <div class="card">
-    <h2>🗺️ Ch.6 Risk Analysis Framework 风险分析框架</h2>
+    <h2>🗺️ Ch.6 Risk Analysis Framework</h2>
     <p style="margin-bottom:1.2rem;color:var(--muted)">这张图展示了从简单的敏感性分析到复杂的组合理论的完整风险分析框架。</p>
     
     <div style="background:#f8fafc;border:2px solid var(--border);border-radius:12px;padding:2rem;margin:1rem 0">
@@ -436,20 +383,20 @@ window.addEventListener('scroll', function() {
         
         <!-- Level 1: Sensitivity Analysis -->
         <rect x="50" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="150" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700"Level 1<br>第一层</text>
-        <text x="150" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600"敏感性分析<br></text>
+        <text x="150" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 1</text>
+        <text x="150" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Sensitivity Analysis</text>
         <text x="150" y="148" text-anchor="middle" fill="#fff" font-size="10">"What if one variable changes?"</text>
         
         <!-- Level 2: Probability Analysis -->
         <rect x="300" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="400" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700"Level 2<br>第二层</text>
-        <text x="400" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600"概率分析<br></text>
+        <text x="400" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 2</text>
+        <text x="400" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Probability Analysis</text>
         <text x="400" y="148" text-anchor="middle" fill="#fff" font-size="10">"How likely is each outcome?"</text>
         
         <!-- Level 3: Expected Value -->
         <rect x="550" y="80" width="200" height="80" rx="8" fill="#e8a020" stroke="#1a3a5c" stroke-width="2"/>
-        <text x="650" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700"Level 3<br>第三层</text>
-        <text x="650" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600"期望值<br></text>
+        <text x="650" y="110" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">Level 3</text>
+        <text x="650" y="130" text-anchor="middle" fill="#fff" font-size="13" font-weight="600">Expected Value</text>
         <text x="650" y="148" text-anchor="middle" fill="#fff" font-size="10">"What's the average outcome?"</text>
         
         <!-- Arrows down -->
@@ -461,26 +408,26 @@ window.addEventListener('scroll', function() {
         <!-- Sensitivity -->
         <rect x="50" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
         <text x="150" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
-        <text x="150" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">改变单个变量<br>Change ONE variable</text>
-        <text x="150" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">找到盈亏平衡点<br>Find break-even value</text>
-        <text x="150" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">计算百分比变化<br>Calculate % change</text>
-        <text x="150" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">识别关键风险<br>Identifies key risks</text>
+        <text x="150" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">Change ONE variable</text>
+        <text x="150" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Find break-even value</text>
+        <text x="150" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Calculate % change</text>
+        <text x="150" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Identifies key risks</text>
         
         <!-- Probability -->
         <rect x="300" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
         <text x="400" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
-        <text x="400" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">分配概率<br>Assign probabilities</text>
-        <text x="400" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">计算每个结果的NPV<br>Calculate NPV for each</text>
-        <text x="400" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">构建概率分布<br>Build distribution</text>
-        <text x="400" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">量化不确定性<br>Quantifies uncertainty</text>
+        <text x="400" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">Assign probabilities</text>
+        <text x="400" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Calculate NPV for each</text>
+        <text x="400" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Build distribution</text>
+        <text x="400" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Quantifies uncertainty</text>
         
         <!-- Expected Value -->
         <rect x="550" y="200" width="200" height="100" rx="6" fill="#fff" stroke="#e8a020" stroke-width="2"/>
         <text x="650" y="225" text-anchor="middle" fill="#1a3a5c" font-size="11" font-weight="600">Key Concept:</text>
-        <text x="650" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">ENPV = Σ(NPV × p)<br>加权平均计算</text>
-        <text x="650" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">加权平均<br>Weighted average</text>
-        <text x="650" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">单一决策指标<br>Single decision metric</text>
-        <text x="650" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">简化决策<br>Simplifies decision</text>
+        <text x="650" y="245" text-anchor="middle" fill="#1a3a5c" font-size="10">ENPV = Σ(NPV × p)</text>
+        <text x="650" y="260" text-anchor="middle" fill="#1a3a5c" font-size="10">Weighted average</text>
+        <text x="650" y="275" text-anchor="middle" fill="#1a3a5c" font-size="10">Single decision metric</text>
+        <text x="650" y="293" text-anchor="middle" fill="#27ae60" font-size="10" font-weight="600">✅ Simplifies decision</text>
         
         <!-- Level 4: Portfolio & Diversification -->
         <rect x="250" y="350" width="300" height="80" rx="8" fill="#27ae60" stroke="#1a3a5c" stroke-width="3"/>
