@@ -695,6 +695,8 @@ This is a starting point. Add your own conventions, style, and rules as you figu
 > 解决：忘记任务、不主动推进、过度依赖确认
 
 ### 核心原则
+
+**第9条（新增）：主动对照检查** - 每次修改后必须对照标准模板检查，发现缺失立即补充
 1. **任务必须记录** - 接收任务立即创建 `.context/CURRENT_TASK.md`
 2. **主动推进工作** - 不要等用户问，主动汇报进度
 3. **先尝试后确认** - 能自己做的先做，不能做的提供建议后确认
