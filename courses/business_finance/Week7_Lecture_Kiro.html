@@ -214,8 +214,44 @@ window.addEventListener('scroll',function(){
     </table>
   </div>
 
-  <!-- Section 5: Apple Case -->
+  <!-- Section 5: Examples 10.1-10.4 -->
   <div class="section" id="part5">
+    <h2>📚 Examples — WACC Calculations</h2>
+
+    <div class="case">
+      <h4>🔢 Example 10.1: Loan Notes Cost</h4>
+      <p>公司发行票面利率 10% 的债券，面值 £100。债券售价 £95，期限 5 年。税率 30%。</p>
+      <p><strong>计算 YTM：</strong> 需要使 £95 = Σ(£10/(1+r)ⁿ) + £100/(1+r)⁵，r ≈ 10.9%</p>
+      <p><strong>税后成本：</strong> K<sub>d</sub> = 10.9% × (1-0.30) = <strong>7.63%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.2: Cost of Equity — Gordon Model</h4>
+      <p>公司当前股价 £4.00，刚支付股利 D<sub>0</sub> = £0.20。预期增长 g = 5%。</p>
+      <p><strong>预期下期股利：</strong> D<sub>1</sub> = £0.20 × 1.05 = £0.21</p>
+      <p><strong>权益成本：</strong> K<sub>e</sub> = D<sub>1</sub>/P<sub>0</sub> + g = £0.21/£4.00 + 0.05 = <strong>10.25%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.3: Convertible Loan Notes</h4>
+      <p>可转换债券：票面利率 5%，售价 £100，转换为股价 £5。税率 30%。</p>
+      <p><strong>纯债券价值：</strong> 假设 YTM = 8%，PV = £88</p>
+      <p><strong>转换期权价值：</strong> £100 - £88 = £12</p>
+      <p><strong>税后成本：</strong> K<sub>d</sub> = 5% × (1-0.30) = <strong>3.5%</strong></p>
+    </div>
+
+    <div class="case">
+      <h4>🔢 Example 10.4: WACC Calculation</h4>
+      <p>公司数据：债务市值 £200万，权益市值 £800万。K<sub>d</sub> = 6%，K<sub>e</sub> = 12%，t = 30%。</p>
+      <p><strong>债务权重：</strong> D/(D+E) = £200/£1000 = 20%</p>
+      <p><strong>权益权重：</strong> E/(D+E) = £800/£1000 = 80%</p>
+      <p><strong>税后债务成本：</strong> K<sub>d</sub>(1-t) = 6% × 0.70 = 4.2%</p>
+      <p><strong>WACC =</strong> 0.20 × 4.2% + 0.80 × 12% = <strong>10.44%</strong></p>
+    </div>
+  </div>
+
+  <!-- Section 6: Apple Case -->
+  <div class="section" id="part6">
     <h2>📚 Real Case: Apple WACC Calculation</h2>
     <p>以下是基于简化假设的 Apple WACC 估算示例：</p>
 
