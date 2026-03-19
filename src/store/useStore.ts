@@ -1,12 +1,23 @@
 import { create } from 'zustand'
-import type { Task, DailyRecord, Reward, RedeemRecord, AppState, ThemeId } from '../types'
+import type { Task, DailyRecord, DailyPlan, Reward, RedeemRecord, AppState, ThemeId, UiSettings } from '../types'
 import * as db from '../db'
 import { DEFAULT_TASKS, DEFAULT_REWARDS, getLevelFromPoints, THEMES } from '../data'
 
+export const DEFAULT_UI_SETTINGS: UiSettings = {
+  sidebarWidth: 288,
+  starBrightness: 60,
+  fontSize: 14,
+  contentMaxWidth: 672,
+  cardRadius: 12,
+  bgOpacity: 60,
+  brightness: 110,
+  textBrightness: 120,
+}
+
 interface Store {
-  // 状态
   appState: AppState
-  tasks: Task[]
+  tasks: Task[]           // 任务模板库（全部）
+  todayPlan: DailyPlan | null  // 今日计划（选出的任务ids）
   todayRecord: DailyRecord | null
   rewards: Reward[]
   redeemRecords: RedeemRecord[]
@@ -14,37 +25,50 @@ interface Store {
   showMotivation: boolean
   motivationText: string
 
-  // 初始化
   init: () => Promise<void>
 
-  // 任务操作
-  completeTask: (taskId: string) => Promise<void>
-  uncompleteTask: (taskId: string) => Promise<void>
+  // 任务模板操作
   addTask: (task: Task) => Promise<void>
   removeTask: (taskId: string) => Promise<void>
+  updateTask: (task: Task) => Promise<void>
+
+  // 今日计划操作
+  addToTodayPlan: (taskId: string) => Promise<void>
+  removeFromTodayPlan: (taskId: string) => Promise<void>
+
+  // 完成/取消完成
+  completeTask: (taskId: string) => Promise<void>
+  uncompleteTask: (taskId: string) => Promise<void>
 
   // 奖励操作
   addReward: (reward: Reward) => Promise<void>
   removeReward: (rewardId: string) => Promise<void>
+  updateReward: (reward: Reward) => Promise<void>
   redeemReward: (reward: Reward) => Promise<boolean>
 
-  // 主题操作
+  // 主题
   setTheme: (themeId: ThemeId) => Promise<void>
   unlockTheme: (themeId: ThemeId) => Promise<boolean>
+  setCustomBg: (base64: string | undefined) => Promise<void>
+  setCustomAvatar: (base64: string | undefined) => Promise<void>
+  setColorMode: (mode: 'dark' | 'light') => Promise<void>
+  updateUiSettings: (patch: Partial<UiSettings>) => Promise<void>
+  reorderTasks: (fromIndex: number, toIndex: number) => Promise<void>
 
-  // 重置操作
+  // 重置
   resetPoints: () => Promise<void>
   resetAll: () => Promise<void>
 
-  // 激励弹窗
   hideMotivation: () => void
 }
 
 const today = () => new Date().toISOString().split('T')[0]
+const nowTime = () => new Date().toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' })
 
 export const useStore = create<Store>((set, get) => ({
   appState: { totalPoints: 0, streak: 0, level: 1, lastActiveDate: '', unlockedThemes: ['piggy'], currentTheme: 'piggy' },
   tasks: [],
+  todayPlan: null,
   todayRecord: null,
   rewards: [],
   redeemRecords: [],
@@ -60,21 +84,18 @@ export const useStore = create<Store>((set, get) => ({
       db.getAllRedeemRecords(),
     ])
 
-    // 初始化默认任务
     let finalTasks = tasks
     if (tasks.length === 0) {
       for (const task of DEFAULT_TASKS) await db.saveTask(task)
       finalTasks = DEFAULT_TASKS
     }
 
-    // 初始化默认奖励
     let finalRewards = rewards
     if (rewards.length === 0) {
       for (const reward of DEFAULT_REWARDS) await db.saveReward(reward)
       finalRewards = DEFAULT_REWARDS
     }
 
-    // 计算连续打卡
     const todayStr = today()
     const yesterday = new Date()
     yesterday.setDate(yesterday.getDate() - 1)
@@ -84,20 +105,86 @@ export const useStore = create<Store>((set, get) => ({
       streak = 0
     }
 
-    const todayRecord = await db.getDailyRecord(todayStr)
+    const [todayRecord, todayPlan] = await Promise.all([
+      db.getDailyRecord(todayStr),
+      db.getDailyPlan(todayStr),
+    ])
+
+    // 如果今天没有计划，默认把所有任务都加进去
+    let finalPlan = todayPlan ?? null
+    if (!finalPlan) {
+      finalPlan = { date: todayStr, taskIds: finalTasks.map(t => t.id) }
+      await db.saveDailyPlan(finalPlan)
+    }
+
     const updatedState = { ...appState, streak, level: getLevelFromPoints(appState.totalPoints) }
     await db.saveAppState(updatedState)
 
-    set({ appState: updatedState, tasks: finalTasks, rewards: finalRewards, redeemRecords, todayRecord: todayRecord ?? null, isLoading: false })
+    set({
+      appState: updatedState,
+      tasks: finalTasks,
+      rewards: finalRewards,
+      redeemRecords,
+      todayRecord: todayRecord ?? null,
+      todayPlan: finalPlan,
+      isLoading: false,
+    })
+  },
+
+  addTask: async (task) => {
+    await db.saveTask(task)
+    // 新任务默认加入今日计划
+    const { todayPlan } = get()
+    const todayStr = today()
+    const newPlan: DailyPlan = todayPlan
+      ? { ...todayPlan, taskIds: [...todayPlan.taskIds, task.id] }
+      : { date: todayStr, taskIds: [task.id] }
+    await db.saveDailyPlan(newPlan)
+    set(s => ({ tasks: [...s.tasks, task], todayPlan: newPlan }))
+  },
+
+  removeTask: async (taskId) => {
+    await db.deleteTask(taskId)
+    const { todayPlan } = get()
+    if (todayPlan) {
+      const newPlan = { ...todayPlan, taskIds: todayPlan.taskIds.filter(id => id !== taskId) }
+      await db.saveDailyPlan(newPlan)
+      set(s => ({ tasks: s.tasks.filter(t => t.id !== taskId), todayPlan: newPlan }))
+    } else {
+      set(s => ({ tasks: s.tasks.filter(t => t.id !== taskId) }))
+    }
+  },
+
+  updateTask: async (task) => {
+    await db.saveTask(task)
+    set(s => ({ tasks: s.tasks.map(t => t.id === task.id ? task : t) }))
+  },
+
+  addToTodayPlan: async (taskId) => {
+    const { todayPlan } = get()
+    const todayStr = today()
+    const plan = todayPlan ?? { date: todayStr, taskIds: [] }
+    if (plan.taskIds.includes(taskId)) return
+    const newPlan = { ...plan, taskIds: [...plan.taskIds, taskId] }
+    await db.saveDailyPlan(newPlan)
+    set({ todayPlan: newPlan })
+  },
+
+  removeFromTodayPlan: async (taskId) => {
+    const { todayPlan } = get()
+    if (!todayPlan) return
+    const newPlan = { ...todayPlan, taskIds: todayPlan.taskIds.filter(id => id !== taskId) }
+    await db.saveDailyPlan(newPlan)
+    set({ todayPlan: newPlan })
   },
 
   completeTask: async (taskId) => {
-    const { tasks, todayRecord, appState } = get()
+    const { tasks, todayRecord, todayPlan, appState } = get()
     const task = tasks.find(t => t.id === taskId)
     if (!task) return
 
     const todayStr = today()
-    const record: DailyRecord = todayRecord ?? { date: todayStr, completedTasks: [], pointsEarned: 0, bonusPoints: 0 }
+    const record: DailyRecord = todayRecord ?? { date: todayStr, completedTasks: [], completedAt: {}, pointsEarned: 0, bonusPoints: 0 }
     if (record.completedTasks.includes(taskId)) return
 
     const newCompleted = [...record.completedTasks, taskId]
@@ -106,6 +193,7 @@ export const useStore = create<Store>((set, get) => ({
     const newRecord: DailyRecord = {
       ...record,
       completedTasks: newCompleted,
+      completedAt: { ...(record.completedAt ?? {}), [taskId]: nowTime() },
       pointsEarned: record.pointsEarned + task.points,
       bonusPoints: record.bonusPoints + bonus,
     }
@@ -120,11 +208,17 @@ export const useStore = create<Store>((set, get) => ({
       lastActiveDate: todayStr,
     }
 
+    // 检查今日是否全完成
+    const planTaskIds = todayPlan?.taskIds ?? []
+    const allDone = planTaskIds.length > 0 && planTaskIds.every(id => newCompleted.includes(id))
+
     await Promise.all([db.saveDailyRecord(newRecord), db.saveAppState(newState)])
 
-    // 随机激励语
     const { MOTIVATIONS } = await import('../data')
-    const text = MOTIVATIONS[Math.floor(Math.random() * MOTIVATIONS.length)]
+    const { PIGGY_QUOTES } = await import('../data/piggyStickers')
+    const text = allDone
+      ? PIGGY_QUOTES.allDone
+      : MOTIVATIONS[Math.floor(Math.random() * MOTIVATIONS.length)]
 
     set({ todayRecord: newRecord, appState: newState, showMotivation: true, motivationText: text })
   },
@@ -135,25 +229,18 @@ export const useStore = create<Store>((set, get) => ({
     if (!task || !todayRecord) return
 
     const newCompleted = todayRecord.completedTasks.filter(id => id !== taskId)
+    const newCompletedAt = { ...(todayRecord.completedAt ?? {}) }
+    delete newCompletedAt[taskId]
     const newRecord: DailyRecord = {
       ...todayRecord,
       completedTasks: newCompleted,
-      pointsEarned: todayRecord.pointsEarned - task.points,
+      completedAt: newCompletedAt,
+      pointsEarned: Math.max(0, todayRecord.pointsEarned - task.points),
     }
     const newState: AppState = { ...appState, totalPoints: Math.max(0, appState.totalPoints - task.points) }
 
     await Promise.all([db.saveDailyRecord(newRecord), db.saveAppState(newState)])
     set({ todayRecord: newRecord, appState: newState })
-  },
-
-  addTask: async (task) => {
-    await db.saveTask(task)
-    set(s => ({ tasks: [...s.tasks, task] }))
-  },
-
-  removeTask: async (taskId) => {
-    await db.deleteTask(taskId)
-    set(s => ({ tasks: s.tasks.filter(t => t.id !== taskId) }))
   },
 
   addReward: async (reward) => {
@@ -164,6 +251,11 @@ export const useStore = create<Store>((set, get) => ({
   removeReward: async (rewardId) => {
     await db.deleteReward(rewardId)
     set(s => ({ rewards: s.rewards.filter(r => r.id !== rewardId) }))
+  },
+
+  updateReward: async (reward) => {
+    await db.saveReward(reward)
+    set(s => ({ rewards: s.rewards.map(r => r.id === reward.id ? reward : r) }))
   },
 
   redeemReward: async (reward) => {
@@ -206,6 +298,46 @@ export const useStore = create<Store>((set, get) => ({
     return true
   },
 
+  setCustomBg: async (base64) => {
+    const { appState } = get()
+    const newState = { ...appState, customBg: base64 }
+    await db.saveAppState(newState)
+    set({ appState: newState })
+  },
+
+  setCustomAvatar: async (base64) => {
+    const { appState } = get()
+    const newState = { ...appState, customAvatar: base64 }
+    await db.saveAppState(newState)
+    set({ appState: newState })
+  },
+
+  setColorMode: async (mode) => {
+    const { appState } = get()
+    const newState = { ...appState, colorMode: mode }
+    await db.saveAppState(newState)
+    set({ appState: newState })
+  },
+
+  updateUiSettings: async (patch) => {
+    const { appState } = get()
+    const current = appState.uiSettings ?? DEFAULT_UI_SETTINGS
+    const newState = { ...appState, uiSettings: { ...current, ...patch } }
+    await db.saveAppState(newState)
+    set({ appState: newState })
+  },
+
+  reorderTasks: async (fromIndex, toIndex) => {
+    const { tasks, appState } = get()
+    const order = appState.taskOrder ?? tasks.map(t => t.id)
+    const newOrder = [...order]
+    const [moved] = newOrder.splice(fromIndex, 1)
+    newOrder.splice(toIndex, 0, moved)
+    const newState = { ...appState, taskOrder: newOrder }
+    await db.saveAppState(newState)
+    set({ appState: newState })
+  },
+
   resetPoints: async () => {
     const { appState } = get()
     const newState = { ...appState, totalPoints: 0 }
@@ -216,7 +348,7 @@ export const useStore = create<Store>((set, get) => ({
   resetAll: async () => {
     await db.resetAllData()
     const newState: AppState = { totalPoints: 0, streak: 0, level: 1, lastActiveDate: '', unlockedThemes: ['piggy'], currentTheme: 'piggy' }
-    set({ appState: newState, todayRecord: null, redeemRecords: [] })
+    set({ appState: newState, todayRecord: null, todayPlan: null, redeemRecords: [] })
   },
 
   hideMotivation: () => set({ showMotivation: false }),

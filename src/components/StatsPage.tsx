@@ -75,11 +75,16 @@ export function StatsPage() {
       {/* 猪猪侠鼓励语 */}
       <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 3, repeat: Infinity }}
         className="rounded-2xl p-4 flex items-center gap-3"
-        style={{ background: 'linear-gradient(135deg, rgba(255,215,0,0.08), rgba(255,165,0,0.05))', border: '1px solid rgba(255,215,0,0.2)' }}>
-        <div className="text-4xl flex-shrink-0">{PIGGY_STICKERS.cool}</div>
+        style={{ background: 'linear-gradient(135deg, rgba(0,255,255,0.06), rgba(255,45,120,0.04))', border: '1px solid rgba(0,255,255,0.2)' }}>
+        <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0"
+          style={{ border: '2px solid #00ffff', boxShadow: '0 0 12px #00ffff44' }}>
+          <img src="/cloud-edu-app/kids-points/piggy.png" alt="猪猪侠"
+            className="w-full h-full object-cover object-top"
+            style={{ transform: 'scale(1.1) translateY(5%)' }} />
+        </div>
         <div>
-          <div className="text-white font-black text-sm">猪猪侠说：</div>
-          <div className="text-gray-300 text-sm">{PIGGY_QUOTES.encourage}</div>
+          <div className="font-black text-sm cyber-title" style={{ color: '#00ffff' }}>猪猪侠说：</div>
+          <div className="text-gray-300 text-sm mt-0.5">{PIGGY_QUOTES.encourage}</div>
         </div>
       </motion.div>
 
