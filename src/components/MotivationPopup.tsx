@@ -3,7 +3,10 @@ import { useStore } from '../store/useStore'
 
 function playConfirmSound() {
   try {
-    const ctx = new (window.AudioContext || (window as any).webkitAudioContext)()
+    const audioContextCtor = window.AudioContext
+      ?? (window as Window & typeof globalThis & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext
+    if (!audioContextCtor) return
+    const ctx = new audioContextCtor()
     // 第一音：上升音
     const o1 = ctx.createOscillator()
     const g1 = ctx.createGain()
@@ -22,11 +25,14 @@ function playConfirmSound() {
     g2.gain.setValueAtTime(0.25, ctx.currentTime + 0.15)
     g2.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.4)
     o2.start(ctx.currentTime + 0.15); o2.stop(ctx.currentTime + 0.4)
-  } catch (_) {}
+  } catch {
+    return
+  }
 }
 
 export function MotivationPopup() {
   const { showMotivation, motivationText, hideMotivation } = useStore()
+  const piggySrc = `${import.meta.env.BASE_URL}piggy.png`
 
   const handleConfirm = () => {
     playConfirmSound()
@@ -101,7 +107,7 @@ export function MotivationPopup() {
                 boxShadow: '0 0 30px #00ffff66, 0 0 60px #00ffff22'
               }}>
               <img
-                src="/cloud-edu-app/kids-points/piggy.png"
+                src={piggySrc}
                 alt="猪猪侠"
                 className="w-full h-full object-cover object-top"
                 style={{ transform: 'scale(1.1) translateY(5%)' }}

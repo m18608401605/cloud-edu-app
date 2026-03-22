@@ -53,13 +53,13 @@ const FLOATING_ELEMENTS = [
 ]
 
 export function StarBackground({ isLight, starBrightness = 60 }: { isLight?: boolean; starBrightness?: number }) {
-  if (isLight) return null
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const brightnessRef = useRef(starBrightness)
 
   useEffect(() => { brightnessRef.current = starBrightness }, [starBrightness])
 
   useEffect(() => {
+    if (isLight) return
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')!
@@ -135,7 +135,9 @@ export function StarBackground({ isLight, starBrightness = 60 }: { isLight?: boo
     const resize = () => { cv.width = window.innerWidth; cv.height = window.innerHeight }
     window.addEventListener('resize', resize)
     return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize) }
-  }, [])
+  }, [isLight])
+
+  if (isLight) return null
 
   return (
     <>

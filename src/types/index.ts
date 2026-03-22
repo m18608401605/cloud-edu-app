@@ -1,6 +1,8 @@
-// 类型定义
-
 export type TaskCategory = 'study' | 'sport' | 'fun' | 'extra' | 'custom'
+export type SubjectId = 'chinese' | 'math' | 'english' | 'science' | 'arts' | 'sport' | 'habit'
+export type CapabilityId = 'focus' | 'reading' | 'writing' | 'logic' | 'speaking' | 'creativity' | 'fitness' | 'discipline'
+export type ThemeId = 'piggy' | 'ocean' | 'forest' | 'galaxy' | 'candy'
+export type VoiceMode = 'reading' | 'retell' | 'speaking'
 
 export interface Task {
   id: string
@@ -10,22 +12,23 @@ export interface Task {
   category: TaskCategory
   description?: string
   isCustom?: boolean
-  deadline?: string     // 截止时间 HH:MM
-  completedAt?: string  // 完成时间 HH:MM
+  deadline?: string
+  completedAt?: string
+  subjectId?: SubjectId
+  capabilityIds?: CapabilityId[]
 }
 
-// 每日任务安排：当天选择的任务ID列表（来自任务模板库）
 export interface DailyPlan {
-  date: string      // YYYY-MM-DD
-  taskIds: string[] // 当天计划做的任务
+  date: string
+  taskIds: string[]
 }
 
 export interface DailyRecord {
-  date: string // YYYY-MM-DD
-  completedTasks: string[] // task ids
-  completedAt: Record<string, string> // taskId -> HH:MM 完成时间
+  date: string
+  completedTasks: string[]
+  completedAt: Record<string, string>
   pointsEarned: number
-  bonusPoints: number // 连续打卡奖励
+  bonusPoints: number
 }
 
 export interface Reward {
@@ -55,17 +58,15 @@ export interface Achievement {
   condition: string
 }
 
-export type ThemeId = 'piggy' | 'ocean' | 'forest' | 'galaxy' | 'candy'
-
 export interface UiSettings {
-  sidebarWidth: number     // 200~400, default 288
-  starBrightness: number   // 0~100, default 60
-  fontSize: number         // 12~20, default 14
-  contentMaxWidth: number  // 480~960, default 672
-  cardRadius: number       // 4~24, default 12
-  bgOpacity: number        // 0~100, default 60
-  brightness: number       // 50~150, default 100 (整体亮度)
-  textBrightness: number   // 50~150, default 100 (文字对比度)
+  sidebarWidth: number
+  starBrightness: number
+  fontSize: number
+  contentMaxWidth: number
+  cardRadius: number
+  bgOpacity: number
+  brightness: number
+  textBrightness: number
 }
 
 export interface Theme {
@@ -91,5 +92,84 @@ export interface AppState {
   customAvatar?: string
   colorMode?: 'dark' | 'light'
   uiSettings?: UiSettings
-  taskOrder?: string[]  // 任务排序顺序（task id 数组）
+  taskOrder?: string[]
+}
+
+export interface BackupData {
+  version: number
+  exportedAt: string
+  source: 'kids-points-system'
+  data: {
+    appState: AppState
+    tasks: Task[]
+    dailyPlans: DailyPlan[]
+    dailyRecords: DailyRecord[]
+    rewards: Reward[]
+    redeemRecords: RedeemRecord[]
+    users?: UserAccount[]
+    childProfiles?: ChildProfile[]
+    profileSnapshots?: ProfileSnapshot[]
+    voiceSessions?: VoiceSession[]
+    session?: AppSession | null
+  }
+}
+
+export interface UserAccount {
+  id: string
+  email: string
+  password: string
+  name: string
+  createdAt: string
+}
+
+export interface ChildProfile {
+  id: string
+  userId: string
+  name: string
+  age: number
+  grade: string
+  avatarEmoji: string
+  target: string
+  focusSubjects: SubjectId[]
+  focusCapabilities: CapabilityId[]
+  createdAt: string
+}
+
+export interface AppSession {
+  userId: string
+  activeProfileId?: string
+}
+
+export interface ProfileSnapshot {
+  profileId: string
+  backup: BackupData
+  updatedAt: string
+}
+
+export interface VoiceSession {
+  id: string
+  userId: string
+  profileId: string
+  title: string
+  mode: VoiceMode
+  subjectId: SubjectId
+  capabilityId: CapabilityId
+  transcript: string
+  durationSec: number
+  recordedAt: string
+  score: number
+  fluencyScore: number
+  vocabularyScore: number
+  confidenceScore: number
+  keywords: string[]
+  summary: string
+}
+
+export interface VoiceAnalysisInput {
+  title: string
+  mode: VoiceMode
+  subjectId: SubjectId
+  capabilityId: CapabilityId
+  transcript: string
+  durationSec: number
 }
