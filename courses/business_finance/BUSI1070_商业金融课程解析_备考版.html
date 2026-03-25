@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BUSI1070 商业金融考试大纲备考版</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #1d4ed8;
+      --accent: #0f766e;
+      --border: #dbe4f0;
+      --soft: #eef4ff;
+      --warn: #fff7ed;
+      --tip: #ecfeff;
+      --pink: #faf5ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.72;
+    }
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 28px 18px 80px;
+    }
+    .hero, .section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.05);
+    }
+    h1, h2, h3, h4 { line-height: 1.3; margin-top: 0; }
+    h1 { font-size: 34px; margin-bottom: 10px; }
+    h2 {
+      font-size: 26px;
+      color: var(--primary);
+      margin-bottom: 16px;
+      border-bottom: 2px solid #e8efff;
+      padding-bottom: 8px;
+    }
+    h3 { font-size: 21px; color: var(--accent); margin-bottom: 10px; }
+    h4 { font-size: 17px; color: #374151; margin-bottom: 8px; }
+    p, li { font-size: 16px; }
+    .lead { font-size: 18px; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--primary);
+      border: 1px solid #cfe0ff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin: 4px 6px 0 0;
+      font-weight: 700;
+    }
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card {
+      background: #fcfdff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+    }
+    .term { color: #7c3aed; font-weight: 700; }
+    .formula {
+      background: #0f172a;
+      color: #f8fafc;
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin: 10px 0;
+      white-space: pre-wrap;
+    }
+    .tip {
+      background: var(--tip);
+      border-left: 5px solid #06b6d4;
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+    .warn {
+      background: var(--warn);
+      border-left: 5px solid #fb923c;
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+    .pink {
+      background: var(--pink);
+      border-left: 5px solid #a855f7;
+      padding: 14px 16px;
+      border-radius: 10px;
+      margin: 12px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 15px;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 12px;
+      vertical-align: top;
+      text-align: left;
+    }
+    th { background: #f2f7ff; }
+    .small { font-size: 14px; color: var(--muted); }
+    ul, ol { padding-left: 22px; }
+    li { margin-bottom: 8px; }
+    .toc a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <h1>BUSI1070 商业金融考试大纲备考版</h1>
+      <p class="lead">严格按考试大纲整理，面向零基础复习。内容围绕：<strong>考点、公式、常见题型、解题步骤、易错点、答题语言</strong> 展开，不扩展到考纲外。</p>
+      <div>
+        <span class="badge">考试：2小时</span>
+        <span class="badge">100% 笔试</span>
+        <span class="badge">Section A 选择题 50%</span>
+        <span class="badge">Section B 四选二 50%</span>
+        <span class="badge">无公式表</span>
+      </div>
+    </section>
+
+    <section class="section toc">
+      <h2>目录</h2>
+      <ol>
+        <li><a href="#exam">考试结构与复习策略</a></li>
+        <li><a href="#map">考纲总览</a></li>
+        <li><a href="#topic1">考点1：Risk and Expected Return</a></li>
+        <li><a href="#topic2">考点2：Time Value of Money</a></li>
+        <li><a href="#topic3">考点3：NPV and Project Appraisal</a></li>
+        <li><a href="#topic4">考点4：Portfolio Theory</a></li>
+        <li><a href="#topic5">考点5：CAPM</a></li>
+        <li><a href="#topic6">考点6：Cost of Capital and WACC</a></li>
+        <li><a href="#topic7">考点7：Capital Structure</a></li>
+        <li><a href="#topic8">考点8：Payout Policy</a></li>
+        <li><a href="#questions">样题对应的常见问法</a></li>
+        <li><a href="#templates">论述题答题模板</a></li>
+        <li><a href="#plan">最后冲刺复习顺序</a></li>
+      </ol>
+    </section>
+
+    <section class="section" id="exam">
+      <h2>一、考试结构与复习策略</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Section A：25道选择题</h3>
+          <p>特点：覆盖面广，定义、理解、公式方向都可能出现。</p>
+          <p>复习重点：<strong>概念清晰 + 公式熟练 + 快速判断</strong>。</p>
+        </div>
+        <div class="card">
+          <h3>Section B：4选2大题</h3>
+          <p>特点：计算题和论述题混合，常要求“算 + 解释 + 评价”。</p>
+          <p>复习重点：<strong>步骤完整、逻辑清楚、结论明确</strong>。</p>
+        </div>
+      </div>
+      <div class="warn">
+        <strong>最重要提醒：</strong>考试不给公式表，所以高频公式必须熟记，尤其是 <span class="term">PV</span>、<span class="term">NPV</span>、<span class="term">CAPM</span>、<span class="term">WACC</span>。
+      </div>
+    </section>
+
+    <section class="section" id="map">
+      <h2>二、考纲总览</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>考纲主题</th>
+            <th>你必须会什么</th>
+            <th>常见考法</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Risk and Expected Return</td>
+            <td>理解风险与回报关系</td>
+            <td>解释型、判断型</td>
+          </tr>
+          <tr>
+            <td>Time Value of Money</td>
+            <td>算现值、理解折现</td>
+            <td>计算题、选择题</td>
+          </tr>
+          <tr>
+            <td>NPV</td>
+            <td>项目评价与接受/拒绝决策</td>
+            <td>大题高频</td>
+          </tr>
+          <tr>
+            <td>Portfolio Theory</td>
+            <td>理解分散化与组合风险</td>
+            <td>解释题、计算题</td>
+          </tr>
+          <tr>
+            <td>CAPM</td>
+            <td>算要求回报率 / Beta / 无风险利率</td>
+            <td>计算题高频</td>
+          </tr>
+          <tr>
+            <td>Cost of Capital / WACC</td>
+            <td>估算股权成本、债务成本、WACC</td>
+            <td>大题高频</td>
+          </tr>
+          <tr>
+            <td>Capital Structure</td>
+            <td>理解债务和股权融资选择</td>
+            <td>论述题高频</td>
+          </tr>
+          <tr>
+            <td>Payout Policy</td>
+            <td>理解留存利润和分红决策</td>
+            <td>论述题常见</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="topic1">
+      <h2>三、考点1：Risk and Expected Return</h2>
+      <h3>1. 这个考点在讲什么</h3>
+      <p><span class="term">Risk</span>（风险）表示结果的不确定性，<span class="term">Expected Return</span>（预期回报）表示投资人希望得到的回报。基本逻辑是：<strong>风险越高，要求的回报通常越高。</strong></p>
+
+      <h3>2. 考试会怎么问</h3>
+      <ul>
+        <li>解释为什么高风险投资需要高回报。</li>
+        <li>比较两个项目，讨论哪个更吸引人。</li>
+        <li>把风险和后面的 CAPM / 项目评价联系起来。</li>
+      </ul>
+
+      <h3>3. 解题步骤</h3>
+      <ol>
+        <li>先指出风险 = 不确定性，而不是单纯“坏结果”。</li>
+        <li>再指出投资人承担更多不确定性时，会要求风险补偿。</li>
+        <li>最后联系决策：风险更高时，折现率/要求回报率通常更高。</li>
+      </ol>
+
+      <h3>4. 易错点</h3>
+      <ul>
+        <li>把风险理解成“必然亏损”。</li>
+        <li>只看回报高低，不看波动和不确定性。</li>
+      </ul>
+
+      <div class="tip"><strong>一句话记忆：</strong>高回报不是白送的，通常是高风险的补偿。</div>
+    </section>
+
+    <section class="section" id="topic2">
+      <h2>四、考点2：Time Value of Money</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Time Value of Money</span> 指今天的钱比未来同样金额的钱更值钱，因为今天的钱可以立即产生收益。</p>
+
+      <h3>2. 必背公式</h3>
+      <div class="formula">Present Value (PV) = Future Cash Flow / (1 + r)^n</div>
+      <p>其中：</p>
+      <ul>
+        <li><span class="term">r</span> = 折现率（discount rate）</li>
+        <li><span class="term">n</span> = 期数</li>
+      </ul>
+
+      <h3>3. 常见题型</h3>
+      <ul>
+        <li>求单笔未来现金流现值</li>
+        <li>求多笔未来现金流现值总和</li>
+        <li>比较两个不同时间点的金额</li>
+      </ul>
+
+      <h3>4. 解题步骤</h3>
+      <ol>
+        <li>找出每笔未来现金流。</li>
+        <li>确认每笔现金流发生在第几年。</li>
+        <li>确认折现率。</li>
+        <li>逐笔折现。</li>
+        <li>把所有现值加总。</li>
+      </ol>
+
+      <h3>5. 易错点</h3>
+      <ul>
+        <li>忘记不同年份要分别折现。</li>
+        <li>把 10% 写成 10 而不是 0.10。</li>
+        <li>现金流年份数放错。</li>
+      </ul>
+
+      <div class="tip"><strong>做题提醒：</strong>先画时间轴，再代公式，错误会少很多。</div>
+    </section>
+
+    <section class="section" id="topic3">
+      <h2>五、考点3：NPV and Project Appraisal</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Net Present Value (NPV)</span> 是把未来所有现金流折现到今天后，再减去初始投资，得到项目净增值。</p>
+
+      <h3>2. 必背公式</h3>
+      <div class="formula">NPV = Sum of Present Values of Future Cash Flows - Initial Investment</div>
+
+      <h3>3. 决策规则</h3>
+      <ul>
+        <li><strong>NPV &gt; 0</strong>：接受项目</li>
+        <li><strong>NPV &lt; 0</strong>：拒绝项目</li>
+        <li><strong>NPV = 0</strong>：理论上无增值</li>
+      </ul>
+
+      <h3>4. 常见题型</h3>
+      <ul>
+        <li>直接计算项目 NPV</li>
+        <li>结合概率信息计算 expected NPV</li>
+        <li>算完后要求讨论是否接受项目</li>
+        <li>解释为什么资本预算看现金流而不是会计利润</li>
+      </ul>
+
+      <h3>5. 标准解题步骤</h3>
+      <ol>
+        <li>列出初始投资。</li>
+        <li>列出每年现金流。</li>
+        <li>按折现率逐年求现值。</li>
+        <li>把各年现值加总。</li>
+        <li>减去初始投资。</li>
+        <li>写出结论：accept / reject，并说明原因。</li>
+      </ol>
+
+      <h3>6. 答题语言模板</h3>
+      <div class="pink">Since the NPV is positive, the project is expected to increase shareholders’ wealth and should therefore be accepted.</div>
+
+      <h3>7. 易错点</h3>
+      <ul>
+        <li>忘记减初始投资。</li>
+        <li>把利润当现金流。</li>
+        <li>只写计算，不写决策结论。</li>
+      </ul>
+
+      <div class="warn"><strong>高频考点：</strong>为什么资本预算用现金流而不是会计利润？因为项目决策关心真实的资金流入流出，而不是账面确认规则下的利润数字。</div>
+    </section>
+
+    <section class="section" id="topic4">
+      <h2>六、考点4：Portfolio Theory</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Portfolio Theory</span> 研究多个资产组合后，风险和回报如何变化。核心思想是 <span class="term">Diversification</span>（分散化）。</p>
+
+      <h3>2. 你必须会的理解</h3>
+      <ul>
+        <li>组合风险不等于单个资产风险简单相加。</li>
+        <li>把资金分散在不同资产上，整体风险可能下降。</li>
+        <li>分散化对降低非系统性风险特别有帮助。</li>
+      </ul>
+
+      <h3>3. 常见题型</h3>
+      <ul>
+        <li>解释为什么组合投资能降低风险。</li>
+        <li>根据权重和收益状态分析组合表现。</li>
+        <li>讨论组合波动性。</li>
+      </ul>
+
+      <h3>4. 解题步骤</h3>
+      <ol>
+        <li>先看每个资产在不同经济状态下的回报。</li>
+        <li>再按投资比例算组合回报。</li>
+        <li>最后讨论分散化效果和风险变化。</li>
+      </ol>
+
+      <div class="tip"><strong>一句话记忆：</strong>不要把鸡蛋放在一个篮子里，这就是投资组合理论最直观的意思。</div>
+    </section>
+
+    <section class="section" id="topic5">
+      <h2>七、考点5：CAPM</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">CAPM</span> 用系统性风险来估算投资人要求的回报率。</p>
+
+      <h3>2. 必背公式</h3>
+      <div class="formula">Expected Return = Risk-free Rate + Beta × Market Risk Premium</div>
+
+      <h3>3. 公式里每个量是什么意思</h3>
+      <ul>
+        <li><span class="term">Risk-free Rate</span>：无风险利率</li>
+        <li><span class="term">Beta</span>：资产相对市场波动的敏感度</li>
+        <li><span class="term">Market Risk Premium</span>：市场超额回报</li>
+      </ul>
+
+      <h3>4. 常见题型</h3>
+      <ul>
+        <li>已知 beta，求 expected return</li>
+        <li>已知 expected return，反求 beta</li>
+        <li>已知 beta 和回报，反求 risk-free rate</li>
+      </ul>
+
+      <h3>5. 标准解题步骤</h3>
+      <ol>
+        <li>先写出 CAPM 公式。</li>
+        <li>把已知数代入。</li>
+        <li>求未知数。</li>
+        <li>解释结果：beta 越高，系统性风险越高，要求回报率越高。</li>
+      </ol>
+
+      <h3>6. 易错点</h3>
+      <ul>
+        <li>把 market return 和 market risk premium 混淆。</li>
+        <li>百分比计算时漏掉单位一致性。</li>
+      </ul>
+    </section>
+
+    <section class="section" id="topic6">
+      <h2>八、考点6：Cost of Capital and WACC</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Cost of Capital</span> 是企业使用资金的代价。考纲要求你会估算股权资本成本、债务资本成本，并理解 <span class="term">WACC</span>。</p>
+
+      <h3>2. 必背公式</h3>
+      <div class="formula">WACC = (E / V) × Ke + (D / V) × Kd × (1 - T)</div>
+      <p>其中：</p>
+      <ul>
+        <li><span class="term">E</span> = equity market value</li>
+        <li><span class="term">D</span> = debt market value</li>
+        <li><span class="term">V</span> = E + D</li>
+        <li><span class="term">Ke</span> = cost of equity</li>
+        <li><span class="term">Kd</span> = pre-tax cost of debt</li>
+        <li><span class="term">T</span> = tax rate</li>
+      </ul>
+
+      <h3>3. 常见题型</h3>
+      <ul>
+        <li>根据股价、债券价格、股利等资料估算资本成本</li>
+        <li>计算公司的 WACC</li>
+        <li>解释为什么 WACC 可以作为折现率</li>
+      </ul>
+
+      <h3>4. 标准解题步骤</h3>
+      <ol>
+        <li>先求各资金来源的市场价值。</li>
+        <li>再求各自资本成本。</li>
+        <li>计算权重。</li>
+        <li>代入 WACC 公式。</li>
+        <li>写出含义：这是企业整体资金的平均成本。</li>
+      </ol>
+
+      <h3>5. 易错点</h3>
+      <ul>
+        <li>用账面价值代替市场价值。</li>
+        <li>债务成本忘记税盾调整。</li>
+        <li>WACC 权重算错。</li>
+      </ul>
+
+      <div class="tip"><strong>一句话记忆：</strong>WACC 就是公司资金的平均“收费标准”。</div>
+    </section>
+
+    <section class="section" id="topic7">
+      <h2>九、考点7：Capital Structure</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Capital Structure</span> 讲的是企业在 <span class="term">Debt</span>（债务）和 <span class="term">Equity</span>（股权）之间如何选择。</p>
+
+      <h3>2. 考试会怎么问</h3>
+      <ul>
+        <li>讨论债务融资和股权融资的差别。</li>
+        <li>讨论资本结构决策的逻辑。</li>
+        <li>结合公司治理或代理问题进行分析。</li>
+      </ul>
+
+      <h3>3. 答题思路</h3>
+      <ol>
+        <li>先说明债务融资的优点：可能较便宜、税盾效应。</li>
+        <li>再说明缺点：财务风险上升、偿债压力增加。</li>
+        <li>说明股权融资优点：还款压力小。</li>
+        <li>说明缺点：可能稀释控制权、成本较高。</li>
+        <li>最后总结：企业要在成本和风险之间平衡。</li>
+      </ol>
+
+      <h3>4. 可直接用于论述题的句子</h3>
+      <div class="pink">An appropriate capital structure should balance the lower cost of debt against the increased financial risk caused by higher gearing.</div>
+    </section>
+
+    <section class="section" id="topic8">
+      <h2>十、考点8：Payout Policy</h2>
+      <h3>1. 核心概念</h3>
+      <p><span class="term">Payout Policy</span> 讲的是企业赚到利润后，应该留存再投资，还是分配给股东。</p>
+
+      <h3>2. 考试会怎么问</h3>
+      <ul>
+        <li>讨论为什么企业发股利。</li>
+        <li>讨论留存收益和分红的取舍。</li>
+        <li>评价不同分配政策对股东的影响。</li>
+      </ul>
+
+      <h3>3. 答题思路</h3>
+      <ol>
+        <li>先说明两种基本选择：留存 or 分配。</li>
+        <li>如果公司有高回报项目，留存可能更合理。</li>
+        <li>如果缺少好项目，分红可能更合理。</li>
+        <li>最后回到目标：是否有利于股东财富最大化。</li>
+      </ol>
+
+      <div class="tip"><strong>一句话记忆：</strong>钱不是一定要分，也不是一定要留，关键是哪里更能创造价值。</div>
+    </section>
+
+    <section class="section" id="questions">
+      <h2>十一、样题对应的常见问法</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>题目类型</th>
+            <th>你该怎么想</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Should the project be accepted based on the expected value of its NPV?</td>
+            <td>先算 expected NPV，再按 NPV 正负写 accept/reject，并解释股东财富影响。</td>
+          </tr>
+          <tr>
+            <td>Explain the reasons for converting accounting profit to cash flows.</td>
+            <td>强调项目决策看现金流，不看账面利润；利润受会计规则影响，现金流更真实。</td>
+          </tr>
+          <tr>
+            <td>What is Stock B’s beta / What is the risk-free rate?</td>
+            <td>立即写 CAPM 公式，代入数值，求未知数。</td>
+          </tr>
+          <tr>
+            <td>What is the company’s WACC?</td>
+            <td>先求各资本来源成本和市场价值，再算权重，最后加权。</td>
+          </tr>
+          <tr>
+            <td>Discuss agency problems in governance and capital structure decisions.</td>
+            <td>按“定义—表现—影响—结论”写，别只写定义。</td>
+          </tr>
+          <tr>
+            <td>Discuss the difference between dividends and share repurchases.</td>
+            <td>先定义两种分配方式，再比较对股东和企业的影响，最后评价选择依据。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="templates">
+      <h2>十二、论述题答题模板</h2>
+      <h3>模板1：Discuss / Evaluate 类</h3>
+      <ol>
+        <li>定义概念</li>
+        <li>说明为什么重要</li>
+        <li>写优点 / 支持理由</li>
+        <li>写缺点 / 限制</li>
+        <li>回到题目要求给出评价</li>
+      </ol>
+
+      <h3>模板2：项目是否接受</h3>
+      <ol>
+        <li>列出关键计算结果</li>
+        <li>指出 NPV 正负</li>
+        <li>连接股东财富最大化</li>
+        <li>给出 accept / reject 结论</li>
+      </ol>
+
+      <h3>模板3：解释型题目</h3>
+      <ol>
+        <li>先说“是什么”</li>
+        <li>再说“为什么”</li>
+        <li>最后说“对决策有什么影响”</li>
+      </ol>
+    </section>
+
+    <section class="section" id="plan">
+      <h2>十三、最后冲刺复习顺序</h2>
+      <ol>
+        <li><strong>第1优先：</strong>PV、NPV、CAPM、WACC 四大公式背熟。</li>
+        <li><strong>第2优先：</strong>每个公式都至少做 3 类题：正向求值、反向求未知数、结合解释写结论。</li>
+        <li><strong>第3优先：</strong>准备 4 个论述主题：Risk-Return、Capital Structure、Payout Policy、Agency / Ethics。</li>
+        <li><strong>第4优先：</strong>练样题，尤其是“算完以后还要解释”的部分。</li>
+        <li><strong>第5优先：</strong>练英文答题句型，确保结论写得干脆。</li>
+      </ol>
+      <div class="warn">
+        <strong>压轴提醒：</strong>这门课拿分的关键，不是只会背定义，也不是只会按计算器，而是：<strong>会公式、会步骤、会解释、会下结论。</strong>
+      </div>
+      <p class="small">资料依据：BUSI1070 Module Outline 2025–2026 中的 Summary of Content、Detailed Schedule、Learning Objectives、Assessment Details 以及附带样题方向。</p>
+    </section>
+  </div>
+</body>
+</html>
