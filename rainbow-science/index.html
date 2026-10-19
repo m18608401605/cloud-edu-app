@@ -267,7 +267,7 @@ let extra=safelyRead('rainbow5_personal_branches',{});if(typeof extra!=='object'
 let answers=safelyRead('rainbow5_map_scores',{});if(typeof answers!=='object'||!answers||Array.isArray(answers))answers={};
 let open=new Set(['light']);let selected='light';let scale=1;
 function persist(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
-function graftExtras(){rebuildIndex();Object.keys(extra).forEach(pid=>{const p=byId.get(pid);if(!p)return;let rows=Array.isArray(extra[pid])?extra[pid]:[];rows.slice(0,12).forEach(x=>{if(typeof x.title==='string'&&typeof x.detail==='string'&&x.title.trim()){p.children.push({id:x.id,title:x.title.slice(0,28),detail:x.detail.slice(0,240),custom:true,children:[]})}})});rebuildIndex()}
+function graftExtras(){function attach(p){let rows=Array.isArray(extra[p.id])?extra[p.id]:[];rows.slice(0,12).forEach(x=>{if(typeof x.id==='string'&&typeof x.title==='string'&&typeof x.detail==='string'&&x.title.trim()&&!p.children.some(z=>z.id===x.id)){p.children.push({id:x.id,title:x.title.slice(0,28),detail:x.detail.slice(0,240),custom:true,children:[]})}});p.children.forEach(attach)}attach(tree);rebuildIndex()}
 graftExtras();
 function getBranchPoints(n){if(n.quiz)return {earned:answers[n.id]===n.quiz.correct?10:0,total:10,attempted:Object.prototype.hasOwnProperty.call(answers,n.id)?1:0,num:1};let r={earned:0,total:0,attempted:0,num:0};(n.children||[]).forEach(c=>{let v=getBranchPoints(c);for(let k of Object.keys(r))r[k]+=v[k]});return r}
 function domSvg(tag,attrs,parent){let e=document.createElementNS(S,tag);for(let [k,v] of Object.entries(attrs||{}))e.setAttribute(k,v);if(parent)parent.appendChild(e);return e}
